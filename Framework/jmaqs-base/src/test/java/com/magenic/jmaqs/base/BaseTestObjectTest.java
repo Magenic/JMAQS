@@ -4,16 +4,13 @@
 
 package com.magenic.jmaqs.base;
 
-import com.magenic.jmaqs.base.BaseTest;
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.DriverManager;
 import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.function.Supplier;
 
+import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;

@@ -5,13 +5,11 @@
 package com.magenic.jmaqs.utilities.logging;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
@@ -276,7 +274,6 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Gets the file extension.
-   *
    * @return
    *          File Extension
    */
@@ -288,6 +285,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   /**
    * Close the class and HTML file.
    */
+  @Override
   public void close() {
     File file = new File(this.getFilePath());
     if (file.exists()) {

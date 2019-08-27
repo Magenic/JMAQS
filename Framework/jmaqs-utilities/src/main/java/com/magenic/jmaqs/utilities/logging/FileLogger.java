@@ -379,7 +379,7 @@ public class FileLogger extends Logger {
     // Replace invalid characters
     String replacedName = name;
     try {
-      replacedName = name.replaceAll("[^a-zA-Z0-9\\._\\- ]+", "~");
+      replacedName = name.replaceAll("[^a-zA-Z0-9._\\- ]+", "~");
     } catch (NullPointerException e) {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
@@ -397,7 +397,7 @@ public class FileLogger extends Logger {
    * @return
    *          The Unknown Message Type Message.
    */
-  protected String unknownMessageTypeMessage(MessageType type) {
+  public String unknownMessageTypeMessage(MessageType type) {
     return StringProcessor.safeFormatter("Unknown MessageType: %s%s%s%s", type.name(),
             System.lineSeparator(), "Message will be displayed with the MessageType of: ", MessageType.GENERIC.name());
   }

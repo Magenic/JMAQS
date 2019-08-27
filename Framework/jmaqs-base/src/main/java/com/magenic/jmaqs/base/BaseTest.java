@@ -12,7 +12,6 @@ import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.logging.TestResultType;
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.lang.reflect.Method;
 import java.nio.file.Files;
@@ -24,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -62,7 +62,7 @@ public abstract class BaseTest {
   /**
    * The Performance Timer Collection.
    */
-  private PerfTimerCollection perfTimerCollection;
+  protected PerfTimerCollection perfTimerCollection;
 
   /**
    * The TestNG Test Context.
