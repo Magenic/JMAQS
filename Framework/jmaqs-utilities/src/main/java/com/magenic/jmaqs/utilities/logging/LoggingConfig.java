@@ -82,6 +82,9 @@ public class LoggingConfig {
         return new ConsoleLogger();
       case "TXT":
         return new FileLogger(false, logDirectory, fileName);
+      case "HTML":
+      case "HTM":
+        return new HtmlFileLogger(logDirectory, fileName, getLoggingLevelSetting());
       default:
         throw new IllegalArgumentException(StringProcessor.safeFormatter(
             "Log type %s is not a valid option", Config.getGeneralValue("LogType", "CONSOLE")));

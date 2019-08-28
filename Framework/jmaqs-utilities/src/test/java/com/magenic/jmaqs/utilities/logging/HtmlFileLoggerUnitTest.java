@@ -2,9 +2,10 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities;
+package com.magenic.jmaqs.utilities.logging;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.HtmlFileLogger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
@@ -27,7 +28,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Test logging to a new file.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void HtmlFileLoggerNoAppendTest() {
     HtmlFileLogger logger = new HtmlFileLogger(false, "", "WriteToHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
@@ -38,7 +39,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Test logging to an existing file.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void HtmlFileLoggerAppendFileTest() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
@@ -51,7 +52,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Test Writing to the Html File Logger
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void WriteToHtmlFileLogger() {
     HtmlFileLogger logger = new HtmlFileLogger("", "WriteToHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
@@ -63,7 +64,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Test Writing to an Existing Html File Logger
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void WriteToExistingHtmlFileLogger() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger", MessageType.GENERIC);
     logger.logMessage(MessageType.WARNING, "This is a test.");
@@ -77,7 +78,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify HtmlFileLogger constructor creates the correct directory if it does not already exist.
    * Delete Directory after each run.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void HtmlFileLoggerConstructorCreateDirectory() {
     HtmlFileLogger logger = new HtmlFileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
             "HtmlFileLoggerCreateDirectoryDelete").toString(), "HtmlFileLoggerCreateDirectory", MessageType.GENERIC);
@@ -99,7 +100,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify that HtmlFileLogger can log message without defining a Message Type
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void HtmlFileLoggerLogMessage() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessage");
     logger.logMessage("Test to ensure LogMessage works as expected.");
@@ -116,7 +117,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify that HTML File Logger can log message and defining a Message Type.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void HtmlFileLoggerLogMessageSelectType() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessageType");
     logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
@@ -132,7 +133,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify that File Path field can be accessed and updated
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void HtmlFileLoggerSetFilePath() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerSetFilePath", MessageType.GENERIC);
     logger.setFilePath("test file path");
@@ -146,7 +147,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify that HTML File Logger catches and handles errors caused by incorrect file Paths
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void HtmlFileLoggerCatchThrownException() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerCatchThrownException", MessageType.GENERIC);
     logger.setFilePath("<>");
@@ -157,7 +158,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify that HTML File Logger catches and handles errors caused by incorrect file Paths.
    */
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Utilities)
   public void FileLoggerEmptyFileNameException() {
     HtmlFileLogger logger = new HtmlFileLogger("");
   }
@@ -165,7 +166,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with No Parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerNoParameters() {
     HtmlFileLogger logger = new HtmlFileLogger();
 
@@ -184,7 +185,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only append parameter assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerAppendOnly() {
     HtmlFileLogger logger = new HtmlFileLogger(true);
 
@@ -204,7 +205,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify File Logger with only File Name parameter assigns the correct default values.
    * Verify default extension is added '.html'
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerNameOnlyAddExtension() {
     HtmlFileLogger logger = new HtmlFileLogger("FileNameOnly");
 
@@ -223,7 +224,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only Message Type parameter assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerMessageTypeOnly() {
     HtmlFileLogger logger = new HtmlFileLogger(MessageType.WARNING);
 
@@ -242,7 +243,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only Append and File Name parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerAppendFileName() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "AppendFileName");
 
@@ -261,7 +262,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only Log Folder and Append parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerAppendLogFolder() {
     HtmlFileLogger logger = new HtmlFileLogger("Append File Directory", true);
 
@@ -280,7 +281,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only Log Folder and File Name parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerLogFolderFileName() {
     HtmlFileLogger logger = new HtmlFileLogger("Log Folder File Name Directory", "LogFolderFileName.html");
 
@@ -299,7 +300,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only Log Folder and Messaging Level parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerLogFolderMessagingLevel() {
     HtmlFileLogger logger = new HtmlFileLogger("Log Folder Messaging Level Directory", MessageType.WARNING);
 
@@ -318,7 +319,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only Append and Messaging Level parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerAppendMessagingLevel() {
     HtmlFileLogger logger = new HtmlFileLogger(true, MessageType.WARNING);
 
@@ -337,7 +338,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only Messaging Level and file name parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerMessagingLevelFileName() {
     HtmlFileLogger logger = new HtmlFileLogger(MessageType.WARNING, "MessagingTypeFile.html");
 
@@ -356,7 +357,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only Append, log folder and file name parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerAppendLogFolderFileName() {
     HtmlFileLogger logger = new HtmlFileLogger(
             true, "AppendLogFolderFileNameDirectory", "AppendLogFolderFileName.html");
@@ -376,7 +377,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only Append, log folder and Messaging Level parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerAppendLogFolderMessagingLevel() {
     HtmlFileLogger logger = new HtmlFileLogger(
             true, "AppendLogFolderFileNameDirectory", MessageType.WARNING);
@@ -396,7 +397,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only File Name, Append and Messaging Level parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerFileNameAppendMessagingLevel() {
     HtmlFileLogger logger = new HtmlFileLogger(
             "FileNameAppendMessagingLevel.html", true, MessageType.WARNING);
@@ -416,7 +417,7 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify File Logger with only Log Folder, File Name and Messaging Level parameters assigns the correct default values.
    */
-  @Test
+  @Test(groups = TestCategories.Utilities)
   public void FileLoggerLogFolderFileNameMessagingLevel() {
     HtmlFileLogger logger = new HtmlFileLogger(
             "LogFolderFileNameMessagingLevelDirectory", "LogFolderFileNameMessagingLevel.html", MessageType.WARNING);
@@ -437,18 +438,15 @@ public class HtmlFileLoggerUnitTest {
   /**
    * Verify that HTML File Logger catches and handles errors caused by empty file name.
    */
-  @Test(expectedExceptions = IllegalArgumentException.class)
+  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Utilities)
   public void HtmlFileLoggerEmptyFileNameException() {
       HtmlFileLogger logger = new HtmlFileLogger("");
   }
 
   /**
    * Read a file and return it as a string
-   *
-   * @param filePath
-   *          The file path to read
-   * @return
-   *          The contents of the file
+   * @param filePath The file path to read
+   * @return The contents of the file
    */
   private String readTextFile(String filePath) {
     String text = "";

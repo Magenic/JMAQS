@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities;
+package com.magenic.jmaqs.utilities.helper;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 

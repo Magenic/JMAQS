@@ -197,7 +197,7 @@ public class PerfTimerCollection {
      * Method to stop an existing timer with a specified name for a test
      * @param timerName Name of the timer
      */
-    public void EndTimer(String timerName) {
+    public void endTimer(String timerName) {
         Date date = new Date();
         if (!this.openTimerList.containsKey(timerName)) {
             throw new IllegalArgumentException("Response time test does not exist");
@@ -215,7 +215,7 @@ public class PerfTimerCollection {
      * Method to Write the Performance Timer Collection to disk
      * @param log The current test Logger
      */
-    public void Write(Logger log) {
+    public void write(Logger log) {
         // Only run if the response times is greater than 0
         if (this.timerList.size() > 0) {
             // Locks the writer if other tests are using it

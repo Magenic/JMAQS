@@ -2,10 +2,8 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities;
+package com.magenic.jmaqs.utilities.helper;
 
-import com.magenic.jmaqs.utilities.helper.GenericWait;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

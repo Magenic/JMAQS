@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities.performanceTests;
+package com.magenic.jmaqs.utilities.performance;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.magenic.jmaqs.base.BaseTest;
@@ -10,8 +10,6 @@ import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-import com.magenic.jmaqs.utilities.performance.PerfTimer;
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,11 +47,11 @@ public class PerformanceUnitTests extends BaseTest {
     Thread.sleep(1000);
     p.startTimer("Inner", "test2");
     Thread.sleep(1000);
-    p.EndTimer("test1");
-    p.EndTimer("test2");
+    p.endTimer("test1");
+    p.endTimer("test2");
 
     // Write the log and validate the resulting file contents
-    p.Write(this.getLogger());
+    p.write(this.getLogger());
     String filepath = LoggingConfig.getLogDirectory() + " " + p.fileName;
 
     // If the file does not exist, just bail
@@ -111,12 +109,12 @@ public class PerformanceUnitTests extends BaseTest {
     p.startTimer("StoppedOuter", "test1");
     p.startTimer("test2");
     Thread.sleep(1000);
-    p.EndTimer("test1");
-    p.EndTimer("test2");
+    p.endTimer("test1");
+    p.endTimer("test2");
     p.startTimer("NotStopped", "test3");
 
     // Write the log and validate the resulting file contents
-    p.Write(this.getLogger());
+    p.write(this.getLogger());
     String filepath = LoggingConfig.getLogDirectory() + " " + p.fileName;
 
     // If the file doesnt exist, just bail
@@ -180,7 +178,7 @@ public class PerformanceUnitTests extends BaseTest {
   @Test
   public void perfEndTimerThrowException() {
     PerfTimerCollection p = this.perfTimerCollection;
-    p.EndTimer("notStarted");
+    p.endTimer("notStarted");
   }
 
   /**
@@ -200,9 +198,9 @@ public class PerformanceUnitTests extends BaseTest {
     // Invalid testName
     PerfTimerCollection p = new PerfTimerCollection("<>");
     p.startTimer("testTimer");
-    p.EndTimer("testTimer");
+    p.endTimer("testTimer");
     FileLogger log = new FileLogger(true, "PerfTimerWriteException", "PerfTimerWriteException", MessageType.GENERIC);
-    p.Write(log);
+    p.write(log);
     //Assert.assertTrue(File.ReadAllText(log.getFileName()).Contains("Could not save response time file.  Error was:"));
     Assert.assertTrue(log.getFileName().contains("Could not save response time file.  Error was:"));
   }

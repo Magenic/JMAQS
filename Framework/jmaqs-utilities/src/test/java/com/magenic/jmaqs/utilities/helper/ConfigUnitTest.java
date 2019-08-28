@@ -2,11 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities;
-
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
+package com.magenic.jmaqs.utilities.helper;
 
 import java.util.HashMap;
 
@@ -17,6 +13,26 @@ import org.testng.annotations.Test;
  * Configuration unit test class.
  */
 public class ConfigUnitTest {
+
+  /**
+   * Gets a value from a string
+   */
+  @Test(groups = TestCategories.Utilities)
+  public void getValueWithString() {
+    String value = Config.getGeneralValue("WaitTime");
+    Assert.assertEquals("100", value);
+  }
+
+  /**
+   * Gets a value with a string or default
+   */
+  @Test(groups = TestCategories.Utilities)
+  public void getValueWithStringAndDefault()
+  {
+    String value = Config.getGeneralValue("DoesNotExist", "Default");
+    Assert.assertEquals("Default", value);
+  }
+
   /**
    * Test getting an entire section from the config.
    */
