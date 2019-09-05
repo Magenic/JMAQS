@@ -163,6 +163,7 @@ public class ConsoleLogger extends Logger {
     // Update console colors
     setConsoleColor(type);
     String result = StringProcessor.safeFormatter(message, args);
+
     try {
       // If this a write-line command
       if (line) {
