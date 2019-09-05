@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Unit tests for the ActionBuilder class.
  */
-public class ActionBuilderUnitTests extends BaseSeleniumTest {
+public class ActionBuilderUnitTest extends BaseSeleniumTest {
 
   /**
    * Url for the automation page.

@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 /**
  * Test with the web service wrapper directly.
  */
-public class WebServiceWithWrapper {
+public class WebServiceWithWrapperTest {
   /**
    * Verifies that basic GET features work with the HttpClientWrapper.
    * 

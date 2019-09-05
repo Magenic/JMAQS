@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  * Tests running in serial.
  */
 @Test(singleThreaded = true)
-public class GenericWaitUnitTestsNotParallel {
+public class GenericWaitNotParallelUnitTest {
   /**
    * Constant test string.
    */
@@ -47,7 +47,7 @@ public class GenericWaitUnitTestsNotParallel {
   public void passNoParamForTest() {
     initialReturnValue = false;
     try {
-      GenericWait.waitFor(GenericWaitUnitTestsNotParallel::isNotParamTest);
+      GenericWait.waitFor(GenericWaitNotParallelUnitTest::isNotParamTest);
     } catch (Exception e) {
       Assert.fail("waitFor no parameter test failed with exception", e);
     }
