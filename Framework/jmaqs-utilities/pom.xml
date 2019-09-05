@@ -84,17 +84,10 @@
             <version>${httpcore.version}</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.magenic.jmaqs.base</groupId>
-            <artifactId>jmaqs-base</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 			<version>2.9.8</version>
 		</dependency>
-
     </dependencies>
 </project>

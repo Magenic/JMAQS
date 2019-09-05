@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.utilities.performance;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -25,7 +26,7 @@ import org.testng.annotations.Test;
 /**
  * Response time test class.
  */
-public class PerformanceUnitTest extends BaseTest {
+public class PerformanceUnitTest extends BaseExtendableTest {
 
   /**
   * Test method to test Performance Timers.
@@ -42,7 +43,6 @@ public class PerformanceUnitTest extends BaseTest {
     tc.webUri = Config.getGeneralValue("WebServiceUri");
 
     // store it (as a JSON string)
-
     ObjectMapper objectMapper = new ObjectMapper();
     p.perfPayloadString = objectMapper.writeValueAsString(tc);
     //p.perfPayloadString = JSONSerializeObject(this.tc);
