@@ -5,7 +5,6 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
@@ -16,10 +15,11 @@ import org.testng.ITestResult;
 /**
  * Base Selenium Test class.
  */
-public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
+public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
   /**
    * Initialize a new instance of the BaseSeleniumTest class.
+   * Setup the web driver for each test class
    */
   public BaseSeleniumTest() {
   }
@@ -31,7 +31,6 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
 
   /**
    * Get WebDriver.
-   * 
    * @return WebDriver
    */
   public WebDriver getWebDriver() {
@@ -40,7 +39,6 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
 
   /**
    * Get SeleniumWait.
-   * 
    * @return SeleniumWait
    */
   public SeleniumWait getSeleniumWait() {
@@ -49,7 +47,6 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
 
   /**
    * Get the seleniumTestObject for this test.
-   * 
    * @return The seleniumTestObject
    */
   public SeleniumTestObject getSeleniumTestObject() {
@@ -71,11 +68,11 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
             SeleniumConfig.getBrowserName());
       }
 
-      /*WebDriver driver = SeleniumConfig.browser();
+      WebDriver driver = SeleniumConfig.browser();
       SeleniumWait wait = new SeleniumWait(driver);
 
       seleniumTestObject.set(new SeleniumTestObject(driver, wait, this.getLogger(),
-          this.getFullyQualifiedTestClassName()));  */
+          this.getFullyQualifiedTestClassName()));
     } catch (Exception e) {
       this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: %s",
           e.getMessage());
@@ -84,21 +81,30 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
     }
   }
 
+
+  /**
+   * Get the current browser.
+   * @return Current browser Web Driver
+   * @throws Exception Throws exception
+   */
+  protected  WebDriver getBrowser() throws Exception {
+    // Returns the web driver
+    return SeleniumConfig.browser();
+  }
+
   /**
    * Take a screen shot if needed and tear down the web driver.
-   * 
-   * @param resultType
-   *          The test result type
+   * @param resultType The test result type
    */
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
     // Try to take a screen shot
     try {
-      if (this.getWebDriver() != null && resultType.getStatus() != ITestResult.SUCCESS 
-          && this.getLoggingEnabledSetting() != LoggingEnabled.NO) {
+      if (this.getWebDriver() != null && resultType.getStatus() != ITestResult.SUCCESS
+              && this.getLoggingEnabledSetting() != LoggingEnabled.NO) {
 
-        captureScreenShot(this.getWebDriver(), this.getLogger(), "");
-      }       
+        SeleniumUtilities.captureScreenshot(this.getWebDriver(), this.getLogger(), "");
+      }
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());
     }
@@ -114,26 +120,8 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
   }
 
   /**
-   * Capture Screenshot.
-   * @return Path to screenshot.
+   * Create a Selenium test object
    */
-  protected String captureScreenShot(WebDriver driver, Logger log, String fileName) {
-    return SeleniumUtilities.captureScreenshot(driver, log, fileName);
-  }
-
-  /**
-   * Get the current browser.
-   * 
-   * @return
-   *      Current browser Web Driver
-   * @throws Exception
-   *        Throws exception
-   */
-  protected  WebDriver getBrowser() throws Exception {
-    // Returns the web driver
-    return SeleniumConfig.browser();
-  }
-
   @Override
   protected void createNewTestObject() {
     //FIXME: Workaround to get module working.  Must Refactor.
