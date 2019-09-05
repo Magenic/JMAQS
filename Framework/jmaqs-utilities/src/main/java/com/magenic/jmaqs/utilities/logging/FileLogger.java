@@ -225,13 +225,6 @@ public class FileLogger extends Logger {
     }
   }
 
-  /**
-   * Gets the FilePath value.
-   * @return returns the file path
-   */
-  public String getFilePath() {
-    return this.filePath;
-  }
 
   /**
    * Gets the Message Type value.
@@ -247,6 +240,14 @@ public class FileLogger extends Logger {
    */
   public String getDirectory() {
     return this.directory;
+  }
+
+  /**
+   * Gets the FilePath value.
+   * @return returns the file path
+   */
+  public String getFilePath() {
+    return this.filePath;
   }
 
   /**

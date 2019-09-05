@@ -18,7 +18,7 @@ public abstract class Logger {
   /**
    * Log Level value area.
    */
-  private MessageType logLevel = MessageType.INFORMATION;
+  private MessageType logLevel;
 
   /**
    *  Log Level value save area.
@@ -79,34 +79,24 @@ public abstract class Logger {
 
   /**
    * Write the formatted message (one line) to the console as a generic message.
-   * 
-   * @param messageType
-   *          The type of message
-   * @param message
-   *          The message text
-   * @param args
-   *          String format arguments
+   * @param messageType The type of message
+   * @param message The message text
+   * @param args String format arguments
    */
   public abstract void logMessage(MessageType messageType, String message, Object... args);
 
   /**
    * Write the formatted message (one line) to the console as a generic message.
-   * 
-   * @param message
-   *          The message text
-   * @param args
-   *          String format arguments
+   * @param message The message text
+   * @param args String format arguments
    */
   public abstract void logMessage(String message, Object... args);
 
   /**
    * Determine if the message should be logged.
    * The message should be logged if it's level is greater than or equal to the current logging level.
-   *
-   * @param messageType
-   *          The type of message being logged.
-   * @return
-   *          True if the message should be logged.
+   * @param messageType The type of message being logged.
+   * @return True if the message should be logged.
    */
   protected boolean shouldMessageBeLogged(MessageType messageType) {
     // The message should be logged if it's level is less than or equal to the current logging level

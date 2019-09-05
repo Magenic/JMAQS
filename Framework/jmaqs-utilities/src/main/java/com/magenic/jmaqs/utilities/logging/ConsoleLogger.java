@@ -8,8 +8,6 @@ import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.ConsoleColors.ConsoleColor;
 import com.magenic.jmaqs.utilities.logging.ConsoleColors.FontColor;
 
-import java.io.Console;
-
 /**
  * Helper class for logging to the console.
  */

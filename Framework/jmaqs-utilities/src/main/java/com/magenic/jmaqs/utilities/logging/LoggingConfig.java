@@ -35,7 +35,7 @@ public class LoggingConfig {
    * Get our logging level.
    * @return MessageType - The current log level.
    */
-  public static MessageType getLoggingLevelSetting() {
+  static MessageType getLoggingLevelSetting() {
     switch (Config.getGeneralValue("LogLevel", "INFORMATION").toUpperCase()) {
       case "VERBOSE":
         return MessageType.VERBOSE;         // Includes this and all of those below
@@ -63,9 +63,7 @@ public class LoggingConfig {
    * @return The logger
    */
   public static Logger getLogger(String fileName) {
-    /**
-     * Disable logging means we just send any logged messages to the console
-     */
+    //Disable logging means we just send any logged messages to the console
     if (getLoggingEnabledSetting() == LoggingEnabled.NO) {
       return new ConsoleLogger();
     }
@@ -90,5 +88,13 @@ public class LoggingConfig {
   public static String getLogDirectory() {
     String path = new File("").getAbsolutePath().concat("\\Logs");
     return Config.getGeneralValue("FileLoggerPath", path);
+  }
+
+  /**
+   * Gets the configuration value to utilize the First Chance Handler
+   * @return Boolean if First Chance Handler should be used
+   */
+  public static boolean getFirstChanceHandler() {
+    return Config.getGeneralValue("UseFirstChanceHandler", "Yes").equals("Yes");
   }
 }

@@ -12,8 +12,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
 /**
  * Helper class for adding logs to an HTML file. Allows configurable file path.
  */
@@ -175,7 +173,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   }
 
   /**
-   *
+   * Write the formatted message (one line) to the console as a generic message
    * @param message The message text
    * @param args String format arguments
    */
@@ -185,7 +183,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   }
 
   /**
-   *
+   * Write the formatted message (one line) to the console as a generic message
    * @param messageType The type of message
    * @param message The message text
    * @param args String format arguments
@@ -203,13 +201,10 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
         // Set the style
         writer.write(this.getTextWithColorFlag(messageType));
 
-        // Add the content TODO: update these three lines
-        writer.write(StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter("%s%s%s",
-                    System.lineSeparator(), System.lineSeparator(), date)));
-        writer.write(StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter(
-                "%s:\t", messageType.name())));
-        writer.write(StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter(
-                System.lineSeparator() + message, args)));
+        // Add the content
+        writer.write(StringProcessor.safeFormatter("%s%s%s", System.lineSeparator(), date));
+        writer.write(StringProcessor.safeFormatter("%s:\t", messageType.name()));
+        writer.write(StringProcessor.safeFormatter(System.lineSeparator() + message, args));
 
         // Close off the style
         writer.write("</p>");
@@ -238,11 +233,20 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   }
 
   /**
-   * Close the class and HTML file.
+   * Dispose the class
+   * Originally Dispose in C#, but renamed for Java purposes
    */
   public void close() {
+    this.close(true);
+  }
+
+  /**
+   * Close the class and HTML file.
+   * @param disposing True if you want to release managed resources
+   */
+  private void close(boolean disposing) {
     File file = new File(this.getFilePath());
-    if (file.exists()) {
+    if (disposing && file.exists()) {
       try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
         writer.write("</body></html>");
       } catch (IOException e) {
