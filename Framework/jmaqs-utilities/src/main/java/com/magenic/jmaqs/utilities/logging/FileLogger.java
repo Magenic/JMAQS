@@ -252,10 +252,10 @@ public class FileLogger extends Logger {
 
   /**
    * Sets the FilePath value.
-   * @param path sets the file path
+   * @param filePath sets the file path
    */
-  public void setFilePath(String path) {
-    this.filePath = path;
+  public void setFilePath(String filePath) {
+    this.filePath = filePath;
   }
 
   /**
@@ -327,7 +327,7 @@ public class FileLogger extends Logger {
     // Replace invalid characters
     String replacedName = name;
     try {
-      replacedName = name.replaceAll("[^a-zA-Z0-9_\\- ]+", "~");
+      replacedName = name.replaceAll("[^a-zA-Z0-9\\.\\-]", "");
     } catch (NullPointerException e) {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(

@@ -25,7 +25,7 @@ public class HtmlFileLoggerUnitTest {
    * Test logging to a new file.
    */
   @Test(groups = TestCategories.Utilities)
-  public void HtmlFileLoggerNoAppendTest() {
+  public void htmlFileLoggerNoAppendTest() {
     HtmlFileLogger logger = new HtmlFileLogger(false, "", "WriteToHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
     File file = new File(logger.getFilePath());
@@ -36,7 +36,7 @@ public class HtmlFileLoggerUnitTest {
    * Test logging to an existing file.
    */
   @Test(groups = TestCategories.Utilities)
-  public void HtmlFileLoggerAppendFileTest() {
+  public void htmlFileLoggerAppendFileTest() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
     logger.logMessage(MessageType.WARNING, "This is a test to append to current file.");
@@ -49,7 +49,7 @@ public class HtmlFileLoggerUnitTest {
    * Test Writing to the Html File Logger
    */
   @Test(groups = TestCategories.Utilities)
-  public void WriteToHtmlFileLogger() {
+  public void writeToHtmlFileLogger() {
     HtmlFileLogger logger = new HtmlFileLogger("", "WriteToHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
 
@@ -61,7 +61,7 @@ public class HtmlFileLoggerUnitTest {
    * Test Writing to an Existing Html File Logger
    */
   @Test(groups = TestCategories.Utilities)
-  public void WriteToExistingHtmlFileLogger() {
+  public void writeToExistingHtmlFileLogger() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "WriteToExistingHtmlFileLogger", MessageType.GENERIC);
     logger.logMessage(MessageType.WARNING, "This is a test.");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
@@ -97,7 +97,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify that HtmlFileLogger can log message without defining a Message Type
    */
   @Test(groups = TestCategories.Utilities)
-  public void HtmlFileLoggerLogMessage() {
+  public void htmlFileLoggerLogMessage() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessage");
     logger.logMessage("Test to ensure LogMessage works as expected.");
     String htmlText = this.readTextFile(logger.getFilePath());
@@ -113,7 +113,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify that HTML File Logger can log message and defining a Message Type.
    */
   @Test(groups = TestCategories.Utilities)
-  public void HtmlFileLoggerLogMessageSelectType() {
+  public void htmlFileLoggerLogMessageSelectType() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessageType");
     logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
     String htmlText = this.readTextFile(logger.getFilePath());
@@ -129,14 +129,19 @@ public class HtmlFileLoggerUnitTest {
    * Verify that File Path field can be accessed and updated
    */
   @Test(groups = TestCategories.Utilities)
-  public void HtmlFileLoggerSetFilePath() {
+  public void htmlFileLoggerSetFilePath() throws IOException {
+    SoftAssert softAssert = new SoftAssert();
+
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerSetFilePath", MessageType.GENERIC);
     logger.setFilePath("test file path");
     String filePath = logger.getFilePath();
 
     File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.delete());
-    Assert.assertEquals(filePath, "test file path", "Expected 'test file path' as file path");
+    softAssert.assertTrue(file.createNewFile(), "New File was not created");
+    softAssert.assertTrue(file.exists(), "File does not Exist");
+    softAssert.assertTrue(file.delete());
+    softAssert.assertEquals(filePath, "test file path", "Expected 'test file path' as file path");
+    softAssert.assertAll();
   }
 
   /**
