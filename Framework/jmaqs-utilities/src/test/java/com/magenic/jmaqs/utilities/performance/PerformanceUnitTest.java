@@ -65,7 +65,6 @@ public class PerformanceUnitTest extends BaseTest {
 
     // Otherwise record the assertion as true and continue...
     Assert.assertTrue(file.exists(), "File Check : Expected File exists.");
-
     PerfTimerCollection r = PerfTimerCollection.loadPerfTimerCollection(filepath);
 
     // Payload check
