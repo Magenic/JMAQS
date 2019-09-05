@@ -76,11 +76,6 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger(true, LoggingConfig.getLogDirectory(),
             this.getFileName("TestHierarchicalTxtFileLogger_" + logLevel, "txt"), MessageType.GENERIC);
     this.testHierarchicalLogging(logger, logger.getFilePath(), logLevel, levels);
-
-    File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.createNewFile(), "New File was not created");
-    Assert.assertTrue(file.exists(), "File does not Exist");
-    Assert.assertTrue(file.delete(), "File was not deleted");
   }
 
   /**
@@ -99,31 +94,7 @@ public class FileLoggerUnitTest {
       ConsoleLogger consoleLogger = new ConsoleLogger();
       this.testHierarchicalLogging(consoleLogger, path, logLevel, levels);
     }
-
-    File file = new File(path);
-    Assert.assertTrue(file.createNewFile(), "New File was not created");
-    Assert.assertTrue(file.exists(), "File does not Exist");
-    Assert.assertTrue(file.delete(), "File was not deleted");
   }
-
-  /**
-   * Verify the txt file logger respects hierarchical logging
-   * @param logLevel The type of logging
-   * @param levels What should appear for each level
-   */
-  @Test(groups = TestCategories.Utilities)
-  public void TestHierarchicalTxtFileLogger(String logLevel, HashMap<String, Boolean> levels) throws IOException {
-    FileLogger logger = new FileLogger(true,
-            LoggingConfig.getLogDirectory(),
-            this.getFileName("TestHierarchicalTxtFileLogger" + logLevel, "txt"), MessageType.GENERIC);
-    this.testHierarchicalLogging(logger, logger.getFilePath(), logLevel, levels);
-
-    File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.createNewFile(), "New File was not created");
-    Assert.assertTrue(file.exists(), "File does not Exist");
-    Assert.assertTrue(file.delete(), "File was not deleted");
-  }
-
 
   /**
    * Verify the Html File logger respects hierarchical logging
@@ -136,11 +107,6 @@ public class FileLoggerUnitTest {
             this.getFileName("TestHierarchicalHtmlFileLogger" + logLevel, "html"), MessageType.GENERIC);
 
     this.testHierarchicalLogging(logger, logger.getFilePath(), logLevel, levels);
-
-    File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.createNewFile(), "New File was not created");
-    Assert.assertTrue(file.exists(), "File does not Exist");
-    Assert.assertTrue(file.delete(), "File was not deleted");
   }
 
   /**
@@ -152,11 +118,6 @@ public class FileLoggerUnitTest {
   public void testFileLogger() throws IOException {
     FileLogger logger = new FileLogger("", "TestFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello");
-
-    File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.createNewFile(), "New File was not created");
-    Assert.assertTrue(file.exists(), "File does not Exist");
-    Assert.assertTrue(file.delete(), "File was not deleted");
   }
 
   /**
@@ -166,10 +127,6 @@ public class FileLoggerUnitTest {
   public void fileLoggerNoAppendTest() throws IOException {
     FileLogger logger = new FileLogger(false, "", "WriteToFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
-    File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.createNewFile(), "New File was created");
-    Assert.assertTrue(file.exists(), "File does not Exist");
-    Assert.assertTrue(file.delete(), "File was not deleted");
   }
 
   /**
@@ -179,10 +136,6 @@ public class FileLoggerUnitTest {
   public void fileLoggerAppendFileTest() throws IOException {
     FileLogger logger = new FileLogger(true, "", "WriteToExistingFileLogger");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
-    File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.createNewFile(), "New File was created");
-    Assert.assertTrue(file.exists(), "File does not Exist");
-    Assert.assertTrue(file.delete(), "File was not deleted");
   }
 
   /**
@@ -234,11 +187,6 @@ public class FileLoggerUnitTest {
   public void writeToFileLogger() throws IOException {
     FileLogger logger = new FileLogger("", "WriteToFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
-
-    File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.createNewFile(), "New File was created");
-    Assert.assertTrue(file.exists(), "File does not Exist");
-    Assert.assertTrue(file.delete(), "File was not deleted");
   }
 
   /**
@@ -251,11 +199,6 @@ public class FileLoggerUnitTest {
             MessageType.GENERIC);
     logger.logMessage(MessageType.WARNING, "This is a test.");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
-
-    File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.createNewFile(), "New File was not created");
-    Assert.assertTrue(file.exists(), "File does not Exist");
-    Assert.assertTrue(file.delete(), "File was not deleted");
   }
 
   /**
