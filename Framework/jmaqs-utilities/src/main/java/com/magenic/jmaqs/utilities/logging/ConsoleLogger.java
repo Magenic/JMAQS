@@ -136,8 +136,8 @@ public class ConsoleLogger extends Logger {
     }
 
     // TODO: set the console Font and Background Colors
-    Console.ForegroundColor = font;
-    Console.BackgroundColor = background;
+    // Console.ForegroundColor = font;
+    // Console.BackgroundColor = background;
   }
 
   /**
@@ -155,8 +155,10 @@ public class ConsoleLogger extends Logger {
 
     // TODO: Get the Current Console Font and Background Colors
     // Save the original console colors
-    ConsoleColor originalBackground = Console.BackgroundColor;
-    FontColor originalFont = Console.ForegroundColor;
+    // ConsoleColor originalBackground = Console.BackgroundColor;
+    // FontColor originalFont = Console.ForegroundColor;
+    ConsoleColor originalBackground = ConsoleColor.BLACK;
+    FontColor originalFont = FontColor.WHITE;
 
     // Update console colors
     setConsoleColor(type);
