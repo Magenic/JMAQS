@@ -49,7 +49,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * Get the seleniumTestObject for this test.
    * @return The seleniumTestObject
    */
-  public SeleniumTestObject getSeleniumTestObject() {
+  SeleniumTestObject getSeleniumTestObject() {
     return this.seleniumTestObject.get();
   }
 
