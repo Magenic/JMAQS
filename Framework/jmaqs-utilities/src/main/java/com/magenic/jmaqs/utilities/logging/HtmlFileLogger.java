@@ -38,9 +38,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param append
-   *          Append document if true
+   * @param append Append document if true
    */
   public HtmlFileLogger(boolean append) {
     this(append, "", DEFAULTLOGNAME, MessageType.INFORMATION);
@@ -48,9 +46,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param name
-   *          File name
+   * @param name File name
    */
   public HtmlFileLogger(String name) {
     this(false, "", name, MessageType.INFORMATION);
@@ -58,9 +54,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param messageLevel
-   *          Messaging Level
+   * @param messageLevel Messaging Level
    */
   public HtmlFileLogger(MessageType messageLevel) {
     this(false, "", DEFAULTLOGNAME, messageLevel);
@@ -68,11 +62,8 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param append
-   *          Append document if true
-   * @param name
-   *          File name
+   * @param append Append document if true
+   * @param name File name
    */
   public HtmlFileLogger(boolean append, String name) {
     this(append, "", name, MessageType.INFORMATION);
@@ -80,11 +71,8 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param logFolder
-   *          Where log files should be saved
-   * @param append
-   *          Append document if true
+   * @param logFolder Where log files should be saved
+   * @param append Append document if true
    */
   public HtmlFileLogger(String logFolder, boolean append) {
     this(append, logFolder, DEFAULTLOGNAME, MessageType.INFORMATION);
@@ -92,11 +80,8 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param logFolder
-   *          Where log files should be saved
-   * @param name
-   *          File Name
+   * @param logFolder Where log files should be saved
+   * @param name File Name
    */
   public HtmlFileLogger(String logFolder, String name) {
     this(false, logFolder, name, MessageType.INFORMATION);
@@ -104,11 +89,8 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param logFolder
-   *          Where log files should be saved
-   * @param messageLevel
-   *          Messaging Level
+   * @param logFolder Where log files should be saved
+   * @param messageLevel Messaging Level
    */
   public HtmlFileLogger(String logFolder, MessageType messageLevel) {
     this(false, logFolder, DEFAULTLOGNAME, messageLevel);
@@ -116,11 +98,8 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param append
-   *          Append document if true
-   * @param messageLevel
-   *          Messaging Level
+   * @param append  Append document if true
+   * @param messageLevel Messaging Level
    */
   public HtmlFileLogger(boolean append, MessageType messageLevel) {
     this(append, "", DEFAULTLOGNAME, messageLevel);
@@ -128,11 +107,8 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param messageLevel
-   *          Messaging Level
-   * @param name
-   *          File Name
+   * @param messageLevel Messaging Level
+   * @param name File Name
    */
   public HtmlFileLogger(MessageType messageLevel, String name) {
     this(false, "", name, messageLevel);
@@ -140,13 +116,9 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param append
-   *          Append document if true
-   * @param logFolder
-   *          Where log files should be saved
-   * @param name
-   *          File Name
+   * @param append Append document if true
+   * @param logFolder Where log files should be saved
+   * @param name File Name
    */
   public HtmlFileLogger(boolean append, String logFolder, String name) {
     this(append, logFolder, name, MessageType.INFORMATION);
@@ -154,13 +126,9 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param append
-   *          Append document if true
-   * @param logFolder
-   *          Where log files should be saved
-   * @param messageLevel
-   *          Messaging Level
+   * @param append Append document if true
+   * @param logFolder Where log files should be saved
+   * @param messageLevel Messaging Level
    */
   public HtmlFileLogger(boolean append, String logFolder, MessageType messageLevel) {
     this(append, logFolder, DEFAULTLOGNAME, messageLevel);
@@ -168,13 +136,9 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param name
-   *          File Name
-   * @param append
-   *          Append document if true
-   * @param messageLevel
-   *          Messaging Level
+   * @param name File Name
+   * @param append Append document if true
+   * @param messageLevel Messaging Level
    */
   public HtmlFileLogger(String name, boolean append, MessageType messageLevel) {
     this(append, "", name, messageLevel);
@@ -182,13 +146,9 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param logFolder
-   *          Where log files should be saved
-   * @param name
-   *          File Name
-   * @param messageLevel
-   *          Messaging Level
+   * @param logFolder Where log files should be saved
+   * @param name File Name
+   * @param messageLevel Messaging Level
    */
   public HtmlFileLogger(String logFolder, String name, MessageType messageLevel) {
     this(false, logFolder, name, messageLevel);
@@ -196,16 +156,11 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   *
-   * @param append
-   *          True to append to an existing log file or false to overwrite it.
+   * @param append True to append to an existing log file or false to overwrite it.
    *          If the file does not exist this, flag will have no affect.
-   * @param logFolder
-   *          Where log files should be saved
-   * @param name
-   *          File Name
-   * @param messageLevel
-   *          Messaging Level
+   * @param logFolder Where log files should be saved
+   * @param name File Name
+   * @param messageLevel Messaging Level
    */
   public HtmlFileLogger(Boolean append, String logFolder, String name, MessageType messageLevel) {
     super(append, logFolder, name, messageLevel);
@@ -219,22 +174,21 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
     }
   }
 
-  /*
-   * (non-Javadoc)
+  /**
    *
-   * @see com.magenic.jmaqs.utilities.Logging.Logger#logMessage(java.lang.String,
-   * java.lang.Object[])
+   * @param message The message text
+   * @param args String format arguments
    */
   @Override
   public void logMessage(String message, Object... args) {
     this.logMessage(MessageType.INFORMATION, message, args);
   }
 
-  /*
-   * (non-Javadoc)
+  /**
    *
-   * @see com.magenic.jmaqs.utilities.Logging.Logger#logMessage(com.magenic.jmaqs.utilities.
-   * Logging.MessageType, java.lang.String, java.lang.Object[])
+   * @param messageType The type of message
+   * @param message The message text
+   * @param args String format arguments
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
@@ -249,7 +203,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
         // Set the style
         writer.write(this.getTextWithColorFlag(messageType));
 
-        // Add the content
+        // Add the content TODO: update these three lines
         writer.write(StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter("%s%s%s",
                     System.lineSeparator(), System.lineSeparator(), date)));
         writer.write(StringEscapeUtils.escapeHtml4(StringProcessor.safeFormatter(
@@ -276,9 +230,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Gets the file extension.
-   *
-   * @return
-   *          File Extension
+   * @return File Extension
    */
   @Override
   protected String getExtension() {
@@ -306,11 +258,8 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Get the HTML style key for the given message type.
-   *
-   * @param type
-   *          The message type
-   * @return
-   *          String - The HTML style key for the given message type
+   * @param type The message type
+   * @return String - The HTML style key for the given message type
    */
   private String getTextWithColorFlag(MessageType type) {
     switch (type) {

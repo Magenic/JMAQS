@@ -60,9 +60,7 @@ public enum MessageType {
 
   /**
    * Gets the value of the current Message Type.
-   *
-   * @return
-   *        Value of current Message Type.
+   * @return Value of current Message Type.
    */
   public int getValue() {
     return this.value;

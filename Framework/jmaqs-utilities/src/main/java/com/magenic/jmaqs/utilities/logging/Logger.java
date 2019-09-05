@@ -4,6 +4,8 @@
 
 package com.magenic.jmaqs.utilities.logging;
 
+import com.magenic.jmaqs.utilities.helper.StringProcessor;
+
 /**
  * Abstract logging interface base class.
  */
@@ -109,5 +111,15 @@ public abstract class Logger {
   protected boolean shouldMessageBeLogged(MessageType messageType) {
     // The message should be logged if it's level is less than or equal to the current logging level
     return messageType.getValue() <= this.logLevel.getValue();
+  }
+
+  /**
+   * Get the message for an unknown message type.
+   * @param type The Message Type.
+   * @return The Unknown Message Type Message.
+   */
+  protected String unknownMessageTypeMessage(MessageType type) {
+    return StringProcessor.safeFormatter("Unknown MessageType: %s%s%s%s", type.name(),
+            System.lineSeparator(), "Message will be displayed with the MessageType of: ", MessageType.GENERIC.name());
   }
 }

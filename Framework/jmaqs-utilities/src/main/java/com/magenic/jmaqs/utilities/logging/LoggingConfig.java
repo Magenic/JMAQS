@@ -11,12 +11,10 @@ import java.io.File;
 
 /**
  * Get logging config data.
- *
  */
 public class LoggingConfig {
   /**
    * Get our logging state - Yes, no or on failure.
-   * 
    * @return The log enabled state
    */
   public static LoggingEnabled getLoggingEnabledSetting() {
@@ -35,7 +33,6 @@ public class LoggingConfig {
 
   /**
    * Get our logging level.
-   *
    * @return MessageType - The current log level.
    */
   public static MessageType getLoggingLevelSetting() {
@@ -62,9 +59,7 @@ public class LoggingConfig {
 
   /**
    * Get the logger.
-   *
-   * @param fileName
-   *          File name to use for the log
+   * @param fileName File name to use for the log
    * @return The logger
    */
   public static Logger getLogger(String fileName) {
@@ -90,7 +85,6 @@ public class LoggingConfig {
 
   /**
    * Gets the File Directory to store log files.
-   * 
    * @return String of file path
    */
   public static String getLogDirectory() {
