@@ -62,7 +62,7 @@ public abstract class BaseTest {
   /**
    * The Performance Timer Collection.
    */
-  private PerfTimerCollection perfTimerCollection;
+  public PerfTimerCollection perfTimerCollection;
 
   /**
    * The TestNG Test Context.
