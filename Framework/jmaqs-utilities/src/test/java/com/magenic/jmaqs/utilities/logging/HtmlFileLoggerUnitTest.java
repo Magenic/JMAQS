@@ -103,8 +103,6 @@ public class HtmlFileLoggerUnitTest {
     String htmlText = this.readTextFile(logger.getFilePath());
 
     File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.delete());
-
     Assert.assertTrue(htmlText.contains("Test to ensure LogMessage works as expected."),
             "Expected Log Message to be contained in log.");
   }
@@ -113,14 +111,10 @@ public class HtmlFileLoggerUnitTest {
    * Verify that HTML File Logger can log message and defining a Message Type.
    */
   @Test(groups = TestCategories.Utilities)
-  public void htmlFileLoggerLogMessageSelectType() {
+  public void htmlFileLoggerLogMessageSelectType() throws IOException {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessageType");
     logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
     String htmlText = this.readTextFile(logger.getFilePath());
-
-    File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.delete());
-
     Assert.assertTrue(htmlText.contains("Test to ensure LogMessage works as expected."),
             "Expected Log Message to be contained in log.");
   }

@@ -6,6 +6,7 @@ package com.magenic.jmaqs.utilities.logging;
 
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
+import org.testng.Assert;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -198,7 +199,7 @@ public class FileLogger extends Logger {
 
     if (!Paths.get(this.directory).toFile().exists()) {
       File dir = new File(this.directory);
-      dir.mkdir();
+      Assert.assertTrue(dir.mkdir());
     }
 
     name = makeValidFileName(name);

@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -207,17 +208,21 @@ public class FileLoggerUnitTest {
    * @throws IOException warning in case exception is thrown
    */
   @Test(groups = TestCategories.Utilities)
-  public void fileLoggerConstructorCreateDirectory() throws IOException {
+  public void fileLoggerConstructorCreateFile() throws IOException {
     String message = "Test to ensure that the file in the created directory can be written to.";
     FileLogger logger = new FileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
-            "FileLoggerCreateDirectoryDelete").toString(), "FileLoggerCreateDirectory", MessageType.GENERIC);
+            "FileLoggerCreateDirectoryDelete").toString(),
+            "FileLoggerCreateDirectory",
+            MessageType.GENERIC);
 
     logger.logMessage(MessageType.WARNING, "Test to ensure that the file in the created directory can be written to.");
 
     File file = new File(logger.getFilePath());
     String actualMessage = this.readTextFile(file.getCanonicalPath());
+    Assert.assertTrue(file.exists(), "the File does not exist");
     Assert.assertTrue(actualMessage.contains(message), "Expected '" + message + "' but got '" + actualMessage + "' for: " + file.getCanonicalPath());
-  }
+    Assert.assertTrue(file.delete(), "The File was not Deleted");
+    }
 
   /**
    * Verify that File Logger can log message without defining a Message Type
