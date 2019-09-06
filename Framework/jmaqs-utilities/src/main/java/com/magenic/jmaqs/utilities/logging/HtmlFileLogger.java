@@ -202,7 +202,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
         writer.write(this.getTextWithColorFlag(messageType));
 
         // Add the content
-        writer.write(StringProcessor.safeFormatter("%s%s%s", System.lineSeparator(), date));
+        writer.write(StringProcessor.safeFormatter("%s%s", System.lineSeparator(), date));
         writer.write(StringProcessor.safeFormatter("%s:\t", messageType.name()));
         writer.write(StringProcessor.safeFormatter(System.lineSeparator() + message, args));
 
