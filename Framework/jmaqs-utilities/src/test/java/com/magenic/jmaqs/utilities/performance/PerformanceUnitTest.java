@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 /**
  * Response time test class.
  */
-public class PerformanceUnitTest extends BaseExtendableTest {
+public class PerformanceUnitTest extends BaseTest {
 
   /**
   * Test method to test Performance Timers.
