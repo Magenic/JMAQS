@@ -1,4 +1,4 @@
-package com.magenic.jmaqs.utilities.performance;
+package com.magenic.jmaqs.performance;
 
 import java.util.Date;
 
@@ -36,7 +36,7 @@ public class PerfTimer {
   *  Sets the Timer Name
   * @param timerName name of the timer
   */
-  void setTimerName(String timerName) {
+  public void setTimerName(String timerName) {
     this.timerName = timerName;
   }
 
@@ -56,14 +56,14 @@ public class PerfTimer {
   *  Sets the start time
   * @param startTime the start time to be set
   */
-  void setStartTime(Date startTime) {
+  public void setStartTime(Date startTime) {
     this.startTime = startTime;
   }
 
   /**
   *  Gets the start time
   */
-  Date getStartTime() {
+  public Date getStartTime() {
     return this.startTime;
   }
 
@@ -76,14 +76,14 @@ public class PerfTimer {
   *  Sets the end time
   * @param endTime end time to be set
   */
-  void setEndTime(Date endTime) {
+  public void setEndTime(Date endTime) {
     this.endTime = endTime;
   }
 
   /**
   *  Gets the end time
   */
-  Date getEndTime() {
+  public Date getEndTime() {
     return this.endTime;
   }
 
@@ -97,7 +97,7 @@ public class PerfTimer {
   * Sets the duration
   * @param duration the duration to be set
   */
-  void setDuration(long duration) {
+  public void setDuration(long duration) {
     this.duration = duration;
   }
 

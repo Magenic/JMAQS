@@ -2,7 +2,7 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities.performance;
+package com.magenic.jmaqs.performance;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
@@ -59,7 +59,7 @@ public class PerfTimerCollection {
     /**
      * Gets and sets the list if response time tests
      */
-    List<PerfTimer> timerList;
+    private List<PerfTimer> timerList;
 
     /**
      * sets the list of response time tests
@@ -80,7 +80,7 @@ public class PerfTimerCollection {
     /**
      * Gets or sets the File name
      */
-    String fileName;
+    private String fileName;
 
     /**
      * Sets the File name
@@ -101,7 +101,7 @@ public class PerfTimerCollection {
     /**
      * Gets or sets the test name
      */
-    String testName;
+    private String testName;
 
     /**
      * Sets the test name
@@ -149,7 +149,7 @@ public class PerfTimerCollection {
      * Sets the logger
      * @param log log to be set
      */
-    private void setLog(Logger log) {
+    public void setLog(Logger log) {
         this.log = log;
     }
 
@@ -165,7 +165,7 @@ public class PerfTimerCollection {
      * Sets the logger
      * @param timerName Name of the timer
      */
-    void startTimer(String timerName) {
+    public void startTimer(String timerName) {
         this.startTimer("", timerName);
     }
 
@@ -174,7 +174,7 @@ public class PerfTimerCollection {
      * @param contextName Name of the context
      * @param timerName Name of the timer
      */
-    void startTimer(String contextName, String timerName) {
+    public void startTimer(String contextName, String timerName) {
         if (this.openTimerList.containsKey(timerName)) {
             throw new IllegalArgumentException("Timer already Started: " + timerName);
         } else {
@@ -197,7 +197,7 @@ public class PerfTimerCollection {
      * Method to stop an existing timer with a specified name for a test
      * @param timerName Name of the timer
      */
-    void endTimer(String timerName) {
+    public void endTimer(String timerName) {
         Date date = new Date();
         if (!this.openTimerList.containsKey(timerName)) {
             throw new IllegalArgumentException("Response time test does not exist");

@@ -2,31 +2,30 @@
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities.performance;
+package com.magenic.jmaqs.performance;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-
-import java.nio.file.Paths;
+import com.magenic.jmaqs.performance.PerfTimerCollection;
 
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 /**
  * Response time test class.
  */
-public class PerformanceUnitTest extends BaseTest {
+public abstract class PerformanceUnitTest extends BaseTest {
 
   /**
   * Test method to test Performance Timers.
@@ -38,15 +37,15 @@ public class PerformanceUnitTest extends BaseTest {
 
     // build an object to store in the pay load string of the PerfTimerCollection
     tConfig tc = new tConfig();
-    tc.logPath = Config.getGeneralValue("FileLoggerPath");
-    tc.logType = Config.getGeneralValue("LogType");
-    tc.webUri = Config.getGeneralValue("WebServiceUri");
+    tc.setLogPath(Config.getGeneralValue("FileLoggerPath"));
+    tc.setLogType(Config.getGeneralValue("LogType"));
+    tc.setWebUri(Config.getGeneralValue("WebServiceUri"));
 
     // store it (as a JSON string)
     ObjectMapper objectMapper = new ObjectMapper();
-    p.perfPayloadString = objectMapper.writeValueAsString(tc);
+    p.setPerfPayloadString(objectMapper.writeValueAsString(tc));
     //p.perfPayloadString = JSONSerializeObject(this.tc);
-    final String jsonString = p.perfPayloadString;
+    final String jsonString = p.getPerfPayloadString();
 
     p.startTimer("Outer", "test1");
     Thread.sleep(1000);
@@ -57,7 +56,7 @@ public class PerformanceUnitTest extends BaseTest {
 
     // Write the log and validate the resulting file contents
     p.write(this.getLogger());
-    String filepath = LoggingConfig.getLogDirectory() + " " + p.fileName;
+    String filepath = LoggingConfig.getLogDirectory() + " " + p.getFileName();
 
     // If the file does not exist, just bail
     File file = new File(filepath);
@@ -68,14 +67,14 @@ public class PerformanceUnitTest extends BaseTest {
     PerfTimerCollection r = PerfTimerCollection.loadPerfTimerCollection(filepath);
 
     // Payload check
-    Assert.assertEquals(jsonString, r.perfPayloadString, "Validated Payload (json)");
+    Assert.assertEquals(jsonString, r.getPerfPayloadString(), "Validated Payload (json)");
 
     // There should be 2 timers
-    Assert.assertEquals(2, r.timerList.size(),"Expected number of timers");
+    Assert.assertEquals(2, r.getTimerList().size(),"Expected number of timers");
 
     // Check the timers
     int badNameCount = 0;
-    for (PerfTimer pt : r.timerList) {
+    for (PerfTimer pt : r.getTimerList()) {
       switch (pt.getTimerName()) {
         // Timer = test1 should have a context of Outer
         case "test1":
@@ -118,7 +117,7 @@ public class PerformanceUnitTest extends BaseTest {
 
     // Write the log and validate the resulting file contents
     p.write(this.getLogger());
-    String filepath = LoggingConfig.getLogDirectory() + " " + p.fileName;
+    String filepath = LoggingConfig.getLogDirectory() + " " + p.getFileName();
 
     // If the file doesn't exist, just bail
     File file = new File(filepath);
@@ -134,11 +133,11 @@ public class PerformanceUnitTest extends BaseTest {
     Assert.assertNull(r.perfPayloadString, "Payload was not Null! Contained: " + r.perfPayloadString);
 
     // There should be 2 timers
-    Assert.assertEquals(2, r.timerList.size(), "Expected number of timers");
+    Assert.assertEquals(2, r.getTimerList().size(), "Expected number of timers");
 
     // Check the timers
     int badNameCount = 0;
-    for (PerfTimer pt : r.timerList) {
+    for (PerfTimer pt : r.getTimerList()) {
       switch (pt.getTimerName()) {
         // Timer = test1 should have a context of StoppedOuter
         case "test1":
@@ -190,7 +189,7 @@ public class PerformanceUnitTest extends BaseTest {
   @Test(groups = TestCategories.Utilities)
   public void perfTimerConstructorTest() {
     PerfTimerCollection p = new PerfTimerCollection("testTimer");
-    Assert.assertEquals(p.testName, "testTimer");
+    Assert.assertEquals(p.getTestName(), "testTimer");
   }
 
   /**
@@ -235,14 +234,56 @@ public class PerformanceUnitTest extends BaseTest {
      */
       private String logPath;
 
+      /**
+       * Sets the Log Path.
+       */
+      private void setLogPath(String logPath){
+        this.logPath = logPath;
+      }
+
+      /**
+       * Gets the Log Path.
+       */
+      private String getLogPath(){
+        return this.logPath;
+      }
+
      /**
      * the Log type.
      */
       private String logType;
 
+      /**
+       * Sets the Log type.
+       */
+      private void setLogType(String logType){
+        this.logType = logType;
+      }
+
+      /**
+       * Gets the Log type.
+       */
+      private String getLogType(){
+        return this.logType;
+      }
+
      /**
      * the Web URI.
      */
       private String webUri;
+
+      /**
+       * Sets the web Uri.
+       */
+      private void setWebUri(String webUri){
+        this.webUri = webUri;
+      }
+
+      /**
+       * Gets the web Uri.
+       */
+      private String getWebUri(){
+        return this.webUri;
+      }
     }
 }

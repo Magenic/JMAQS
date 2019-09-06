@@ -6,7 +6,7 @@ package com.magenic.jmaqs.base;
 
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
+import com.magenic.jmaqs.performance.PerfTimerCollection;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -12,7 +12,7 @@ import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.logging.TestResultType;
-import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
+import com.magenic.jmaqs.performance.*;
 
 import java.lang.reflect.Method;
 import java.nio.file.Files;

@@ -50,5 +50,11 @@
 			<version>${guice.version}</version>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.magenic.jmaqs.performance</groupId>
+            <artifactId>jmaqs-performance</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
