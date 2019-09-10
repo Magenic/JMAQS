@@ -4,8 +4,6 @@
 
 package com.magenic.jmaqs.selenium;
 
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import org.apache.commons.io.FilenameUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,7 +20,7 @@ public class ScreenshotUnitTest extends BaseSeleniumTest {
    */
   @Test
   public void createScreenShotTest() throws IOException {
-    String path = SeleniumUtilities.captureScreenshot(this.getWebDriver(), ".", "screenshotTest");
+    String path = SeleniumUtilities.captureScreenshot(this.getWebDriver(), getTestObject(), ".", "screenshotTest", ScreenshotImageFormat.Bmp);
     File ss = new File(path);
     Assert.assertTrue(ss.exists() && ss.isFile());
     ss.delete();
