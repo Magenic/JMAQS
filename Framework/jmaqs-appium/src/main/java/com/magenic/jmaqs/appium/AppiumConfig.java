@@ -16,6 +16,8 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -27,12 +29,12 @@ public class AppiumConfig {
   /**
    * The web service configuration section.
    */
-  public static final ConfigSection APPIUM_SECTION = ConfigSection.AppiumMaqs;
+  private static final ConfigSection APPIUM_SECTION = ConfigSection.AppiumMaqs;
 
   /**
    * The web service configuration section.
    */
-  public static final ConfigSection APPIUM_CAPS_SECTION = ConfigSection.AppiumCapsMaqs;
+  private static final ConfigSection APPIUM_CAPS_SECTION = ConfigSection.AppiumCapsMaqs;
 
   /**
    * Gets the mobile device OS.
@@ -40,7 +42,7 @@ public class AppiumConfig {
    * @return the mobile device OS
    */
   public static String getPlatformName() {
-    return Config.getValueForSection(APPIUM_SECTION,"PlatformName", "Android");
+    return Config.getValueForSection(APPIUM_SECTION, "PlatformName", "Android");
   }
 
   /**
@@ -49,7 +51,7 @@ public class AppiumConfig {
    * @return the mobile device UDID
    */
   public static String getMobileDeviceUdid() {
-    return Config.getValueForSection(APPIUM_SECTION,"DeviceUDID");
+    return Config.getValueForSection(APPIUM_SECTION, "DeviceUDID");
   }
 
   /**
@@ -58,7 +60,7 @@ public class AppiumConfig {
    * @return the bundle ID
    */
   public static String getBundleId() {
-    return Config.getValueForSection(APPIUM_SECTION,"BundleID");
+    return Config.getValueForSection(APPIUM_SECTION, "BundleID");
   }
 
   /**
@@ -67,7 +69,7 @@ public class AppiumConfig {
    * @return the OS version
    */
   public static String getPlatformVersion() {
-    return Config.getValueForSection(APPIUM_SECTION,"PlatformVersion");
+    return Config.getValueForSection(APPIUM_SECTION, "PlatformVersion");
   }
 
   /**
@@ -76,7 +78,7 @@ public class AppiumConfig {
    * @return the device name
    */
   public static String getDeviceName() {
-    return Config.getValueForSection(APPIUM_SECTION,"DeviceName");
+    return Config.getValueForSection(APPIUM_SECTION, "DeviceName");
   }
 
   /**
@@ -85,7 +87,7 @@ public class AppiumConfig {
    * @return true, if is using mobile browser
    */
   public static boolean isUsingMobileBrowser() {
-    String value = Config.getValueForSection(APPIUM_SECTION,"MobileBrowser", "NO");
+    String value = Config.getValueForSection(APPIUM_SECTION, "MobileBrowser", "NO");
 
     if (value.equalsIgnoreCase("YES")) {
       return true;
@@ -99,14 +101,19 @@ public class AppiumConfig {
    *
    * @return the save page source on fail
    */
-  public static boolean getSavePageSourceOnFail()
-  {
-    return Config.getValueForSection(APPIUM_SECTION, "SavePageSourceOnFail").equalsIgnoreCase("Yes");
+  public static boolean getSavePageSourceOnFail() {
+    return Config.getValueForSection(APPIUM_SECTION, "SavePageSourceOnFail")
+        .equalsIgnoreCase("Yes");
   }
 
-  public static boolean getSoftAssertScreenShot()
-  {
-    return Config.getValueForSection(APPIUM_SECTION, "SoftAssertScreenShot").equalsIgnoreCase("Yes");
+  /**
+   * Gets soft assert screen shot.
+   *
+   * @return the soft assert screen shot
+   */
+  public static boolean getSoftAssertScreenShot() {
+    return Config.getValueForSection(APPIUM_SECTION, "SoftAssertScreenShot")
+        .equalsIgnoreCase("Yes");
   }
 
   /**
@@ -115,7 +122,7 @@ public class AppiumConfig {
    * @return the mobile hub url string
    */
   public static String getMobileHubUrlString() {
-    return Config.getValueForSection(APPIUM_SECTION,"MobileHubUrl");
+    return Config.getValueForSection(APPIUM_SECTION, "MobileHubUrl");
   }
 
   /**
@@ -235,5 +242,23 @@ public class AppiumConfig {
   public static void setTimeouts(AppiumDriver driver) {
     int timeoutTime = Integer.parseInt(Config.getValue("Timeout", "0"));
     driver.manage().timeouts().pageLoadTimeout(timeoutTime, null);
+  }
+
+  /**
+   * Gets capabilities as strings.
+   *
+   * @return the capabilities as strings
+   */
+  public static Map<String, String> getCapabilitiesAsStrings() {
+    return Config.getSection(APPIUM_CAPS_SECTION);
+  }
+
+  /**
+   * Gets capabilities as objects.
+   *
+   * @return the capabilities as objects
+   */
+  public static Map<String, Object> getCapabilitiesAsObjects() {
+    return new HashMap<>(getCapabilitiesAsStrings());
   }
 }
