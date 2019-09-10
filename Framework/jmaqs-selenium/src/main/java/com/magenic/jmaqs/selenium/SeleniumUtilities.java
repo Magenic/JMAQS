@@ -100,7 +100,6 @@ public class SeleniumUtilities {
   
   /**
    * Get the web driver from a web element.
-   * 
    * @param webElement
    *          The web element
    * @return The web driver
