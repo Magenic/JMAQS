@@ -30,7 +30,6 @@ public class SeleniumUtilities {
 
   /**
    * To capture a screenshot during execution.
-   * 
    * @param webDriver
    *          The WebDriver
    * @param log
