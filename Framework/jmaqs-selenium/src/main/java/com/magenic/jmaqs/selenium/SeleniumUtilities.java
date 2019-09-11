@@ -22,11 +22,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.Assert;
 
 /**
  * Static class for the selenium utilities, ported from MAQS.
  */
-public class SeleniumUtilities {
+class SeleniumUtilities {
 
   /**
    * To capture a screenshot during execution.
@@ -38,9 +39,9 @@ public class SeleniumUtilities {
    *          Appends a name to the end of a filename
    * @return Boolean if the save of the image was successful
    */
-  public static String captureScreenshot(WebDriver webDriver, 
-                                          Logger log, 
-                                          String appendName) {
+  static String captureScreenshot(WebDriver webDriver,
+                                  Logger log,
+                                  String appendName) {
     try {
       String path;
 
@@ -79,9 +80,9 @@ public class SeleniumUtilities {
    * @throws IOException
    *           There was a problem creating the screen shot
    */
-  public static String captureScreenshot(WebDriver webDriver,
-                                         String directory, 
-                                         String fileNameWithoutExtension) throws IOException {
+  static String captureScreenshot(WebDriver webDriver,
+                                  String directory,
+                                  String fileNameWithoutExtension) throws IOException {
     
     File scrFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
 
@@ -103,7 +104,7 @@ public class SeleniumUtilities {
    *          The web element
    * @return The web driver
    */
-  public static WebDriver webElementToWebDriver(WebElement webElement) {
+  static WebDriver webElementToWebDriver(WebElement webElement) {
 
     WebDriver driver;
 
@@ -125,7 +126,7 @@ public class SeleniumUtilities {
     // Make sure the directory exists
     File folder = new File(directory);
     if (!folder.isDirectory()) {
-      folder.mkdir();
+      Assert.assertTrue(folder.mkdir());
     }
   }
 }

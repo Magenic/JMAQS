@@ -128,14 +128,19 @@ public class ConsoleLogger extends Logger {
    * @param background The background color
    */
   private static void setConsoleColor(ConsoleColor background, FontColor font) {
+/*
+// TODO: set the console Font and Background Colors
 
     if (background == null) {
       background = ConsoleColor.BLACK;
     }
 
-    // TODO: set the console Font and Background Colors
+    ConsoleColor backgrounColor = background;
+    FontColor fontColor = font;
     // Console.ForegroundColor = font;
     // Console.BackgroundColor = background;
+
+ */
   }
 
   /**
@@ -165,12 +170,10 @@ public class ConsoleLogger extends Logger {
     try {
       // If this a write-line command
       if (line) {
-        System.out.println(result);
-      } else {
-        System.out.println(result);
+        logMessage(result);
       }
     } catch (Exception e) {
-      System.out.println(StringProcessor.safeFormatter("Failed to write to the console because: {0}", e.getMessage()));
+      logMessage(StringProcessor.safeFormatter("Failed to write to the console because: {0}", e.getMessage()));
     }
 
     // Cleanup after yourself
@@ -206,7 +209,7 @@ public class ConsoleLogger extends Logger {
         break;
       default:
         setConsoleColor(null, FontColor.YELLOW);
-        System.out.println(this.unknownMessageTypeMessage(type));
+        logMessage(unknownMessageTypeMessage(type));
         setConsoleColor(null, FontColor.WHITE);
         break;
     }

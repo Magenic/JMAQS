@@ -37,9 +37,12 @@ public class ScreenshotUnitTest extends BaseSeleniumTest {
     ss.delete();
   }
 
-  //FIXME: Commenting out test until repaired.  Casting issue
-  //FIXME: ava.lang.ClassCastException: com.magenic.jmaqs.utilities.logging.ConsoleLogger cannot be cast to com.magenic.jmaqs.utilities.logging.FileLogger
-  //	at com.magenic.jmaqs.selenium.ScreenshotUnitTest.createScreenShotWithLoggerFileNameTest(ScreenshotUnitTest.java:49)
+  /*
+  * FIXME: Commenting out test until repaired.  Casting issue
+  * FIXME: ava.lang.ClassCastException: com.magenic.jmaqs.utilities.logging.ConsoleLogger cannot be cast to com.magenic.jmaqs.utilities.logging.FileLogger
+  *	at com.magenic.jmaqs.selenium.ScreenshotUnitTest.createScreenShotWithLoggerFileNameTest(ScreenshotUnitTest.java:49)
+  */
+
   /**
    * Test taking a screenshot, check file name
    *//*
