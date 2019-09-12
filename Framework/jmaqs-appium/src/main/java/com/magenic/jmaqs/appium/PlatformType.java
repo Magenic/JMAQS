@@ -4,19 +4,23 @@
 
 package com.magenic.jmaqs.appium;
 
-public enum PlatformType{
-    /**
-    * Android application
-    */
-    Android,
+/**
+ * The enum Platform type.
+ */
+public enum PlatformType {
+  /**
+   * Android application
+   */
+  ANDROID,
 
-    /**
-     * iOS application
-     */
-    iOS,
+  /**
+   * iOS application
+   */
+  IOS,
 
-    /**
-     * Windows application
-     */
-    Windows
+  /**
+   * Windows application
+   */
+  WINDOWS
+
 }

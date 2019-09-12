@@ -5,15 +5,40 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
 
 /**
  * Selenium configuration tests.
  */
 public class SeleniumConfigTest {
+
+  /**
+   * Remote capabilities username identifier
+   */
+  private String username = "username";
+  /**
+   * Remote browser access key identifier
+   */
+  private String accessKey = "accessKey";
+  /**
+   * Remote browser name identifier
+   */
+  private String browserName = "browserName";
+  /**
+   * Remote version platform identifier
+   */
+  private String platform = "platform";
+  /**
+   * Remote browser version identifier
+   */
+  private String version = "version";
+
   /**
    * Browser check.
    */
@@ -163,6 +188,48 @@ public class SeleniumConfigTest {
 
     Assert.assertNotNull(driverWait);
     driver.quit();
+  }
+
+  /**
+   * Verify remote capabilities section of config
+   */
+  @Test(groups = TestCategories.Selenium)
+  public void getRemoteCapabilitiesAsStrings() {
+    Map<String, String> capabilitiesAsStrings = SeleniumConfig.getRemoteCapabilitiesAsStrings();
+
+    SoftAssert softAssert = new SoftAssert();
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
+    softAssert.assertEquals(capabilitiesAsStrings.get(username), "Sauce_Labs_Username");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
+    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "Sauce_Labs_Accesskey");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
+    softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(platform));
+    softAssert.assertEquals(capabilitiesAsStrings.get(platform), "OS X 10.11");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(version));
+    softAssert.assertEquals(capabilitiesAsStrings.get(version), "54.0");
+    softAssert.assertAll();
+  }
+
+  /**
+   * Verify remote capabilities section of config
+   */
+  @Test(groups = TestCategories.Selenium)
+  public void getRemoteCapabilitiesAsObjects() {
+    Map<String, Object> capabilitiesAsStrings = SeleniumConfig.getRemoteCapabilitiesAsObjects();
+
+    SoftAssert softAssert = new SoftAssert();
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
+    softAssert.assertEquals(capabilitiesAsStrings.get(username), "Sauce_Labs_Username");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
+    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "Sauce_Labs_Accesskey");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
+    softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(platform));
+    softAssert.assertEquals(capabilitiesAsStrings.get(platform), "OS X 10.11");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(version));
+    softAssert.assertEquals(capabilitiesAsStrings.get(version), "54.0");
+    softAssert.assertAll();
   }
 
   /**
