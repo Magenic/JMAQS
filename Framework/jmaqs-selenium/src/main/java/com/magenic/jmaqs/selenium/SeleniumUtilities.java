@@ -27,7 +27,7 @@ import org.testng.Assert;
 /**
  * Static class for the selenium utilities, ported from MAQS.
  */
-class SeleniumUtilities {
+public class SeleniumUtilities {
 
   /**
    * To capture a screenshot during execution.

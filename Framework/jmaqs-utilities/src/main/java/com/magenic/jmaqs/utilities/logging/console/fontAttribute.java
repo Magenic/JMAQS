@@ -1,9 +1,9 @@
-package com.magenic.jmaqs.utilities.logging.ConsoleColors;
+package com.magenic.jmaqs.utilities.logging.console;
 
 /**
  * Enumeration of each Ansi code for Attribute.
  */
-public enum FontAttribute {
+public enum fontAttribute {
     CLEAR("0"),
     BOLD("1"),
     LIGHT("1"),
@@ -21,7 +21,7 @@ public enum FontAttribute {
      *
      * @param code to associate
      */
-    FontAttribute(String code) {
+    fontAttribute(String code) {
         this.code = code;
     }
 

@@ -74,7 +74,7 @@ public class FileLoggerUnitTest {
    * @param levels  What should appear for each level.
    */
   @Test(dataProvider = "logLevels", groups = TestCategories.Utilities)
-  public void testHierarchicalTxtFileLogger(String logLevel, HashMap<String, Boolean> levels) throws IOException {
+  public void testHierarchicalTxtFileLogger(String logLevel, HashMap<String, Boolean> levels) {
     FileLogger logger = new FileLogger(true, LoggingConfig.getLogDirectory(),
             this.getFileName("TestHierarchicalTxtFileLogger_" + logLevel, "txt"), MessageType.GENERIC);
     this.testHierarchicalLogging(logger, logger.getFilePath(), logLevel, levels);
@@ -87,7 +87,7 @@ public class FileLoggerUnitTest {
    */
   @Ignore // FIXME: test passes locally but not in ADO
   @Test(dataProvider = "logLevels", groups = TestCategories.Utilities)
-  public void testHierarchicalConsoleLogger(String logLevel, HashMap<String, Boolean> levels) throws IOException {
+  public void testHierarchicalConsoleLogger(String logLevel, HashMap<String, Boolean> levels) {
     // Calculate a file path
     String path = Paths.get(LoggingConfig.getLogDirectory(),
             this.getFileName("TestHierarchicalConsoleLogger" + logLevel, "txt")).toString();
@@ -105,7 +105,7 @@ public class FileLoggerUnitTest {
    * @param levels What should appear for each level.
    */
   @Test(dataProvider = "logLevels", groups = TestCategories.Utilities)
-  public void testHierarchicalHtmlFileLogger(String logLevel, HashMap<String, Boolean> levels) throws IOException {
+  public void testHierarchicalHtmlFileLogger(String logLevel, HashMap<String, Boolean> levels) {
     HtmlFileLogger logger = new HtmlFileLogger(true, LoggingConfig.getLogDirectory(),
             this.getFileName("TestHierarchicalHtmlFileLogger" + logLevel, "html"), MessageType.GENERIC);
 
@@ -118,7 +118,7 @@ public class FileLoggerUnitTest {
    * must have the [Test] attribute.
    */
   @Test(groups = TestCategories.Utilities)
-  public void testFileLogger() throws IOException {
+  public void testFileLogger() {
     FileLogger logger = new FileLogger("", "TestFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello");
   }
@@ -127,7 +127,7 @@ public class FileLoggerUnitTest {
    * Test logging to a new file.
    */
   @Test(groups = TestCategories.Utilities)
-  public void fileLoggerNoAppendTest() throws IOException {
+  public void fileLoggerNoAppendTest() {
     FileLogger logger = new FileLogger(false, "", "WriteToFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
   }
@@ -136,7 +136,7 @@ public class FileLoggerUnitTest {
    * Test logging to an existing file.
    */
   @Test(groups = TestCategories.Utilities)
-  public void fileLoggerAppendFileTest() throws IOException {
+  public void fileLoggerAppendFileTest() {
     FileLogger logger = new FileLogger(true, "", "WriteToExistingFileLogger");
     logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
   }
@@ -145,7 +145,7 @@ public class FileLoggerUnitTest {
    * Verify the logging suspension functions
    */
   @Test(groups = TestCategories.Utilities)
-  public void testSuspendLogger() throws IOException {
+  public void testSuspendLogger() {
     SoftAssert softAssert = new SoftAssert();
 
     // Start logging
@@ -187,7 +187,7 @@ public class FileLoggerUnitTest {
    * Test Writing to the File Logger
    */
   @Test(groups = TestCategories.Utilities)
-  public void writeToFileLogger() throws IOException {
+  public void writeToFileLogger() {
     FileLogger logger = new FileLogger("", "WriteToFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
   }
@@ -196,7 +196,7 @@ public class FileLoggerUnitTest {
    * Test Writing to an Existing File Logger
    */
   @Test(groups = TestCategories.Utilities)
-  public void writeToExistingFileLogger() throws IOException {
+  public void writeToExistingFileLogger() {
     FileLogger logger = new FileLogger(true, "",
             "WriteToExistingFileLogger",
             MessageType.GENERIC);
@@ -231,7 +231,7 @@ public class FileLoggerUnitTest {
    * Verify that File Logger can log message without defining a Message Type
    */
   @Test(groups = TestCategories.Utilities)
-  public void fileLoggerLogMessage() throws IOException {
+  public void fileLoggerLogMessage() {
     FileLogger logger = new FileLogger(true, "", "FileLoggerLogMessage");
     logger.logMessage("Test to ensure LogMessage works as expected.");
     Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains("Test to ensure LogMessage works as expected."),
@@ -242,7 +242,7 @@ public class FileLoggerUnitTest {
    * Verify that File Logger can log message and defining a Message Type
    */
   @Test(groups = TestCategories.Utilities)
-  public void fileLoggerLogMessageSelectType() throws IOException {
+  public void fileLoggerLogMessageSelectType() {
     FileLogger logger = new FileLogger(true, "", "FileLoggerLogMessage");
     logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
     Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains("Test to ensure LogMessage works as expected."),
@@ -592,13 +592,6 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.SUCCESS, logLine, MessageType.SUCCESS);
     logger.logMessage(MessageType.WARNING, logLine, MessageType.WARNING);
     logger.logMessage(MessageType.ERROR, logLine, MessageType.ERROR);
-
-    // Give the write time
-    try {
-      Thread.sleep(250);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
 
     // Get the file content
     String logContents = this.readTextFile(filePath);

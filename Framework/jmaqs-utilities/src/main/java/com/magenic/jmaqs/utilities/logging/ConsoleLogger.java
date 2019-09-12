@@ -5,8 +5,8 @@
 package com.magenic.jmaqs.utilities.logging;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.utilities.logging.ConsoleColors.ConsoleColor;
-import com.magenic.jmaqs.utilities.logging.ConsoleColors.FontColor;
+import com.magenic.jmaqs.utilities.logging.console.consoleColor;
+import com.magenic.jmaqs.utilities.logging.console.fontColor;
 
 /**
  * Helper class for logging to the console.
@@ -127,21 +127,18 @@ public class ConsoleLogger extends Logger {
    * @param font The fort color
    * @param background The background color
    */
-  private static void setConsoleColor(ConsoleColor background, FontColor font) {
-/*
-// TODO: set the console Font and Background Colors
+
+  private static void setConsoleColor(consoleColor background, fontColor font) {
+
+// FIXME: set the console Font and Background Colors
 
     if (background == null) {
-      background = ConsoleColor.BLACK;
+      background = consoleColor.BLACK;
     }
 
-    ConsoleColor backgrounColor = background;
-    FontColor fontColor = font;
-    // Console.ForegroundColor = font;
-    // Console.BackgroundColor = background;
-
- */
+    System.out.println(background.toString() + font.toString());
   }
+
 
   /**
    * Change the console color to match the message type, write the message and restore the previous console colors
@@ -156,12 +153,10 @@ public class ConsoleLogger extends Logger {
       return;
     }
 
-    // TODO: Get the Current Console Font and Background Colors
+    // FIXME: Get the Current Console Font and Background Colors
     // Save the original console colors
-    // ConsoleColor originalBackground = Console.BackgroundColor;
-    // FontColor originalFont = Console.ForegroundColor;
-    ConsoleColor originalBackground = ConsoleColor.BLACK;
-    FontColor originalFont = FontColor.WHITE;
+    consoleColor originalBackground = consoleColor.BLACK;
+    fontColor originalFont = fontColor.WHITE;
 
     // Update console colors
     setConsoleColor(type);
@@ -190,27 +185,27 @@ public class ConsoleLogger extends Logger {
         // Suspended so we do nothing
         break;
       case VERBOSE:
-        setConsoleColor(ConsoleColor.BLACK, FontColor.WHITE);
+        setConsoleColor(consoleColor.BLACK, fontColor.WHITE);
         break;
       case INFORMATION:
-        setConsoleColor(ConsoleColor.BLUE, FontColor.WHITE);
+        setConsoleColor(consoleColor.BLUE, fontColor.WHITE);
         break;
       case GENERIC:
-        setConsoleColor(null, FontColor.WHITE);
+        setConsoleColor(null, fontColor.WHITE);
         break;
       case SUCCESS:
-        setConsoleColor(null, FontColor.GREEN);
+        setConsoleColor(null, fontColor.GREEN);
         break;
       case WARNING:
-        setConsoleColor(null, FontColor.YELLOW);
+        setConsoleColor(null, fontColor.YELLOW);
         break;
       case ERROR:
-        setConsoleColor(null, FontColor.RED);
+        setConsoleColor(null, fontColor.RED);
         break;
       default:
-        setConsoleColor(null, FontColor.YELLOW);
+        setConsoleColor(null, fontColor.YELLOW);
         logMessage(unknownMessageTypeMessage(type));
-        setConsoleColor(null, FontColor.WHITE);
+        setConsoleColor(null, fontColor.WHITE);
         break;
     }
   }

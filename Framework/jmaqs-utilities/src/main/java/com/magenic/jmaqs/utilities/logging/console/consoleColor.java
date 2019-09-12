@@ -1,9 +1,9 @@
-package com.magenic.jmaqs.utilities.logging.ConsoleColors;
+package com.magenic.jmaqs.utilities.logging.console;
 
 /**
  * Enumeration of each Ansi code for Background Color.
  */
-public enum ConsoleColor {
+public enum consoleColor {
     BLACK("40"),
     RED("41"),
     GREEN("42"),
@@ -21,7 +21,7 @@ public enum ConsoleColor {
      *
      * @param code to associate
      */
-    ConsoleColor(String code) {
+    consoleColor(String code) {
         this.code = code;
     }
 

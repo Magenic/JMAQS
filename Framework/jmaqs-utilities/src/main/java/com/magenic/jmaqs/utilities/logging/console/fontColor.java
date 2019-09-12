@@ -1,9 +1,9 @@
-package com.magenic.jmaqs.utilities.logging.ConsoleColors;
+package com.magenic.jmaqs.utilities.logging.console;
 
 /**
  * Enumeration of each Ansi code for Foreground Color.
  */
-public enum FontColor {
+public enum fontColor {
     BLACK("30"),
     RED("31"),
     GREEN("32"),
@@ -22,7 +22,7 @@ public enum FontColor {
      *
      * @param code to associate
      */
-    FontColor(String code) {
+    fontColor(String code) {
         this.code = code;
     }
 
