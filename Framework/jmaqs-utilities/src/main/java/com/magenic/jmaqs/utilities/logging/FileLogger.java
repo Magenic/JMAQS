@@ -17,12 +17,12 @@ public class FileLogger extends Logger {
   /**
    * The default log file save location.
    */
-  private static final String defaultLogFolder = System.getProperty("java.io.tmpdir");
+  private static final String dDEFAULT_LOG_FOLDER = System.getProperty("java.io.tmpdir");
 
   /**
    * Initializes a new instance of the FileLogger class.
    */
-  private static final String defaultLogName = "FileLog.txt";
+  private static final String DEFAULT_LOG_NAME = "FileLog.txt";
 
   /**
    * Creates a private string for the name of the file.
@@ -48,7 +48,7 @@ public class FileLogger extends Logger {
    * Initializes a new instance of the FileLogger class.
    */
   public FileLogger() {
-    this(false, "", defaultLogName, MessageType.INFORMATION);
+    this(false, "", DEFAULT_LOG_NAME, MessageType.INFORMATION);
   }
 
   /**
@@ -56,7 +56,7 @@ public class FileLogger extends Logger {
    * @param append Append document if true
    */
   public FileLogger(boolean append){
-    this(append, "", defaultLogName, MessageType.INFORMATION);
+    this(append, "", DEFAULT_LOG_NAME, MessageType.INFORMATION);
   }
 
   /**
@@ -64,7 +64,7 @@ public class FileLogger extends Logger {
    * @param name File name
    */
   public FileLogger(String name) {
-    this(false, defaultLogFolder, name, MessageType.INFORMATION);
+    this(false, dDEFAULT_LOG_FOLDER, name, MessageType.INFORMATION);
   }
 
   /**
@@ -72,7 +72,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(MessageType messageLevel) {
-        this(false, defaultLogFolder, defaultLogName, messageLevel);
+        this(false, dDEFAULT_LOG_FOLDER, DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -81,7 +81,7 @@ public class FileLogger extends Logger {
    * @param name File name
    */
   public FileLogger(boolean append, String name) {
-    this(append, defaultLogFolder, name, MessageType.INFORMATION);
+    this(append, dDEFAULT_LOG_FOLDER, name, MessageType.INFORMATION);
   }
 
   /**
@@ -90,7 +90,7 @@ public class FileLogger extends Logger {
    * @param append Append document if true
    */
   public FileLogger(String logFolder, boolean append) {
-        this(append, logFolder, defaultLogName, MessageType.INFORMATION);
+        this(append, logFolder, DEFAULT_LOG_NAME, MessageType.INFORMATION);
   }
 
   /**
@@ -108,7 +108,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(String logFolder, MessageType messageLevel) {
-      this(false, logFolder, defaultLogName, messageLevel);
+      this(false, logFolder, DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -117,7 +117,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(boolean append, MessageType messageLevel) {
-    this(append, defaultLogFolder, defaultLogName, messageLevel);
+    this(append, dDEFAULT_LOG_FOLDER, DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -126,7 +126,7 @@ public class FileLogger extends Logger {
    * @param name File Name
    */
   public FileLogger(MessageType messageLevel, String name) {
-      this(false, defaultLogFolder, name, messageLevel);
+      this(false, dDEFAULT_LOG_FOLDER, name, messageLevel);
   }
 
   /**
@@ -146,7 +146,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(boolean append, String logFolder, MessageType messageLevel) {
-      this(append, logFolder, defaultLogName, messageLevel);
+      this(append, logFolder, DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -156,7 +156,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(String name, boolean append, MessageType messageLevel) {
-      this(append, defaultLogFolder, name, messageLevel);
+      this(append, dDEFAULT_LOG_FOLDER, name, messageLevel);
   }
 
   /**
@@ -181,7 +181,7 @@ public class FileLogger extends Logger {
     super(messageLevel);
 
     if (logFolder == null || logFolder.isEmpty()) {
-      this.directory = defaultLogFolder;
+      this.directory = dDEFAULT_LOG_FOLDER;
     } else {
       this.directory = logFolder;
     }
@@ -190,9 +190,9 @@ public class FileLogger extends Logger {
       File dir = new File(this.directory);
       ConsoleLogger console = new ConsoleLogger();
 
-      if (!dir.mkdir())
-      console.logMessage(MessageType.ERROR, "Directory was not created");
-
+      if (!dir.mkdir()) {
+        console.logMessage(MessageType.ERROR, "Directory was not created");
+      }
     }
 
     name = makeValidFileName(name);

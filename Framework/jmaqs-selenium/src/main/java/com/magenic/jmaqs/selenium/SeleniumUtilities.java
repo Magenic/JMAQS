@@ -47,13 +47,15 @@ public class SeleniumUtilities {
       // Check if we are using a file logger
       if (!(log instanceof FileLogger)) {
         // Since this is not a file logger we will need to use a generic file name
-        path =  captureScreenshot(webDriver, LoggingConfig.getLogDirectory(),"ScreenCap" + appendName);
+        path =  captureScreenshot(webDriver,
+                LoggingConfig.getLogDirectory(),
+                "ScreenCap" + appendName);
         
       } else {
         // Calculate the file name
-        String fullpath = ((FileLogger) log).getFilePath();
-        String directory = new File(fullpath).getParent();
-        String fileNameWithoutExtension = FilenameUtils.getBaseName(fullpath);
+        String fullPath = ((FileLogger) log).getFilePath();
+        String directory = new File(fullPath).getParent();
+        String fileNameWithoutExtension = FilenameUtils.getBaseName(fullPath);
 
         path =  captureScreenshot(webDriver, directory, fileNameWithoutExtension);
       }
@@ -81,7 +83,7 @@ public class SeleniumUtilities {
    */
   static String captureScreenshot(WebDriver webDriver,
                                   String directory,
-                                  String fileNameWithoutExtension) throws Exception {
+                                  String fileNameWithoutExtension) throws IOException {
     
     File scrFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
 
