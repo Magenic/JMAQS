@@ -85,14 +85,16 @@ public abstract class Logger {
    */
   public abstract void logMessage(MessageType messageType, String message, Object... args);
 
-  /**
-   * Write the formatted message (one line) to the console as a generic message.
-   * @param message The message text
-   * @param args String format arguments
-   */
-  public abstract void logMessage(String message, Object... args);
+    /**
+     * Write the formatted message (one line) to the console as a generic message.
+     *
+     * @param message The message text
+     * @param args    String format arguments
+     */
+    public void logMessage(String message, Object... args) {
+    }
 
-  /**
+    /**
    * Determine if the message should be logged.
    * The message should be logged if it's level is greater than or equal to the current logging level.
    * @param messageType The type of message being logged.

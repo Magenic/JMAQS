@@ -32,7 +32,6 @@ public class ConsoleLogger extends Logger {
    * @param message The message text
    * @param args String format arguments
    */
-  @Override
   public void logMessage(String message, Object... args) {
     this.writeLine(message, args);
   }
@@ -128,15 +127,12 @@ public class ConsoleLogger extends Logger {
    * @param background The background color
    */
 
-  private static void setConsoleColor(consoleColor background, fontColor font) {
-
-// FIXME: set the console Font and Background Colors
-
+  private void setConsoleColor(consoleColor background, fontColor font) {
     if (background == null) {
       background = consoleColor.BLACK;
     }
 
-    System.out.println(background.toString() + font.toString());
+   logMessage(background.toString() + font.toString());
   }
 
 
@@ -153,7 +149,6 @@ public class ConsoleLogger extends Logger {
       return;
     }
 
-    // FIXME: Get the Current Console Font and Background Colors
     // Save the original console colors
     consoleColor originalBackground = consoleColor.BLACK;
     fontColor originalFont = fontColor.WHITE;
