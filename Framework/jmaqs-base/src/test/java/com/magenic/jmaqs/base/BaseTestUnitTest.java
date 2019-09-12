@@ -71,8 +71,9 @@ public class BaseTestUnitTest extends BaseTest {
     exceptions.add("Third Exception.");
     this.setLoggedExceptions(exceptions);
 
-    Assert.assertTrue(this.getLoggedExceptions().size() == 3,
-        "Expect that 3 Logged exceptions are in this exception list.");
+    Assert.assertEquals(this.getLoggedExceptions().size(),
+            3,
+            "Expect that 3 Logged exceptions are in this exception list.");
   }
 
   /**

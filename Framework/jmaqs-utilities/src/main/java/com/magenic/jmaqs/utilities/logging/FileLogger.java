@@ -6,13 +6,8 @@ package com.magenic.jmaqs.utilities.logging;
 
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import org.testng.Assert;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Paths;
 
 /**
@@ -22,18 +17,12 @@ public class FileLogger extends Logger {
   /**
    * The default log file save location.
    */
-  private static final String DEFAULTLOGFOLDER = System.getProperty("java.io.tmpdir");
-
-  /**
-   * Object for locking the log file so
-   * pending tasks will wait for file to be freed
-   */
-  protected Object fileLock = new Object();
+  private static final String defaultLogFolder = System.getProperty("java.io.tmpdir");
 
   /**
    * Initializes a new instance of the FileLogger class.
    */
-  private static final String DEFAULTLOGNAME = "FileLog.txt";
+  private static final String defaultLogName = "FileLog.txt";
 
   /**
    * Creates a private string for the name of the file.
@@ -59,15 +48,15 @@ public class FileLogger extends Logger {
    * Initializes a new instance of the FileLogger class.
    */
   public FileLogger() {
-    this(false, "", DEFAULTLOGNAME, MessageType.INFORMATION);
+    this(false, "", defaultLogName, MessageType.INFORMATION);
   }
 
   /**
    * Initializes a new instance of the FileLogger class.
    * @param append Append document if true
    */
-  public FileLogger(boolean append) {
-    this(append, "", DEFAULTLOGNAME, MessageType.INFORMATION);
+  public FileLogger(boolean append){
+    this(append, "", defaultLogName, MessageType.INFORMATION);
   }
 
   /**
@@ -75,7 +64,7 @@ public class FileLogger extends Logger {
    * @param name File name
    */
   public FileLogger(String name) {
-    this(false, DEFAULTLOGFOLDER, name, MessageType.INFORMATION);
+    this(false, defaultLogFolder, name, MessageType.INFORMATION);
   }
 
   /**
@@ -83,7 +72,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(MessageType messageLevel) {
-        this(false, DEFAULTLOGFOLDER, DEFAULTLOGNAME, messageLevel);
+        this(false, defaultLogFolder, defaultLogName, messageLevel);
   }
 
   /**
@@ -92,7 +81,7 @@ public class FileLogger extends Logger {
    * @param name File name
    */
   public FileLogger(boolean append, String name) {
-    this(append, DEFAULTLOGFOLDER, name, MessageType.INFORMATION);
+    this(append, defaultLogFolder, name, MessageType.INFORMATION);
   }
 
   /**
@@ -101,7 +90,7 @@ public class FileLogger extends Logger {
    * @param append Append document if true
    */
   public FileLogger(String logFolder, boolean append) {
-        this(append, logFolder, DEFAULTLOGNAME, MessageType.INFORMATION);
+        this(append, logFolder, defaultLogName, MessageType.INFORMATION);
   }
 
   /**
@@ -119,7 +108,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(String logFolder, MessageType messageLevel) {
-      this(false, logFolder, DEFAULTLOGNAME, messageLevel);
+      this(false, logFolder, defaultLogName, messageLevel);
   }
 
   /**
@@ -128,7 +117,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(boolean append, MessageType messageLevel) {
-    this(append, DEFAULTLOGFOLDER, DEFAULTLOGNAME, messageLevel);
+    this(append, defaultLogFolder, defaultLogName, messageLevel);
   }
 
   /**
@@ -137,7 +126,7 @@ public class FileLogger extends Logger {
    * @param name File Name
    */
   public FileLogger(MessageType messageLevel, String name) {
-      this(false, DEFAULTLOGFOLDER, name, messageLevel);
+      this(false, defaultLogFolder, name, messageLevel);
   }
 
   /**
@@ -157,7 +146,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(boolean append, String logFolder, MessageType messageLevel) {
-      this(append, logFolder, DEFAULTLOGNAME, messageLevel);
+      this(append, logFolder, defaultLogName, messageLevel);
   }
 
   /**
@@ -167,7 +156,7 @@ public class FileLogger extends Logger {
    * @param messageLevel Messaging Level
    */
   public FileLogger(String name, boolean append, MessageType messageLevel) {
-      this(append, DEFAULTLOGFOLDER, name, messageLevel);
+      this(append, defaultLogFolder, name, messageLevel);
   }
 
   /**
@@ -192,14 +181,14 @@ public class FileLogger extends Logger {
     super(messageLevel);
 
     if (logFolder == null || logFolder.isEmpty()) {
-      this.directory = DEFAULTLOGFOLDER;
+      this.directory = defaultLogFolder;
     } else {
       this.directory = logFolder;
     }
 
     if (!Paths.get(this.directory).toFile().exists()) {
       File dir = new File(this.directory);
-      Assert.assertTrue(dir.mkdir());
+     dir.mkdir();
     }
 
     name = makeValidFileName(name);
@@ -231,7 +220,7 @@ public class FileLogger extends Logger {
    * Gets the Message Type value.
    * @return The Message Type.
    */
-  public MessageType getMessageType() {
+  MessageType getMessageType() {
     return this.messageType;
   }
 
@@ -239,7 +228,7 @@ public class FileLogger extends Logger {
    * Gets the Directory Path.
    * @return Returns the Directory
    */
-  public String getDirectory() {
+  String getDirectory() {
     return this.directory;
   }
 
@@ -255,7 +244,7 @@ public class FileLogger extends Logger {
    * Sets the FilePath value.
    * @param filePath sets the file path
    */
-  public void setFilePath(String filePath) {
+  void setFilePath(String filePath) {
     this.filePath = filePath;
   }
 
@@ -263,7 +252,7 @@ public class FileLogger extends Logger {
    * Gets the File Name value.
    * @return Returns the File Name.
    */
-  public String getFileName() {
+  String getFileName() {
     return this.fileName;
   }
 
@@ -328,7 +317,7 @@ public class FileLogger extends Logger {
     // Replace invalid characters
     String replacedName = name;
     try {
-      replacedName = name.replaceAll("[^a-zA-Z0-9\\.\\-]", "");
+      replacedName = name.replaceAll("[^a-zA-Z0-9.\\-]", "");
     } catch (NullPointerException e) {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(

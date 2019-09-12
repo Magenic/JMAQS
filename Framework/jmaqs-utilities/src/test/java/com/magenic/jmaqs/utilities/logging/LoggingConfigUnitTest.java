@@ -5,12 +5,10 @@
 package com.magenic.jmaqs.utilities.logging;
 
 import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.util.HashMap;
 
 /**
@@ -218,20 +216,4 @@ public class LoggingConfigUnitTest {
         Logger logger = LoggingConfig.getLogger(fileName);
         Assert.assertTrue(logger instanceof ConsoleLogger, "Expected Logger to be of Type ConsoleLogger.");
     }
-
-    /**
-     * Test getting Log Directory.
-     * Config value not defined - Compare to Default Path.
-     */
-    /*
-    // FIXME: Commenting out test until repaired.  Expected result does not make sense.
-    @Test(groups = TestCategories.Utilities)
-    public void getLogDirectoryTest() {
-        String log = LoggingConfig.getLogDirectory();
-        String defaultPath = new File(LoggingConfig.getLogDirectory()).getAbsolutePath();
-
-        Assert.assertEquals(defaultPath.contains(log),"jmaqs-utilities\\.\\target\logs",
-                "Expected Default Path: " + defaultPath);
-    }
-    */
 }

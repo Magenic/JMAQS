@@ -32,6 +32,7 @@ public class ConsoleLogger extends Logger {
    * @param message The message text
    * @param args String format arguments
    */
+  @Override
   public void logMessage(String message, Object... args) {
     this.writeLine(message, args);
   }

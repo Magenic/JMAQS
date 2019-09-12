@@ -22,7 +22,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.Assert;
 
 /**
  * Static class for the selenium utilities, ported from MAQS.
@@ -122,13 +121,11 @@ public class SeleniumUtilities {
    * Checks if directory exists, creating one if not.
    * @param directory The directory path
    */
-  private static void checkDirectory(String directory) throws Exception {
+  private static void checkDirectory(String directory) {
     // Make sure the directory exists
     File folder = new File(directory);
     if (!folder.isDirectory()) {
-      if (!folder.mkdir()){
-        throw new Exception("Directory was not Created");
-      }
+      folder.mkdir();
     }
   }
 }

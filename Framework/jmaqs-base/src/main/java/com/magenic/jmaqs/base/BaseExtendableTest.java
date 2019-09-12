@@ -43,4 +43,3 @@ public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseT
 
   protected abstract void createNewTestObject();
 }
-

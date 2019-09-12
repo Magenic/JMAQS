@@ -6,10 +6,6 @@ package com.magenic.jmaqs.base;
 
 import static org.testng.Assert.assertNotNull;
 
-import com.magenic.jmaqs.base.BaseTest;
-import com.magenic.jmaqs.base.BaseTestObject;
-import com.magenic.jmaqs.base.DriverManager;
-import com.magenic.jmaqs.base.ManagerDictionary;
 import java.util.function.Supplier;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -99,7 +95,7 @@ public class ManagerDictionaryUnitTest extends BaseTest {
   }
 
   @Override
-  protected void postSetupLogging() throws Exception {
+  protected void postSetupLogging() {
 
   }
 
@@ -117,7 +113,7 @@ public class ManagerDictionaryUnitTest extends BaseTest {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
       System.out.println("Closing Test Driver Manager...");
     }
   }
