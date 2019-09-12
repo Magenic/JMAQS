@@ -23,18 +23,18 @@ public class ScreenshotUnitTest extends BaseSeleniumTest {
     String path = SeleniumUtilities.captureScreenshot(this.getWebDriver(), ".", "screenshotTest");
     File ss = new File(path);
     Assert.assertTrue(ss.exists() && ss.isFile());
-    ss.delete();
+    Assert.assertTrue(ss.delete());
   }
 
   /**
    * Test taking a screenshot
    */
   @Test
-  public void createScreenShotWithLoggerTest() throws IOException {
+  public void createScreenShotWithLoggerTest() {
     String path = SeleniumUtilities.captureScreenshot(this.getWebDriver(), this.getLogger(), "");
     File ss = new File(path);
     Assert.assertTrue(ss.exists() && ss.isFile());
-    ss.delete();
+    Assert.assertTrue(ss.delete());
   }
 
   /*
