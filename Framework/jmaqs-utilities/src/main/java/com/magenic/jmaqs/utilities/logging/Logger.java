@@ -92,6 +92,7 @@ public abstract class Logger {
      * @param args    String format arguments
      */
     public void logMessage(String message, Object... args) {
+      logMessage(message);
     }
 
     /**

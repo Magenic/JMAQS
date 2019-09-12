@@ -53,7 +53,8 @@ public class LoggingConfig {
         return MessageType.SUSPENDED;       // All logging is suspended
       default:
         throw new IllegalArgumentException(StringProcessor.safeFormatter(
-                "Logging level value '{0}' is not a valid option", Config.getGeneralValue("LogLevel")));
+                "Logging level value '{0}' is not a valid option",
+                Config.getGeneralValue("LogLevel")));
     }
   }
 

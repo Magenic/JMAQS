@@ -112,12 +112,12 @@ public class ConsoleLogger extends Logger {
     try {
       // If this a write-line command
       if (line) {
-        System.out.println(result);
+        logMessage(result);
       } else {
-        System.out.print(result);
+        logMessage(result);
       }
     } catch (Exception e) {
-      System.out.println(StringProcessor.safeFormatter("Failed to write to the console because: %s",
+      logMessage(StringProcessor.safeFormatter("Failed to write to the console because: %s",
           e.getMessage()));
     }
   }

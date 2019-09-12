@@ -188,7 +188,11 @@ public class FileLogger extends Logger {
 
     if (!Paths.get(this.directory).toFile().exists()) {
       File dir = new File(this.directory);
-     dir.mkdir();
+      ConsoleLogger console = new ConsoleLogger();
+
+      if (!dir.mkdir())
+      console.logMessage(MessageType.ERROR, "Directory was not created");
+
     }
 
     name = makeValidFileName(name);
