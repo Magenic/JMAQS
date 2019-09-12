@@ -82,7 +82,7 @@ public class SeleniumUtilities {
    */
   static String captureScreenshot(WebDriver webDriver,
                                   String directory,
-                                  String fileNameWithoutExtension) throws IOException {
+                                  String fileNameWithoutExtension) throws Exception {
     
     File scrFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
 
@@ -122,11 +122,13 @@ public class SeleniumUtilities {
    * Checks if directory exists, creating one if not.
    * @param directory The directory path
    */
-  private static void checkDirectory(String directory) {
+  private static void checkDirectory(String directory) throws Exception {
     // Make sure the directory exists
     File folder = new File(directory);
     if (!folder.isDirectory()) {
-      Assert.assertTrue(folder.mkdir());
+      if (!folder.mkdir()){
+        throw new Exception("Directory was not Created");
+      }
     }
   }
 }
