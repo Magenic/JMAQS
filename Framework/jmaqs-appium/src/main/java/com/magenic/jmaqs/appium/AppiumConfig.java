@@ -7,15 +7,13 @@ package com.magenic.jmaqs.appium;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import org.openqa.selenium.Platform;
@@ -152,6 +150,34 @@ public class AppiumConfig {
   }
 
   /**
+   * Gets command timeout.
+   *
+   * @return the command timeout
+   */
+  public static Duration getCommandTimeout() {
+    String value = Config.getValueForSection(APPIUM_SECTION, "MobileCommandTimeout", "60000");
+    int timeoutValue = 0;
+    try {
+      timeoutValue = Integer.parseInt(value);
+    } catch (NumberFormatException ex) {
+      throw new NumberFormatException("MobileCommandTimeout in " + APPIUM_SECTION
+          + " should be a number, but the current value is: " + value);
+    }
+
+    return Duration.ofMillis((long) timeoutValue);
+  }
+
+  /**
+   * Gets mobile timeout.
+   *
+   * @return the mobile timeout
+   */
+  public static Duration getMobileTimeout() {
+    return Duration.ofMillis(
+        Integer.parseInt(Config.getValueForSection(APPIUM_SECTION, "MobileTimeout", "0")));
+  }
+
+  /**
    * Mobile device.
    *
    * @return the appium driver
@@ -260,5 +286,35 @@ public class AppiumConfig {
    */
   public static Map<String, Object> getCapabilitiesAsObjects() {
     return new HashMap<>(getCapabilitiesAsStrings());
+  }
+
+  /**
+   * Gets device type.
+   *
+   * @return the device type
+   */
+  public static PlatformType getDeviceType() {
+    return getDeviceType(getPlatformName());
+  }
+
+  /**
+   * Gets device type.
+   *
+   * @param platformName the platform name
+   * @return the device type
+   */
+  public static PlatformType getDeviceType(String platformName) {
+    switch (platformName.toUpperCase().trim()) {
+      case "ANDROID":
+        return PlatformType.ANDROID;
+      case "IOS":
+        return PlatformType.IOS;
+      case "WIN":
+      case "WINDOWS":
+        return PlatformType.WINDOWS;
+      default:
+        throw new IllegalArgumentException(
+            StringProcessor.safeFormatter("Device type '{0}' is not supported", platformName));
+    }
   }
 }

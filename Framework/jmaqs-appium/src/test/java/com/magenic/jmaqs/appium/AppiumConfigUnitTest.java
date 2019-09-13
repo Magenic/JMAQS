@@ -3,7 +3,9 @@
  */
 package com.magenic.jmaqs.appium;
 
-import com.magenic.jmaqs.appium.AppiumConfig;
+import com.magenic.jmaqs.utilities.helper.Config;
+import com.magenic.jmaqs.utilities.helper.ConfigSection;
+import java.util.HashMap;
 import java.util.Map;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,10 +13,10 @@ import org.testng.asserts.SoftAssert;
 
 public class AppiumConfigUnitTest {
 
-  String username = "username";
-  String app = "app";
-  String appiumVersion = "appiumVersion";
-  String accessKey = "accessKey";
+  private String username = "username";
+  private String app = "app";
+  private String appiumVersion = "appiumVersion";
+  private String accessKey = "accessKey";
 
   @Test
   public void testGetMobileDeviceUDID() throws Exception {
@@ -58,7 +60,8 @@ public class AppiumConfigUnitTest {
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
     softAssert.assertEquals(capabilitiesAsStrings.get(username), "Partner_Magenic");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
-    softAssert.assertEquals(capabilitiesAsStrings.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
+    softAssert
+        .assertEquals(capabilitiesAsStrings.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(app));
     softAssert.assertEquals(capabilitiesAsStrings.get(app), "org.openintents.shopping");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(appiumVersion));
@@ -74,7 +77,8 @@ public class AppiumConfigUnitTest {
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(username));
     softAssert.assertEquals(capabilitiesAsObjects.get(username), "Partner_Magenic");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(accessKey));
-    softAssert.assertEquals(capabilitiesAsObjects.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
+    softAssert
+        .assertEquals(capabilitiesAsObjects.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(app));
     softAssert.assertEquals(capabilitiesAsObjects.get(app), "org.openintents.shopping");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(appiumVersion));
@@ -90,5 +94,48 @@ public class AppiumConfigUnitTest {
   @Test
   public void testGetSoftAssertScreenShot() {
     Assert.assertFalse(AppiumConfig.getSoftAssertScreenShot());
+  }
+
+  @Test
+  public void testGetCommandTimeout() {
+    Assert.assertEquals(AppiumConfig.getCommandTimeout().toMillis(), 122000);
+  }
+
+  @Test(expectedExceptions = NumberFormatException.class)
+  public void testGetCommandTimeoutError() {
+    HashMap<String, String> configValues = new HashMap<>();
+    configValues.put("MobileCommandTimeout", "sixty thousand");
+    Config.addTestSettingValues(configValues, ConfigSection.AppiumMaqs, true);
+    AppiumConfig.getCommandTimeout();
+  }
+
+  @Test
+  public void testGetMobileTimeout() {
+    Assert.assertEquals(AppiumConfig.getMobileTimeout().toMillis(), 10000);
+  }
+
+  @Test
+  public void testGetDeviceType() {
+    Assert.assertEquals(AppiumConfig.getDeviceType(), PlatformType.ANDROID);
+  }
+
+  @Test
+  public void testGetDeviceTypeAndroid() {
+    Assert.assertEquals(AppiumConfig.getDeviceType("android"), PlatformType.ANDROID);
+  }
+
+  @Test
+  public void testGetDeviceTypeIOS() {
+    Assert.assertEquals(AppiumConfig.getDeviceType("ios"), PlatformType.IOS);
+  }
+
+  @Test
+  public void testGetDeviceTypeWindows() {
+    Assert.assertEquals(AppiumConfig.getDeviceType("windows"), PlatformType.WINDOWS);
+  }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetDeviceTypeError() {
+    AppiumConfig.getDeviceType("linux");
   }
 }
