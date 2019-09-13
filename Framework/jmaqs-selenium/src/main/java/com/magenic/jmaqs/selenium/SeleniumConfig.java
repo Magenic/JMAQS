@@ -15,7 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
-import java.time.Clock;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -43,7 +44,7 @@ public final class SeleniumConfig {
   /**
    * The remote selenium configuration section.
    */
-  public static final ConfigSection REMOTE_SELENIUM_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
+  private static final ConfigSection SELENIUM_CAPS_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
 
   /**
    * Get the file extension for the screenshots.
@@ -336,8 +337,8 @@ public final class SeleniumConfig {
       if (webDriver != null) {
         try {
           webDriver.quit();
-        } catch (Exception quitExecption) {
-          throw new Exception("Failed to quit Web driver during setup", quitExecption);
+        } catch (Exception quitException) {
+          throw new Exception("Failed to quit Web driver during setup", quitException);
         }
       }
       String errorException = "Failed to setup web driver. Your driver may be out of date or unsupported. Exception: ";
@@ -419,6 +420,22 @@ public final class SeleniumConfig {
     }
 
     return capabilities;
+  }
+
+  /**
+   * Get the remote capabilities as a HashMap
+   * @return HashMap of remote capabilities
+   */
+  public static Map<String, String> getRemoteCapabilitiesAsStrings() {
+    return Config.getSection(SELENIUM_CAPS_SECTION);
+  }
+
+  /**
+   * Get the remote capabilities as a HashMap
+   * @return HashMap of remote capabilities
+   */
+  public static Map<String, Object> getRemoteCapabilitiesAsObjects() {
+    return new HashMap<>(getRemoteCapabilitiesAsStrings());
   }
 
   /**
