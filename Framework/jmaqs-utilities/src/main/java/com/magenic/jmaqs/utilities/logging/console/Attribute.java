@@ -3,7 +3,7 @@ package com.magenic.jmaqs.utilities.logging.console;
 /**
  * Enumeration of each Ansi code for Attribute.
  */
-public enum fontAttribute {
+public enum Attribute {
     CLEAR("0"),
     BOLD("1"),
     LIGHT("1"),
@@ -21,7 +21,7 @@ public enum fontAttribute {
      *
      * @param code to associate
      */
-    fontAttribute(String code) {
+    Attribute(String code) {
         this.code = code;
     }
 

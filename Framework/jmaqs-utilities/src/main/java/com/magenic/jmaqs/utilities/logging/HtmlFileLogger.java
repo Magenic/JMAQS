@@ -19,19 +19,19 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   /**
    * The default log name.
    */
-  private static final String DEFAULTLOGNAME = "FileLog.html";
+  private static final String DEFAULT_LOG_NAME = "FileLog.html";
 
   /**
    * Default header for the HTML file, this gives us our colored text.
    */
-  private static final String DEFAULTHTMLHEADER =
+  private static final String DEFAULT_HTML_HEADER =
           "<!DOCTYPE html><html><header><title>Test Log</title></header><body>";
 
   /**
    * Initializes a new instance of the FileLogger class.
    */
   public HtmlFileLogger() {
-    this(false, "", DEFAULTLOGNAME, MessageType.INFORMATION);
+    this(false, "", DEFAULT_LOG_NAME, MessageType.INFORMATION);
   }
 
   /**
@@ -39,7 +39,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * @param append Append document if true.
    */
   public HtmlFileLogger(boolean append) {
-    this(append, "", DEFAULTLOGNAME, MessageType.INFORMATION);
+    this(append, "", DEFAULT_LOG_NAME, MessageType.INFORMATION);
   }
 
   /**
@@ -55,7 +55,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * @param messageLevel Messaging Level
    */
   public HtmlFileLogger(MessageType messageLevel) {
-    this(false, "", DEFAULTLOGNAME, messageLevel);
+    this(false, "", DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -73,7 +73,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * @param append Appends the document if true.
    */
   public HtmlFileLogger(String logFolder, boolean append) {
-    this(append, logFolder, DEFAULTLOGNAME, MessageType.INFORMATION);
+    this(append, logFolder, DEFAULT_LOG_NAME, MessageType.INFORMATION);
   }
 
   /**
@@ -91,7 +91,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * @param messageLevel the Messaging Level.
    */
   public HtmlFileLogger(String logFolder, MessageType messageLevel) {
-    this(false, logFolder, DEFAULTLOGNAME, messageLevel);
+    this(false, logFolder, DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -100,7 +100,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * @param messageLevel Messaging Level.
    */
   public HtmlFileLogger(boolean append, MessageType messageLevel) {
-    this(append, "", DEFAULTLOGNAME, messageLevel);
+    this(append, "", DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -129,7 +129,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * @param messageLevel Messaging Level.
    */
   public HtmlFileLogger(boolean append, String logFolder, MessageType messageLevel) {
-    this(append, logFolder, DEFAULTLOGNAME, messageLevel);
+    this(append, logFolder, DEFAULT_LOG_NAME, messageLevel);
   }
 
   /**
@@ -164,7 +164,7 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
     super(append, logFolder, name, messageLevel);
 
     try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
-      writer.write(DEFAULTHTMLHEADER);
+      writer.write(DEFAULT_HTML_HEADER);
     } catch (IOException e) {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
@@ -242,6 +242,8 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Close the class and HTML file.
+   * Dispose the class.
+   * Originally Dispose in C#, but renamed for Java purposes.
    * @param disposing True if you want to release managed resources.
    */
   private void close(boolean disposing) {

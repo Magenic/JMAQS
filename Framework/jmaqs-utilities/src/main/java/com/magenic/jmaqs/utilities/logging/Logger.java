@@ -39,7 +39,7 @@ public abstract class Logger {
    *          The logging level.
    */
   protected Logger(MessageType level) {
-    this.logLevel = level;
+    this.setLoggingLevel(level);
   }
 
   /**
@@ -48,17 +48,29 @@ public abstract class Logger {
    * @param level
    *          The logging level.
    */
-  public void setLoggingLevel(MessageType level) {
+  void setLoggingLevel(MessageType level) {
     this.logLevel = level;
+  }
+
+  private MessageType getLoggingLevel(){
+    return this.logLevel;
+  }
+
+  public void setLogLevelSaved(MessageType logLevelSaved){
+    this.logLevelSaved = logLevelSaved;
+  }
+
+  public MessageType getLogLevelSaved(){
+    return this.logLevelSaved;
   }
 
   /**
    * Suspends logging.
    */
   public void suspendLogging() {
-    if (this.logLevel != MessageType.SUSPENDED) {
-      this.logLevelSaved = this.logLevel;
-      this.logLevel = MessageType.SUSPENDED;
+    if (this.getLoggingLevel() != MessageType.SUSPENDED) {
+      this.setLogLevelSaved(this.getLoggingLevel());
+      this.setLoggingLevel(MessageType.SUSPENDED);
       this.logMessage(MessageType.VERBOSE, "Suspending Logging..");
     }
   }
@@ -68,12 +80,12 @@ public abstract class Logger {
     */
   public void continueLogging() {
     // Check if the logging was suspended
-    if (this.logLevelSaved != MessageType.SUSPENDED) {
+    if (this.getLogLevelSaved() != MessageType.SUSPENDED) {
       // Return to the log level at the suspension of logging
-      this.logLevel = this.logLevelSaved;
+      this.setLoggingLevel(this.getLogLevelSaved());
     }
 
-    this.logLevelSaved = MessageType.SUSPENDED;
+    this.setLogLevelSaved(MessageType.SUSPENDED);
     this.logMessage(MessageType.VERBOSE, "Logging Continued..");
   }
 
@@ -103,7 +115,7 @@ public abstract class Logger {
    */
   protected boolean shouldMessageBeLogged(MessageType messageType) {
     // The message should be logged if it's level is less than or equal to the current logging level
-    return messageType.getValue() <= this.logLevel.getValue();
+    return messageType.getValue() <= this.getLoggingLevel().getValue();
   }
 
   /**

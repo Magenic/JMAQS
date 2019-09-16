@@ -57,14 +57,59 @@ public final class GenericWait {
   }
 
   /**
+   * Wait until the wait for true function returns true, an exception will be thrown if the wait times out
+   * @param waitForTrue The function we are waiting to return true
+   */
+  public static <T> void waitFor(Predicate<T> waitForTrue)
+          throws FunctionException, InterruptedException, TimeoutException {
+    if (!wait((BooleanSupplier) waitForTrue, retryTimeFromConfig, timeoutFromConfig, true)) {
+      throw new TimeoutException(StringProcessor.safeFormatter(
+              "Timed out waiting for '{0}' to return true",
+              waitForTrue.getClass().getEnclosingMethod().getName()));
+    }
+  }
+
+  /**
+   * Wait until the wait for true function returns true, an exception will be thrown if the wait times out.
+   * @param waitForTrue The type of parameter to pass in the wait for true function.
+   * @param arg The function we are waiting to return true.
+   * @param <T> Parameter to pass to the wait for true function.
+   * @throws FunctionException
+   * @throws InterruptedException
+   */
+  public static <T> void waitFor(Predicate<T> waitForTrue, T arg)
+          throws FunctionException, InterruptedException, TimeoutException {
+    if (!wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, true, arg)) {
+      throw new TimeoutException(StringProcessor.safeFormatter("Timed out waiting for '{0}' to return true",
+              waitForTrue.getClass().getName()));
+    }
+  }
+
+  /**
+   * Wait until the wait for true function returns true, an exception will be thrown if the wait times out.
+   * @param waitForTrue The type of parameter to pass in the wait for true function.
+   * @throws FunctionException
+   * @throws InterruptedException
+   */
+  public static <T> T waitFor(Supplier<T> waitForTrue)
+          throws InterruptedException, TimeoutException {
+    if (wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig) == null) {
+      throw new TimeoutException(StringProcessor.safeFormatter("Timed out waiting for '{0}' to return true",
+              waitForTrue.getClass().getName()));
+    }
+
+    return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig);
+  }
+
+  /**
    * Wait until the wait for true function returns true, an exception will be thrown if the
    * wait times out.
    *
    * @param waitForTrue The function we are waiting to return true
    */
   public static void waitForTrue(BooleanSupplier waitForTrue)
-      throws InterruptedException, FunctionException, TimeoutException {
-    if (!wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, true)) {
+          throws InterruptedException, FunctionException, TimeoutException {
+    if (!wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false)) {
       throw new TimeoutException("Timed out waiting for the function to return true");
     }
   }
@@ -218,28 +263,6 @@ public final class GenericWait {
       throw new TimeoutException(
           "Timed out waiting for the supplier to return the expected value of " + comparativeValue);
     }
-  }
-
-  /**
-   * Wait until the wait for function returns the expected type, an exception will be thrown if the wait times out.
-   *
-   * @param waitFor The wait for function
-   * @return The wait for function return value
-   */
-  public static <T> T waitFor(Supplier<T> waitFor) throws InterruptedException, TimeoutException {
-    return wait(waitFor, retryTimeFromConfig, timeoutFromConfig);
-  }
-
-  /**
-   * Wait until the wait for function returns the expected type, an exception will be thrown if the wait times out.
-   *
-   * @param waitFor The wait for function
-   * @param arg     The wait for function argument
-   * @return The wait for function return value
-   */
-  public static <T, U> T waitFor(Function<U, T> waitFor, U arg)
-      throws InterruptedException, TimeoutException {
-    return wait(waitFor, retryTimeFromConfig, timeoutFromConfig, arg);
   }
 
   /**
