@@ -27,7 +27,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
   /**
    * Thread local storage of SeleniumTestObject.
    */
-  private ThreadLocal<SeleniumTestObject> seleniumTestObject = new ThreadLocal<SeleniumTestObject>();
+  private ThreadLocal<SeleniumTestObject> seleniumTestObject = new ThreadLocal<>();
 
   /**
    * Get WebDriver.
