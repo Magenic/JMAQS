@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.utilities;
 
+import com.magenic.jmaqs.utilities.helper.FunctionException;
 import com.magenic.jmaqs.utilities.helper.GenericWait;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.helper.TimeoutException;
@@ -122,7 +123,7 @@ public class GenericWaitUnitTest {
   public void throwExceptionWithoutParamTest() throws Throwable {
     try {
       GenericWait.waitForTrue(this::throwError);
-    } catch (Exception e) {
+    } catch (NullPointerException e) {
       throw e.getCause();
     }
   }
