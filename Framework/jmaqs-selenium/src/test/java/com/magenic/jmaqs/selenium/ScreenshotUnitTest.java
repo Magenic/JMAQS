@@ -21,7 +21,7 @@ public class ScreenshotUnitTest extends BaseSeleniumTest {
    * Test taking a screenshot
    */
   @Test
-  public void createScreenShotTest() throws IOException {
+  public void createScreenShotTest() throws Exception {
     String path = SeleniumUtilities.captureScreenshot(this.getWebDriver(), ".", "screenshotTest");
     File ss = new File(path);
     Assert.assertTrue(ss.exists() && ss.isFile());

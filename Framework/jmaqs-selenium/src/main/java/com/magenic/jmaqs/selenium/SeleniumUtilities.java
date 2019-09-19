@@ -20,7 +20,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
@@ -39,9 +39,9 @@ public class SeleniumUtilities {
    *          Appends a name to the end of a filename
    * @return Boolean if the save of the image was successful
    */
-  public static String captureScreenshot(WebDriver webDriver, 
-                                          Logger log, 
-                                          String appendName) {
+  static String captureScreenshot(WebDriver webDriver,
+                                  Logger log,
+                                  String appendName) {
     try {
       String path;
 
@@ -52,9 +52,9 @@ public class SeleniumUtilities {
         
       } else {
         // Calculate the file name
-        String fullpath = ((FileLogger) log).getFilePath();
-        String directory = new File(fullpath).getParent();
-        String fileNameWithoutExtension = FilenameUtils.getBaseName(fullpath);
+        String filePath = ((FileLogger) log).getFilePath();
+        String directory = new File(filePath).getParent();
+        String fileNameWithoutExtension = FilenameUtils.getBaseName(filePath);
 
         path =  captureScreenshot(webDriver, directory, fileNameWithoutExtension);
       }
@@ -80,9 +80,9 @@ public class SeleniumUtilities {
    * @throws IOException
    *           There was a problem creating the screen shot
    */
-  public static String captureScreenshot(WebDriver webDriver,
-                                         String directory, 
-                                         String fileNameWithoutExtension) throws IOException {
+  static String captureScreenshot(WebDriver webDriver,
+                                  String directory,
+                                  String fileNameWithoutExtension) throws Exception {
     
     File scrFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
 
@@ -105,7 +105,7 @@ public class SeleniumUtilities {
    *          The web element
    * @return The web driver
    */
-  public static WebDriver webElementToWebDriver(WebElement webElement) {
+  static WebDriver webElementToWebDriver(WebElement webElement) {
 
     WebDriver driver;
 
@@ -123,11 +123,13 @@ public class SeleniumUtilities {
    * Checks if directory exists, creating one if not.
    * @param directory The directory path
    */
-  private static void checkDirectory(String directory) {
+  private static void checkDirectory(String directory) throws Exception {
     // Make sure the directory exists
     File folder = new File(directory);
     if (!folder.isDirectory()) {
-      folder.mkdir();
+      if (!folder.mkdir()) {
+        throw new Exception("Directory was not created");
+      }
     }
   }
 }
