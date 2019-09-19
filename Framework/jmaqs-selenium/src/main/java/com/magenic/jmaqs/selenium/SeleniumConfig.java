@@ -39,7 +39,7 @@ public final class SeleniumConfig {
   /**
    * The web service configuration section.
    */
-  public static final ConfigSection SELENIUM_SECTION = ConfigSection.SeleniumMaqs;
+  private static final ConfigSection SELENIUM_SECTION = ConfigSection.SeleniumMaqs;
 
   /**
    * The remote selenium configuration section.
@@ -51,7 +51,7 @@ public final class SeleniumConfig {
    *
    * @return The type of file, defaults to .png
    */
-  public static String getScreenShotExtension() {
+  static String getScreenShotExtension() {
     return Config.getValueForSection(SELENIUM_SECTION,"ImageFormat", ".png");
   }
   
@@ -60,7 +60,7 @@ public final class SeleniumConfig {
    *
    * @return The browser type
    */
-  public static String getBrowserName() {
+  static String getBrowserName() {
     return Config.getValueForSection(SELENIUM_SECTION,"Browser", "Chrome");
   }
 
@@ -69,7 +69,7 @@ public final class SeleniumConfig {
    *
    * @return the hub URL
    */
-  public static String getHubUrl() {
+  static String getHubUrl() {
     return Config.getValueForSection(SELENIUM_SECTION, "HubUrl");
   }
 
@@ -78,7 +78,7 @@ public final class SeleniumConfig {
    *
    * @return The web site base url
    */
-  public static String getWebSiteBase() {
+  static String getWebSiteBase() {
     return Config.getValueForSection(SELENIUM_SECTION,"WebSiteBase");
   }
 
@@ -87,8 +87,9 @@ public final class SeleniumConfig {
    *
    * @return True if the flag is set to "Yes"
    */
-  public static boolean getSavePagesourceOnFail() {
-    return Config.getValueForSection(SELENIUM_SECTION, "SavePagesourceOnFail").equalsIgnoreCase("Yes");
+  static boolean getSavePagesourceOnFail() {
+    return Config.getValueForSection(SELENIUM_SECTION,
+            "SavePagesourceOnFail").equalsIgnoreCase("Yes");
   }
 
   /**
@@ -96,8 +97,9 @@ public final class SeleniumConfig {
    *
    * @return True if the flag is set to "Yes"
    */
-  public static boolean getSoftAssertScreenshot() {
-    return Config.getValueForSection(SELENIUM_SECTION, "SoftAssertScreenshot").equalsIgnoreCase("Yes");
+  static boolean getSoftAssertScreenshot() {
+    return Config.getValueForSection(SELENIUM_SECTION,
+            "SoftAssertScreenshot").equalsIgnoreCase("Yes");
   }
 
   /**
@@ -105,7 +107,7 @@ public final class SeleniumConfig {
    *
    * @return The hint path for the web driver
    */
-  public static String getDriverHintPath() {
+  static String getDriverHintPath() {
     String defaultPath = new java.io.File("Resources").getAbsolutePath();
     return Config.getValueForSection(SELENIUM_SECTION,"WebDriverHintPath", defaultPath);
   }
@@ -115,7 +117,7 @@ public final class SeleniumConfig {
    *
    * @return The browser type being used on grid
    */
-  public static String getRemoteBrowserName() {
+  static String getRemoteBrowserName() {
     return Config.getValueForSection(SELENIUM_SECTION,"RemoteBrowser", "Chrome");
   }
 
@@ -125,7 +127,7 @@ public final class SeleniumConfig {
    *
    * @return The web driver
    */
-  public static WebDriver getRemoteBrowser() throws Exception {
+  static WebDriver getRemoteBrowser() throws Exception {
     return browser(getRemoteBrowserName());
   }
 
@@ -136,7 +138,7 @@ public final class SeleniumConfig {
    *          The browser type we want to use
    * @return A WebDriver
    */
-  public static WebDriver getRemoteBrowser(String remoteBrowser) throws Exception {
+  static WebDriver getRemoteBrowser(String remoteBrowser) throws Exception {
     WebDriver webDriver = null;
 
     try {
@@ -196,15 +198,18 @@ public final class SeleniumConfig {
           // MalformedURLException exception is thrown if no protocol is
           // specified, or an unknown protocol is found, or spec is null.
           try {
-            webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION,"HubUrl")),
+            webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION,
+                    "HubUrl")),
                 getRemoteCapabilities());
           } catch (MalformedURLException e) {
-            throw new Exception("Malformed URL Exception thrown trying to create the remote web driver.", e);
+            throw new Exception("Malformed URL Exception thrown"
+                    + " trying to create the remote web driver.", e);
           }
           break;
         default:
           throw new RuntimeException(
-              StringProcessor.safeFormatter("Browser type %s is not supported", remoteBrowser));
+              StringProcessor.safeFormatter("Browser type %s is not supported",
+                      remoteBrowser));
       }
 
       // Maximize the browser and than return it
@@ -218,7 +223,8 @@ public final class SeleniumConfig {
           throw new Exception("Failed to quit Web driver during setup", quitExecption);
         }
       }
-      String errorException = "Failed to setup web driver. Your driver may be out of date or unsupported. Exception: ";
+      String errorException = "Failed to setup web driver. "
+              + "Your driver may be out of date or unsupported. Exception: ";
       throw new Exception(MessageFormat.format("{1} {0}", errorException, e));
     }
   }
@@ -228,7 +234,7 @@ public final class SeleniumConfig {
    *
    * @return The platform (or OS) to run remote tests against
    */
-  public static String getRemotePlatform() {
+  static String getRemotePlatform() {
     return Config.getValueForSection(SELENIUM_SECTION,"RemotePlatform");
   }
 
@@ -237,7 +243,7 @@ public final class SeleniumConfig {
    *
    * @return The browser version to run against on grid
    */
-  public static String getRemoteBrowserVersion() {
+  static String getRemoteBrowserVersion() {
     return Config.getValueForSection(SELENIUM_SECTION,"RemoteBrowserVersion");
   }
 
@@ -247,7 +253,7 @@ public final class SeleniumConfig {
    *
    * @return The web driver
    */
-  public static WebDriver browser() throws Exception {
+  static WebDriver browser() throws Exception {
     return browser(getBrowserName());
   }
 
@@ -258,7 +264,7 @@ public final class SeleniumConfig {
    *          The browser type we want to use
    * @return A WebDriver
    */
-  public static WebDriver browser(String browser) throws Exception {
+  static WebDriver browser(String browser) throws Exception {
     WebDriver webDriver = null;
 
     try {
@@ -319,10 +325,12 @@ public final class SeleniumConfig {
           // MalformedURLException exception is thrown if no protocol is
           // specified, or an unknown protocol is found, or spec is null.
           try {
-            webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION,"HubUrl")),
+            webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION,
+                    "HubUrl")),
                       getRemoteCapabilities());
           } catch (MalformedURLException e) {
-            throw new Exception("Malformed URL Exception thrown trying to create the remote web driver.", e);
+            throw new Exception("Malformed URL Exception thrown "
+                    + "trying to create the remote web driver.", e);
           }
           break;
         default:
@@ -341,7 +349,8 @@ public final class SeleniumConfig {
           throw new Exception("Failed to quit Web driver during setup", quitException);
         }
       }
-      String errorException = "Failed to setup web driver. Your driver may be out of date or unsupported. Exception: ";
+      String errorException = "Failed to setup web driver. "
+              + "Your driver may be out of date or unsupported. Exception: ";
       throw new Exception(MessageFormat.format("{1} {0}", errorException, e));
     }
   }
@@ -352,7 +361,7 @@ public final class SeleniumConfig {
    * @param driver
    *          Brings in a WebDriver
    */
-  public static void setTimeouts(WebDriver driver) {
+  static void setTimeouts(WebDriver driver) {
     int timeoutTime = Integer.parseInt(Config.getGeneralValue("Timeout", "0"));
     driver.manage().timeouts().setScriptTimeout(timeoutTime, null);
     driver.manage().timeouts().pageLoadTimeout(timeoutTime, null);
@@ -363,13 +372,14 @@ public final class SeleniumConfig {
    *
    * @return The initialize timeout
    */
-  public static int getCommandTimeout() {
+  static int getCommandTimeout() {
     String value = Config.getValueForSection(SELENIUM_SECTION, "SeleniumCommandTimeout", "60000");
     try {
       Integer.parseInt(value);
       return Integer.parseInt(value);
     } catch (NumberFormatException e) {
-      throw new NumberFormatException("SeleniumCommandTimeout should be a number, but the current value is: " + value);
+      throw new NumberFormatException("SeleniumCommandTimeout should be a number, "
+              + "but the current value is: " + value);
     }
   }
 
@@ -426,7 +436,7 @@ public final class SeleniumConfig {
    * Get the remote capabilities as a HashMap
    * @return HashMap of remote capabilities
    */
-  public static Map<String, String> getRemoteCapabilitiesAsStrings() {
+  static Map<String, String> getRemoteCapabilitiesAsStrings() {
     return Config.getSection(SELENIUM_CAPS_SECTION);
   }
 
@@ -434,7 +444,7 @@ public final class SeleniumConfig {
    * Get the remote capabilities as a HashMap
    * @return HashMap of remote capabilities
    */
-  public static Map<String, Object> getRemoteCapabilitiesAsObjects() {
+  static Map<String, Object> getRemoteCapabilitiesAsObjects() {
     return new HashMap<>(getRemoteCapabilitiesAsStrings());
   }
 
@@ -450,8 +460,9 @@ public final class SeleniumConfig {
    *          found an error will be thrown
    * @return The path to the web driver
    */
-  private static String getDriverLocation(String driverFile, String defaultHintPath,
-      boolean mustExist) {
+  private static String getDriverLocation(String driverFile,
+                                          String defaultHintPath,
+                                          boolean mustExist) {
     // Get the hint path from the app.config
     String hintPath = getDriverHintPath();
 
@@ -569,7 +580,7 @@ public final class SeleniumConfig {
    *          The Web Driver
    * @return A WebDriverWait
    */
-  public static WebDriverWait getWaitDriver(WebDriver driver) {
+  static WebDriverWait getWaitDriver(WebDriver driver) {
     return new WebDriverWait(driver, getTimeoutTime());
   }
 
@@ -578,7 +589,7 @@ public final class SeleniumConfig {
    *
    * @return The timeout time
    */
-  public static int getTimeoutTime() {
+  static int getTimeoutTime() {
     return Integer.parseInt(Config.getGeneralValue("BrowserTimeout", "0"));
   }
 
@@ -587,17 +598,18 @@ public final class SeleniumConfig {
    *
    * @return The wait time
    */
-  public static int getWaitTime() {
+  /*
+    static int getWaitTime() {
     return Integer.parseInt(Config.getGeneralValue("BrowserWaitTime", "0"));
   }
+   */
 
   /**
    * Get browser size from config.
    *
    * @return The browser size
    */
-  public static String getBrowserSize() {
+  static String getBrowserSize() {
     return Config.getValueForSection(SELENIUM_SECTION, "BrowserSize", "MAXIMIZE".toUpperCase());
   }
-
 }
