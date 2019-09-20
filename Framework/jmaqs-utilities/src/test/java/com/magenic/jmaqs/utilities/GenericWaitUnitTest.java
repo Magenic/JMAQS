@@ -117,18 +117,6 @@ public class GenericWaitUnitTest {
   }
 
   /**
-   * Test wait until with a parameter array works when the wait function returns false.
-   */
-  @Test(expectedExceptions = UnsupportedOperationException.class, groups = TestCategories.Utilities)
-  public void throwExceptionWithoutParamTest() throws Throwable {
-    try {
-      GenericWait.waitForTrue(this::throwError);
-    } catch (NullPointerException e) {
-      throw e.getCause();
-    }
-  }
-
-  /**
    * Test waitForTrue passes.
    */
   @Test(groups = TestCategories.Utilities)
@@ -149,6 +137,18 @@ public class GenericWaitUnitTest {
       GenericWait.waitForTrue((c) -> 2 == c, 2);
     } catch (Exception e) {
       Assert.fail("waitForTrue threw unexpected exception", e);
+    }
+  }
+
+  /**
+   * Test wait until with a parameter array works when the wait function returns false.
+   */
+  @Test(expectedExceptions = UnsupportedOperationException.class, groups = TestCategories.Utilities)
+  public void throwExceptionWithoutParamTest() throws Throwable {
+    try {
+      GenericWait.waitForTrue(this::throwError);
+    } catch (Exception e) {
+      throw e.getCause();
     }
   }
 
