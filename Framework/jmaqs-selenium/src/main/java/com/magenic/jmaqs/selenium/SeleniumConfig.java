@@ -546,7 +546,7 @@ public final class SeleniumConfig {
     if (System.getProperty("os.name").contains("Windows")) {
       is64bit = (System.getenv("ProgramFiles(x86)") != null);
     } else {
-      is64bit = (System.getProperty("os.arch").indexOf("64") != -1);
+      is64bit = (System.getProperty("os.arch").contains("64"));
     }
 
     if (is64bit) {
@@ -598,11 +598,9 @@ public final class SeleniumConfig {
    *
    * @return The wait time
    */
-  /*
-    static int getWaitTime() {
+  static int getWaitTime() {
     return Integer.parseInt(Config.getGeneralValue("BrowserWaitTime", "0"));
   }
-   */
 
   /**
    * Get browser size from config.
