@@ -15,7 +15,7 @@ import java.io.File;
 public class LoggingConfig {
   /**
    * Get our logging state - Yes, no or on failure.
-   * @return The log enabled state
+   * @return The log enabled state.
    */
   public static LoggingEnabled getLoggingEnabledSetting() {
     switch (Config.getGeneralValue("Log", "NO").toUpperCase()) {
@@ -60,8 +60,8 @@ public class LoggingConfig {
 
   /**
    * Get the logger.
-   * @param fileName File name to use for the log
-   * @return The logger
+   * @param fileName File name to use for the log.
+   * @return The logger.
    */
   public static Logger getLogger(String fileName) {
     // Disable logging means we just send any logged messages to the console
@@ -84,7 +84,7 @@ public class LoggingConfig {
 
   /**
    * Gets the File Directory to store log files.
-   * @return String of file path
+   * @return String of file path.
    */
   public static String getLogDirectory() {
     String path = new File("").getAbsolutePath().concat("\\Logs");

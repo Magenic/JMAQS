@@ -7,19 +7,15 @@ package com.magenic.jmaqs.utilities.logging;
 import com.magenic.jmaqs.utilities.ConsoleCopy;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -76,9 +72,15 @@ public class FileLoggerUnitTest {
    */
   @Test(dataProvider = "logLevels", groups = TestCategories.Utilities)
   public void testHierarchicalTxtFileLogger(String logLevel, HashMap<String, Boolean> levels) {
-    FileLogger logger = new FileLogger(true, LoggingConfig.getLogDirectory(),
-            this.getFileName("TestHierarchicalTxtFileLogger_" + logLevel, "txt"), MessageType.GENERIC);
-    this.testHierarchicalLogging(logger, logger.getFilePath(), logLevel, levels);
+    FileLogger logger = new FileLogger(true,
+            LoggingConfig.getLogDirectory(),
+            this.getFileName("TestHierarchicalTxtFileLogger_" + logLevel,
+                    "txt"),
+            MessageType.GENERIC);
+    this.testHierarchicalLogging(logger,
+            logger.getFilePath(),
+            logLevel,
+            levels);
   }
 
   /**
@@ -86,15 +88,15 @@ public class FileLoggerUnitTest {
    * @param logLevel  The type of logging.
    * @param levels  What should appear for each level.
    */
-  @Ignore // FIXME: test passes locally but not in ADO
   @Test(dataProvider = "logLevels", groups = TestCategories.Utilities)
   public void testHierarchicalConsoleLogger(String logLevel, HashMap<String, Boolean> levels) {
     // Calculate a file path
     String path = Paths.get(LoggingConfig.getLogDirectory(),
-            this.getFileName("TestHierarchicalConsoleLogger" + logLevel, "txt")).toString();
+            this.getFileName("TestHierarchicalConsoleLogger" + logLevel,
+                    "txt")).toString();
 
     // Pipe the console to this file
-    try(ConsoleCopy consoleCopy = new ConsoleCopy(path)) {
+    try(ConsoleCopy ignored = new ConsoleCopy(path)) {
       ConsoleLogger consoleLogger = new ConsoleLogger();
       this.testHierarchicalLogging(consoleLogger, path, logLevel, levels);
     }
@@ -107,10 +109,15 @@ public class FileLoggerUnitTest {
    */
   @Test(dataProvider = "logLevels", groups = TestCategories.Utilities)
   public void testHierarchicalHtmlFileLogger(String logLevel, HashMap<String, Boolean> levels) {
-    HtmlFileLogger logger = new HtmlFileLogger(true, LoggingConfig.getLogDirectory(),
-            this.getFileName("TestHierarchicalHtmlFileLogger" + logLevel, "html"), MessageType.GENERIC);
-
-    this.testHierarchicalLogging(logger, logger.getFilePath(), logLevel, levels);
+    HtmlFileLogger logger = new HtmlFileLogger(true,
+            LoggingConfig.getLogDirectory(),
+            this.getFileName("TestHierarchicalHtmlFileLogger" + logLevel,
+                    "html"),
+            MessageType.GENERIC);
+    this.testHierarchicalLogging(logger,
+            logger.getFilePath(),
+            logLevel,
+            levels);
   }
 
   /**
@@ -129,8 +136,11 @@ public class FileLoggerUnitTest {
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerNoAppendTest() {
-    FileLogger logger = new FileLogger(false, "", "WriteToFileLogger");
-    logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
+    FileLogger logger = new FileLogger(false,
+            "",
+            "WriteToFileLogger");
+    logger.logMessage(MessageType.WARNING,
+            "Hello, this is a test.");
   }
 
   /**
@@ -138,8 +148,11 @@ public class FileLoggerUnitTest {
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerAppendFileTest() {
-    FileLogger logger = new FileLogger(true, "", "WriteToExistingFileLogger");
-    logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
+    FileLogger logger = new FileLogger(true,
+            "",
+            "WriteToExistingFileLogger");
+    logger.logMessage(MessageType.WARNING,
+            "This is a test to write to an existing file.");
   }
 
   /**
@@ -150,9 +163,11 @@ public class FileLoggerUnitTest {
     SoftAssert softAssert = new SoftAssert();
 
     // Start logging
-    FileLogger logger = new FileLogger(true, LoggingConfig.getLogDirectory(),
+    FileLogger logger = new FileLogger(true,
+            LoggingConfig.getLogDirectory(),
             this.getFileName("TestHierarchicalTxtFileLogger",
-                    "txt"), MessageType.GENERIC);
+                    "txt"),
+            MessageType.GENERIC);
     logger.setLoggingLevel(MessageType.VERBOSE);
 
     logger.logMessage(MessageType.VERBOSE, "HellO");
@@ -170,15 +185,17 @@ public class FileLoggerUnitTest {
 
     // Verify that logging was active
     boolean helloFound = logContents.contains("HellO");
-    softAssert.assertTrue(helloFound, "'HellO' was not found.  Logging Failed");
+    softAssert.assertTrue(helloFound,
+            "'HellO' was not found.  Logging Failed");
 
     // Verify that logging was suspended
     boolean goodbyeFound = logContents.contains("GoodByE");
-    softAssert.assertFalse(goodbyeFound, "'GoodByE' was found when it should not be written.  Logging Failed");
+    softAssert.assertFalse(goodbyeFound,
+            "'GoodByE' was found when it should not be written. Logging Failed");
 
     // Verify that logging was active
     boolean backFound = logContents.contains("BacK");
-    softAssert.assertTrue(backFound, "'BacK' was not found.  Logging Failed");
+    softAssert.assertTrue(backFound, "'BacK' was not found. Logging Failed");
 
     // Fail the test if any soft asserts failed
     softAssert.assertAll();
@@ -201,8 +218,10 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger(true, "",
             "WriteToExistingFileLogger",
             MessageType.GENERIC);
-    logger.logMessage(MessageType.WARNING, "This is a test.");
-    logger.logMessage(MessageType.WARNING, "This is a test to write to an existing file.");
+    logger.logMessage(MessageType.WARNING,
+            "This is a test.");
+    logger.logMessage(MessageType.WARNING,
+            "This is a test to write to an existing file.");
   }
 
   /**
@@ -210,21 +229,24 @@ public class FileLoggerUnitTest {
    * already exist. Delete Directory after each run.
    * @throws IOException warning in case exception is thrown
    */
-  @Ignore // FIXME: Test passes locally but not in ADO
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerConstructorCreateFile() throws IOException {
     String message = "Test to ensure that the file in the created directory can be written to.";
-    FileLogger logger = new FileLogger(true, Paths.get(LoggingConfig.getLogDirectory(),
+    FileLogger logger = new FileLogger(true,
+            Paths.get(LoggingConfig.getLogDirectory(),
             "FileLoggerCreateDirectoryDelete").toString(),
             "FileLoggerCreateDirectory",
             MessageType.GENERIC);
 
-    logger.logMessage(MessageType.WARNING, "Test to ensure that the file in the created directory can be written to.");
+    logger.logMessage(MessageType.WARNING,
+            "Test to ensure that the file in the created directory can be written to.");
 
     File file = new File(logger.getFilePath());
     String actualMessage = this.readTextFile(file.getCanonicalPath());
     Assert.assertTrue(file.exists(), "the File does not exist");
-    Assert.assertTrue(actualMessage.contains(message), "Expected '" + message + "' but got '" + actualMessage + "' for: " + file.getCanonicalPath());
+    Assert.assertTrue(actualMessage.contains(message),
+            "Expected '" + message + "' but got '"
+                    + actualMessage + "' for: " + file.getCanonicalPath());
     Assert.assertTrue(file.delete(), "The File was not Deleted");
     }
 
@@ -233,9 +255,12 @@ public class FileLoggerUnitTest {
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerLogMessage() {
-    FileLogger logger = new FileLogger(true, "", "FileLoggerLogMessage");
+    FileLogger logger = new FileLogger(true,
+            "",
+            "FileLoggerLogMessage");
     logger.logMessage("Test to ensure LogMessage works as expected.");
-    Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains("Test to ensure LogMessage works as expected."),
+    Assert.assertTrue(this.readTextFile(logger.getFilePath())
+                    .contains("Test to ensure LogMessage works as expected."),
             "Expected Log Message to be contained in log.");
   }
 
@@ -244,9 +269,13 @@ public class FileLoggerUnitTest {
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerLogMessageSelectType() {
-    FileLogger logger = new FileLogger(true, "", "FileLoggerLogMessage");
-    logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
-    Assert.assertTrue(this.readTextFile(logger.getFilePath()).contains("Test to ensure LogMessage works as expected."),
+    FileLogger logger = new FileLogger(true,
+            "",
+            "FileLoggerLogMessage");
+    logger.logMessage(MessageType.GENERIC,
+            "Test to ensure LogMessage works as expected.");
+    Assert.assertTrue(this.readTextFile(logger.getFilePath())
+                    .contains("Test to ensure LogMessage works as expected."),
             "Expected Log Message to be contained in log.");
   }
 
@@ -255,42 +284,56 @@ public class FileLoggerUnitTest {
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerSetFilePath() {
-    FileLogger logger = new FileLogger(true, "", "FileLoggerSetFilePath", MessageType.GENERIC);
+    FileLogger logger = new FileLogger(true,
+            "",
+            "FileLoggerSetFilePath",
+            MessageType.GENERIC);
     logger.setFilePath("test file path");
     Assert.assertEquals(logger.getFilePath(), "test file path");
   }
 
   /**
-   * Verify that File Logger catches and handles errors caused by incorrect file Paths
+   * Verify that File Logger catches and
+   * handles errors caused by incorrect file Paths
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerCatchThrownException() {
-    FileLogger logger = new FileLogger(true, "", "FileLoggerCatchThrownException", MessageType.GENERIC);
+    FileLogger logger = new FileLogger(true,
+            "",
+            "FileLoggerCatchThrownException",
+            MessageType.GENERIC);
     logger.setFilePath("<>");
-
     logger.logMessage(MessageType.GENERIC, "test throws error");
   }
 
   /**
-   * Test File Logger with empty file name throws Illegal Argument Exception.
+   * Test File Logger with empty file
+   * name throws Illegal Argument Exception.
    */
   @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.Utilities)
   public void fileLoggerEmptyFileNameException() {
-    FileLogger logger = new FileLogger("");
+    new FileLogger("");
   }
 
   /**
-   * Verify File Logger with No Parameters assigns the correct default values.
+   * Verify File Logger with No Parameters
+   * assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerNoParameters() throws IOException {
     FileLogger logger = new FileLogger();
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
-    softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals(System.getProperty("java.io.tmpdir"),
+            logger.getDirectory(),
+            StringProcessor.safeFormatter(
+            "Expected Directory '%s'.",
+                    System.getProperty("java.io.tmpdir")));
+    softAssert.assertEquals("FileLog.txt", logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION,
+            logger.getMessageType(),
+            "Expected Information Message Type.");
 
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
@@ -300,17 +343,22 @@ public class FileLoggerUnitTest {
   }
 
   /**
-   * Verify File Logger with only append parameter assigns the correct default values.
+   * Verify File Logger with only append
+   * parameter assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerAppendOnly() throws IOException {
     FileLogger logger = new FileLogger(true);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
-    softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals(System.getProperty("java.io.tmpdir"),
+            logger.getDirectory(),
+            StringProcessor.safeFormatter("Expected Directory '%s'.",
+            System.getProperty("java.io.tmpdir")));
+    softAssert.assertEquals("FileLog.txt", logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(),
+            "Expected Information Message Type.");
 
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
@@ -320,7 +368,8 @@ public class FileLoggerUnitTest {
   }
 
   /**
-   * Verify File Logger with only File Name parameter assigns the correct default values.
+   * Verify File Logger with only File Name
+   * parameter assigns the correct default values.
    * Verify default extension is added '.txt'
    */
   @Test(groups = TestCategories.Utilities)
@@ -328,10 +377,16 @@ public class FileLoggerUnitTest {
     FileLogger logger = new FileLogger("FileNameOnly");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
-    softAssert.assertEquals("FileNameOnly.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals(System.getProperty("java.io.tmpdir"),
+            logger.getDirectory(),
+            StringProcessor.safeFormatter("Expected Directory '%s'.",
+                    System.getProperty("java.io.tmpdir")));
+    softAssert.assertEquals("FileNameOnly.txt",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION,
+            logger.getMessageType(),
+            "Expected Information Message Type.");
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
     softAssert.assertTrue(file.exists(), "File does not Exist");
@@ -340,17 +395,22 @@ public class FileLoggerUnitTest {
   }
 
   /**
-   * Verify File Logger with only Message Type parameter assigns the correct default values.
+   * Verify File Logger with only Message Type
+   * parameter assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerMessageTypeOnly() throws IOException {
     FileLogger logger = new FileLogger(MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
-    softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
+    softAssert.assertEquals(System.getProperty("java.io.tmpdir"),
+            logger.getDirectory(),
+            StringProcessor.safeFormatter("Expected Directory '%s'.",
+                    System.getProperty("java.io.tmpdir")));
+    softAssert.assertEquals("FileLog.txt", logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(),
+            "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
@@ -360,17 +420,22 @@ public class FileLoggerUnitTest {
   }
 
   /**
-   * Verify File Logger with only Append and File Name parameters assigns the correct default values.
+   * Verify File Logger with only Append and,
+   * File Name parameters assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerAppendFileName() throws IOException {
     FileLogger logger = new FileLogger(true, "AppendFileName");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
-    softAssert.assertEquals("AppendFileName.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals(System.getProperty("java.io.tmpdir"),
+            logger.getDirectory(),
+            StringProcessor.safeFormatter("Expected Directory '%s'.",
+                    System.getProperty("java.io.tmpdir")));
+    softAssert.assertEquals("AppendFileName.txt", logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(),
+            "Expected Information Message Type.");
 
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
@@ -380,7 +445,8 @@ public class FileLoggerUnitTest {
   }
 
   /**
-   * Verify File Logger with only Log Folder and Append parameters assigns the correct default values.
+   * Verify File Logger with only Log Folder and,
+   * Append parameters assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerAppendLogFolder() throws IOException {
@@ -389,42 +455,57 @@ public class FileLoggerUnitTest {
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals("Append File Directory", logger.getDirectory(),
             "Expected Directory 'Append File Directory'.");
-    softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals("FileLog.txt",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION,
+            logger.getMessageType(),
+            "Expected Information Message Type.");
 
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
     softAssert.assertTrue(file.exists(), "File does not Exist");
-    softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getAbsoluteFile().delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().getAbsoluteFile().delete(), "File was not deleted");
     softAssert.assertAll();
   }
 
   /**
-   * Verify File Logger with only Log Folder and File Name parameters assigns the correct default values.
+   * Verify File Logger with only Log Folder and,
+   * File Name parameters assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerLogFolderFileName() throws IOException {
-    FileLogger logger = new FileLogger("Log Folder File Name Directory", "LogFolderFileName.txt");
+    FileLogger logger = new FileLogger("Log Folder File Name Directory",
+            "LogFolderFileName.txt");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("Log Folder File Name Directory", logger.getDirectory(),
+    softAssert.assertEquals("Log Folder File Name Directory",
+            logger.getDirectory(),
             "Expected Directory 'Log Folder File Name Directory'.");
-    softAssert.assertEquals("LogFolderFileName.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals("LogFolderFileName.txt",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION,
+            logger.getMessageType(),
+            "Expected Information Message Type.");
 
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
     softAssert.assertTrue(file.exists(), "File does not Exist");
     softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().delete(), "Directory was not deleted");
     softAssert.assertAll();
   }
 
   /**
-   * Verify File Logger with only Log Folder and Messaging Level parameters assigns the correct default values.
+   * Verify File Logger with only Log Folder and,
+   * Messaging Level parameters assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerLogFolderMessagingLevel() throws IOException {
-    FileLogger logger = new FileLogger("Log Folder Messaging Level Directory", MessageType.WARNING);
+    FileLogger logger = new FileLogger("Log Folder Messaging Level Directory",
+            MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertEquals("Log Folder Messaging Level Directory", logger.getDirectory(),
@@ -436,61 +517,86 @@ public class FileLoggerUnitTest {
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
     softAssert.assertTrue(file.exists(), "File does not Exist");
     softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().delete(), "Directory was not deleted");
     softAssert.assertAll();
   }
 
   /**
-   * Verify File Logger with only Append and Messaging Level parameters assigns the correct default values.
+   * Verify File Logger with only Append and,
+   * Messaging Level parameters assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerAppendMessagingLevel() throws IOException {
     FileLogger logger = new FileLogger(true, MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
-    softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
+    softAssert.assertEquals(System.getProperty("java.io.tmpdir"),
+            logger.getDirectory(),
+            StringProcessor.safeFormatter("Expected Directory '%s'.",
+                    System.getProperty("java.io.tmpdir")));
+    softAssert.assertEquals("FileLog.txt",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.WARNING,
+            logger.getMessageType(),
+            "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.createNewFile() || file.exists(), "File was not Created");
+    softAssert.assertTrue(file.createNewFile(), "File was not Created");
+    softAssert.assertTrue(file.exists(), "File was not Created");
     softAssert.assertTrue(file.delete(), "File was not deleted");
     softAssert.assertAll();
   }
 
   /**
-   * Verify File Logger with only Messaging Level and file name parameters assigns the correct default values.
+   * Verify File Logger with only Messaging Level and,
+   * file name parameters assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerMessagingLevelFileName() throws IOException {
-    FileLogger logger = new FileLogger(MessageType.WARNING, "MessagingTypeFile.txt");
+    FileLogger logger = new FileLogger(MessageType.WARNING,
+            "MessagingTypeFile.txt");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
-    softAssert.assertEquals("MessagingTypeFile.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
+    softAssert.assertEquals(System.getProperty("java.io.tmpdir"),
+            logger.getDirectory(),
+            StringProcessor.safeFormatter(
+            "Expected Directory '%s'.",
+                    System.getProperty("java.io.tmpdir")));
+    softAssert.assertEquals("MessagingTypeFile.txt",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.WARNING,
+            logger.getMessageType(),
+            "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.createNewFile(), "File was not Created");
+    softAssert.assertTrue(file.getAbsoluteFile().createNewFile(), "File was not Created");
     softAssert.assertTrue(file.exists(), "File does not Exist");
-    softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getAbsoluteFile().delete(), "File was not deleted");
     softAssert.assertAll();
   }
 
   /**
-   * Verify File Logger with only Append, log folder and file name parameters assigns the correct default values.
+   * Verify File Logger with only Append,
+   * log folder and file name parameters assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerAppendLogFolderFileName() throws IOException {
-    FileLogger logger = new FileLogger(
-            true, "AppendLogFolderFileNameDirectory", "AppendLogFolderFileName.txt");
+    FileLogger logger = new FileLogger(true,
+            "AppendLogFolderFileNameDirectory",
+            "AppendLogFolderFileName.txt");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("AppendLogFolderFileNameDirectory", logger.getDirectory(),
+    softAssert.assertEquals("AppendLogFolderFileNameDirectory",
+            logger.getDirectory(),
             " Expected Directory AppendLogFolderFileNameDirectory");
-    softAssert.assertEquals("AppendLogFolderFileName.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals("AppendLogFolderFileName.txt",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION,
+            logger.getMessageType(),
+            "Expected Information Message Type.");
 
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
@@ -500,40 +606,56 @@ public class FileLoggerUnitTest {
   }
 
   /**
-   * Verify File Logger with only Append, log folder and Messaging Level parameters assigns the correct default values.
+   * Verify File Logger with only Append,
+   * log folder and Messaging Level parameters assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerAppendLogFolderMessagingLevel() throws IOException {
     FileLogger logger = new FileLogger(
-            true, "AppendLogFolderFileNameDirectory", MessageType.WARNING);
+            true,
+            "AppendLogFolderFileNameDirectory",
+            MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("AppendLogFolderFileNameDirectory", logger.getDirectory(),
+    softAssert.assertEquals("AppendLogFolderFileNameDirectory",
+            logger.getDirectory(),
             " Expected Directory AppendLogFolderFileNameDirectory");
-    softAssert.assertEquals("FileLog.txt", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
+    softAssert.assertEquals("FileLog.txt",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.WARNING,
+            logger.getMessageType(),
+            "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
     softAssert.assertTrue(file.exists(), "File does not Exist");
-    softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getAbsoluteFile().delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().delete(), "Directory was not deleted");
     softAssert.assertAll();
   }
 
   /**
-   * Verify File Logger with only File Name, Append and Messaging Level parameters assigns the correct default values.
+   * Verify File Logger with only File Name,
+   * Append and Messaging Level parameters assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerFileNameAppendMessagingLevel() throws IOException {
-    FileLogger logger = new FileLogger(
-            "FileNameAppendMessagingLevel.txt", true, MessageType.WARNING);
+    FileLogger logger = new FileLogger("FileNameAppendMessagingLevel.txt",
+            true,
+            MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
-    softAssert.assertEquals("FileNameAppendMessagingLevel.txt", logger.getFileName(),
+    softAssert.assertEquals(System.getProperty("java.io.tmpdir"),
+            logger.getDirectory(),
+            StringProcessor.safeFormatter("Expected Directory '%s'.",
+                    System.getProperty("java.io.tmpdir")));
+    softAssert.assertEquals("FileNameAppendMessagingLevel.txt",
+            logger.getFileName(),
             "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
+    softAssert.assertEquals(MessageType.WARNING,
+            logger.getMessageType(),
+            "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
@@ -543,24 +665,31 @@ public class FileLoggerUnitTest {
   }
 
   /**
-   * Verify File Logger with only Log Folder, File Name and Messaging Level parameters assigns the correct default values.
+   * Verify File Logger with only Log Folder.
+   * File Name and Messaging Level parameters assigns the correct default values.
    */
   @Test(groups = TestCategories.Utilities)
   public void fileLoggerLogFolderFileNameMessagingLevel() throws IOException {
-    FileLogger logger = new FileLogger(
-            "LogFolderFileNameMessagingLevelDirectory", "LogFolderFileNameMessagingLevel.txt", MessageType.WARNING);
+    FileLogger logger = new FileLogger("LogFolderFileNameMessagingLevelDirectory",
+            "LogFolderFileNameMessagingLevel.txt",
+            MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("LogFolderFileNameMessagingLevelDirectory", logger.getDirectory(),
+    softAssert.assertEquals("LogFolderFileNameMessagingLevelDirectory",
+            logger.getDirectory(),
             "Expected Directory 'LogFolderFileNameMessagingLevelDirectory'");
-    softAssert.assertEquals("LogFolderFileNameMessagingLevel.txt", logger.getFileName(),
+    softAssert.assertEquals("LogFolderFileNameMessagingLevel.txt",
+            logger.getFileName(),
             "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
+    softAssert.assertEquals(MessageType.WARNING,
+            logger.getMessageType(),
+            "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
     softAssert.assertTrue(file.createNewFile(), "File was not Created");
     softAssert.assertTrue(file.exists(), "File does not Exist");
     softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().delete(), "Directory was not deleted");
     softAssert.assertAll();
   }
 
@@ -571,7 +700,10 @@ public class FileLoggerUnitTest {
    * @param logLevelText The type of logging
    * @param levels What should appear for each level
    */
-  private void testHierarchicalLogging(Logger logger, String filePath, String logLevelText, HashMap<String, Boolean> levels) {
+  private void testHierarchicalLogging(Logger logger,
+                                       String filePath,
+                                       String logLevelText,
+                                       HashMap<String, Boolean> levels) {
     // Create a soft assert
     SoftAssert softAssert = new SoftAssert();
 
@@ -580,7 +712,7 @@ public class FileLoggerUnitTest {
     logger.setLoggingLevel(logLevel);
 
     // Set the logger options to set the log level and add log entries to the file
-    logger.logMessage(logLevel, "\nThe Loglevel is set to " + logLevel);
+    logger.logMessage(logLevel, "\nThe Log level is set to " + logLevel);
 
     // Message template
     String logLine = "Test Log item %s";
@@ -600,10 +732,13 @@ public class FileLoggerUnitTest {
     for(HashMap.Entry<String, Boolean> level : levels.entrySet()) {
       if ((!level.getKey().equals("Row")) && (!level.getKey().equals("LogLevel"))) {
         // Verify if the Message Type is found
-        boolean logMessageFound = logContents.contains(String.format(logLine, level.getKey()));
-        softAssert.assertEquals(Boolean.toString(logMessageFound), level.getValue().toString(),
+        boolean logMessageFound = logContents.contains(String.format(logLine,
+                level.getKey()));
+        softAssert.assertEquals(Boolean.toString(logMessageFound),
+                level.getValue().toString(),
                 "Looking for '" + String.format(logLine, level.getKey())
-                        + "' with Logger of type '" + logLevel.name() + "'. \nLog Contents: " + logContents);
+                        + "' with Logger of type '"
+                        + logLevel.name() + "'. \nLog Contents: " + logContents);
       }
     }
 
@@ -636,6 +771,9 @@ public class FileLoggerUnitTest {
    * @return A unique file name
    */
   private String getFileName(String testName, String extension) {
-    return StringProcessor.safeFormatter("UtilitiesUnitTesting.%s-%s.%s", testName, UUID.randomUUID().toString(), extension);
+    return StringProcessor.safeFormatter("UtilitiesUnitTesting.%s-%s.%s",
+            testName,
+            UUID.randomUUID().toString(),
+            extension);
   }
 }

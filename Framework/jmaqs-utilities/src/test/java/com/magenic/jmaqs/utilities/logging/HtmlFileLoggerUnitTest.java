@@ -29,7 +29,7 @@ public class HtmlFileLoggerUnitTest {
     HtmlFileLogger logger = new HtmlFileLogger(false, "", "WriteToHtmlFileLogger");
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
     File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.delete());
+    Assert.assertTrue(file.delete(), "File was not deleted");
   }
 
   /**
@@ -115,7 +115,7 @@ public class HtmlFileLoggerUnitTest {
    * Verify that HTML File Logger can log message and defining a Message Type.
    */
   @Test(groups = TestCategories.Utilities)
-  public void htmlFileLoggerLogMessageSelectType() throws IOException {
+  public void htmlFileLoggerLogMessageSelectType() {
     HtmlFileLogger logger = new HtmlFileLogger(true, "", "HtmlFileLoggerLogMessageType");
     logger.logMessage(MessageType.GENERIC, "Test to ensure LogMessage works as expected.");
     String htmlText = this.readTextFile(logger.getFilePath());
@@ -229,13 +229,19 @@ public class HtmlFileLoggerUnitTest {
     HtmlFileLogger logger = new HtmlFileLogger(MessageType.WARNING);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
-    softAssert.assertEquals("FileLog.html", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
+    softAssert.assertEquals(System.getProperty("java.io.tmpdir"),
+            logger.getDirectory(),
+            StringProcessor.safeFormatter("Expected Directory '%s'.",
+                    System.getProperty("java.io.tmpdir")));
+    softAssert.assertEquals("FileLog.html",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.WARNING,
+            logger.getMessageType(),
+            "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
     softAssert.assertAll();
   }
 
@@ -247,13 +253,19 @@ public class HtmlFileLoggerUnitTest {
     HtmlFileLogger logger = new HtmlFileLogger(true, "AppendFileName");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals(System.getProperty("java.io.tmpdir"), logger.getDirectory(), StringProcessor.safeFormatter(
-            "Expected Directory '%s'.", System.getProperty("java.io.tmpdir")));
-    softAssert.assertEquals("AppendFileName.html", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals(System.getProperty("java.io.tmpdir"),
+            logger.getDirectory(),
+            StringProcessor.safeFormatter("Expected Directory '%s'.",
+                    System.getProperty("java.io.tmpdir")));
+    softAssert.assertEquals("AppendFileName.html",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION,
+            logger.getMessageType(),
+            "Expected Information Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
     softAssert.assertAll();
   }
 
@@ -265,13 +277,19 @@ public class HtmlFileLoggerUnitTest {
     HtmlFileLogger logger = new HtmlFileLogger("Append File Directory", true);
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("Append File Directory", logger.getDirectory(),
+    softAssert.assertEquals("Append File Directory",
+            logger.getDirectory(),
             "Expected Directory 'Append File Directory'.");
-    softAssert.assertEquals("FileLog.html", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals("FileLog.html",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION,
+            logger.getMessageType(),
+            "Expected Information Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().delete(), "Directory was not deleted");
     softAssert.assertAll();
   }
 
@@ -280,16 +298,23 @@ public class HtmlFileLoggerUnitTest {
    */
   @Test(groups = TestCategories.Utilities)
   public void FileLoggerLogFolderFileName() {
-    HtmlFileLogger logger = new HtmlFileLogger("Log Folder File Name Directory", "LogFolderFileName.html");
+    HtmlFileLogger logger = new HtmlFileLogger("Log Folder File Name Directory",
+            "LogFolderFileName.html");
 
     SoftAssert softAssert = new SoftAssert();
-    softAssert.assertEquals("Log Folder File Name Directory", logger.getDirectory(),
+    softAssert.assertEquals("Log Folder File Name Directory",
+            logger.getDirectory(),
             "Expected Directory 'Log Folder File Name Directory'.");
-    softAssert.assertEquals("LogFolderFileName.html", logger.getFileName(), "Expected correct File Name.");
-    softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
+    softAssert.assertEquals("LogFolderFileName.html",
+            logger.getFileName(),
+            "Expected correct File Name.");
+    softAssert.assertEquals(MessageType.INFORMATION,
+            logger.getMessageType(),
+            "Expected Information Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().delete(), "Directory was not deleted");
     softAssert.assertAll();
   }
 
@@ -307,7 +332,8 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().delete(), "Directory was not deleted");
     softAssert.assertAll();
   }
 
@@ -325,7 +351,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
     softAssert.assertAll();
   }
 
@@ -343,7 +369,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
     softAssert.assertAll();
   }
 
@@ -364,7 +390,8 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.INFORMATION, logger.getMessageType(), "Expected Information Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().delete(), "Directory was not deleted");
     softAssert.assertAll();
   }
 
@@ -383,7 +410,8 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().delete(), "Directory was not deleted");
     softAssert.assertAll();
   }
 
@@ -404,7 +432,7 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
-    softAssert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
     softAssert.assertAll();
   }
 
@@ -426,7 +454,8 @@ public class HtmlFileLoggerUnitTest {
     softAssert.assertEquals(MessageType.WARNING, logger.getMessageType(), "Expected Warning Message Type.");
 
     File file = new File(logger.getFilePath());
-    Assert.assertTrue(file.delete());
+    softAssert.assertTrue(file.delete(), "File was not deleted");
+    softAssert.assertTrue(file.getParentFile().delete(), "Directory was not deleted");
     softAssert.assertAll();
   }
 

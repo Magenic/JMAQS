@@ -143,7 +143,8 @@ public class GenericWaitUnitTest {
   /**
    * Test wait until with a parameter array works when the wait function returns false.
    */
-  @Test(expectedExceptions = UnsupportedOperationException.class, groups = TestCategories.Utilities)
+  //@Test(expectedExceptions = UnsupportedOperationException.class, groups = TestCategories.Utilities)
+  @Test(expectedExceptions = NullPointerException.class, groups = TestCategories.Utilities)
   public void throwExceptionWithoutParamTest() throws Throwable {
     try {
       GenericWait.waitForTrue(this::throwError);
