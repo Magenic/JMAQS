@@ -38,13 +38,15 @@ public class ConsoleLogger extends Logger {
   }
 
   /**
-   * Write the formatted message (one line) to the console as the specified type.
+   * Write the formatted message (one line)
+   * to the console as the specified type.
    * @param messageType The type of message.
    * @param message The message text.
    * @param args String format arguments.
    */
   @Override
-  public void logMessage(MessageType messageType, String message, Object... args) {
+  public void logMessage(MessageType messageType,
+                         String message, Object... args) {
     this.writeLine(messageType, message, args);
   }
 
@@ -116,9 +118,13 @@ public class ConsoleLogger extends Logger {
    * @param message The log message.
    * @param args  Message string format arguments.
    */
-  private void writeToConsole(MessageType type, boolean line, String message, Object... args) {
+  private void writeToConsole(MessageType type,
+                              boolean line,
+                              String message,
+                              Object... args) {
     // Just return if there is no message
-    if (message == null || message.isEmpty() || !this.shouldMessageBeLogged(type)) {
+    if (message == null || message.isEmpty()
+            || !this.shouldMessageBeLogged(type)) {
       return;
     }
 
@@ -131,24 +137,26 @@ public class ConsoleLogger extends Logger {
         System.out.print(Integer.parseInt(result));
       }
     } catch (Exception e) {
-      System.out.println(StringProcessor.safeFormatter("Failed to write to the console because: %s",
+      System.out.println(StringProcessor
+              .safeFormatter("Failed to write to the console because: %s",
           e.getMessage()));
     }
   }
-  
+
   /**
-   * Change the console color to match the message type,
-   * write the message and restore the previous console colors.
-   * @param type The type of message.
-   * @param line Is this a write-line command, else it is just a write.
-   * @param message The log message.
-   * @param args Message string format arguments.
-   */
+  * Change the console color to match the message type
+  * write the message and restore the previous console colors.
+  * @param type The type of message.
+  * @param line Is this a write-line command, else it is just a write.
+  * @param message The log message.
+  * @param args Message string format arguments.
+  */
   private void setColorWriteAndRestore(MessageType type,
                                        boolean line,
                                        String message,
                                        Object... args) {
-    // Just return if there is no message or this type of message should not be logged
+    // Just return if there is no message or
+    // this type of message should not be logged
     if (message.isEmpty() || !this.shouldMessageBeLogged(type)) {
       return;
     }
@@ -167,7 +175,8 @@ public class ConsoleLogger extends Logger {
         logMessage(result);
       }
     } catch (Exception e) {
-      logMessage(StringProcessor.safeFormatter("Failed to write to the console because: {0}",
+      logMessage(StringProcessor
+              .safeFormatter("Failed to write to the console because: {0}",
               e.getMessage()));
     }
 

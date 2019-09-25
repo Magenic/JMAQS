@@ -7,9 +7,6 @@ package com.magenic.jmaqs.utilities.logging;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
-import java.io.File;
-import java.net.URISyntaxException;
-
 /**
  * Get logging config data.
  */
@@ -28,7 +25,8 @@ public class LoggingConfig {
         return LoggingEnabled.NO;
       default:
         throw new IllegalArgumentException(StringProcessor.safeFormatter(
-                "Log value %s is not a valid option", Config.getGeneralValue("Log", "NO")));
+                "Log value %s is not a valid option",
+                Config.getGeneralValue("Log", "NO")));
     }
   }
 
@@ -39,19 +37,19 @@ public class LoggingConfig {
   static MessageType getLoggingLevelSetting() {
     switch (Config.getGeneralValue("LogLevel", "INFORMATION").toUpperCase()) {
       case "VERBOSE":
-        return MessageType.VERBOSE;         // Includes this and all of those below
+        return MessageType.VERBOSE; // Includes this and all of those below
       case "INFORMATION":
-        return MessageType.INFORMATION;     // Includes this and all of those below
+        return MessageType.INFORMATION; // Includes this and all of those below
       case "GENERIC":
-        return MessageType.GENERIC;         // Includes this and all of those below
+        return MessageType.GENERIC; // Includes this and all of those below
       case "SUCCESS":
-        return MessageType.SUCCESS;         // Includes this and all of those below
+        return MessageType.SUCCESS; // Includes this and all of those below
       case "WARNING":
-        return MessageType.WARNING;         // Includes this and all of those below
+        return MessageType.WARNING; // Includes this and all of those below
       case "ERROR":
-        return MessageType.ERROR;           // Includes errors only
+        return MessageType.ERROR;   // Includes errors only
       case "SUSPENDED":
-        return MessageType.SUSPENDED;       // All logging is suspended
+        return MessageType.SUSPENDED;  // All logging is suspended
       default:
         throw new IllegalArgumentException(StringProcessor.safeFormatter(
                 "Logging level value '{0}' is not a valid option",
@@ -64,7 +62,7 @@ public class LoggingConfig {
    * @param fileName File name to use for the log.
    * @return The logger.
    */
-  public static Logger getLogger(String fileName) {
+  public static Logger getLogger(final String fileName) {
     // Disable logging means we just send any logged messages to the console
     if (getLoggingEnabledSetting() == LoggingEnabled.NO) {
       return new ConsoleLogger();
@@ -79,7 +77,9 @@ public class LoggingConfig {
         return new FileLogger(false, logDirectory, fileName);
       default:
         throw new IllegalArgumentException(StringProcessor.safeFormatter(
-            "Log type %s is not a valid option", Config.getGeneralValue("LogType", "CONSOLE")));
+            "Log type %s is not a valid option",
+                Config.getGeneralValue("LogType",
+                        "CONSOLE")));
     }
   }
 
@@ -92,12 +92,11 @@ public class LoggingConfig {
     try {
       path = LoggingConfig.class.getProtectionDomain().getCodeSource()
               .getLocation().toURI().getPath();
-
     } catch (Exception ignored) {
-
     }
     /*
-    String path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Logs");
+    String path = Path.Combine(
+    Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Logs");
     return Config.getGeneralValue("FileLoggerPath", path);
 
     String path = new File("").getAbsolutePath().concat("\\Logs");

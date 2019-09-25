@@ -105,7 +105,9 @@ public abstract class Logger {
    * @param message The message text.
    * @param args String format arguments.
    */
-  public abstract void logMessage(MessageType messageType, String message, Object... args);
+  public abstract void logMessage(MessageType messageType,
+                                  String message,
+                                  Object... args);
 
   /**
    * Write the formatted message (one line) to the console as a generic message.
@@ -122,7 +124,8 @@ public abstract class Logger {
    * @return True if the message should be logged.
    */
   boolean shouldMessageBeLogged(MessageType messageType) {
-    // The message should be logged if it's level is less than or equal to the current logging level
+    // The message should be logged if it's level
+    // is less than or equal to the current logging level
     return messageType.getValue() <= this.getLoggingLevel().getValue();
   }
 

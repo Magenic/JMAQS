@@ -154,16 +154,21 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
 
   /**
    * Initializes a new instance of the HtmlFileLogger class.
-   * @param append True to append to an existing log file or false to overwrite it.
-   *          If the file does not exist this, flag will have no affect.
+   * @param append True to append to an existing log file
+   *  or false to overwrite it.
+   *  f the file does not exist this, flag will have no affect.
    * @param logFolder Where log files should be saved.
    * @param name the File Name.
    * @param messageLevel Messaging Level.
    */
-  HtmlFileLogger(Boolean append, String logFolder, String name, MessageType messageLevel) {
+  HtmlFileLogger(Boolean append,
+                 String logFolder,
+                 String name,
+                 MessageType messageLevel) {
     super(append, logFolder, name, messageLevel);
 
-    try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
+    try (FileWriter writer = new FileWriter(this.getFilePath(),
+            true)) {
       writer.write(DEFAULT_HTML_HEADER);
     } catch (IOException e) {
       ConsoleLogger console = new ConsoleLogger();
@@ -189,22 +194,30 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
    * @param args String format arguments.
    */
   @Override
-  public void logMessage(MessageType messageType, String message, Object... args) {
-    // If the message level is greater that the current log level then do not log it.
+  public void logMessage(MessageType messageType,
+                         String message,
+                         Object... args) {
+    // If the message level is greater that
+    // the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
       // Log the message
-      try (FileWriter writer = new FileWriter(this.getFilePath(), true)) {
+      try (FileWriter writer = new FileWriter(this.getFilePath(),
+              true)) {
         Date dateObject = new Date();
-        SimpleDateFormat format = new SimpleDateFormat(Logger.DEFAULT_DATE_FORMAT);
+        SimpleDateFormat format = new SimpleDateFormat(
+                Logger.DEFAULT_DATE_FORMAT);
         String date = format.format(dateObject);
 
         // Set the style
         writer.write(this.getTextWithColorFlag(messageType));
 
         // Add the content
-        writer.write(StringProcessor.safeFormatter("%s%s", System.lineSeparator(), date));
-        writer.write(StringProcessor.safeFormatter("%s:\t", messageType.name()));
-        writer.write(StringProcessor.safeFormatter(System.lineSeparator() + message, args));
+        writer.write(StringProcessor.safeFormatter("%s%s",
+                System.lineSeparator(), date));
+        writer.write(StringProcessor.safeFormatter("%s:\t",
+                messageType.name()));
+        writer.write(StringProcessor.safeFormatter(
+                System.lineSeparator() + message, args));
 
         // Close off the style
         writer.write("</p>");

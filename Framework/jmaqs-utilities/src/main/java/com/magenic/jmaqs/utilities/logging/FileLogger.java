@@ -15,13 +15,15 @@ import java.io.PrintWriter;
 import java.nio.file.Paths;
 
 /**
- * Helper class for adding logs to a plain text file. Allows configurable file path.
+ * Helper class for adding logs to a plain text file.
+ * Allows configurable file path.
  */
 public class FileLogger extends Logger {
   /**
    * The default log file save location.
    */
-  private static final String DEFAULT_LOG_FOLDER = System.getProperty("java.io.tmpdir");
+  private static final String DEFAULT_LOG_FOLDER =
+          System.getProperty("java.io.tmpdir");
 
   /**
    * Initializes a new instance of the FileLogger class.
@@ -245,7 +247,9 @@ public class FileLogger extends Logger {
    * @param logFolder Where log files should be saved.
    * @param messageLevel Messaging Level.
    */
-  public FileLogger(boolean append, String logFolder, MessageType messageLevel) {
+  public FileLogger(boolean append,
+                    String logFolder,
+                    MessageType messageLevel) {
       this(append,
               logFolder,
               DEFAULT_LOG_NAME,
@@ -280,8 +284,9 @@ public class FileLogger extends Logger {
 
   /**
    * Initializes a new instance of the FileLogger class.
-   * @param append True to append to an existing log file or false to overwrite it.
-   *          If the file does not exist this, flag will have no affect.
+   * @param append True to append to
+   * an existing log file or false to overwrite it.
+   * If the file does not exist this, flag will have no affect.
    * @param logFolder Where log files should be saved.
    * @param name  File Name.
    * @param messageLevel Messaging Level.
@@ -314,7 +319,8 @@ public class FileLogger extends Logger {
     }
 
     this.setFileName(name);
-    this.setFilePath(Paths.get(this.getDirectory(), name).normalize().toString());
+    this.setFilePath(Paths.get(this.getDirectory(),
+            name).normalize().toString());
     this.setMessageType(messageLevel);
 
     File file = new File(this.getFilePath());
@@ -332,7 +338,8 @@ public class FileLogger extends Logger {
   }
 
   /**
-   * Write the formatted message (one line) to the console as the specified type.
+   * Write the formatted message (one line)
+   * to the console as the specified type.
    * @param message The message text.
    * @param args String format arguments.
    */
@@ -348,18 +355,22 @@ public class FileLogger extends Logger {
    * @param args String format arguments.
    */
   @Override
-  public void logMessage(MessageType messageType, String message, Object... args) {
-    // If the message level is greater that the current log level then do not log it.
+  public void logMessage(MessageType messageType,
+                         String message, Object... args) {
+    // If the message level is greater than
+    // the current log level then do not log it.
     if (this.shouldMessageBeLogged(messageType)) {
       try (
-          FileWriter fw = new FileWriter(this.getFilePath(), true);
+          FileWriter fw = new FileWriter(this.getFilePath(),
+                  true);
           BufferedWriter bw = new BufferedWriter(fw);
           PrintWriter writer = new PrintWriter(bw)) {
         writer.println(
                 StringProcessor.safeFormatter("%s%s",
                         Config.NEW_LINE,
                         System.currentTimeMillis()));
-        writer.print(StringProcessor.safeFormatter("%s:\t", messageType.toString()));
+        writer.print(StringProcessor.safeFormatter("%s:\t",
+                messageType.toString()));
 
         writer.println(StringProcessor.safeFormatter(message, args));
         writer.flush();
@@ -367,7 +378,9 @@ public class FileLogger extends Logger {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
         console.logMessage(MessageType.ERROR,
-                StringProcessor.safeFormatter("Failed to write to event log because: %s", e));
+                StringProcessor.safeFormatter(
+                        "Failed to write to event log because: %s",
+                        e));
         console.logMessage(messageType, message, args);
       }
     }
@@ -380,17 +393,20 @@ public class FileLogger extends Logger {
    */
   private static String makeValidFileName(String name) {
     if (name == null || name.isEmpty()) {
-      throw new IllegalArgumentException("Blank or null file name was provided");
+      throw new IllegalArgumentException(
+              "Blank or null file name was provided");
     }
 
     // Replace invalid characters
     String replacedName = name;
     try {
-      replacedName = name.replaceAll("[^a-zA-Z0-9.\\-]", "");
+      replacedName = name.replaceAll(
+              "[^a-zA-Z0-9.\\-]", "");
     } catch (NullPointerException e) {
       ConsoleLogger console = new ConsoleLogger();
       console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(
-              "Failed to Replace Invalid Characters because: %s", e.getMessage()));
+              "Failed to Replace Invalid Characters because: %s",
+              e.getMessage()));
     }
 
     return replacedName;

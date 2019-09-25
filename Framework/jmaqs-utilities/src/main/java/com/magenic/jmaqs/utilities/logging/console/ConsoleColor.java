@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.utilities.logging.console;
 
 /**
