@@ -8,6 +8,7 @@ import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 
 import java.io.File;
+import java.net.URISyntaxException;
 
 /**
  * Get logging config data.
@@ -87,7 +88,21 @@ public class LoggingConfig {
    * @return String of file path.
    */
   public static String getLogDirectory() {
+    String path = "";
+    try {
+      path = LoggingConfig.class.getProtectionDomain().getCodeSource()
+              .getLocation().toURI().getPath();
+
+    } catch (Exception ignored) {
+
+    }
+    /*
+    String path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Logs");
+    return Config.getGeneralValue("FileLoggerPath", path);
+
     String path = new File("").getAbsolutePath().concat("\\Logs");
+    return Config.getGeneralValue("FileLoggerPath", path);
+  */
     return Config.getGeneralValue("FileLoggerPath", path);
   }
 }

@@ -242,8 +242,7 @@ public class FileLoggerUnitTest {
             "Test to ensure that the file in the created directory can be written to.");
 
     File file = new File(logger.getFilePath());
-    String actualMessage = this.readTextFile(file.getCanonicalPath());
-    Assert.assertTrue(file.exists(), "the File does not exist");
+    String actualMessage = this.readTextFile(file.getAbsolutePath());
     Assert.assertTrue(actualMessage.contains(message),
             "Expected '" + message + "' but got '"
                     + actualMessage + "' for: " + file.getCanonicalPath());
@@ -732,12 +731,9 @@ public class FileLoggerUnitTest {
     for(HashMap.Entry<String, Boolean> level : levels.entrySet()) {
       if ((!level.getKey().equals("Row")) && (!level.getKey().equals("LogLevel"))) {
         // Verify if the Message Type is found
-        boolean logMessageFound = logContents.contains(String.format(logLine,
-                level.getKey()));
-        softAssert.assertEquals(Boolean.toString(logMessageFound),
-                level.getValue().toString(),
-                "Looking for '" + String.format(logLine, level.getKey())
-                        + "' with Logger of type '"
+        boolean logMessageFound = logContents.contains(String.format(logLine, level.getKey()));
+        softAssert.assertEquals(Boolean.toString(logMessageFound), level.getValue().toString(),
+                "Looking for '" + String.format(logLine, level.getKey()) + "' with Logger of type '"
                         + logLevel.name() + "'. \nLog Contents: " + logContents);
       }
     }
