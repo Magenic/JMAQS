@@ -82,7 +82,8 @@ public class SeleniumConfigTest {
      */
 
     // Using FireFox because headless Chrome does not respect Maximize as of 8/24/2018
-    WebDriver driverManualSize = webDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.Firefox);
+    WebDriver driverManualSize = WebDriverFactory
+            .getBrowserWithDefaultConfiguration(BrowserType.Firefox);
 
     try {
       driverManualSize.manage().window().maximize();
@@ -95,11 +96,14 @@ public class SeleniumConfigTest {
       browserSize.put("BrowserSize", "MAXIMIZE");
       Config.addTestSettingValues(browserSize, "SeleniumMaqs", true);
       
-      WebDriver driverConfigSize = webDriverFactory.GetBrowserWithDefaultConfiguration(BrowserType.Firefox);
+      WebDriver driverConfigSize = WebDriverFactory
+              .getBrowserWithDefaultConfiguration(BrowserType.Firefox);
 
       try {
-        Assert.assertEquals(manuallyMaximizedWidth, driverConfigSize.manage().window().getSize().width);
-        Assert.assertEquals(manuallyMaximizedHidth, driverConfigSize.manage().window().getSize().height);
+        Assert.assertEquals(manuallyMaximizedWidth,
+                driverConfigSize.manage().window().getSize().width);
+        Assert.assertEquals(manuallyMaximizedHidth,
+                driverConfigSize.manage().window().getSize().height);
       } finally {
         driverConfigSize.quit();
       }
@@ -123,7 +127,7 @@ public class SeleniumConfigTest {
     browserSize.put("BrowserSize", "MAXIMIZE");
     Config.addTestSettingValues(browserSize, "SeleniumMaqs", true);
 
-    WebDriver driverChangeSize = webDriverFactory.GetDefaultBrowser();
+    WebDriver driverChangeSize = WebDriverFactory.GetDefaultBrowser();
 
     try {
       int defaultWidth = driverChangeSize.manage().window().getSize().width;
@@ -134,7 +138,7 @@ public class SeleniumConfigTest {
       Dimension dimension = new Dimension(nonDefaultWidth, nonDefaultHeight);
       driverChangeSize.manage().window().setSize(dimension);
 
-      WebDriver driverDefault = webDriverFactory.getDefaultBrowser();
+      WebDriver driverDefault = WebDriverFactory.getDefaultBrowser();
 
       try {
         Assert.assertEquals(defaultWidth, driverDefault.manage().window().getSize().width);
@@ -162,7 +166,7 @@ public class SeleniumConfigTest {
     "SeleniumMaqs",
             true);
 
-    WebDriver driver = webDriverFactory.GetDefaultBrowser();
+    WebDriver driver = WebDriverFactory.GetDefaultBrowser();
 
     try {
       Assert.assertEquals(expectedWidth, driver.manage().window().getSize().width);
@@ -204,8 +208,18 @@ public class SeleniumConfigTest {
    */
   @Test(groups = TestCategories.Selenium)
   public void setTimeout() {
-    WebDriver driver = webDriverFactory.GetDefaultBrowser();
+    WebDriver driver = WebDriverFactory.GetDefaultBrowser();
     SeleniumConfig.setTimeouts(driver);
+    Assert.assertEquals(0, SeleniumConfig.getTimeoutTime());
+  }
+
+  /**
+   * Command timeout.
+   */
+  @Test(groups = TestCategories.Selenium)
+  public void setWaitTime() throws InterruptedException {
+    WebDriver driver = WebDriverFactory.GetDefaultBrowser();
+    driver.manage().timeouts().wait(SeleniumConfig.getWaitTime());
     Assert.assertEquals(0, SeleniumConfig.getTimeoutTime());
   }
 
