@@ -279,7 +279,7 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the webdriver for the provided browser.
+   * Get the web driver for the provided browser.
    * Browsers are maximized by default.
    *
    * @param browser
@@ -397,9 +397,12 @@ public final class SeleniumConfig {
    *          Brings in a WebDriver
    */
   static void setTimeouts(final WebDriver driver) {
-    int timeoutTime = Integer.parseInt(Config.getGeneralValue("Timeout", "0"));
-    driver.manage().timeouts().setScriptTimeout(timeoutTime, null);
-    driver.manage().timeouts().pageLoadTimeout(timeoutTime, null);
+    int timeoutTime = Integer.parseInt(Config.getGeneralValue(
+            "Timeout", "0"));
+    driver.manage().timeouts().setScriptTimeout(timeoutTime,
+            null);
+    driver.manage().timeouts().pageLoadTimeout(timeoutTime,
+            null);
   }
 
   /**
@@ -593,20 +596,23 @@ public final class SeleniumConfig {
     }
 
     if (is64bit) {
-      Path path = Paths.get(System.getenv("ProgramW6432"), folderName, file);
+      Path path = Paths.get(System.getenv("ProgramW6432"),
+              folderName, file);
 
       if (Files.isRegularFile(path)) {
         return path.getParent().toString();
       }
 
-      path = Paths.get(System.getenv("ProgramFiles(x86)"), folderName, file);
+      path = Paths.get(System.getenv("ProgramFiles(x86)"),
+              folderName, file);
 
       if (Files.isRegularFile(path)) {
         return path.getParent().toString();
       }
 
     } else {
-      Path path = Paths.get(System.getenv("ProgramFiles"), folderName, file);
+      Path path = Paths.get(System.getenv("ProgramFiles"),
+              folderName, file);
 
       if (path.toFile().isFile()) {
         return path.getParent().toString();
@@ -633,7 +639,8 @@ public final class SeleniumConfig {
    * @return The timeout time
    */
   static int getTimeoutTime() {
-    return Integer.parseInt(Config.getGeneralValue("BrowserTimeout", "0"));
+    return Integer.parseInt(Config.getGeneralValue(
+            "BrowserTimeout", "0"));
   }
 
   /**
@@ -642,7 +649,8 @@ public final class SeleniumConfig {
    * @return The wait time
    */
   static int getWaitTime() {
-    return Integer.parseInt(Config.getGeneralValue("BrowserWaitTime", "0"));
+    return Integer.parseInt(Config.getGeneralValue(
+            "BrowserWaitTime", "0"));
   }
 
   /**
