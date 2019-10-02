@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2019 (C) Magenic, All rights Reserved
  */
@@ -21,13 +22,14 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * Initialize a new instance of the BaseSeleniumTest class.
    * Setup the web driver for each test class
    */
-  public BaseSeleniumTest() {
+  BaseSeleniumTest() {
   }
 
   /**
    * Thread local storage of SeleniumTestObject.
    */
-  private ThreadLocal<SeleniumTestObject> seleniumTestObject = new ThreadLocal<>();
+  private ThreadLocal<SeleniumTestObject> seleniumTestObject =
+          new ThreadLocal<>();
 
   /**
    * Get WebDriver.
@@ -41,7 +43,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * Get SeleniumWait.
    * @return SeleniumWait
    */
-  public SeleniumWait getSeleniumWait() {
+  SeleniumWait getSeleniumWait() {
     return this.seleniumTestObject.get().getSeleniumWait();
   }
 
@@ -61,26 +63,29 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
     try {
 
       if (SeleniumConfig.getBrowserName().equalsIgnoreCase("Remote")) {
-        this.getLogger().logMessage(MessageType.INFORMATION, "Remote driver: %s",
+        this.getLogger().logMessage(MessageType.INFORMATION,
+                "Remote driver: %s",
             SeleniumConfig.getRemoteBrowserName());
       } else {
-        this.getLogger().logMessage(MessageType.INFORMATION, "Loaded driver: %s",
+        this.getLogger().logMessage(MessageType.INFORMATION,
+                "Loaded driver: %s",
             SeleniumConfig.getBrowserName());
       }
 
       WebDriver driver = SeleniumConfig.browser();
       SeleniumWait wait = new SeleniumWait(driver);
 
-      seleniumTestObject.set(new SeleniumTestObject(driver, wait, this.getLogger(),
-          this.getFullyQualifiedTestClassName()));
+      seleniumTestObject.set(new SeleniumTestObject(driver,
+              wait, this.getLogger(), this.getFullyQualifiedTestClassName()));
     } catch (Exception e) {
-      this.getLogger().logMessage(MessageType.ERROR, "Failed to start driver because: %s",
+      this.getLogger().logMessage(MessageType.ERROR,
+              "Failed to start driver because: %s",
           e.getMessage());
       System.out.println(
-          StringProcessor.safeFormatter("Browser type %s is not supported", e.getMessage()));
+          StringProcessor.safeFormatter("Browser type %s is not supported",
+                  e.getMessage()));
     }
   }
-
 
   /**
    * Get the current browser.
@@ -97,16 +102,19 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * @param resultType The test result type
    */
   @Override
-  protected void beforeLoggingTeardown(ITestResult resultType) {
+  protected void beforeLoggingTeardown(final ITestResult resultType) {
     // Try to take a screen shot
     try {
-      if (this.getWebDriver() != null && resultType.getStatus() != ITestResult.SUCCESS
+      if (this.getWebDriver() != null && resultType.getStatus()
+              != ITestResult.SUCCESS
               && this.getLoggingEnabledSetting() != LoggingEnabled.NO) {
 
-        SeleniumUtilities.captureScreenshot(this.getWebDriver(), this.getLogger(), "");
+        SeleniumUtilities.captureScreenshot(this.getWebDriver(),
+                this.getLogger(), "");
       }
     } catch (Exception e) {
-      this.tryToLog(MessageType.WARNING, "Failed to get screen shot because: %s", e.getMessage());
+      this.tryToLog(MessageType.WARNING,
+              "Failed to get screen shot because: %s", e.getMessage());
     }
 
     this.tryToLog(MessageType.INFORMATION, "Close");
@@ -115,12 +123,13 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
     try {
       this.seleniumTestObject.get().webDriver.quit();
     } catch (Exception e) {
-      this.tryToLog(MessageType.WARNING, "Failed to quit because: %s", e.getMessage());
+      this.tryToLog(MessageType.WARNING,
+              "Failed to quit because: %s", e.getMessage());
     }
   }
 
   /**
-   * Create a Selenium test object
+   * Create a Selenium test object.
    */
   @Override
   protected void createNewTestObject() {
@@ -133,8 +142,10 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
       e.printStackTrace();
     }
     SeleniumWait wait = new SeleniumWait(driver);
-    SeleniumTestObject seleniumTestObject = new SeleniumTestObject(driver, wait, logger, this.getFullyQualifiedTestClassName());
-    this.setTestObject(seleniumTestObject);
-    this.seleniumTestObject.set(seleniumTestObject);
+    SeleniumTestObject newSeleniumTestObject =
+            new SeleniumTestObject(driver, wait,
+                    logger, this.getFullyQualifiedTestClassName());
+    this.setTestObject(newSeleniumTestObject);
+    this.seleniumTestObject.set(newSeleniumTestObject);
   }
 }
