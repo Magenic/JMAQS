@@ -51,7 +51,7 @@ public class SeleniumConfigTest {
    */
   @Test(groups = TestCategories.Selenium)
   public void getBrowser() throws Exception {
-    WebDriver driver = SeleniumConfig.browser();
+    WebDriver driver = WebDriverFactory.getDefaultBrowser();
 
     try {
       Assert.assertNotNull(driver);
@@ -73,7 +73,7 @@ public class SeleniumConfigTest {
    * Verify resize browser window to Maximum lengths
    */
   @Test(groups = TestCategories.Selenium)
-  public void resizeBrowserWindowMaximize() {
+  public void resizeBrowserWindowMaximize() throws Exception {
     /*
      * Create driver at whatever size
      * Manually maximize the window
@@ -95,7 +95,7 @@ public class SeleniumConfigTest {
       HashMap<String, String> browserSize = new HashMap<>();
       browserSize.put("BrowserSize", "MAXIMIZE");
       Config.addTestSettingValues(browserSize, "SeleniumMaqs", true);
-      
+
       WebDriver driverConfigSize = WebDriverFactory
               .getBrowserWithDefaultConfiguration(BrowserType.Firefox);
 
@@ -117,7 +117,7 @@ public class SeleniumConfigTest {
    */
   // [DoNotParallelize]
   @Test(groups = TestCategories.Selenium)
-  public void resizeBrowserWindowDefault() {
+  public void resizeBrowserWindowDefault() throws Exception {
     /*
      * Create driver at default size,
      * Set the driver window so that it is not at a default size
@@ -127,7 +127,7 @@ public class SeleniumConfigTest {
     browserSize.put("BrowserSize", "MAXIMIZE");
     Config.addTestSettingValues(browserSize, "SeleniumMaqs", true);
 
-    WebDriver driverChangeSize = WebDriverFactory.GetDefaultBrowser();
+    WebDriver driverChangeSize = WebDriverFactory.getDefaultBrowser();
 
     try {
       int defaultWidth = driverChangeSize.manage().window().getSize().width;
@@ -156,17 +156,17 @@ public class SeleniumConfigTest {
    */
   // [DoNotParallelize]
   @Test(groups = TestCategories.Selenium)
-  public void resizeBrowserWindowCustom() {
+  public void resizeBrowserWindowCustom() throws Exception {
     int expectedWidth = 1024;
     int expectedHeight = 768;
 
     HashMap<String, String> browserSize = new HashMap<>();
-    browserSize.put("BrowserSize", expectedWidth+ "x" + expectedHeight);
+    browserSize.put("BrowserSize", expectedWidth + "x" + expectedHeight);
     Config.addTestSettingValues(browserSize,
-    "SeleniumMaqs",
+            "SeleniumMaqs",
             true);
 
-    WebDriver driver = WebDriverFactory.GetDefaultBrowser();
+    WebDriver driver = WebDriverFactory.getDefaultBrowser();
 
     try {
       Assert.assertEquals(expectedWidth, driver.manage().window().getSize().width);
@@ -207,8 +207,8 @@ public class SeleniumConfigTest {
    * Command timeout.
    */
   @Test(groups = TestCategories.Selenium)
-  public void setTimeout() {
-    WebDriver driver = WebDriverFactory.GetDefaultBrowser();
+  public void setTimeout() throws Exception {
+    WebDriver driver = WebDriverFactory.getDefaultBrowser();
     SeleniumConfig.setTimeouts(driver);
     Assert.assertEquals(0, SeleniumConfig.getTimeoutTime());
   }
@@ -217,8 +217,8 @@ public class SeleniumConfigTest {
    * Command timeout.
    */
   @Test(groups = TestCategories.Selenium)
-  public void setWaitTime() throws InterruptedException {
-    WebDriver driver = WebDriverFactory.GetDefaultBrowser();
+  public void setWaitTime() throws Exception {
+    WebDriver driver = WebDriverFactory.getDefaultBrowser();
     driver.manage().timeouts().wait(SeleniumConfig.getWaitTime());
     Assert.assertEquals(0, SeleniumConfig.getTimeoutTime());
   }
@@ -297,7 +297,7 @@ public class SeleniumConfigTest {
    */
   @Test(groups = TestCategories.Selenium)
   public void getWaitDriver() throws Exception {
-    WebDriver driver = SeleniumConfig.browser();
+    WebDriver driver = WebDriverFactory.getDefaultBrowser();
     WebDriverWait driverWait = SeleniumConfig.getWaitDriver(driver);
     Assert.assertNotNull(driverWait);
     driver.quit();
@@ -308,7 +308,8 @@ public class SeleniumConfigTest {
    */
   @Test(groups = TestCategories.Selenium)
   public void getRemoteCapabilitiesAsStrings() {
-    Map<String, String> capabilitiesAsStrings = SeleniumConfig.getRemoteCapabilitiesAsStrings();
+    Map<String, String> capabilitiesAsStrings =
+            SeleniumConfig.getRemoteCapabilitiesAsStrings();
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
@@ -329,7 +330,8 @@ public class SeleniumConfigTest {
    */
   @Test(groups = TestCategories.Selenium)
   public void getRemoteCapabilitiesAsObjects() {
-    Map<String, Object> capabilitiesAsStrings = SeleniumConfig.getRemoteCapabilitiesAsObjects();
+    Map<String, Object> capabilitiesAsStrings =
+            SeleniumConfig.getRemoteCapabilitiesAsObjects();
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
@@ -371,3 +373,4 @@ public class SeleniumConfigTest {
     String value = SeleniumConfig.getBrowserSize();
     Assert.assertNotNull(value);
   }
+}

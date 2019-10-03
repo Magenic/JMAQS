@@ -62,7 +62,8 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
   protected void postSetupLogging() {
     try {
 
-      if (SeleniumConfig.getBrowserName().equalsIgnoreCase("Remote")) {
+      if (SeleniumConfig.getBrowserName()
+              .equalsIgnoreCase("Remote")) {
         this.getLogger().logMessage(MessageType.INFORMATION,
                 "Remote driver: %s",
             SeleniumConfig.getRemoteBrowserName());
@@ -82,7 +83,8 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
               "Failed to start driver because: %s",
           e.getMessage());
       System.out.println(
-          StringProcessor.safeFormatter("Browser type %s is not supported",
+          StringProcessor.safeFormatter(
+                  "Browser type %s is not supported",
                   e.getMessage()));
     }
   }
@@ -102,7 +104,8 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * @param resultType The test result type
    */
   @Override
-  protected void beforeLoggingTeardown(final ITestResult resultType) {
+  protected void beforeLoggingTeardown(
+          final ITestResult resultType) {
     // Try to take a screen shot
     try {
       if (this.getWebDriver() != null && resultType.getStatus()
