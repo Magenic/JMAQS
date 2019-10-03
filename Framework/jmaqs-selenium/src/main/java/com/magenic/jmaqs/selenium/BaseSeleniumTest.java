@@ -20,7 +20,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
   /**
    * Initialize a new instance of the BaseSeleniumTest class.
-   * Setup the web driver for each test class
+   * Setup the web driver for each test class.
    */
   BaseSeleniumTest() {
   }
@@ -33,7 +33,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
   /**
    * Get WebDriver.
-   * @return WebDriver
+   * @return WebDriver.
    */
   public WebDriver getWebDriver() {
     return this.getSeleniumTestObject().getWebDriver();
@@ -41,7 +41,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
   /**
    * Get SeleniumWait.
-   * @return SeleniumWait
+   * @return SeleniumWait.
    */
   SeleniumWait getSeleniumWait() {
     return this.getSeleniumTestObject().getSeleniumWait();
@@ -49,7 +49,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
   /**
    * Get the seleniumTestObject for this test.
-   * @return The seleniumTestObject
+   * @return The seleniumTestObject.
    */
   SeleniumTestObject getSeleniumTestObject() {
     return this.seleniumTestObject.get();
@@ -91,8 +91,8 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
   /**
    * Get the current browser.
-   * @return Current browser Web Driver
-   * @throws Exception Throws exception
+   * @return Current browser Web Driver.
+   * @throws Exception Throws exception.
    */
   protected  WebDriver getBrowser() throws Exception {
     // Returns the web driver
@@ -101,7 +101,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
   /**
    * Take a screen shot if needed and tear down the web driver.
-   * @param resultType The test result type
+   * @param resultType The test result type.
    */
   @Override
   protected void beforeLoggingTeardown(
