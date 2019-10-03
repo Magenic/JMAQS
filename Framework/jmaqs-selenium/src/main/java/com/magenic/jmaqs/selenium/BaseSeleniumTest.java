@@ -72,7 +72,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
             SeleniumConfig.getBrowserName());
       }
 
-      WebDriver driver = SeleniumConfig.browser();
+      WebDriver driver = WebDriverFactory.getDefaultBrowser();
       SeleniumWait wait = new SeleniumWait(driver);
 
       seleniumTestObject.set(new SeleniumTestObject(driver,
@@ -94,7 +94,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    */
   protected  WebDriver getBrowser() throws Exception {
     // Returns the web driver
-    return SeleniumConfig.browser();
+    return WebDriverFactory.getDefaultBrowser();
   }
 
   /**
@@ -137,7 +137,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
     Logger logger = this.createLogger();
     WebDriver driver = null;
     try {
-      driver = SeleniumConfig.browser();
+      driver = WebDriverFactory.getDefaultBrowser();
     } catch (Exception e) {
       e.printStackTrace();
     }
