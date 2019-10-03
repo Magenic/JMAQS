@@ -36,7 +36,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * @return WebDriver
    */
   public WebDriver getWebDriver() {
-    return this.seleniumTestObject.get().getWebDriver();
+    return this.getSeleniumTestObject().getWebDriver();
   }
 
   /**
@@ -44,7 +44,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * @return SeleniumWait
    */
   SeleniumWait getSeleniumWait() {
-    return this.seleniumTestObject.get().getSeleniumWait();
+    return this.getSeleniumTestObject().getSeleniumWait();
   }
 
   /**
@@ -124,7 +124,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
     // tear down the web driver
     try {
-      this.seleniumTestObject.get().webDriver.quit();
+      this.getSeleniumTestObject().getWebDriver().quit();
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING,
               "Failed to quit because: %s", e.getMessage());
