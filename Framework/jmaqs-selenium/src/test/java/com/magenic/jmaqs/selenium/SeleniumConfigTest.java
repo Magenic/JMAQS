@@ -292,8 +292,8 @@ public class SeleniumConfigTest {
 
   /**
    * Get Web Wait Driver.
-   * @throws Exception
-   *            Can throw new Exception
+   *
+   * @throws Exception Can throw new Exception
    */
   @Test(groups = TestCategories.Selenium)
   public void getWaitDriver() throws Exception {
@@ -371,4 +371,3 @@ public class SeleniumConfigTest {
     String value = SeleniumConfig.getBrowserSize();
     Assert.assertNotNull(value);
   }
-}
