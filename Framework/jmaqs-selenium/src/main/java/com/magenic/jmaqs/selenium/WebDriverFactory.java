@@ -86,7 +86,7 @@ public class WebDriverFactory {
           break;
         default:
           throw new IllegalArgumentException(
-              StringProcessor.safeFormatter("Browser type '%s' is not supported", browser));
+                  StringProcessor.safeFormatter("Browser type '%s' is not supported", browser));
       }
       return webDriver;
     } catch (IllegalArgumentException e) {
@@ -195,7 +195,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
     System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME.getFile());
+            getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME.getFile());
     WebDriver driver = new ChromeDriver(chromeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -209,7 +209,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
     System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME.getFile());
+            getDriverLocation(WebDriverFile.CHROME.getFile()) + File.separator + WebDriverFile.CHROME.getFile());
     return new ChromeDriver(headlessChromeOptions);
   }
 
@@ -222,7 +222,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
     System.setProperty("webdriver.gecko.driver",
-        getDriverLocation(WebDriverFile.FIREFOX.getFile()) + File.separator + WebDriverFile.FIREFOX.getFile());
+            getDriverLocation(WebDriverFile.FIREFOX.getFile()) + File.separator + WebDriverFile.FIREFOX.getFile());
 
     WebDriver driver = new FirefoxDriver(firefoxOptions);
     setBrowserSize(driver, size);
@@ -239,7 +239,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
     String driverLocation = getDriverLocation(WebDriverFile.EDGE.getFile(),
-        getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFile()));
+            getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFile()));
 
     // If we can't find an installed edge driver, look in the normal places
     if (driverLocation.isEmpty()) {
@@ -261,7 +261,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
     System.setProperty("webdriver.ie.driver",
-        getDriverLocation(WebDriverFile.IE.getFile()) + File.separator + WebDriverFile.IE.getFile());
+            getDriverLocation(WebDriverFile.IE.getFile()) + File.separator + WebDriverFile.IE.getFile());
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
 
@@ -300,7 +300,7 @@ public class WebDriverFactory {
    * @return The remote driver options
    */
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser,
-      Map<String, Object> remoteCapabilities) {
+                                                     Map<String, Object> remoteCapabilities) {
     return getRemoteOptions(remoteBrowser, "", "", remoteCapabilities);
   }
 
@@ -314,7 +314,7 @@ public class WebDriverFactory {
    * @return The remote driver options
    */
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser, String remotePlatform,
-      String remoteBrowserVersion, Map<String, Object> remoteCapabilities) {
+                                                     String remoteBrowserVersion, Map<String, Object> remoteCapabilities) {
     MutableCapabilities options = null;
     switch (remoteBrowser) {
       case IE:
@@ -339,7 +339,7 @@ public class WebDriverFactory {
 
       default:
         throw new IllegalArgumentException(
-            StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
+                StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
     }
 
     // Make sure the remote capabilities dictionary exists
