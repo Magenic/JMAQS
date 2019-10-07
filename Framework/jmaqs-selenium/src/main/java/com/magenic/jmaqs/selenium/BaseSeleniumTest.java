@@ -58,7 +58,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
     /**
      * Unloads the Thread Local Selenium Test Object.
      */
-  public void unloadSeleniumTestObject() {
+    void unloadSeleniumTestObject() {
       this.seleniumTestObject.remove();
   }
 
@@ -68,7 +68,6 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
   @Override
   protected void postSetupLogging() {
     try {
-
       if (SeleniumConfig.getBrowserName()
               .equalsIgnoreCase("Remote")) {
         this.getLogger().logMessage(MessageType.INFORMATION,
@@ -101,7 +100,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * @return Current browser Web Driver
    * @throws Exception Throws exception
    */
-  protected  WebDriver getBrowser() throws Exception {
+  WebDriver getBrowser() throws Exception {
     // Returns the web driver
     return WebDriverFactory.getDefaultBrowser();
   }
