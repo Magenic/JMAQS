@@ -55,6 +55,13 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
     return this.seleniumTestObject.get();
   }
 
+    /**
+     * Unloads the Thread Local Selenium Test Object.
+     */
+  public void unloadSeleniumTestObject() {
+      this.seleniumTestObject.remove();
+  }
+
   /**
    * Log info about the web driver setup.
    */
