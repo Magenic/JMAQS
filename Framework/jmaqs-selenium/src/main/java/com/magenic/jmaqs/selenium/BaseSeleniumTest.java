@@ -71,12 +71,10 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
       if (SeleniumConfig.getBrowserName()
               .equalsIgnoreCase("Remote")) {
         this.getLogger().logMessage(MessageType.INFORMATION,
-                "Remote driver: %s",
-            SeleniumConfig.getRemoteBrowserName());
+                "Remote driver: %s", SeleniumConfig.getRemoteBrowserName());
       } else {
         this.getLogger().logMessage(MessageType.INFORMATION,
-                "Loaded driver: %s",
-            SeleniumConfig.getBrowserName());
+                "Loaded driver: %s", SeleniumConfig.getBrowserName());
       }
 
       WebDriver driver = WebDriverFactory.getDefaultBrowser();
@@ -88,10 +86,9 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
       this.getLogger().logMessage(MessageType.ERROR,
               "Failed to start driver because: %s",
           e.getMessage());
-      System.out.println(
-          StringProcessor.safeFormatter(
-                  "Browser type %s is not supported",
-                  e.getMessage()));
+      this.getLogger().logMessage(MessageType.ERROR,
+              StringProcessor.safeFormatter("Browser type %s is not supported",
+              e.getMessage()));
     }
   }
 
@@ -115,15 +112,16 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
     // Try to take a screen shot
     try {
       if (this.getWebDriver() != null && resultType.getStatus()
-              != ITestResult.SUCCESS
-              && this.getLoggingEnabledSetting() != LoggingEnabled.NO) {
+              != ITestResult.SUCCESS && this.getLoggingEnabledSetting()
+              != LoggingEnabled.NO) {
 
         SeleniumUtilities.captureScreenshot(this.getWebDriver(),
                 this.getLogger(), "");
       }
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING,
-              "Failed to get screen shot because: %s", e.getMessage());
+              "Failed to get screen shot because: %s",
+              e.getMessage());
     }
 
     this.tryToLog(MessageType.INFORMATION, "Close");
@@ -133,7 +131,8 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
       this.getSeleniumTestObject().getWebDriver().quit();
     } catch (Exception e) {
       this.tryToLog(MessageType.WARNING,
-              "Failed to quit because: %s", e.getMessage());
+              "Failed to quit because: %s",
+              e.getMessage());
     }
   }
 
@@ -148,8 +147,11 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
     try {
       driver = WebDriverFactory.getDefaultBrowser();
     } catch (Exception e) {
-      e.printStackTrace();
+      this.tryToLog(MessageType.WARNING,
+              "Failed to create new test Object because %s",
+              e.getMessage());
     }
+
     SeleniumWait wait = new SeleniumWait(driver);
     SeleniumTestObject newSeleniumTestObject =
             new SeleniumTestObject(driver, wait,
