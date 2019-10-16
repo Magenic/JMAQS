@@ -1,7 +1,7 @@
 package com.company.automation.pagemodels;
 
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumConfig;
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumTestObject;
+import com.magenic.jmaqs.selenium.SeleniumConfig;
+import com.magenic.jmaqs.selenium.SeleniumTestObject;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 

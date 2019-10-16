@@ -1,6 +1,6 @@
 package com.company.automation.pagemodels;
 
-import com.magenic.jmaqs.appium.baseAppiumTest.AppiumTestObject;
+import com.magenic.jmaqs.appium.AppiumTestObject;
 
 /**
  * Base Page Model Class.

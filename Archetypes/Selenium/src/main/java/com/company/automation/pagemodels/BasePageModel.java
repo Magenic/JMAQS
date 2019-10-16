@@ -1,6 +1,6 @@
 package com.company.automation.pagemodels;
 
-import com.magenic.jmaqs.selenium.baseSeleniumTest.SeleniumTestObject;
+import com.magenic.jmaqs.selenium.SeleniumTestObject;
 
 /**
  * The type Base page model.
