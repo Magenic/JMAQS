@@ -47,21 +47,97 @@ public final class SeleniumConfig {
   private static final ConfigSection SELENIUM_CAPS_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
 
   /**
+   * Get the browser type.
+   *
+   * @return The browser type
+   */
+  public static BrowserType getBrowserType() {
+    return getBrowserType(getBrowserName());
+  }
+
+  /**
+   * Get the browser type based on the provided browser name.
+   *
+   * @param browserName Name of the browse as a string
+   * @return The browser type
+   */
+  public static BrowserType getBrowserType(String browserName) {
+    switch (browserName.toUpperCase()) {
+      case "INTERNET EXPLORER":
+      case "INTERNETEXPLORER":
+      case "IE":
+        return BrowserType.IE;
+      case "FIREFOX":
+        return BrowserType.Firefox;
+      case "CHROME":
+        return BrowserType.Chrome;
+      case "HEADLESSCHROME":
+        return BrowserType.HeadlessChrome;
+      case "EDGE":
+        return BrowserType.Edge;
+      case "REMOTE":
+        return BrowserType.Remote;
+      case "PHANTOMJS":
+      case "PHANTOM JS":
+      case "PHANTOM":
+        throw new IllegalArgumentException("Selenium no longer supports PhantomJS");
+      default:
+        throw new IllegalArgumentException(
+            StringProcessor.safeFormatter("Browser type '%s' is not supported", browserName));
+    }
+  }
+
+  /**
+   * Get the remote browser type.
+   *
+   * @return The remote browser type
+   */
+  public static RemoteBrowserType getRemoteBrowserType() {
+    return getRemoteBrowserType(getRemoteBrowserName());
+  }
+
+  /**
+   * Get the remote browser type.
+   *
+   * @param remoteBrowser Name of the remote browser
+   * @return The remote browser type
+   */
+  public static RemoteBrowserType getRemoteBrowserType(String remoteBrowser) {
+    switch (remoteBrowser.toUpperCase()) {
+      case "INTERNET EXPLORER":
+      case "INTERNETEXPLORER":
+      case "IE":
+        return RemoteBrowserType.IE;
+      case "FIREFOX":
+        return RemoteBrowserType.Firefox;
+      case "CHROME":
+        return RemoteBrowserType.Chrome;
+      case "SAFARI":
+        return RemoteBrowserType.Safari;
+      case "EDGE":
+        return RemoteBrowserType.Edge;
+      default:
+        throw new IllegalArgumentException(
+            StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
+    }
+  }
+
+  /**
    * Get the file extension for the screenshots.
    *
    * @return The type of file, defaults to .png
    */
   public static String getScreenShotExtension() {
-    return Config.getValueForSection(SELENIUM_SECTION,"ImageFormat", ".png");
+    return Config.getValueForSection(SELENIUM_SECTION, "ImageFormat", ".png");
   }
-  
+
   /**
    * Get the browser type name - Example: Chrome.
    *
    * @return The browser type
    */
   public static String getBrowserName() {
-    return Config.getValueForSection(SELENIUM_SECTION,"Browser", "Chrome");
+    return Config.getValueForSection(SELENIUM_SECTION, "Browser", "Chrome");
   }
 
   /**
@@ -79,7 +155,7 @@ public final class SeleniumConfig {
    * @return The web site base url
    */
   public static String getWebSiteBase() {
-    return Config.getValueForSection(SELENIUM_SECTION,"WebSiteBase");
+    return Config.getValueForSection(SELENIUM_SECTION, "WebSiteBase");
   }
 
   /**
@@ -107,7 +183,7 @@ public final class SeleniumConfig {
    */
   public static String getDriverHintPath() {
     String defaultPath = new java.io.File("Resources").getAbsolutePath();
-    return Config.getValueForSection(SELENIUM_SECTION,"WebDriverHintPath", defaultPath);
+    return Config.getValueForSection(SELENIUM_SECTION, "WebDriverHintPath", defaultPath);
   }
 
   /**
@@ -116,7 +192,7 @@ public final class SeleniumConfig {
    * @return The browser type being used on grid
    */
   public static String getRemoteBrowserName() {
-    return Config.getValueForSection(SELENIUM_SECTION,"RemoteBrowser", "Chrome");
+    return Config.getValueForSection(SELENIUM_SECTION, "RemoteBrowser", "Chrome");
   }
 
   /**
@@ -132,10 +208,11 @@ public final class SeleniumConfig {
   /**
    * Get the webdriver for the provided remote browser. Browsers are maximized by default.
    *
-   * @param remoteBrowser
-   *          The browser type we want to use
+   * @param remoteBrowser The browser type we want to use
    * @return A WebDriver
+   * @deprecated use {@link WebDriverFactory#getBrowserWithDefaultConfiguration(BrowserType)} instead.
    */
+  @Deprecated
   public static WebDriver getRemoteBrowser(String remoteBrowser) throws Exception {
     WebDriver webDriver = null;
 
@@ -186,25 +263,23 @@ public final class SeleniumConfig {
           EdgeOptions edgeOptions = new EdgeOptions();
           edgeOptions.setPageLoadStrategy("Normal");
 
-          System.setProperty("webdriver.edge.driver",
-              getDriverLocation("MicrosoftWebDriver.exe",
-                  getProgramFilesFolder("Microsoft Web Driver", "MicrosoftWebDriver.exe"))
-                  + File.separator + "MicrosoftWebDriver.exe");
+          System.setProperty("webdriver.edge.driver", getDriverLocation("MicrosoftWebDriver.exe",
+              getProgramFilesFolder("Microsoft Web Driver", "MicrosoftWebDriver.exe")) + File.separator
+              + "MicrosoftWebDriver.exe");
           webDriver = new EdgeDriver(edgeOptions);
           break;
         case "REMOTE":
           // MalformedURLException exception is thrown if no protocol is
           // specified, or an unknown protocol is found, or spec is null.
           try {
-            webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION,"HubUrl")),
+            webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION, "HubUrl")),
                 getRemoteCapabilities());
           } catch (MalformedURLException e) {
             throw new Exception("Malformed URL Exception thrown trying to create the remote web driver.", e);
           }
           break;
         default:
-          throw new RuntimeException(
-              StringProcessor.safeFormatter("Browser type %s is not supported", remoteBrowser));
+          throw new RuntimeException(StringProcessor.safeFormatter("Browser type %s is not supported", remoteBrowser));
       }
 
       // Maximize the browser and than return it
@@ -229,7 +304,7 @@ public final class SeleniumConfig {
    * @return The platform (or OS) to run remote tests against
    */
   public static String getRemotePlatform() {
-    return Config.getValueForSection(SELENIUM_SECTION,"RemotePlatform");
+    return Config.getValueForSection(SELENIUM_SECTION, "RemotePlatform");
   }
 
   /**
@@ -238,7 +313,7 @@ public final class SeleniumConfig {
    * @return The browser version to run against on grid
    */
   public static String getRemoteBrowserVersion() {
-    return Config.getValueForSection(SELENIUM_SECTION,"RemoteBrowserVersion");
+    return Config.getValueForSection(SELENIUM_SECTION, "RemoteBrowserVersion");
   }
 
   /**
@@ -246,7 +321,9 @@ public final class SeleniumConfig {
    * Chrome. Browsers are maximized by default
    *
    * @return The web driver
+   * @deprecated use {@link WebDriverFactory#getDefaultBrowser()} instead.
    */
+  @Deprecated
   public static WebDriver browser() throws Exception {
     return browser(getBrowserName());
   }
@@ -254,10 +331,11 @@ public final class SeleniumConfig {
   /**
    * Get the webdriver for the provided browser. Browsers are maximized by default.
    *
-   * @param browser
-   *          The browser type we want to use
+   * @param browser The browser type we want to use
    * @return A WebDriver
+   * @deprecated use {@link WebDriverFactory#getBrowserWithDefaultConfiguration(BrowserType)} ()} instead.
    */
+  @Deprecated
   public static WebDriver browser(String browser) throws Exception {
     WebDriver webDriver = null;
 
@@ -267,13 +345,13 @@ public final class SeleniumConfig {
         case "INTERNETEXPLORER":
         case "IE":
           System.setProperty("webdriver.ie.driver",
-                  getDriverLocation("IEDriverServer.exe") + File.separator + "IEDriverServer.exe");
+              getDriverLocation("IEDriverServer.exe") + File.separator + "IEDriverServer.exe");
           webDriver = new InternetExplorerDriver();
           break;
         case "FIREFOX":
 
           System.setProperty("webdriver.gecko.driver",
-                  getDriverLocation("geckodriver.exe") + File.separator + "geckodriver.exe");
+              getDriverLocation("geckodriver.exe") + File.separator + "geckodriver.exe");
 
           FirefoxOptions options = new FirefoxOptions();
           options.setProfile(new FirefoxProfile());
@@ -288,7 +366,7 @@ public final class SeleniumConfig {
           chromeOptions.addArguments("--disable-extensions");
 
           System.setProperty("webdriver.chrome.driver",
-                  getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
+              getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
           webDriver = new ChromeDriver(chromeOptions);
           break;
         case "HEADLESSCHROME":
@@ -302,32 +380,30 @@ public final class SeleniumConfig {
           headlessChromeOptions.addArguments("--window-size=1920,1080");
 
           System.setProperty("webdriver.chrome.driver",
-                  getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
+              getDriverLocation("chromedriver.exe") + File.separator + "chromedriver.exe");
           webDriver = new ChromeDriver(headlessChromeOptions);
           break;
         case "EDGE":
           EdgeOptions edgeOptions = new EdgeOptions();
           edgeOptions.setPageLoadStrategy("Normal");
 
-          System.setProperty("webdriver.edge.driver",
-                  getDriverLocation("MicrosoftWebDriver.exe",
-                          getProgramFilesFolder("Microsoft Web Driver", "MicrosoftWebDriver.exe"))
-                          + File.separator + "MicrosoftWebDriver.exe");
+          System.setProperty("webdriver.edge.driver", getDriverLocation("MicrosoftWebDriver.exe",
+              getProgramFilesFolder("Microsoft Web Driver", "MicrosoftWebDriver.exe")) + File.separator
+              + "MicrosoftWebDriver.exe");
           webDriver = new EdgeDriver(edgeOptions);
           break;
         case "REMOTE":
           // MalformedURLException exception is thrown if no protocol is
           // specified, or an unknown protocol is found, or spec is null.
           try {
-            webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION,"HubUrl")),
-                      getRemoteCapabilities());
+            webDriver = new RemoteWebDriver(new URL(Config.getValueForSection(SELENIUM_SECTION, "HubUrl")),
+                getRemoteCapabilities());
           } catch (MalformedURLException e) {
             throw new Exception("Malformed URL Exception thrown trying to create the remote web driver.", e);
           }
           break;
         default:
-          throw new RuntimeException(
-                    StringProcessor.safeFormatter("Browser type %s is not supported", browser));
+          throw new RuntimeException(StringProcessor.safeFormatter("Browser type %s is not supported", browser));
       }
 
       // Maximize the browser and than return it
@@ -349,8 +425,7 @@ public final class SeleniumConfig {
   /**
    * Set the script and page timeouts.
    *
-   * @param driver
-   *          Brings in a WebDriver
+   * @param driver Brings in a WebDriver
    */
   public static void setTimeouts(WebDriver driver) {
     int timeoutTime = Integer.parseInt(Config.getGeneralValue("Timeout", "0"));
@@ -362,7 +437,9 @@ public final class SeleniumConfig {
    * Get the initialize Selenium timeout.
    *
    * @return The initialize timeout
+   * @deprecated Deprecated because specifying command timeout does not exist when creating web drivers in java.
    */
+  @Deprecated
   public static int getCommandTimeout() {
     String value = Config.getValueForSection(SELENIUM_SECTION, "SeleniumCommandTimeout", "60000");
     try {
@@ -377,8 +454,9 @@ public final class SeleniumConfig {
    * Get the remote desired capability.
    *
    * @return The remote desired capability
+   * @deprecated use {@link WebDriverFactory#getDefaultRemoteOptions()} instead.
    */
-
+  @Deprecated
   private static DesiredCapabilities getRemoteCapabilities() {
     DesiredCapabilities capabilities;
     String remoteBrowser = getRemoteBrowserName();
@@ -405,8 +483,8 @@ public final class SeleniumConfig {
         break;
       default:
         // changed from exception to illegal argument exception
-        throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Remote browser type %s is not supported", remoteBrowser));
+        throw new IllegalArgumentException(
+            StringProcessor.safeFormatter("Remote browser type %s is not supported", remoteBrowser));
     }
 
     // Add a platform setting if one was provided
@@ -423,7 +501,8 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the remote capabilities as a HashMap
+   * Get the remote capabilities as a HashMap.
+   *
    * @return HashMap of remote capabilities
    */
   public static Map<String, String> getRemoteCapabilitiesAsStrings() {
@@ -431,7 +510,8 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the remote capabilities as a HashMap
+   * Get the remote capabilities as a HashMap.
+   *
    * @return HashMap of remote capabilities
    */
   public static Map<String, Object> getRemoteCapabilitiesAsObjects() {
@@ -441,29 +521,26 @@ public final class SeleniumConfig {
   /**
    * Get the web driver location.
    *
-   * @param driverFile
-   *          The web drive file, including extension
-   * @param defaultHintPath
-   *          The default location for the specific driver
-   * @param mustExist
-   *          Do we need to know where this drive is located, if this is true and the file is not
-   *          found an error will be thrown
+   * @param driverFile      The web drive file, including extension
+   * @param defaultHintPath The default location for the specific driver
+   * @param mustExist       Do we need to know where this drive is located, if this is true and the file is not
+   *                        found an error will be thrown
    * @return The path to the web driver
+   * @deprecated use {@link WebDriverFactory#getDriverLocation(String, String, boolean)} instead.
    */
-  private static String getDriverLocation(String driverFile, String defaultHintPath,
-      boolean mustExist) {
+  @Deprecated
+  private static String getDriverLocation(String driverFile, String defaultHintPath, boolean mustExist) {
     // Get the hint path from the app.config
     String hintPath = getDriverHintPath();
 
     // Try the hintpath first
-    if (!(hintPath == null || hintPath.isEmpty())
-        && Files.exists(Paths.get(hintPath, driverFile))) {
+    if (!(hintPath == null || hintPath.isEmpty()) && Files.exists(Paths.get(hintPath, driverFile))) {
       return hintPath;
     }
 
     // Try the default hint path next
-    if (!(defaultHintPath == null || defaultHintPath.isEmpty())
-        && Files.exists(Paths.get(defaultHintPath, driverFile))) {
+    if (!(defaultHintPath == null || defaultHintPath.isEmpty()) && Files
+        .exists(Paths.get(defaultHintPath, driverFile))) {
       return Paths.get(defaultHintPath).toString();
     }
 
@@ -486,8 +563,7 @@ public final class SeleniumConfig {
     // We didn't find the web driver so throw an error if we need to know
     // where it is
     if (mustExist) {
-      throw new RuntimeException(
-          StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
+      throw new RuntimeException(StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
     }
 
     return "";
@@ -496,10 +572,11 @@ public final class SeleniumConfig {
   /**
    * Get the web driver location.
    *
-   * @param driverFile
-   *          The web drive file, including extension
+   * @param driverFile The web drive file, including extension
    * @return The overloaded method
+   * @deprecated use {@link WebDriverFactory#getDriverLocation(String)} instead.
    */
+  @Deprecated
   private static String getDriverLocation(String driverFile) {
 
     return getDriverLocation(driverFile, "", true);
@@ -508,13 +585,12 @@ public final class SeleniumConfig {
   /**
    * Get the web driver location.
    *
-   * @param driverFile
-   *          The web drive file, including extension
-   * @param defaultHintPath
-   *          The default location for the specific driver
-   *
+   * @param driverFile      The web drive file, including extension
+   * @param defaultHintPath The default location for the specific driver
    * @return The overloaded method
+   * @deprecated use {@link WebDriverFactory#getDriverLocation(String, String)} instead.
    */
+  @Deprecated
   private static String getDriverLocation(String driverFile, String defaultHintPath) {
 
     return getDriverLocation(driverFile, defaultHintPath, true);
@@ -523,12 +599,12 @@ public final class SeleniumConfig {
   /**
    * Get the programs file folder which contains given file.
    *
-   * @param folderName
-   *          The programs file sub folder
-   * @param file
-   *          The file we are looking for
+   * @param folderName The programs file sub folder
+   * @param file       The file we are looking for
    * @return The parent folder of the given file or the empty String if the file is not found
+   * @deprecated use {@link WebDriverFactory#getProgramFilesFolder(String, String)} instead.
    */
+  @Deprecated
   private static String getProgramFilesFolder(String folderName, String file) {
     // Handle 64 bit systems first
     boolean is64bit = false;
@@ -565,8 +641,7 @@ public final class SeleniumConfig {
   /**
    * Get the default wait driver.
    *
-   * @param driver
-   *          The Web Driver
+   * @param driver The Web Driver
    * @return A WebDriverWait
    */
   public static WebDriverWait getWaitDriver(WebDriver driver) {
@@ -599,5 +674,4 @@ public final class SeleniumConfig {
   public static String getBrowserSize() {
     return Config.getValueForSection(SELENIUM_SECTION, "BrowserSize", "MAXIMIZE".toUpperCase());
   }
-
 }

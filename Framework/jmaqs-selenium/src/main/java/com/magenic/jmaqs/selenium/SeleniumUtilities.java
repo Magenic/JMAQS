@@ -20,7 +20,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
@@ -106,9 +106,7 @@ public class SeleniumUtilities {
    * @return The web driver
    */
   public static WebDriver webElementToWebDriver(WebElement webElement) {
-
     WebDriver driver;
-
     driver = ((WrapsDriver) webElement).getWrappedDriver();
 
     // If this an even firing wrapper get the base wrapper

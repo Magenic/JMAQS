@@ -76,12 +76,13 @@ public class LoggingConfig {
     }
 
     String logDirectory = getLogDirectory();
+    MessageType loggingLevel = getLoggingLevelSetting();
 
     switch (Config.getGeneralValue("LogType", "CONSOLE").toUpperCase()) {
       case "CONSOLE":
-        return new ConsoleLogger();
+        return new ConsoleLogger(loggingLevel);
       case "TXT":
-        return new FileLogger(false, logDirectory, fileName);
+        return new FileLogger(false, logDirectory, fileName, loggingLevel);
       default:
         throw new IllegalArgumentException(StringProcessor.safeFormatter(
             "Log type %s is not a valid option", Config.getGeneralValue("LogType", "CONSOLE")));

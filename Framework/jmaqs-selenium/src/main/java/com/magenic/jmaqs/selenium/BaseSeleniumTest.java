@@ -5,7 +5,6 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.magenic.jmaqs.base.BaseTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;

@@ -34,7 +34,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Selenium waiter This is the tool-class used for waiting. It can be used to wait for many
  * circumstances (element exist, not exist, be visible, to equal a desired value, etc..
+ * @deprecated {@link SeleniumWait} is no longer supported. Use {@link com.magenic.jmaqs.selenium.factories.UIWaitFactory UIWaitFactory} 
+ *             to create {@link UIWait UIWait} objects instead.
  */
+@Deprecated
 public class SeleniumWait {
 
   /**
