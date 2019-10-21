@@ -31,6 +31,21 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
   private ThreadLocal<SeleniumTestObject> seleniumTestObject =
           new ThreadLocal<>();
 
+    /**
+     * Get the seleniumTestObject for this test.
+     * @return The seleniumTestObject
+     */
+    SeleniumTestObject getSeleniumTestObject() {
+        return this.seleniumTestObject.get();
+    }
+
+    /**
+     * Unloads the Thread Local Selenium Test Object.
+     */
+    void unloadSeleniumTestObject() {
+        this.seleniumTestObject.remove();
+    }
+
   /**
    * Get WebDriver.
    * @return WebDriver
@@ -45,51 +60,6 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    */
   SeleniumWait getSeleniumWait() {
     return this.getSeleniumTestObject().getSeleniumWait();
-  }
-
-  /**
-   * Get the seleniumTestObject for this test.
-   * @return The seleniumTestObject
-   */
-  SeleniumTestObject getSeleniumTestObject() {
-    return this.seleniumTestObject.get();
-  }
-
-    /**
-     * Unloads the Thread Local Selenium Test Object.
-     */
-    void unloadSeleniumTestObject() {
-      this.seleniumTestObject.remove();
-  }
-
-  /**
-   * Log info about the web driver setup.
-   */
-  @Override
-  protected void postSetupLogging() {
-    try {
-      if (SeleniumConfig.getBrowserName()
-              .equalsIgnoreCase("Remote")) {
-        this.getLogger().logMessage(MessageType.INFORMATION,
-                "Remote driver: %s", SeleniumConfig.getRemoteBrowserName());
-      } else {
-        this.getLogger().logMessage(MessageType.INFORMATION,
-                "Loaded driver: %s", SeleniumConfig.getBrowserName());
-      }
-
-      WebDriver driver = WebDriverFactory.getDefaultBrowser();
-      SeleniumWait wait = new SeleniumWait(driver);
-
-      seleniumTestObject.set(new SeleniumTestObject(driver,
-              wait, this.getLogger(), this.getFullyQualifiedTestClassName()));
-    } catch (Exception e) {
-      this.getLogger().logMessage(MessageType.ERROR,
-              "Failed to start driver because: %s",
-          e.getMessage());
-      this.getLogger().logMessage(MessageType.ERROR,
-              StringProcessor.safeFormatter("Browser type %s is not supported",
-              e.getMessage()));
-    }
   }
 
   /**
@@ -135,6 +105,39 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
               e.getMessage());
     }
   }
+
+    /**
+     * Log info about the web driver setup.
+     */
+    @Override
+    protected void postSetupLogging() {
+        try {
+            if (SeleniumConfig.getBrowserName()
+                    .equalsIgnoreCase("Remote")) {
+                this.getLogger().logMessage(MessageType.INFORMATION,
+                        "Remote driver: %s",
+                        SeleniumConfig.getRemoteBrowserName());
+            } else {
+                this.getLogger().logMessage(MessageType.INFORMATION,
+                        "Loaded driver: %s", SeleniumConfig.getBrowserName());
+            }
+
+            WebDriver driver = WebDriverFactory.getDefaultBrowser();
+            SeleniumWait wait = new SeleniumWait(driver);
+
+            seleniumTestObject.set(new SeleniumTestObject(driver,
+                    wait, this.getLogger(),
+                    this.getFullyQualifiedTestClassName()));
+        } catch (Exception e) {
+            this.getLogger().logMessage(MessageType.ERROR,
+                    "Failed to start driver because: %s",
+                    e.getMessage());
+            this.getLogger().logMessage(MessageType.ERROR,
+                    StringProcessor.safeFormatter(
+                            "Browser type %s is not supported",
+                            e.getMessage()));
+        }
+    }
 
   /**
    * Create a Selenium test object.

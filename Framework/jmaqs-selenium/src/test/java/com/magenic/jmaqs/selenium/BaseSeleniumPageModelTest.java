@@ -7,6 +7,7 @@ package com.magenic.jmaqs.selenium;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
@@ -26,5 +27,15 @@ public class BaseSeleniumPageModelTest extends BaseSeleniumTest {
     public void checkGetBrowser() throws Exception {
         WebDriver browser = this.getBrowser();
         Assert.assertNotNull(browser);
+    }
+
+    @Test
+    public void loggingTeardown() throws Exception {
+        WebDriver browser = this.getBrowser();
+        Assert.assertNotNull(browser);
+
+        BaseSeleniumTest seleniumTest = new BaseSeleniumTest();
+        ITestResult testResult = ITestResult.STARTED;
+        seleniumTest.beforeLoggingTeardown();
     }
 }
