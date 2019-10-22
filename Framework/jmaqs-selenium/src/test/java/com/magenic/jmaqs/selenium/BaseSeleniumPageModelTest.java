@@ -28,14 +28,4 @@ public class BaseSeleniumPageModelTest extends BaseSeleniumTest {
         WebDriver browser = this.getBrowser();
         Assert.assertNotNull(browser);
     }
-
-    @Test
-    public void loggingTeardown() throws Exception {
-        WebDriver browser = this.getBrowser();
-        Assert.assertNotNull(browser);
-
-        BaseSeleniumTest seleniumTest = new BaseSeleniumTest();
-        ITestResult testResult = ITestResult.STARTED;
-        seleniumTest.beforeLoggingTeardown();
-    }
 }
