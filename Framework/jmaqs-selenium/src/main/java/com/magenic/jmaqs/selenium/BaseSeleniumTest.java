@@ -6,7 +6,6 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
@@ -106,11 +105,13 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
     }
   }
 
-    /**
-     * Log info about the web driver setup.
-     */
+   /**
+    * Log info about the web driver setup.
+    TODO: Utilize code after logging refactoring.
+   */
     @Override
     protected void postSetupLogging() {
+        /*
         try {
             if (SeleniumConfig.getBrowserName()
                     .equalsIgnoreCase("Remote")) {
@@ -137,6 +138,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
                             "Browser type %s is not supported",
                             e.getMessage()));
         }
+         */
     }
 
   /**
