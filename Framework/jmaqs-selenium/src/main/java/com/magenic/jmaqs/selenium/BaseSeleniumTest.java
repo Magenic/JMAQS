@@ -6,6 +6,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
+import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
@@ -108,11 +109,9 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
    /**
     * Log info about the web driver setup.
-    TODO: Utilize code after logging refactoring.
    */
     @Override
     protected void postSetupLogging() {
-        /*
         try {
             if (SeleniumConfig.getBrowserName()
                     .equalsIgnoreCase("Remote")) {
@@ -131,15 +130,14 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
                     wait, this.getLogger(),
                     this.getFullyQualifiedTestClassName()));
         } catch (Exception e) {
-            this.getLogger().logMessage(MessageType.ERROR,
-                    "Failed to start driver because: %s",
-                    e.getMessage());
-            this.getLogger().logMessage(MessageType.ERROR,
-                    StringProcessor.safeFormatter(
-                            "Browser type %s is not supported",
-                            e.getMessage()));
+          this.getLogger().logMessage(MessageType.ERROR,
+                  "Failed to start driver because: %s",
+                  e.getMessage());
+          this.getLogger().logMessage(MessageType.ERROR,
+                  StringProcessor.safeFormatter(
+                          "Browser type %s is not supported",
+                          e.getMessage()));
         }
-         */
     }
 
   /**
