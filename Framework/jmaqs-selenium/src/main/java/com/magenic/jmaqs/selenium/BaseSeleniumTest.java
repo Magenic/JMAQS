@@ -11,7 +11,6 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 
 /**
@@ -59,7 +58,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
    * Get SeleniumWait.
    * @return SeleniumWait
    */
-  WebDriverWait getSeleniumWait() {
+  SeleniumWait getSeleniumWait() {
     return this.getSeleniumTestObject().getSeleniumWait();
   }
 
@@ -156,7 +155,7 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
               e.getMessage());
     }
 
-    UIWait wait = new UIWait(driver);
+    SeleniumWait wait = new SeleniumWait(driver);
     SeleniumTestObject newSeleniumTestObject =
             new SeleniumTestObject(driver, wait,
                     logger, this.getFullyQualifiedTestClassName());

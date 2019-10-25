@@ -86,7 +86,7 @@ public class BaseSeleniumUnitTest extends BaseSeleniumTest {
     public void setSeleniumTestObjectTest() {
         Logger logger = new ConsoleLogger();
         SeleniumTestObject seleniumTestObject = new SeleniumTestObject(this.getWebDriver(),
-                seleniumWait, logger,
+                getSeleniumWait(), logger,
                 this.getFullyQualifiedTestClassName());
 
         Assert.assertTrue(seleniumTestObject.getLog() instanceof ConsoleLogger,
@@ -101,9 +101,6 @@ public class BaseSeleniumUnitTest extends BaseSeleniumTest {
             Logger logger = new ConsoleLogger();
         BaseTestObject baseTestObject = new BaseTestObject(logger,
                 this.getFullyQualifiedTestClassName());
-
-        //setTestResult(ITestResult.STARTED);
-
 
         ArrayList<String> loggedExceptions = new ArrayList<>();
         loggedExceptions.add(LoggingEnabled.YES.toString());
