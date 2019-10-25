@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import org.openqa.selenium.Dimension;
@@ -17,6 +18,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -234,8 +236,43 @@ public class WebDriverFactoryTest {
 
   @Test(groups = TestCategories.Selenium)
   public void getDriverLocationTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation("chromedriver.exe");
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFile());
     Assert.assertFalse(driverLocation.isEmpty());
+  }
+
+  @Test(groups = TestCategories.Selenium)
+  public void getDriverLocationConfigHintPathTest() {
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFile());
+    Assert.assertFalse(driverLocation.isEmpty());
+    Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
+        "Checking that driver location and config hint path are the same.");
+  }
+
+  @Test(groups = TestCategories.Selenium)
+  @Ignore("Not able to be tested yet")
+  public void getDriverLocationDefaultHintPathTest() {
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFile(), "");
+    Assert.assertFalse(driverLocation.isEmpty());
+    Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
+        "Checking that driver location and default hint path are the same.");
+  }
+
+  @Test(groups = TestCategories.Selenium)
+  @Ignore("Not able to be tested yet")
+  public void getDriverLocationTestLocationTest() {
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFile());
+    Assert.assertFalse(driverLocation.isEmpty());
+    Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
+        "Checking that driver location and config hint path are the same.");
+  }
+
+  @Test(groups = TestCategories.Selenium)
+  @Ignore("Not able to be tested yet")
+  public void getDriverLocationTestResourcesLocationTest() {
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFile());
+    Assert.assertFalse(driverLocation.isEmpty());
+    Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
+        "Checking that driver location and config hint path are the same.");
   }
 
   @Test(groups = TestCategories.Selenium)

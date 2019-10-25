@@ -8,23 +8,26 @@ import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import java.util.HashMap;
 import java.util.Map;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class AppiumConfigUnitTest {
 
   private String username = "username";
-  private String app = "app";
-  private String appiumVersion = "appiumVersion";
+  private String browserName = "browserName";
   private String accessKey = "accessKey";
+  private String deviceOrientation = "deviceOrientation";
 
   @Test
+  @Ignore("Test ignored because method is deprecated.")
   public void testGetMobileDeviceUDID() throws Exception {
     String mobileDeviceUDID = AppiumConfig.getMobileDeviceUdid();
     Assert.assertTrue(mobileDeviceUDID.equalsIgnoreCase("1234567890ACDEF1234687890ABCDEF"));
   }
 
   @Test
+  @Ignore("Test ignored because method is deprecated.")
   public void testGetBundleID() throws Exception {
     String bundleID = AppiumConfig.getBundleId();
     Assert.assertTrue(bundleID.equalsIgnoreCase("com.magenic.maqs.appium.tester"));
@@ -49,6 +52,7 @@ public class AppiumConfigUnitTest {
   }
 
   @Test
+  @Ignore("Test ignored because method is deprecated.")
   public void testSetTimeouts() throws Exception {
   }
 
@@ -61,11 +65,11 @@ public class AppiumConfigUnitTest {
     softAssert.assertEquals(capabilitiesAsStrings.get(username), "Partner_Magenic");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
     softAssert
-        .assertEquals(capabilitiesAsStrings.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
-    softAssert.assertTrue(capabilitiesAsStrings.containsKey(app));
-    softAssert.assertEquals(capabilitiesAsStrings.get(app), "org.openintents.shopping");
-    softAssert.assertTrue(capabilitiesAsStrings.containsKey(appiumVersion));
-    softAssert.assertEquals(capabilitiesAsStrings.get(appiumVersion), "1.7.1");
+        .assertEquals(capabilitiesAsStrings.get(accessKey), "0a4d7d84-f93b-43e6-9af1-1c89ac143355");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
+    softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
+    softAssert.assertTrue(capabilitiesAsStrings.containsKey(deviceOrientation));
+    softAssert.assertEquals(capabilitiesAsStrings.get(deviceOrientation), "portrait");
     softAssert.assertAll();
   }
 
@@ -78,11 +82,11 @@ public class AppiumConfigUnitTest {
     softAssert.assertEquals(capabilitiesAsObjects.get(username), "Partner_Magenic");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(accessKey));
     softAssert
-        .assertEquals(capabilitiesAsObjects.get(accessKey), "7e0592a4-16de-4c6b-9b87-ee61aa43ceac");
-    softAssert.assertTrue(capabilitiesAsObjects.containsKey(app));
-    softAssert.assertEquals(capabilitiesAsObjects.get(app), "org.openintents.shopping");
-    softAssert.assertTrue(capabilitiesAsObjects.containsKey(appiumVersion));
-    softAssert.assertEquals(capabilitiesAsObjects.get(appiumVersion), "1.7.1");
+        .assertEquals(capabilitiesAsObjects.get(accessKey), "0a4d7d84-f93b-43e6-9af1-1c89ac143355");
+    softAssert.assertTrue(capabilitiesAsObjects.containsKey(browserName));
+    softAssert.assertEquals(capabilitiesAsObjects.get(browserName), "Chrome");
+    softAssert.assertTrue(capabilitiesAsObjects.containsKey(deviceOrientation));
+    softAssert.assertEquals(capabilitiesAsObjects.get(deviceOrientation), "portrait");
     softAssert.assertAll();
   }
 
@@ -102,6 +106,7 @@ public class AppiumConfigUnitTest {
   }
 
   @Test(expectedExceptions = NumberFormatException.class)
+  @Ignore("Impacting future tests since there is no way to reload config")
   public void testGetCommandTimeoutError() {
     HashMap<String, String> configValues = new HashMap<>();
     configValues.put("MobileCommandTimeout", "sixty thousand");

@@ -48,7 +48,9 @@
         <WebSiteBase>http://magenicautomation.azurewebsites.net/</WebSiteBase>
         <BrowserWaitTime>1000</BrowserWaitTime>
         <BrowserTimeout>20000</BrowserTimeout>
-        <SeleniumCommandTimeout>61000</SeleniumCommandTimeout>
+        <RemoteBrowserName>Chrome</RemoteBrowserName>
+        <RemotePlatform>OS X 10.11</RemotePlatform>
+        <RemoteVersion>54.0</RemoteVersion>
 
         <!--Browser Resize settings
         <BrowserSize>MAXIMIZE</BrowserSize>

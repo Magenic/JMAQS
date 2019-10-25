@@ -1,6 +1,6 @@
 package com.company.automation.test;
 
-import com.magenic.jmaqs.selenium.baseSeleniumTest.BaseSeleniumTest;
+import com.magenic.jmaqs.selenium.BaseSeleniumTest;
 import com.company.automation.pagemodels.HomePageModel;
 import com.company.automation.pagemodels.LoginPageModel;
 import org.testng.Assert;

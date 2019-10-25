@@ -343,11 +343,16 @@ public final class GenericWait {
       throws InterruptedException, TimeoutException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
-    Exception exception;
+    Exception exception = new Exception();
 
     do {
       try {
-        return waitFor.get();
+        T value = waitFor.get();
+        
+        if (value != null) {
+        	return value;
+        }
+        
       } catch (Exception e) {
         exception = e;
       }

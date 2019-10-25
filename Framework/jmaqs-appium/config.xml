@@ -66,19 +66,11 @@
         <SavePageSourceOnFail>YES</SavePageSourceOnFail>
         <SavePageSourceOnFail>NO</SavePageSourceOnFail>-->
         <SavePageSourceOnFail>NO</SavePageSourceOnFail>
-
-        <!-- settings in JMAQS, not in MAQS> -->
-        <BundleID>com.magenic.maqs.appium.tester</BundleID>
-        <Orienation>landscape</Orienation>
-        <DeviceUDID>1234567890ACDEF1234687890ABCDEF</DeviceUDID>
-        <MobileBrowser>NO</MobileBrowser>
     </AppiumMaqs>
     <AppiumCapsMaqs>
         <username>Partner_Magenic</username>
-        <accessKey>7e0592a4-16de-4c6b-9b87-ee61aa43ceac</accessKey>
-        <appiumVersion>1.7.1</appiumVersion>
-        <app>org.openintents.shopping</app>
+        <accessKey>0a4d7d84-f93b-43e6-9af1-1c89ac143355</accessKey>
+        <deviceOrientation>portrait</deviceOrientation>
+        <browserName>Chrome</browserName>
     </AppiumCapsMaqs>
-
-
 </configuration>

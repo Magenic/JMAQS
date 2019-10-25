@@ -39,9 +39,9 @@ public class SeleniumUtilities {
    *          Appends a name to the end of a filename
    * @return Boolean if the save of the image was successful
    */
-  static String captureScreenshot(WebDriver webDriver,
-                                  Logger log,
-                                  String appendName) {
+  public static String captureScreenshot(WebDriver webDriver, 
+                                          Logger log, 
+                                          String appendName) {
     try {
       String path;
 
@@ -52,9 +52,9 @@ public class SeleniumUtilities {
         
       } else {
         // Calculate the file name
-        String filePath = ((FileLogger) log).getFilePath();
-        String directory = new File(filePath).getParent();
-        String fileNameWithoutExtension = FilenameUtils.getBaseName(filePath);
+        String fullpath = ((FileLogger) log).getFilePath();
+        String directory = new File(fullpath).getParent();
+        String fileNameWithoutExtension = FilenameUtils.getBaseName(fullpath);
 
         path =  captureScreenshot(webDriver, directory, fileNameWithoutExtension);
       }
@@ -80,16 +80,16 @@ public class SeleniumUtilities {
    * @throws IOException
    *           There was a problem creating the screen shot
    */
-  static String captureScreenshot(WebDriver webDriver,
-                                  String directory,
-                                  String fileNameWithoutExtension) throws Exception {
+  public static String captureScreenshot(WebDriver webDriver,
+                                         String directory, 
+                                         String fileNameWithoutExtension) throws IOException {
     
     File scrFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
 
     checkDirectory(directory);
 
     // Calculate the file name
-    String filePath = MessageFormat.format("{0}.{1}",fileNameWithoutExtension, SeleniumConfig.getScreenShotExtension());
+    String filePath = MessageFormat.format("{0}.{1}",fileNameWithoutExtension, SeleniumConfig.getImageFormat());
     String fullPath = Paths.get(directory, filePath).toString();
 
     // Save the screenshot
@@ -105,10 +105,8 @@ public class SeleniumUtilities {
    *          The web element
    * @return The web driver
    */
-  static WebDriver webElementToWebDriver(WebElement webElement) {
-
+  public static WebDriver webElementToWebDriver(WebElement webElement) {
     WebDriver driver;
-
     driver = ((WrapsDriver) webElement).getWrappedDriver();
 
     // If this an even firing wrapper get the base wrapper
@@ -123,13 +121,11 @@ public class SeleniumUtilities {
    * Checks if directory exists, creating one if not.
    * @param directory The directory path
    */
-  private static void checkDirectory(String directory) throws Exception {
+  private static void checkDirectory(String directory) {
     // Make sure the directory exists
     File folder = new File(directory);
     if (!folder.isDirectory()) {
-      if (!folder.mkdir()) {
-        throw new Exception("Directory was not created");
-      }
+      folder.mkdir();
     }
   }
 }

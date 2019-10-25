@@ -5,10 +5,13 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+
+import java.time.Duration;
 import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -18,37 +21,25 @@ import org.testng.asserts.SoftAssert;
 public class SeleniumConfigTest {
 
   /**
-   * Remote capabilities username identifier
+   * Remote capabilities username identifier.
    */
   private String username = "username";
   /**
-   * Remote browser access key identifier
+   * Remote browser access key identifier.
    */
   private String accessKey = "accessKey";
   /**
-   * Remote browser name identifier
+   * Remote browser name identifier.
    */
   private String browserName = "browserName";
   /**
-   * Remote version platform identifier
+   * Remote version platform identifier.
    */
   private String platform = "platform";
   /**
-   * Remote browser version identifier
+   * Remote browser version identifier.
    */
   private String version = "version";
-
-  /**
-   * Browser check.
-   */
-  @Test(groups = TestCategories.Selenium)
-  public void getBrowser() throws Exception {
-
-    WebDriver driver = SeleniumConfig.browser();
-
-    Assert.assertNotNull(driver);
-    driver.quit();
-  }
 
   /**
    * Browser name.
@@ -84,17 +75,6 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Command timeout.
-   */
-  @Test(groups = TestCategories.Selenium)
-  public void getCommandTimeout() {
-
-    int timeout = SeleniumConfig.getCommandTimeout();
-
-    Assert.assertEquals(timeout, 61000);
-  }
-
-  /**
    * Driver hint path.
    */
   @Test(groups = TestCategories.Selenium)
@@ -117,31 +97,6 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Remote browser check.
-   */
-  @Test(groups = TestCategories.Selenium)
-  public void getRemoteBrowser() throws Exception {
-
-    WebDriver driver = SeleniumConfig.getRemoteBrowser();
-
-    Assert.assertNotNull(driver);
-    driver.quit();
-
-  }
-
-  /**
-   * Remote browser with string.
-   */
-  @Test(groups = TestCategories.Selenium)
-  public void getRemoteBrowserWithString() throws Exception {
-
-    WebDriver driver = SeleniumConfig.getRemoteBrowser("HEADLESSCHROME");
-
-    Assert.assertNotNull(driver);
-    driver.quit();
-  }
-
-  /**
    * Remote platform test.
    */
   @Test(groups = TestCategories.Selenium)
@@ -149,7 +104,7 @@ public class SeleniumConfigTest {
 
     String platform = SeleniumConfig.getRemotePlatform();
 
-    Assert.assertEquals(platform, "");
+    Assert.assertEquals(platform, "OS X 10.11");
   }
 
   /**
@@ -160,19 +115,7 @@ public class SeleniumConfigTest {
 
     String version = SeleniumConfig.getRemoteBrowserVersion();
 
-    Assert.assertEquals(version, "");
-  }
-
-  /**
-   * Browser with string.
-   */
-  @Test(groups = TestCategories.Selenium)
-  public void getBrowserWithString() throws Exception {
-
-    WebDriver driver = SeleniumConfig.browser("HEADLESSCHROME");
-
-    Assert.assertNotNull(driver);
-    driver.quit();
+    Assert.assertEquals(version, "54.0");
   }
 
   /**
@@ -180,17 +123,23 @@ public class SeleniumConfigTest {
    *
    * @throws Exception Can throw new Exception
    */
+  @Ignore
   @Test(groups = TestCategories.Selenium)
   public void getWaitDriver() throws Exception {
-    WebDriver driver = SeleniumConfig.browser();
-    WebDriverWait driverWait = SeleniumConfig.getWaitDriver(driver);
-
-    Assert.assertNotNull(driverWait);
-    driver.quit();
+    WebDriver driver = null;
+    try {
+      driver = WebDriverFactory.getDefaultBrowser();
+      WebDriverWait driverWait = SeleniumConfig.getWaitDriver(driver);
+      Assert.assertNotNull(driverWait);
+    } finally {
+      if (driver != null) {
+        driver.quit();
+      }
+    }
   }
 
   /**
-   * Verify remote capabilities section of config
+   * Verify remote capabilities section of config.
    */
   @Test(groups = TestCategories.Selenium)
   public void getRemoteCapabilitiesAsStrings() {
@@ -211,7 +160,7 @@ public class SeleniumConfigTest {
   }
 
   /**
-   * Verify remote capabilities section of config
+   * Verify remote capabilities section of config.
    */
   @Test(groups = TestCategories.Selenium)
   public void getRemoteCapabilitiesAsObjects() {
@@ -249,6 +198,26 @@ public class SeleniumConfigTest {
     boolean value = SeleniumConfig.getSoftAssertScreenshot();
 
     Assert.assertTrue(value);
+  }
+
+  /**
+   * Get wait time.
+   */
+  @Test(groups = TestCategories.Selenium)
+  public void getWaitTime() {
+    Duration value = SeleniumConfig.getWaitTime();
+
+    Assert.assertNotNull(value);
+  }
+
+  /**
+   * Get timeout time.
+   */
+  @Test(groups = TestCategories.Selenium)
+  public void getTimeoutTime() {
+    Duration value = SeleniumConfig.getTimeoutTime();
+
+    Assert.assertNotNull(value);
   }
 
   /**

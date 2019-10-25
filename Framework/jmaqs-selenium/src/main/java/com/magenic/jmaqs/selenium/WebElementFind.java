@@ -15,7 +15,11 @@ import org.openqa.selenium.WebElement;
 
 /**
  * Web element find helper class.
+ * 
+ * @deprecated {@link WebElementFind} is no longer supported. Use {@link com.magenic.jmaqs.selenium.factories.UIFindFactory UIFindFactory}
+ *             to create {@link UIFind UIFind} objects instead.
  */
+@Deprecated
 public class WebElementFind {
 
   /**
@@ -75,7 +79,7 @@ public class WebElementFind {
     }
 
     for (WebElement element : elementList) {
-      if (element.toString().equals(text)) {
+      if (element.getText().equals(text)) {
         return element;
       }
     }
@@ -123,7 +127,7 @@ public class WebElementFind {
     }
 
     for (int i = 0; i < elementList.size(); i++) {
-      if (elementList.get(i).toString().equals(text)) {
+      if (elementList.get(i).getText().equals(text)) {
         return i;
       }
     }
@@ -178,10 +182,10 @@ public class WebElementFind {
 
     if (!throwException) {
       return index;
-    } else {
-      throw new NotFoundException(StringProcessor
+    } 
+    
+    throw new NotFoundException(StringProcessor
                 .safeFormatter("Text did not match any element in collection %s", list.toString()));
-    }
   }
 
   /**
@@ -191,7 +195,7 @@ public class WebElementFind {
    *          ICollection of Web Elements
    * @param text
    *          Text to search the Web Element Collection
-   * @return Returns the index of the Web Element in the inputted WebElement Collection
+   * @return Returns the index of the Web Element in the inputed WebElement Collection
    */
   public static int findIndexOfElementWithText(List<WebElement> list, String text) {
     return findIndexOfElementWithText(list, text, true);

@@ -1,6 +1,6 @@
 /*
  * Copyright 2019 (C) Magenic, All rights Reserved
- *//*
+ */
 
 
 package com.magenic.jmaqs.selenium;
@@ -12,6 +12,7 @@ import com.magenic.jmaqs.utilities.logging.FileLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -22,87 +23,77 @@ import java.util.ArrayList;
 //FIXME:  Commenting out tests until repaired.  All failing for same general casting issue.
 //FIXME: java.lang.ClassCastException: com.magenic.jmaqs.utilities.logging.ConsoleLogger cannot be cast to com.magenic.jmaqs.utilities.logging.FileLogger at com.magenic.jmaqs.selenium.EventHandlerUnitTest.eventHandlerSwitchWindow(EventHandlerUnitTest.java:253)
 
-*/
+
 /**
  * Unit tests for EventHandler class.
- *//*
+ */
 
 @Test
+@Ignore
 public class EventHandlerUnitTest extends BaseSeleniumTest {
-  */
 /**
    * Url for the site.
-   *//*
+   */
 
   private static String siteUrl = SeleniumConfig.getWebSiteBase();
 
-  */
 /**
    * Automation site url.
-   *//*
+   */
 
   private static String siteAutomationUrl = siteUrl + "Automation/";
 
-  */
 /**
    * Event Handler.
-   *//*
+   */
 
   private EventHandler eventHandler;
 
-  */
 /**
    * Event Firing Web Driver.
-   *//*
+   */
 
   private EventFiringWebDriver eventFiringWebDriver;
 
-  */
 /**
    * Home button.
-   *//*
+   */
 
   private static By home = By.cssSelector("#homeButton > a");
 
-  */
 /**
    * Alert button with confirm option.
-   *//*
+   */
 
   private static By alertWithConfirm = By.id("javascriptConfirmAlertButton");
 
-  */
 /**
    * Swagger link.
-   *//*
+   */
 
   private static By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
 
-  */
 /**
    * First name text box.
-   *//*
+   */
 
   private By firstNameTextBox = By.cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
 
-  */
 /**
    * First checkbox.
-   *//*
+   */
 
   private static By checkbox = By.cssSelector("#Checkbox1");
 
-  */
 /**
    * Computer parts list.
-   *//*
+   */
 
   private static By computerPartsList = By.cssSelector("#computerParts");
 
-  */
 /**
    * Test that checks if the correct messages are logged when clicking an element.
-   *//*
+   */
 
   @Test
   public void eventHandlerClickElement() {
@@ -121,10 +112,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when changing the value of an element.
-   *//*
+   */
 
   @Test
   public void eventHandlerChangeValueOf() {
@@ -143,10 +133,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when finding an element.
-   *//*
+   */
 
   @Test
   public void eventHandlerFindBy() {
@@ -165,10 +154,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when navigating back to the previous page.
-   *//*
+   */
 
   @Test
   public void eventHandlerNavigateBack() {
@@ -188,10 +176,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when navigating forward to a page.
-   *//*
+   */
 
   @Test
   public void eventHandlerNavigateForward() {
@@ -212,10 +199,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when refreshing a page.
-   *//*
+   */
 
   @Test
   public void eventHandlerRefresh() {
@@ -234,10 +220,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when navigating to a page.
-   *//*
+   */
 
   @Test
   public void eventHandlerNavigateTo() {
@@ -256,10 +241,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when running a script.
-   *//*
+   */
 
   @Test
   public void eventHandlerScript() {
@@ -279,10 +263,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when switching windows.
-   *//*
+   */
 
   @Test
   public void eventHandlerSwitchWindow() {
@@ -303,10 +286,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when accepting an alert.
-   *//*
+   */
 
   @Test
   public void eventHandlerAcceptAlert() {
@@ -327,10 +309,9 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when dismissing an alert.
-   *//*
+   */
 
   @Test
   public void eventHandlerAcceptDismiss() {
@@ -351,7 +332,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Test that checks if the correct messages are logged when getting the text from an element.
    *//*
@@ -376,7 +356,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   */
 /**
    * Test that checks if the correct messages are logged when taking a screenshot.
-   *//*
+   */
 
   @Test
   public void eventHandlerScreenshot() {
@@ -396,20 +376,18 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 /**
    * Unregister the Event Firing Web Driver after each test.
-   *//*
+   */
 
   @AfterTest
   private void cleanupEventHandler() {
     this.eventFiringWebDriver.unregister(this.eventHandler);
   }
 
-  */
 /**
    * Setup the Event Handler and register the Event Firing Web Driver before each test.
-   *//*
+   */
 
   private void setupEventHandler() {
     this.eventHandler = new EventHandler(this.getLogger());
@@ -417,17 +395,15 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     this.eventFiringWebDriver.register(this.eventHandler);
   }
 
-  */
 /**
    * Navigate to test page url and wait for page to load.
-   *//*
+   */
 
   private void navigateToAutomationSiteUrl() {
     getWebDriver().navigate().to(siteAutomationUrl);
     getSeleniumWait().waitForPageLoad();
   }
 
-  */
 /**
    * Read a file and return it as a string
    *
@@ -435,7 +411,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    *          The file path to read
    * @return
    *          The contents of the file
-   *//*
+   */
 
   private String readTextFile(String filePath) {
     String text = "";
@@ -448,4 +424,4 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     return text;
   }
 }
-*/
+
