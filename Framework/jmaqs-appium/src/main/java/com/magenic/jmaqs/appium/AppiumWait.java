@@ -10,7 +10,9 @@ import io.appium.java_client.AppiumDriver;
 
 /**
  * Class AppiumWait.
+ * @deprecated in favor of a static service
  */
+@Deprecated
 public class AppiumWait extends SeleniumWait {
 
   /**
