@@ -37,7 +37,7 @@ public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
     int timeout = 1000;
     int polling = 500;
 
-    PageElementsPageModel pageModel = new PageElementsPageModel(this.getSeleniumTestObject());
+    PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
     pageModel.open(siteAutomationUrl);
     WebElement elementDriver = UIWaitFactory
         .getWaitDriver(pageModel.getSeleniumTestObject().getWebDriver())
