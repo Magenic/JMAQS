@@ -26,7 +26,7 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
 	
 	@Test
 	public void testGetUIFindWithElement() {
-		PageElementsPageModel pageModel = new PageElementsPageModel(this.getSeleniumTestObject());
+		PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
 		pageModel.open(siteAutomationUrl);
 		WebElement elementDriver = UIWaitFactory.getWaitDriver(pageModel.getSeleniumTestObject().getWebDriver())
 				.waitForClickableElement(pageModel.showDialog1ButtonLocator);

@@ -70,7 +70,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 	
 	@Test(groups=TestCategories.Selenium)
 	public void getWaitDriverWithWebElement() {
-		PageElementsPageModel pageModel = new PageElementsPageModel(this.getSeleniumTestObject());
+		PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
 		pageModel.open(siteAutomationUrl);
 		WebElement elementDriver = UIWaitFactory.getWaitDriver(pageModel.getSeleniumTestObject().getWebDriver())
 				.waitForClickableElement(pageModel.showDialog1ButtonLocator);
