@@ -65,6 +65,8 @@
 
         <!-- Time-out in milliseconds -->
         <WebServiceTimeout>10000</WebServiceTimeout>
+        <UseProxy>No</UseProxy>
+        <ProxyAddress>127.0.0.1:8001</ProxyAddress>
     </WebServiceMaqs>
 
 </configuration>
