@@ -1,7 +1,11 @@
-**Build:** [![Build status](https://dev.azure.com/magenicOpen/JMAQS/_apis/build/status/JMAQS-Pull-Request)](https://dev.azure.com/magenicOpen/JMAQS/_build/latest?definitionId=7)
-
-**Code Quality:** [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.magenic.jmaqs%3Ajmaqs-framework&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.magenic.jmaqs%3Ajmaqs-framework)
 # JMAQS
+
+| Check | Status |
+|--------|--------|
+|  **Build** |[![Build status](https://dev.azure.com/magenicOpen/JMAQS/_apis/build/status/JMAQS-Pull-Request)](https://dev.azure.com/magenicOpen/JMAQS/_build/latest?definitionId=7)|
+| **Code Quality** | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.magenic.jmaqs%3Ajmaqs-framework&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.magenic.jmaqs%3Ajmaqs-framework)|
+| **Dependencies** | [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=Magenic/JMAQS)](https://dependabot.com) |
+
 ## Introduction 
 JMAQS stands for Magenic's Automation Quick Start - Java Edtion.
 
