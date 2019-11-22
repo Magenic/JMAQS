@@ -16,8 +16,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <appiumjavaclient.version>7.3.0</appiumjavaclient.version>
         <testng.version>7.0.0</testng.version>
-        <appiumjavaclient.version>7.0.0</appiumjavaclient.version>
     </properties>
 
     <dependencies>
