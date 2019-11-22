@@ -42,7 +42,7 @@
 		<nexusstaging.plugin.version>1.6.8</nexusstaging.plugin.version>
 		<javadoc.plugin.version>2.10.4</javadoc.plugin.version>
 		<compiler.plugin.version>3.6.1</compiler.plugin.version>
-		<surefire.plugin.version>2.19.1</surefire.plugin.version>
+		<surefire.plugin.version>2.22.2</surefire.plugin.version>
 		<mvncheckstyle.plugin.version>2.17</mvncheckstyle.plugin.version>
 		<puppycheckstyle.plugin.version>7.6.1</puppycheckstyle.plugin.version>
 	</properties>
