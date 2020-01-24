@@ -1,6 +1,0 @@
-run
---sla-threshold=70
---classpath=/Users/jasonedstrom/Documents/Development/Magenic/JMAQS/Framework/jmaqs-base/target/classes
---stub-classpath=/var/folders/6w/xm3y47dn0cq12j2b4ncrhvy40000gn/T/threadsafe/com.contemplateltd.analyser.macosx.x86_64/1.3.5.20161209-2217/jdk-stubs.jar
---logfile=/Users/jasonedstrom/Documents/Development/Magenic/JMAQS/Framework/threadsafe-html/log/ThreadSafe.log.txt
---report-progress
