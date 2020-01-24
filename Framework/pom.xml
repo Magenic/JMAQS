@@ -69,6 +69,7 @@
 		<nexusstaging.plugin.version>1.6.8</nexusstaging.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<puppycheckstyle.plugin.version>7.6.1</puppycheckstyle.plugin.version>
+		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../${aggregate.report.dir}</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 	<!--<reporting>
 		<plugins>
@@ -128,6 +129,19 @@
 					<parallel>methods</parallel>
 					<threadCount>6</threadCount>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>report</id>
+						<goals>
+							<goal>report-aggregate</goal>
+						</goals>
+						<phase>verify</phase>
+					</execution>
+				</executions>
 			</plugin>
 			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
