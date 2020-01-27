@@ -37,68 +37,57 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Url for the site.
    */
-
   private static String siteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Automation site url.
    */
-
   private static String siteAutomationUrl = siteUrl + "Automation/";
 
   /**
    * Event Handler.
    */
-
   private EventHandler eventHandler;
 
   /**
    * Event Firing Web Driver.
    */
-
   private EventFiringWebDriver eventFiringWebDriver;
 
   /**
    * Home button.
    */
-
   private static By home = By.cssSelector("#homeButton > a");
 
   /**
    * Alert button with confirm option.
    */
-
   private static By alertWithConfirm = By.id("javascriptConfirmAlertButton");
 
   /**
    * Swagger link.
    */
-
   private static By swaggerLinkBy = By.cssSelector("#SwaggerPageLink > a");
 
   /**
    * First name text box.
    */
-
   private By firstNameTextBox = By
       .cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
 
   /**
    * First checkbox.
    */
-
   private static By checkbox = By.cssSelector("#Checkbox1");
 
   /**
    * Computer parts list.
    */
-
   private static By computerPartsList = By.cssSelector("#computerParts");
 
   /**
    * Test that checks if the correct messages are logged when clicking an element.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerClickElement() {
     // Navigate to the Automation site and setup the event handler
@@ -106,7 +95,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     setupEventHandler();
 
     // Use the Event Firing Web Driver to click an element, then get the log text
-    this.eventFiringWebDriver.findElement(this.checkbox).click();
+    this.eventFiringWebDriver.findElement(checkbox).click();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
@@ -121,7 +110,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when changing the value of an element.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerChangeValueOf() {
     // Navigate to the Automation site and setup the event handler
@@ -144,7 +132,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when finding an element.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerFindBy() {
     // Navigate to the Automation site and setup the event handler
@@ -152,7 +139,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     setupEventHandler();
 
     // Use the Event Firing Web Driver to find an element, then get the log text
-    this.eventFiringWebDriver.findElement(this.computerPartsList);
+    this.eventFiringWebDriver.findElement(computerPartsList);
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
@@ -167,7 +154,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when navigating back to the previous page.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerNavigateBack() {
     // Navigate to the Automation site and setup the event handler
@@ -175,7 +161,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     setupEventHandler();
 
     // Use the Event Firing Web Driver to navigate back to a page, then get the log text
-    this.eventFiringWebDriver.findElement(this.home).click();
+    this.eventFiringWebDriver.findElement(home).click();
     this.eventFiringWebDriver.navigate().back();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
@@ -191,7 +177,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when navigating forward to a page.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerNavigateForward() {
     // Navigate to the Automation site and setup the event handler
@@ -199,7 +184,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     setupEventHandler();
 
     // Use the Event Firing Web Driver to navigate forward to a page, then get the log text
-    this.eventFiringWebDriver.findElement(this.home).click();
+    this.eventFiringWebDriver.findElement(home).click();
     this.eventFiringWebDriver.navigate().back();
     this.eventFiringWebDriver.navigate().forward();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
@@ -216,7 +201,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when refreshing a page.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerRefresh() {
     // Navigate to the Automation site and setup the event handler
@@ -239,7 +223,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when navigating to a page.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerNavigateTo() {
     // Navigate to the Automation site and setup the event handler
@@ -262,7 +245,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when running a script.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerScript() {
     // Navigate to the Automation site and setup the event handler
@@ -270,7 +252,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     setupEventHandler();
 
     // Use the Event Firing Web Driver to execute a script, then get the log text
-    JavascriptExecutor javascriptExecutor = (JavascriptExecutor) this.eventFiringWebDriver;
+    JavascriptExecutor javascriptExecutor = this.eventFiringWebDriver;
     javascriptExecutor.executeScript("document.querySelector(\"#homeButton > a\");");
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
@@ -286,7 +268,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when switching windows.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerSwitchWindow() {
     // Navigate to the Automation site and setup the event handler
@@ -295,7 +276,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
     // Use the Event Firing Web Driver to open a new tab, then get the log text
     ((JavascriptExecutor) this.eventFiringWebDriver).executeScript("window.open()");
-    ArrayList<String> tabs = new ArrayList<String>(this.eventFiringWebDriver.getWindowHandles());
+    ArrayList<String> tabs = new ArrayList<>(this.eventFiringWebDriver.getWindowHandles());
     this.eventFiringWebDriver.switchTo().window(tabs.get(1));
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
@@ -311,7 +292,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when accepting an alert.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerAcceptAlert() {
     // Navigate to the Automation site and setup the event handler
@@ -337,7 +317,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test that checks if the correct messages are logged when dismissing an alert.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerAcceptDismiss() {
     // Navigate to the Automation site and setup the event handler
@@ -362,8 +341,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   /**
    * Test that checks if the correct messages are logged when getting the text from an element.
-   *//*
-
+   */
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerGetText() {
     // Navigate to the Automation site and setup the event handler
@@ -371,24 +349,21 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     setupEventHandler();
 
     // Use the Event Firing Web Driver to get the text from an element, then get the log text
-    this.eventFiringWebDriver.findElement(this.swaggerLinkBy).getText();
+    this.eventFiringWebDriver.findElement(swaggerLinkBy).getText();
     String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before getting text from element"),
-    "Expected message to be logged before getting text from an element.");
+        "Expected message to be logged before getting text from an element.");
     softAssert.assertTrue(logText.contains("Got element text"),
-    "Expected message to be logged after getting text from an element.");
+        "Expected message to be logged after getting text from an element.");
     softAssert.assertAll();
   }
-
-  */
 
   /**
    * Test that checks if the correct messages are logged when taking a screenshot.
    */
-
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerScreenshot() {
     // Navigate to the Automation site and setup the event handler
@@ -396,7 +371,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     setupEventHandler();
 
     // Use the Event Firing Web Driver to take a screenshot, then get the log text
-    TakesScreenshot takeScreenshot = ((TakesScreenshot) this.eventFiringWebDriver);
+    TakesScreenshot takeScreenshot = this.eventFiringWebDriver;
     takeScreenshot.getScreenshotAs(OutputType.FILE);
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
@@ -412,7 +387,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unregister the Event Firing Web Driver after each test.
    */
-
   @AfterTest
   private void cleanupEventHandler() {
     this.eventFiringWebDriver.unregister(this.eventHandler);
@@ -421,7 +395,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Setup the Event Handler and register the Event Firing Web Driver before each test.
    */
-
   private void setupEventHandler() {
     this.eventHandler = new EventHandler(this.getLogger());
     this.eventFiringWebDriver = new EventFiringWebDriver(this.getWebDriver());
@@ -442,7 +415,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
    * @param filePath The file path to read
    * @return The contents of the file
    */
-
   private String readTextFile(String filePath) {
     String text = "";
     try {
