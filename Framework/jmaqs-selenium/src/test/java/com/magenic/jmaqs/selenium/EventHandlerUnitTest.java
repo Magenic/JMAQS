@@ -408,23 +408,8 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unregister the Event Firing Web Driver after each test.
-   */
-
-  //  @AfterMethod
-  //  private void cleanupEventHandler() {
-  //    webDriverWithHandler.unregister(this.eventHandler);
-  //  }
-
-  /**
    * Setup the Event Handler and register the Event Firing Web Driver before each test.
    */
-
-  //  private void setupEventHandler() {
-  //    this.eventHandler = new EventHandler(this.getLogger());
-  //    webDriverWithHandler = new EventFiringWebDriver(this.getWebDriver());
-  //    webDriverWithHandler.register(this.eventHandler);
-  //  }
   private EventFiringWebDriver getEventWebDriver() {
     return new EventFiringWebDriver(this.getWebDriver());
   }
