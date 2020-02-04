@@ -154,7 +154,7 @@
 				Bug #10229:-->
 				<configuration>
 					<parallel>methods</parallel>
-					<threadCount>6</threadCount>
+					<threadCount>4</threadCount>
 					<argLine>${argLine}</argLine>
 				</configuration>
 			</plugin>
