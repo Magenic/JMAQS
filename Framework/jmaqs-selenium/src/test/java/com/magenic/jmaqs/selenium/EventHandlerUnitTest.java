@@ -372,17 +372,16 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
     // Use the Event Firing Web Driver to get the text from an element, then get the log text
     webDriverWithHandler.findElement(this.swaggerLinkBy).getText();
-    String logText = this.readTextFile(((FileLogger)this.getLogger()).getFilePath());
+    String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 
     // Assert the expected Event Handler logs exist.
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(logText.contains("Before getting text from element"),
-    "Expected message to be logged before getting text from an element.");
+        "Expected message to be logged before getting text from an element.");
     softAssert.assertTrue(logText.contains("Got element text"),
-    "Expected message to be logged after getting text from an element.");
+        "Expected message to be logged after getting text from an element.");
     softAssert.assertAll();
   }
-
 
   /**
    * Test that checks if the correct messages are logged when taking a screenshot.
