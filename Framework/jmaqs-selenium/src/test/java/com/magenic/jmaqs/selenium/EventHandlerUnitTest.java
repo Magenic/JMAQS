@@ -362,7 +362,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
   /**
    * Test that checks if the correct messages are logged when getting the text from an element.
-   *//*
+   */
 
   @Test(groups = TestCategories.Selenium)
   public void eventHandlerGetText() {
@@ -383,7 +383,6 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
     softAssert.assertAll();
   }
 
-  */
 
   /**
    * Test that checks if the correct messages are logged when taking a screenshot.
