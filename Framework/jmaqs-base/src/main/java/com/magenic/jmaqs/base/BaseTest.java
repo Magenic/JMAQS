@@ -11,7 +11,6 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-import com.magenic.jmaqs.utilities.logging.TestResultType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.lang.reflect.Method;
@@ -317,7 +316,7 @@ public abstract class BaseTest {
    * Get the type of test result.
    *
    * @return The type of test result
-   */
+   *//*
   protected TestResultType getResultType() {
     switch (this.testResult.getStatus()) {
       case ITestResult.SUCCESS:
@@ -329,13 +328,13 @@ public abstract class BaseTest {
       default:
         return TestResultType.OTHER;
     }
-  }
+  }*/
 
-  /**
+  /* *//**
    * Get the test result type as text.
    *
    * @return The test result type as text
-   */
+   *//*
   protected String getResultText() {
     switch (this.testResult.getStatus()) {
       case ITestResult.SUCCESS:
@@ -347,7 +346,7 @@ public abstract class BaseTest {
       default:
         return "OTHER";
     }
-  }
+  }*/
 
   /**
    * Get the fully qualified test name.

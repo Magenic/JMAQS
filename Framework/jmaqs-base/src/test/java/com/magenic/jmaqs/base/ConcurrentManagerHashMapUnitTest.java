@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.base;
 
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.Test;
@@ -13,7 +14,7 @@ import org.testng.annotations.Test;
  */
 public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testClear() {
 
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
@@ -25,7 +26,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     Assert.assertEquals(newHash.mappingCount(), 0);
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testRemoveWithKey() {
 
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
@@ -39,7 +40,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     Assert.assertFalse(newHash.containsKey("2"), "Was not expecting item '2'");
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testRemoveWithKeyAndValue() {
 
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
@@ -53,7 +54,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     Assert.assertFalse(newHash.containsKey("2"), "Was not expecting item '2'");
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testReplace() {
 
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
@@ -69,7 +70,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     Assert.assertTrue(newHash.containsKey("2"), "Expected item '2'");
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testReplaceWithNewAndOld() {
 
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
