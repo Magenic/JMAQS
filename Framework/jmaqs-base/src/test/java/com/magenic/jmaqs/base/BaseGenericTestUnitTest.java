@@ -4,12 +4,13 @@
 
 package com.magenic.jmaqs.base;
 
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class BaseGenericTestUnitTest extends BaseGenericTest {
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testCreateTestObject() {
     Assert.assertNotNull(this.getTestObject());
   }
