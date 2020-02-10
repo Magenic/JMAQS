@@ -7,12 +7,14 @@
         <artifactId>jmaqs-framework</artifactId>
         <groupId>com.magenic.jmaqs</groupId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
+    <groupId>com.magenic.jmaqs.database</groupId>
     <artifactId>jmaqs-database</artifactId>
     <name>jmaqs-database</name>
-
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

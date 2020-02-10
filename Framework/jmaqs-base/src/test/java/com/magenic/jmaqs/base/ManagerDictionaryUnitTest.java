@@ -6,6 +6,7 @@ package com.magenic.jmaqs.base;
 
 import static org.testng.Assert.assertNotNull;
 
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.function.Supplier;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -16,7 +17,7 @@ import org.testng.annotations.Test;
  */
 public class ManagerDictionaryUnitTest extends BaseGenericTest {
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testClose() {
 
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -38,7 +39,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
 
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testGetDriver() {
     final String dm1 = "DM1";
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -47,7 +48,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
     assertNotNull(managerDictionary.getDriver(dm1));
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testPut() {
     final String dm1 = "DM1";
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -61,7 +62,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
     return new TestDriverManager(supplier, getTestObject());
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testPutOrOverride() {
     ManagerDictionary managerDictionary = new ManagerDictionary();
     TestDriverManager testManager = getTestDriverManager();
@@ -69,7 +70,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
     Assert.assertTrue(managerDictionary.containsValue(testManager));
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testPutOrOverride1() {
     final String dm1 = "DM1";
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -79,7 +80,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
     assertNotNull(managerDictionary.get(dm1));
   }
 
-  @Test
+  @Test(groups = TestCategories.Framework)
   public void testRemove() {
     final String dm1 = "DM1";
     final String dm2 = "DM2";

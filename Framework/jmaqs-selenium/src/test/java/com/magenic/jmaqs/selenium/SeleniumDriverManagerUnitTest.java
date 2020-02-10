@@ -50,7 +50,6 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.Selenium)
   public void testCloseInitialized() {
-
     SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
         this.getTestObject());
     WebDriver webDriver = seleniumDriverManager.getWebDriver();
@@ -77,12 +76,11 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
    * Test log verbose.
    */
   @Test(groups = TestCategories.Selenium)
-  @Ignore("Ignore until logger rework")
   public void testLogVerbose() {
     SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
         this.getTestObject());
-    List list;
+    //List list;
     seleniumDriverManager.logVerbose("Logging verbose messaging");
-
   }
+
 }

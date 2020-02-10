@@ -8,6 +8,13 @@ package com.magenic.jmaqs.utilities.helper;
  * Initializes a new instance of the StringProcessor class.
  */
 public final class StringProcessor {
+
+  /**
+   * Constructor StringProcessor creates a new StringProcessor instance.
+   */
+  private StringProcessor() {
+  }
+
   /**
    * Creates a string based on the arguments. If no args are applied, then we want to just return
    * the message
@@ -21,10 +28,10 @@ public final class StringProcessor {
       return String.format(message, args);
     } catch (Exception e) {
       StringBuilder builder = new StringBuilder();
-      builder.append(message);
-
+      builder.append("Message: " + message);
+      builder.append(" Arguments: ");
       for (Object arg : args) {
-        builder.append(arg.toString());
+        builder.append(arg.toString() + " ");
       }
 
       return builder.toString();

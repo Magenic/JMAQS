@@ -11,7 +11,6 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
-import com.magenic.jmaqs.utilities.logging.TestResultType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 
 import java.lang.reflect.Method;
@@ -262,11 +261,14 @@ public abstract class BaseTest {
     // Get the Fully Qualified Test Name
     String fullyQualifiedTestName = this.getFullyQualifiedTestClassName();
 
-    // Release logged messages
-    this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
+    try (BaseTestObject baseTestObject = this.getTestObject()) {
+      // Release logged messages
+      this.loggedExceptions.remove(this.getFullyQualifiedTestClassName());
 
-    // Release the Base Test Object
-    this.baseTestObjects.remove(fullyQualifiedTestName, this.getTestObject());
+      // Release the Base Test Object
+      this.baseTestObjects.remove(fullyQualifiedTestName, baseTestObject);
+    }
+
 
     // Create console logger to log subsequent messages
     this.setTestObject(new BaseTestObject(new ConsoleLogger(), fullyQualifiedTestName));
@@ -317,7 +319,7 @@ public abstract class BaseTest {
    * Get the type of test result.
    *
    * @return The type of test result
-   */
+   *//*
   protected TestResultType getResultType() {
     switch (this.testResult.getStatus()) {
       case ITestResult.SUCCESS:
@@ -329,13 +331,13 @@ public abstract class BaseTest {
       default:
         return TestResultType.OTHER;
     }
-  }
+  }*/
 
-  /**
+  /* *//**
    * Get the test result type as text.
    *
    * @return The test result type as text
-   */
+   *//*
   protected String getResultText() {
     switch (this.testResult.getStatus()) {
       case ITestResult.SUCCESS:
@@ -347,7 +349,7 @@ public abstract class BaseTest {
       default:
         return "OTHER";
     }
-  }
+  }*/
 
   /**
    * Get the fully qualified test name.
