@@ -63,35 +63,27 @@ public class WebDriverFactory {
    * @throws Exception An exception
    */
   public static WebDriver getBrowserWithDefaultConfiguration(BrowserType browser) throws Exception {
-    WebDriver webDriver = null;
     String size = SeleniumConfig.getBrowserSize();
 
     try {
       switch (browser) {
         case IE:
-          webDriver = getInternetExplorerDriver(getDefaultInternetExplorerOptions(), size);
-          break;
+          return getInternetExplorerDriver(getDefaultInternetExplorerOptions(), size);
         case FIREFOX:
-          webDriver = getFirefoxDriver(getDefaultFirefoxOptions(), size);
-          break;
+          return getFirefoxDriver(getDefaultFirefoxOptions(), size);
         case CHROME:
-          webDriver = getChromeDriver(getDefaultChromeOptions(), size);
-          break;
+          return getChromeDriver(getDefaultChromeOptions(), size);
         case HEADLESS_CHROME:
-          webDriver = getHeadlessChromeDriver(getDefaultHeadlessChromeOptions(size));
-          break;
+          return getHeadlessChromeDriver(getDefaultHeadlessChromeOptions(size));
         case EDGE:
-          webDriver = getEdgeDriver(getDefaultEdgeOptions(), size);
-          break;
+          return getEdgeDriver(getDefaultEdgeOptions(), size);
         case REMOTE:
-          webDriver = new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()),
+          return new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()),
               getDefaultRemoteOptions());
-          break;
         default:
           throw new IllegalArgumentException(
               StringProcessor.safeFormatter("Browser type '%s' is not supported", browser));
       }
-      return webDriver;
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
@@ -325,7 +317,7 @@ public class WebDriverFactory {
    */
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser,
       String remotePlatform, String remoteBrowserVersion, Map<String, Object> remoteCapabilities) {
-    MutableCapabilities options = null;
+    MutableCapabilities options;
     switch (remoteBrowser) {
       case IE:
         options = new InternetExplorerOptions();
@@ -488,7 +480,7 @@ public class WebDriverFactory {
     // Get the hint path from the config
     String hintPath = SeleniumConfig.getDriverHintPath();
 
-    // Try the hintpath first
+    // Try the hint path first
     if (!hintPath.isEmpty() && Paths.get(hintPath, driverFile).toFile().exists()) {
       return hintPath;
     }
@@ -548,5 +540,4 @@ public class WebDriverFactory {
 
     return "";
   }
-
 }

@@ -50,6 +50,26 @@ public class UIFind {
   }
 
   /**
+   * General Find Element.
+   *
+   * @param by Css Selector
+   * @return The Web Element
+   */
+  public WebElement findElement(By by) {
+    return findElement(by, true);
+  }
+
+  /**
+   * Finds all elements using the by provided.
+   *
+   * @param by             Css Selector
+   * @return The Web Element
+   */
+  public List<WebElement> findElements(By by) {
+    return this.getElementList(by, true);
+  }
+
+  /**
    * Finds all elements using the by provided.
    *
    * @param by             Css Selector
@@ -58,16 +78,6 @@ public class UIFind {
    */
   public List<WebElement> findElements(By by, boolean throwException) {
     return this.getElementList(by, throwException);
-  }
-
-  /**
-   * General Find Element.
-   *
-   * @param by Css Selector
-   * @return The Web Element
-   */
-  public WebElement findElement(By by) {
-    return findElement(by, true);
   }
 
   /**
@@ -150,8 +160,7 @@ public class UIFind {
    * @param throwException optional assert parameter - throws an exception if no element is found
    * @return The index of the Web Element in the inputted WebElement Collection
    */
-  public int findIndexOfElementWithText(List<WebElement> list, String text,
-      boolean throwException) {
+  public int findIndexOfElementWithText(List<WebElement> list, String text, boolean throwException) {
     int index = -1;
 
     if (list == null) {
@@ -163,7 +172,7 @@ public class UIFind {
     }
 
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).toString().equals(text)) {
+      if (list.get(i).getText().equals(text)) {
         return i;
       }
     }
@@ -198,7 +207,7 @@ public class UIFind {
   private List<WebElement> getElementList(By by, boolean throwException) {
     List<WebElement> elems = this.searchItem.findElements(by);
 
-    if (elems.isEmpty() || !throwException) {
+    if (!elems.isEmpty() || !throwException) {
       return elems;
     }
 
