@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <MagenicMaqs>
+        <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
+        <WaitTime>100</WaitTime>
+
+        <!-- Generic time-out in milliseconds -->
+        <Timeout>10000</Timeout>
+
+        <!-- Do you want to create logs for your tests
+        <Log>YES</Log>
+        <Log>NO</Log>
+        <Log>OnFail</Log>-->
+        <Log>YES</Log>
+
+        <!--Logging Levels
+        <LogLevel>VERBOSE</LogLevel>
+        <LogLevel>INFORMATION</LogLevel>
+        <LogLevel>GENERIC</LogLevel>
+        <LogLevel>SUCCESS</LogLevel>
+        <LogLevel>WARNING</LogLevel>
+        <LogLevel>ERROR</LogLevel>-->
+        <LogLevel>VERBOSE</LogLevel>
+
+        <!-- Logging Types
+        <LogType>CONSOLE</LogType>
+        <LogType>TXT</LogType>
+        <LogType>HTML</LogType>-->
+        <LogType>TXT</LogType>
+
+        <!-- Log file path - Defaults to build location if no value is defined -->
+        <FileLoggerPath>./target/logs</FileLoggerPath>
+    </MagenicMaqs>
+
+    <SeleniumMaqs>
+        <!--Local browser settings
+        <Browser>Chrome</Browser>
+        <Browser>Internet Explorer</Browser>
+        <Browser>Firefox</Browser>
+        <Browser>Edge</Browser>-->
+        <Browser>HeadlessChrome</Browser>
+
+        <!--Remote browser settings-->
+        <!--<Browser>REMOTE</Browser>-->
+        <RemoteBrowser>Chrome</RemoteBrowser>
+        <HubUrl>http://ondemand.saucelabs.com:80/wd/hub</HubUrl>
+        <WebSiteBase>http://magenicautomation.azurewebsites.net/</WebSiteBase>
+        <BrowserWaitTime>1000</BrowserWaitTime>
+        <BrowserTimeout>20000</BrowserTimeout>
+        <SeleniumCommandTimeout>61000</SeleniumCommandTimeout>
+
+        <!--Browser Resize settings
+        <BrowserSize>MAXIMIZE</BrowserSize>
+        <BrowserSize>DEFAULT</BrowserSize>-->
+        <BrowserSize>1024x768</BrowserSize>
+
+        <SoftAssertScreenshot>Yes</SoftAssertScreenshot>
+        <SavePagesourceOnFail>Yes</SavePagesourceOnFail>
+        <ImageFormat>Jpeg</ImageFormat>
+    </SeleniumMaqs>
+
+    <WebServiceMaqs>
+        <!-- Web service root -->
+        <WebServiceUri>http://magenicautomation.azurewebsites.net</WebServiceUri>
+
+        <!-- Time-out in milliseconds -->
+        <WebServiceTimeout>10000</WebServiceTimeout>
+        <UseProxy>No</UseProxy>
+        <ProxyAddress>127.0.0.1:8001</ProxyAddress>
+    </WebServiceMaqs>
+
+</configuration>
