@@ -109,7 +109,7 @@
 						<driver>
 							<name>chromedriver</name>
 							<customFileName>chromedriver</customFileName>
-							<version>78.0.3904.105</version>
+							<version>79.0.3945.36</version>
 						</driver>
                         <driver>
                             <name>internetexplorerdriver</name>
