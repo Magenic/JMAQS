@@ -187,6 +187,6 @@
     <property name="eachLine" value="true"/>
   </module>
   <module name="Header">
-    <property name="header" value="/*\n * Copyright 2019 (C) Magenic, All rights Reserved\n */\n"/>
+    <property name="header" value="/*\n * Copyright 2020 (C) Magenic, All rights Reserved\n */\n"/>
   </module>
 </module>
