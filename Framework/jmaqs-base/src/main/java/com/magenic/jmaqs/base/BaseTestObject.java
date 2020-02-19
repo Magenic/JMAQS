@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.base;
@@ -7,10 +7,10 @@ package com.magenic.jmaqs.base;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * The BaseTestObject class.
@@ -52,12 +52,13 @@ public class BaseTestObject implements AutoCloseable {
   private String fullyQualifiedTestName;
 
   /**
-   * Was the object closed
+   * Was the object closed.
    */
   private boolean isClosed = false;
 
   /**
    * Check if the object has been closed.
+   *
    * @return True if the object is closed
    */
   public boolean getClosed() {
@@ -90,8 +91,8 @@ public class BaseTestObject implements AutoCloseable {
   public BaseTestObject(BaseTestObject baseTestObject) {
     this.log = baseTestObject.getLog();
     this.perfTimerCollection = baseTestObject.getPerfTimerCollection();
-    this.values = baseTestObject.getValues();
-    this.objects = baseTestObject.getObjects();
+    this.values = (ConcurrentHashMap) baseTestObject.getValues();
+    this.objects = (ConcurrentHashMap) baseTestObject.getObjects();
     this.managerStore = baseTestObject.getManagerStore();
     this.associatedFiles = new ArrayList<>();
     this.fullyQualifiedTestName = baseTestObject.getFullyQualifiedTestName();
@@ -144,7 +145,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @return Concurrent Hash Map of string key value pairs
    */
-  public ConcurrentHashMap<String, String> getValues() {
+  public ConcurrentMap<String, String> getValues() {
     return this.values;
   }
 
@@ -153,7 +154,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param values Concurrent Hash Map of string key value pairs to use
    */
-  private void setValues(ConcurrentHashMap<String, String> values) {
+  protected void setValues(ConcurrentHashMap<String, String> values) {
     this.values = values;
   }
 
@@ -162,7 +163,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @return Concurrent Hash Map of string key and object value pairs
    */
-  public ConcurrentHashMap<String, Object> getObjects() {
+  public ConcurrentMap<String, Object> getObjects() {
     return this.objects;
   }
 
@@ -171,7 +172,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param objects Concurrent Hash Map of string key and object value pairs to use
    */
-  private void setObjects(ConcurrentHashMap<String, Object> objects) {
+  protected void setObjects(ConcurrentHashMap<String, Object> objects) {
     this.objects = objects;
   }
 
@@ -189,7 +190,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param managerStore Concurrent Hash Map of string key and driver value pairs to use.
    */
-  private void setManagerStore(ManagerDictionary managerStore) {
+  protected void setManagerStore(ManagerDictionary managerStore) {
     this.managerStore = managerStore;
   }
 

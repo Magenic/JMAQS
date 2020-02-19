@@ -16,7 +16,7 @@
 
     <properties>
         <commons-io.version>2.6</commons-io.version>
-        <hibernate-core.version>5.4.11.Final</hibernate-core.version>
+        <hibernate-core.version>5.4.12.Final</hibernate-core.version>
         <javax.persistence.version>2.2.1</javax.persistence.version>
         <mssql-jdbc.version>7.4.1.jre8</mssql-jdbc.version>
         <sqlite-dialect.version>0.1.0</sqlite-dialect.version>

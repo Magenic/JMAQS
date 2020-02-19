@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.base;
@@ -14,7 +14,7 @@ public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTest
   /**
    * Removes the entry for a key only if currently mapped to a given value.
    *
-   * @param key key with which the specified value is associated
+   * @param key   key with which the specified value is associated
    * @param value value expected to be associated with the specified key
    * @return true if the value was removed
    */
@@ -50,7 +50,7 @@ public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTest
   /**
    * Replaces the entry for a key only if currently mapped to a given value.
    *
-   * @param key key with which the specified value is associated
+   * @param key      key with which the specified value is associated
    * @param oldValue value expected to be associated with the specified key
    * @param newValue value to be associated with the specified key
    * @return true if the value was replaced
@@ -64,7 +64,7 @@ public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTest
   /**
    * Replaces the entry for a key only if currently mapped to some value.
    *
-   * @param key key with which the specified value is associated
+   * @param key   key with which the specified value is associated
    * @param value value expected to be associated with the specified key
    * @return the previous value associated with the specified key, or null if there was no mapping for the key
    */
@@ -75,14 +75,12 @@ public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTest
   }
 
   /**
-   * Close the object that matches the key
+   * Close the object that matches the key.
    *
    * @param key Key of the item to close
    */
-  private void closeForKey(Object key)
-  {
-    if(super.contains(key))
-    {
+  private void closeForKey(Object key) {
+    if (super.contains(key)) {
       super.get(key).close();
     }
   }

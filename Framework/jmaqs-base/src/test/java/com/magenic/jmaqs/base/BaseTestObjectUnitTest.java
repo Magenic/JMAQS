@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.base;
@@ -7,13 +7,10 @@ package com.magenic.jmaqs.base;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.function.Supplier;
-
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
@@ -327,7 +324,6 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
       }
     };
   }*/
-
 
   private DriverManager getDriverManager(BaseTestObject testObject, Supplier supplier) {
     return new DriverManager(supplier, testObject) {

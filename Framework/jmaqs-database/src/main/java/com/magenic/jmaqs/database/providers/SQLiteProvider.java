@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.database.providers;
@@ -31,9 +31,6 @@ public class SQLiteProvider implements IDataSourceProvider {
     this.dbUrl = dbUrl;
   }
 
-  /**
-   * @see IDataSourceProvider#getDataSource().
-   */
   @Override
   public DataSource getDataSource() {
     SQLiteDataSource dataSource = new SQLiteDataSource();
@@ -41,9 +38,6 @@ public class SQLiteProvider implements IDataSourceProvider {
     return dataSource;
   }
 
-  /**
-   * @see IDataSourceProvider#getDialect().
-   */
   @Override
   public String getDialect() {
     return dataProviderType.getDialectString();

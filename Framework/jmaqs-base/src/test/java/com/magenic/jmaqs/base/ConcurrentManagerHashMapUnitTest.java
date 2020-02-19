@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.base;
@@ -48,7 +48,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
     newHash.put("2", temp);
 
-    Assert.assertTrue(newHash.remove("2", temp ), "Did not remove");
+    Assert.assertTrue(newHash.remove("2", temp), "Did not remove");
 
     Assert.assertTrue(newHash.containsKey("1"), "Expected item '1'");
     Assert.assertFalse(newHash.containsKey("2"), "Was not expecting item '2'");
@@ -63,8 +63,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     BaseTestObject temp2 = new BaseTestObject(this.getTestObject());
     newHash.put("2", temp);
 
-
-    Assert.assertEquals(temp, newHash.replace("2", temp2 ), "Did not replace");
+    Assert.assertEquals(temp, newHash.replace("2", temp2), "Did not replace");
 
     Assert.assertTrue(newHash.containsKey("1"), "Expected item '1'");
     Assert.assertTrue(newHash.containsKey("2"), "Expected item '2'");
@@ -79,7 +78,7 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     BaseTestObject temp2 = new BaseTestObject(this.getTestObject());
     newHash.put("2", temp);
 
-    Assert.assertTrue(newHash.replace("2", temp, temp2 ), "Did not replace");
+    Assert.assertTrue(newHash.replace("2", temp, temp2), "Did not replace");
 
     Assert.assertTrue(newHash.containsKey("1"), "Expected item '1'");
     Assert.assertTrue(newHash.containsKey("2"), "Expected item '2'");
@@ -87,14 +86,14 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     Assert.assertFalse(temp2.getClosed(), "Did not expect new item to be closed");
   }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#beforeLoggingTeardown(org.testng.
-     * ITestResult)
-     */
-    @Override
-    protected void beforeLoggingTeardown(ITestResult resultType) {
+  /*
+   * (non-Javadoc)
+   *
+   * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest#beforeLoggingTeardown(org.testng.
+   * ITestResult)
+   */
+  @Override
+  protected void beforeLoggingTeardown(ITestResult resultType) {
 
-    }
   }
+}
