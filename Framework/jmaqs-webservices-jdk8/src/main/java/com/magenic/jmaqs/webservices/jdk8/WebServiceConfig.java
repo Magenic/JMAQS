@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2020 (C) Magenic, All rights Reserved
  */
@@ -33,8 +32,7 @@ public final class WebServiceConfig {
   /**
    * Gets the expected time out in seconds.
    *
-   * @return an Integer containing the Time Out value for
-   * the web service test, or -1 if none are configured
+   * @return the Time Out value for the web service test, or -1 if none are configured
    */
   public static int getWebServiceTimeOut() {
     return Integer

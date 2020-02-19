@@ -27,7 +27,7 @@ public class DatabaseConfig {
   private static final ConfigSection DATABASE_SECTION = ConfigSection.DatabaseMaqs;
 
   /**
-   * Field DATABASE_CAPS_SECTION
+   * Field DATABASE_CAPS_SECTION.
    */
   private static final ConfigSection DATABASE_CAPS_SECTION = ConfigSection.DatabaseCapsMaqs;
 
@@ -106,7 +106,7 @@ public class DatabaseConfig {
   }
 
   /**
-   * Method getDatabaseCapabilitiesAsObjects
+   * Method getDatabaseCapabilitiesAsObjects.
    *
    * @return the databaseCapabilitiesAsObjects of this DatabaseConfig object.
    */
@@ -115,10 +115,9 @@ public class DatabaseConfig {
   }
 
   /**
-   * Method getDatabaseCapabilitiesAsStrings
+   * Method getDatabaseCapabilitiesAsStrings.
    *
    * @return the databaseCapabilitiesAsStrings of this DatabaseConfig object.
-   *
    */
   public static Map<String, String> getDatabaseCapabilitiesAsStrings() {
     return Config.getSection(DATABASE_CAPS_SECTION);
