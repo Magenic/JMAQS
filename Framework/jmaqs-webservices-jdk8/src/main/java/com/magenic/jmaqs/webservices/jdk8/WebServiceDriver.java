@@ -5,11 +5,9 @@
 package com.magenic.jmaqs.webservices.jdk8;
 
 import com.beust.jcommander.internal.Lists;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
@@ -46,11 +44,9 @@ public class WebServiceDriver {
 
   /**
    * Constructor.
-   * 
-   * @param baseAddress
-   *          The base URI address to use
-   * @throws URISyntaxException
-   *           URI syntax is invalid
+   *
+   * @param baseAddress The base URI address to use
+   * @throws URISyntaxException URI syntax is invalid
    */
   public WebServiceDriver(String baseAddress) throws URISyntaxException {
     this(new URI(baseAddress));
@@ -58,9 +54,8 @@ public class WebServiceDriver {
 
   /**
    * Constructor.
-   * 
-   * @param baseAddress
-   *          The base URI address to use
+   *
+   * @param baseAddress The base URI address to use
    */
   public WebServiceDriver(URI baseAddress) {
     this.baseAddress = baseAddress;
@@ -68,6 +63,7 @@ public class WebServiceDriver {
 
   /**
    * Class Constructor that sets the http Client.
+   *
    * @param newHttpClient the http client to be set.
    */
   public WebServiceDriver(CloseableHttpClient newHttpClient) {
@@ -76,9 +72,8 @@ public class WebServiceDriver {
 
   /**
    * Set the HTTP client.
-   * 
-   * @param httpClient
-   *          The HTTP client
+   *
+   * @param httpClient The HTTP client
    */
   public void setHttpClient(CloseableHttpClient httpClient) {
     this.baseHttpClient = httpClient;
@@ -86,7 +81,7 @@ public class WebServiceDriver {
 
   /**
    * Get the HTTP client.
-   * 
+   *
    * @return the HttpClient to interact with
    */
   public CloseableHttpClient getHttpClient(String mediaType) {
@@ -101,7 +96,7 @@ public class WebServiceDriver {
 
   /**
    * Get the base URI.
-   * 
+   *
    * @return A URI containing the Web Service Address.
    */
   public URI getBaseWebServiceAddress() {
@@ -110,11 +105,9 @@ public class WebServiceDriver {
 
   /**
    * Sets the base Web Service address for the Web Service Driver.
-   * 
-   * @param address
-   *          The string to set the URI to
-   * @throws URISyntaxException
-   *           thrown when the string can't be parsed into a URI object
+   *
+   * @param address The string to set the URI to
+   * @throws URISyntaxException thrown when the string can't be parsed into a URI object
    */
   public void setBaseWebServiceAddress(String address) throws URISyntaxException {
     this.baseAddress = new URI(address);
@@ -122,16 +115,12 @@ public class WebServiceDriver {
 
   /**
    * Do a web service get.
-   * 
-   * @param requestUri
-   *          The request URI
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param requestUri      The request URI
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   public CloseableHttpResponse getContent(String requestUri, ContentType returnMediaType,
       boolean expectSuccess) throws IOException, URISyntaxException {
@@ -140,16 +129,12 @@ public class WebServiceDriver {
 
   /**
    * Do a web service get.
-   * 
-   * @param requestUri
-   *          The request URI
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param requestUri      The request URI
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   public CloseableHttpResponse getContent(String requestUri, String returnMediaType,
       boolean expectSuccess) throws IOException, URISyntaxException {
@@ -160,18 +145,13 @@ public class WebServiceDriver {
 
   /**
    * Do a web service put.
-   * 
-   * @param requestUri
-   *          The request URI
-   * @param content
-   *          Put content
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param requestUri      The request URI
+   * @param content         Put content
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   public CloseableHttpResponse putContent(String requestUri, HttpEntity content,
       ContentType returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
@@ -180,18 +160,13 @@ public class WebServiceDriver {
 
   /**
    * Do a web service put.
-   * 
-   * @param requestUri
-   *          The request URI
-   * @param content
-   *          Put content
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param requestUri      The request URI
+   * @param content         Put content
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   public CloseableHttpResponse putContent(String requestUri, HttpEntity content,
       String returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
@@ -202,18 +177,13 @@ public class WebServiceDriver {
 
   /**
    * Do a web service patch.
-   * 
-   * @param requestUri
-   *          The request URI
-   * @param content
-   *          Patch content
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param requestUri      The request URI
+   * @param content         Patch content
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   public CloseableHttpResponse patchContent(String requestUri, HttpEntity content,
       ContentType returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
@@ -222,18 +192,13 @@ public class WebServiceDriver {
 
   /**
    * Do a web service patch.
-   * 
-   * @param requestUri
-   *          The request URI
-   * @param content
-   *          Patch content
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param requestUri      The request URI
+   * @param content         Patch content
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   public CloseableHttpResponse patchContent(String requestUri, HttpEntity content,
       String returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
@@ -244,18 +209,13 @@ public class WebServiceDriver {
 
   /**
    * Do a web service post.
-   * 
-   * @param requestUri
-   *          The request URI
-   * @param content
-   *          Post content
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param requestUri      The request URI
+   * @param content         Post content
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   public CloseableHttpResponse postContent(String requestUri, HttpEntity content,
       ContentType returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
@@ -264,18 +224,13 @@ public class WebServiceDriver {
 
   /**
    * Do a web service post.
-   * 
-   * @param requestUri
-   *          The request URI
-   * @param content
-   *          Post content
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param requestUri      The request URI
+   * @param content         Post content
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   public CloseableHttpResponse postContent(String requestUri, HttpEntity content,
       String returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
@@ -287,16 +242,12 @@ public class WebServiceDriver {
 
   /**
    * Do a web service delete.
-   * 
-   * @param requestUri
-   *          The request URI
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param requestUri      The request URI
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   public CloseableHttpResponse deleteContent(String requestUri, ContentType returnMediaType,
       boolean expectSuccess) throws IOException, URISyntaxException {
@@ -305,16 +256,12 @@ public class WebServiceDriver {
 
   /**
    * Do a web service delete.
-   * 
-   * @param requestUri
-   *          The request URI
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param requestUri      The request URI
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   public CloseableHttpResponse deleteContent(String requestUri, String returnMediaType,
       boolean expectSuccess) throws IOException, URISyntaxException {
@@ -326,16 +273,12 @@ public class WebServiceDriver {
 
   /**
    * Execute a web service call.
-   * 
-   * @param request
-   *          The web service call to execute
-   * @param returnMediaType
-   *          The return media type
-   * @param expectSuccess
-   *          Check to make sure a success code was returned, if not throw an exception
+   *
+   * @param request         The web service call to execute
+   * @param returnMediaType The return media type
+   * @param expectSuccess   Check to make sure a success code was returned, if not throw an exception
    * @return An HTTP response
-   * @throws Exception
-   *           A web service call exception
+   * @throws Exception A web service call exception
    */
   private CloseableHttpResponse executeRequest(HttpUriRequest request, String returnMediaType,
       boolean expectSuccess) throws IOException {
@@ -377,7 +320,7 @@ public class WebServiceDriver {
 
   /**
    * Get the request configuration.
-   * 
+   *
    * @return The request configuration
    */
   private RequestConfig getRequestTimeouts() {
