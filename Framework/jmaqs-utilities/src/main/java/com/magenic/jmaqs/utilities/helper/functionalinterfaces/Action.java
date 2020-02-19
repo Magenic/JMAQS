@@ -1,11 +1,17 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.utilities.helper.functionalinterfaces;
 
 /**
- * No param, no output functional interface
+ * No param, no output functional interface.
  */
 @FunctionalInterface
 public interface Action {
 
-	/** invokes the functional interface when called */
-	void invoke();
+  /**
+   * invokes the functional interface when called.
+   */
+  void invoke();
 }
