@@ -4,6 +4,8 @@
 
 package com.magenic.jmaqs.base;
 
+import static java.lang.System.out;
+
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
@@ -28,7 +30,6 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import static java.lang.System.out;
 
 /**
  * Base test class.
