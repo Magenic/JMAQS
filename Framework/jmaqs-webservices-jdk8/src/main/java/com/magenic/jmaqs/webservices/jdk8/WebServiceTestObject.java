@@ -48,7 +48,8 @@ public class WebServiceTestObject extends BaseTestObject {
   }
 
   /**
-   * Gets the Web Service driver managers
+   * Gets the Web Service driver managers.
+   *
    * @return the web service manager.
    */
   public WebServiceDriverManager getWebServiceDriverManager() {

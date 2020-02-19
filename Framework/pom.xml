@@ -71,10 +71,10 @@
         <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
         <compiler.plugin.version>3.6.1</compiler.plugin.version>
         <surefire.plugin.version>3.0.0-M4</surefire.plugin.version>
-        <mvncheckstyle.plugin.version>2.17</mvncheckstyle.plugin.version>
+        <mvncheckstyle.plugin.version>3.1.0</mvncheckstyle.plugin.version>
         <nexusstaging.plugin.version>1.6.8</nexusstaging.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <puppycheckstyle.plugin.version>7.6.1</puppycheckstyle.plugin.version>
+        <puppycheckstyle.plugin.version>8.29</puppycheckstyle.plugin.version>
         <jacoco.version>0.8.5</jacoco.version>
         <testng.version>7.1.0</testng.version>
         <selenium.version>3.141.59</selenium.version>
@@ -134,34 +134,34 @@
                 </configuration>
             </plugin>
             <!--<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${mvncheckstyle.plugin.version}</version>
-				<dependencies>
-					<dependency>
-						<groupId>com.puppycrawl.tools</groupId>
-						<artifactId>checkstyle</artifactId>
-						<version>${puppycheckstyle.plugin.version}</version>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-						<id>checkstyle</id>
-						<phase>validate</phase>
-						<configuration>
-							<failOnViolation>true</failOnViolation>
-							<configLocation>maqs_checks.xml</configLocation>
-							<encoding>UTF-8</encoding>
-							<consoleOutput>true</consoleOutput>
-							<linkXRef>false</linkXRef>
-							<violationSeverity>warning</violationSeverity>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${mvncheckstyle.plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>${puppycheckstyle.plugin.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <id>checkstyle</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <failOnViolation>true</failOnViolation>
+                            <configLocation>maqs_checks.xml</configLocation>
+                            <encoding>${project.build.sourceEncoding}</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <linkXRef>false</linkXRef>
+                            <violationSeverity>warning</violationSeverity>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
         </plugins>
     </build>
 </project>

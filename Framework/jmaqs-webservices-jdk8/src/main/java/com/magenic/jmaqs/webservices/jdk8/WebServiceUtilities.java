@@ -23,12 +23,12 @@ import org.apache.http.util.EntityUtils;
  */
 public final class WebServiceUtilities {
   /**
-   * ObjecMapper for serializing and deserializing json
+   * ObjecMapper for serializing and deserializing json.
    */
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
   /**
-   * XmlMapper used for serializing and deserializing xml
+   * XmlMapper used for serializing and deserializing xml.
    */
   private static final ObjectMapper xmlMapper = new XmlMapper();
 
@@ -76,7 +76,7 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Create the string entity
+   * Create the string entity.
    *
    * @param body      The body being set in the entity
    * @param encoding  The charset encoding of the message
@@ -90,7 +90,7 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Creates the string content
+   * Creates the string content.
    *
    * @param body        The body being set in the entity
    * @param contentType The content type of the
@@ -111,7 +111,7 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Gets the json object as a string
+   * Gets the json object as a string.
    *
    * @param body The body being serialized to a string
    * @param <T>  The type of the body
@@ -123,7 +123,7 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Gets the xml object as a string
+   * Gets the xml object as a string.
    *
    * @param body The body being serialized to a string
    * @param <T>  The type of the body
@@ -135,7 +135,7 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Deserialzizes the response to the object specified
+   * Deserialzizes the response to the object specified.
    *
    * @param message The httpresponse message being deserialized
    * @param <T>     The type the message will be deserialized to
@@ -149,7 +149,7 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Deserializes the response to the object specified
+   * Deserializes the response to the object specified.
    *
    * @param message The http response message being deserialized
    * @param <T>     The tyep the message will be deserialied to

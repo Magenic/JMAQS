@@ -1,11 +1,10 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.base;
 
 import java.lang.reflect.Method;
-
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 
@@ -22,6 +21,7 @@ public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseT
   protected BaseExtendableTest() {
   }
 
+  @Override
   public T getTestObject() {
     return (T) super.getTestObject();
   }
@@ -37,10 +37,11 @@ public abstract class BaseExtendableTest<T extends BaseTestObject> extends BaseT
 
   @BeforeMethod
   @Override
-  public void setup(Method method, ITestContext testContext) throws Exception {
+  public void setup(Method method, ITestContext testContext) {
     super.setup(method, testContext);
   }
 
+  @Override
   protected abstract void createNewTestObject();
 }
 

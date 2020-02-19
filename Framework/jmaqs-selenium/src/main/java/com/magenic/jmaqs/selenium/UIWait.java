@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium;
@@ -22,7 +22,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Coordinates;
 import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -287,7 +286,6 @@ public class UIWait {
     WebElement element = this.waitForVisibleElement(by);
     FluentWait<WebElement> fluentWait = FluentWaitFactory
         .getNewElementFluentWait(element, timeOutInMillis, sleepInMillis);
-
     Function<WebElement, Boolean> function = obj -> {
       try {
         return obj.isEnabled();
@@ -486,7 +484,7 @@ public class UIWait {
    */
   public boolean waitUntilExactText(final By by, final String text, WebDriverWait wait) {
     try {
-      return wait.until((ExpectedCondition<Boolean>) function -> doesTextMatch(by, text));
+      return wait.until(function -> doesTextMatch(by, text));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       return false;
     }
@@ -543,7 +541,7 @@ public class UIWait {
    */
   public boolean waitUntilContainsText(final By by, final String text, WebDriverWait wait) {
     try {
-      return wait.until((ExpectedCondition<Boolean>) function -> doesContainsText(by, text));
+      return wait.until(function -> doesContainsText(by, text));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       return false;
     }
@@ -668,8 +666,7 @@ public class UIWait {
   public boolean waitUntilAttribute(final By by, final String attribute, final String text,
       WebDriverWait wait, final boolean contains) {
     try {
-      return wait.until(
-          (ExpectedCondition<Boolean>) f -> attributeMatches(f, by, attribute, text, contains));
+      return wait.until(f -> attributeMatches(f, by, attribute, text, contains));
     } catch (NoSuchElementException | StaleElementReferenceException | TimeoutException e) {
       return false;
     }

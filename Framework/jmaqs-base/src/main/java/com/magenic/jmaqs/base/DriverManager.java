@@ -1,11 +1,10 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.base;
 
 import com.magenic.jmaqs.utilities.logging.Logger;
-
 import java.util.function.Supplier;
 
 /**

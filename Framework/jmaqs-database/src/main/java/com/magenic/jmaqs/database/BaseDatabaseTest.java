@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.database;
@@ -8,7 +8,7 @@ import com.magenic.jmaqs.base.BaseExtendableTest;
 import org.testng.ITestResult;
 
 /**
- * Base Database Test Class
+ * Base Database Test Class.
  */
 public class BaseDatabaseTest extends BaseExtendableTest<DatabaseTestObject> {
 
@@ -16,7 +16,7 @@ public class BaseDatabaseTest extends BaseExtendableTest<DatabaseTestObject> {
   }
 
   /**
-   * Get Database Driver from TestObject
+   * Get Database Driver from TestObject.
    *
    * @return the databaseDriver (type DatabaseDriver) of this BaseDatabaseTest object.
    */
@@ -34,7 +34,7 @@ public class BaseDatabaseTest extends BaseExtendableTest<DatabaseTestObject> {
   }
 
   /**
-   * Get a new DatabaseDriver from the ConnectionFactory
+   * Get a new DatabaseDriver from the ConnectionFactory.
    *
    * @return the connection (type DatabaseDriver) of this BaseDatabaseTest object.
    */
@@ -49,7 +49,8 @@ public class BaseDatabaseTest extends BaseExtendableTest<DatabaseTestObject> {
 
   @Override
   protected void createNewTestObject() {
-    this.setTestObject(new DatabaseTestObject(this.getConnection(), this.createLogger(), this.getFullyQualifiedTestClassName()));
+    this.setTestObject(new DatabaseTestObject(this.getConnection(), this.createLogger(),
+        this.getFullyQualifiedTestClassName()));
   }
 
 }

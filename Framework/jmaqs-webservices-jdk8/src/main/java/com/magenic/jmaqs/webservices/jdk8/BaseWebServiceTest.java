@@ -5,12 +5,9 @@
 package com.magenic.jmaqs.webservices.jdk8;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
-
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
-
 import java.net.URISyntaxException;
-
 import org.testng.ITestResult;
 
 /**
@@ -28,9 +25,9 @@ public abstract class BaseWebServiceTest extends BaseExtendableTest<WebServiceTe
   }
 
   /**
-   * Set the webServiceDriver
+   * Set the webServiceDriver.
    *
-   * @param webServiceDriver
+   * @param webServiceDriver the webservice driver object
    */
   public void setWebServiceDriver(WebServiceDriver webServiceDriver) {
     this.getTestObject().setWebServiceDriver(webServiceDriver);
@@ -42,23 +39,26 @@ public abstract class BaseWebServiceTest extends BaseExtendableTest<WebServiceTe
    * @see com.magenic.jmaqs.utilities.BaseTest.BaseTest# beforeLoggingTeardown
    * (org.testng.ITestResult)
    */
-  @Override protected void beforeLoggingTeardown(ITestResult resultType) {
+  @Override
+  protected void beforeLoggingTeardown(ITestResult resultType) {
     // There is no before logging tear-down required
   }
 
   /**
-   * Gets new WebServiceDriver
+   * Gets new WebServiceDriver.
+   *
    * @return WebServiceDriver
-   * @throws URISyntaxException
+   * @throws URISyntaxException when URI is incorrect
    */
   protected WebServiceDriver getWebServiceClient() throws URISyntaxException {
     return new WebServiceDriver(WebServiceConfig.getWebServiceUri());
   }
 
   /**
-   * Creates a new test object
+   * Creates a new test object.
    */
-  @Override protected void createNewTestObject() {
+  @Override
+  protected void createNewTestObject() {
     Logger logger = this.createLogger();
     try {
 
