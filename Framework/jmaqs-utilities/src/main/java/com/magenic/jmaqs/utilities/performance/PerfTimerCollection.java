@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2017 (C) Magenic, All rights Reserved
  */
 
@@ -23,54 +23,48 @@ public class PerfTimerCollection {
 
   /**
    * Gets the Logger.
-   * 
-   * @return
-   *          The Logger
+   *
+   * @return The Logger
    */
   protected Logger getLog() {
-    return this.log;  
+    return this.log;
   }
 
   /**
    * Sets the Logger.
-   * 
-   * @param logger
-   *                The logger to set.
+   *
+   * @param logger The logger to set.
    */
   private void setLog(Logger logger) {
-    this.log = logger;  
+    this.log = logger;
   }
 
   /**
    * Gets the Test Name.
-   * 
-   * @return
-   *          The Test Name
+   *
+   * @return The Test Name
    */
   public String getTestName() {
-    return this.testName;  
+    return this.testName;
   }
 
   /**
    * Sets the Test Name.
-   * 
-   * @param testName
-   *                  The Test Name
+   *
+   * @param testName The Test Name
    */
   public void setTestName(String testName) {
-    this.testName = testName;  
+    this.testName = testName;
   }
 
   /**
    * Initializes a new instance of the PerfTimerCollection class.
-   * 
-   * @param logger
-   *                Logger to use
-   * @param fullyQualifiedTestName
-   *                Test Name
+   *
+   * @param logger                 Logger to use
+   * @param fullyQualifiedTestName Test Name
    */
   public PerfTimerCollection(Logger logger, String fullyQualifiedTestName) {
     this.log = logger;
     this.testName = fullyQualifiedTestName;
-  }  
+  }
 }

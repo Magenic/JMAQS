@@ -7,7 +7,6 @@ package com.magenic.jmaqs.database.providers;
 import com.magenic.jmaqs.database.DatabaseConfig;
 import com.magenic.jmaqs.database.constants.DataProviderType;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
-
 import javax.sql.DataSource;
 
 public class SQLProvider implements IDataSourceProvider {

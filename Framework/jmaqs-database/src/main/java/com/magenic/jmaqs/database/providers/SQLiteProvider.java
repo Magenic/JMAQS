@@ -31,9 +31,6 @@ public class SQLiteProvider implements IDataSourceProvider {
     this.dbUrl = dbUrl;
   }
 
-  /**
-   * @see IDataSourceProvider#getDataSource().
-   */
   @Override
   public DataSource getDataSource() {
     SQLiteDataSource dataSource = new SQLiteDataSource();
@@ -41,9 +38,6 @@ public class SQLiteProvider implements IDataSourceProvider {
     return dataSource;
   }
 
-  /**
-   * @see IDataSourceProvider#getDialect().
-   */
   @Override
   public String getDialect() {
     return dataProviderType.getDialectString();
