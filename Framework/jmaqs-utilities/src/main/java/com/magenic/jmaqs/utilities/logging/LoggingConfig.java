@@ -6,17 +6,15 @@ package com.magenic.jmaqs.utilities.logging;
 
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-
 import java.io.File;
 
 /**
  * Get logging config data.
- *
  */
 public class LoggingConfig {
   /**
    * Get our logging state - Yes, no or on failure.
-   * 
+   *
    * @return The log enabled state
    */
   public static LoggingEnabled getLoggingEnabledSetting() {
@@ -28,8 +26,9 @@ public class LoggingConfig {
       case "NO":
         return LoggingEnabled.NO;
       default:
-        throw new IllegalArgumentException(StringProcessor.safeFormatter(
-                "Log value %s is not a valid option", Config.getGeneralValue("Log", "NO")));
+        throw new IllegalArgumentException(StringProcessor
+            .safeFormatter("Log value %s is not a valid option",
+                Config.getGeneralValue("Log", "NO")));
     }
   }
 
@@ -55,16 +54,16 @@ public class LoggingConfig {
       case "SUSPENDED":
         return MessageType.SUSPENDED;       // All logging is suspended
       default:
-        throw new IllegalArgumentException(StringProcessor.safeFormatter(
-                "Logging level value '{0}' is not a valid option", Config.getGeneralValue("LogLevel")));
+        throw new IllegalArgumentException(StringProcessor
+            .safeFormatter("Logging level value '{0}' is not a valid option",
+                Config.getGeneralValue("LogLevel")));
     }
   }
 
   /**
    * Get the logger.
    *
-   * @param fileName
-   *          File name to use for the log
+   * @param fileName File name to use for the log
    * @return The logger
    */
   public static Logger getLogger(String fileName) {
@@ -84,14 +83,15 @@ public class LoggingConfig {
       case "TXT":
         return new FileLogger(false, logDirectory, fileName, loggingLevel);
       default:
-        throw new IllegalArgumentException(StringProcessor.safeFormatter(
-            "Log type %s is not a valid option", Config.getGeneralValue("LogType", "CONSOLE")));
+        throw new IllegalArgumentException(StringProcessor
+            .safeFormatter("Log type %s is not a valid option",
+                Config.getGeneralValue("LogType", "CONSOLE")));
     }
   }
 
   /**
    * Gets the File Directory to store log files.
-   * 
+   *
    * @return String of file path
    */
   public static String getLogDirectory() {

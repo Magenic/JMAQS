@@ -348,11 +348,11 @@ public final class GenericWait {
     do {
       try {
         T value = waitFor.get();
-        
+
         if (value != null) {
-        	return value;
+          return value;
         }
-        
+
       } catch (Exception e) {
         exception = e;
       }

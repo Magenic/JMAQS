@@ -75,7 +75,7 @@ public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTest
   }
 
   /**
-   * Close the object that matches the key
+   * Close the object that matches the key.
    *
    * @param key Key of the item to close
    */

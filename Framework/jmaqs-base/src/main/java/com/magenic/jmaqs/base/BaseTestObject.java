@@ -52,7 +52,7 @@ public class BaseTestObject implements AutoCloseable {
   private String fullyQualifiedTestName;
 
   /**
-   * Was the object closed
+   * Was the object closed.
    */
   private boolean isClosed = false;
 
