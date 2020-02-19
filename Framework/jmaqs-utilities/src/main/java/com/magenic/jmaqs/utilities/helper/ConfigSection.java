@@ -30,7 +30,7 @@ public enum ConfigSection {
   DatabaseMaqs,
 
   /**
-   * Database Caps Section
+   * Database Caps Section.
    */
   DatabaseCapsMaqs,
 

@@ -106,18 +106,19 @@ public class DatabaseConfig {
   }
 
   /**
-   * Method getDatabaseCapabilitiesAsObjects returns the databaseCapabilitiesAsObjects of this DatabaseConfig object.
+   * Method getDatabaseCapabilitiesAsObjects
    *
-   * @return the databaseCapabilitiesAsObjects (type Map of String keys and Object values) of this DatabaseConfig object.
+   * @return the databaseCapabilitiesAsObjects of this DatabaseConfig object.
    */
   public static Map<String, Object> getDatabaseCapabilitiesAsObjects() {
     return new HashMap<>(getDatabaseCapabilitiesAsStrings());
   }
 
   /**
-   * Method getDatabaseCapabilitiesAsStrings returns the databaseCapabilitiesAsStrings of this DatabaseConfig object.
+   * Method getDatabaseCapabilitiesAsStrings
    *
-   * @return the databaseCapabilitiesAsStrings (type Map of String keys and String values) of this DatabaseConfig object.
+   * @return the databaseCapabilitiesAsStrings of this DatabaseConfig object.
+   *
    */
   public static Map<String, String> getDatabaseCapabilitiesAsStrings() {
     return Config.getSection(DATABASE_CAPS_SECTION);
