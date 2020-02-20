@@ -14,8 +14,8 @@ selenium:
   - Framework/jmaqs-selenium/**/*
   
 webservices:
-  - Framework/jmaqs-webservices/*
-  - Framework/jmaqs-webservices/**/*
+  - Framework/jmaqs-webservices-jdk8/*
+  - Framework/jmaqs-webservices-jdk8/**/*
   
 utilities:
   - Framework/jmaqs-utilities/*
