@@ -1,0 +1,26 @@
+framework:
+ - Framework/*
+ 
+base:
+ - Framework/jmaqs-base/*
+ - Framework/jmaqs-base/**/*
+ 
+appium:
+  - Framework/jmaqs-appium/*
+  - Framework/jmaqs-appium/**/*
+  
+selenium:
+  - Framework/jmaqs-selenium/*
+  - Framework/jmaqs-selenium/**/*
+  
+webservices:
+  - Framework/jmaqs-webservices-jdk8/*
+  - Framework/jmaqs-webservices-jdk8/**/*
+  
+utilities:
+  - Framework/jmaqs-utilities/*
+  - Framework/jmaqs-utilities/**/*
+  
+database:
+  - Framework/jmaqs-database/*
+  - Framework/jmaqs-database/**/*
