@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.database;
@@ -19,20 +19,20 @@ import org.testng.asserts.SoftAssert;
 
 public class ConnectionFactoryUnitTest extends BaseGenericTest {
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetEntityManagerFactory() {
     final EntityManagerFactory entityManagerFactory = ConnectionFactory.getEntityManagerFactory();
     Assert.assertNotNull(entityManagerFactory);
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetProperties() {
     final Properties properties = ConnectionFactory.getProperties();
     Assert.assertNotNull(properties);
 
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetEntityClassNames() throws ClassNotFoundException, IOException {
     final List<String> entityClassNames = ConnectionFactory.getEntityClassNames();
     SoftAssert softAssert = new SoftAssert();
@@ -50,7 +50,7 @@ public class ConnectionFactoryUnitTest extends BaseGenericTest {
     softAssert.assertAll();
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetEntityFiles() {
     SoftAssert softAssert = new SoftAssert();
     final File[] entityFiles = ConnectionFactory.getEntityFiles();

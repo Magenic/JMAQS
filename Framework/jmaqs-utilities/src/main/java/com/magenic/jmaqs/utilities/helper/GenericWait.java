@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.utilities.helper;
@@ -348,11 +348,11 @@ public final class GenericWait {
     do {
       try {
         T value = waitFor.get();
-        
+
         if (value != null) {
-        	return value;
+          return value;
         }
-        
+
       } catch (Exception e) {
         exception = e;
       }

@@ -21,7 +21,7 @@ public class WebServiceDriverUnitTest extends BaseGenericTest {
    *
    * @throws Exception Web service get failed
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceGetVerificationTest() throws Exception {
     WebServiceDriver client = new WebServiceDriver("http://magenicautomation.azurewebsites.net");
     CloseableHttpResponse response = client
@@ -37,7 +37,7 @@ public class WebServiceDriverUnitTest extends BaseGenericTest {
    *
    * @throws Exception Web service get failed
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void setWebServiceAddress() throws Exception {
     WebServiceDriver webServiceDriver = new WebServiceDriver(
         "http://magenicautomation.azurewebsites.net");
@@ -50,7 +50,7 @@ public class WebServiceDriverUnitTest extends BaseGenericTest {
   /**
    * Verifies that basic GET features work with the WebServiceDriver.
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void setHttpClient() throws URISyntaxException {
     WebServiceDriver webServiceDriver1 = new WebServiceDriver(
         "http://magenicautomation.azurewebsites.net");

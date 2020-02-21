@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.base;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class BaseGenericTestUnitTest extends BaseGenericTest {
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testCreateTestObject() {
     Assert.assertNotNull(this.getTestObject());
   }

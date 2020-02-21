@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.utilities;
@@ -22,7 +22,7 @@ public class ListProcessorUnitTest {
    * Unit Test for creating a comma delimited string.
    */
 
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void createCommaDelimitedStringTest() {
     ArrayList<String> stringList = new ArrayList<String>();
 
@@ -47,7 +47,7 @@ public class ListProcessorUnitTest {
    * Unit Test for creating a sorted comma delimited string.
    */
 
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void createSortedCommaDelimitedStringTest() {
     ArrayList<String> stringList = new ArrayList<String>();
     stringList.add("Maine");
@@ -71,7 +71,7 @@ public class ListProcessorUnitTest {
    * Unit Test for comparing two lists of strings.
    */
 
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void listOfStringsComparerTest() {
 
     final StringBuilder results = new StringBuilder();
@@ -101,7 +101,7 @@ public class ListProcessorUnitTest {
   /**
    * Unit Test for comparing two lists of strings by order.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void listOfStringsComparerByOrderTest() {
     final StringBuilder results = new StringBuilder();
     ArrayList<String> expectedList = new ArrayList<String>();
@@ -130,7 +130,7 @@ public class ListProcessorUnitTest {
   /**
    * Verify that listOfStringsComparer handles lists of unequal length as expected.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void listOfStringsComparerUnequalLengths() {
     final StringBuilder results = new StringBuilder();
     ArrayList<String> expectedList = new ArrayList<String>();
@@ -147,7 +147,7 @@ public class ListProcessorUnitTest {
   /**
    * Verify that ListOfStringsComparer handles not finding an item in the expected list correctly.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void listOfStringComparerItemNotFound() {
     final StringBuilder results = new StringBuilder();
     ArrayList<String> expectedList = new ArrayList<String>();
@@ -166,7 +166,7 @@ public class ListProcessorUnitTest {
   /**
    * Verify that listOfStringsComparer handles inequality between lists as expected.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void listOfStringsComparerItemNotMatching() {
     final StringBuilder results = new StringBuilder();
     ArrayList<String> expectedList = new ArrayList<String>();

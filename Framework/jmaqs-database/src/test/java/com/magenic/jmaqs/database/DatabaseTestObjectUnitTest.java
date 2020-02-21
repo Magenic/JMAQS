@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.database;
@@ -7,12 +7,11 @@ package com.magenic.jmaqs.database;
 import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 public class DatabaseTestObjectUnitTest extends BaseGenericTest {
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testDatabaseTestObject() {
     DatabaseDriver databaseDriver = ConnectionFactory.getOpenConnection();
 
@@ -21,7 +20,7 @@ public class DatabaseTestObjectUnitTest extends BaseGenericTest {
     Assert.assertNotNull(testObject, "Checking that database test object via driver is not null");
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetDatabaseDriver() {
     DatabaseDriver databaseDriver = ConnectionFactory.getOpenConnection();
 
@@ -31,7 +30,7 @@ public class DatabaseTestObjectUnitTest extends BaseGenericTest {
         "Checking that database driver can be retrieved from test object");
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetDatabaseManager() {
     DatabaseDriver databaseDriver = ConnectionFactory.getOpenConnection();
 
@@ -41,7 +40,7 @@ public class DatabaseTestObjectUnitTest extends BaseGenericTest {
         "Checking that database driver manager can be retrieved from test object");
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testSetDatabaseDriver() {
     DatabaseDriver databaseDriver = ConnectionFactory.getOpenConnection();
 

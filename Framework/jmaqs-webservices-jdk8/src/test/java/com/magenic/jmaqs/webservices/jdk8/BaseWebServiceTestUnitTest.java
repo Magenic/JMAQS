@@ -12,17 +12,17 @@ import java.net.URISyntaxException;
 
 public class BaseWebServiceTestUnitTest extends BaseWebServiceTest {
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetWebServiceDriver() {
     Assert.assertNotNull(this.getWebServiceDriver());
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetWebServiceTestObject() {
     Assert.assertNotNull(this.getTestObject());
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testSetWebServiceDriver() {
     int hashCode = this.getWebServiceDriver().hashCode();
     try {
@@ -34,7 +34,7 @@ public class BaseWebServiceTestUnitTest extends BaseWebServiceTest {
     Assert.assertNotEquals(hashCode, hashCode1);
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetWebServiceClient() throws URISyntaxException {
     Assert.assertNotNull(this.getWebServiceClient());
   }

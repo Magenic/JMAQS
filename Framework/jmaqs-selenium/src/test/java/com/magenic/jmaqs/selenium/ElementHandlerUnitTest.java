@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium;
@@ -83,7 +83,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit Test for creating a sorted comma delimited String.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void createSortedCommaDelimitedStringFromWebElementsTest() {
     String expectedText = "Hard Drive, Keyboard, Monitor, Motherboard, Mouse, Power Supply";
     navigateToUrl();
@@ -95,7 +95,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit Test for creating a sorted comma delimited String.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void createCommaDelimitedStringFromWebElementsTest() {
     String expectedText = "Motherboard, Power Supply, Hard Drive, Monitor, Mouse, Keyboard";
     navigateToUrl();
@@ -107,7 +107,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit test for entering text into a textbox and getting text from a textbox.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void setTextBoxAndVerifyValueTest() {
     String expectedValue = "Tester";
     navigateToUrl();
@@ -119,7 +119,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit Test for checking a radio button.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void checkRadioButtonTest() {
     navigateToUrl();
     ElementHandler.clickButton(getWebDriver(), femaleRadioButton, false);
@@ -131,7 +131,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit Test for checking a checkbox.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void checkCheckBoxTest() {
     navigateToUrl();
     ElementHandler.checkCheckBox(getWebDriver(), checkbox, true);
@@ -143,7 +143,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit Test for get element attribute function.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void getElementAttributeTest() {
     String expectedText = "http://magenicautomation.azurewebsites.net/Swagger";
     navigateToUrl();
@@ -155,7 +155,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    * Unit Test for selecting an item from a dropdown and getting the selected item from a dropdown
    * (By actual value).
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void selectItemFromDropDownTest() {
     String expectedSelection = "Emily";
     navigateToUrl();
@@ -169,7 +169,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    * Unit Test for selecting an item from a dropdown and getting the selected item from a dropdown
    * (By list value).
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void selectItemFromDropDownByValueTest() {
     String expectedSelection = "Jack";
     navigateToUrl();
@@ -183,7 +183,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    * Unit Test for selecting multiple items from a list box and getting all selected items in a list
    * box(By actual value).
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void selectMultipleItemsFromListBoxTest() {
     final StringBuilder results = new StringBuilder();
     ArrayList<String> itemsToSelect = new ArrayList<String>();
@@ -205,7 +205,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    * Unit Test for selecting multiple items from a list box and getting all selected items in a list
    * box(By list value).
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void selectMultipleItemsFromListBoxTestByValue() {
     ArrayList<String> itemsToSelect = new ArrayList<String>();
     itemsToSelect.add("one");
@@ -225,7 +225,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit test for ClickElementByJavaScript using a hover dropdown, where dropdown is not visible.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void clickElementByJavascriptFromHoverDropdown() {
     navigateToUrl();
     ElementHandler.clickElementByJavaScript(getWebDriver(), employeeButton);
@@ -236,7 +236,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test to verify scrolling into view.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void scrollIntoView() {
     navigateToUrl();
     ElementHandler.scrollIntoView(getWebDriver(), checkbox);
@@ -245,7 +245,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test to verify scrolling into view.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void scrollIntoViewWithCoords() {
     navigateToUrl();
     ElementHandler.scrollIntoView(getWebDriver(), checkbox, 50, 0);
@@ -254,7 +254,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test to verify scrolling into view when passing a parent WebElement.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void scrollIntoViewElement() {
     navigateToUrl();
     WebElement element = this.getWebDriver().findElement(By.cssSelector("body"));
@@ -264,7 +264,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test to verify scrolling into view when passing a parent WebElement with coordinates.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void scrollIntoViewElementWithCoords() {
     navigateToUrl();
     WebElement element = this.getWebDriver().findElement(By.cssSelector("body"));
@@ -274,7 +274,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Test to verify scrolling into view.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void executingScrolling() {
     navigateToUrl();
     ElementHandler.executeScrolling(getWebDriver(), 50, 0);
@@ -283,7 +283,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Unit test for ClickElementByJavaScript where the element is not present.
    */
-  @Test(expectedExceptions = NoSuchElementException.class, groups = TestCategories.Selenium)
+  @Test(expectedExceptions = NoSuchElementException.class, groups = TestCategories.SELENIUM)
   public void clickElementByJavascriptFromHoverDropdownNotFound() {
     navigateToUrl();
     ElementHandler.clickElementByJavaScript(getWebDriver(), By.cssSelector(".NotPresent"));
@@ -292,7 +292,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Verify slow type text is correctly typed.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void slowTypeTest() {
     navigateToUrl();
     ElementHandler.slowType(getWebDriver(), firstNameTextBox, "Test input slowtype");
@@ -305,7 +305,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    * Verify Send Secret Keys suspends logging.
    */
   @Ignore("This can be uncommented when the logger functions as expected.")
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void sendSecretTextSuspendLoggingTest() throws IOException {
     this.navigateToUrl();
     this.getWebDriver().findElement(firstNameTextBox).sendKeys("somethingTest");
@@ -325,7 +325,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    * Verify Send Secret Keys re-enables after suspending logging.
    */
   @Ignore("This can be uncommented when the logger functions as expected.")
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void sendSecretTextContinueLoggingTest() throws IOException {
     this.navigateToUrl();
     ElementHandler.sendSecretKeys(getWebDriver(), firstNameTextBox, "secretKeys", this.getLogger());

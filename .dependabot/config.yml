@@ -1,13 +1,12 @@
 version: 1
 update_configs:
 #  TODO: Modules will be enabled slowly as baseline stabilizes and framework matures.
-#  - package_manager: "java:maven"
-#    directory: "/Framework/"
-#    update_schedule: "daily"
-#    target_branch: "master"
-#    default_labels:
-#      - "framework"
-#      - "dependencies"
+  - package_manager: "java:maven"
+    directory: "/Framework"
+    update_schedule: "daily"
+    target_branch: "master"
+    default_labels:
+      - "dependencies"
 
 #  - package_manager: "java:maven"
 #    directory: "/Framework/jmaqs-base"
@@ -24,35 +23,35 @@ update_configs:
 #    default_labels:
 #      - "utilities"
 #      - "dependencies"
-
-  - package_manager: "java:maven"
-    directory: "/Framework/jmaqs-selenium"
-    update_schedule: "daily"
-    target_branch: "master"
-    default_labels: 
-      - "selenium"
-      - "dependencies"
-  
-  - package_manager: "java:maven"
-    directory: "/Framework/jmaqs-appium"
-    update_schedule: "daily"
-    target_branch: "master"
-    default_labels: 
-      - "appium"
-      - "dependencies"
-  
-  - package_manager: "java:maven"
-    directory: "/Framework/jmaqs-webservices-jdk8"
-    update_schedule: "daily"
-    target_branch: "master"
-    default_labels:
-      - "webservices"
-      - "dependencies"
-
-  - package_manager: "java:maven"
-    directory: "/Framework/jmaqs-database"
-    update_schedule: "daily"
-    target_branch: "master"
-    default_labels:
-      - "database"
-      - "dependencies"
+#
+#  - package_manager: "java:maven"
+#    directory: "/Framework/jmaqs-selenium"
+#    update_schedule: "daily"
+#    target_branch: "master"
+#    default_labels:
+#      - "selenium"
+#      - "dependencies"
+#
+#  - package_manager: "java:maven"
+#    directory: "/Framework/jmaqs-appium"
+#    update_schedule: "daily"
+#    target_branch: "master"
+#    default_labels:
+#      - "appium"
+#      - "dependencies"
+#
+#  - package_manager: "java:maven"
+#    directory: "/Framework/jmaqs-webservices-jdk8"
+#    update_schedule: "daily"
+#    target_branch: "master"
+#    default_labels:
+#      - "webservices"
+#      - "dependencies"
+#
+#  - package_manager: "java:maven"
+#    directory: "/Framework/jmaqs-database"
+#    update_schedule: "daily"
+#    target_branch: "master"
+#    default_labels:
+#      - "database"
+#      - "dependencies"

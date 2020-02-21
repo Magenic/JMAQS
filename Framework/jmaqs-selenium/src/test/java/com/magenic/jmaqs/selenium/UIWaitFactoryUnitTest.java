@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium;
@@ -42,7 +42,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Gets wait driver test.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void getWaitDriverTest() {
     UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
@@ -52,7 +52,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Gets wait driver when one exists.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void getWaitDriverWhenOneExists() {
     UIWait firstWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
     UIWait secondWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
@@ -64,7 +64,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Sets wait driver when driver key does not exist.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void setWaitDriverWhenDriverKeyDoesNotExist() {
     UIWait waitDriver = new UIWait(this.getWebDriver());
     UIWaitFactory.setWaitDriver(this.getWebDriver(), waitDriver);
@@ -78,7 +78,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Sets wait driver when driver key does exist.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void setWaitDriverWhenDriverKeyDoesExist() {
     UIWait oldWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
     UIWait newWaitDriver = new UIWait(this.getWebDriver());
@@ -95,7 +95,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Gets wait driver with web element.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void getWaitDriverWithWebElement() {
     PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
     pageModel.open(siteAutomationUrl);
@@ -111,7 +111,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Remove wait driver.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void removeWaitDriver() {
     UIWait waitDriverToBeRemoved = UIWaitFactory.getWaitDriver(this.getWebDriver());
     UIWaitFactory.removeWaitDriver(this.getWebDriver());

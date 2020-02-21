@@ -1,6 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.magenic.jmaqs</groupId>
@@ -9,127 +10,120 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-	<groupId>com.magenic.jmaqs.selenium</groupId>
-	<artifactId>jmaqs-selenium</artifactId>
+    <groupId>com.magenic.jmaqs.selenium</groupId>
+    <artifactId>jmaqs-selenium</artifactId>
     <name>jmaqs-selenium</name>
-	<packaging>jar</packaging>
-	<url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
+    <url>http://maven.apache.org</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<testng.version>7.1.0</testng.version>
-		<commonsio.version>2.4</commonsio.version>
-		<selenium.version>3.141.59</selenium.version>
-		<reportng.version>1.1.4</reportng.version>
-		<guice.version>4.2.2</guice.version>
-		<jetbrainsannotations.version>18.0.0</jetbrainsannotations.version>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <commonsio.version>2.6</commonsio.version>
+        <selenium.version>3.141.59</selenium.version>
+    </properties>
 
-	<dependencies>
+    <dependencies>
         <dependency>
-            <groupId>org.apache.directory.studio</groupId>
-            <artifactId>org.apache.commons.io</artifactId>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
             <version>${commonsio.version}</version>
         </dependency>
-		<dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>${selenium.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-chrome-driver</artifactId>
-			<version>${selenium.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-firefox-driver</artifactId>
-			<version>${selenium.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-ie-driver</artifactId>
-			<version>${selenium.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>${testng.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.uncommons</groupId>
-			<artifactId>reportng</artifactId>
-			<version>${reportng.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.testng</groupId>
-					<artifactId>testng</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>${guice.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.magenic.jmaqs.utilities</groupId>
-			<artifactId>jmaqs-utilities</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.magenic.jmaqs.base</groupId>
-			<artifactId>jmaqs-base</artifactId>
-			<version>${project.version}</version>
-		</dependency>
         <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>${jetbrainsannotations.version}</version>
-            <scope>compile</scope>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>3.141.59</version>
         </dependency>
-	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.github.webdriverextensions</groupId>
-				<artifactId>webdriverextensions-maven-plugin</artifactId>
-				<version>3.2.0</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>install-drivers</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<installationDirectory>./src/test/resources</installationDirectory>
-					<drivers>
-						<driver>
-							<name>chromedriver</name>
-							<customFileName>chromedriver</customFileName>
-							<version>79.0.3945.36</version>
-						</driver>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-ie-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.utilities</groupId>
+            <artifactId>jmaqs-utilities</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.base</groupId>
+            <artifactId>jmaqs-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-edge-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-safari-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.webdriverextensions</groupId>
+                <artifactId>webdriverextensions-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-drivers</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <installationDirectory>./src/test/resources</installationDirectory>
+                    <drivers>
+                        <driver>
+                            <name>chromedriver</name>
+                            <customFileName>chromedriver</customFileName>
+                            <version>79.0.3945.36</version>
+                        </driver>
                         <driver>
                             <name>internetexplorerdriver</name>
                             <platform>windows</platform>
-							<customFileName>IEDriverServer</customFileName>
+                            <customFileName>IEDriverServer</customFileName>
                         </driver>
-						<driver>
-							<name>geckodriver</name>
-							<customFileName>geckodriver</customFileName>
-							<version>0.24.0</version>
-						</driver>
-						<driver>
-							<name>edgedriver</name>
-							<platform>windows</platform>
-							<customFileName>MicrosoftWebDriver</customFileName>
-							<version>5.16299</version>
-						</driver>
-					</drivers>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+                        <driver>
+                            <name>geckodriver</name>
+                            <customFileName>geckodriver</customFileName>
+                            <version>0.24.0</version>
+                        </driver>
+                        <driver>
+                            <name>edgedriver</name>
+                            <platform>windows</platform>
+                            <customFileName>MicrosoftWebDriver</customFileName>
+                            <version>5.16299</version>
+                        </driver>
+                    </drivers>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

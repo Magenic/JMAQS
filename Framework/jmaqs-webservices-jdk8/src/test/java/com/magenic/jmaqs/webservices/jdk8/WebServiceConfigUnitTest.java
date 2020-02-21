@@ -14,7 +14,7 @@ public class WebServiceConfigUnitTest extends BaseGenericTest {
   /**
    * gets if proxy can be used.
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceUri() {
     Assert.assertEquals(WebServiceConfig.getWebServiceUri(),
         "http://magenicautomation.azurewebsites.net", "the web service URI does not match");
@@ -23,7 +23,7 @@ public class WebServiceConfigUnitTest extends BaseGenericTest {
   /**
    * gets if proxy can be used.
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceTimeOut() {
     Assert.assertEquals(WebServiceConfig.getWebServiceTimeOut(), 10000,
         "Use proxy did not come back false");
@@ -32,7 +32,7 @@ public class WebServiceConfigUnitTest extends BaseGenericTest {
   /**
    * gets if proxy can be used.
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void getUseProxy() {
     Assert.assertFalse(WebServiceConfig.getUseProxy(), "Use proxy did not come back false");
   }
@@ -40,7 +40,7 @@ public class WebServiceConfigUnitTest extends BaseGenericTest {
   /**
    * gets the proxy address.
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void getProxyAddress() {
     Assert.assertEquals(WebServiceConfig.getProxyAddress(), "127.0.0.1:8001",
         "Proxy address is not the same");

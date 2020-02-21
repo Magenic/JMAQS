@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium;
@@ -59,7 +59,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   /**
    * Verify findElement works, validating a specific selector is found.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findElementFound() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -71,7 +71,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    * Verify findElement works, validating a specific selector is not found.
    * The expected exception is to catch the exception thrown in find.findElement.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findElementNotFound() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -81,7 +81,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   /**
    * Verify findElements works, validating that there are 3 found.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findElementsFound() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -102,7 +102,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   /**
    * Verify findElements works, validating that there are none found.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findElementsNotFound() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -113,7 +113,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   /**
    * Verify Find.Elements() throws an exception when there are no Elements existing on the page.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findElementsNotFoundThrowException() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -124,7 +124,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   /**
    * Verify FindElementWithText = Validate null is returned if the element is not found.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findElementWithTextElementNotFound() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -136,7 +136,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    * Verify FindElementWithText,
    * Validating specific text is found within a specific selector.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findElementWithText() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -149,7 +149,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    * Verify FindElementWithText,
    * Validating specific text is NOT found within a specific selector.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findElementWithTextNotFound() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -161,7 +161,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    * Verify FindIndexOfElementWithText works,
    * Validating the correct index is returned for a specific Selector and text.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findIndexOfElementWithText() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -172,7 +172,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    * Verify FindIndexOfElementWithText works,
    * Validating index is not returned for a specific Selector and text.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findIndexOfElementWithTextNotFound() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -184,7 +184,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    *  Verify FindIndexOfElementWithText works,
    *  Validate that index of -1 is returned if an empty list is returned by ElemList.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findIndexOfElementWithTextWithNotFoundElement() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -196,7 +196,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    * Verify FindIndexOfElementWithText works,
    * Validating the correct index is returned for a specific collection and text.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findIndexOfElementInCollection() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -208,7 +208,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    * Verify FindIndexOfElementWithText works,
    * Validating -1 is returned for a specific collection and text.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findIndexOfElementInCollectionNotFound() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -220,7 +220,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    * Verify FindIndexOfElementWithText works,
    * NotFoundException is thrown when an Empty input list is entered with assert == true.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findIndexOfElementInCollectionEmptyInputList() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
@@ -233,7 +233,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
    * Verify FindIndexOfElementWithText works,
    * NotFoundException is thrown when the element is not found and assert == true.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void findIndexOfElementInCollectionTextNotFoundAssertIsTrue() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());

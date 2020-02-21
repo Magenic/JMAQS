@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.database;
@@ -27,7 +27,7 @@ public class DatabaseConfig {
   private static final ConfigSection DATABASE_SECTION = ConfigSection.DatabaseMaqs;
 
   /**
-   * Field DATABASE_CAPS_SECTION
+   * Field DATABASE_CAPS_SECTION.
    */
   private static final ConfigSection DATABASE_CAPS_SECTION = ConfigSection.DatabaseCapsMaqs;
 
@@ -106,18 +106,18 @@ public class DatabaseConfig {
   }
 
   /**
-   * Method getDatabaseCapabilitiesAsObjects returns the databaseCapabilitiesAsObjects of this DatabaseConfig object.
+   * Method getDatabaseCapabilitiesAsObjects.
    *
-   * @return the databaseCapabilitiesAsObjects (type Map of String keys and Object values) of this DatabaseConfig object.
+   * @return the databaseCapabilitiesAsObjects of this DatabaseConfig object.
    */
   public static Map<String, Object> getDatabaseCapabilitiesAsObjects() {
     return new HashMap<>(getDatabaseCapabilitiesAsStrings());
   }
 
   /**
-   * Method getDatabaseCapabilitiesAsStrings returns the databaseCapabilitiesAsStrings of this DatabaseConfig object.
+   * Method getDatabaseCapabilitiesAsStrings.
    *
-   * @return the databaseCapabilitiesAsStrings (type Map of String keys and String values) of this DatabaseConfig object.
+   * @return the databaseCapabilitiesAsStrings of this DatabaseConfig object.
    */
   public static Map<String, String> getDatabaseCapabilitiesAsStrings() {
     return Config.getSection(DATABASE_CAPS_SECTION);

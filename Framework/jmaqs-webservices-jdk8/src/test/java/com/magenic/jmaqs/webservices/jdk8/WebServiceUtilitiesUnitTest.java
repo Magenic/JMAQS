@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   private final Product product = new Product(1, "Milk", "Dairy", BigDecimal.TEN);
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBody() throws Exception {
     CloseableHttpResponse response = this.getWebServiceDriver()
         .getContent("/api/String/1", ContentType.TEXT_PLAIN, true);
@@ -27,7 +27,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
     Assert.assertNotNull(responseString, "Response body did not deserialize string correctly");
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromJson() throws Exception {
     CloseableHttpResponse response = this.getWebServiceDriver()
         .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_JSON, true);
@@ -38,7 +38,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
         .assertNotNull(jsonProduct, "Response body did not deserialize object from json correctly");
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromXml() throws Exception {
     CloseableHttpResponse response = this.getWebServiceDriver()
         .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_XML, true);
@@ -48,7 +48,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
     Assert.assertNotNull(xmlProduct, "Response body did not deserialize object from xml correctly");
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.WebService)
+  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromNeitherXmlOrJson() throws Exception {
     CloseableHttpResponse response = this.getWebServiceDriver()
         .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_OCTET_STREAM, true);
@@ -58,7 +58,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
     Assert.fail("Exception was not thrown for attempting to deserialize json to an object");
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testDeserializeJson() throws Exception {
     CloseableHttpResponse response = this.getWebServiceDriver()
         .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_JSON, true);
@@ -67,7 +67,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
     Assert.assertNotNull(product);
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testDeserializeXml() throws Exception {
     CloseableHttpResponse response = this.getWebServiceDriver()
         .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_XML, true);
@@ -76,7 +76,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
     Assert.assertNotNull(product);
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testCreateStringEntityJson() throws JsonProcessingException {
     HttpEntity entity = WebServiceUtilities
         .createStringEntity(this.product, ContentType.APPLICATION_JSON);
@@ -85,7 +85,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
         .assertNotNull(entity, "string entity wasn't created using content type application/json");
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testCreateStringEntityXml() throws JsonProcessingException {
     HttpEntity entity = WebServiceUtilities
         .createStringEntity(this.product, ContentType.APPLICATION_XML);
@@ -93,7 +93,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
     Assert.assertNotNull(entity, "string entity wasn't created using content type application/xml");
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeJson() throws JsonProcessingException {
     String expectedJson = "{\"Id\":1,\"Name\":\"Milk\",\"Category\":\"Dairy\",\"Price\":10}";
     String actualJson = WebServiceUtilities.serializeJson(this.product);
@@ -103,7 +103,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
             expectedJson, actualJson));
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeXml() throws JsonProcessingException {
     String expectedXml = "<Product><Id>1</Id><Name>Milk</Name><Category>Dairy</Category><Price>10</Price></Product>";
     String actualXml = WebServiceUtilities.serializeXml(this.product);
@@ -113,7 +113,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
             expectedXml, actualXml));
   }
 
-  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.WebService)
+  @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.WEB_SERVICE)
   public void testCreateStringEntityNotJsonOrXml() throws JsonProcessingException {
     HttpEntity entity = WebServiceUtilities
         .createStringEntity(this.product, ContentType.APPLICATION_FORM_URLENCODED);
@@ -122,7 +122,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
         "Expected exception of IllegalArgumentException was not caught for content type that did not contain xml or json");
   }
 
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testCreateStringEntityCustomContentType() throws JsonProcessingException {
     HttpEntity entity = WebServiceUtilities
         .createStringEntity(this.product, Charset.defaultCharset(), "application/json");

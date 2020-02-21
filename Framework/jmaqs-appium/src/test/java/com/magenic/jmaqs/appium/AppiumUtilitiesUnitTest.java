@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.appium;
@@ -26,7 +26,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test capture screenshot no append.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testCaptureScreenshotNoAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -45,7 +45,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test capture screenshot append.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testCaptureScreenshotAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -64,7 +64,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test capture screenshot console logger.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testCaptureScreenshotConsoleLogger() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     ConsoleLogger consoleLogger = new ConsoleLogger();
@@ -83,7 +83,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test capture screenshot custom directory file name.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testCaptureScreenshotCustomDirectoryFileName() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -108,7 +108,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test save page source no append.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testSavePageSourceNoAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -127,7 +127,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test save page source append.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testSavePageSourceAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -146,7 +146,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test save page source custom directory file name.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testSavePageSourceCustomDirectoryFileName() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -171,7 +171,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test save page source console logger.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testSavePageSourceConsoleLogger() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     ConsoleLogger consoleLogger = new ConsoleLogger();
@@ -190,7 +190,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test kill driver.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testKillDriver() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();

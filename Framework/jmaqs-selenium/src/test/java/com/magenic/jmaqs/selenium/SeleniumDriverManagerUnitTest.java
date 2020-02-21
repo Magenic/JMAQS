@@ -1,16 +1,14 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import java.util.List;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -34,7 +32,7 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
   /**
    * Test close not initialized.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testCloseNotInitialized() {
     SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
         this.getTestObject());
@@ -48,7 +46,7 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
   /**
    * Test close initialized.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testCloseInitialized() {
     SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
         this.getTestObject());
@@ -64,7 +62,7 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
   /**
    * Test get web driver.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
     SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
         this.getTestObject());
@@ -75,7 +73,7 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
   /**
    * Test log verbose.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testLogVerbose() {
     SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
         this.getTestObject());

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.appium;
@@ -19,7 +19,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test appium test object creation with driver.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testAppiumTestObjectCreationWithDriver() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, this.getLogger(),
@@ -31,7 +31,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test appium test object creation with supplier.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testAppiumTestObjectCreationWithSupplier() {
     AppiumTestObject appiumTestObject = new AppiumTestObject(
         AppiumDriverFactory::getDefaultMobileDriver, this.getLogger(),
@@ -43,7 +43,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test get appium driver.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testGetAppiumDriver() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, this.getLogger(),
@@ -56,7 +56,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test get appium manager.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testGetAppiumManager() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, this.getLogger(),
@@ -69,7 +69,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test set appium driver.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testSetAppiumDriverWithDriver() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, this.getLogger(),
@@ -86,7 +86,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test test set appium driver.
    */
-  @Test(groups = TestCategories.Appium)
+  @Test(groups = TestCategories.APPIUM)
   public void testSetAppiumDriverWithSupplier() {
     AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
     AppiumTestObject appiumTestObject = new AppiumTestObject(defaultMobileDriver, this.getLogger(),

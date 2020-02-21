@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium.factories;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 
 /**
- * Handles the creation of {@link org.openqa.selenium.support.ui.FluentWait FluentWait} objects
+ * Handles the creation of {@link org.openqa.selenium.support.ui.FluentWait FluentWait} objects.
  */
 public class FluentWaitFactory {
 

@@ -17,7 +17,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <appiumjavaclient.version>7.3.0</appiumjavaclient.version>
-        <testng.version>7.1.0</testng.version>
     </properties>
 
     <dependencies>
@@ -27,9 +26,18 @@
             <version>${appiumjavaclient.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
@@ -37,8 +45,8 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.magenic.jmaqs.selenium</groupId>
-            <artifactId>jmaqs-selenium</artifactId>
+            <groupId>com.magenic.jmaqs.base</groupId>
+            <artifactId>jmaqs-base</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

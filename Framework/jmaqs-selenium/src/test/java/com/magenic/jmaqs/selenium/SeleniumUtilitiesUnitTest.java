@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium;
@@ -32,7 +32,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test capture screenshot no append.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testCaptureScreenshotNoAppend() throws Exception {
     WebDriver webDriver = null;
     webDriver = WebDriverFactory.getDefaultBrowser();
@@ -56,7 +56,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test capture screenshot append.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testCaptureScreenshotAppend() throws Exception {
     WebDriver webDriver = null;
     webDriver = WebDriverFactory.getDefaultBrowser();
@@ -84,7 +84,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test capture screenshot console logger.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testCaptureScreenshotConsoleLogger() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     ConsoleLogger consoleLogger = new ConsoleLogger();
@@ -103,7 +103,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test capture screenshot custom directory file name.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testCaptureScreenshotCustomDirectoryFileName() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -130,7 +130,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test save page source no append.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testSavePageSourceNoAppend() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -153,7 +153,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test save page source append.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testSavePageSourceAppend() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -181,7 +181,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test save page source custom directory file name.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testSavePageSourceCustomDirectoryFileName() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
@@ -213,7 +213,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test save page source console logger.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testSavePageSourceConsoleLogger() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     ConsoleLogger consoleLogger = new ConsoleLogger();
@@ -236,7 +236,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test web element to web driver.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testWebElementToWebDriver() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(webDriver);
@@ -256,7 +256,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
   /**
    * Test kill driver.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testKillDriver() throws Exception {
     WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
     ConsoleLogger consoleLogger = new ConsoleLogger();

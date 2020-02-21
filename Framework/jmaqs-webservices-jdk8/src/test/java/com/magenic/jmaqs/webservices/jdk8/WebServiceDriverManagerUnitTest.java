@@ -19,7 +19,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
    *
    * @throws URISyntaxException URI Syntax Exception
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceDriverWithSupplierTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     webServiceDriver
@@ -38,7 +38,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
    *
    * @throws URISyntaxException URI Syntax Exception
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceDriverTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver,
@@ -53,7 +53,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
    *
    * @throws URISyntaxException URI Syntax Exception
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceDriverNullDriver() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver,
@@ -70,7 +70,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
    *
    * @throws URISyntaxException URI Syntax Exception
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void overrideWebServiceDriverTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     WebServiceDriver webServiceDriver2 = new WebServiceDriver("http://www.google.com/");
@@ -88,7 +88,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
    *
    * @throws URISyntaxException URI Syntax Exception
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void closeWebServiceDriverTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver,

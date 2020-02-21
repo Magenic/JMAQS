@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class DriverManagerUnitTest extends BaseGenericTest {
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetBaseDriver() throws Exception {
     DriverManager driverManager = getDriverManager();
     driverManager.setBaseDriver("Fake String");
@@ -18,33 +18,33 @@ public class DriverManagerUnitTest extends BaseGenericTest {
 
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testSetBaseDriver() {
     DriverManager driverManager = getDriverManager();
     driverManager.setBaseDriver("Fake String");
     Assert.assertNotNull(driverManager.getBaseDriver());
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testIsDriverInitializedTrue() {
     DriverManager driverManager = getDriverManager();
     Assert.assertNotNull(driverManager.getBase());
     Assert.assertTrue(driverManager.isDriverInitialized());
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testIsDriverInitializedFalse() {
     DriverManager driverManager = getDriverManager();
     Assert.assertFalse(driverManager.isDriverInitialized());
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetLogger() {
     DriverManager driverManager = getDriverManager();
     Assert.assertNotNull(driverManager.getLogger());
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetBase() {
     DriverManager driverManager = getDriverManager();
     Assert.assertNotNull(driverManager.getBase());

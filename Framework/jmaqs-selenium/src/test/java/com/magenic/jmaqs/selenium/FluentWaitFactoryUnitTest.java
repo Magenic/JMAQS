@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium;
@@ -36,7 +36,7 @@ public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Test get fluent wait object.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetFluentWaitObject() {
     int timeout = 1000;
     int polling = 500;

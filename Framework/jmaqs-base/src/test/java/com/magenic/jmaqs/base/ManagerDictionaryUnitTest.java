@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.base;
@@ -9,7 +9,6 @@ import static org.testng.Assert.assertNotNull;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.function.Supplier;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
@@ -17,7 +16,7 @@ import org.testng.annotations.Test;
  */
 public class ManagerDictionaryUnitTest extends BaseGenericTest {
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testClose() {
 
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -39,7 +38,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
 
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testGetDriver() {
     final String dm1 = "DM1";
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -48,7 +47,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
     assertNotNull(managerDictionary.getDriver(dm1));
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testPut() {
     final String dm1 = "DM1";
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -62,7 +61,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
     return new TestDriverManager(supplier, getTestObject());
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testPutOrOverride() {
     ManagerDictionary managerDictionary = new ManagerDictionary();
     TestDriverManager testManager = getTestDriverManager();
@@ -70,7 +69,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
     Assert.assertTrue(managerDictionary.containsValue(testManager));
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testPutOrOverride1() {
     final String dm1 = "DM1";
     ManagerDictionary managerDictionary = new ManagerDictionary();
@@ -80,7 +79,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
     assertNotNull(managerDictionary.get(dm1));
   }
 
-  @Test(groups = TestCategories.Framework)
+  @Test(groups = TestCategories.FRAMEWORK)
   public void testRemove() {
     final String dm1 = "DM1";
     final String dm2 = "DM2";

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.database;
@@ -44,6 +44,10 @@ public class DatabaseDriver implements AutoCloseable {
     return this.entityManager.createNativeQuery(query).getResultList();
   }
 
+  public <T> List<T> query(String query, Class<T> resultClass) {
+    return this.entityManager.createNativeQuery(query, resultClass).getResultList();
+  }
+
   public int execute(String query) {
     final EntityTransaction transaction = this.getEntityManager().getTransaction();
     transaction.begin();
@@ -52,9 +56,6 @@ public class DatabaseDriver implements AutoCloseable {
     return i;
   }
 
-  public <T> List<T> query(String query, Class<T> resultClass) {
-    return this.entityManager.createNativeQuery(query, resultClass).getResultList();
-  }
 
   @Override
   public void close() throws Exception {

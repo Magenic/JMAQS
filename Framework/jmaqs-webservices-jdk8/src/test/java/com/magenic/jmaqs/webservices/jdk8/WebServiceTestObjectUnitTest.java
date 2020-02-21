@@ -21,7 +21,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test object creation with driver.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testWebServiceTestObjectCreationWithDriver() throws URISyntaxException {
     WebServiceDriver defaultBrowser = getWebServiceDriver();
     WebServiceTestObject testObject = new WebServiceTestObject(defaultBrowser, this.getLogger(),
@@ -33,7 +33,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test object creation with supplier.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testWebServiceTestObjectCreationWithSupplier() {
     Supplier<CloseableHttpClient> httpClientSupplier = getCloseableHttpClientSupplier();
     WebServiceTestObject testObject = new WebServiceTestObject(httpClientSupplier, this.getLogger(),
@@ -45,7 +45,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   /**
    * tests getting the web service driver.
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetWebServiceDriver() throws URISyntaxException {
     WebServiceDriver testObject = getWebServiceDriver();
     Assert
@@ -55,7 +55,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   /**
    * tests getting the web service driver manager.
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetWebServiceDriverManager() throws URISyntaxException {
     WebServiceDriver defaultBrowser = getWebServiceDriver();
     WebServiceTestObject testObject = new WebServiceTestObject(defaultBrowser, this.getLogger(),
@@ -67,7 +67,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   /**
    * tests overriding the web service driver with a web service driver.
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testSetWebServiceDriverWithDriver() throws URISyntaxException {
     WebServiceDriver serviceDriver = getWebServiceDriver();
     WebServiceTestObject testObject = new WebServiceTestObject(serviceDriver, this.getLogger(),
@@ -83,7 +83,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   /**
    * tests overriding the web service driver with a closeable http client.
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testSetWebServiceDriverWithHttpClient() throws URISyntaxException {
     WebServiceDriver serviceDriver = getWebServiceDriver();
     CloseableHttpClient client = HttpClientBuilder.create().build();
@@ -100,7 +100,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   /**
    * tests overriding the web service driver with a supplier.
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void testSetWebServiceDriverSupplier() {
     Supplier<CloseableHttpClient> httpClientSupplier = getCloseableHttpClientSupplier();
     WebServiceTestObject testObject = new WebServiceTestObject(httpClientSupplier, this.getLogger(),

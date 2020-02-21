@@ -23,7 +23,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceGetVerificationTest() throws Exception {
 
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/1",
@@ -40,7 +40,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceGetError() throws Exception {
 
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/-1",
@@ -54,7 +54,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceDelete() throws Exception {
 
     CloseableHttpResponse response = this.getWebServiceDriver()
@@ -68,7 +68,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void webServicePatchError() throws Exception {
     HttpEntity content = WebServiceUtilities.createStringEntity("", ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver()
@@ -84,7 +84,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void webServicePostError() throws Exception {
     CloseableHttpResponse response = this.getWebServiceDriver()
         .postContent("/api/String", null, ContentType.TEXT_PLAIN, false);
@@ -99,7 +99,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
    * @throws Exception
    *           There was a problem with the test
    */
-  @Test(groups = TestCategories.WebService)
+  @Test(groups = TestCategories.WEB_SERVICE)
   public void webServicePutError() throws Exception {
     HttpEntity content = WebServiceUtilities.createStringEntity("", ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver()

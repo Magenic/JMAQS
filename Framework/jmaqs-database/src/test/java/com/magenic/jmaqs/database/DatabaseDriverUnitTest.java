@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.database;
@@ -28,19 +28,19 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
    */
   private static final String STATES_UPDATE_QUERY = "UPDATE States SET StateAbbreviation = 'WI' WHERE StateAbbreviation = 'WI'";
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetEntityManager() {
     final DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     Assert.assertNotNull(openConnection.getEntityManager());
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testGetEntityManagerFactory() {
     final DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     Assert.assertNotNull(openConnection.getEntityManagerFactory());
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testSetEntityManager() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     final int hashCode = openConnection.getEntityManager().hashCode();
@@ -50,7 +50,7 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
     Assert.assertNotEquals(hashCode, hashCode1);
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testSetEntityManagerFactory() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     final int hashCode = openConnection.getEntityManagerFactory().hashCode();
@@ -59,28 +59,28 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
     Assert.assertNotEquals(hashCode, hashCode1);
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testQuery() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     List results = openConnection.query(INFORMATION_SCHEMAS_QUERY);
     Assert.assertTrue(results.stream().anyMatch(n -> ((Object[]) n)[2].equals("States")));
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testClose() throws Exception {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     openConnection.close();
     Assert.assertFalse(openConnection.isOpen());
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testExecute() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     final int rowsUpdated = openConnection.execute(STATES_UPDATE_QUERY);
     Assert.assertEquals(rowsUpdated, 1);
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testTypedQuery() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     final List<StatesEntity> queryResults = openConnection
@@ -89,7 +89,7 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
     Assert.assertEquals(queryResults.size(), 49);
   }
 
-  @Test(groups = TestCategories.Database)
+  @Test(groups = TestCategories.DATABASE)
   public void testIsOpen() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     Assert.assertTrue(openConnection.isOpen());

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.utilities;
@@ -43,7 +43,7 @@ public class GenericWaitNotParallelUnitTest {
   /**
    * Test wait for with no parameters works when the wait function returns true.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void passNoParamForTest() {
     initialReturnValue = false;
     try {
@@ -56,7 +56,7 @@ public class GenericWaitNotParallelUnitTest {
   /**
    * Test wait until with one parameter works when the wait function returns true.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void passStringUntilTest() {
     number = 0;
     try {
@@ -70,7 +70,7 @@ public class GenericWaitNotParallelUnitTest {
   /**
    * Test wait until function returns expected value, then returns the value.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void passStringsEqual() {
     number = 0;
     String matchedVal = "";
@@ -86,7 +86,7 @@ public class GenericWaitNotParallelUnitTest {
   /**
    * Test wait until function returns expected value, then returns the value.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void passStringsEqualOverride() {
     number = 0;
     String matchedVal = "";
@@ -104,7 +104,7 @@ public class GenericWaitNotParallelUnitTest {
   /**
    * Test wait until function returns expected value, throws an exception if a timeout occurs.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void passStringWaitFor() {
     int[] number = { 0 };
     try {
@@ -118,7 +118,7 @@ public class GenericWaitNotParallelUnitTest {
    * Tests waits checking that the function returns a value equal to the
    * input value until the input test retry and test timeout before throwing an exception.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void passStringWaitForOverride() {
     number = 0;
     try {
@@ -131,7 +131,7 @@ public class GenericWaitNotParallelUnitTest {
   /**
    * Test wait for with one parameter works when the wait function returns true.
    */
-  @Test(groups = TestCategories.Utilities)
+  @Test(groups = TestCategories.UTILITIES)
   public void passStringForTest() {
     int[] number = { 0 };
     try {

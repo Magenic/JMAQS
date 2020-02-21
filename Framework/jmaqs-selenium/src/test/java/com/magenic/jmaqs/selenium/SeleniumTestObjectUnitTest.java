@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 (C) Magenic, All rights Reserved
+ * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
 package com.magenic.jmaqs.selenium;
@@ -18,7 +18,7 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test appium test object creation with driver.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testSeleniumTestObjectCreationWithDriver() {
 
     WebDriver defaultBrowser = null;
@@ -36,7 +36,7 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
   /**
    * Test appium test object creation with supplier.
    */
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testSeleniumTestObjectCreationWithSupplier() {
 
     try (SeleniumTestObject testObject = new SeleniumTestObject(() -> {
@@ -52,7 +52,7 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
     }
   }
 
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
     WebDriver defaultBrowser = null;
     try {
@@ -69,7 +69,7 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
 
   }
 
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testGetWebManager() {
     WebDriver defaultBrowser = null;
     try {
@@ -85,7 +85,7 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
         "Checking that selenium driver manager can be retrieved from test object");
   }
 
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriver() {
     WebDriver defaultBrowser = null;
     try {
@@ -111,7 +111,7 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
         hashCode, hashCode1));
   }
 
-  @Test(groups = TestCategories.Selenium)
+  @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriverSupplier() {
     WebDriver defaultBrowser = null;
     try {
