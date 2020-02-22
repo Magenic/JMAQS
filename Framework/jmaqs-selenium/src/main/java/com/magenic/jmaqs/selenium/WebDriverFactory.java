@@ -31,36 +31,31 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
 /**
- * Static web driver factory.
+ * The type Web driver factory.
  */
 public class WebDriverFactory {
 
-  /**
-   * Constant for the maximizing browser size.
-   */
   private static final String WINDOW_MAX = "MAXIMIZE";
 
-  /**
-   * Private constructor.
-   */
   private WebDriverFactory() {
   }
 
   /**
-   * Get the default web driver based on the test run configuration.
+   * Gets default browser.
    *
-   * @return A web driver
+   * @return the default browser
+   * @throws Exception the exception
    */
   public static WebDriver getDefaultBrowser() throws Exception {
     return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
   }
 
   /**
-   * Get the default web driver (for the specified browser type) based on the test run configuration.
+   * Gets browser with default configuration.
    *
-   * @param browser The type of browser
-   * @return A web driver
-   * @throws Exception An exception
+   * @param browser the browser
+   * @return the browser with default configuration
+   * @throws Exception the exception
    */
   public static WebDriver getBrowserWithDefaultConfiguration(BrowserType browser) throws Exception {
     String size = SeleniumConfig.getBrowserSize();
@@ -93,9 +88,9 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the default Chrome options.
+   * Gets default chrome options.
    *
-   * @return The default Chrome options
+   * @return the default chrome options
    */
   public static ChromeOptions getDefaultChromeOptions() {
     ChromeOptions chromeOptions = new ChromeOptions();
@@ -108,19 +103,19 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the default headless Chrome options.
+   * Gets default headless chrome options.
    *
-   * @return The default headless Chrome options
+   * @return the default headless chrome options
    */
   public static ChromeOptions getDefaultHeadlessChromeOptions() {
     return getDefaultHeadlessChromeOptions(WINDOW_MAX);
   }
 
   /**
-   * Get the default headless Chrome options.
+   * Gets default headless chrome options.
    *
-   * @param size Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
-   * @return The default headless Chrome options
+   * @param size the size
+   * @return the default headless chrome options
    */
   public static ChromeOptions getDefaultHeadlessChromeOptions(String size) {
     ChromeOptions headlessChromeOptions = new ChromeOptions();
@@ -136,9 +131,9 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the default IE options.
+   * Gets default internet explorer options.
    *
-   * @return The default IE options
+   * @return the default internet explorer options
    */
   public static InternetExplorerOptions getDefaultInternetExplorerOptions() {
     InternetExplorerOptions options = new InternetExplorerOptions();
@@ -148,9 +143,9 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the default Firefox options.
+   * Gets default firefox options.
    *
-   * @return The default Firefox options
+   * @return the default firefox options
    */
   public static FirefoxOptions getDefaultFirefoxOptions() {
     FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -160,9 +155,9 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the default Edge options.
+   * Gets default edge options.
    *
-   * @return The default Edge options
+   * @return the default edge options
    */
   public static EdgeOptions getDefaultEdgeOptions() {
     EdgeOptions edgeOptions = new EdgeOptions();
@@ -172,21 +167,21 @@ public class WebDriverFactory {
   }
 
   /**
-   * Initialize a new Chrome driver.
+   * Gets chrome driver.
    *
-   * @param chromeOptions Browser options
-   * @return A new Chrome driver
+   * @param chromeOptions the chrome options
+   * @return the chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions) {
     return getChromeDriver(chromeOptions, WINDOW_MAX);
   }
 
   /**
-   * Initialize a new Chrome driver.
+   * Gets chrome driver.
    *
-   * @param chromeOptions Browser options
-   * @param size          Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
-   * @return A new Chrome driver
+   * @param chromeOptions the chrome options
+   * @param size          the size
+   * @return the chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
     System.setProperty("webdriver.chrome.driver",
@@ -198,10 +193,10 @@ public class WebDriverFactory {
   }
 
   /**
-   * Initialize a new headless Chrome driver.
+   * Gets headless chrome driver.
    *
-   * @param headlessChromeOptions Browser options
-   * @return A new headless Chrome driver
+   * @param headlessChromeOptions the headless chrome options
+   * @return the headless chrome driver
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
     System.setProperty("webdriver.chrome.driver",
@@ -211,11 +206,11 @@ public class WebDriverFactory {
   }
 
   /**
-   * Initialize a new Firefox driver.
+   * Gets firefox driver.
    *
-   * @param firefoxOptions Browser options
-   * @param size           Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
-   * @return A new Firefox driver
+   * @param firefoxOptions the firefox options
+   * @param size           the size
+   * @return the firefox driver
    */
   public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
     System.setProperty("webdriver.gecko.driver",
@@ -229,11 +224,11 @@ public class WebDriverFactory {
   }
 
   /**
-   * Initialize a new Edge driver.
+   * Gets edge driver.
    *
-   * @param edgeOptions Browser options
-   * @param size        Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
-   * @return A new Edge driver
+   * @param edgeOptions the edge options
+   * @param size        the size
+   * @return the edge driver
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
     String driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName(),
@@ -252,11 +247,11 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get a new IE driver.
+   * Gets internet explorer driver.
    *
-   * @param internetExplorerOptions Browser options
-   * @param size                    Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
-   * @return A new IE driver
+   * @param internetExplorerOptions the internet explorer options
+   * @param size                    the size
+   * @return the internet explorer driver
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions,
       String size) {
@@ -270,9 +265,9 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the default remote driver options - Default values are pulled from the configuration.
+   * Gets default remote options.
    *
-   * @return The remote driver options
+   * @return the default remote options
    */
   public static MutableCapabilities getDefaultRemoteOptions() {
     RemoteBrowserType remoteBrowser = SeleniumConfig.getRemoteBrowserType();
@@ -285,21 +280,21 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the remote driver options.
+   * Gets remote options.
    *
-   * @param remoteBrowser The remote browser type
-   * @return The remote driver options
+   * @param remoteBrowser the remote browser
+   * @return the remote options
    */
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser) {
     return getRemoteOptions(remoteBrowser, "", "", null);
   }
 
   /**
-   * Get the remote driver options.
+   * Gets remote options.
    *
-   * @param remoteBrowser      The remote browser type
-   * @param remoteCapabilities Additional remote capabilities
-   * @return The remote driver options
+   * @param remoteBrowser      the remote browser
+   * @param remoteCapabilities the remote capabilities
+   * @return the remote options
    */
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser,
       Map<String, Object> remoteCapabilities) {
@@ -307,13 +302,13 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the remote driver options.
+   * Gets remote options.
    *
-   * @param remoteBrowser        The remote browser type
-   * @param remotePlatform       The remote platform
-   * @param remoteBrowserVersion The remote browser version
-   * @param remoteCapabilities   Additional remote capabilities
-   * @return The remote driver options
+   * @param remoteBrowser        the remote browser
+   * @param remotePlatform       the remote platform
+   * @param remoteBrowserVersion the remote browser version
+   * @param remoteCapabilities   the remote capabilities
+   * @return the remote options
    */
   public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser,
       String remotePlatform, String remoteBrowserVersion, Map<String, Object> remoteCapabilities) {
@@ -366,10 +361,10 @@ public class WebDriverFactory {
   }
 
   /**
-   * Add additional capabilities to the driver options.
+   * Sets driver options.
    *
-   * @param driverOptions          The driver option you want to add capabilities to
-   * @param additionalCapabilities Capabilities to add
+   * @param driverOptions          the driver options
+   * @param additionalCapabilities the additional capabilities
    */
   public static void setDriverOptions(MutableCapabilities driverOptions,
       Map<String, Object> additionalCapabilities) {
@@ -386,14 +381,10 @@ public class WebDriverFactory {
   }
 
   /**
-   * Sets the browser size based on the provide string value.
-   * Browser size is expected to be: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080).
-   * MAXIMIZE just maximizes the browser.
-   * DEFAULT does not change the current size.
-   * #x# sets a custom size.
+   * Sets browser size.
    *
-   * @param webDriver the webDriver from the Browser method
-   * @param size      Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
+   * @param webDriver the web driver
+   * @param size      the size
    */
   public static void setBrowserSize(WebDriver webDriver, String size) {
     size = size.toUpperCase();
@@ -406,10 +397,10 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the browser/browser size as a string.
+   * Gets headless window size string.
    *
-   * @param size Browser size in the following format: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080)
-   * @return The browser size as a string - Specifically for headless Chrome options
+   * @param size the size
+   * @return the headless window size string
    */
   public static String getHeadlessWindowSizeString(String size) {
     if (size.equals(WINDOW_MAX) || size.equals("DEFAULT")) {
@@ -422,10 +413,10 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the window size as a Dimension object.
+   * Extract dimension from string dimension.
    *
-   * @param size The size in a #X# format
-   * @return The dimension object with width and height defined
+   * @param size the size
+   * @return the dimension
    */
   public static Dimension extractDimensionFromString(String size) {
     String[] sizes = size.split("[xX]");
@@ -446,34 +437,33 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the web driver location.
+   * Gets driver location.
    *
-   * @param driverFile The web driver file, including extension
-   * @return The path to the web driver
+   * @param driverFile the driver file
+   * @return the driver location
    */
   public static String getDriverLocation(String driverFile) {
     return getDriverLocation(driverFile, "", true);
   }
 
   /**
-   * Get the web driver location.
+   * Gets driver location.
    *
-   * @param driverFile      The web driver file, including extension
-   * @param defaultHintPath The default location for the specific driver
-   * @return The path to the web driver
+   * @param driverFile      the driver file
+   * @param defaultHintPath the default hint path
+   * @return the driver location
    */
   public static String getDriverLocation(String driverFile, String defaultHintPath) {
     return getDriverLocation(driverFile, defaultHintPath, true);
   }
 
   /**
-   * Get the web driver location.
+   * Gets driver location.
    *
-   * @param driverFile      The web driver file, including extension
-   * @param defaultHintPath The default location for the specific driver
-   * @param mustExist       Do we need to know where this drive is located,
-   *                        if this is true and the file is not found an error will be thrown
-   * @return The path to the web driver
+   * @param driverFile      the driver file
+   * @param defaultHintPath the default hint path
+   * @param mustExist       the must exist
+   * @return the driver location
    */
   public static String getDriverLocation(String driverFile, String defaultHintPath,
       boolean mustExist) {
@@ -515,10 +505,10 @@ public class WebDriverFactory {
   }
 
   /**
-   * Get the file path for the Edge driver pre-installed on the system.
+   * Gets windows edge driver location.
    *
-   * @param file The file we are looking for
-   * @return The parent folder of the given file or the empty string if the file is not found
+   * @param file the file
+   * @return the windows edge driver location
    */
   static String getWindowsEdgeDriverLocation(String file) {
     String edgeDriverFolder = "Microsoft Web Driver";

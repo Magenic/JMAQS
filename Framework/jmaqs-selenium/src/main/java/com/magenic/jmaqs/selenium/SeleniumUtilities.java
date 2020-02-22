@@ -27,18 +27,12 @@ import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
- * Static class for the selenium utilities, ported from MAQS.
+ * The type Selenium utilities.
  */
 public class SeleniumUtilities {
 
-  /**
-   * Default Date Time Format for appending to files.
-   */
   private static final String DEFAULT_DATE_TIME_FORMAT = "uuuu-MM-dd-HH-mm-ss-SSSS";
 
-  /**
-   * The constant LOG_MESSAGE_PREFIX.
-   */
   private static final String LOG_MESSAGE_PREFIX = "%s - %s%s";
 
   private SeleniumUtilities() {
@@ -56,12 +50,12 @@ public class SeleniumUtilities {
   }
 
   /**
-   * To capture a screenshot during execution.
+   * Capture screenshot boolean.
    *
-   * @param webDriver  The WebDriver
+   * @param webDriver  the web driver
    * @param testObject the test object
-   * @param appendName Appends a name to the end of a filename
-   * @return Boolean if the save of the image was successful
+   * @param appendName the append name
+   * @return the boolean
    */
   public static boolean captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject,
       String appendName) {
@@ -89,14 +83,13 @@ public class SeleniumUtilities {
   }
 
   /**
-   * To capture a screenshot during execution.
+   * Capture screenshot string.
    *
-   * @param webDriver                The WebDriver
+   * @param webDriver                the web driver
    * @param testObject               the test object
-   * @param directory                The directory file path
-   * @param fileNameWithoutExtension Filename without extension
-   * @return Path to the log file
-   * @throws IOException There was a problem creating the screen shot
+   * @param directory                the directory
+   * @param fileNameWithoutExtension the file name without extension
+   * @return the string
    */
   public static String captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject,
       String directory, String fileNameWithoutExtension) {
@@ -118,36 +111,28 @@ public class SeleniumUtilities {
     return path;
   }
 
-  /**
-   * Copy file.
-   *
-   * @param tempFile the temp file
-   * @param path     the path
-   * @throws IOException the io exception
-   */
   private static void copyFileToPath(File tempFile, String path) throws IOException {
     Files.copy(tempFile.toPath(), new File(path).toPath(), StandardCopyOption.COPY_ATTRIBUTES);
   }
 
   /**
-   * To capture a page source during execution.
-   * Default parameter appendName of empty string.
+   * Save page source boolean.
    *
    * @param webDriver  the web driver
-   * @param testObject The Appium Test Object
-   * @return True if saving page source is successful, otherwise false
+   * @param testObject the test object
+   * @return the boolean
    */
   public static boolean savePageSource(WebDriver webDriver, SeleniumTestObject testObject) {
     return savePageSource(webDriver, testObject, "");
   }
 
   /**
-   * To capture a page source during execution.
+   * Save page source boolean.
    *
    * @param webDriver  the web driver
-   * @param testObject The Appium Test Object
-   * @param appendName Appends a name to the end of a filename
-   * @return True if saving page source is successful, otherwise false
+   * @param testObject the test object
+   * @param appendName the append name
+   * @return the boolean
    */
   public static boolean savePageSource(WebDriver webDriver, SeleniumTestObject testObject,
       String appendName) {
@@ -182,13 +167,13 @@ public class SeleniumUtilities {
   }
 
   /**
-   * To capture Page Source during execution.
+   * Save page source string.
    *
    * @param webDriver                the web driver
-   * @param testObject               The Appium Test Object
-   * @param directory                The directory file path
-   * @param fileNameWithoutExtension File Name Without Extension
-   * @return Path to the log file
+   * @param testObject               the test object
+   * @param directory                the directory
+   * @param fileNameWithoutExtension the file name without extension
+   * @return the string
    */
   public static String savePageSource(WebDriver webDriver, SeleniumTestObject testObject,
       String directory, String fileNameWithoutExtension) {
@@ -214,25 +199,11 @@ public class SeleniumUtilities {
     return path;
   }
 
-  /**
-   * Calculate file name string.
-   *
-   * @param directory                the directory
-   * @param fileNameWithoutExtension the file name without extension
-   * @param fileExtension            the file extension
-   * @return the string
-   */
   private static String calculateFileName(String directory, String fileNameWithoutExtension,
       String fileExtension) {
     return Paths.get(directory, fileNameWithoutExtension + fileExtension).normalize().toString();
   }
 
-  /**
-   * Validate directory structure and create if it does not exist.
-   *
-   * @param testObject the test object
-   * @param directory  the directory
-   */
   private static void validateDirectoryStructure(SeleniumTestObject testObject, String directory) {
     try {
       Path path = new File(directory).toPath();
@@ -246,10 +217,10 @@ public class SeleniumUtilities {
   }
 
   /**
-   * Get the web driver from a web element.
+   * Web element to web driver web driver.
    *
-   * @param webElement The web element
-   * @return The web driver
+   * @param webElement the web element
+   * @return the web driver
    */
   public static WebDriver webElementToWebDriver(WebElement webElement) {
     WebDriver driver;
@@ -264,7 +235,7 @@ public class SeleniumUtilities {
   }
 
   /**
-   * Make sure the driver is shut down.
+   * Kill driver.
    *
    * @param webDriver the web driver
    */

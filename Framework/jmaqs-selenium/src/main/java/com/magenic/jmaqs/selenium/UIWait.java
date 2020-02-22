@@ -27,45 +27,26 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Selenium waiter This is the tool-class used for waiting. It can be used to wait for many
- * circumstances (element exist, not exist, be visible, to equal a desired value, etc..
+ * The type Ui wait.
  */
 public class UIWait {
 
-  /**
-   * The default value of the Header size... Your header's size may be different.
-   */
   private static final int HEADER_SIZE = 90;
 
-  /**
-   * The default value of the page's body. Your page might have a different Header value.
-   */
   private static final By BODY_BY = By.cssSelector("BODY");
 
-  /**
-   * The Web driver that the test is currently running on.
-   */
   private WebDriver driver;
 
-  /**
-   * The retry time.
-   */
   private int fluentRetryTime;
 
-  /**
-   * The timeout time.
-   */
   private int timeout;
 
-  /**
-   * The web driver wait that the test is currently running on.
-   */
   private WebDriverWait waitDriver;
 
   /**
-   * Constructor for {@link UIWait} object.
+   * Instantiates a new Ui wait.
    *
-   * @param driver WebDriver
+   * @param driver the driver
    */
   public UIWait(WebDriver driver) {
     this(driver, Integer
@@ -75,11 +56,11 @@ public class UIWait {
   }
 
   /**
-   * Constructor for SeleniumWait object.
+   * Instantiates a new Ui wait.
    *
-   * @param driver           The WebDriver
-   * @param timeOutInSeconds int value of the total time to wait until timing out
-   * @param fluentRetryTime  int value of seconds to use for fluent retry
+   * @param driver           the driver
+   * @param timeOutInSeconds the time out in seconds
+   * @param fluentRetryTime  the fluent retry time
    */
   public UIWait(WebDriver driver, final int timeOutInSeconds, final int fluentRetryTime) {
     this.driver = driver;
@@ -89,27 +70,27 @@ public class UIWait {
   }
 
   /**
-   * Get the WebDriverWait for use outside of this instance class.
+   * Gets wait driver.
    *
-   * @return The WebDriverWait
+   * @return the wait driver
    */
   public WebDriverWait getWaitDriver() {
     return this.waitDriver;
   }
 
   /**
-   * Sets the WebDriverWait.
+   * Sets wait driver.
    *
-   * @param waiter The WebDriverWait
+   * @param waiter the waiter
    */
   public void setWaitDriver(WebDriverWait waiter) {
     this.waitDriver = waiter;
   }
 
   /**
-   * Resets wait default wait driver.
+   * Reset wait driver web driver wait.
    *
-   * @return The WebDriverWait
+   * @return the web driver wait
    */
   public WebDriverWait resetWaitDriver() {
     WebDriverWait wait = this.getNewWaitDriver();
@@ -118,22 +99,22 @@ public class UIWait {
   }
 
   /**
-   * Waits until the element is present.
+   * Wait for present element web element.
    *
-   * @param by The by selector
-   * @return Returns the element if present
+   * @param by the by
+   * @return the web element
    */
   public WebElement waitForPresentElement(By by) {
     return this.waitForPresentElement(by, this.getWaitDriver());
   }
 
   /**
-   * Waits until the element is present.
+   * Wait for present element web element.
    *
-   * @param by              The by selector
-   * @param timeOutInMillis The timeout in milliseconds
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return Returns the element if present
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the web element
    */
   public WebElement waitForPresentElement(By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -142,35 +123,33 @@ public class UIWait {
   }
 
   /**
-   * Waits For the element to be present.
+   * Wait for present element web element.
    *
-   * @param by   The by selector
-   * @param wait The wait driver
-   * @return Returns the element if present
+   * @param by   the by
+   * @param wait the wait
+   * @return the web element
    */
   public WebElement waitForPresentElement(By by, WebDriverWait wait) {
     return wait.until(ExpectedConditions.presenceOfElementLocated(by));
   }
 
   /**
-   * Wait for the specified element to be visible on the pages DOM. The first element located with
-   * the specified By value is returned.
+   * Wait for visible element web element.
    *
-   * @param by Selector to wait for, and return
-   * @return WebElement - first one found with by
+   * @param by the by
+   * @return the web element
    */
   public WebElement waitForVisibleElement(final By by) {
     return this.waitForVisibleElement(by, getWaitDriver());
   }
 
   /**
-   * Wait for the specified element to be visible on the pages DOM. The first element located with
-   * the specified By value is returned.
+   * Wait for visible element web element.
    *
-   * @param by              Selector to wait for, and return
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return WebElement - first one found with by. Null
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the web element
    */
   public WebElement waitForVisibleElement(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -179,12 +158,11 @@ public class UIWait {
   }
 
   /**
-   * Wait for the specified element to be visible on the pages DOM. The first element located with
-   * the specified By value is returned.
+   * Wait for visible element web element.
    *
-   * @param by   Selector to wait for, and return
-   * @param wait The wait driver
-   * @return WebElement - first one found with by. Null
+   * @param by   the by
+   * @param wait the wait
+   * @return the web element
    */
   public WebElement waitForVisibleElement(final By by, WebDriverWait wait) {
     try {
@@ -195,22 +173,22 @@ public class UIWait {
   }
 
   /**
-   * Wait until the element exists and is visible.
+   * Wait until visible element boolean.
    *
-   * @param by Selector to wait for
-   * @return boolean true if element is found
+   * @param by the by
+   * @return the boolean
    */
   public boolean waitUntilVisibleElement(final By by) {
     return waitUntilVisibleElement(by, this.getWaitDriver());
   }
 
   /**
-   * Wait until the element exists and is visible.
+   * Wait until visible element boolean.
    *
-   * @param by              Selector to wait for
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return boolean true if element is found
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilVisibleElement(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -219,11 +197,11 @@ public class UIWait {
   }
 
   /**
-   * Wait until the element exists and is visible.
+   * Wait until visible element boolean.
    *
-   * @param by   Selector to wait for
-   * @param wait The wait driver
-   * @return boolean true if element is found
+   * @param by   the by
+   * @param wait the wait
+   * @return the boolean
    */
   public boolean waitUntilVisibleElement(final By by, WebDriverWait wait) {
     try {
@@ -234,24 +212,22 @@ public class UIWait {
   }
 
   /**
-   * Wait for the specified element to be present and enabled. The first element located with
-   * the specified By value is returned.
+   * Wait for enabled element web element.
    *
-   * @param by Selector to wait for, and return
-   * @return WebElement - first one found with by. Null
+   * @param by the by
+   * @return the web element
    */
   public WebElement waitForEnabledElement(final By by) {
     return waitForEnabledElement(by, this.timeout, this.fluentRetryTime);
   }
 
   /**
-   * Wait for the specified element to be present and enabled. The first element located with
-   * the specified By value is returned.
+   * Wait for enabled element web element.
    *
-   * @param by              Selector to wait for, and return
-   * @param timeOutInMillis - the number of milliseconds to wait before failing
-   * @param sleepInMillis   - the number of milliseconds to wait before a recheck
-   * @return WebElement - first one found with by. Null
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the web element
    */
   public WebElement waitForEnabledElement(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -263,22 +239,22 @@ public class UIWait {
   }
 
   /**
-   * Wait until the specified element to be present and enabled.
+   * Wait until enabled element boolean.
    *
-   * @param by - Selector to wait for, and return
-   * @return boolean true if element is found, else false
+   * @param by the by
+   * @return the boolean
    */
   public boolean waitUntilEnabledElement(final By by) {
     return waitUntilEnabledElement(by, this.timeout, this.fluentRetryTime);
   }
 
   /**
-   * Wait for the specified element to be present and enabled.
+   * Wait until enabled element boolean.
    *
-   * @param by              Selector to wait for, and return
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return boolean true if element is found, else false
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilEnabledElement(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -304,22 +280,22 @@ public class UIWait {
   }
 
   /**
-   * Waits until the element is disabled.
+   * Wait until disabled element boolean.
    *
-   * @param by the By selector
-   * @return returns true if the element is disabled, else false
+   * @param by the by
+   * @return the boolean
    */
   public boolean waitUntilDisabledElement(By by) {
     return waitUntilDisabledElement(by, this.timeout, this.fluentRetryTime);
   }
 
   /**
-   * Waits until the element is disabled.
+   * Wait until disabled element boolean.
    *
-   * @param by              the web element
-   * @param timeOutInMillis he number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return returns true if the element is disabled, else false
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilDisabledElement(By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -336,18 +312,20 @@ public class UIWait {
   }
 
   /**
-   * Wait until the element is not displayed or visible.
+   * Wait for absent element.
    *
-   * @param by Selector to not be displayed or visible
+   * @param by the by
    */
   public void waitForAbsentElement(final By by) {
     this.waitForAbsentElement(by, this.timeout, this.fluentRetryTime);
   }
 
   /**
-   * Wait until the element is not displayed or visible.
+   * Wait for absent element.
    *
-   * @param by Selector to not be displayed or visible
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
    */
   public void waitForAbsentElement(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -360,21 +338,22 @@ public class UIWait {
   }
 
   /**
-   * Wait until the element is not displayed or visible.
+   * Wait until absent element boolean.
    *
-   * @param by Selector to not be displayed or visible
+   * @param by the by
+   * @return the boolean
    */
   public boolean waitUntilAbsentElement(final By by) {
     return this.waitUntilAbsentElement(by, this.timeout, this.fluentRetryTime);
   }
 
   /**
-   * Wait until the element is not displayed or visible.
+   * Wait until absent element boolean.
    *
-   * @param by              element to not be displayed or visible
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return boolean - true if not displayed
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilAbsentElement(By by, final int timeOutInMillis, final int sleepInMillis) {
 
@@ -399,24 +378,22 @@ public class UIWait {
   }
 
   /**
-   * Wait for a selector to present, and then return a list of all WebElements that are located by
-   * that selector.
+   * Wait for elements list.
    *
-   * @param by Selector value to wait for
-   * @return List of WebElements - all web elements found by the specified selector
+   * @param by the by
+   * @return the list
    */
   public List<WebElement> waitForElements(final By by) {
     return this.waitForElements(by, getWaitDriver());
   }
 
   /**
-   * Wait for a selector to be present and then return a list
-   * of all WebElements that are located by that selector.
+   * Wait for elements list.
    *
-   * @param by              Selector value to wait for
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return List of WebElements - all web elements found by the specified selector
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the list
    */
   public List<WebElement> waitForElements(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -425,23 +402,22 @@ public class UIWait {
   }
 
   /**
-   * Wait for a selector to present, and then return a list of all WebElements that are located by
-   * that selector.
+   * Wait for elements list.
    *
-   * @param by   Selector value to wait for
-   * @param wait The wait driver
-   * @return List of WebElements - all web elements found by the specified selector
+   * @param by   the by
+   * @param wait the wait
+   * @return the list
    */
   public List<WebElement> waitForElements(final By by, WebDriverWait wait) {
     return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
   }
 
   /**
-   * Wait for the specified element to have the Exact text.
+   * Wait for exact text web element.
    *
-   * @param by   By selector to examine
-   * @param text String to search for in the text
-   * @return WebElement - element, null if not found and assert == false
+   * @param by   the by
+   * @param text the text
+   * @return the web element
    */
   public WebElement waitForExactText(final By by, final String text) {
     waitUntilExactText(by, text);
@@ -449,24 +425,24 @@ public class UIWait {
   }
 
   /**
-   * Wait until the exact text is present in the specified element.
+   * Wait until exact text boolean.
    *
-   * @param by   Selector to examine for the specified text
-   * @param text String value to verify the specified selector contains
-   * @return boolean - true if the text was found in the element - else false
+   * @param by   the by
+   * @param text the text
+   * @return the boolean
    */
   public boolean waitUntilExactText(final By by, final String text) {
     return this.waitUntilExactText(by, text, getWaitDriver());
   }
 
   /**
-   * Wait until the exact text is present in the specified element.
+   * Wait until exact text boolean.
    *
-   * @param by              Selector to examine for the specified text
-   * @param text            String value to verify the specified selector contains
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return boolean - true if the text was found in the element - else false
+   * @param by              the by
+   * @param text            the text
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilExactText(final By by, final String text, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -475,12 +451,12 @@ public class UIWait {
   }
 
   /**
-   * Wait until the exact text is present in the specified element.
+   * Wait until exact text boolean.
    *
-   * @param by   Selector to examine for the specified text
-   * @param text String value to verify the specified selector contains
-   * @param wait The wait driver
-   * @return boolean - true if the text was found in the element - else false
+   * @param by   the by
+   * @param text the text
+   * @param wait the wait
+   * @return the boolean
    */
   public boolean waitUntilExactText(final By by, final String text, WebDriverWait wait) {
     try {
@@ -491,11 +467,11 @@ public class UIWait {
   }
 
   /**
-   * Wait for an element to contain a specified text.
+   * Wait for contains text web element.
    *
-   * @param by   Selector to check the containing text
-   * @param text String that should be contained within the selector
-   * @return WebElement containing the text
+   * @param by   the by
+   * @param text the text
+   * @return the web element
    */
   public WebElement waitForContainsText(final By by, final String text) {
     if (waitUntilContainsText(by, text, getWaitDriver())) {
@@ -506,24 +482,24 @@ public class UIWait {
   }
 
   /**
-   * Wait until an element contains the specified text.
+   * Wait until contains text boolean.
    *
-   * @param by   Selector to check the containing text
-   * @param text String that should be contained within the selector
-   * @return boolean - true if the text is contained in the selector, else false
+   * @param by   the by
+   * @param text the text
+   * @return the boolean
    */
   public boolean waitUntilContainsText(final By by, final String text) {
     return this.waitUntilContainsText(by, text, getWaitDriver());
   }
 
   /**
-   * Wait until an element contains the specified text.
+   * Wait until contains text boolean.
    *
-   * @param by              Selector to check the containing text
-   * @param text            String that should be contained within the selector
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return boolean - true if the text is contained in the selector, else false
+   * @param by              the by
+   * @param text            the text
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilContainsText(final By by, final String text, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -532,12 +508,12 @@ public class UIWait {
   }
 
   /**
-   * Wait until the element contains the specified text.
+   * Wait until contains text boolean.
    *
-   * @param by   Selector to check the containing text
-   * @param text String that should be contained within the selector
-   * @param wait int value of seconds to wait before timing out
-   * @return boolean - true if the text is contained in the selector, else false
+   * @param by   the by
+   * @param text the text
+   * @param wait the wait
+   * @return the boolean
    */
   public boolean waitUntilContainsText(final By by, final String text, WebDriverWait wait) {
     try {
@@ -548,12 +524,12 @@ public class UIWait {
   }
 
   /**
-   * Wait until an attribute of the specified selector to be present and equal the desired value.
+   * Wait until attribute text equals boolean.
    *
-   * @param by        Selector to look for
-   * @param attribute String value of the attribute to look at on the specified selector
-   * @param text      String value of the text to look for in the attribute
-   * @return true if the attribute with the specified text value is found, else false
+   * @param by        the by
+   * @param attribute the attribute
+   * @param text      the text
+   * @return the boolean
    */
   public boolean waitUntilAttributeTextEquals(final By by, final String attribute,
       final String text) {
@@ -561,14 +537,14 @@ public class UIWait {
   }
 
   /**
-   * Wait until an attribute of the specified selector to be present.
+   * Wait until attribute text equals boolean.
    *
-   * @param by              Selector to look for
-   * @param attribute       String value of the attribute to look at on the specified selector
-   * @param text            String value of the text to look for in the attribute
-   * @param timeOutInMillis - the number of milliseconds to wait before failing
-   * @param sleepInMillis   - the number of milliseconds to wait before a recheck
-   * @return true if the attribute with the specified text value is found, else false
+   * @param by              the by
+   * @param attribute       the attribute
+   * @param text            the text
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilAttributeTextEquals(final By by, final String attribute,
       final String text, final int timeOutInMillis, final int sleepInMillis) {
@@ -577,12 +553,12 @@ public class UIWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present.
+   * Wait for attribute text equals web element.
    *
-   * @param by        Selector to look for
-   * @param attribute String value of the attribute to look at on the specified selector
-   * @param text      String value of the text to look for in the attribute
-   * @return Webelement of the selector that is found
+   * @param by        the by
+   * @param attribute the attribute
+   * @param text      the text
+   * @return the web element
    */
   public WebElement waitForAttributeTextEquals(final By by, final String attribute,
       final String text) {
@@ -590,14 +566,14 @@ public class UIWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present and equal the desired value.
+   * Wait for attribute text equals web element.
    *
-   * @param by              Selector to look for
-   * @param attribute       String value of the attribute to look at on the specified selector
-   * @param text            String value of the text to look for in the attribute
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return WebElement of the selector that is found
+   * @param by              the by
+   * @param attribute       the attribute
+   * @param text            the text
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the web element
    */
   public WebElement waitForAttributeTextEquals(final By by, final String attribute,
       final String text, final int timeOutInMillis, final int sleepInMillis) {
@@ -606,13 +582,13 @@ public class UIWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present and equal the desired value.
+   * Wait for attribute text equals web element.
    *
-   * @param by        Selector to look for
-   * @param attribute String value of the attribute to look at on the specified selector
-   * @param text      String value of the text to look for in the attribute
-   * @param wait      int version of the timeout in seconds
-   * @return WebElement of the selector that is found
+   * @param by        the by
+   * @param attribute the attribute
+   * @param text      the text
+   * @param wait      the wait
+   * @return the web element
    */
   public WebElement waitForAttributeTextEquals(final By by, final String attribute,
       final String text, WebDriverWait wait) {
@@ -625,12 +601,12 @@ public class UIWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present, and contain the specified text.
+   * Wait until attribute text contains boolean.
    *
-   * @param by        Selector to look for
-   * @param attribute String value of the attribute to look at on the specified selector
-   * @param text      String value of the text to look for in the attribute
-   * @return true if the attribute with the specified text value is found, else false
+   * @param by        the by
+   * @param attribute the attribute
+   * @param text      the text
+   * @return the boolean
    */
   public boolean waitUntilAttributeTextContains(final By by, final String attribute,
       final String text) {
@@ -638,14 +614,14 @@ public class UIWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present, and contain the specified text.
+   * Wait until attribute text contains boolean.
    *
-   * @param by              Selector to look for
-   * @param attribute       String value of the attribute to look at on the specified selector
-   * @param text            String value of the text to look for in the attribute
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return true if the attribute with the specified text value is found, else false
+   * @param by              the by
+   * @param attribute       the attribute
+   * @param text            the text
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilAttributeTextContains(final By by, final String attribute,
       final String text, final int timeOutInMillis, final int sleepInMillis) {
@@ -654,14 +630,14 @@ public class UIWait {
   }
 
   /**
-   * Wait for an attribute of the specified selector to be present, and contain the specified text.
+   * Wait until attribute boolean.
    *
-   * @param by        Selector to look for
-   * @param attribute String value of the attribute to look at on the specified selector
-   * @param text      String value of the text to look for in the attribute
-   * @param wait      The wait driver
-   * @param contains  boolean true if checking if contains, false if exact match
-   * @return true if the attribute with the specified text value is found, else false
+   * @param by        the by
+   * @param attribute the attribute
+   * @param text      the text
+   * @param wait      the wait
+   * @param contains  the contains
+   * @return the boolean
    */
   public boolean waitUntilAttribute(final By by, final String attribute, final String text,
       WebDriverWait wait, final boolean contains) {
@@ -673,22 +649,22 @@ public class UIWait {
   }
 
   /**
-   * Scroll an element into view, and wait for it to be clickable.
+   * Wait for clickable element and scroll into view web element.
    *
-   * @param by Selector to wait for and focus on
-   * @return WebElement
+   * @param by the by
+   * @return the web element
    */
   public WebElement waitForClickableElementAndScrollIntoView(final By by) {
     return this.waitForClickableElementAndScrollIntoView(by, getWaitDriver());
   }
 
   /**
-   * Scroll an element into view, and wait for it to be clickable.
+   * Wait for clickable element and scroll into view web element.
    *
-   * @param by              Selector to wait for and focus on
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return WebElement
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the web element
    */
   public WebElement waitForClickableElementAndScrollIntoView(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -697,11 +673,11 @@ public class UIWait {
   }
 
   /**
-   * Scroll an element into view, and wait for it to be clickable.
+   * Wait for clickable element and scroll into view web element.
    *
-   * @param by   Selector to wait for and focus on
-   * @param wait int value of seconds to wait for before timing out
-   * @return WebElement
+   * @param by   the by
+   * @param wait the wait
+   * @return the web element
    */
   public WebElement waitForClickableElementAndScrollIntoView(final By by, WebDriverWait wait) {
     scrollIntoView(by);
@@ -710,22 +686,22 @@ public class UIWait {
   }
 
   /**
-   * Scroll an element into view, and wait for it to be clickable.
+   * Wait until clickable element and scroll into view boolean.
    *
-   * @param by Selector to wait for and focus on
-   * @return boolean - true if the element is found and clickable
+   * @param by the by
+   * @return the boolean
    */
   public boolean waitUntilClickableElementAndScrollIntoView(final By by) {
     return this.waitUntilClickableElementAndScrollIntoView(by, getWaitDriver());
   }
 
   /**
-   * Scroll an element into view, and wait for it to be clickable.
+   * Wait until clickable element and scroll into view boolean.
    *
-   * @param by              Selector to wait for and focus on
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return boolean - true if the element is found and clickable
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilClickableElementAndScrollIntoView(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -734,11 +710,11 @@ public class UIWait {
   }
 
   /**
-   * Scroll an element into view, and wait for it to be clickable.
+   * Wait until clickable element and scroll into view boolean.
    *
-   * @param by   Selector to wait for and focus on
-   * @param wait The wait driver
-   * @return boolean - true if the element is found and clickable
+   * @param by   the by
+   * @param wait the wait
+   * @return the boolean
    */
   public boolean waitUntilClickableElementAndScrollIntoView(final By by, WebDriverWait wait) {
     scrollIntoView(by);
@@ -747,22 +723,22 @@ public class UIWait {
   }
 
   /**
-   * Wait for the specified selector to be clickable.
+   * Wait until clickable element boolean.
    *
-   * @param by Selector to wait for
-   * @return boolean - true if found and clickable, else false
+   * @param by the by
+   * @return the boolean
    */
   public boolean waitUntilClickableElement(final By by) {
     return this.waitUntilClickableElement(by, getWaitDriver());
   }
 
   /**
-   * Wait for the specified selector to be clickable.
+   * Wait until clickable element boolean.
    *
-   * @param by              Selector to wait for
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return boolean - true if found and clickable, else false
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilClickableElement(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -771,11 +747,11 @@ public class UIWait {
   }
 
   /**
-   * Wait for the specified selector to be clickable.
+   * Wait until clickable element boolean.
    *
-   * @param by   Selector to wait for
-   * @param wait The wait driver
-   * @return boolean - true if found and clickable, else false
+   * @param by   the by
+   * @param wait the wait
+   * @return the boolean
    */
   public boolean waitUntilClickableElement(final By by, WebDriverWait wait) {
     try {
@@ -789,22 +765,22 @@ public class UIWait {
   }
 
   /**
-   * Wait for the element specified by the provided selector to be clickable.
+   * Wait for clickable element web element.
    *
-   * @param by Selector to wait for to be clickable
-   * @return WebElement that is located, or null if none is found
+   * @param by the by
+   * @return the web element
    */
   public WebElement waitForClickableElement(final By by) {
     return this.waitForClickableElement(by, getWaitDriver());
   }
 
   /**
-   * Wait for the element specified by the provided selector to be clickable.
+   * Wait for clickable element web element.
    *
-   * @param by              Selector to wait for to be clickable
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
-   * @return WebElement that is located, or null if none is found
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the web element
    */
   public WebElement waitForClickableElement(final By by, final int timeOutInMillis,
       final int sleepInMillis) {
@@ -814,19 +790,18 @@ public class UIWait {
   }
 
   /**
-   * Wait for the element specified by the provided selector to be clickable.
+   * Wait for clickable element web element.
    *
-   * @param by   Selector to wait for to be clickable
-   * @param wait The wait driver
-   * @return WebElement that is located, or null if none is found
+   * @param by   the by
+   * @param wait the wait
+   * @return the web element
    */
   public WebElement waitForClickableElement(final By by, WebDriverWait wait) {
     return wait.until(ExpectedConditions.elementToBeClickable(by));
   }
 
   /**
-   * Wait for the page to load by waiting for the source to stop changing for at least a second.
-   * Asserts the page loads
+   * Wait for page load.
    */
   public void waitForPageLoad() {
     if (!this.waitUntilPageLoad()) {
@@ -835,9 +810,9 @@ public class UIWait {
   }
 
   /**
-   * Wait for the page to load by waiting for the source to stop changing for at least a second.
+   * Wait until page load boolean.
    *
-   * @return true if it's successfully loaded, false if timed out and not finished loading
+   * @return the boolean
    */
   public boolean waitUntilPageLoad() {
     String before = "";
@@ -859,20 +834,22 @@ public class UIWait {
   }
 
   /**
-   * Waits for the Frame to be available.
+   * Wait until iframe to load boolean.
    *
-   * @param by The frame locator
+   * @param by the by
+   * @return the boolean
    */
   public boolean waitUntilIframeToLoad(By by) {
     return waitUntilIframeToLoad(by, this.getWaitDriver());
   }
 
   /**
-   * Waits for the Frame to be available.
+   * Wait until iframe to load boolean.
    *
-   * @param by              The frame locator
-   * @param timeOutInMillis he number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the boolean
    */
   public boolean waitUntilIframeToLoad(By by, final int timeOutInMillis, final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
@@ -880,9 +857,11 @@ public class UIWait {
   }
 
   /**
-   * Waits for the Frame to be available.
+   * Wait until iframe to load boolean.
    *
-   * @param by The frame locator
+   * @param by   the by
+   * @param wait the wait
+   * @return the boolean
    */
   public boolean waitUntilIframeToLoad(By by, WebDriverWait wait) {
 
@@ -895,20 +874,20 @@ public class UIWait {
   }
 
   /**
-   * Waits for the Frame to be available.
+   * Wait for iframe to load.
    *
-   * @param by The frame locator
+   * @param by the by
    */
   public void waitForIframeToLoad(By by) {
     waitForIframeToLoad(by, this.getWaitDriver());
   }
 
   /**
-   * Waits for the Frame to be available.
+   * Wait for iframe to load.
    *
-   * @param by              The frame locator
-   * @param timeOutInMillis the number of milliseconds to wait before failing
-   * @param sleepInMillis   the number of milliseconds to wait before a recheck
+   * @param by              the by
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
    */
   public void waitForIframeToLoad(By by, final int timeOutInMillis, final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
@@ -916,68 +895,71 @@ public class UIWait {
   }
 
   /**
-   * Waits for the Frame to be available.
+   * Wait for iframe to load.
    *
-   * @param by The frame locator
+   * @param by   the by
+   * @param wait the wait
    */
   public void waitForIframeToLoad(By by, WebDriverWait wait) {
     wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
   }
 
   /**
-   * Returns the webDriver of this SeleniumWait object.
+   * Gets web driver.
    *
-   * @return the webDriver (type WebDriver) of this SeleniumWait object.
+   * @return the web driver
    */
   protected WebDriver getWebDriver() {
     return driver;
   }
 
   /**
-   * Gets a new WaitDriver using the default timeout.
+   * Gets new wait driver.
    *
-   * @return new WaitDriver
+   * @param driver the driver
+   * @return the new wait driver
    */
   protected WebDriverWait getNewWaitDriver(WebDriver driver) {
     return getNewWaitDriver(driver, this.timeout, this.fluentRetryTime);
   }
 
   /**
-   * Gets a new WaitDriver using the default timeout.
+   * Gets new wait driver.
    *
-   * @return new WaitDriver
+   * @return the new wait driver
    */
   protected WebDriverWait getNewWaitDriver() {
     return getNewWaitDriver(this.getWebDriver(), this.timeout, this.fluentRetryTime);
   }
 
   /**
-   * Gets a new WaitDriver using the specified timeout.
+   * Gets new wait driver.
    *
-   * @param timeOutInMillis the default timeout
-   * @return new WaitDriver
+   * @param timeOutInMillis the time out in millis
+   * @return the new wait driver
    */
   protected WebDriverWait getNewWaitDriver(int timeOutInMillis) {
     return getNewWaitDriver(this.getWebDriver(), timeOutInMillis, this.fluentRetryTime);
   }
 
   /**
-   * Gets a new WaitDriver using the specified timeout.
+   * Gets new wait driver.
    *
-   * @param timeOutInMillis the time to wait before a timeout
-   * @param sleepInMillis   the time to wait before a recheck
-   * @return new WaitDriver
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the new wait driver
    */
   protected WebDriverWait getNewWaitDriver(int timeOutInMillis, int sleepInMillis) {
     return getNewWaitDriver(this.getWebDriver(), timeOutInMillis, sleepInMillis);
   }
 
   /**
-   * Gets a new WaitDriver using the specified timeout.
+   * Gets new wait driver.
    *
-   * @param timeOutInMillis the time to wait before a timeout
-   * @param sleepInMillis   the time to wait before a recheck
-   * @return new WaitDriver
+   * @param driver          the driver
+   * @param timeOutInMillis the time out in millis
+   * @param sleepInMillis   the sleep in millis
+   * @return the new wait driver
    */
   protected WebDriverWait getNewWaitDriver(WebDriver driver, int timeOutInMillis,
       int sleepInMillis) {
@@ -987,11 +969,6 @@ public class UIWait {
     return wait;
   }
 
-  /**
-   * Scroll the web page so the selector is visible.
-   *
-   * @param by Selector to make visible
-   */
   private void scrollIntoView(By by) {
     WebElement element = waitForVisibleElement(by);
     int counter = 0;
@@ -1012,16 +989,6 @@ public class UIWait {
     }
   }
 
-  /**
-   * Check the text value of an attribute.
-   *
-   * @param driver    - web driver
-   * @param by        Selector to get the attribute from
-   * @param attribute String value of the attribute to examine
-   * @param text      String to check against the attribute
-   * @param contains  boolean - true to see if the string is contained, false if exact match
-   * @return boolean - true if they match, else false
-   */
   private static boolean attributeMatches(WebDriver driver, By by, String attribute, String text,
       boolean contains) {
     try {
@@ -1035,13 +1002,6 @@ public class UIWait {
     }
   }
 
-  /**
-   * Checks if the text of the elements are equal.
-   *
-   * @param by   Selector to examine
-   * @param text Text that is being compared to the selector
-   * @return boolean - true if equal
-   */
   // TODO: should have fuzzy validation incorporated.
   private boolean doesTextMatch(By by, String text) {
     try {
@@ -1058,13 +1018,6 @@ public class UIWait {
     return false;
   }
 
-  /**
-   * Checks if the text of the elements are equal.
-   *
-   * @param by   Selector to examine
-   * @param text Text that is being compared to the selector
-   * @return boolean - true if equal
-   */
   private boolean doesContainsText(By by, String text) {
     try {
       WebElement element = this.waitForVisibleElement(by);

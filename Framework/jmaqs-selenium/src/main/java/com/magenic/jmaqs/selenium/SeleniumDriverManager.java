@@ -21,10 +21,11 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 public class SeleniumDriverManager extends DriverManager {
 
   /**
-   * Initializes a new instance of the <see cref="SeleniumDriverManager"/> class.
+   * Instantiates a new Selenium driver manager.
    *
-   * @param getDriver  Function for getting an Selenium web driver
-   * @param testObject The associated test object
+   * @param getDriver  the get driver
+   * @param testObject the test object
+   * @param <T>        the type generic
    */
   public <T> SeleniumDriverManager(Supplier<T> getDriver, BaseTestObject testObject) {
     super(getDriver, testObject);
@@ -52,9 +53,9 @@ public class SeleniumDriverManager extends DriverManager {
   }
 
   /**
-   * Get the web driver.
+   * Gets web driver.
    *
-   * @return The web driver
+   * @return the web driver
    */
   public WebDriver getWebDriver() {
 
@@ -72,10 +73,10 @@ public class SeleniumDriverManager extends DriverManager {
   }
 
   /**
-   * Log a verbose message and include the automation specific call stack data.
+   * Log verbose.
    *
-   * @param message The message text
-   * @param args    String format arguments
+   * @param message the message
+   * @param args    the args
    */
   protected void logVerbose(String message, Object... args) {
 
@@ -97,11 +98,6 @@ public class SeleniumDriverManager extends DriverManager {
     System.out.println(messages);
   }
 
-  /**
-   * Logging startup.
-   *
-   * @param webDriver the web driver
-   */
   private void loggingStartup(WebDriver webDriver) {
     try {
       WebDriver driver = ((EventFiringWebDriver) webDriver).getWrappedDriver();

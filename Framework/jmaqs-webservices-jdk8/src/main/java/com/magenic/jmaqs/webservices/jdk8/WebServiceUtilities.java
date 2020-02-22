@@ -19,17 +19,11 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
 
 /**
- * Web service utilities.
+ * The type Web service utilities.
  */
 public final class WebServiceUtilities {
-  /**
-   * ObjecMapper for serializing and deserializing json.
-   */
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
-  /**
-   * XmlMapper used for serializing and deserializing xml.
-   */
   private static final ObjectMapper xmlMapper = new XmlMapper();
 
   // private constructor
@@ -37,12 +31,11 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Get the body from a HTTP response.
+   * Gets response body.
    *
-   * @param response The response
-   * @return The response body
-   * @throws ParseException There was an error parsing the response as a string
-   * @throws IOException    There was a problem reading the response
+   * @param response the response
+   * @return the response body
+   * @throws IOException the io exception
    */
   public static String getResponseBody(CloseableHttpResponse response) throws IOException {
     HttpEntity entity = response.getEntity();
@@ -50,14 +43,14 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Get the body from a HTTP response.
+   * Gets response body.
    *
-   * @param response    The response
-   * @param contentType The content type of the request
-   * @param type        The type the response is being deserialized to
-   * @return The response body
-   * @throws ParseException There was an error parsing the response as a string
-   * @throws IOException    There was a problem reading the response
+   * @param <T>         the type parameter
+   * @param response    the response
+   * @param contentType the content type
+   * @param type        the type
+   * @return the response body
+   * @throws IOException the io exception
    */
   public static <T> T getResponseBody(CloseableHttpResponse response, ContentType contentType,
       Type type) throws IOException {
@@ -76,12 +69,14 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Create the string entity.
+   * Create string entity string entity.
    *
-   * @param body      The body being set in the entity
-   * @param encoding  The charset encoding of the message
-   * @param mediaType The mime type of the message
-   * @return The string entity
+   * @param <T>       the type parameter
+   * @param body      the body
+   * @param encoding  the encoding
+   * @param mediaType the media type
+   * @return the string entity
+   * @throws JsonProcessingException the json processing exception
    */
   public static <T> StringEntity createStringEntity(T body, Charset encoding, String mediaType)
       throws JsonProcessingException {
@@ -90,13 +85,13 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Creates the string content.
+   * Create string entity string entity.
    *
-   * @param body        The body being set in the entity
-   * @param contentType The content type of the
-   * @param <T>         The type of the body
-   * @return The string entity
-   * @throws JsonProcessingException If the json or xml failed to deserialize
+   * @param <T>         the type parameter
+   * @param body        the body
+   * @param contentType the content type
+   * @return the string entity
+   * @throws JsonProcessingException the json processing exception
    */
   public static <T> StringEntity createStringEntity(T body, ContentType contentType)
       throws JsonProcessingException {
@@ -111,36 +106,37 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Gets the json object as a string.
+   * Serialize json string.
    *
-   * @param body The body being serialized to a string
-   * @param <T>  The type of the body
-   * @return The body as a json string
-   * @throws JsonProcessingException If the json serialization fails
+   * @param <T>  the type parameter
+   * @param body the body
+   * @return the string
+   * @throws JsonProcessingException the json processing exception
    */
   public static <T> String serializeJson(T body) throws JsonProcessingException {
     return objectMapper.writeValueAsString(body);
   }
 
   /**
-   * Gets the xml object as a string.
+   * Serialize xml string.
    *
-   * @param body The body being serialized to a string
-   * @param <T>  The type of the body
-   * @return The body as an xml string
-   * @throws JsonProcessingException If the xml serialization fails
+   * @param <T>  the type parameter
+   * @param body the body
+   * @return the string
+   * @throws JsonProcessingException the json processing exception
    */
   public static <T> String serializeXml(T body) throws JsonProcessingException {
     return xmlMapper.writeValueAsString(body);
   }
 
   /**
-   * Deserialzizes the response to the object specified.
+   * Deserialize json t.
    *
-   * @param message The httpresponse message being deserialized
-   * @param <T>     The type the message will be deserialized to
-   * @return The json as the type specified
-   * @throws IOException If the object can't be written to that type
+   * @param <T>     the type parameter
+   * @param message the message
+   * @param type    the type
+   * @return the t
+   * @throws IOException the io exception
    */
   public static <T> T deserializeJson(CloseableHttpResponse message, Type type) throws IOException {
     String responseEntity = getResponseBody(message);
@@ -149,12 +145,13 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Deserializes the response to the object specified.
+   * Deserialize xml t.
    *
-   * @param message The http response message being deserialized
-   * @param <T>     The tyep the message will be deserialied to
-   * @return The json as the type specified
-   * @throws IOException If the object can't be written to that type
+   * @param <T>     the type parameter
+   * @param message the message
+   * @param type    the type
+   * @return the t
+   * @throws IOException the io exception
    */
   public static <T> T deserializeXml(CloseableHttpResponse message, Type type) throws IOException {
     String responseEntity = getResponseBody(message);

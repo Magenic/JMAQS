@@ -217,7 +217,6 @@ public abstract class BaseTest {
    *
    * @param method      The initial executing Method object
    * @param testContext The initial executing Test Context object
-   * @throws Exception Throws exception if get logger fails
    */
   @BeforeMethod(alwaysRun = true)
   public void setup(Method method, ITestContext testContext) {
