@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<configuration>
+    <MagenicMaqs>
+        <!-- Generic wait time in milliseconds - AKA how long do you wait for rechecking something -->
+        <WaitTime>100</WaitTime>
+
+        <!-- Generic time-out in milliseconds -->
+        <Timeout>10000</Timeout>
+
+        <!-- Do you want to create logs for your tests
+        <Log>YES</Log>
+        <Log>NO</Log>
+        <Log>OnFail</Log>-->
+        <Log>YES</Log>
+
+        <!--Logging Levels
+        <LogLevel>VERBOSE</LogLevel>
+        <LogLevel>INFORMATION</LogLevel>
+        <LogLevel>GENERIC</LogLevel>
+        <LogLevel>SUCCESS</LogLevel>
+        <LogLevel>WARNING</LogLevel>
+        <LogLevel>ERROR</LogLevel>-->
+        <LogLevel>VERBOSE</LogLevel>
+
+        <!-- Logging Types
+        <LogType>CONSOLE</LogType>
+        <LogType>TXT</LogType>
+        <LogType>HTML</LogType>-->
+        <LogType>TXT</LogType>
+
+        <!-- Log file path - Defaults to build location if no value is defined -->
+        <FileLoggerPath>./target/logs</FileLoggerPath>
+    </MagenicMaqs>
+    <!--<DatabaseMaqs>
+        <Name>JMAQS</Name>
+        &lt;!&ndash;<DatabaseProviderType>SQLSERVER</DatabaseProviderType>
+        <DatabaseProviderType>MYSQL</DatabaseProviderType>&ndash;&gt;
+        <DatabaseProviderType>SQLITE</DatabaseProviderType>
+        <DatabaseConnectionString>jdbc:sqlite:./src/test/resources/MyDatabase.sqlite</DatabaseConnectionString>
+        <EntityDirectory>./src/test/java/com/magenic/jmaqs/database/entities/</EntityDirectory>
+        <EntityPackage>com.magenic.jmaqs.database.entities</EntityPackage>
+    </DatabaseMaqs>-->
+    <!--<DatabaseCaps>
+        <hibernate.archive.autodetection>class</hibernate.archive.autodetection>
+        <hibernate.show_sql>true</hibernate.show_sql>
+        <hibernate.format_sql>true</hibernate.format_sql>
+        <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+    </DatabaseCaps>-->
+
+    <DatabaseMaqs>
+        <DatabaseName>MagenicAutomation</DatabaseName>
+        <!--<DatabaseProviderType>SQL</DatabaseProviderType>
+        <DatabaseProviderType>MYSQL</DatabaseProviderType>-->
+        <DatabaseProviderType>SQL</DatabaseProviderType>
+        <DatabaseUser>MagenicQA</DatabaseUser>
+        <DatabasePassword>1magenicMARQ</DatabasePassword>
+        <DatabaseConnectionString>jdbc:sqlserver://qasqlserver.database.windows.net</DatabaseConnectionString>
+        <EntityDirectory>./src/test/java/com/magenic/jmaqs/database/entities/</EntityDirectory>
+        <EntityPackage>com.magenic.jmaqs.database.entities</EntityPackage>
+    </DatabaseMaqs>
+    <DatabaseCaps>
+        <hibernate.archive.autodetection>class</hibernate.archive.autodetection>
+        <hibernate.show_sql>true</hibernate.show_sql>
+        <hibernate.format_sql>true</hibernate.format_sql>
+        <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+    </DatabaseCaps>
+</configuration>
+
+<!--<persistence-unit name="JMAQS">-->
+<!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
+<!--<class>com.magenic.jmaqs.database.entities.OrdersEntity</class>-->
+<!--<class>com.magenic.jmaqs.database.entities.ProductsEntity</class>-->
+<!--<class>com.magenic.jmaqs.database.entities.SqliteMasterEntity</class>-->
+<!--<class>com.magenic.jmaqs.database.entities.UsersEntity</class>-->
+<!--<properties>-->
+<!--    <property name="hibernate.connection.url" value="jdbc:sqlite:/Users/jasonedstrom/Documents/Development/Magenic/JMAQS/Framework/jmaqs-database/src/test/resources/MyDatabase.sqlite"/>-->
+<!--    <property name="hibernate.connection.driver_class" value="org.sqlite.JDBC"/>-->
+<!--    <property name="hibernate.connection.username" value=""/>-->
+<!--    <property name="hibernate.connection.password" value=""/>-->
+<!--    <property name="hibernate.archive.autodetection" value="class"/>-->
+<!--    <property name="hibernate.show_sql" value="true"/>-->
+<!--    <property name="hibernate.format_sql" value="true"/>-->
+<!--    <property name="hibernate.hbm2ddl.auto" value="update"/>-->
+<!--</properties>-->
+<!--</persistence-unit>-->
