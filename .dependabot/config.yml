@@ -2,7 +2,7 @@ version: 1
 update_configs:
 #  TODO: Modules will be enabled slowly as baseline stabilizes and framework matures.
   - package_manager: "java:maven"
-    directory: "/Framework"
+    directory: ""
     update_schedule: "daily"
     target_branch: "master"
     default_labels:
