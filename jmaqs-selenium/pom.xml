@@ -113,7 +113,7 @@
                         <driver>
                             <name>geckodriver</name>
                             <customFileName>geckodriver</customFileName>
-                            <version>0.24.0</version>
+                            <version>0.26.0</version>
                         </driver>
                         <driver>
                             <name>edgedriver</name>
