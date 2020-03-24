@@ -1,61 +1,69 @@
-/*
- * Copyright 2020 (C) Magenic, All rights Reserved
- */
-
 package com.magenic.jmaqs.webservices.jdk11;
 
-import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
+import java.io.IOException;
+import java.net.Authenticator;
 import java.net.InetSocketAddress;
 import java.net.ProxySelector;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
 import java.time.Duration;
 
 /**
- * Http client factory.
+ * Http client factory
  */
 public class HttpClientFactory {
   /**
-   * private constructor.
-   */
-  private HttpClientFactory() {
-
-  }
-
-  /**
    * Gets a HTTP client based on configuration values.
    * @return A HTTP client
+   * @throws URISyntaxException if the uri has a syntax issue
    */
-  public static HttpClient getDefaultClient() {
-    return getClient(WebServiceConfig.getWebServiceTimeOut());
+  public static HttpClient getDefaultClient() throws URISyntaxException, IOException {
+    return getClient(WebServiceConfig.getWebServiceUri(),
+        WebServiceConfig.getWebServiceTimeOut());
   }
 
   /**
    * Gets a HTTP client based on configuration values.
+   * @param baseAddress Base service uri
    * @param timeout Web service timeout
    * @return A HTTP client
    */
-  public static HttpClient getClient(int timeout) {
-    return getClient(Duration.ofSeconds(timeout), WebServiceConfig.getUseProxy(),
-        WebServiceConfig.getProxyAddress());
+  public static HttpClient getClient(String baseAddress, int timeout) throws IOException {
+    return getClient(URI.create(baseAddress), Duration.ofSeconds(timeout), WebServiceConfig.getUseProxy(),
+        new URL(WebServiceConfig.getProxyAddress()));
   }
 
   /**
    * Gets a HTTP client based on configuration values.
+   * @param baseAddress Base service uri
    * @param timeout Web service timeout
    * @param useProxy Use a proxy
    * @param proxyAddress The proxy address to use
    * @return A HTTP client
    */
-  public static HttpClient getClient(Duration timeout, boolean useProxy, String proxyAddress) {
-    HttpClient.Builder builder = HttpClient.newBuilder()
-        .version(HttpClient.Version.HTTP_2)
-        .followRedirects(HttpClient.Redirect.NORMAL)
-        .connectTimeout(timeout);
+  public static HttpClient getClient(URI baseAddress, Duration timeout,
+      boolean useProxy, URL proxyAddress) throws IOException {
+    HttpRequest request = HttpRequest.newBuilder(baseAddress).build();
+    HttpClient client = null;
 
-    // sets up proxy settings
     if (useProxy) {
-      builder.proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, WebServiceConfig.getProxyPort())));
+      client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).connectTimeout(timeout)
+          .proxy(ProxySelector.of(new InetSocketAddress(String.valueOf(proxyAddress), 8080)))
+          .authenticator(Authenticator.getDefault()).build();
+    } else {
+      client = HttpClient.newHttpClient();
+      client.s
     }
-    return builder.build();
+
+    HttpClient.newBuilder().connectTimeout(timeout).build();
+
+    return new HttpClient(handler)
+    {
+      BaseAddress = baseAddress,
+      Timeout = timeout
+    };
   }
 }
