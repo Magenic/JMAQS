@@ -3,7 +3,11 @@ package com.magenic.jmaqs.webservices.jdk11;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 
+/**
+ * Web service specific configuration settings.
+ */
 public class WebServiceConfig {
+  // private constructor
   private WebServiceConfig() {
   }
 
@@ -14,7 +18,6 @@ public class WebServiceConfig {
 
   /**
    * Grabs the URI for the Web Service.
-   *
    * @return A String containing the URI for the WebService to test
    */
   public static String getWebServiceUri() {
@@ -23,7 +26,6 @@ public class WebServiceConfig {
 
   /**
    * Gets the expected time out in seconds.
-   *
    * @return the Time Out value for the web service test, or -1 if none are configured
    */
   public static int getWebServiceTimeOut() {
@@ -33,7 +35,6 @@ public class WebServiceConfig {
 
   /**
    * Get if we want to use a proxy for the web driver traffic.
-   *
    * @return True if we want to use the proxy
    */
   public static boolean getUseProxy() {
@@ -42,7 +43,6 @@ public class WebServiceConfig {
 
   /**
    * Get the proxy address to use.
-   *
    * @return The proxy address
    */
   public static String getProxyAddress() {
