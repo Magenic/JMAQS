@@ -35,6 +35,34 @@ public class WebServiceDriver {
   private URI baseAddress;
 
   /**
+   * Class Constructor that sets the http Client.
+   * @param newHttpClient the http client to be set.
+   */
+  public WebServiceDriver(HttpClient newHttpClient) {
+    this.baseHttpClient = newHttpClient;
+  }
+
+  /**
+   * Class Constructor that sets the base address as a URI.
+   * @param baseAddress The base URI address to use
+   */
+  public WebServiceDriver(URI baseAddress) {
+    this.baseAddress = baseAddress;
+  }
+
+  /**
+   * Class Constructor that sets the base address as a string.
+   *
+   * @param baseAddress
+   *          The base URI address to use
+   * @throws URISyntaxException
+   *           URI syntax is invalid
+   */
+  public WebServiceDriver(String baseAddress) throws URISyntaxException {
+    this(new URI(baseAddress));
+  }
+
+  /**
    * Sets http client.
    *
    * @param httpClient the http client
@@ -66,36 +94,6 @@ public class WebServiceDriver {
     return RequestConfig.copy(RequestConfig.DEFAULT)
         .setConnectionRequestTimeout(WebServiceConfig.getWebServiceTimeOut() * 1000)
         .setConnectTimeout(WebServiceConfig.getWebServiceTimeOut() * 1000).build();
-  }
-
-  /**
-   * Constructor.
-   *
-   * @param baseAddress
-   *          The base URI address to use
-   * @throws URISyntaxException
-   *           URI syntax is invalid
-   */
-  public WebServiceDriver(String baseAddress) throws URISyntaxException {
-    this(new URI(baseAddress));
-  }
-
-  /**
-   * Constructor.
-   *
-   * @param baseAddress
-   *          The base URI address to use
-   */
-  public WebServiceDriver(URI baseAddress) {
-    this.baseAddress = baseAddress;
-  }
-
-  /**
-   * Class Constructor that sets the http Client.
-   * @param newHttpClient the http client to be set.
-   */
-  public WebServiceDriver(HttpClient newHttpClient) {
-    this.baseHttpClient = newHttpClient;
   }
 
   /**
