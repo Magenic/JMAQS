@@ -9,13 +9,16 @@ import org.apache.http.Header;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpResponseException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpResponse;
-
+import java.util.Collection;
+import java.util.List;
 
 /**
  * The Web Service Driver.
@@ -49,13 +52,21 @@ public class WebServiceDriver {
   public HttpClient getHttpClient(String mediaType) {
     if (this.baseHttpClient == null) {
       Header header = new BasicHeader(HttpHeaders.CONTENT_TYPE, mediaType);
-      this.baseHttpClient = HttpClientBuilder.create().setDefaultHeaders(Lists.newArrayList(header))
-          //.setDefaultRequestConfig(getRequestTimeouts()).build();
-          .setDefaultRequestConfig(10000).build();
+      List<Header> headers = Lists.newArrayList(header);
+      HttpClient client = HttpClients.custom().setDefaultHeaders(headers).build();
+
+      this.baseHttpClient = HttpClientBuilder.create()
+          .setDefaultHeaders(Lists.newArrayList(header))
+          .setDefaultRequestConfig(getRequestTimeouts()).build();
     }
     return this.baseHttpClient;
   }
 
+  private RequestConfig getRequestTimeouts() {
+    return RequestConfig.copy(RequestConfig.DEFAULT)
+        .setConnectionRequestTimeout(WebServiceConfig.getWebServiceTimeOut() * 1000)
+        .setConnectTimeout(WebServiceConfig.getWebServiceTimeOut() * 1000).build();
+  }
 
   /**
    * Constructor.
