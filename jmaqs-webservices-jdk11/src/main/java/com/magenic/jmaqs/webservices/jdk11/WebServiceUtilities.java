@@ -1,50 +1,41 @@
-/*
- * Copyright 2020 (C) Magenic, All rights Reserved
- */
-
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import com.magenic.jmaqs.webservices.jdk8.MediaType;
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.net.http.HttpResponse;
+import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.util.EntityUtils;
+import java.lang.reflect.Type;
+import java.io.IOException;
+import java.net.http.HttpResponse;
+import java.nio.charset.Charset;
 
-/**
- * The type Web service utilities.
- */
 public class WebServiceUtilities {
-  /**
-   * used to serialize and deserialize json properties.
-   */
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
-  /**
-   * used to serialize and deserialize xml properties.
-   */
   private static final ObjectMapper xmlMapper = new XmlMapper();
 
-  /**
-   * private class constructor.
-   */
+  // private constructor
   private WebServiceUtilities() {
   }
 
   /**
    * Gets response body.
+   *
    * @param response the response
    * @return the response body
+   * @throws IOException the io exception
    */
-  public static String getResponseBody(HttpResponse<String> response) {
-    return response.body();
+  public static String getResponseBody(HttpResponse response) throws IOException {
+    return response.body().toString();
   }
 
   /**
    * Gets response body.
+   *
    * @param <T>         the type parameter
    * @param response    the response
    * @param contentType the content type
@@ -52,13 +43,13 @@ public class WebServiceUtilities {
    * @return the response body
    * @throws IOException the io exception
    */
-  public static <T> T getResponseBody(HttpResponse<String> response, MediaType contentType, Type type)
+  public static <T> T getResponseBody(HttpResponse response, ContentType contentType, Type type)
       throws IOException {
     T responseBody;
 
-    if (contentType.equals(MediaType.APP_JSON)) {
+    if (contentType.toString().toUpperCase().contains("JSON")) {
       responseBody = deserializeJson(response, type);
-    } else if (contentType.equals(MediaType.APP_XML)) {
+    } else if (contentType.toString().toUpperCase().contains("XML")) {
       responseBody = deserializeXml(response, type);
     } else {
       throw new IllegalArgumentException(
@@ -71,17 +62,33 @@ public class WebServiceUtilities {
   /**
    * Create string entity string entity.
    *
+   * @param <T>       the type parameter
+   * @param body      the body
+   * @param encoding  the encoding
+   * @param mediaType the media type
+   * @return the string entity
+   * @throws JsonProcessingException the json processing exception
+   */
+  public static <T> StringEntity createStringEntity(T body, Charset encoding, String mediaType)
+      throws JsonProcessingException {
+    ContentType contentType = ContentType.create(mediaType, encoding);
+    return createStringEntity(body, contentType);
+  }
+
+  /**
+   * Create string entity string entity.
+   *
    * @param <T>         the type parameter
    * @param body        the body
    * @param contentType the content type
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> String createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
+  public static <T> StringEntity createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
     if (contentType.toString().toUpperCase().contains("XML")) {
-      return serializeXml(body);
+      return new StringEntity(serializeXml(body), contentType);
     } else if (contentType.toString().toUpperCase().contains("JSON")) {
-      return serializeJson(body);
+      return new StringEntity(serializeJson(body), contentType);
     } else {
       throw new IllegalArgumentException(
           StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
@@ -113,7 +120,7 @@ public class WebServiceUtilities {
   }
 
   /**
-   * Deserialize json to a specified object.
+   * Deserialize json t.
    *
    * @param <T>     the type parameter
    * @param message the message
@@ -121,12 +128,13 @@ public class WebServiceUtilities {
    * @return the t
    * @throws IOException the io exception
    */
-  public static <T> T deserializeJson(HttpResponse<String> message, Type type) throws IOException {
-    return objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
+  public static <T> T deserializeJson(HttpResponse message, Type type) throws IOException {
+    String responseEntity = getResponseBody(message);
+    return objectMapper.readValue(responseEntity, objectMapper.getTypeFactory().constructType(type));
   }
 
   /**
-   * Deserialize xml to a specified object.
+   * Deserialize xml t.
    *
    * @param <T>     the type parameter
    * @param message the message
@@ -134,7 +142,8 @@ public class WebServiceUtilities {
    * @return the t
    * @throws IOException the io exception
    */
-  public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
-    return xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
+  public static <T> T deserializeXml(HttpResponse message, Type type) throws IOException {
+    String responseEntity = getResponseBody(message);
+    return xmlMapper.readValue(responseEntity, xmlMapper.getTypeFactory().constructType(type));
   }
 }
