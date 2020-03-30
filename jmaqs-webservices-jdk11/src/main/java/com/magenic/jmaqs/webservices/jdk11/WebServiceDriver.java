@@ -13,6 +13,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import static javafx.scene.input.KeyCode.T;
+
 /**
  * The Web Service Driver.
  */
@@ -103,12 +105,100 @@ public class WebServiceDriver {
     return this.baseHttpRequest;
   }
 
+  /// <summary>
+  /// Execute a web service get
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media you are expecting back</param>
+  /// <param name="expectSuccess">Assert a success code was returned</param>
+  /// <returns>The response content as a string</returns>
+  public String get(String requestUri, String expectedMediaType, boolean expectSuccess)
+      throws HttpResponseException {
+    HttpResponse response = this.getWithResponse(requestUri, expectedMediaType, expectSuccess);
+    return response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+  }
+
+  /// <summary>
+  /// Execute a web service get
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media you are expecting back</param>
+  /// <param name="expectedStatus">Assert a specific status code was returned</param>
+  /// <returns>The response content as a string</returns>
+  public String get(String requestUri, String expectedMediaType, HttpStatus expectedStatus)
+      throws HttpResponseException {
+    HttpResponse response = this.getWithResponse(requestUri, expectedMediaType, expectedStatus);
+    return response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+  }
+
+  /// <summary>
+  /// Execute a web service get
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media you are expecting back</param>
+  /// <param name="expectSuccess">Assert a success code was returned</param>
+  /// <returns>The http response message</returns>
+  public HttpResponse getWithResponse(String requestUri, String expectedMediaType, boolean expectSuccess)
+      throws HttpResponseException {
+    return this.getContent(requestUri, expectedMediaType, expectSuccess).GetAwaiter().GetResult();
+  }
+
+  /// <summary>
+  /// Execute a web service get
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="expectedMediaType">The type of media you are expecting back</param>
+  /// <param name="expectedStatus">Assert a specific status code was returned</param>
+  /// <returns>The http response message</returns>
+  public HttpResponse getWithResponse(String requestUri, String expectedMediaType, HttpStatus expectedStatus)
+      throws HttpResponseException {
+    return this.getContent(requestUri, expectedMediaType, expectedStatus).GetAwaiter().GetResult();
+  }
+
+  /// <summary>
+  /// Do a web service get for the given uri and media type
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="mediaType">What type of media are we expecting</param>
+  /// <param name="expectSuccess">Assert a success code was returned</param>
+  /// <returns>A http response message</returns>
+  protected HttpResponse getContent(String requestUri, String mediaType, boolean expectSuccess)
+      throws HttpResponseException {
+    this.checkIfMediaTypeNotPresent(mediaType);
+    HttpResponse response = await this.HttpClient.GetAsync(requestUri).ConfigureAwait(false);
+
+    // Should we check for success
+    if (expectSuccess) {
+      ensureSuccessStatusCode(response);
+    }
+
+    return response;
+  }
+
+  /// <summary>
+  /// Do a web service get for the given uri and media type
+  /// </summary>
+  /// <param name="requestUri">The request uri</param>
+  /// <param name="mediaType">What type of media are we expecting</param>
+  /// <param name="expectedStatus">Assert a specific status code was returned</param>
+  /// <returns>A http response message</returns>
+  protected HttpResponse getContent(String requestUri, String mediaType, HttpStatus expectedStatus)
+      throws HttpResponseException {
+    this.checkIfMediaTypeNotPresent(mediaType);
+    HttpResponse response = await this.HttpClient.GetAsync(requestUri).ConfigureAwait(false);
+
+    // We check for specific status
+    ensureStatusCodesMatch(response, expectedStatus);
+
+    return response;
+  }
+
   /**
    * Ensure the HTTP response was successful, if not throw a user friendly error message.
    * @param response The HTTP response
    * @throws HttpResponseException if the HttpResponse is null
    */
-  private static <T> void ensureSuccessStatusCode(HttpResponse<T> response) throws HttpResponseException {
+  public static <T> void ensureSuccessStatusCode(HttpResponse response) throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
       throw new HttpResponseException(HttpStatus.SC_NO_CONTENT, "Response was null");
@@ -130,7 +220,7 @@ public class WebServiceDriver {
    * @param expectedStatus Assert a specific status code was returned
    * @throws HttpResponseException if the HttpResponse is null
    */
-  private static <T> void ensureStatusCodesMatch(HttpResponse<T> response, HttpStatus expectedStatus)
+  public static <T> void ensureStatusCodesMatch(HttpResponse response, HttpStatus expectedStatus)
       throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
@@ -152,7 +242,7 @@ public class WebServiceDriver {
    * Check if the media type is supported.
    * @param mediaType Media type to add
    */
-  private void checkIfMediaTypeNotPresent(String mediaType) {
+  public void checkIfMediaTypeNotPresent(String mediaType) {
     // Make sure a media type was passed in
     if (mediaType.isEmpty()) {
       return;
