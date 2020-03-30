@@ -27,7 +27,7 @@ public class WebServiceUtilities {
    * @return the response body
    * @throws IOException the io exception
    */
-  public static String getResponseBody(HttpResponse response) throws IOException {
+  public static String getResponseBody(HttpResponse response) {
     return response.body().toString();
   }
 
