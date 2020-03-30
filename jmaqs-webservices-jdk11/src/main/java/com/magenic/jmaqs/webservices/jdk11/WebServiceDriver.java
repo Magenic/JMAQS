@@ -4,21 +4,14 @@
 
 package com.magenic.jmaqs.webservices.jdk11;
 
-import com.beust.jcommander.internal.Lists;
-import org.apache.http.Header;
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpResponseException;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeader;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * The Web Service Driver.
@@ -30,9 +23,13 @@ public class WebServiceDriver {
   private HttpClient baseHttpClient;
 
   /**
-   * The URI to be stored for the Web Service.
+   * the base HTTP request control.
    */
-  private URI baseAddress;
+  private HttpRequest baseHttpRequest;
+
+  /**
+   * The URI to be stored for the Web Service.
+   */  private URI baseAddress;
 
   /**
    * Class Constructor that sets the http Client.
@@ -40,25 +37,34 @@ public class WebServiceDriver {
    */
   public WebServiceDriver(HttpClient newHttpClient) {
     this.baseHttpClient = newHttpClient;
+    this.baseHttpRequest = HttpRequestFactory.getDefaultRequest();
+  }
+
+  /**
+   * Class constructor that sets the HttpRequest.
+   * @param newHttpRequest the new Http request to be set
+   * @throws IOException the Sexception if it occurs
+   */
+  public WebServiceDriver(HttpRequest newHttpRequest) throws IOException {
+    this.baseHttpClient = HttpClientFactory.getDefaultClient();
+    this.baseHttpRequest = newHttpRequest;
   }
 
   /**
    * Class Constructor that sets the base address as a URI.
    * @param baseAddress The base URI address to use
    */
-  public WebServiceDriver(URI baseAddress) {
-    this.baseAddress = baseAddress;
+  public WebServiceDriver(URI baseAddress) throws IOException {
+    setHttpClient(HttpClientFactory.getDefaultClient());
+    setHttpRequest(HttpRequestFactory.getRequest(baseAddress));
   }
 
   /**
    * Class Constructor that sets the base address as a string.
-   *
-   * @param baseAddress
-   *          The base URI address to use
-   * @throws URISyntaxException
-   *           URI syntax is invalid
+   * @param baseAddress The base URI address to use
+   * @throws URISyntaxException URI syntax is invalid
    */
-  public WebServiceDriver(String baseAddress) throws URISyntaxException {
+  public WebServiceDriver(String baseAddress) throws URISyntaxException, IOException {
     this(new URI(baseAddress));
   }
 
@@ -78,37 +84,38 @@ public class WebServiceDriver {
    * @return the http client
    */
   public HttpClient getHttpClient(String mediaType) {
-    if (this.baseHttpClient == null) {
-      Header header = new BasicHeader(HttpHeaders.CONTENT_TYPE, mediaType);
-      List<Header> headers = Lists.newArrayList(header);
-      HttpClient client = HttpClients.custom().setDefaultHeaders(headers).build();
-
-      this.baseHttpClient = HttpClientBuilder.create()
-          .setDefaultHeaders(Lists.newArrayList(header))
-          .setDefaultRequestConfig(getRequestTimeouts()).build();
-    }
     return this.baseHttpClient;
   }
 
-  private RequestConfig getRequestTimeouts() {
-    return RequestConfig.copy(RequestConfig.DEFAULT)
-        .setConnectionRequestTimeout(WebServiceConfig.getWebServiceTimeOut() * 1000)
-        .setConnectTimeout(WebServiceConfig.getWebServiceTimeOut() * 1000).build();
+  /**
+   * sets the Http Request.
+   * @param httpRequest the new http request to be set
+   */
+  public void setHttpRequest(HttpRequest httpRequest){
+    this.baseHttpRequest = httpRequest;
+  }
+
+  /**
+   * gets the http request.
+   * @return the http request
+   */
+  public HttpRequest getHttpRequest() {
+    return this.baseHttpRequest;
   }
 
   /**
    * Ensure the HTTP response was successful, if not throw a user friendly error message.
    * @param response The HTTP response
-   * @throws HttpResponseException
+   * @throws HttpResponseException if the HttpResponse is null
    */
-  private static void ensureSuccessStatusCode(HttpResponse response) throws HttpResponseException {
+  private static <T> void ensureSuccessStatusCode(HttpResponse<T> response) throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
-      throw new HttpResponseException(response.statusCode(), "Response was null");
+      throw new HttpResponseException(HttpStatus.SC_NO_CONTENT, "Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
-    if (response.statusCode() != 200) {
+    if (response.statusCode() != HttpStatus.SC_OK) {
       String body = response.body().toString();
 
       throw new HttpResponseException(response.statusCode(),
@@ -121,13 +128,13 @@ public class WebServiceDriver {
    * Ensure the HTTP response has specified status, if not throw a user friendly error message.
    * @param response The HTTP response
    * @param expectedStatus Assert a specific status code was returned
-   * @throws HttpResponseException
+   * @throws HttpResponseException if the HttpResponse is null
    */
-  private static void ensureStatusCodesMatch(HttpResponse response, HttpStatus expectedStatus)
+  private static <T> void ensureStatusCodesMatch(HttpResponse<T> response, HttpStatus expectedStatus)
       throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
-      throw new HttpResponseException(response.statusCode(), "Response was null");
+      throw new HttpResponseException(HttpStatus.SC_NO_CONTENT, "Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
@@ -142,24 +149,23 @@ public class WebServiceDriver {
   }
 
   /**
-   * Add accept media type if it isn't already added
+   * Check if the media type is supported.
    * @param mediaType Media type to add
    */
-  private void addAcceptIfNotPresent(String mediaType) {
+  private void checkIfMediaTypeNotPresent(String mediaType) {
     // Make sure a media type was passed in
-    if (mediaType.isEmpty() || mediaType == null) {
+    if (mediaType.isEmpty()) {
       return;
     }
 
     // Look for the media type
-    for (MediaTypeWithQualityHeaderValue header : this.baseHttpClient.DefaultRequestHeaders.Accept) {
-      if (header.MediaType.Equals(mediaType, StringComparison.CurrentCultureIgnoreCase)) {
-        // Type was found so return
+    for (MediaType media : MediaType.values()) {
+      if (media.toString().equals(mediaType)) {
         return;
       }
     }
 
-    // Add the type
-    this.baseHttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(mediaType));
+    // Add the type or throw exception???
+    throw new UnsupportedOperationException("Media Type is not supported");
   }
 }
