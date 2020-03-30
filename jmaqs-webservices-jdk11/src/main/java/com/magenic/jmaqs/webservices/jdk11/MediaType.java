@@ -26,15 +26,6 @@ public enum MediaType {
   IMAGE_PNG("image/png");
 
   /**
-   * Getter for property 'mediaTypeString'.
-   *
-   * @return Value for property 'mediaTypeString'.
-   */
-  public String getMediaTypeString() {
-    return mediaTypeString;
-  }
-
-  /**
    * The Media type.
    */
   private final String mediaTypeString;
@@ -43,9 +34,10 @@ public enum MediaType {
     this.mediaTypeString = string;
   }
 
-  @Override
+  /**
+   * getter for the Property of the Enum.
+   */
   public String toString() {
-    //HACK: This is an attempt to avoid calling for the string explicitly.  Review when necessary
     return mediaTypeString;
   }
 }
