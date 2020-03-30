@@ -20,6 +20,17 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>com.magenic.jmaqs.base</groupId>
+            <artifactId>jmaqs-base</artifactId>
+            <version>2.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.webservices</groupId>
+            <artifactId>jmaqs-webservices-jdk8</artifactId>
+            <version>2.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
             <version>4.4.13</version>
@@ -37,15 +48,8 @@
             <version>2.10.2</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.magenic.jmaqs.webservices</groupId>
-            <artifactId>jmaqs-webservices-jdk8</artifactId>
-            <version>2.0.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
     <name>JMAQS JDK11 WebServices Testing Module</name>
-
 
     <build>
         <plugins>
