@@ -36,25 +36,16 @@ public class HttpClientFactory {
    * @return A HTTP client
    */
   public static HttpClient getClient(Duration timeout, boolean useProxy, String proxyAddress) {
-    HttpClient client;
+    HttpClient.Builder builder = HttpClient.newBuilder()
+        .version(HttpClient.Version.HTTP_2)
+        .followRedirects(HttpClient.Redirect.NORMAL)
+        //.authenticator(Authenticator.getDefault())
+        .connectTimeout(timeout);
 
+    // sets up proxy settings
     if (useProxy) {
-      // sets up proxy settings
-      client = HttpClient.newBuilder()
-          .version(HttpClient.Version.HTTP_2)
-          .followRedirects(HttpClient.Redirect.NORMAL)
-          .authenticator(Authenticator.getDefault())
-          .connectTimeout(timeout)
-          .proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, 8080)))
-          .build();
-    } else {
-      client = HttpClient.newBuilder()
-          .version(HttpClient.Version.HTTP_2)
-          .followRedirects(HttpClient.Redirect.NORMAL)
-          //.authenticator(Authenticator.getDefault())
-          .connectTimeout(timeout)
-          .build();
+      builder.proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, 8080)));
     }
-    return client;
+    return builder.build();
   }
 }
