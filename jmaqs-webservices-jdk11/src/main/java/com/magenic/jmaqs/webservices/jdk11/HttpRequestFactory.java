@@ -10,7 +10,7 @@ public class HttpRequestFactory {
    * @return A HTTP client
    */
   public static HttpRequest getDefaultRequest() {
-    return getRequest(URI.create(WebServiceConfig.getWebServiceUri()));
+    return getRequest(WebServiceConfig.getWebServiceUri());
   }
 
   /**
@@ -18,8 +18,8 @@ public class HttpRequestFactory {
    * @param baseUri Base service uri
    * @return a HTTP Request
    */
-  public static HttpRequest getRequest(URI baseUri) {
-    return getRequest(baseUri, WebServiceConfig.getWebServiceTimeOut());
+  public static HttpRequest getRequest(String baseUri) {
+    return getRequest(baseUri, WebServiceConfig.getWebServiceTimeout());
   }
 
   /**
@@ -28,8 +28,22 @@ public class HttpRequestFactory {
    * @param timeout Web service timeout
    * @return a HTTP Request
    */
-  public static HttpRequest getRequest(URI baseUri, int timeout) {
+  public static HttpRequest getRequest(String baseUri, int timeout) {
     return getRequest(baseUri, timeout, MediaType.APP_JSON);
+  }
+
+
+
+  public static HttpRequest getRequest(String baseUri, MediaType mediaType) {
+    return getRequest(baseUri, WebServiceConfig.getWebServiceTimeout(), mediaType, RequestType.GET);
+  }
+
+  public static HttpRequest getRequest(String baseUri, int timeout, MediaType mediaType) {
+    return getRequest(baseUri, timeout, mediaType, RequestType.GET);
+  }
+
+  public static HttpRequest getRequest(String baseUri, MediaType mediaType, RequestType requestType) {
+    return getRequest(baseUri, WebServiceConfig.getWebServiceTimeout(), mediaType, requestType);
   }
 
   /**
@@ -39,11 +53,29 @@ public class HttpRequestFactory {
    * @param mediaType media/content type to be received
    * @return A HTTP Request
    */
-  public static HttpRequest getRequest(URI baseUri, int timeout, MediaType mediaType) {
-    return HttpRequest.newBuilder()
-        .uri(baseUri)
+  public static HttpRequest getRequest(String baseUri, int timeout, MediaType mediaType, RequestType requestType) {
+    HttpRequest.Builder builder = HttpRequest.newBuilder()
+        .uri(URI.create(baseUri))
         .timeout(Duration.ofSeconds(timeout))
-        .header("Content-Type", mediaType.toString())
-        .build();
+        .header("Content-Type", mediaType.toString());
+
+    switch (requestType) {
+      case POST:
+        //return builder.POST().build();
+      case PUT:
+        //return builder.PUT().build();
+      case DELETE:
+        return builder.DELETE().build();
+      case GET:
+        return builder.GET().build();
+      default:
+        throw new UnsupportedOperationException("This request type is not supported");
+    }
+/*
+    return HttpRequest.newBuilder()
+        .uri(URI.create(baseUri))
+        .timeout(Duration.ofSeconds(timeout))
+        .header("Content-Type", mediaType.toString());
+         */
   }
 }
