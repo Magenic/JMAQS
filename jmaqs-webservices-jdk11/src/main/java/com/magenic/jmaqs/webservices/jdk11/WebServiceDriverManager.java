@@ -1,9 +1,9 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
-import java.net.http.HttpClient;
-import java.util.function.Supplier;
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.base.DriverManager;
+import java.net.http.HttpClient;
+import java.util.function.Supplier;
 
 /**
  * Web Service Driver Manager Class.
@@ -16,7 +16,6 @@ public class WebServiceDriverManager extends DriverManager {
 
   /**
    * Instantiates a new Web Service Driver Manager.
-   *
    * @param getDriverFunction Function that specifies how to get the driver.
    * @param baseTestObject    The Base Test Object.
    */
@@ -28,7 +27,6 @@ public class WebServiceDriverManager extends DriverManager {
 
   /**
    * Instantiates a new Web Service Driver Manager.
-   *
    * @param driver            Web Service Driver
    * @param baseTestObject    The Base Test Object.
    */
@@ -39,7 +37,6 @@ public class WebServiceDriverManager extends DriverManager {
 
   /**
    * Get the Web Service Driver.
-   *
    * @return  The Web Service Driver.
    */
   public WebServiceDriver getWebServiceDriver() {

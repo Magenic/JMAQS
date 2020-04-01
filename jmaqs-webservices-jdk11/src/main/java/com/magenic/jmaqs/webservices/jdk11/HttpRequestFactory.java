@@ -6,20 +6,20 @@ import java.time.Duration;
 
 public class HttpRequestFactory {
   /**
-   * Gets a HTTP client based on configuration values.
+   * Gets a HTTP Request based on configuration values.
    * @return A HTTP client
    */
-  public static HttpRequest getDefaultRequest() {
-    return getRequest(URI.create(WebServiceConfig.getWebServiceUri()));
+  public static HttpRequest getRequest(String baseUri) {
+    return getRequest(WebServiceConfig.getWebServiceUri(), baseUri);
   }
 
   /**
-   * Gets a HTTP client based on configuration values.
+   * Gets a HTTP Request based on configuration values.
    * @param baseUri Base service uri
    * @return a HTTP Request
    */
-  public static HttpRequest getRequest(URI baseUri) {
-    return getRequest(baseUri, WebServiceConfig.getWebServiceTimeOut());
+  public static HttpRequest getRequest(String baseAddress, String baseUri) {
+    return getRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeOut());
   }
 
   /**
@@ -28,8 +28,18 @@ public class HttpRequestFactory {
    * @param timeout Web service timeout
    * @return a HTTP Request
    */
-  public static HttpRequest getRequest(URI baseUri, int timeout) {
-    return getRequest(baseUri, timeout, MediaType.APP_JSON);
+  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout) {
+    return getRequest(baseAddress, baseUri, timeout, MediaType.APP_JSON);
+  }
+
+  /**
+   * Gets a HTTP Request based on configuration values.
+   * @param baseUri Base service uri
+   * @param mediaType web service media type
+   * @return a HTTP Request
+   */
+  public static HttpRequest getRequest(String baseAddress, String baseUri, MediaType mediaType) {
+    return getRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeOut(), mediaType);
   }
 
   /**
@@ -39,9 +49,9 @@ public class HttpRequestFactory {
    * @param mediaType media/content type to be received
    * @return A HTTP Request
    */
-  public static HttpRequest getRequest(URI baseUri, int timeout, MediaType mediaType) {
+  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType) {
     return HttpRequest.newBuilder()
-        .uri(baseUri)
+        .uri(URI.create(baseAddress + baseUri))
         .timeout(Duration.ofSeconds(timeout))
         .header("Content-Type", mediaType.toString())
         .build();

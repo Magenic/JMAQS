@@ -3,9 +3,9 @@ package com.magenic.jmaqs.webservices.jdk11;
 import com.magenic.jmaqs.base.BaseExtendableTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
-import org.testng.ITestResult;
-
+import java.io.IOException;
 import java.net.URISyntaxException;
+import org.testng.ITestResult;
 
 /**
  * Base web service test class.
@@ -17,7 +17,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
    *
    * @return WebServiceDriver
    */
-  public WebServiceDriver getWebServiceDriver() {
+  public WebServiceDriver getWebServiceDriver() throws URISyntaxException {
     return this.getTestObject().getWebServiceDriver();
   }
 
@@ -47,7 +47,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
    * @return WebServiceDriver
    * @throws URISyntaxException when URI is incorrect
    */
-  protected WebServiceDriver getWebServiceClient() throws URISyntaxException {
+  protected WebServiceDriver getWebServiceClient() throws URISyntaxException, IOException {
     return new WebServiceDriver(WebServiceConfig.getWebServiceUri());
   }
 
@@ -58,11 +58,10 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
   protected void createNewTestObject() {
     Logger logger = this.createLogger();
     try {
-
       WebServiceTestObject webServiceTestObject = new WebServiceTestObject(
           this.getWebServiceClient(), logger, this.getFullyQualifiedTestClassName());
       this.setTestObject(webServiceTestObject);
-    } catch (URISyntaxException e) {
+    } catch (URISyntaxException | IOException e) {
       getLogger().logMessage(
           StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
     }

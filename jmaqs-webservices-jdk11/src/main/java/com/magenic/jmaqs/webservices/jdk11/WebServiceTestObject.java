@@ -2,7 +2,6 @@ package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.utilities.logging.Logger;
-
 import java.net.http.HttpClient;
 import java.util.function.Supplier;
 

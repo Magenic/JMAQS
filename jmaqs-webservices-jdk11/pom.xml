@@ -48,6 +48,12 @@
             <version>2.10.2</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.11</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <name>JMAQS JDK11 WebServices Testing Module</name>
 
