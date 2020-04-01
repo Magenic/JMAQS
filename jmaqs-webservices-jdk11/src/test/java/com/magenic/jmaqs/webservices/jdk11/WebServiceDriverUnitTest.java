@@ -1,11 +1,11 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,7 +14,7 @@ public class WebServiceDriverUnitTest {
    * Verifies that basic GET features work with the WebServiceDriver.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void setHttpClient() throws URISyntaxException, IOException {
+  public void setHttpClient() {
     WebServiceDriver webServiceDriver1 = new WebServiceDriver(
         "http://magenicautomation.azurewebsites.net");
     webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient(MediaType.APP_JSON));

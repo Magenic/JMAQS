@@ -1,6 +1,8 @@
-package com.magenic.jmaqs.webservices.jdk11;
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
 
-import org.apache.http.impl.client.HttpClientBuilder;
+package com.magenic.jmaqs.webservices.jdk11;
 
 import java.net.InetSocketAddress;
 import java.net.ProxySelector;
@@ -8,9 +10,14 @@ import java.net.http.HttpClient;
 import java.time.Duration;
 
 /**
- * Http client factory
+ * Http client factory.
  */
 public class HttpClientFactory {
+  /**
+   * class constructor.
+   */
+  private HttpClientFactory() {}
+
   /**
    * Gets a HTTP client based on configuration values.
    * @return A HTTP client
