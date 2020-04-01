@@ -22,18 +22,15 @@ public class WebServiceUtilities {
 
   /**
    * Gets response body.
-   *
    * @param response the response
    * @return the response body
-   * @throws IOException the io exception
    */
-  public static String getResponseBody(HttpResponse response) {
-    return response.body().toString();
+  public static String getResponseBody(HttpResponse<String> response) {
+    return response.body();
   }
 
   /**
    * Gets response body.
-   *
    * @param <T>         the type parameter
    * @param response    the response
    * @param contentType the content type
@@ -41,7 +38,7 @@ public class WebServiceUtilities {
    * @return the response body
    * @throws IOException the io exception
    */
-  public static <T> T getResponseBody(HttpResponse response, ContentType contentType, Type type)
+  public static <T> T getResponseBody(HttpResponse<String> response, MediaType contentType, Type type)
       throws IOException {
     T responseBody;
 
@@ -126,7 +123,7 @@ public class WebServiceUtilities {
    * @return the t
    * @throws IOException the io exception
    */
-  public static <T> T deserializeJson(HttpResponse message, Type type) throws IOException {
+  public static <T> T deserializeJson(HttpResponse<String> message, Type type) throws IOException {
     String responseEntity = getResponseBody(message);
     return objectMapper.readValue(responseEntity, objectMapper.getTypeFactory().constructType(type));
   }
@@ -140,8 +137,8 @@ public class WebServiceUtilities {
    * @return the t
    * @throws IOException the io exception
    */
-  public static <T> T deserializeXml(HttpResponse message, Type type) throws IOException {
-    String responseEntity = getResponseBody(message);
+  public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
+    String responseEntity = xmlMapper.writeValueAsString(deserializeJson(message, type));
     return xmlMapper.readValue(responseEntity, xmlMapper.getTypeFactory().constructType(type));
   }
 }
