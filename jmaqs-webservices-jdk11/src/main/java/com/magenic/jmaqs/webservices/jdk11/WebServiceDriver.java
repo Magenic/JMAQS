@@ -108,7 +108,7 @@ public class WebServiceDriver {
   /// <param name="expectSuccess">Assert a success code was returned</param>
   /// <returns>The response content as a string</returns>
   public HttpResponse<String> get(String requestUri, MediaType expectedMediaType, boolean expectSuccess)
-      throws IOException, InterruptedException, URISyntaxException {
+      throws IOException, InterruptedException {
     return this.getWithResponse(requestUri, expectedMediaType, expectSuccess);
   }
 

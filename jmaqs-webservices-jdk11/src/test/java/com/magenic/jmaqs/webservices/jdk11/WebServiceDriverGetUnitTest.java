@@ -38,7 +38,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest{
    * @throws InterruptedException
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void getJsonDeserializeProducts() throws IOException, URISyntaxException, InterruptedException {
+  public void getJsonDeserialize() throws IOException, URISyntaxException, InterruptedException {
     WebServiceDriver client = new WebServiceDriver(url);
     HttpResponse<String> response = client.get("/api/XML_JSON/GetAllProducts", MediaType.APP_JSON, false);
     Product[] products = WebServiceUtilities.getResponseBody(response, MediaType.APP_JSON, Product[].class);
