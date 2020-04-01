@@ -31,4 +31,11 @@ public class WebServiceDriverUnitTest {
         "http://magenicautomation.azurewebsites.net");
     Assert.assertNotNull(webServiceDriver.getHttpRequest());
   }
+
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getDefaultHttpClientAndRequest() {
+    WebServiceDriver webServiceDriver = new WebServiceDriver();
+    HttpRequest request = webServiceDriver.getHttpRequest();
+    Assert.assertNotNull(webServiceDriver.getHttpRequest());
+  }
 }

@@ -32,12 +32,18 @@ public class WebServiceDriver {
    * The URI to be stored for the Web Service.
    */  private URI baseAddress;
 
+  public WebServiceDriver() {
+    this.baseHttpClient = HttpClientFactory.getDefaultClient();
+    this.baseHttpRequest = HttpRequestFactory.getDefaultRequest();
+  }
+
   /**
    * Class Constructor that sets the http Client.
    * @param newHttpClient the http client to be set.
    */
   public WebServiceDriver(HttpClient newHttpClient) {
     this.baseHttpClient = newHttpClient;
+    this.baseHttpRequest = HttpRequestFactory.getDefaultRequest();
   }
 
   /**

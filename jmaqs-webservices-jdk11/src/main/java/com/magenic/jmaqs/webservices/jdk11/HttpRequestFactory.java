@@ -10,7 +10,11 @@ public class HttpRequestFactory {
    * @return A HTTP client
    */
   public static HttpRequest getDefaultRequest() {
-    return getRequest(WebServiceConfig.getWebServiceUri());
+    return getRequest(WebServiceConfig.getWebServiceUri(), "");
+  }
+
+  public static HttpRequest getRequest(String baseUri) {
+    return getRequest(WebServiceConfig.getWebServiceUri(), baseUri);
   }
 
   /**
@@ -18,8 +22,8 @@ public class HttpRequestFactory {
    * @param baseUri Base service uri
    * @return a HTTP Request
    */
-  public static HttpRequest getRequest(String baseUri) {
-    return getRequest(baseUri, WebServiceConfig.getWebServiceTimeout());
+  public static HttpRequest getRequest(String baseAddress, String baseUri) {
+    return getRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeout());
   }
 
   /**
@@ -28,22 +32,20 @@ public class HttpRequestFactory {
    * @param timeout Web service timeout
    * @return a HTTP Request
    */
-  public static HttpRequest getRequest(String baseUri, int timeout) {
-    return getRequest(baseUri, timeout, MediaType.APP_JSON);
+  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout) {
+    return getRequest(baseAddress, baseUri, timeout, MediaType.APP_JSON);
   }
 
-
-
-  public static HttpRequest getRequest(String baseUri, MediaType mediaType) {
-    return getRequest(baseUri, WebServiceConfig.getWebServiceTimeout(), mediaType, RequestType.GET);
+  public static HttpRequest getRequest(String baseAddress, String baseUri, MediaType mediaType) {
+    return getRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeout(), mediaType, RequestType.GET);
   }
 
-  public static HttpRequest getRequest(String baseUri, int timeout, MediaType mediaType) {
-    return getRequest(baseUri, timeout, mediaType, RequestType.GET);
+  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType) {
+    return getRequest(baseAddress, baseUri, timeout, mediaType, RequestType.GET);
   }
 
-  public static HttpRequest getRequest(String baseUri, MediaType mediaType, RequestType requestType) {
-    return getRequest(baseUri, WebServiceConfig.getWebServiceTimeout(), mediaType, requestType);
+  public static HttpRequest getRequest(String baseAddress, String baseUri, MediaType mediaType, RequestType requestType) {
+    return getRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeout(), mediaType, requestType);
   }
 
   /**
@@ -53,9 +55,9 @@ public class HttpRequestFactory {
    * @param mediaType media/content type to be received
    * @return A HTTP Request
    */
-  public static HttpRequest getRequest(String baseUri, int timeout, MediaType mediaType, RequestType requestType) {
+  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType, RequestType requestType) {
     HttpRequest.Builder builder = HttpRequest.newBuilder()
-        .uri(URI.create(baseUri))
+        .uri(URI.create(baseAddress + baseUri))
         .timeout(Duration.ofSeconds(timeout))
         .header("Content-Type", mediaType.toString());
 

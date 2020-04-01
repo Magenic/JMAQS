@@ -46,15 +46,6 @@ public class HttpClientFactory {
     // sets up proxy settings
     if (useProxy) {
       builder.proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, 8080)));
-      /*
-      client = HttpClient.newBuilder()
-          .version(HttpClient.Version.HTTP_2)
-          .followRedirects(HttpClient.Redirect.NORMAL)
-          //.authenticator(Authenticator.getDefault())
-          .connectTimeout(timeout)
-          .proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, 8080)))
-          .build();
-       */
     }
     return builder.build();
   }
