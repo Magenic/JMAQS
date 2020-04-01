@@ -19,7 +19,7 @@ public class WebServiceConfigUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceTimeOut() {
-    Assert.assertEquals(WebServiceConfig.getWebServiceTimeOut(), 10000,
+    Assert.assertEquals(WebServiceConfig.getWebServiceTimeout(), 10000,
         "Use proxy did not come back false");
   }
 

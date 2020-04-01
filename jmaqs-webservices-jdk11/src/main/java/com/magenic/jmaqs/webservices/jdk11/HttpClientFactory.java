@@ -1,6 +1,7 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
-import java.io.IOException;
+import org.apache.http.impl.client.HttpClientBuilder;
+
 import java.net.InetSocketAddress;
 import java.net.ProxySelector;
 import java.net.http.HttpClient;
@@ -13,10 +14,9 @@ public class HttpClientFactory {
   /**
    * Gets a HTTP client based on configuration values.
    * @return A HTTP client
-   * @throws IOException if there is an IO Exception
    */
-  public static HttpClient getDefaultClient() throws IOException {
-    return getClient(WebServiceConfig.getWebServiceTimeOut());
+  public static HttpClient getDefaultClient() {
+    return getClient(WebServiceConfig.getWebServiceTimeout());
   }
 
   /**
@@ -24,7 +24,7 @@ public class HttpClientFactory {
    * @param timeout Web service timeout
    * @return A HTTP client
    */
-  public static HttpClient getClient(int timeout) throws IOException {
+  public static HttpClient getClient(int timeout) {
     return getClient(Duration.ofSeconds(timeout), WebServiceConfig.getUseProxy(),
         WebServiceConfig.getProxyAddress());
   }
@@ -37,10 +37,16 @@ public class HttpClientFactory {
    * @return A HTTP client
    */
   public static HttpClient getClient(Duration timeout, boolean useProxy, String proxyAddress) {
-    HttpClient client;
+    HttpClient.Builder builder = HttpClient.newBuilder()
+        .version(HttpClient.Version.HTTP_2)
+        .followRedirects(HttpClient.Redirect.NORMAL)
+        //.authenticator(Authenticator.getDefault())
+        .connectTimeout(timeout);
 
+    // sets up proxy settings
     if (useProxy) {
-      // sets up proxy settings
+      builder.proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, 8080)));
+      /*
       client = HttpClient.newBuilder()
           .version(HttpClient.Version.HTTP_2)
           .followRedirects(HttpClient.Redirect.NORMAL)
@@ -48,14 +54,8 @@ public class HttpClientFactory {
           .connectTimeout(timeout)
           .proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, 8080)))
           .build();
-    } else {
-      client = HttpClient.newBuilder()
-          .version(HttpClient.Version.HTTP_2)
-          .followRedirects(HttpClient.Redirect.NORMAL)
-          //.authenticator(Authenticator.getDefault())
-          .connectTimeout(timeout)
-          .build();
+       */
     }
-    return client;
+    return builder.build();
   }
 }

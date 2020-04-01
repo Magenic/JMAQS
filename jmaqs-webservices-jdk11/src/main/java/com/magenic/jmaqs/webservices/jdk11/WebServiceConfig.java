@@ -26,7 +26,7 @@ public class WebServiceConfig {
    *
    * @return the Time Out value for the web service test, or -1 if none are configured
    */
-  public static int getWebServiceTimeOut() {
+  public static int getWebServiceTimeout() {
     return Integer
         .parseInt(Config.getValueForSection(WEBSERVICE_SECTION, "WebServiceTimeout", "-1"));
   }
