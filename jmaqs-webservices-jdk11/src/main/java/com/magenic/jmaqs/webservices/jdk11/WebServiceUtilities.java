@@ -4,13 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import java.lang.reflect.Type;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
 import java.nio.charset.Charset;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 
+/**
+ * Web service Utilities class.
+ */
 public class WebServiceUtilities {
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -27,8 +30,8 @@ public class WebServiceUtilities {
    * @return the response body
    * @throws IOException the io exception
    */
-  public static String getResponseBody(HttpResponse response) {
-    return response.body().toString();
+  public static String getResponseBody(HttpResponse<String> response) {
+    return response.body();
   }
 
   /**
@@ -41,7 +44,7 @@ public class WebServiceUtilities {
    * @return the response body
    * @throws IOException the io exception
    */
-  public static <T> T getResponseBody(HttpResponse response, ContentType contentType, Type type)
+  public static <T> T getResponseBody(HttpResponse<String> response, ContentType contentType, Type type)
       throws IOException {
     T responseBody;
 
@@ -126,7 +129,7 @@ public class WebServiceUtilities {
    * @return the t
    * @throws IOException the io exception
    */
-  public static <T> T deserializeJson(HttpResponse message, Type type) throws IOException {
+  public static <T> T deserializeJson(HttpResponse<String> message, Type type) throws IOException {
     String responseEntity = getResponseBody(message);
     return objectMapper.readValue(responseEntity, objectMapper.getTypeFactory().constructType(type));
   }
@@ -140,7 +143,7 @@ public class WebServiceUtilities {
    * @return the t
    * @throws IOException the io exception
    */
-  public static <T> T deserializeXml(HttpResponse message, Type type) throws IOException {
+  public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
     String responseEntity = getResponseBody(message);
     return xmlMapper.readValue(responseEntity, xmlMapper.getTypeFactory().constructType(type));
   }

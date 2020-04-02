@@ -1,9 +1,9 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
-import java.net.http.HttpClient;
-import java.util.function.Supplier;
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.base.DriverManager;
+import java.net.http.HttpClient;
+import java.util.function.Supplier;
 
 /**
  * Web Service Driver Manager Class.

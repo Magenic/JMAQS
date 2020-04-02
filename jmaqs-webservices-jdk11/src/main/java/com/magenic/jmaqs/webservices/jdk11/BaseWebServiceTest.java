@@ -3,9 +3,8 @@ package com.magenic.jmaqs.webservices.jdk11;
 import com.magenic.jmaqs.base.BaseExtendableTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
-import org.testng.ITestResult;
-
 import java.net.URISyntaxException;
+import org.testng.ITestResult;
 
 /**
  * Base web service test class.
