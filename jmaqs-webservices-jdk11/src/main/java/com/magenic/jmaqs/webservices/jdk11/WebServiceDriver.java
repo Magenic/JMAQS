@@ -7,7 +7,6 @@ package com.magenic.jmaqs.webservices.jdk11;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpResponseException;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -32,18 +31,12 @@ public class WebServiceDriver {
    * The URI to be stored for the Web Service.
    */  private URI baseAddress;
 
-  public WebServiceDriver() {
-    this.baseHttpClient = HttpClientFactory.getDefaultClient();
-    this.baseHttpRequest = HttpRequestFactory.getDefaultRequest();
-  }
-
   /**
    * Class Constructor that sets the http Client.
    * @param newHttpClient the http client to be set.
    */
   public WebServiceDriver(HttpClient newHttpClient) {
     this.baseHttpClient = newHttpClient;
-    this.baseHttpRequest = HttpRequestFactory.getDefaultRequest();
   }
 
   /**
@@ -56,12 +49,20 @@ public class WebServiceDriver {
   }
 
   /**
-   * Class Constructor that sets the base address as a string.
+   * Class Constructor that sets the base address as a URI.
    * @param baseAddress The base URI address to use
    */
-  public WebServiceDriver(String baseAddress) {
+  public WebServiceDriver(URI baseAddress) {
     setHttpClient(HttpClientFactory.getDefaultClient());
-    setHttpRequest(HttpRequestFactory.getRequest(baseAddress));
+  }
+
+  /**
+   * Class Constructor that sets the base address as a string.
+   * @param baseAddress The base URI address to use
+   * @throws URISyntaxException URI syntax is invalid
+   */
+  public WebServiceDriver(String baseAddress) throws URISyntaxException {
+    this(new URI(baseAddress));
   }
 
   /**
@@ -78,7 +79,7 @@ public class WebServiceDriver {
    * @param mediaType the media type
    * @return the http client
    */
-  public HttpClient getHttpClient(MediaType mediaType) {
+  public HttpClient getHttpClient(String mediaType) {
     return this.baseHttpClient;
   }
 
@@ -96,96 +97,6 @@ public class WebServiceDriver {
    */
   public HttpRequest getHttpRequest() {
     return this.baseHttpRequest;
-  }
-
-  /// <summary>
-  /// Execute a web service get
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="expectedMediaType">The type of media you are expecting back</param>
-  /// <param name="expectSuccess">Assert a success code was returned</param>
-  /// <returns>The response content as a string</returns>
-  public HttpResponse<String> get(String requestUri, MediaType expectedMediaType, boolean expectSuccess)
-      throws IOException, InterruptedException {
-    return this.getWithResponse(requestUri, expectedMediaType, expectSuccess);
-  }
-
-  /// <summary>
-  /// Execute a web service get
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="expectedMediaType">The type of media you are expecting back</param>
-  /// <param name="expectedStatus">Assert a specific status code was returned</param>
-  /// <returns>The response content as a string</returns>
-  public HttpResponse<String> get(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
-      throws IOException, InterruptedException {
-    return this.getWithResponse(requestUri, expectedMediaType, expectedStatus);
-  }
-
-  /// <summary>
-  /// Execute a web service get
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="expectedMediaType">The type of media you are expecting back</param>
-  /// <param name="expectSuccess">Assert a success code was returned</param>
-  /// <returns>The http response message</returns>
-  public HttpResponse<String> getWithResponse(String requestUri, MediaType expectedMediaType, boolean expectSuccess)
-      throws IOException, InterruptedException {
-    return this.getContent(requestUri, expectedMediaType, expectSuccess);
-  }
-
-  /// <summary>
-  /// Execute a web service get
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="expectedMediaType">The type of media you are expecting back</param>
-  /// <param name="expectedStatus">Assert a specific status code was returned</param>
-  /// <returns>The http response message</returns>
-  public HttpResponse<String> getWithResponse(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
-      throws IOException, InterruptedException {
-    return this.getContent(requestUri, expectedMediaType, expectedStatus);
-  }
-
-  /// <summary>
-  /// Do a web service get for the given uri and media type
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="mediaType">What type of media are we expecting</param>
-  /// <param name="expectSuccess">Assert a success code was returned</param>
-  /// <returns>A http response message</returns>
-  protected HttpResponse<String> getContent(String requestUri, MediaType mediaType, boolean expectSuccess)
-      throws IOException, InterruptedException {
-    this.checkIfMediaTypeNotPresent(mediaType.toString());
-
-    setHttpRequest(HttpRequestFactory.getRequest(requestUri));
-    HttpResponse<String> response = baseHttpClient.send(getHttpRequest(), HttpResponse.BodyHandlers.ofString());
-
-    // Should we check for success
-    if (expectSuccess) {
-      ensureSuccessStatusCode(response);
-    }
-
-    return response;
-  }
-
-  /// <summary>
-  /// Do a web service get for the given uri and media type
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="mediaType">What type of media are we expecting</param>
-  /// <param name="expectedStatus">Assert a specific status code was returned</param>
-  /// <returns>A http response message</returns>
-  protected HttpResponse<String> getContent(String requestUri, MediaType mediaType, HttpStatus expectedStatus)
-      throws IOException, InterruptedException {
-    this.checkIfMediaTypeNotPresent(mediaType.toString());
-
-    setHttpRequest(HttpRequestFactory.getRequest(requestUri));
-    HttpResponse<String> response = baseHttpClient.send(getHttpRequest(), HttpResponse.BodyHandlers.ofString());
-
-    // We check for specific status
-    ensureStatusCodesMatch(response, expectedStatus);
-
-    return response;
   }
 
   /**
