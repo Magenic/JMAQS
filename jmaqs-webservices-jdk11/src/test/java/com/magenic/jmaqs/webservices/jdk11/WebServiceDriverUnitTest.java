@@ -25,6 +25,9 @@ public class WebServiceDriverUnitTest {
     Assert.assertNotNull(webServiceDriver2, "Driver 2 is null");
   }
 
+  /**
+   * Tests the setting of the http request.
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void setHttpRequest() {
     WebServiceDriver webServiceDriver = new WebServiceDriver(
@@ -32,6 +35,9 @@ public class WebServiceDriverUnitTest {
     Assert.assertNotNull(webServiceDriver.getHttpRequest());
   }
 
+  /**
+   * Tests the setting of default Http Client and request.
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getDefaultHttpClientAndRequest() {
     WebServiceDriver webServiceDriver = new WebServiceDriver();
