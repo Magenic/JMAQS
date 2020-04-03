@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.webservices.jdk11;
 
+import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.net.InetSocketAddress;
 import java.net.ProxySelector;
 import java.net.http.HttpClient;
@@ -23,7 +24,7 @@ public class HttpClientFactory {
    * @return A HTTP client
    */
   public static HttpClient getDefaultClient() {
-    return getClient(WebServiceConfig.getWebServiceTimeout());
+    return getClient(WebServiceConfig.getWebServiceTimeOut());
   }
 
   /**

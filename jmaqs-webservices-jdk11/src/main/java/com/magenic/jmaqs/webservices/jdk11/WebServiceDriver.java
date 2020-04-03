@@ -79,7 +79,7 @@ public class WebServiceDriver {
    * @param mediaType the media type
    * @return the http client
    */
-  public HttpClient getHttpClient(String mediaType) {
+  public HttpClient getHttpClient(MediaType mediaType) {
     return this.baseHttpClient;
   }
 

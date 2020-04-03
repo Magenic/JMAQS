@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -23,7 +24,7 @@ public class WebServiceConfigUnitTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceTimeOut() {
-    Assert.assertEquals(WebServiceConfig.getWebServiceTimeout(), 10000,
+    Assert.assertEquals(WebServiceConfig.getWebServiceTimeOut(), 10000,
         "Use proxy did not come back false");
   }
 

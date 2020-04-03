@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.webservices.jdk11;
 
+import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpRequest;
@@ -41,7 +42,7 @@ public class HttpRequestFactory {
    * @return a HTTP Request
    */
   public static HttpRequest getRequest(String baseAddress, String baseUri) {
-    return getRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeout());
+    return getRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeOut());
   }
 
   /**

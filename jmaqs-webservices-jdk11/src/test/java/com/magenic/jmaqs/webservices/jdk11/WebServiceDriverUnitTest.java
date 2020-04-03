@@ -5,6 +5,8 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+
+import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,7 +16,7 @@ public class WebServiceDriverUnitTest {
    * Verifies that basic GET features work with the WebServiceDriver.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void setHttpClient() {
+  public void setHttpClient() throws URISyntaxException {
     WebServiceDriver webServiceDriver1 = new WebServiceDriver(
         "http://magenicautomation.azurewebsites.net");
     webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient(MediaType.APP_JSON));
@@ -29,7 +31,7 @@ public class WebServiceDriverUnitTest {
    * Tests the setting of the http request.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void setHttpRequest() {
+  public void setHttpRequest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(
         "http://magenicautomation.azurewebsites.net");
     Assert.assertNotNull(webServiceDriver.getHttpRequest());
@@ -39,8 +41,8 @@ public class WebServiceDriverUnitTest {
    * Tests the setting of default Http Client and request.
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void getDefaultHttpClientAndRequest() {
-    WebServiceDriver webServiceDriver = new WebServiceDriver();
+  public void getDefaultHttpClientAndRequest() throws URISyntaxException {
+    WebServiceDriver webServiceDriver = new WebServiceDriver("http://magenicautomation.azurewebsites.net");
     HttpRequest request = webServiceDriver.getHttpRequest();
     Assert.assertNotNull(webServiceDriver.getHttpRequest());
   }
