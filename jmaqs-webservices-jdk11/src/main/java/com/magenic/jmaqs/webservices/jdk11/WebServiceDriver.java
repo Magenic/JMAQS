@@ -4,14 +4,14 @@
 
 package com.magenic.jmaqs.webservices.jdk11;
 
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpResponseException;
-
+import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpResponseException;
 
 /**
  * The Web Service Driver.
@@ -29,7 +29,8 @@ public class WebServiceDriver {
 
   /**
    * The URI to be stored for the Web Service.
-   */  private URI baseAddress;
+   */
+  private URI baseAddress;
 
   /**
    * Class Constructor that sets the http Client.
@@ -75,7 +76,6 @@ public class WebServiceDriver {
 
   /**
    * Gets http client.
-   *
    * @param mediaType the media type
    * @return the http client
    */

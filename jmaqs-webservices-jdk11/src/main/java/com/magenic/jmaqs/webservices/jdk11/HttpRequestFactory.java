@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.webservices.jdk11;
 
+import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.net.URI;
 import java.net.URLEncoder;
