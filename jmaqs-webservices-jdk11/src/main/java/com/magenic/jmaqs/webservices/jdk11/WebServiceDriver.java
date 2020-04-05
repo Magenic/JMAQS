@@ -4,15 +4,15 @@
 
 package com.magenic.jmaqs.webservices.jdk11;
 
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpResponseException;
-
+import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpResponseException;
 
 /**
  * The Web Service Driver.
@@ -62,7 +62,7 @@ public class WebServiceDriver {
    * @param baseAddress The base URI address to use
    * @throws URISyntaxException URI syntax is invalid
    */
-  public WebServiceDriver(String baseAddress) throws URISyntaxException, IOException {
+  public WebServiceDriver(String baseAddress) throws URISyntaxException {
     this(new URI(baseAddress));
   }
 
@@ -100,61 +100,71 @@ public class WebServiceDriver {
     return this.baseHttpRequest;
   }
 
-  /// <summary>
-  /// Execute a web service get
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="expectedMediaType">The type of media you are expecting back</param>
-  /// <param name="expectSuccess">Assert a success code was returned</param>
-  /// <returns>The response content as a string</returns>
+  /**
+   * Execute a web service get.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media you are expecting back
+   * @param expectSuccess Assert a success code was returned
+   * @return The response content as a string
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
   public HttpResponse<String> get(String requestUri, MediaType expectedMediaType, boolean expectSuccess)
       throws IOException, InterruptedException {
     return this.getWithResponse(requestUri, expectedMediaType, expectSuccess);
   }
 
-  /// <summary>
-  /// Execute a web service get
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="expectedMediaType">The type of media you are expecting back</param>
-  /// <param name="expectedStatus">Assert a specific status code was returned</param>
-  /// <returns>The response content as a string</returns>
+  /**
+   * Execute a web service get.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media you are expecting back
+   * @param expectedStatus Assert a specific status code was returned
+   * @return The response content as a string
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
   public HttpResponse<String> get(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
       throws IOException, InterruptedException {
     return this.getWithResponse(requestUri, expectedMediaType, expectedStatus);
   }
 
-  /// <summary>
-  /// Execute a web service get
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="expectedMediaType">The type of media you are expecting back</param>
-  /// <param name="expectSuccess">Assert a success code was returned</param>
-  /// <returns>The http response message</returns>
+  /**
+   * Execute a web service get.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media you are expecting back
+   * @param expectSuccess Assert a success code was returned
+   * @return The http response message
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   public HttpResponse<String> getWithResponse(String requestUri, MediaType expectedMediaType, boolean expectSuccess)
       throws IOException, InterruptedException {
     return this.getContent(requestUri, expectedMediaType, expectSuccess);
   }
 
-  /// <summary>
-  /// Execute a web service get
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="expectedMediaType">The type of media you are expecting back</param>
-  /// <param name="expectedStatus">Assert a specific status code was returned</param>
-  /// <returns>The http response message</returns>
+  /**
+   * Execute a web service get.
+   * @param requestUri The request uri
+   * @param expectedMediaType The type of media you are expecting back
+   * @param expectedStatus Assert a specific status code was returned
+   * @return The http response message
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   public HttpResponse<String> getWithResponse(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
       throws IOException, InterruptedException {
     return this.getContent(requestUri, expectedMediaType, expectedStatus);
   }
 
-  /// <summary>
-  /// Do a web service get for the given uri and media type
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="mediaType">What type of media are we expecting</param>
-  /// <param name="expectSuccess">Assert a success code was returned</param>
-  /// <returns>A http response message</returns>
+  /**
+   * Do a web service get for the given uri and media type.
+   * @param requestUri The request uri
+   * @param mediaType What type of media are we expecting
+   * @param expectSuccess Assert a success code was returned
+   * @return A http response message
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   protected HttpResponse<String> getContent(String requestUri, MediaType mediaType, boolean expectSuccess)
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
@@ -170,13 +180,15 @@ public class WebServiceDriver {
     return response;
   }
 
-  /// <summary>
-  /// Do a web service get for the given uri and media type
-  /// </summary>
-  /// <param name="requestUri">The request uri</param>
-  /// <param name="mediaType">What type of media are we expecting</param>
-  /// <param name="expectedStatus">Assert a specific status code was returned</param>
-  /// <returns>A http response message</returns>
+  /**
+   * Do a web service get for the given uri and media type.
+   * @param requestUri The request uri
+   * @param mediaType What type of media are we expecting
+   * @param expectedStatus Assert a specific status code was returned
+   * @return A http response message
+   * @throws IOException if the exception is thrown
+   * @throws InterruptedException if the exception is thrown
+   */
   protected HttpResponse<String> getContent(String requestUri, MediaType mediaType, HttpStatus expectedStatus)
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());

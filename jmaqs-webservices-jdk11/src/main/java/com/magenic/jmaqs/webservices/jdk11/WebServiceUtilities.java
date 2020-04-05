@@ -4,13 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
+import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.lang.reflect.Type;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.nio.charset.Charset;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 
+/**
+ * The type Web service utilities.
+ */
 public class WebServiceUtilities {
   private static final ObjectMapper objectMapper = new ObjectMapper();
 

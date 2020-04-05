@@ -2,11 +2,13 @@ package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.webservices.jdk11.models.Product;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import com.magenic.jmaqs.webservices.jdk8.MediaType;
+import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * Test web service gets.
@@ -19,9 +21,9 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest{
 
   /**
    * Test XML get.
-   * @throws IOException
-   * @throws InterruptedException
-   * @throws URISyntaxException
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   * @throws URISyntaxException if exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getXmlDeserialize() throws IOException, InterruptedException, URISyntaxException {
@@ -33,9 +35,9 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest{
 
   /**
    * Test Json Get deserialize multiple products.
-   * @throws IOException
-   * @throws URISyntaxException
-   * @throws InterruptedException
+   * @throws IOException if exception is thrown
+   * @throws URISyntaxException if exception is thrown
+   * @throws InterruptedException if exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getJsonDeserialize() throws IOException, URISyntaxException, InterruptedException {
@@ -47,9 +49,9 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest{
 
   /**
    * Test string Get
-   * @throws IOException
-   * @throws URISyntaxException
-   * @throws InterruptedException
+   * @throws IOException if exception is thrown
+   * @throws URISyntaxException if exception is thrown
+   * @throws InterruptedException if exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getString() throws IOException, URISyntaxException, InterruptedException {
@@ -62,9 +64,9 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest{
 
   /**
    * Test that we can use the web service utility to deserialize JSON.
-   * @throws IOException
-   * @throws URISyntaxException
-   * @throws InterruptedException
+   * @throws IOException if exception is thrown
+   * @throws URISyntaxException if exception is thrown
+   * @throws InterruptedException if exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getResponseAndDeserializeJson()

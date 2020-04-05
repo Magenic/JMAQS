@@ -1,6 +1,7 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
-import java.net.Authenticator;
+import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
+
 import java.net.InetSocketAddress;
 import java.net.ProxySelector;
 import java.net.http.HttpClient;
@@ -10,6 +11,11 @@ import java.time.Duration;
  * Http client factory
  */
 public class HttpClientFactory {
+  /**
+   * private constructor.
+   */
+  private HttpClientFactory() {}
+
   /**
    * Gets a HTTP client based on configuration values.
    * @return A HTTP client
