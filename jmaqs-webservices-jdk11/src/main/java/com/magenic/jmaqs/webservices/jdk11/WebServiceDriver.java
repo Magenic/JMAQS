@@ -87,7 +87,7 @@ public class WebServiceDriver {
    * sets the Http Request.
    * @param httpRequest the new http request to be set
    */
-  public void setHttpRequest(HttpRequest httpRequest){
+  public void setHttpRequest(HttpRequest httpRequest) {
     this.baseHttpRequest = httpRequest;
   }
 
@@ -104,7 +104,7 @@ public class WebServiceDriver {
    * @param response The HTTP response
    * @throws HttpResponseException if the HttpResponse is null
    */
-  public static void ensureSuccessStatusCode(HttpResponse<String> response) throws HttpResponseException {
+  private static void ensureSuccessStatusCode(HttpResponse<String> response) throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
       throw new HttpResponseException(HttpStatus.SC_NO_CONTENT, "Response was null");
@@ -126,7 +126,7 @@ public class WebServiceDriver {
    * @param expectedStatus Assert a specific status code was returned
    * @throws HttpResponseException if the HttpResponse is null
    */
-  public static void ensureStatusCodesMatch(HttpResponse<String> response, HttpStatus expectedStatus)
+  private static void ensureStatusCodesMatch(HttpResponse<String> response, HttpStatus expectedStatus)
       throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
@@ -148,7 +148,7 @@ public class WebServiceDriver {
    * Check if the media type is supported.
    * @param mediaType Media type to add
    */
-  public void checkIfMediaTypeNotPresent(String mediaType) {
+  private void checkIfMediaTypeNotPresent(String mediaType) {
     // Make sure a media type was passed in
     if (mediaType.isEmpty()) {
       return;

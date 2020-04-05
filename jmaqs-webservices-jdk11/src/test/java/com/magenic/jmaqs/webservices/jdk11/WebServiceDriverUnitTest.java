@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-
+import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
 import org.testng.Assert;
@@ -44,6 +44,7 @@ public class WebServiceDriverUnitTest {
   public void getDefaultHttpClientAndRequest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver("http://magenicautomation.azurewebsites.net");
     HttpRequest request = webServiceDriver.getHttpRequest();
-    Assert.assertNotNull(webServiceDriver.getHttpRequest());
+    Assert.assertNotNull(webServiceDriver.getHttpClient(MediaType.APP_JSON));
+    Assert.assertNotNull(request);
   }
 }
