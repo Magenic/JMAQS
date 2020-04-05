@@ -1,7 +1,7 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-
+import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import org.testng.Assert;

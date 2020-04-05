@@ -3,6 +3,7 @@ package com.magenic.jmaqs.webservices.jdk11;
 import com.magenic.jmaqs.base.BaseExtendableTest;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
+import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import org.testng.ITestResult;
@@ -17,7 +18,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
    *
    * @return WebServiceDriver
    */
-  public WebServiceDriver getWebServiceDriver() throws URISyntaxException {
+  public WebServiceDriver getWebServiceDriver() {
     return this.getTestObject().getWebServiceDriver();
   }
 
