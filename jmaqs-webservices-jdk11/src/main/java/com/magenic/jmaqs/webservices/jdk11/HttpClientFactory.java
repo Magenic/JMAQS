@@ -1,14 +1,13 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
-
 import java.net.InetSocketAddress;
 import java.net.ProxySelector;
 import java.net.http.HttpClient;
 import java.time.Duration;
 
 /**
- * Http client factory
+ * Http client factory.
  */
 public class HttpClientFactory {
   /**
