@@ -30,7 +30,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest{
     WebServiceDriver client = new WebServiceDriver(url);
     HttpResponse<String> result = client.get("/api/XML_JSON/GetAllProducts", MediaType.APP_XML, false);
     Product[] products = WebServiceUtilities.getResponseBody(result, MediaType.APP_XML, Product[].class);
-    Assert.assertEquals(3, products.length, "Expected 3 products to be returned");
+    Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
   }
 
   /**
@@ -44,7 +44,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest{
     WebServiceDriver client = new WebServiceDriver(url);
     HttpResponse<String> response = client.get("/api/XML_JSON/GetAllProducts", MediaType.APP_JSON, false);
     Product[] products = WebServiceUtilities.getResponseBody(response, MediaType.APP_JSON, Product[].class);
-    Assert.assertEquals(3, products.length, "Expected 3 products to be returned");
+    Assert.assertEquals(products.length,3, "Expected 3 products to be returned");
   }
 
   /**
@@ -75,7 +75,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest{
     HttpResponse<String> message = client.getWithResponse("/api/XML_JSON/GetAllProducts",
        MediaType.APP_JSON, true  );
     Product[] products = WebServiceUtilities.deserializeJson(message, Product[].class);
-    Assert.assertEquals(3, products.length, "Expected 3 products to be returned");
+    Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
   }
 
   /**
@@ -88,6 +88,6 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest{
     HttpResponse<String> message = client.getWithResponse("/api/XML_JSON/GetAllProducts",
         MediaType.APP_XML, true);
     Product[] products = WebServiceUtilities.deserializeXml(message, Product[].class);
-    Assert.assertEquals(3, products.length, "Expected 3 products to be returned");
+    Assert.assertEquals(products.length,3,"Expected 3 products to be returned");
   }
 }

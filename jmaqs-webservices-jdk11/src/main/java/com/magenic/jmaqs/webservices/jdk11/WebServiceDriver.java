@@ -30,7 +30,8 @@ public class WebServiceDriver {
 
   /**
    * The URI to be stored for the Web Service.
-   */  private URI baseAddress;
+   */
+  private URI baseAddress;
 
   /**
    * Class Constructor that sets the http Client.
@@ -88,7 +89,7 @@ public class WebServiceDriver {
    * sets the Http Request.
    * @param httpRequest the new http request to be set
    */
-  public void setHttpRequest(HttpRequest httpRequest){
+  public void setHttpRequest(HttpRequest httpRequest) {
     this.baseHttpRequest = httpRequest;
   }
 
