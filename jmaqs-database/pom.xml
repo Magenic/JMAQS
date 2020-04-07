@@ -10,7 +10,7 @@
   <artifactId>jmaqs-database</artifactId>
   <name>JMAQS Database Testing Module</name>
   <properties>
-    <hibernate-core.version>5.4.13.Final</hibernate-core.version>
+    <hibernate-core.version>5.4.14.Final</hibernate-core.version>
     <sqlite-jdbc.version>3.30.1</sqlite-jdbc.version>
     <mssql-jdbc.version>7.4.1.jre8</mssql-jdbc.version>
     <javax.persistence.version>2.2.1</javax.persistence.version>
