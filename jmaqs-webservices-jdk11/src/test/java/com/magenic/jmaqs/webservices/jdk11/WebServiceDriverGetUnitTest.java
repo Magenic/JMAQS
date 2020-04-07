@@ -2,6 +2,7 @@ package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.webservices.jdk11.models.Product;
+import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * Test web service gets.
  */
-public class WebServiceDriverGetUnitTest extends BaseWebServiceTest{
+public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   /**
    * String to hold the URL.
    */
