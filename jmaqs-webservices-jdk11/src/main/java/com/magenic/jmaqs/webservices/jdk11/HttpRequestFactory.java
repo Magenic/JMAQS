@@ -7,11 +7,10 @@ package com.magenic.jmaqs.webservices.jdk11;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.net.URI;
-import java.net.URLEncoder;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-import java.util.Map;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 public class HttpRequestFactory {
 
@@ -25,7 +24,7 @@ public class HttpRequestFactory {
    * @return A HTTP client
    */
   public static HttpRequest getDefaultRequest() {
-    return getRequest(WebServiceConfig.getWebServiceUri(), "");
+    return getRequest(WebServiceConfig.getWebServiceUri());
   }
 
   /**
@@ -65,7 +64,7 @@ public class HttpRequestFactory {
    * @return a HTTP Request
    */
   public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType) {
-    return getRequest(baseAddress, baseUri, timeout, mediaType, null);
+    return setUpRequest(baseAddress, baseUri, timeout, mediaType, "", RequestMethod.GET);
   }
 
   /**
@@ -75,35 +74,23 @@ public class HttpRequestFactory {
    * @param mediaType media/content type to be received
    * @return A HTTP Request
    */
-  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType, Map<Object, Object> data) {
-    HttpRequest.Builder builder = HttpRequest.newBuilder().uri(URI.create(baseAddress + baseUri))
-        .timeout(Duration.ofSeconds(timeout)).header("Content-Type", mediaType.toString());
+  public static HttpRequest setUpRequest(String baseAddress, String baseUri, int timeout,
+      MediaType mediaType, String content, RequestMethod requestType) {
+    HttpRequest.Builder builder = HttpRequest.newBuilder()
+        .uri(URI.create(baseAddress + baseUri))
+        .timeout(Duration.ofSeconds(timeout))
+        .version(HttpClient.Version.HTTP_2)
+        .header("Content-Type", mediaType.toString());
 
-    if (baseUri.toLowerCase().contains("post")) {
-      return builder.POST(buildFormDataFromMap(data)).build();
-    } else if (baseUri.toLowerCase().contains("put")) {
-      return builder.PUT(buildFormDataFromMap(data)).build();
-    } else if (baseUri.toLowerCase().contains("delete")) {
+    if (requestType.equals(RequestMethod.POST)) {
+      return builder.POST(HttpRequest.BodyPublishers.ofString(content)).build();
+    } else if (requestType.equals(RequestMethod.PUT)) {
+      return builder.PUT(HttpRequest.BodyPublishers.ofString(content)).build();
+    } else if (requestType.equals(RequestMethod.DELETE)) {
       return builder.DELETE().build();
+    } else if (requestType.equals(RequestMethod.PATCH)) {
+      builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content));
     }
     return builder.GET().build();
-  }
-
-  /**
-   * Creates a Body publisher based on given data.
-   * @param data the data to be turned into a body publisher
-   * @return a Body Publisher
-   */
-  private static HttpRequest.BodyPublisher buildFormDataFromMap(Map<Object, Object> data) {
-    StringBuilder stringBuilder = new StringBuilder();
-    for (Map.Entry<Object, Object> entry : data.entrySet()) {
-      if (stringBuilder.length() > 0) {
-        stringBuilder.append("&");
-      }
-      stringBuilder.append(URLEncoder.encode(entry.getKey().toString(), StandardCharsets.UTF_8));
-      stringBuilder.append("=");
-      stringBuilder.append(URLEncoder.encode(entry.getValue().toString(), StandardCharsets.UTF_8));
-    }
-    return HttpRequest.BodyPublishers.ofString(stringBuilder.toString());
   }
 }

@@ -26,25 +26,4 @@ public class WebServiceDriverUnitTest {
         "Driver 1 is null");
     Assert.assertNotNull(webServiceDriver2, "Driver 2 is null");
   }
-
-  /**
-   * Tests the setting of the http request.
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void setHttpRequest() throws URISyntaxException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(
-        "http://magenicautomation.azurewebsites.net");
-    Assert.assertNotNull(webServiceDriver.getHttpRequest());
-  }
-
-  /**
-   * Tests the setting of default Http Client and request.
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void getDefaultHttpClientAndRequest() throws URISyntaxException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver("http://magenicautomation.azurewebsites.net");
-    HttpRequest request = webServiceDriver.getHttpRequest();
-    Assert.assertNotNull(webServiceDriver.getHttpClient(MediaType.APP_JSON));
-    Assert.assertNotNull(request);
-  }
 }
