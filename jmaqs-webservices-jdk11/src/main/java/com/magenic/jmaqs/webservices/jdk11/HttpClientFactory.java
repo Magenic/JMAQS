@@ -17,7 +17,7 @@ public class HttpClientFactory {
   /**
    * class constructor.
    */
-  private HttpClientFactory() {}
+  private HttpClientFactory() { }
 
   /**
    * Gets a HTTP client based on configuration values.

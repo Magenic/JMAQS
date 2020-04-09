@@ -12,12 +12,14 @@ import java.net.http.HttpRequest;
 import java.time.Duration;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Http request factory.
+ */
 public class HttpRequestFactory {
-
   /**
    * class constructor.
    */
-  private HttpRequestFactory() {}
+  private HttpRequestFactory() { }
 
   /**
    * Gets a default TTP client based on configuration values.
@@ -38,6 +40,7 @@ public class HttpRequestFactory {
 
   /**
    * Gets a HTTP client based on configuration values.
+   * @param baseAddress the base url address
    * @param baseUri Base service uri
    * @return a HTTP Request
    */
@@ -47,6 +50,7 @@ public class HttpRequestFactory {
 
   /**
    * Gets a HTTP Request based on configuration values.
+   * @param baseAddress the base url address
    * @param baseUri Base service uri
    * @param timeout Web service timeout
    * @return a HTTP Request
@@ -69,9 +73,12 @@ public class HttpRequestFactory {
 
   /**
    * Gets a HTTP Request based on configuration values.
+   * @param baseAddress the base url address
    * @param baseUri Base service uri
    * @param timeout Web service timeout
    * @param mediaType media/content type to be received
+   * @param content the content to be used in a POST/PUT/PATCH
+   * @param requestType the type of request to be done
    * @return A HTTP Request
    */
   public static HttpRequest setUpRequest(String baseAddress, String baseUri, int timeout,
