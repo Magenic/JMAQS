@@ -10,8 +10,8 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpResponseException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.NotAcceptableStatusException;
 
 /**
  * The Web Service Driver.
@@ -103,21 +103,18 @@ public class WebServiceDriver {
   /**
    * Ensure the HTTP response was successful, if not throw a user friendly error message.
    * @param response The HTTP response
-   * @throws HttpResponseException if the HttpResponse is null
    */
-  private static void ensureSuccessStatusCode(HttpResponse<String> response) throws HttpResponseException {
+  public static void ensureSuccessStatusCode(HttpResponse<String> response) {
     // Make sure a response was returned
     if (response == null) {
-      throw new HttpResponseException(HttpStatus.SC_NO_CONTENT, "Response was null");
+      throw new NullPointerException(HttpStatus.NO_CONTENT.toString() + " Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
-    if (response.statusCode() != HttpStatus.SC_OK) {
-      String body = response.body();
-
-      throw new HttpResponseException(response.statusCode(),
+    if (response.statusCode() != HttpStatus.OK.value()) {
+      throw new NotAcceptableStatusException(
           String.format("Response did not indicate a success. %s Response code was: %s",
-              System.lineSeparator(), body));
+              System.lineSeparator(), response.statusCode()));
     }
   }
 
@@ -125,23 +122,20 @@ public class WebServiceDriver {
    * Ensure the HTTP response has specified status, if not throw a user friendly error message.
    * @param response The HTTP response
    * @param expectedStatus Assert a specific status code was returned
-   * @throws HttpResponseException if the HttpResponse is null
    */
-  private static void ensureStatusCodesMatch(HttpResponse<String> response, HttpStatus expectedStatus)
-      throws HttpResponseException {
+  public static void ensureStatusCodesMatch(HttpResponse<String> response, HttpStatus expectedStatus) {
     // Make sure a response was returned
     if (response == null) {
-      throw new HttpResponseException(HttpStatus.SC_NO_CONTENT, "Response was null");
+      throw new NullPointerException(HttpStatus.NO_CONTENT.toString() + " Response was null");
     }
 
     // Check if it was a success and if not create a user friendly error message
     if (response.statusCode() != expectedStatus.hashCode()) {
       String body = response.body();
-      throw new HttpResponseException(response.statusCode(),
-          String.format("Response status did not match expected. %s "
-                  + "Response code was: %s %s Expected code was: %s %s"
-                  + "Body: %s", System.lineSeparator(), response.statusCode(),
-              System.lineSeparator(), expectedStatus.hashCode(), System.lineSeparator(), body));
+      throw new NotAcceptableStatusException(String.format("Response status did not match expected. %s "
+              + "Response code was: %s %s Expected code was: %s %s"
+              + "Body: %s", System.lineSeparator(), response.statusCode(),
+          System.lineSeparator(), expectedStatus.hashCode(), System.lineSeparator(), body));
     }
   }
 
