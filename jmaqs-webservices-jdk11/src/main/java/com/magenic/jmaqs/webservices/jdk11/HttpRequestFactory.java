@@ -5,6 +5,7 @@ import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.time.Duration;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Handles the request portion of the HTTP client request.
@@ -42,7 +43,7 @@ public class HttpRequestFactory {
    * @return a HTTP Request
    */
   public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout) {
-    return getRequest(baseAddress, baseUri, timeout, MediaType.APP_JSON, null);
+    return getRequest(baseAddress, baseUri, timeout, MediaType.APP_JSON, null, RequestMethod.GET);
   }
 
   /**
@@ -53,7 +54,7 @@ public class HttpRequestFactory {
    * @return a HTTP Request
    */
   public static HttpRequest getRequest(String baseAddress, String baseUri, MediaType mediaType) {
-    return getRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeOut(), mediaType, null);
+    return getRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeOut(), mediaType, null, RequestMethod.GET);
   }
 
   /**
@@ -65,16 +66,21 @@ public class HttpRequestFactory {
    * @param content the content to be posted/put
    * @return A HTTP Request
    */
-  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType, String content) {
-    HttpRequest.Builder builder = HttpRequest.newBuilder().uri(URI.create(baseAddress.concat(baseUri)))
-        .timeout(Duration.ofSeconds(timeout)).header("Content-Type", mediaType.toString());
+  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType,
+      String content, RequestMethod requestType) {
+    HttpRequest.Builder builder = HttpRequest.newBuilder()
+        .uri(URI.create(baseAddress.concat(baseUri)))
+        .timeout(Duration.ofSeconds(timeout))
+        .header("Content-Type", mediaType.toString());
 
-    if (baseUri.toLowerCase().contains("post")) {
+    if (requestType.equals(RequestMethod.POST)) {
       return builder.POST(HttpRequest.BodyPublishers.ofString(content)).build();
-    } else if (baseUri.toLowerCase().contains("put")) {
+    } else if (requestType.equals(RequestMethod.PUT)) {
       return builder.PUT(HttpRequest.BodyPublishers.ofString(content)).build();
-    } else if (baseUri.toLowerCase().contains("delete")) {
+    } else if (requestType.equals(RequestMethod.DELETE)) {
       return builder.DELETE().build();
+    } else if (requestType.equals(RequestMethod.PATCH)) {
+      return builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content)).build();
     }
     return builder.GET().build();
   }

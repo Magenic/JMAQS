@@ -21,17 +21,45 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   private static String url = WebServiceConfig.getWebServiceUri();
 
   /**
-   * Test XML get.
+   * Test Json Get deserialize a single product.
    * @throws IOException if exception is thrown
    * @throws InterruptedException if exception is thrown
    * @throws URISyntaxException if exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void getXmlDeserialize() throws IOException, InterruptedException, URISyntaxException {
+  public void getProductXmlDeserialize() throws IOException, InterruptedException, URISyntaxException {
+    WebServiceDriver client = new WebServiceDriver(url);
+    HttpResponse<String> result = client.get("/api/XML_JSON/GetProduct/2", MediaType.APP_XML, false);
+    Product products = WebServiceUtilities.getResponseBody(result, MediaType.APP_XML, Product.class);
+    Assert.assertEquals(products.getName(), "Yo-yo", "Expected 3 products to be returned");
+  }
+
+  /**
+   * Test XML get all items.
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   * @throws URISyntaxException if exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getProductsXmlDeserialize() throws IOException, InterruptedException, URISyntaxException {
     WebServiceDriver client = new WebServiceDriver(url);
     HttpResponse<String> result = client.get("/api/XML_JSON/GetAllProducts", MediaType.APP_XML, false);
     Product[] products = WebServiceUtilities.getResponseBody(result, MediaType.APP_XML, Product[].class);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
+  }
+
+  /**
+   * Test Json Get deserialize a single product.
+   * @throws IOException if exception is thrown
+   * @throws URISyntaxException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getProductJsonDeserialize() throws IOException, URISyntaxException, InterruptedException {
+    WebServiceDriver client = new WebServiceDriver(url);
+    HttpResponse<String> response = client.get("/api/XML_JSON/GetProduct/2", MediaType.APP_JSON, false);
+    Product products = WebServiceUtilities.getResponseBody(response, MediaType.APP_JSON, Product.class);
+    Assert.assertEquals(products.getName(),"Yo-yo", "Expected 3 products to be returned");
   }
 
   /**
@@ -41,25 +69,57 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    * @throws InterruptedException if exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void getJsonDeserialize() throws IOException, URISyntaxException, InterruptedException {
+  public void getProductsJsonDeserialize() throws IOException, URISyntaxException, InterruptedException {
     WebServiceDriver client = new WebServiceDriver(url);
     HttpResponse<String> response = client.get("/api/XML_JSON/GetAllProducts", MediaType.APP_JSON, false);
     Product[] products = WebServiceUtilities.getResponseBody(response, MediaType.APP_JSON, Product[].class);
-    Assert.assertEquals(products.length,3, "Expected 3 products to be returned");
+    Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
   }
 
   /**
-   * Test string Get
+   * Test string Get all.
    * @throws IOException if exception is thrown
    * @throws URISyntaxException if exception is thrown
    * @throws InterruptedException if exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void getString() throws IOException, URISyntaxException, InterruptedException {
+  public void getProductsPlainText() throws IOException, URISyntaxException, InterruptedException {
+    WebServiceDriver client = new WebServiceDriver(url);
+    HttpResponse<String> result = client.get("/api/String/Get",  MediaType.PLAIN_TEXT, false);
+    Assert.assertTrue(result.body().contains("Tomato Soup"),
+        "Was expecting a result with Tomato Soup but instead got - " + result);
+    Assert.assertTrue(result.body().contains("Yo-yo"),
+        "Was expecting a result with Yo-yo but instead got - " + result);
+    Assert.assertTrue(result.body().contains("Hammer"),
+        "Was expecting a result with Hammer but instead got - " + result);
+  }
+
+  /**
+   * Test string Get by id.
+   * @throws IOException if exception is thrown
+   * @throws URISyntaxException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getStringById() throws IOException, URISyntaxException, InterruptedException {
     WebServiceDriver client = new WebServiceDriver(url);
     HttpResponse<String> result = client.get("/api/String/1",  MediaType.PLAIN_TEXT, false);
     Assert.assertTrue(result.body().contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + result);
+  }
+
+  /**
+   * Test string Get by id.
+   * @throws IOException if exception is thrown
+   * @throws URISyntaxException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getStringByName() throws IOException, URISyntaxException, InterruptedException {
+    WebServiceDriver client = new WebServiceDriver(url);
+    HttpResponse<String> result = client.get("/api/String/Yo-yo",  MediaType.PLAIN_TEXT, false);
+    Assert.assertTrue(result.body().contains("Yo-yo"),
+        "Was expecting a result with Yo-yo but instead got - " + result);
   }
 
   /**
