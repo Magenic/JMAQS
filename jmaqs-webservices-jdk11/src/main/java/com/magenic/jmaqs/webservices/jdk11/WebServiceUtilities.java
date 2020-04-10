@@ -60,21 +60,6 @@ public class WebServiceUtilities {
 
   /**
    * Create string entity string entity.
-   * @param <T>       the type parameter
-   * @param body      the body
-   * @param encoding  the encoding
-   * @param mediaType the media type
-   * @return the string entity
-   * @throws JsonProcessingException the json processing exception
-   */
-  public static <T> StringEntity createStringEntity(T body, Charset encoding, String mediaType)
-      throws JsonProcessingException {
-    ContentType contentType = ContentType.create(mediaType, encoding);
-    return createStringEntity(body, contentType);
-  }
-
-  /**
-   * Create string entity string entity.
    *
    * @param <T>         the type parameter
    * @param body        the body
@@ -82,11 +67,11 @@ public class WebServiceUtilities {
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> StringEntity createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
+  public static <T> String createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
     if (contentType.toString().toUpperCase().contains("XML")) {
-      return new StringEntity(serializeXml(body), contentType);
+      return serializeXml(body);
     } else if (contentType.toString().toUpperCase().contains("JSON")) {
-      return new StringEntity(serializeJson(body), contentType);
+      return serializeJson(body);
     } else {
       throw new IllegalArgumentException(
           StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));

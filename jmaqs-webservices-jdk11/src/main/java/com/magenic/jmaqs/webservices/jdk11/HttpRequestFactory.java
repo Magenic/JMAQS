@@ -13,10 +13,11 @@ public class HttpRequestFactory {
   /**
    * private constructor.
    */
-  private HttpRequestFactory() {}
+  private HttpRequestFactory() { }
 
   /**
    * Gets a HTTP Request based on configuration values.
+   * @param baseUri the web service uri to be run
    * @return A HTTP client
    */
   public static HttpRequest getRequest(String baseUri) {
@@ -25,6 +26,7 @@ public class HttpRequestFactory {
 
   /**
    * Gets a HTTP Request based on configuration values.
+   * @param baseAddress the bast url
    * @param baseUri Base service uri
    * @return a HTTP Request
    */
@@ -34,6 +36,7 @@ public class HttpRequestFactory {
 
   /**
    * Gets a HTTP Request based on configuration values.
+   * @param baseAddress the bast url
    * @param baseUri Base service uri
    * @param timeout Web service timeout
    * @return a HTTP Request
@@ -44,6 +47,7 @@ public class HttpRequestFactory {
 
   /**
    * Gets a HTTP Request based on configuration values.
+   * @param baseAddress the bast url
    * @param baseUri Base service uri
    * @param mediaType web service media type
    * @return a HTTP Request
@@ -54,9 +58,11 @@ public class HttpRequestFactory {
 
   /**
    * Gets a HTTP Request based on configuration values.
+   * @param baseAddress the bast url
    * @param baseUri Base service uri
    * @param timeout Web service timeout
    * @param mediaType media/content type to be received
+   * @param content the content to be posted/put
    * @return A HTTP Request
    */
   public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType, String content) {

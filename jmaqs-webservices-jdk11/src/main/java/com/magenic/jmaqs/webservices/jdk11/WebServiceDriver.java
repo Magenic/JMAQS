@@ -124,8 +124,8 @@ public class WebServiceDriver {
    * @throws IOException if exception is thrown
    * @throws InterruptedException if exception is thrown
    */
-  public HttpResponse<String> get(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
-      throws IOException, InterruptedException {
+  public HttpResponse<String> get(String requestUri, MediaType expectedMediaType,
+      HttpStatus expectedStatus) throws IOException, InterruptedException {
     return this.getWithResponse(requestUri, expectedMediaType, expectedStatus);
   }
 
@@ -138,8 +138,8 @@ public class WebServiceDriver {
    * @throws IOException if the exception is thrown
    * @throws InterruptedException if the exception is thrown
    */
-  public HttpResponse<String> getWithResponse(String requestUri, MediaType expectedMediaType, boolean expectSuccess)
-      throws IOException, InterruptedException {
+  public HttpResponse<String> getWithResponse(String requestUri, MediaType expectedMediaType,
+      boolean expectSuccess) throws IOException, InterruptedException {
     return this.getContent(requestUri, expectedMediaType, expectSuccess);
   }
 
@@ -152,8 +152,8 @@ public class WebServiceDriver {
    * @throws IOException if the exception is thrown
    * @throws InterruptedException if the exception is thrown
    */
-  public HttpResponse<String> getWithResponse(String requestUri, MediaType expectedMediaType, HttpStatus expectedStatus)
-      throws IOException, InterruptedException {
+  public HttpResponse<String> getWithResponse(String requestUri, MediaType expectedMediaType,
+      HttpStatus expectedStatus) throws IOException, InterruptedException {
     return this.getContent(requestUri, expectedMediaType, expectedStatus);
   }
 
