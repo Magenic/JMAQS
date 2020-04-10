@@ -58,7 +58,6 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   public void getString() throws IOException, URISyntaxException, InterruptedException {
     WebServiceDriver client = new WebServiceDriver(url);
     HttpResponse<String> result = client.get("/api/String/1",  MediaType.PLAIN_TEXT, false);
-
     Assert.assertTrue(result.body().contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + result);
   }
@@ -81,6 +80,9 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
 
   /**
    * Test that we can use the web service utility to deserialize XML.
+   * @throws IOException if exception is thrown
+   * @throws URISyntaxException if exception is thrown
+   * @throws InterruptedException if exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getResponseAndDeserializeXml()
