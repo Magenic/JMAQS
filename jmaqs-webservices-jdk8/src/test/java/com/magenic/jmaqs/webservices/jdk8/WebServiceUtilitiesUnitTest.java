@@ -7,6 +7,8 @@ package com.magenic.jmaqs.webservices.jdk8;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.magenic.jmaqs.webservices.jdk8.models.Product;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import org.apache.http.HttpEntity;
@@ -16,7 +18,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
-  private final Product product = new Product(1, "Milk", "Dairy", BigDecimal.TEN);
+  private final Product product = new Product(1, "Milk", "Dairy", 10);
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBody() throws Exception {
@@ -77,25 +79,22 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void testCreateStringEntityJson() throws JsonProcessingException {
-    HttpEntity entity = WebServiceUtilities
-        .createStringEntity(this.product, ContentType.APPLICATION_JSON);
-
-    Assert
-        .assertNotNull(entity, "string entity wasn't created using content type application/json");
+  public void testCreateStringEntityJson()
+      throws JsonProcessingException, UnsupportedEncodingException {
+    HttpEntity entity = WebServiceUtilities.createStringEntity(this.product, ContentType.APPLICATION_JSON);
+    Assert.assertNotNull(entity, "string entity wasn't created using content type application/json");
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void testCreateStringEntityXml() throws JsonProcessingException {
-    HttpEntity entity = WebServiceUtilities
-        .createStringEntity(this.product, ContentType.APPLICATION_XML);
-
+  public void testCreateStringEntityXml()
+      throws JsonProcessingException, UnsupportedEncodingException {
+    HttpEntity entity = WebServiceUtilities.createStringEntity(this.product, ContentType.APPLICATION_XML);
     Assert.assertNotNull(entity, "string entity wasn't created using content type application/xml");
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeJson() throws JsonProcessingException {
-    String expectedJson = "{\"Id\":1,\"Name\":\"Milk\",\"Category\":\"Dairy\",\"Price\":10}";
+    String expectedJson = "{\"Id\":1,\"Name\":\"Milk\",\"Category\":\"Dairy\",\"Price\":10.0}";
     String actualJson = WebServiceUtilities.serializeJson(this.product);
 
     Assert.assertEquals(expectedJson, actualJson, String
@@ -105,7 +104,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeXml() throws JsonProcessingException {
-    String expectedXml = "<Product><Id>1</Id><Name>Milk</Name><Category>Dairy</Category><Price>10</Price></Product>";
+    String expectedXml = "<Product><Id>1</Id><Name>Milk</Name><Category>Dairy</Category><Price>10.0</Price></Product>";
     String actualXml = WebServiceUtilities.serializeXml(this.product);
 
     Assert.assertEquals(expectedXml, actualXml, String
@@ -114,18 +113,17 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.WEB_SERVICE)
-  public void testCreateStringEntityNotJsonOrXml() throws JsonProcessingException {
-    HttpEntity entity = WebServiceUtilities
-        .createStringEntity(this.product, ContentType.APPLICATION_FORM_URLENCODED);
+  public void testCreateStringEntityNotJsonOrXml()
+      throws JsonProcessingException, UnsupportedEncodingException {
+    HttpEntity entity = WebServiceUtilities.createStringEntity(this.product, ContentType.APPLICATION_FORM_URLENCODED);
 
-    Assert.fail(
-        "Expected exception of IllegalArgumentException was not caught for content type that did not contain xml or json");
+    Assert.fail("Expected exception of IllegalArgumentException was not caught for content type that did not contain xml or json");
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void testCreateStringEntityCustomContentType() throws JsonProcessingException {
-    HttpEntity entity = WebServiceUtilities
-        .createStringEntity(this.product, Charset.defaultCharset(), "application/json");
+  public void testCreateStringEntityCustomContentType()
+      throws JsonProcessingException, UnsupportedEncodingException {
+    HttpEntity entity = WebServiceUtilities.createStringEntity(this.product, Charset.defaultCharset(), "application/json");
 
     Assert.assertNotNull(entity, "Entity was not set correctly with custom charset and mime-type");
   }

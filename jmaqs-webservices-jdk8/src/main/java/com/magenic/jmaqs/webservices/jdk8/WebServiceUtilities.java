@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import org.apache.http.HttpEntity;
@@ -78,7 +79,7 @@ public final class WebServiceUtilities {
    * @throws JsonProcessingException the json processing exception
    */
   public static <T> StringEntity createStringEntity(T body, Charset encoding, String mediaType)
-      throws JsonProcessingException {
+      throws JsonProcessingException, UnsupportedEncodingException {
     ContentType contentType = ContentType.create(mediaType, encoding);
     return createStringEntity(body, contentType);
   }
@@ -92,11 +93,14 @@ public final class WebServiceUtilities {
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> StringEntity createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
+  public static <T> StringEntity createStringEntity(T body, ContentType contentType)
+      throws JsonProcessingException, UnsupportedEncodingException {
     if (contentType.toString().toUpperCase().contains("XML")) {
       return new StringEntity(serializeXml(body), contentType);
     } else if (contentType.toString().toUpperCase().contains("JSON")) {
       return new StringEntity(serializeJson(body), contentType);
+    } else if (contentType.toString().toUpperCase().contains("TEXT")) {
+      return new StringEntity((String) body);
     } else {
       throw new IllegalArgumentException(
           StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));

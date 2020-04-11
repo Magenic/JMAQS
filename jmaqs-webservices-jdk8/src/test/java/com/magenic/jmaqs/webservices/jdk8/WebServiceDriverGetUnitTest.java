@@ -1,0 +1,109 @@
+package com.magenic.jmaqs.webservices.jdk8;
+
+import com.magenic.jmaqs.utilities.helper.TestCategories;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.entity.ContentType;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class WebServiceDriverGetUnitTest extends  BaseWebServiceTest{
+  /**
+   * Verify we can get content.
+   *
+   * @throws Exception
+   *           There was a problem with the test
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void webServiceGetStringById() throws Exception {
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/1",
+        ContentType.TEXT_PLAIN, true);
+    String responseString = WebServiceUtilities.getResponseBody(response);
+
+    Assert.assertTrue(responseString.contains("Tomato Soup"),
+        "Was expecting a result with Tomato Soup but instead got - " + response.toString());
+  }
+
+  /**
+   * Verify we can get content.
+   *
+   * @throws Exception
+   *           There was a problem with the test
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void webServiceGetStringByName() throws Exception {
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/Hammer",
+        ContentType.TEXT_PLAIN, true);
+    String responseString = WebServiceUtilities.getResponseBody(response);
+
+    Assert.assertTrue(responseString.contains("Hammer"),
+        "Was expecting a result with Hammer but instead got - " + response.toString());
+  }
+
+  /**
+   * Verify we can get content.
+   *
+   * @throws Exception
+   *           There was a problem with the test
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void webServiceGetAllStrings() throws Exception {
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/Get",
+        ContentType.TEXT_PLAIN, true);
+    String responseString = WebServiceUtilities.getResponseBody(response);
+
+    Assert.assertTrue(responseString.contains("Tomato Soup"),
+        "Was expecting a result with Tomato Soup but instead got - " + response.toString());
+    Assert.assertTrue(responseString.contains("Yo-yo"),
+        "Was expecting a result with Yo-yo but instead got - " + response.toString());
+    Assert.assertTrue(responseString.contains("Hammer"),
+        "Was expecting a result with Hammer but instead got - " + response.toString());
+  }
+
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void webServiceGetAllProductsXml() throws IOException, URISyntaxException {
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetAllProducts",
+        ContentType.APPLICATION_XML, true);
+    String responseString = WebServiceUtilities.getResponseBody(response);
+    Assert.assertTrue(responseString.contains("3"));
+  }
+
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void webServiceGetAllProductsJson() throws IOException, URISyntaxException {
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetAllProducts",
+        ContentType.APPLICATION_JSON, true);
+    String responseString = WebServiceUtilities.getResponseBody(response);
+    Assert.assertTrue(responseString.contains("3"));
+  }
+
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void webServiceGetProductXml() throws IOException, URISyntaxException {
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetProduct/2",
+        ContentType.APPLICATION_XML, true);
+    String responseString = WebServiceUtilities.getResponseBody(response);
+    Assert.assertTrue(responseString.contains("Yo-yo"));
+  }
+
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void webServiceGetProductJson() throws IOException, URISyntaxException {
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetProduct/2",
+        ContentType.APPLICATION_JSON, true);
+    String responseString = WebServiceUtilities.getResponseBody(response);
+    Assert.assertTrue(responseString.contains("Yo-yo"));
+  }
+
+  /**
+   * Verify a get error returns the expected code and message.
+   *
+   * @throws Exception
+   *           There was a problem with the test
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void webServiceGetError() throws Exception {
+
+    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/-1",
+        ContentType.TEXT_PLAIN, false);
+    Assert.assertEquals(response.getStatusLine().getStatusCode(), 204);
+  }
+}

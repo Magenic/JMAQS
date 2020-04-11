@@ -6,8 +6,6 @@ package com.magenic.jmaqs.webservices.jdk8.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.math.BigDecimal;
-
 public class Product {
     @JsonProperty("Id")
     private int id;
@@ -19,9 +17,9 @@ public class Product {
     private String category;
 
     @JsonProperty("Price")
-    private BigDecimal price;
+    private double price;
 
-    public Product(int id, String name, String category, BigDecimal price) {
+    public Product(int id, String name, String category, double price) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -54,21 +52,18 @@ public class Product {
         this.category = category;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder(20);
-        sb.append(String.format("%s:%d\n", "Id", this.getId()));
-        sb.append(String.format("%s:%s\n", "Name", this.getName()));
-        sb.append(String.format("%s:%s\n", "Category", this.getCategory()));
-        sb.append(String.format("%s:%d\n", "Price", this.getPrice()));
-
-        return sb.toString();
+        return String.format("%s:%d\n", "Id", this.getId()) + String
+            .format("%s:%s\n", "Name", this.getName()) + String
+            .format("%s:%s\n", "Category", this.getCategory()) + String
+            .format("%s:%s\n", "Price", this.getPrice());
     }
 }

@@ -16,52 +16,6 @@ import org.testng.annotations.Test;
  * Web service wrapper unit tests.
  */
 public class WebServiceUnitTest extends BaseWebServiceTest {
-
-  /**
-   * Verify we can get content.
-   * 
-   * @throws Exception
-   *           There was a problem with the test
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void webServiceGetVerificationTest() throws Exception {
-
-    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/1",
-        ContentType.TEXT_PLAIN, true);
-    String responseString = WebServiceUtilities.getResponseBody(response);
-
-    Assert.assertTrue(responseString.contains("Tomato Soup"),
-        "Was expecting a result with Tomato Soup but instead got - " + response.toString());
-  }
-
-  /**
-   * Verify a get error returns the expected code and message.
-   * 
-   * @throws Exception
-   *           There was a problem with the test
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void webServiceGetError() throws Exception {
-
-    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/-1",
-        ContentType.TEXT_PLAIN, false);
-    Assert.assertEquals(response.getStatusLine().getStatusCode(), 204);
-  }
-
-  /**
-   * Verify delete works.
-   * 
-   * @throws Exception
-   *           There was a problem with the test
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void webServiceDelete() throws Exception {
-
-    CloseableHttpResponse response = this.getWebServiceDriver()
-        .deleteContent("/api/XML_JSON/Delete/1", ContentType.TEXT_PLAIN, false);
-    Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
-  }
-
   /**
    * Verify a patch error returns the expected code and message.
    * 
@@ -108,4 +62,7 @@ public class WebServiceUnitTest extends BaseWebServiceTest {
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 409);
     Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Conflict");
   }
+
+
+
 }
