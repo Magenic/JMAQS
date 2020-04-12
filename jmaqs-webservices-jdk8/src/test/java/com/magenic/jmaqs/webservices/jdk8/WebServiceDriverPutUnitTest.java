@@ -26,7 +26,7 @@ public class WebServiceDriverPutUnitTest extends BaseWebServiceTest {
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void webServiceJsonXmlPut() throws Exception {
+  public void webServiceXmlPut() throws Exception {
     Product p = new Product();
     p.setCategory("ff");
     p.setId(4);
@@ -36,6 +36,22 @@ public class WebServiceDriverPutUnitTest extends BaseWebServiceTest {
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver()
         .putContent("/api/XML_JSON/Put/1", content, ContentType.APPLICATION_XML, false);
+
+    Assert.assertEquals(response.getStatusLine().getStatusCode(), 409);
+    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Conflict");
+  }
+
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void webServiceJsonPut() throws Exception {
+    Product p = new Product();
+    p.setCategory("ff");
+    p.setId(4);
+    p.setName("ff");
+    p.setPrice(3.25123);
+
+    HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_JSON);
+    CloseableHttpResponse response = this.getWebServiceDriver()
+        .putContent("/api/XML_JSON/Put/1", content, ContentType.APPLICATION_JSON, false);
 
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 409);
     Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Conflict");

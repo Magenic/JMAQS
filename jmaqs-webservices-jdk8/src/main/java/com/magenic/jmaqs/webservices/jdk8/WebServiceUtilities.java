@@ -128,7 +128,8 @@ public final class WebServiceUtilities {
    * @throws JsonProcessingException the json processing exception
    */
   public static <T> String serializeXml(T body) throws JsonProcessingException {
-    return xmlMapper.writeValueAsString(body);
+    String str = xmlMapper.writeValueAsString(body);
+    return str;
   }
 
   /**
