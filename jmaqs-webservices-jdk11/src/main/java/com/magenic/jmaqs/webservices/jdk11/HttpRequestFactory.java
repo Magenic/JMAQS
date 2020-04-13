@@ -71,6 +71,12 @@ public class HttpRequestFactory {
     return setUpRequest(baseAddress, baseUri, timeout, mediaType, "", RequestMethod.GET);
   }
 
+
+  public static HttpRequest getRequest(String requestUri, MediaType mediaType, String content, RequestMethod requestType) {
+    return setUpRequest(WebServiceConfig.getWebServiceUri(), requestUri,
+        WebServiceConfig.getWebServiceTimeOut(), mediaType, content , requestType);
+  }
+
   /**
    * Gets a HTTP Request based on configuration values.
    * @param baseAddress the base url address
