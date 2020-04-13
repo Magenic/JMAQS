@@ -43,7 +43,7 @@ public class HttpRequestFactory {
    * @return a HTTP Request
    */
   public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout) {
-    return getRequest(baseAddress, baseUri, timeout, MediaType.APP_JSON, null, RequestMethod.GET);
+    return setUpRequest(baseAddress, baseUri, timeout, MediaType.APP_JSON, null, RequestMethod.GET);
   }
 
   /**
@@ -54,7 +54,7 @@ public class HttpRequestFactory {
    * @return a HTTP Request
    */
   public static HttpRequest getRequest(String baseAddress, String baseUri, MediaType mediaType) {
-    return getRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeOut(), mediaType, null, RequestMethod.GET);
+    return setUpRequest(baseAddress, baseUri, WebServiceConfig.getWebServiceTimeOut(), mediaType, null, RequestMethod.GET);
   }
 
   /**
@@ -66,7 +66,7 @@ public class HttpRequestFactory {
    * @param content the content to be posted/put
    * @return A HTTP Request
    */
-  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType,
+  public static HttpRequest setUpRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType,
       String content, RequestMethod requestType) {
     HttpRequest.Builder builder = HttpRequest.newBuilder()
         .uri(URI.create(baseAddress.concat(baseUri)))
