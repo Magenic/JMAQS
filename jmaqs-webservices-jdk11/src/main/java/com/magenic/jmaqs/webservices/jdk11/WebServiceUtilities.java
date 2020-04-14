@@ -8,19 +8,25 @@ import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
-import java.nio.charset.Charset;
 import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
 
 /**
  * The type Web service utilities.
  */
 public class WebServiceUtilities {
+  /**
+   * used to serialize and deserialize json properties.
+   */
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
+  /**
+   * used to serialize and deserialize xml properties.
+   */
   private static final ObjectMapper xmlMapper = new XmlMapper();
 
-  // private constructor
+  /**
+   * private class constructor.
+   */
   private WebServiceUtilities() {
   }
 
