@@ -52,19 +52,19 @@ public class WebServiceDriver {
 
   /**
    * Class Constructor that sets the base address as a URI.
-   * @param baseAddress The base URI address to use
+   * @param newBaseAddress The base URI address to use
    */
-  public WebServiceDriver(URI baseAddress) {
+  public WebServiceDriver(URI newBaseAddress) {
     setHttpClient(HttpClientFactory.getDefaultClient());
   }
 
   /**
    * Class Constructor that sets the base address as a string.
-   * @param baseAddress The base URI address to use
+   * @param newBaseAddress The base URI address to use
    * @throws URISyntaxException URI syntax is invalid
    */
-  public WebServiceDriver(String baseAddress) throws URISyntaxException {
-    this(new URI(baseAddress));
+  public WebServiceDriver(String newBaseAddress) throws URISyntaxException {
+    this(new URI(newBaseAddress));
   }
 
   /**
