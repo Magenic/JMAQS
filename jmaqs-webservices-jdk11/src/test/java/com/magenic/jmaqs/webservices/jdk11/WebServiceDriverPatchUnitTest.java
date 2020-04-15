@@ -241,7 +241,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   public void patchExpectContentError() throws URISyntaxException, IOException,
       InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.patchWithResponse("/api/String/Patch/1", MediaType.PLAIN_TEXT, null, false);
+    var result = webServiceDriver.patchWithResponse("/api/String/Patch/1", MediaType.PLAIN_TEXT, "", false);
     Assert.assertEquals(result.statusCode(), HttpStatus.BAD_REQUEST.value());
   }
 
