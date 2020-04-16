@@ -5,8 +5,15 @@
 package com.magenic.jmaqs.webservices.jdk8.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class Product {
+    /**
+     * the xml namespace.
+     */
+    @JacksonXmlProperty(isAttribute = true)
+    private final String xmlns = "http://schemas.datacontract.org/2004/07/AutomationTestSite.Models";
+
     @JsonProperty("Id")
     private int id;
 

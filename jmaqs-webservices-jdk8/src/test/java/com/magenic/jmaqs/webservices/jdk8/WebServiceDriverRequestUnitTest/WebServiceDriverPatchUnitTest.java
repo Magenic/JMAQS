@@ -1,6 +1,8 @@
-package com.magenic.jmaqs.webservices.jdk8;
+package com.magenic.jmaqs.webservices.jdk8.WebServiceDriverRequestUnitTest;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
+import com.magenic.jmaqs.webservices.jdk8.WebServiceUtilities;
 import com.magenic.jmaqs.webservices.jdk8.models.Product;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -13,50 +15,41 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceStringPatch() throws Exception {
     Product p = new Product();
-    p.setCategory("ff");
-    p.setId(4);
-    p.setName("ff");
-    p.setPrice(3.25);
+    p.setCategory("gg");
 
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_JSON);
     CloseableHttpResponse response = this.getWebServiceDriver()
-        .putContent("/api/String/Patch/2", content, ContentType.TEXT_PLAIN, true);
+        .patchContent("/api/String/Patch/1", content, ContentType.TEXT_PLAIN, true);
 
-    Assert.assertEquals(response.getStatusLine().getStatusCode(), 405);
-    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Patched");
+    Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
+    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "OK");
   }
 
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceXmlPatch() throws Exception {
     Product p = new Product();
-    p.setCategory("ff");
-    p.setId(4);
-    p.setName("ff");
-    p.setPrice(3.25);
+    p.setCategory("gg");
 
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver()
-        .putContent("/api/XML_JSON/Patch/2", content, ContentType.APPLICATION_XML, true);
+        .patchContent("/api/XML_JSON/Patch/1", content, ContentType.APPLICATION_XML, true);
 
-    Assert.assertEquals(response.getStatusLine().getStatusCode(), 405);
-    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Patched");
+    Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
+    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "OK");
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceJsonPatch() throws Exception {
     Product p = new Product();
-    p.setCategory("ff");
-    p.setId(4);
-    p.setName("ff");
-    p.setPrice(3.25123);
+    p.setCategory("gg");
 
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_JSON);
     CloseableHttpResponse response = this.getWebServiceDriver()
-        .putContent("/api/XML_JSON/Patch/2", content, ContentType.APPLICATION_JSON, true);
+        .patchContent("/api/XML_JSON/Patch/1", content, ContentType.APPLICATION_JSON, true);
 
-    Assert.assertEquals(response.getStatusLine().getStatusCode(), 405);
-    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Patched");
+    Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
+    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "OK");
   }
 
   /**

@@ -9,7 +9,6 @@ import com.magenic.jmaqs.webservices.jdk8.models.Product;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 
 import java.io.UnsupportedEncodingException;
-import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -104,7 +103,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeXml() throws JsonProcessingException {
-    String expectedXml = "<Product><Id>1</Id><Name>Milk</Name><Category>Dairy</Category><Price>10.0</Price></Product>";
+    String expectedXml = "<?xml version='1.0' encoding='UTF-8'?>"
+        + "<Product xmlns=\"http://schemas.datacontract.org/2004/07/AutomationTestSite.Models\">"
+        + "<Id>1</Id><Name>Milk</Name><Category>Dairy</Category><Price>10.0</Price></Product>";
     String actualXml = WebServiceUtilities.serializeXml(this.product);
 
     Assert.assertEquals(expectedXml, actualXml, String
