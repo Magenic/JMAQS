@@ -94,7 +94,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSerializeJson() throws JsonProcessingException {
-    String expectedJson = "{\"Id\":1,\"Name\":\"Milk\",\"Category\":\"Dairy\",\"Price\":10.0}";
+    String expectedJson = "{\"Id\":1,\"Name\":\"Milk\",\"Category\":\"Dairy\",\"Price\":10}";
     String actualJson = WebServiceUtilities.serializeJson(this.product);
 
     Assert.assertEquals(expectedJson, actualJson, String
@@ -106,7 +106,7 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   public void testSerializeXml() throws JsonProcessingException {
     String expectedXml = "<?xml version='1.0' encoding='UTF-8'?>"
         + "<Product xmlns=\"http://schemas.datacontract.org/2004/07/AutomationTestSite.Models\">"
-        + "<Id>1</Id><Name>Milk</Name><Category>Dairy</Category><Price>10.0</Price></Product>";
+        + "<Id>1</Id><Name>Milk</Name><Category>Dairy</Category><Price>10</Price></Product>";
     String actualXml = WebServiceUtilities.serializeXml(this.product);
 
     Assert.assertEquals(expectedXml, actualXml, String

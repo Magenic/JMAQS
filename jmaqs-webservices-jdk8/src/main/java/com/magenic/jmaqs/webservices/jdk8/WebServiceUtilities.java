@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.webservices.jdk8;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -138,6 +139,7 @@ public final class WebServiceUtilities {
    */
   public static <T> String serializeXml(T body) throws JsonProcessingException {
     xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+    xmlMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
     return xmlMapper.writeValueAsString(body);
   }
 
