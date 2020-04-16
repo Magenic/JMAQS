@@ -118,8 +118,7 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeJson(HttpResponse<String> message, Type type) throws IOException {
-    String responseEntity = getResponseBody(message);
-    return objectMapper.readValue(responseEntity, objectMapper.getTypeFactory().constructType(type));
+    return objectMapper.readValue(getResponseBody(message), objectMapper.getTypeFactory().constructType(type));
   }
 
   /**
@@ -132,7 +131,6 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
-    String responseEntity = xmlMapper.writeValueAsString(deserializeJson(message, type));
-    return xmlMapper.readValue(responseEntity, xmlMapper.getTypeFactory().constructType(type));
+    return xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
   }
 }
