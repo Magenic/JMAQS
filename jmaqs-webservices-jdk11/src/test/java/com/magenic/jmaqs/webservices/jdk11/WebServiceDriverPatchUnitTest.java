@@ -126,6 +126,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
     p.setId(4);
     p.setName("ff");
     p.setPrice(3.25);
+
     var content = WebServiceUtilities.makeStringContent(p, MediaType.APP_XML);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     Product result = webServiceDriver.patch("/api/XML_JSON/Patch/1", MediaType.APP_XML, content, Product.class, true);
@@ -150,40 +151,12 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Patch stream without utility.
-   * @throws URISyntaxException if the exception is thrown
-   * @throws IOException if the exception is thrown
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void patchStreamWithoutMakeContent()
-      throws URISyntaxException, IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.patch("/api/String/Patch/1", MediaType.PLAIN_TEXT,
-        "Test", MediaType.PLAIN_TEXT, false, true);
-    Assert.assertEquals(result, "\"Patched\"");
-  }
-
-  /**
    * Patch string with utility.
    * @throws JsonProcessingException if the exception is thrown
    * @throws URISyntaxException if the exception is thrown
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void patchStringWithMakeContent()
-      throws IOException, URISyntaxException, InterruptedException {
-    var content = WebServiceUtilities.makeStringContent("Test", MediaType.PLAIN_TEXT);
-    WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.patch("/api/String/Patch/1", MediaType.PLAIN_TEXT, content, true);
-    Assert.assertEquals(result, "\"Patched\"");
-  }
-
-  /**
-   * Patch string with utility.
-   * @throws JsonProcessingException if the exception is thrown
-   * @throws URISyntaxException if the exception is thrown
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void patchStreamWithMakeContent()
       throws IOException, URISyntaxException, InterruptedException {
     var content = WebServiceUtilities.makeStringContent("Test", MediaType.PLAIN_TEXT);
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
@@ -202,20 +175,6 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     var result = webServiceDriver.patchWithResponse("/api/String/Patch/1", MediaType.PLAIN_TEXT,
         "Test", MediaType.PLAIN_TEXT, true, true);
-    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
-  }
-
-  /**
-   * Patch stream without utility to verify status code.
-   * @throws URISyntaxException if the exception is thrown
-   * @throws IOException if the exception is thrown
-   */
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void patchStreamWithoutContentStatusCode()
-      throws URISyntaxException, IOException, InterruptedException {
-    WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.patchWithResponse("/api/String/Patch/1", MediaType.PLAIN_TEXT,
-        "Test", MediaType.PLAIN_TEXT, false, true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
   }
 
@@ -253,7 +212,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   public void patchExpectStringError() throws URISyntaxException, IOException,
       InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    var result = webServiceDriver.patch("/api/String/Patch/1", MediaType.PLAIN_TEXT, null, false);
+    var result = webServiceDriver.patch("/api/String/Patch/", MediaType.PLAIN_TEXT, "", false);
     var expected = "{\"Message\":\"Value is required\"}";
     Assert.assertEquals(result, expected);
   }

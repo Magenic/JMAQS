@@ -102,7 +102,7 @@ public class HttpRequestFactory {
     } else if (requestType.equals(RequestMethod.DELETE)) {
       return builder.DELETE().build();
     } else if (requestType.equals(RequestMethod.PATCH)) {
-      builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content));
+      return builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content)).build();
     }
     return builder.GET().build();
   }

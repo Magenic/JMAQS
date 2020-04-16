@@ -137,7 +137,7 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
-    String responseEntity = xmlMapper.writeValueAsString(deserializeJson(message, type));
+    String responseEntity = getResponseBody(message);
     return xmlMapper.readValue(responseEntity, xmlMapper.getTypeFactory().constructType(type));
   }
 }
