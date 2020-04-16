@@ -10,6 +10,8 @@ import org.apache.http.entity.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.math.BigDecimal;
+
 public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
 
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -18,7 +20,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
     p.setCategory("ff");
     p.setId(4);
     p.setName("ff");
-    p.setPrice(3.25);
+    p.setPrice(BigDecimal.valueOf(3.25));
 
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver()
@@ -33,7 +35,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
     p.setCategory("ff");
     p.setId(4);
     p.setName("ff");
-    p.setPrice(3.25);
+    p.setPrice(BigDecimal.valueOf(3.25));
 
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_JSON);
     CloseableHttpResponse response = this.getWebServiceDriver()

@@ -4,6 +4,7 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceUtilities;
 import com.magenic.jmaqs.webservices.jdk8.models.Product;
+import java.math.BigDecimal;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ContentType;
@@ -21,7 +22,7 @@ public class WebServiceDriverPutUnitTest extends BaseWebServiceTest {
     p.setCategory("ff");
     p.setId(4);
     p.setName("ff");
-    p.setPrice(3.25123);
+    p.setPrice(BigDecimal.valueOf(3.25));
 
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver()
@@ -41,7 +42,7 @@ public class WebServiceDriverPutUnitTest extends BaseWebServiceTest {
     p.setCategory("ff");
     p.setId(4);
     p.setName("ff");
-    p.setPrice(3.25123);
+    p.setPrice(BigDecimal.valueOf(3.25));
 
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_JSON);
     CloseableHttpResponse response = this.getWebServiceDriver()
@@ -61,7 +62,7 @@ public class WebServiceDriverPutUnitTest extends BaseWebServiceTest {
     p.setCategory("ff");
     p.setId(4);
     p.setName("ff");
-    p.setPrice(3.25123);
+    p.setPrice(BigDecimal.valueOf(3.25));
 
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_JSON);
     CloseableHttpResponse response = this.getWebServiceDriver()
