@@ -9,6 +9,7 @@ import com.magenic.jmaqs.webservices.jdk8.models.Product;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -17,7 +18,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
-  private final Product product = new Product(1, "Milk", "Dairy", 10);
+  private final Product product = new Product(1, "Milk", "Dairy", BigDecimal.TEN);
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBody() throws Exception {
