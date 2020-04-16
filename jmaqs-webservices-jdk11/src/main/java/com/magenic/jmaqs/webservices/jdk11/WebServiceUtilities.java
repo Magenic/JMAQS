@@ -52,9 +52,9 @@ public class WebServiceUtilities {
       throws IOException {
     T responseBody;
 
-    if (contentType.toString().toUpperCase().contains("JSON")) {
+    if (contentType.equals(MediaType.APP_JSON)) {
       responseBody = deserializeJson(response, type);
-    } else if (contentType.toString().toUpperCase().contains("XML")) {
+    } else if (contentType.equals(MediaType.APP_XML)) {
       responseBody = deserializeXml(response, type);
     } else {
       throw new IllegalArgumentException(
@@ -131,6 +131,9 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
-    return xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
+    // the body of the response is given back in JSON
+    // therefore deserialize it to JSON then convert into XML
+    String response = xmlMapper.writeValueAsString(deserializeJson(message, type));
+    return xmlMapper.readValue(response, xmlMapper.getTypeFactory().constructType(type));
   }
 }
