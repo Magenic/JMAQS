@@ -1,6 +1,8 @@
-package com.magenic.jmaqs.webservices.jdk8;
+package com.magenic.jmaqs.webservices.jdk8.WebServiceDriverRequestUnitTest;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
+import com.magenic.jmaqs.webservices.jdk8.WebServiceUtilities;
 import com.magenic.jmaqs.webservices.jdk8.models.Product;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -20,9 +22,9 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
 
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver()
-        .putContent("/api/XML_JSON/Post/1", content, ContentType.APPLICATION_XML, true);
-    Assert.assertEquals(response.getStatusLine().getStatusCode(), 405);
-    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Conflict");
+        .postContent("/api/XML_JSON/Post/1", content, ContentType.APPLICATION_XML, true);
+    Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
+    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "OK");
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -35,24 +37,18 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
 
     HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_JSON);
     CloseableHttpResponse response = this.getWebServiceDriver()
-        .putContent("/api/XML_JSON/Post", content, ContentType.APPLICATION_JSON, true);
-    Assert.assertEquals(response.getStatusLine().getStatusCode(), 405);
-    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Conflict");
+        .postContent("/api/XML_JSON/Post", content, ContentType.APPLICATION_JSON, true);
+    Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
+    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "OK");
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceStringPost() throws Exception {
-    Product p = new Product();
-    p.setCategory("ff");
-    p.setId(4);
-    p.setName("ff");
-    p.setPrice(3.25123);
-
-    HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_XML);
+    HttpEntity content = WebServiceUtilities.createStringEntity("Test", ContentType.TEXT_PLAIN);
     CloseableHttpResponse response = this.getWebServiceDriver()
-        .putContent("/api/String/Post", content, ContentType.APPLICATION_XML, true);
-    Assert.assertEquals(response.getStatusLine().getStatusCode(), 409);
-    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Conflict");
+        .postContent("/api/String", content, ContentType.TEXT_PLAIN, true);
+    Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
+    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "OK");
   }
 
   /**
@@ -62,7 +58,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
    *           There was a problem with the test
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void webServicePostError() throws Exception {
+  public void webServicePostStringError() throws Exception {
     CloseableHttpResponse response = this.getWebServiceDriver()
         .postContent("/api/String", null, ContentType.TEXT_PLAIN, false);
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 400);

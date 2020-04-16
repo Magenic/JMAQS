@@ -1,14 +1,17 @@
-package com.magenic.jmaqs.webservices.jdk8;
+package com.magenic.jmaqs.webservices.jdk8.WebServiceDriverRequestUnitTest;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.io.IOException;
 import java.net.URISyntaxException;
+
+import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
+import com.magenic.jmaqs.webservices.jdk8.WebServiceUtilities;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class WebServiceDriverGetUnitTest extends  BaseWebServiceTest{
+public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   /**
    * Verify we can get content.
    *
@@ -100,8 +103,7 @@ public class WebServiceDriverGetUnitTest extends  BaseWebServiceTest{
    *           There was a problem with the test
    */
   @Test(groups = TestCategories.WEB_SERVICE)
-  public void webServiceGetError() throws Exception {
-
+  public void webServiceGetStringError() throws Exception {
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/-1",
         ContentType.TEXT_PLAIN, false);
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 204);

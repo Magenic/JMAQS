@@ -7,6 +7,7 @@ package com.magenic.jmaqs.webservices.jdk8;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -22,11 +23,19 @@ import org.apache.http.util.EntityUtils;
  * The type Web service utilities.
  */
 public final class WebServiceUtilities {
+  /**
+   * The Object mapper to serialize/deserialize JSON.
+   */
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
-  private static final ObjectMapper xmlMapper = new XmlMapper();
+  /**
+   * The Object mapper to serialize/deserialize XML.
+   */
+  private static final XmlMapper xmlMapper = new XmlMapper();
 
-  // private constructor
+  /**
+   * private class constructor.
+   */
   private WebServiceUtilities() {
   }
 
@@ -128,8 +137,8 @@ public final class WebServiceUtilities {
    * @throws JsonProcessingException the json processing exception
    */
   public static <T> String serializeXml(T body) throws JsonProcessingException {
-    String str = xmlMapper.writeValueAsString(body);
-    return str;
+    xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+    return xmlMapper.writeValueAsString(body);
   }
 
   /**
