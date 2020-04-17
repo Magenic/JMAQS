@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 public class Product {
     /**
-     * the xml namespace.
+     * the xmlns namespace.
      */
     @JacksonXmlProperty(isAttribute = true)
     private final String xmlns = "http://schemas.datacontract.org/2004/07/AutomationTestSite.Models";
