@@ -102,7 +102,11 @@ public class HttpRequestFactory {
     } else if (requestType.equals(RequestMethod.DELETE)) {
       return builder.DELETE().build();
     } else if (requestType.equals(RequestMethod.PATCH)) {
-      return builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content)).build();
+      if (!content.isEmpty()) {
+        return builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content)).build();
+      } else {
+        throw new NullPointerException("Content is Empty");
+      }
     }
     return builder.GET().build();
   }

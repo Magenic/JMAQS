@@ -196,7 +196,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    * Verifying other http status codes.
    * @throws URISyntaxException if the exception is thrown
    */
-  @Test(groups = TestCategories.WEB_SERVICE)
+  @Test(groups = TestCategories.WEB_SERVICE, expectedExceptions = NullPointerException.class)
   public void patchExpectContentError() throws URISyntaxException, IOException,
       InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
@@ -208,7 +208,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
    * Testing string returned for Patch.
    * @throws URISyntaxException if the exception is thrown
    */
-  @Test(groups = TestCategories.WEB_SERVICE)
+  @Test(groups = TestCategories.WEB_SERVICE,  expectedExceptions = NullPointerException.class)
   public void patchExpectStringError() throws URISyntaxException, IOException,
       InterruptedException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
