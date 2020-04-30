@@ -77,10 +77,9 @@ public class WebServiceDriver {
 
   /**
    * Gets http client.
-   * @param mediaType the media type
    * @return the http client
    */
-  public HttpClient getHttpClient(MediaType mediaType) {
+  public HttpClient getHttpClient() {
     return this.baseHttpClient;
   }
 
@@ -104,7 +103,7 @@ public class WebServiceDriver {
    * Ensure the HTTP response was successful, if not throw a user friendly error message.
    * @param response The HTTP response
    */
-  public static void ensureSuccessStatusCode(HttpResponse<String> response) {
+  private static void ensureSuccessStatusCode(HttpResponse<String> response) {
     // Make sure a response was returned
     if (response == null) {
       throw new NullPointerException(HttpStatus.NO_CONTENT.toString() + " Response was null");
@@ -123,7 +122,7 @@ public class WebServiceDriver {
    * @param response The HTTP response
    * @param expectedStatus Assert a specific status code was returned
    */
-  public static void ensureStatusCodesMatch(HttpResponse<String> response, HttpStatus expectedStatus) {
+  private static void ensureStatusCodesMatch(HttpResponse<String> response, HttpStatus expectedStatus) {
     // Make sure a response was returned
     if (response == null) {
       throw new NullPointerException(HttpStatus.NO_CONTENT.toString() + " Response was null");
