@@ -2,7 +2,7 @@
  * Copyright 2020 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities.helper;
+package com.magenic.jmaqs.utilities.helper.exceptions;
 
 /**
  * Custom TimeoutException, as the built in one does not allow for a passed in inner exception.

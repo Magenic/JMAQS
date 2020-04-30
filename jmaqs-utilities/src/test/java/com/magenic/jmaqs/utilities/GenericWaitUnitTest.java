@@ -6,8 +6,8 @@ package com.magenic.jmaqs.utilities;
 
 import com.magenic.jmaqs.utilities.helper.GenericWait;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.helper.TimeoutException;
 
+import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;

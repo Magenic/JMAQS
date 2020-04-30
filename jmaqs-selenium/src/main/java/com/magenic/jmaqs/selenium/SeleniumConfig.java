@@ -228,7 +228,7 @@ public final class SeleniumConfig {
    * @return The wait time (in milliseconds)
    */
   public static Duration getWaitTime() {
-    return Duration.ofMillis(Integer.parseInt(Config.getGeneralValue("BrowserWaitTime", "0")));
+    return Duration.ofMillis(Integer.parseInt(Config.getValueForSection(SELENIUM_SECTION,"BrowserWaitTime", "0")));
   }
 
   /**
@@ -237,7 +237,7 @@ public final class SeleniumConfig {
    * @return The timeout time (in milliseconds)
    */
   public static Duration getTimeoutTime() {
-    return Duration.ofMillis(Integer.parseInt(Config.getGeneralValue("BrowserTimeout", "0")));
+    return Duration.ofMillis(Integer.parseInt(Config.getValueForSection(SELENIUM_SECTION, "BrowserTimeout", "0")));
   }
 
   /**

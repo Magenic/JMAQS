@@ -1,11 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.magenic.jmaqs</groupId>
     <artifactId>jmaqs-framework</artifactId>
     <version>2.0.1-SNAPSHOT</version>
     <name>JMAQS Framework</name>
-    <description>A collection of testing libraries and conveince classes to accelerate startup automation efforts</description>
+    <description>A collection of testing libraries and conveince classes to accelerate startup
+        automation efforts
+    </description>
     <packaging>pom</packaging>
     <url>https://github.com/Magenic/JMAQS</url>
     <inceptionYear>2017</inceptionYear>
@@ -49,7 +53,7 @@
         <module>jmaqs-selenium</module>
         <module>jmaqs-webservices-jdk8</module>
         <module>jmaqs-appium</module>
-      <module>jmaqs-database</module>
+        <module>jmaqs-database</module>
         <module>jmaqs-webservices-jdk11</module>
     </modules>
 
@@ -193,7 +197,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-           
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -219,6 +223,7 @@
                         </goals>
                         <configuration>
                             <source>8</source>
+                            <doclint>none</doclint>
                             <additionalparam>-Xdoclint:none</additionalparam>
                             <workingDirectory>target/</workingDirectory>
                         </configuration>
