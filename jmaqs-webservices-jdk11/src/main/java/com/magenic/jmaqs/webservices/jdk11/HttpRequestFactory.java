@@ -68,7 +68,7 @@ public class HttpRequestFactory {
    * @return a HTTP Request
    */
   public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout, MediaType mediaType) {
-    return setUpRequest(baseAddress, baseUri, timeout, mediaType, "", RequestMethod.GET);
+    return getRequest(baseAddress, baseUri, timeout, mediaType, "", RequestMethod.GET);
   }
 
   /**
@@ -81,7 +81,7 @@ public class HttpRequestFactory {
    * @param requestType the type of request to be done
    * @return A HTTP Request
    */
-  public static HttpRequest setUpRequest(String baseAddress, String baseUri, int timeout,
+  public static HttpRequest getRequest(String baseAddress, String baseUri, int timeout,
       MediaType mediaType, String content, RequestMethod requestType) {
     HttpRequest.Builder builder = HttpRequest.newBuilder()
         .uri(URI.create(baseAddress + baseUri))
