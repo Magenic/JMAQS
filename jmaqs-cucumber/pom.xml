@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -13,4 +13,24 @@
     <name>JMAQS Cucumber Module</name>
 
 
+    <dependencies>
+        <dependency>
+            <scope>compile</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>6.0.0-RC2</version>
+        </dependency>
+        <dependency>
+            <scope>compile</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-gherkin</artifactId>
+            <version>6.0.0-RC2</version>
+        </dependency>
+        <dependency>
+            <scope>compile</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>6.0.0-RC2</version>
+        </dependency>
+    </dependencies>
 </project>
