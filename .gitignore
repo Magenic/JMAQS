@@ -159,3 +159,4 @@ Logs
 */.gtm/
 /Framework/jmaqs-selenium/src/test/resources
 .gtm
+.DS_Store
