@@ -55,6 +55,7 @@
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
         <module>jmaqs-webservices-jdk11</module>
+        <module>jmaqs-cucumber</module>
     </modules>
 
     <distributionManagement>
