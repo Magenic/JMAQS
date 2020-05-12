@@ -7,6 +7,7 @@ package com.magenic.jmaqs.cucumber.steps;
 import com.magenic.jmaqs.base.BaseTestObject;
 import com.magenic.jmaqs.cucumber.ScenarioContext;
 import io.cucumber.java.BeforeStep;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 
 public abstract class AbstractTestSteps<T extends BaseTestObject> {
@@ -17,14 +18,6 @@ public abstract class AbstractTestSteps<T extends BaseTestObject> {
     this.localScenarioContext = context;
   }
 
-  public ScenarioContext getScenarioContext() {
-    return this.localScenarioContext;
-  }
-
-  public void setScenarioContext(ScenarioContext context) {
-    this.localScenarioContext = context;
-  }
-
   public abstract T getTestObject();
 
   @BeforeStep
@@ -32,7 +25,7 @@ public abstract class AbstractTestSteps<T extends BaseTestObject> {
     throw new UnsupportedOperationException("Not Implemented Yet");
   }
 
-  @AfterTest
+  @AfterMethod
   void teardownAfterScenario() {
     throw new UnsupportedOperationException("Not Implemented Yet");
   }
