@@ -18,19 +18,25 @@
             <scope>compile</scope>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
-            <version>6.0.0-RC2</version>
-        </dependency>
-        <dependency>
-            <scope>compile</scope>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-gherkin</artifactId>
-            <version>6.0.0-RC2</version>
+            <version>5.7.0</version>
         </dependency>
         <dependency>
             <scope>compile</scope>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>6.0.0-RC2</version>
+            <version>5.7.0</version>
+        </dependency>
+        <dependency>
+            <scope>compile</scope>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-gherkin</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.base</groupId>
+            <artifactId>jmaqs-base</artifactId>
+            <version>2.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
