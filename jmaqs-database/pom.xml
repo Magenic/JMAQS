@@ -12,7 +12,7 @@
   <properties>
     <hibernate-core.version>5.4.15.Final</hibernate-core.version>
     <sqlite-jdbc.version>3.31.1</sqlite-jdbc.version>
-    <mssql-jdbc.version>8.2.2.jre8</mssql-jdbc.version>
+    <mssql-jdbc.version>8.3.0.jre14-preview</mssql-jdbc.version>
     <javax.persistence.version>2.2.1</javax.persistence.version>
     <sqlite-dialect.version>0.1.0</sqlite-dialect.version>
     <commons-io.version>2.6</commons-io.version>
