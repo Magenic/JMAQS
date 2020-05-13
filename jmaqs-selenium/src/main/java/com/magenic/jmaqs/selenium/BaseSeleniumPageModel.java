@@ -48,7 +48,7 @@ public abstract class BaseSeleniumPageModel {
    * @return the logger
    */
   protected Logger getLogger() {
-    return this.testObject.getLog();
+    return this.testObject.getLogger();
   }
 
     /**

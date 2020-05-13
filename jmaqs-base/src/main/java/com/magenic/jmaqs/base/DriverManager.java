@@ -71,7 +71,7 @@ public abstract class DriverManager<T> implements AutoCloseable {
    * @return the logger
    */
   public Logger getLogger() {
-    return this.baseTestObject.getLog();
+    return this.baseTestObject.getLogger();
   }
 
   /**

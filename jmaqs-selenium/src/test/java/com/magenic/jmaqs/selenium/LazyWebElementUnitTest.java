@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.interactions.Actions;
@@ -416,7 +415,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		this.getInputBox().clear();
 		this.getInputBox().sendKeys("continueTest");
 
-		FileLogger logger = (FileLogger)this.getTestObject().getLog();
+		FileLogger logger = (FileLogger)this.getTestObject().getLogger();
 		String filepath = logger.getFilePath();
 		String logFile = Files.readAllLines(Paths.get(filepath)).stream().reduce((x, y) -> x + y + System.lineSeparator())
 				.orElseThrow(() -> new FileNotFoundException(String.format("The log file %s was not found at path %s", logger.getFileName(), filepath)));

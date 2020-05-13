@@ -312,7 +312,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     this.getWebDriver().findElement(firstNameTextBox).clear();
     ElementHandler.sendSecretKeys(getWebDriver(), firstNameTextBox, "secretKeys", this.getLogger());
 
-    FileLogger logger = (FileLogger) this.getTestObject().getLog();
+    FileLogger logger = (FileLogger) this.getTestObject().getLogger();
     File file = new File(logger.getFilePath());
 
     Assert.assertTrue(FileUtils.readFileToString(file).contains("somethingTest"),
@@ -332,7 +332,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     this.getWebDriver().findElement(firstNameTextBox).clear();
     this.getWebDriver().findElement(firstNameTextBox).sendKeys("somethingTest");
 
-    FileLogger logger = (FileLogger) this.getTestObject().getLog();
+    FileLogger logger = (FileLogger) this.getTestObject().getLogger();
     File file = new File(logger.getFilePath());
 
     Assert.assertFalse(FileUtils.readFileToString(file).contains("secretKeys"),

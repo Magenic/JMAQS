@@ -17,7 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -30,7 +29,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.APPIUM)
   public void testCaptureScreenshotNoAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -49,7 +48,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.APPIUM)
   public void testCaptureScreenshotAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -87,7 +86,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.APPIUM)
   public void testCaptureScreenshotCustomDirectoryFileName() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -112,7 +111,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.APPIUM)
   public void testSavePageSourceNoAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -131,7 +130,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.APPIUM)
   public void testSavePageSourceAppend() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -150,7 +149,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.APPIUM)
   public void testSavePageSourceCustomDirectoryFileName() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
@@ -194,7 +193,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.APPIUM)
   public void testKillDriver() {
     AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
     AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
         this.getTestObject().getFullyQualifiedTestName());
     this.setTestObject(testObject);
