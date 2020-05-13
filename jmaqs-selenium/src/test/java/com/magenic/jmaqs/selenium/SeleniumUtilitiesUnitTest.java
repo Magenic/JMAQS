@@ -38,7 +38,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
-                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                                         this.getTestObject().getFullyQualifiedTestName());
                         this.setTestObject(testObject);
@@ -66,7 +66,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
-                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                                         this.getTestObject().getFullyQualifiedTestName());
                         this.setTestObject(testObject);
@@ -123,7 +123,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
-                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                                         this.getTestObject().getFullyQualifiedTestName());
                         this.setTestObject(testObject);
@@ -155,7 +155,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
-                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                                         this.getTestObject().getFullyQualifiedTestName());
                         this.setTestObject(testObject);
@@ -183,7 +183,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
-                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                                         this.getTestObject().getFullyQualifiedTestName());
                         this.setTestObject(testObject);
@@ -216,7 +216,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
-                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                                         this.getTestObject().getFullyQualifiedTestName());
                         this.setTestObject(testObject);

@@ -25,8 +25,8 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   public void testBaseTestObject1() {
     final BaseTestObject testObject = this.getTestObject();
 
-    // final String methodName = this.method.getName();
-    BaseTestObject baseTestObject = new BaseTestObject(testObject.getLog(), "FakeTestName");
+    //final String methodName = this.method.getName();
+    BaseTestObject baseTestObject = new BaseTestObject(testObject.getLogger(), "FakeTestName");
     Assert.assertNotNull(baseTestObject, "Checking that Base Test Object instantiated correctly");
   }
 
@@ -74,7 +74,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetLog() {
     BaseTestObject testObject = this.getTestObject();
-    Assert.assertNotNull(testObject.getLog(), "Checking that logger is not null.");
+    Assert.assertNotNull(testObject.getLogger(), "Checking that logger is not null.");
   }
 
   /**
@@ -84,8 +84,8 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   public void testSetLog() {
     BaseTestObject testObject = this.getTestObject();
     final Logger logger = this.getLogger();
-    testObject.setLog(logger);
-    Assert.assertEquals(testObject.getLog(), logger, "Checking that logger set correctly.");
+    testObject.setLogger(logger);
+    Assert.assertEquals(testObject.getLogger(), logger, "Checking that logger set correctly.");
   }
 
   /**
@@ -103,7 +103,8 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void testSetPerfTimerCollectionGetSet() {
     BaseTestObject testObject = this.getTestObject();
-    final PerfTimerCollection perfTimerCollection = new PerfTimerCollection(testObject.getLog(), "FakeTestName");
+    final PerfTimerCollection perfTimerCollection = new PerfTimerCollection(testObject.getLogger(),
+"FakeTestName");
     testObject.setPerfTimerCollection(perfTimerCollection);
     Assert.assertEquals(testObject.getPerfTimerCollection(), perfTimerCollection,
         "Checking that perf timer collection set correctly.");

@@ -103,7 +103,7 @@ public abstract class BaseTest {
    * @return Logger object
    */
   public Logger getLogger() {
-    return this.getTestObject().getLog();
+    return this.getTestObject().getLogger();
   }
 
   /**
@@ -112,7 +112,7 @@ public abstract class BaseTest {
    * @param log The Logger object
    */
   public void setLogger(Logger log) {
-    this.getTestObject().setLog(log);
+    this.getTestObject().setLogger(log);
   }
 
   /**
