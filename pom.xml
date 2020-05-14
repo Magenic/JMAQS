@@ -226,10 +226,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${compiler.plugin.version}</version>
                 <configuration>
+                    <release>11</release>
+                    <release>8</release>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showDeprecation>false</showDeprecation>
-                    <source>8</source>
-                    <target>8</target>
                     <workingDirectory>target/</workingDirectory>
                 </configuration>
             </plugin>
