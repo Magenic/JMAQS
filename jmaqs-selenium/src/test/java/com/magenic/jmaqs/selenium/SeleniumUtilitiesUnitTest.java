@@ -36,7 +36,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
     public void testCaptureScreenshotNoAppend() throws Exception {
         WebDriver webDriver = null;
         webDriver = WebDriverFactory.getDefaultBrowser();
-        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                 this.getTestObject().getFullyQualifiedTestName());
         this.setTestObject(testObject);
@@ -59,7 +59,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
     public void testCaptureScreenshotAppend() throws Exception {
         WebDriver webDriver = null;
         webDriver = WebDriverFactory.getDefaultBrowser();
-        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                 this.getTestObject().getFullyQualifiedTestName());
         this.setTestObject(testObject);
@@ -104,7 +104,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
     @Test(groups = TestCategories.SELENIUM)
     public void testCaptureScreenshotCustomDirectoryFileName() throws Exception {
         WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                 this.getTestObject().getFullyQualifiedTestName());
         this.setTestObject(testObject);
@@ -128,7 +128,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
     @Test(groups = TestCategories.SELENIUM)
     public void testSavePageSourceNoAppend() throws Exception {
         WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                 this.getTestObject().getFullyQualifiedTestName());
         this.setTestObject(testObject);
@@ -150,7 +150,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
     @Test(groups = TestCategories.SELENIUM)
     public void testSavePageSourceAppend() throws Exception {
         WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                 this.getTestObject().getFullyQualifiedTestName());
         this.setTestObject(testObject);
@@ -177,7 +177,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
     @Test(groups = TestCategories.SELENIUM)
     public void testSavePageSourceCustomDirectoryFileName() throws Exception {
         WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-        FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
+    FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
         SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
                 this.getTestObject().getFullyQualifiedTestName());
         this.setTestObject(testObject);

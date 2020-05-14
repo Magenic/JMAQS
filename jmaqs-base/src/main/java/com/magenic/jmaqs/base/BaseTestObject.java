@@ -19,7 +19,7 @@ public class BaseTestObject implements AutoCloseable {
   /**
    * The Logger.
    */
-  private Logger log;
+  private Logger logger;
 
   /**
    * The Performance Timer Collection.
@@ -72,7 +72,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param fullyQualifiedTestName The test's fully qualified test name
    */
   public BaseTestObject(final Logger logger, final String fullyQualifiedTestName) {
-    this.log = logger;
+    this.logger = logger;
     this.perfTimerCollection = new PerfTimerCollection(logger, fullyQualifiedTestName);
     this.values = new ConcurrentHashMap<>();
     this.objects = new ConcurrentHashMap<>();
@@ -89,7 +89,7 @@ public class BaseTestObject implements AutoCloseable {
    * @param baseTestObject An existing base test object
    */
   public BaseTestObject(final BaseTestObject baseTestObject) {
-    this.log = baseTestObject.getLog();
+    this.logger = baseTestObject.getLogger();
     this.perfTimerCollection = baseTestObject.getPerfTimerCollection();
     this.values = (ConcurrentHashMap<String, String>) baseTestObject.getValues();
     this.objects = (ConcurrentHashMap<String, Object>) baseTestObject.getObjects();
@@ -97,7 +97,7 @@ public class BaseTestObject implements AutoCloseable {
     this.associatedFiles = new ArrayList<>();
     this.fullyQualifiedTestName = baseTestObject.getFullyQualifiedTestName();
 
-    baseTestObject.getLog().logMessage(MessageType.INFORMATION, "Setup test object");
+    baseTestObject.getLogger().logMessage(MessageType.INFORMATION, "Setup test object");
   }
 
   /**
@@ -105,8 +105,8 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @return The logger
    */
-  public Logger getLog() {
-    return this.log;
+  public Logger getLogger() {
+    return this.logger;
   }
 
   /**
@@ -114,8 +114,8 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param logger The logger to use
    */
-  public void setLog(final Logger logger) {
-    this.log = logger;
+  public void setLogger(fina Logger logger) {
+    this.logger = logger;
   }
 
   /**
@@ -308,7 +308,7 @@ public class BaseTestObject implements AutoCloseable {
       return;
     }
 
-    this.log.logMessage(MessageType.VERBOSE, "Start dispose");
+    this.logger.logMessage(MessageType.VERBOSE, "Start dispose");
 
     for (final DriverManager<?> singleDriver : this.managerStore.values()) {
       if (singleDriver != null) {
@@ -319,7 +319,7 @@ public class BaseTestObject implements AutoCloseable {
         }
       }
       this.managerStore = null;
-      this.log.logMessage(MessageType.VERBOSE, "End dispose");
+      this.logger.logMessage(MessageType.VERBOSE, "End dispose");
     }
 
     isClosed = true;

@@ -54,7 +54,6 @@
         <module>jmaqs-webservices-jdk8</module>
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
-        <module>jmaqs-webservices-jdk11</module>
     </modules>
 
     <distributionManagement>
@@ -69,6 +68,15 @@
     </distributionManagement>
 
     <profiles>
+        <profile>
+            <id>WIP</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>jmaqs-webservices-jdk11</module>
+            </modules>
+        </profile>
         <profile>
             <id>jacoco</id>
             <activation>
@@ -119,6 +127,12 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -180,6 +194,7 @@
                 <version>2.5.3</version>
                 <configuration>
                     <localCheckout>true</localCheckout>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
                     <pushChanges>false</pushChanges>
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
