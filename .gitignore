@@ -160,3 +160,4 @@ Logs
 /jmaqs-selenium/src/test/resources
 .gtm
 .vscode
+/.gtm/
