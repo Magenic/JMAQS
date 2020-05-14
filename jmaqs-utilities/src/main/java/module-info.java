@@ -4,4 +4,6 @@ module jmaqs.utilities {
   exports com.magenic.jmaqs.utilities.logging;
   exports com.magenic.jmaqs.utilities.helper;
   exports com.magenic.jmaqs.utilities.performance;
+  exports com.magenic.jmaqs.utilities.helper.exceptions;
+  exports com.magenic.jmaqs.utilities.helper.functionalinterfaces;
 }
