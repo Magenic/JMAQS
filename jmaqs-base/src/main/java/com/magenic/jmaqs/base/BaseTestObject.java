@@ -114,7 +114,7 @@ public class BaseTestObject implements AutoCloseable {
    *
    * @param logger The logger to use
    */
-  public void setLogger(fina Logger logger) {
+  public void setLogger(final Logger logger) {
     this.logger = logger;
   }
 
