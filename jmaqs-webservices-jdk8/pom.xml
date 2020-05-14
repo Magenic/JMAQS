@@ -21,6 +21,17 @@
         <jackson-annotations.version>2.11.0</jackson-annotations.version>
         <httpclient.version>4.5.12</httpclient.version>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <release>8</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

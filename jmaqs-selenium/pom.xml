@@ -12,7 +12,7 @@
     <artifactId>jmaqs-selenium</artifactId>
     <name>JMAQS Selenium Testing Module</name>
     <packaging>jar</packaging>
-    <url>http://maven.apache.org</url>
+    <url>http://www.magenic.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -84,6 +84,15 @@
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                    <release>8</release>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.github.webdriverextensions</groupId>
                 <artifactId>webdriverextensions-maven-plugin</artifactId>
