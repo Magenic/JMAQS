@@ -18,7 +18,7 @@ public final class WebServiceConfig {
   /**
    * The web service configuration section.
    */
-  private static final ConfigSection WEBSERVICE_SECTION = ConfigSection.WebServiceMaqs;
+  private static final ConfigSection WEBSERVICE_SECTION = ConfigSection.WEB_SERVICE_MAQS;
 
   /**
    * Grabs the URI for the Web Service.
@@ -45,7 +45,7 @@ public final class WebServiceConfig {
    * @return True if we want to use the proxy
    */
   public static boolean getUseProxy() {
-    return Config.getValueForSection(ConfigSection.WebServiceMaqs, "UseProxy", "No").equals("Yes");
+    return Config.getValueForSection(ConfigSection.WEB_SERVICE_MAQS, "UseProxy", "No").equals("Yes");
   }
 
   /**
@@ -54,6 +54,6 @@ public final class WebServiceConfig {
    * @return The proxy address
    */
   public static String getProxyAddress() {
-    return Config.getValueForSection(ConfigSection.WebServiceMaqs, "ProxyAddress");
+    return Config.getValueForSection(ConfigSection.WEB_SERVICE_MAQS, "ProxyAddress");
   }
 }

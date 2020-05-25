@@ -19,7 +19,7 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
   /**
    * The Get driver.
    */
-  private final Supplier<Object> getDriver = () -> {
+  private final Supplier<WebDriver> getDriver = () -> {
     WebDriver driver = null;
     try {
       driver = WebDriverFactory.getDefaultBrowser();
@@ -34,8 +34,7 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testCloseNotInitialized() {
-    SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
-        this.getTestObject());
+    SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver, this.getTestObject());
     Assert.assertFalse(seleniumDriverManager.isDriverInitialized(),
         "Checking that driver is not initialized - Pre Close");
     seleniumDriverManager.close();
@@ -48,15 +47,12 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testCloseInitialized() {
-    SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
-        this.getTestObject());
+    SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver, this.getTestObject());
     WebDriver webDriver = seleniumDriverManager.getWebDriver();
     webDriver.quit();
-    Assert.assertTrue(seleniumDriverManager.isDriverInitialized(),
-        "Checking that driver is initialized");
+    Assert.assertTrue(seleniumDriverManager.isDriverInitialized(), "Checking that driver is initialized");
     seleniumDriverManager.close();
-    Assert.assertFalse(seleniumDriverManager.isDriverInitialized(),
-        "Checking that driver is not initialized");
+    Assert.assertFalse(seleniumDriverManager.isDriverInitialized(), "Checking that driver is not initialized");
   }
 
   /**
@@ -64,10 +60,10 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
-    SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
-        this.getTestObject());
-    WebDriver webDriver = seleniumDriverManager.getWebDriver();
-    Assert.assertNotNull(webDriver, "Checking that driver is not null");
+    try (SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver, this.getTestObject())) {
+      WebDriver webDriver = seleniumDriverManager.getWebDriver();
+      Assert.assertNotNull(webDriver, "Checking that driver is not null");
+    }
   }
 
   /**
@@ -75,10 +71,19 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testLogVerbose() {
-    SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver,
-        this.getTestObject());
-    //List list;
-    seleniumDriverManager.logVerbose("Logging verbose messaging");
+    try (SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver, this.getTestObject())) {
+      // List list;
+      seleniumDriverManager.logVerbose("Logging verbose messaging");
+    }
   }
 
+    /**
+   * Test creating driver manager with instantiated web driver .
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void testDriverManWithInstantiatedDriver() {
+    try (SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver.get(), this.getTestObject())) {
+      seleniumDriverManager.logVerbose("Run with new driver");
+    }
+  }
 }

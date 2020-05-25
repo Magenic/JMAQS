@@ -67,6 +67,9 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
     Assert.assertTrue(newHash.containsKey("1"), "Expected item '1'");
     Assert.assertTrue(newHash.containsKey("2"), "Expected item '2'");
+
+    Assert.assertTrue(temp.getClosed());
+    Assert.assertFalse(temp2.getClosed());
   }
 
   @Test(groups = TestCategories.FRAMEWORK)
@@ -84,6 +87,15 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
     Assert.assertTrue(newHash.containsKey("2"), "Expected item '2'");
     Assert.assertTrue(temp.getClosed(), "Expected item old item to be closed");
     Assert.assertFalse(temp2.getClosed(), "Did not expect new item to be closed");
+  }
+
+  @Test
+  public void testReplaceWithNew() {
+    ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
+    newHash.put("1", new BaseTestObject(this.getTestObject()));
+    BaseTestObject temp = new BaseTestObject(this.getTestObject());
+    BaseTestObject temp2 = new BaseTestObject(this.getTestObject());
+    newHash.put("2", temp);
   }
 
   /*

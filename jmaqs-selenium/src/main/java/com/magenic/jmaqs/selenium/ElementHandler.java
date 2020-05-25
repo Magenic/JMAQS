@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.exceptions.ElementHandlerException;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.ListProcessor;
 import com.magenic.jmaqs.utilities.logging.Logger;
@@ -163,10 +164,8 @@ public class ElementHandler {
    * @param by                   By selector for the element
    * @param elementsTextToSelect ArrayList items as Strings to select from List box
    */
-  public static void selectMultipleElementsFromListBox(WebDriver webDriver, By by,
-      List<String> elementsTextToSelect) {
-    Select selectItem = new Select(
-        UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
+  public static void selectMultipleElementsFromListBox(WebDriver webDriver, By by, List<String> elementsTextToSelect) {
+    Select selectItem = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
 
     // Select all desired items in the Listbox
     for (String text : elementsTextToSelect) {
@@ -181,10 +180,8 @@ public class ElementHandler {
    * @param by        By selector for the element
    * @param values    ArrayList items as Strings to select from List box
    */
-  public static void selectMultipleElementsFromListBoxByValue(WebDriver webDriver, By by,
-      List<String> values) {
-    Select selectItem = new Select(
-        UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
+  public static void selectMultipleElementsFromListBoxByValue(WebDriver webDriver, By by, List<String> values) {
+    Select selectItem = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
 
     // Select all desired items in the Listbox
     for (String value : values) {
@@ -234,7 +231,7 @@ public class ElementHandler {
       element.clear();
       element.sendKeys(textToEnter);
     } else {
-      throw new RuntimeException("String is either null or empty");
+      throw new ElementHandlerException("String is either null or empty");
     }
   }
 
@@ -347,8 +344,7 @@ public class ElementHandler {
    */
   public static void slowType(WebDriver webDriver, By by, String textToEnter) {
     for (char singleLetter : textToEnter.toCharArray()) {
-      UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by)
-          .sendKeys(Character.toString(singleLetter));
+      UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by).sendKeys(Character.toString(singleLetter));
 
       try {
         Thread.sleep(500);
@@ -381,8 +377,7 @@ public class ElementHandler {
       String stackTrace = sw.toString();
 
       logger.logMessage(MessageType.ERROR,
-          "Exception during sending secret keys: " + e.getMessage() + System.lineSeparator()
-              + stackTrace);
+          "Exception during sending secret keys: " + e.getMessage() + System.lineSeparator() + stackTrace);
       throw e;
     }
   }

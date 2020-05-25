@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Database Driver
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Database Driver
 
 ## Overview
 Driver to manage the database manager, factory, and querying the database.

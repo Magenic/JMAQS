@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Connection Factory
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Connection Factory
 
 ## Overview
  Manages and sets connections for Database Testing

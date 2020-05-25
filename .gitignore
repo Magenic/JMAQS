@@ -157,5 +157,6 @@ Logs
 
 #Git Time Tracking
 */.gtm/
-/Framework/jmaqs-selenium/src/test/resources
+/jmaqs-selenium/src/test/resources
 .gtm
+.vscode

@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
+import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
@@ -35,8 +36,9 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
    * Sets web driver.
    *
    * @param webDriver the web driver
+   * @throws Exception exception
    */
-  public void setWebDriver(WebDriver webDriver) {
+  public void setWebDriver(WebDriver webDriver) throws Exception {
     this.getTestObject().setWebDriver(webDriver);
   }
 
@@ -62,9 +64,9 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
    * Get the current browser.
    *
    * @return Current browser Web Driver
-   * @throws Exception Throws exception
+   * @throws WebDriverFactoryException Throws exception
    */
-  protected WebDriver getBrowser() throws Exception {
+  protected WebDriver getBrowser() throws WebDriverFactoryException {
     // Returns the web driver
     return WebDriverFactory.getDefaultBrowser();
   }
@@ -72,11 +74,10 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
   @Override
   protected void createNewTestObject() {
     try {
-      this.setTestObject(new SeleniumTestObject(this.getBrowser(), this.createLogger(),
-          this.getFullyQualifiedTestClassName()));
+      this.setTestObject(
+          new SeleniumTestObject(this.getBrowser(), this.createLogger(), this.getFullyQualifiedTestClassName()));
     } catch (Exception e) {
-      getLogger().logMessage(
-          StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
+      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
     }
   }
 }

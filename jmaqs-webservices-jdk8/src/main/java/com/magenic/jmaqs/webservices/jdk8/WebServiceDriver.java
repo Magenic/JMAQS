@@ -76,6 +76,15 @@ public class WebServiceDriver {
   /**
    * Gets http client.
    *
+   * @return the http client
+   */
+  public CloseableHttpClient getHttpClient() {
+    return this.baseHttpClient;
+  }
+
+  /**
+   * Gets http client.
+   *
    * @param mediaType the media type
    * @return the http client
    */
@@ -118,8 +127,8 @@ public class WebServiceDriver {
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
    */
-  public CloseableHttpResponse getContent(String requestUri, ContentType returnMediaType,
-      boolean expectSuccess) throws IOException, URISyntaxException {
+  public CloseableHttpResponse getContent(String requestUri, ContentType returnMediaType, boolean expectSuccess)
+      throws IOException, URISyntaxException {
     return getContent(requestUri, returnMediaType.toString(), expectSuccess);
   }
 
@@ -133,8 +142,8 @@ public class WebServiceDriver {
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
    */
-  public CloseableHttpResponse getContent(String requestUri, String returnMediaType,
-      boolean expectSuccess) throws IOException, URISyntaxException {
+  public CloseableHttpResponse getContent(String requestUri, String returnMediaType, boolean expectSuccess)
+      throws IOException, URISyntaxException {
     HttpGet newGet = new HttpGet(new URIBuilder(this.baseAddress).setPath(requestUri).build());
 
     return executeRequest(newGet, returnMediaType, expectSuccess);
@@ -151,8 +160,8 @@ public class WebServiceDriver {
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
    */
-  public CloseableHttpResponse putContent(String requestUri, HttpEntity content,
-      ContentType returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
+  public CloseableHttpResponse putContent(String requestUri, HttpEntity content, ContentType returnMediaType,
+      boolean expectSuccess) throws IOException, URISyntaxException {
     return this.putContent(requestUri, content, returnMediaType.toString(), expectSuccess);
   }
 
@@ -167,8 +176,8 @@ public class WebServiceDriver {
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
    */
-  public CloseableHttpResponse putContent(String requestUri, HttpEntity content,
-      String returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
+  public CloseableHttpResponse putContent(String requestUri, HttpEntity content, String returnMediaType,
+      boolean expectSuccess) throws IOException, URISyntaxException {
     HttpPut newPut = new HttpPut(new URIBuilder(this.baseAddress).setPath(requestUri).build());
     newPut.setEntity(content);
     return executeRequest(newPut, returnMediaType, expectSuccess);
@@ -185,8 +194,8 @@ public class WebServiceDriver {
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
    */
-  public CloseableHttpResponse patchContent(String requestUri, HttpEntity content,
-      ContentType returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
+  public CloseableHttpResponse patchContent(String requestUri, HttpEntity content, ContentType returnMediaType,
+      boolean expectSuccess) throws IOException, URISyntaxException {
     return this.patchContent(requestUri, content, returnMediaType.toString(), expectSuccess);
   }
 
@@ -201,8 +210,8 @@ public class WebServiceDriver {
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
    */
-  public CloseableHttpResponse patchContent(String requestUri, HttpEntity content,
-      String returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
+  public CloseableHttpResponse patchContent(String requestUri, HttpEntity content, String returnMediaType,
+      boolean expectSuccess) throws IOException, URISyntaxException {
     HttpPatch newPut = new HttpPatch(new URIBuilder(this.baseAddress).setPath(requestUri).build());
     newPut.setEntity(content);
     return executeRequest(newPut, returnMediaType, expectSuccess);
@@ -219,8 +228,8 @@ public class WebServiceDriver {
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
    */
-  public CloseableHttpResponse postContent(String requestUri, HttpEntity content,
-      ContentType returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
+  public CloseableHttpResponse postContent(String requestUri, HttpEntity content, ContentType returnMediaType,
+      boolean expectSuccess) throws IOException, URISyntaxException {
     return this.postContent(requestUri, content, returnMediaType.toString(), expectSuccess);
   }
 
@@ -235,8 +244,8 @@ public class WebServiceDriver {
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
    */
-  public CloseableHttpResponse postContent(String requestUri, HttpEntity content,
-      String returnMediaType, boolean expectSuccess) throws IOException, URISyntaxException {
+  public CloseableHttpResponse postContent(String requestUri, HttpEntity content, String returnMediaType,
+      boolean expectSuccess) throws IOException, URISyntaxException {
     HttpPost newPost = new HttpPost(new URIBuilder(this.baseAddress).setPath(requestUri).build());
     newPost.setEntity(content);
 
@@ -253,8 +262,8 @@ public class WebServiceDriver {
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
    */
-  public CloseableHttpResponse deleteContent(String requestUri, ContentType returnMediaType,
-      boolean expectSuccess) throws IOException, URISyntaxException {
+  public CloseableHttpResponse deleteContent(String requestUri, ContentType returnMediaType, boolean expectSuccess)
+      throws IOException, URISyntaxException {
     return this.deleteContent(requestUri, returnMediaType.toString(), expectSuccess);
   }
 
@@ -268,16 +277,15 @@ public class WebServiceDriver {
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
    */
-  public CloseableHttpResponse deleteContent(String requestUri, String returnMediaType,
-      boolean expectSuccess) throws IOException, URISyntaxException {
-    HttpDelete newDelete = new HttpDelete(
-        new URIBuilder(this.baseAddress).setPath(requestUri).build());
+  public CloseableHttpResponse deleteContent(String requestUri, String returnMediaType, boolean expectSuccess)
+      throws IOException, URISyntaxException {
+    HttpDelete newDelete = new HttpDelete(new URIBuilder(this.baseAddress).setPath(requestUri).build());
 
     return executeRequest(newDelete, returnMediaType, expectSuccess);
   }
 
-  private CloseableHttpResponse executeRequest(HttpUriRequest request, String returnMediaType,
-      boolean expectSuccess) throws IOException {
+  private CloseableHttpResponse executeRequest(HttpUriRequest request, String returnMediaType, boolean expectSuccess)
+      throws IOException {
 
     CloseableHttpResponse response = this.getHttpClient(returnMediaType).execute(request);
 
@@ -289,8 +297,7 @@ public class WebServiceDriver {
     return response;
   }
 
-  private static void ensureSuccessStatusCode(final HttpResponse response)
-      throws HttpResponseException {
+  private static void ensureSuccessStatusCode(final HttpResponse response) throws HttpResponseException {
     // Make sure a response was returned
     if (response == null) {
       throw new NullPointerException("Response was null");
@@ -302,8 +309,7 @@ public class WebServiceDriver {
       String body = response.getStatusLine().toString();
 
       throw new HttpResponseException(response.getStatusLine().getStatusCode(), String
-          .format("Response did not indicate a success. %s Response code was: %s ",
-              System.lineSeparator(), body));
+          .format("Response did not indicate a success. %s Response code was: %s ", System.lineSeparator(), body));
     }
 
   }

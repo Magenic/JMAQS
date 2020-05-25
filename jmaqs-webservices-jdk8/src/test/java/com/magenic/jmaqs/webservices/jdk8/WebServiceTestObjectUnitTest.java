@@ -26,8 +26,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
     WebServiceDriver defaultBrowser = getWebServiceDriver();
     WebServiceTestObject testObject = new WebServiceTestObject(defaultBrowser, this.getLogger(),
         this.getFullyQualifiedTestClassName());
-    Assert.assertNotNull(testObject,
-        "Checking that the Web service test object via driver is not null");
+    Assert.assertNotNull(testObject, "Checking that the Web service test object via driver is not null");
   }
 
   /**
@@ -38,8 +37,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
     Supplier<CloseableHttpClient> httpClientSupplier = getCloseableHttpClientSupplier();
     WebServiceTestObject testObject = new WebServiceTestObject(httpClientSupplier, this.getLogger(),
         this.getFullyQualifiedTestClassName());
-    Assert.assertNotNull(testObject,
-        "Checking that the Web service test object via driver is not null");
+    Assert.assertNotNull(testObject, "Checking that the Web service test object via driver is not null");
   }
 
   /**
@@ -48,8 +46,7 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetWebServiceDriver() throws URISyntaxException {
     WebServiceDriver testObject = getWebServiceDriver();
-    Assert
-        .assertNotNull(testObject, "Checking that the Web service test object via driver is null");
+    Assert.assertNotNull(testObject, "Checking that the Web service test object via driver is null");
   }
 
   /**
@@ -58,10 +55,11 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetWebServiceDriverManager() throws URISyntaxException {
     WebServiceDriver defaultBrowser = getWebServiceDriver();
-    WebServiceTestObject testObject = new WebServiceTestObject(defaultBrowser, this.getLogger(),
-        this.getFullyQualifiedTestClassName());
-    Assert.assertNotNull(testObject.getWebServiceDriverManager(),
-        "Checking that the Web service driver manager is null");
+    try (WebServiceTestObject testObject = new WebServiceTestObject(defaultBrowser, this.getLogger(),
+        this.getFullyQualifiedTestClassName())) {
+      Assert.assertNotNull(testObject.getWebServiceDriverManager(),
+          "Checking that the Web service driver manager is null");
+    }
   }
 
   /**
@@ -70,14 +68,15 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSetWebServiceDriverWithDriver() throws URISyntaxException {
     WebServiceDriver serviceDriver = getWebServiceDriver();
-    WebServiceTestObject testObject = new WebServiceTestObject(serviceDriver, this.getLogger(),
-        this.getFullyQualifiedTestClassName());
-    testObject.setWebServiceDriver(serviceDriver);
-    Assert.assertNotNull(testObject.getWebServiceDriver(), "the web service driver is null");
-    int hashCode = testObject.getWebServiceDriver().hashCode();
-    testObject.setWebServiceDriver(getWebServiceDriver());
-    int hashCode1 = testObject.getWebServiceDriver().hashCode();
-    Assert.assertNotEquals(hashCode, hashCode1);
+    try (WebServiceTestObject testObject = new WebServiceTestObject(serviceDriver, this.getLogger(),
+        this.getFullyQualifiedTestClassName())) {
+      testObject.setWebServiceDriver(serviceDriver);
+      Assert.assertNotNull(testObject.getWebServiceDriver(), "the web service driver is null");
+      int hashCode = testObject.getWebServiceDriver().hashCode();
+      testObject.setWebServiceDriver(getWebServiceDriver());
+      int hashCode1 = testObject.getWebServiceDriver().hashCode();
+      Assert.assertNotEquals(hashCode, hashCode1);
+    }
   }
 
   /**
@@ -87,14 +86,15 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   public void testSetWebServiceDriverWithHttpClient() throws URISyntaxException {
     WebServiceDriver serviceDriver = getWebServiceDriver();
     CloseableHttpClient client = HttpClientBuilder.create().build();
-    WebServiceTestObject testObject = new WebServiceTestObject(serviceDriver, this.getLogger(),
-        this.getFullyQualifiedTestClassName());
-    testObject.setWebServiceDriver(client);
-    Assert.assertNotNull(testObject.getWebServiceDriver(), "the web service driver is null");
-    int hashCode = testObject.getWebServiceDriver().hashCode();
-    testObject.setWebServiceDriver(client);
-    int hashCode1 = testObject.getWebServiceDriver().hashCode();
-    Assert.assertNotEquals(hashCode, hashCode1);
+    try (WebServiceTestObject testObject = new WebServiceTestObject(serviceDriver, this.getLogger(),
+        this.getFullyQualifiedTestClassName())) {
+      testObject.setWebServiceDriver(client);
+      Assert.assertNotNull(testObject.getWebServiceDriver(), "the web service driver is null");
+      int hashCode = testObject.getWebServiceDriver().hashCode();
+      testObject.setWebServiceDriver(client);
+      int hashCode1 = testObject.getWebServiceDriver().hashCode();
+      Assert.assertNotEquals(hashCode, hashCode1);
+    }
   }
 
   /**
@@ -103,13 +103,14 @@ public class WebServiceTestObjectUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testSetWebServiceDriverSupplier() {
     Supplier<CloseableHttpClient> httpClientSupplier = getCloseableHttpClientSupplier();
-    WebServiceTestObject testObject = new WebServiceTestObject(httpClientSupplier, this.getLogger(),
-        this.getFullyQualifiedTestClassName());
-    Assert.assertNotNull(testObject.getWebServiceDriver(), "the web service driver is null");
-    int hashCode = testObject.getWebServiceDriver().hashCode();
-    testObject.setWebServiceDriver(getCloseableHttpClientSupplier());
-    int hashCode1 = testObject.getWebServiceDriver().hashCode();
-    Assert.assertNotEquals(hashCode, hashCode1);
+    try (WebServiceTestObject testObject = new WebServiceTestObject(httpClientSupplier, this.getLogger(),
+        this.getFullyQualifiedTestClassName())) {
+      Assert.assertNotNull(testObject.getWebServiceDriver(), "the web service driver is null");
+      int hashCode = testObject.getWebServiceDriver().hashCode();
+      testObject.setWebServiceDriver(getCloseableHttpClientSupplier());
+      int hashCode1 = testObject.getWebServiceDriver().hashCode();
+      Assert.assertNotEquals(hashCode, hashCode1);
+    }
   }
 
   /**

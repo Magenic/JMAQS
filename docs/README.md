@@ -1,7 +1,7 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> MAQS
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> JMAQS
 
-### Version - Select the Version of MAQS
+### Version - Select the Version of JMAQS
 
 * [JMAQS 1](JMAQS_1/Introduction.md)
 
-![MAQS](resources/maqsfull.jpg)
+![MAQS](resources/maqsfull.png)

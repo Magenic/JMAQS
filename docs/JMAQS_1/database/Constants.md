@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32">Database Info Constants
+# <img src="resources/jmaqslogo.jpg" height="32" width="32">Database Info Constants
 
 ## Overview
 Place holder for the Data provider types and interactions.

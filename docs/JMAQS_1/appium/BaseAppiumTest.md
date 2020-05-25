@@ -1,96 +1,51 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> BaseAppiumTest
-Generic base Appium test class
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Base Appium Test
 
-## Inheritance Hierarchy
+## Overview
+The Base Appium Test has methods that sets up the web driver, gets the mobile driver, tears down the appium driver, and creates a new test object. 
 
-```java
-BaseTest  
-    BaseExtendableTest<AppiumTestObject>  
-        com.magenic.jmaqs.appium.BaseAppiumTest
-```
-Package: com.magenic.jmaqs.appium;
-Assembly: import com.magenic.jmaqs.appium.BaseAppiumTest
-
-## Syntax
-Java
-
-```java
-public abstract class BaseAppiumTest extends 
-    BaseExtendableTest<AppiumTestObject>
-```
-The BaseAppiumTest type exposes the following members.
-
-## Constructors
-### BaseAppiumTest
-Initializes a new instance of the BaseAppiumTest class. 
-<br>Setup the web driver for each test class
-#### Written as
-```java
-BaseAppiumTest()
-```
-#### Example
-```java
-public class BaseAppiumTestUnitTest extends BaseAppiumTest {
-```
-
-## Methods
-[BeforeLoggingTeardown](#BeforeLoggingTeardown)  - Preps for the logging teardown  
-[CreateNewTestObject](#CreateNewTestObject)  - creates a new Test object  
-[GetAppiumDriver](#GetAppiumDriver)  -  Gets the appium driver  
-[SetAppiumDriver](#SetAppiumDriver)  -  Sets the appium driver  
-[GetMobileDriver](#GetMobileDriver)  -  Gets the mobile driver  
-
-## BeforeLoggingTeardown
-Steps to do before logging teardown results.
-#### Written as
-```java
-void beforeLoggingTeardown(ITestResult resultType) 
-```
-#### Example
-```java
-this.beforeLoggingTeardown(testResult);
-```
-
-## CreateNewTestObject
-Creates a new Appium Test object
-#### Written as
-```java
-void createNewTestObject()
-```
-#### Example
-```java
- this.createNewTestObject();
-```
+# Available calls
+[GetAppiumDriver](#GetAppiumDriver)  
+[SetAppiumDriver](#SetAppiumDriver)  
+[GetMobileDriver](#GetMobileDriver)  
+[BeforeLoggingTeardown](#BeforeLoggingTeardown)  
+[CreateNewTestObject](#CreateNewTestObject)  
 
 ## GetAppiumDriver
-Gets the appium driver.
-#### Written as
+This method gets the default Appium driver
 ```java
-AppiumDriver<WebElement> getAppiumDriver()
-```
-#### Example
-```java
-this.getAppiumDriver()
+public AppiumDriver<WebElement> getAppiumDriver() {
+    return this.getTestObject().getAppiumDriver();
+  }
 ```
 
 ## SetAppiumDriver
-Sets appium driver.
-#### Written as
+This method sets the default Appium driver
 ```java
-void setAppiumDriver(AppiumDriver<WebElement> mobileDriver)
-```
-#### Example
-```java
-this.setAppiumDriver(this.getMobileDriver());
+public void setAppiumDriver(AppiumDriver<WebElement> mobileDriver) {
+    this.getTestObject().setAppiumDriver(mobileDriver);
+  }
 ```
 
 ## GetMobileDriver
-Gets new mobile driver.
-#### Written as
+Gets new mobile driver
 ```java
-AppiumDriver<WebElement> getMobileDriver()
+protected AppiumDriver<WebElement> getMobileDriver() {
+    return AppiumDriverFactory.getDefaultMobileDriver();
+  }
 ```
-#### Example
+
+## BeforeLoggingTeardown
+Takes a screen shot if needed and tear down the appium driver. It is called during teardown.
 ```java
-this.setAppiumDriver(this.getMobileDriver());
+this.beforeLoggingTeardown(resultType);
+```
+
+## CreateNewTestObject
+This method creates a new Appium test object based on the mobile device.
+```java
+ protected override void createNewTestObject(){
+    this.TestObject = new AppiumTestObject(() => this.getMobileDevice(), this.createLogger(), this.getFullyQualifiedTestClassName());
+}
+
+this.createNewTestObject();
 ```

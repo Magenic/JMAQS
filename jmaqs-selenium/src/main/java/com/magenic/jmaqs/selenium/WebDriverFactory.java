@@ -7,6 +7,8 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
+import com.magenic.jmaqs.selenium.exceptions.DriverNotFoundException;
+import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.File;
 import java.net.URL;
@@ -46,7 +48,7 @@ public class WebDriverFactory {
    * @return the default browser
    * @throws Exception the exception
    */
-  public static WebDriver getDefaultBrowser() throws Exception {
+  public static WebDriver getDefaultBrowser() throws WebDriverFactoryException {
     return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
   }
 
@@ -55,9 +57,9 @@ public class WebDriverFactory {
    *
    * @param browser the browser
    * @return the browser with default configuration
-   * @throws Exception the exception
+   * @throws WebDriverFactoryException the exception
    */
-  public static WebDriver getBrowserWithDefaultConfiguration(BrowserType browser) throws Exception {
+  public static WebDriver getBrowserWithDefaultConfiguration(BrowserType browser) throws WebDriverFactoryException {
     String size = SeleniumConfig.getBrowserSize();
 
     try {
@@ -83,7 +85,7 @@ public class WebDriverFactory {
       throw e;
     } catch (Exception e) {
       // Log that something went wrong
-      throw new Exception("Your web driver may be out of date or unsupported.", e);
+      throw new WebDriverFactoryException("Your web driver may be out of date or unsupported.", e);
     }
   }
 
@@ -497,7 +499,7 @@ public class WebDriverFactory {
 
     // We didn't find the web driver so throw an error if we need to know where it is
     if (mustExist) {
-      throw new RuntimeException(
+      throw new DriverNotFoundException(
           StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
     }
 

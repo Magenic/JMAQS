@@ -18,17 +18,26 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 /**
  * The type Selenium driver manager.
  */
-public class SeleniumDriverManager extends DriverManager {
+public class SeleniumDriverManager extends DriverManager<WebDriver> {
 
   /**
    * Instantiates a new Selenium driver manager.
    *
    * @param getDriver  the get driver
    * @param testObject the test object
-   * @param <T>        the type generic
    */
-  public <T> SeleniumDriverManager(Supplier<T> getDriver, BaseTestObject testObject) {
+  public SeleniumDriverManager(Supplier<WebDriver> getDriver, BaseTestObject testObject) {
     super(getDriver, testObject);
+  }
+
+  /**
+   * Instantiates a new Selenium driver manager.
+   *
+   * @param driver     the Selenium web driver
+   * @param testObject the test object
+   */
+  public SeleniumDriverManager(WebDriver driver, BaseTestObject testObject) {
+    super(() -> driver, testObject);
   }
 
   @Override
@@ -60,7 +69,7 @@ public class SeleniumDriverManager extends DriverManager {
   public WebDriver getWebDriver() {
 
     if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-      WebDriver tempDriver = (WebDriver) this.getBase();
+      WebDriver tempDriver = this.getBase();
       tempDriver = new EventFiringWebDriver(tempDriver);
       this.baseDriver = tempDriver;
 
@@ -68,7 +77,7 @@ public class SeleniumDriverManager extends DriverManager {
       this.loggingStartup(tempDriver);
     }
 
-    return (WebDriver) getBase();
+    return getBase();
   }
 
   /**
@@ -81,20 +90,16 @@ public class SeleniumDriverManager extends DriverManager {
 
     StringBuilder messages = new StringBuilder();
     messages.append(StringProcessor.safeFormatter(message, args));
-
-    //FIXME: Need to figure out what the approach is for java in this form of logging
-    //Object methodInfo = Object[].class.getEnclosingMethod();
-    //String fullName = methodInfo.getClass().getTypeName() + "." + methodInfo.getClass().getName();
+    String fullTestName = getTestObject().getFullyQualifiedTestName();
 
     Thread thread = Thread.currentThread();
     for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
-      //FIXME: Need to figure out what the approach is for java in this form of logging
-      /*String trim = stackTraceElement.toString().trim();
-      if (!trim.equals(""));*/
-      messages.append(stackTraceElement.toString());
+      String trim = stackTraceElement.toString().trim();
+      if (!trim.startsWith(fullTestName)) {
+        messages.append(stackTraceElement.toString());
+      }
     }
     getLogger().logMessage(MessageType.VERBOSE, messages.toString());
-    System.out.println(messages);
   }
 
   private void loggingStartup(WebDriver webDriver) {
@@ -115,5 +120,4 @@ public class SeleniumDriverManager extends DriverManager {
       System.out.println(StringProcessor.safeFormatter("Failed to start driver because: %s", e.getMessage()));
     }
   }
-
 }

@@ -41,19 +41,21 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetDriver() {
     final String dm1 = "DM1";
-    ManagerDictionary managerDictionary = new ManagerDictionary();
-    managerDictionary.putOrOverride(dm1, getTestDriverManager());
-    Assert.assertTrue(managerDictionary.containsKey(dm1));
-    assertNotNull(managerDictionary.getDriver(dm1));
+    try (ManagerDictionary managerDictionary = new ManagerDictionary()) {
+      managerDictionary.putOrOverride(dm1, getTestDriverManager());
+      Assert.assertTrue(managerDictionary.containsKey(dm1));
+      assertNotNull(managerDictionary.getDriver(dm1));
+    }
   }
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testPut() {
     final String dm1 = "DM1";
-    ManagerDictionary managerDictionary = new ManagerDictionary();
-    managerDictionary.put(dm1, getTestDriverManager());
-    Assert.assertTrue(managerDictionary.containsKey(dm1));
-    assertNotNull(managerDictionary.get(dm1));
+    try (ManagerDictionary managerDictionary = new ManagerDictionary()) {
+      managerDictionary.put(dm1, getTestDriverManager());
+      Assert.assertTrue(managerDictionary.containsKey(dm1));
+      assertNotNull(managerDictionary.get(dm1));
+    }
   }
 
   private TestDriverManager getTestDriverManager() {
@@ -63,41 +65,44 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testPutOrOverride() {
-    ManagerDictionary managerDictionary = new ManagerDictionary();
-    TestDriverManager testManager = getTestDriverManager();
-    managerDictionary.putOrOverride(testManager);
-    Assert.assertTrue(managerDictionary.containsValue(testManager));
+    try (ManagerDictionary managerDictionary = new ManagerDictionary()) {
+      TestDriverManager testManager = getTestDriverManager();
+      managerDictionary.putOrOverride(testManager);
+      Assert.assertTrue(managerDictionary.containsValue(testManager));
+    }
   }
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testPutOrOverride1() {
     final String dm1 = "DM1";
-    ManagerDictionary managerDictionary = new ManagerDictionary();
-    TestDriverManager testManager = getTestDriverManager();
-    managerDictionary.putOrOverride(dm1, testManager);
-    Assert.assertTrue(managerDictionary.containsKey(dm1));
-    assertNotNull(managerDictionary.get(dm1));
+    try (ManagerDictionary managerDictionary = new ManagerDictionary()) {
+      TestDriverManager testManager = getTestDriverManager();
+      managerDictionary.putOrOverride(dm1, testManager);
+      Assert.assertTrue(managerDictionary.containsKey(dm1));
+      assertNotNull(managerDictionary.get(dm1));
+    }
   }
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testRemove() {
     final String dm1 = "DM1";
     final String dm2 = "DM2";
-    ManagerDictionary managerDictionary = new ManagerDictionary();
-    managerDictionary.put(dm1, getTestDriverManager());
-    managerDictionary.put(dm2, getTestDriverManager());
-    Assert.assertTrue(managerDictionary.containsKey(dm1));
-    Assert.assertTrue(managerDictionary.containsKey(dm2));
-    System.out.println("Removing DM2 entry...");
-    Assert.assertTrue(managerDictionary.remove(dm2),"Checking if remove reported as successful");
-    Assert.assertTrue(managerDictionary.containsKey(dm1));
-    Assert.assertFalse(managerDictionary.containsKey(dm2));
+    try (ManagerDictionary managerDictionary = new ManagerDictionary()) {
+      managerDictionary.put(dm1, getTestDriverManager());
+      managerDictionary.put(dm2, getTestDriverManager());
+      Assert.assertTrue(managerDictionary.containsKey(dm1));
+      Assert.assertTrue(managerDictionary.containsKey(dm2));
+      System.out.println("Removing DM2 entry...");
+      Assert.assertTrue(managerDictionary.remove(dm2), "Checking if remove reported as successful");
+      Assert.assertTrue(managerDictionary.containsKey(dm1));
+      Assert.assertFalse(managerDictionary.containsKey(dm2));
+    }
   }
 
   /**
    * Test Driver Manager for Unit Tests.
    */
-  private class TestDriverManager extends DriverManager {
+  private class TestDriverManager extends DriverManager<Object> {
     TestDriverManager(Supplier<Object> getDriverFunction, BaseTestObject baseTestObject) {
       super(getDriverFunction, baseTestObject);
     }

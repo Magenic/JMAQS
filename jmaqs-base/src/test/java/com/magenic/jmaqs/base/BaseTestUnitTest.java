@@ -94,7 +94,7 @@ public class BaseTestUnitTest extends BaseTest {
         this.getFullyQualifiedTestClassName());
     this.setTestObject(baseTestObject);
 
-    Assert.assertTrue(this.getTestObject().getLog() instanceof ConsoleLogger,
+    Assert.assertTrue(this.getTestObject().getLogger() instanceof ConsoleLogger,
         "Expected Test Object to be set to have a Console Logger.");
   }
 

@@ -4,6 +4,8 @@
 
 package com.magenic.jmaqs.utilities.helper;
 
+import com.magenic.jmaqs.utilities.helper.exceptions.FunctionException;
+import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.function.BooleanSupplier;

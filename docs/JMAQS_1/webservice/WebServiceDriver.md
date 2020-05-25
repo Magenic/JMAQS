@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Web Service Driver
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Web Service Driver
 
 ## Overview
 The WebServiceDriver object allows you to interact with web services.

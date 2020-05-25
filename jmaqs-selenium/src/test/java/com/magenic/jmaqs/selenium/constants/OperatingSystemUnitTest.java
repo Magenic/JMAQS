@@ -6,7 +6,6 @@ package com.magenic.jmaqs.selenium.constants;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -28,8 +27,7 @@ public class OperatingSystemUnitTest extends BaseGenericTest {
    */
   @Test
   public void testGetOperatingSystemWithAbbreviationWindows() {
-    Assert.assertEquals(OperatingSystem.getOperatingSystemWithAbbreviation("win"),
-        OperatingSystem.WINDOWS);
+    Assert.assertEquals(OperatingSystem.getOperatingSystemWithAbbreviation("win"), OperatingSystem.WINDOWS);
   }
 
   /**
@@ -46,8 +44,7 @@ public class OperatingSystemUnitTest extends BaseGenericTest {
    */
   @Test
   public void testGetOperatingSystemWithAbbreviationLinux() {
-    Assert.assertEquals(OperatingSystem.getOperatingSystemWithAbbreviation("nix"),
-        OperatingSystem.LINUX);
+    Assert.assertEquals(OperatingSystem.getOperatingSystemWithAbbreviation("nix"), OperatingSystem.LINUX);
   }
 
   /**
@@ -55,8 +52,7 @@ public class OperatingSystemUnitTest extends BaseGenericTest {
    */
   @Test
   public void testGetOperatingSystemWithAbbreviationMac() {
-    Assert.assertEquals(OperatingSystem.getOperatingSystemWithAbbreviation("mac os x"),
-        OperatingSystem.MACOS);
+    Assert.assertEquals(OperatingSystem.getOperatingSystemWithAbbreviation("mac os x"), OperatingSystem.MACOS);
   }
 
   /**

@@ -12,7 +12,7 @@ public class DriverManagerUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetBaseDriver() throws Exception {
-    DriverManager driverManager = getDriverManager();
+    DriverManager<String> driverManager = getDriverManager();
     driverManager.setBaseDriver("Fake String");
     Assert.assertNotNull(driverManager.getBaseDriver());
 
@@ -20,38 +20,38 @@ public class DriverManagerUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testSetBaseDriver() {
-    DriverManager driverManager = getDriverManager();
+    DriverManager<String> driverManager = getDriverManager();
     driverManager.setBaseDriver("Fake String");
     Assert.assertNotNull(driverManager.getBaseDriver());
   }
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testIsDriverInitializedTrue() {
-    DriverManager driverManager = getDriverManager();
+    DriverManager<String> driverManager = getDriverManager();
     Assert.assertNotNull(driverManager.getBase());
     Assert.assertTrue(driverManager.isDriverInitialized());
   }
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testIsDriverInitializedFalse() {
-    DriverManager driverManager = getDriverManager();
+    DriverManager<String> driverManager = getDriverManager();
     Assert.assertFalse(driverManager.isDriverInitialized());
   }
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetLogger() {
-    DriverManager driverManager = getDriverManager();
+    DriverManager<String> driverManager = getDriverManager();
     Assert.assertNotNull(driverManager.getLogger());
   }
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testGetBase() {
-    DriverManager driverManager = getDriverManager();
+    DriverManager<String> driverManager = getDriverManager();
     Assert.assertNotNull(driverManager.getBase());
   }
 
-  private DriverManager getDriverManager() {
-    return new DriverManager(() -> "Fake String here", getTestObject()) {
+  private DriverManager<String> getDriverManager() {
+    return new DriverManager<String>(() -> "Fake String here", getTestObject()) {
       @Override
       public void close() throws Exception {
         this.close();

@@ -1,8 +1,8 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> SeleniumConfig
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> SeleniumConfig
 
 ## Overview
 The SeleniumConfig class is used to get values from the SeleniumMaqs section of your test run properties.
-<br>These values come from your App.config, appsettings.json and/or test run parameters.
+<br>These values come from your config.xml, appsettings.json and/or test run parameters.
 
 ## SeleniumJMAQS
 The SeleniumMaqs configuration section contains the following Keys:  

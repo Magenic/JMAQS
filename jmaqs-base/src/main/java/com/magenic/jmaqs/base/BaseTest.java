@@ -30,7 +30,6 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-
 /**
  * Base test class.
  */
@@ -103,7 +102,7 @@ public abstract class BaseTest {
    * @return Logger object
    */
   public Logger getLogger() {
-    return this.getTestObject().getLog();
+    return this.getTestObject().getLogger();
   }
 
   /**
@@ -112,7 +111,7 @@ public abstract class BaseTest {
    * @param log The Logger object
    */
   public void setLogger(Logger log) {
-    this.getTestObject().setLog(log);
+    this.getTestObject().setLogger(log);
   }
 
   /**
@@ -154,8 +153,7 @@ public abstract class BaseTest {
    * @param loggedExceptionList ArrayList of logged exceptions to use.
    */
   public void setLoggedExceptions(List<String> loggedExceptionList) {
-    this.loggedExceptions
-        .put(this.fullyQualifiedTestClassName.get(), (ArrayList<String>) loggedExceptionList);
+    this.loggedExceptions.put(this.fullyQualifiedTestClassName.get(), (ArrayList<String>) loggedExceptionList);
   }
 
   /**
@@ -238,8 +236,7 @@ public abstract class BaseTest {
     try {
       this.beforeLoggingTeardown(testResult);
     } catch (Exception e) {
-      this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s",
-          e.getMessage());
+      this.tryToLog(MessageType.WARNING, "Failed before logging teardown because: %s", e.getMessage());
     }
 
     // Log the test result
@@ -309,10 +306,9 @@ public abstract class BaseTest {
     this.setLoggedExceptions(new ArrayList<String>());
 
     if (this.loggingEnabledSetting != LoggingEnabled.NO) {
-      log = LoggingConfig.getLogger(StringProcessor
-          .safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
-              DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
-                  .format(LocalDateTime.now(Clock.systemUTC()))));
+      log = LoggingConfig.getLogger(StringProcessor.safeFormatter("%s - %s", this.fullyQualifiedTestClassName.get(),
+          DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+              .format(LocalDateTime.now(Clock.systemUTC()))));
     } else {
       log = new ConsoleLogger();
     }
@@ -405,8 +401,7 @@ public abstract class BaseTest {
 
     for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
       // If the stack trace element is from the com.magenic package (excluding this method) append the stack trace line 
-      if (element.toString().startsWith("com.magenic") && !element.toString()
-          .contains("BaseTest.logVerbose")) {
+      if (element.toString().startsWith("com.magenic") && !element.toString().contains("BaseTest.logVerbose")) {
         messages.append(element.toString() + System.lineSeparator());
       }
     }

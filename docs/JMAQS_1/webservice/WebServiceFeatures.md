@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Web Service Test Basics
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Web Service Features
 
 ## Overview
 MAQS provides support for testing web services.  

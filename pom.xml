@@ -1,11 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<!--
+  ~ Copyright 2020 (C) Magenic, All rights Reserved
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.magenic.jmaqs</groupId>
     <artifactId>jmaqs-framework</artifactId>
     <version>2.0.1-SNAPSHOT</version>
     <name>JMAQS Framework</name>
-    <description>A collection of testing libraries and conveince classes to accelerate startup automation efforts</description>
+    <description>A collection of testing libraries and conveince classes to accelerate startup
+        automation efforts
+    </description>
     <packaging>pom</packaging>
     <url>https://github.com/Magenic/JMAQS</url>
     <inceptionYear>2017</inceptionYear>
@@ -49,8 +57,7 @@
         <module>jmaqs-selenium</module>
         <module>jmaqs-webservices-jdk8</module>
         <module>jmaqs-appium</module>
-      <module>jmaqs-database</module>
-        <module>jmaqs-webservices-jdk11</module>
+        <module>jmaqs-database</module>
     </modules>
 
     <distributionManagement>
@@ -65,6 +72,15 @@
     </distributionManagement>
 
     <profiles>
+        <profile>
+            <id>WIP</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>jmaqs-webservices-jdk11</module>
+            </modules>
+        </profile>
         <profile>
             <id>jacoco</id>
             <activation>
@@ -115,6 +131,12 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -128,7 +150,7 @@
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
         <surefire.plugin.version>3.0.0-M4</surefire.plugin.version>
-        <mvncheckstyle.plugin.version>3.1.0</mvncheckstyle.plugin.version>
+        <mvncheckstyle.plugin.version>3.1.1</mvncheckstyle.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <puppycheckstyle.plugin.version>8.29</puppycheckstyle.plugin.version>
         <jacoco.version>0.8.5</jacoco.version>
@@ -176,6 +198,7 @@
                 <version>2.5.3</version>
                 <configuration>
                     <localCheckout>true</localCheckout>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
                     <pushChanges>false</pushChanges>
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
@@ -193,7 +216,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-           
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -219,6 +242,7 @@
                         </goals>
                         <configuration>
                             <source>8</source>
+                            <doclint>none</doclint>
                             <additionalparam>-Xdoclint:none</additionalparam>
                             <workingDirectory>target/</workingDirectory>
                         </configuration>
@@ -257,7 +281,7 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>${maven-deploy-plugin.version}</version>
             </plugin>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${mvncheckstyle.plugin.version}</version>
@@ -277,7 +301,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <failOnWarnings>false</failOnWarnings>
-                    <failOnError>true</failOnError>
+                            <failOnError>true</failOnError>
                             <configLocation>maqs_checks.xml</configLocation>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <consoleOutput>true</consoleOutput>
@@ -286,7 +310,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 </project>

@@ -10,48 +10,58 @@ package com.magenic.jmaqs.utilities.helper;
 public enum ConfigSection {
 
   /**
-   * The default magenic maqs section.
+   * The default appium capabilities section.
    */
-  MagenicMaqs,
+  APPIUM_CAPS_MAQS("AppiumCapsMaqs"),
 
   /**
    * The default appium maqs section.
    */
-  AppiumMaqs,
-
-  /**
-   * The default appium capabilities section.
-   */
-  AppiumCapsMaqs,
-
-  /**
-   * The default database maqs section.
-   */
-  DatabaseMaqs,
+  APPIUM_MAQS("AppiumMaqs"),
 
   /**
    * Database Caps Section.
    */
-  DatabaseCapsMaqs,
+  DATABASE_CAPS_MAQS("DatabaseCapsMaqs"),
+
+  /**
+   * The default database maqs section.
+   */
+  DATABASE_MAQS("DatabaseMaqs"),
 
   /**
    * The default email maqs section.
    */
-  EmailMaqs,
+  EMAIL_MAQS("EmailMaqs"),
 
   /**
-   * The default selenium maqs section.
+   * The default magenic maqs section.
    */
-  SeleniumMaqs,
+  MAGENIC_MAQS("MagenicMaqs"),
 
   /**
    * The default remote selenium capabilities section.
    */
-  RemoteSeleniumCapsMaqs,
+  REMOTE_SELENIUM_CAPS_MAQS("RemoteSeleniumCapsMaqs"),
+
+  /**
+   * The default selenium maqs section.
+   */
+  SELENIUM_MAQS("SeleniumMaqs"),
 
   /**
    * The default web service section.
    */
-  WebServiceMaqs;
+  WEB_SERVICE_MAQS("WebServiceMaqs");
 
+  private final String sectionName;
+
+  ConfigSection(String sectionName) {
+    this.sectionName = sectionName;
+  }
+
+  @Override
+  public String toString() {
+    return sectionName;
+  }
 }
