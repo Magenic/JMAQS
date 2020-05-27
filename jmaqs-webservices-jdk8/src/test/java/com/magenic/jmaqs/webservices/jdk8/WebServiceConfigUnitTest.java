@@ -10,6 +10,9 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Unit tests for the Web Service Config functionality.
+ */
 public class WebServiceConfigUnitTest extends BaseGenericTest {
   /**
    * gets if proxy can be used.

@@ -10,8 +10,14 @@ import org.apache.http.entity.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Tests the web service driver Patch functionality.
+ */
 public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
-
+  /**
+   * Test patching with a String object.
+   * @throws Exception if an error occurs
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceStringPatch() throws Exception {
     Product p = new Product();
@@ -25,7 +31,10 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
     Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "OK");
   }
 
-
+  /**
+   * Test patching with an Xml object.
+   * @throws Exception if an error occurs
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceXmlPatch() throws Exception {
     Product p = new Product();
@@ -39,6 +48,10 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
     Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "OK");
   }
 
+  /**
+   * Test patching with a Json object.
+   * @throws Exception if an error occurs
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceJsonPatch() throws Exception {
     Product p = new Product();

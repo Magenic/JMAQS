@@ -11,6 +11,9 @@ import org.apache.http.entity.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Tests the web service driver Get functionality.
+ */
 public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   /**
    * Verify we can get content.
@@ -64,6 +67,11 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
         "Was expecting a result with Hammer but instead got - " + response.toString());
   }
 
+  /**
+   * Tests getting all products in Xml format.
+   * @throws IOException if an IO exception is thrown
+   * @throws URISyntaxException if an incorrect URI syntax occurs
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceGetAllProductsXml() throws IOException, URISyntaxException {
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetAllProducts",
@@ -72,6 +80,11 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     Assert.assertTrue(responseString.contains("3"));
   }
 
+  /**
+   * Tests getting all products in Json format.
+   * @throws IOException if an IO exception is thrown
+   * @throws URISyntaxException if an incorrect URI syntax occurs
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceGetAllProductsJson() throws IOException, URISyntaxException {
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetAllProducts",
@@ -80,6 +93,11 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     Assert.assertTrue(responseString.contains("3"));
   }
 
+  /**
+   * Tests getting a product in Xml format.
+   * @throws IOException if an IO exception occurs
+   * @throws URISyntaxException If the URI syntax isn't valid
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceGetProductXml() throws IOException, URISyntaxException {
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetProduct/2",
@@ -88,6 +106,11 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     Assert.assertTrue(responseString.contains("Yo-yo"));
   }
 
+  /**
+   * Tests getting a product in Json format.
+   * @throws IOException if an IO exception occurs
+   * @throws URISyntaxException If the URI syntax isn't valid
+   */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceGetProductJson() throws IOException, URISyntaxException {
     CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetProduct/2",

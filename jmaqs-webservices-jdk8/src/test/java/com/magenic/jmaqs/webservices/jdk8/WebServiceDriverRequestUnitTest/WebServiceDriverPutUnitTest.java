@@ -11,9 +11,12 @@ import org.apache.http.entity.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Tests the web service driver Put functionality.
+ */
 public class WebServiceDriverPutUnitTest extends BaseWebServiceTest {
   /**
-   * verify an object serialized as a XML can do a PUT request
+   * verify an object serialized as a XML can do a PUT request.
    * @throws Exception There was a problem with the test
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -33,7 +36,7 @@ public class WebServiceDriverPutUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * verify an object serialized as a JSON can do a PUT request
+   * verify an object serialized as a JSON can do a PUT request.
    * @throws Exception There was a problem with the test
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -53,7 +56,7 @@ public class WebServiceDriverPutUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * verify an object serialized as a String can do a PUT request
+   * verify an object serialized as a String can do a PUT request.
    * @throws Exception There was a problem with the test
    */
   @Test(groups = TestCategories.WEB_SERVICE)

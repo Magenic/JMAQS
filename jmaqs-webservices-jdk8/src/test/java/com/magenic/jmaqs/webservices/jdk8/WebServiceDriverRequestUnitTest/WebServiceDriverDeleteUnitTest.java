@@ -7,6 +7,9 @@ import org.apache.http.entity.ContentType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Tests the web service driver Delete functionality.
+ */
 public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
   /**
    * Verify delete works.
@@ -16,7 +19,6 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceDelete() throws Exception {
-
     CloseableHttpResponse response = this.getWebServiceDriver()
         .deleteContent("/api/XML_JSON/Delete/1", ContentType.TEXT_PLAIN, false);
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
@@ -30,7 +32,6 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceStringDelete() throws Exception {
-
     CloseableHttpResponse response = this.getWebServiceDriver()
         .deleteContent("/api/String/Delete/1", ContentType.TEXT_PLAIN, false);
     Assert.assertEquals(response.getStatusLine().getStatusCode(), 200);
