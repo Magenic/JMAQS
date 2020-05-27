@@ -22,8 +22,8 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBody() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/String/1", ContentType.TEXT_PLAIN,
-        true);
+    CloseableHttpResponse response = this.getWebServiceDriver()
+        .getContent("/api/String/1", ContentType.TEXT_PLAIN, true);
     String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertNotNull(responseString, "Response body did not deserialize string correctly");
@@ -31,35 +31,38 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromJson() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetProduct/1",
-        ContentType.APPLICATION_JSON, true);
-    Product jsonProduct = WebServiceUtilities.getResponseBody(response, ContentType.APPLICATION_JSON, Product.class);
+    CloseableHttpResponse response = this.getWebServiceDriver()
+        .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_JSON, true);
+    Product jsonProduct = WebServiceUtilities
+        .getResponseBody(response, ContentType.APPLICATION_JSON, Product.class);
 
     Assert.assertNotNull(jsonProduct, "Response body did not deserialize object from json correctly");
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromXml() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetProduct/1",
-        ContentType.APPLICATION_XML, true);
-    Product xmlProduct = WebServiceUtilities.getResponseBody(response, ContentType.APPLICATION_XML, Product.class);
+    CloseableHttpResponse response = this.getWebServiceDriver()
+        .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_XML, true);
+    Product xmlProduct = WebServiceUtilities
+        .getResponseBody(response, ContentType.APPLICATION_XML, Product.class);
 
     Assert.assertNotNull(xmlProduct, "Response body did not deserialize object from xml correctly");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.WEB_SERVICE)
   public void testGetResponseBodyAsObjectFromNeitherXmlOrJson() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetProduct/1",
-        ContentType.APPLICATION_OCTET_STREAM, true);
-    WebServiceUtilities.getResponseBody(response, ContentType.APPLICATION_OCTET_STREAM, Product.class);
+    CloseableHttpResponse response = this.getWebServiceDriver()
+        .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_OCTET_STREAM, true);
+    Product xmlProduct = WebServiceUtilities
+        .getResponseBody(response, ContentType.APPLICATION_OCTET_STREAM, Product.class);
 
     Assert.fail("Exception was not thrown for attempting to deserialize json to an object");
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testDeserializeJson() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetProduct/1",
-        ContentType.APPLICATION_JSON, true);
+    CloseableHttpResponse response = this.getWebServiceDriver()
+        .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_JSON, true);
     Product product = WebServiceUtilities.deserializeJson(response, Product.class);
 
     Assert.assertNotNull(product);
@@ -67,8 +70,8 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
 
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testDeserializeXml() throws Exception {
-    CloseableHttpResponse response = this.getWebServiceDriver().getContent("/api/XML_JSON/GetProduct/1",
-        ContentType.APPLICATION_XML, true);
+    CloseableHttpResponse response = this.getWebServiceDriver()
+        .getContent("/api/XML_JSON/GetProduct/1", ContentType.APPLICATION_XML, true);
     Product product = WebServiceUtilities.deserializeXml(response, Product.class);
 
     Assert.assertNotNull(product);
@@ -93,8 +96,9 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
     String expectedJson = "{\"Id\":1,\"Name\":\"Milk\",\"Category\":\"Dairy\",\"Price\":10}";
     String actualJson = WebServiceUtilities.serializeJson(this.product);
 
-    Assert.assertEquals(expectedJson, actualJson, String.format(
-        "the json values compared aren't equal, expected was %s while actual was %s", expectedJson, actualJson));
+    Assert.assertEquals(expectedJson, actualJson, String
+        .format("the json values compared aren't equal, expected was %s while actual was %s",
+            expectedJson, actualJson));
   }
 
   @Test(groups = TestCategories.WEB_SERVICE)
