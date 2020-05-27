@@ -119,8 +119,8 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void testCreateStringEntityCustomContentType()
       throws JsonProcessingException, UnsupportedEncodingException {
-    HttpEntity entity = WebServiceUtilities.createStringEntity(this.product, Charset.defaultCharset(), "application/json");
-
+    HttpEntity entity = WebServiceUtilities.createStringEntity(this.product,
+        Charset.defaultCharset(), "application/json");
     Assert.assertNotNull(entity, "Entity was not set correctly with custom charset and mime-type");
   }
 }
