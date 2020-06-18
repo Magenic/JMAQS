@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.utilities.helper;
 
+import com.magenic.jmaqs.utilities.helper.exceptions.ExecutionFailedException;
 import com.magenic.jmaqs.utilities.helper.exceptions.FunctionException;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import java.time.LocalDateTime;
@@ -197,11 +198,10 @@ public final class GenericWait {
    * @throws InterruptedException the interrupted exception
    * @throws TimeoutException     the timeout exception
    */
-  public static <T> void waitForMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
-      throws InterruptedException {
+  public static <T> void waitForMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue) {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
-
+    Exception exception = null;
     // Checks if the two values are equal
     boolean paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
 
@@ -211,10 +211,17 @@ public final class GenericWait {
       paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
 
       // If they aren't, wait
-      Thread.sleep(retryTime);
+      try {
+        Thread.sleep(retryTime);
+      } catch (InterruptedException e) {
+        exception = e;
+      }
+
     }
 
-    if (!paramsAreEqual) {
+    if (exception != null) {
+      throw new ExecutionFailedException("Thread Sleep interrupted: ", exception);
+    } else if (!paramsAreEqual) {
       throw new TimeoutException(
           "Timed out waiting for the supplier to return the expected value of " + comparativeValue);
     }
