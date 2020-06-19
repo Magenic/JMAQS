@@ -222,6 +222,18 @@ public abstract class BaseTest {
 
     // Get the Fully Qualified Test Class Name and set it in the object
     String testName = method.getDeclaringClass() + "." + method.getName();
+    customSetup(testName, testContext);
+  }
+
+  /**
+   * Setup before a test with custom name.
+   *
+   * @param testName    User provide name of test
+   * @param testContext The initial executing Test Context object
+   */
+  public void customSetup(String testName, ITestContext testContext) {
+    this.testContextInstance = testContext;
+
     testName = testName.replaceFirst("class ", "");
     this.fullyQualifiedTestClassName.set(testName);
 

@@ -86,5 +86,10 @@
             <artifactId>jmaqs-selenium</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.cucumber</groupId>
+            <artifactId>jmaqs-cucumber</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

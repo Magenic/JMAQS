@@ -53,6 +53,7 @@
         <module>jmaqs-webservices-jdk8</module>
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
+        <module>jmaqs-cucumber</module>
     </modules>
 
     <distributionManagement>
@@ -159,7 +160,7 @@
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
-        <surefire.plugin.version>3.0.0-M4</surefire.plugin.version>
+        <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
         <mvncheckstyle.plugin.version>3.1.1</mvncheckstyle.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <puppycheckstyle.plugin.version>8.29</puppycheckstyle.plugin.version>

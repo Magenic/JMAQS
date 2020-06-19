@@ -15,12 +15,13 @@ import org.testng.ITestResult;
 /**
  * Base Selenium Test class.
  */
-public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
+public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
   /**
    * Initialize a new instance of the BaseSeleniumTest class.
    */
   public BaseSeleniumTest() {
+    // This initializer is intentionally left blank
   }
 
   /**
@@ -72,10 +73,17 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
   }
 
   @Override
-  protected void createNewTestObject() {
+  protected void createNewTestObject()  {
     try {
       this.setTestObject(
-          new SeleniumTestObject(this.getBrowser(), this.createLogger(), this.getFullyQualifiedTestClassName()));
+          new SeleniumTestObject(() -> {
+            try {
+              return getBrowser();
+            } catch (WebDriverFactoryException e) {
+              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
+            }
+            return null;
+          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
     } catch (Exception e) {
       getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
     }

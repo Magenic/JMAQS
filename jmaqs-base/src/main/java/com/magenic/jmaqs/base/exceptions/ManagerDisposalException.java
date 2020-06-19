@@ -11,7 +11,7 @@ public class ManagerDisposalException extends RuntimeException {
   /**
    * Instantiates a new Manager disposal exception.
    *
-   * @param e the e
+   * @param e the exception
    */
   public ManagerDisposalException(Exception e) {
     super(e);
