@@ -19,4 +19,13 @@ public class FunctionException extends RuntimeException {
   public FunctionException(String errorMessage, Throwable err) {
     super(errorMessage, err);
   }
+
+  /**
+   * Instantiates a new Function exception.
+   *
+   * @param e the exception
+   */
+  public FunctionException(Exception e) {
+    super(e);
+  }
 }

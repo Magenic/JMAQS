@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -39,10 +40,10 @@ public final class GenericWait {
    * @param waitForTrue the wait for true
    * @param arg         the arg
    * @return the boolean
-   * @throws InterruptedException the interrupted exception
-   * @throws FunctionException    the function exception
+   * @throws FunctionException the function exception
+   * @ the interrupted exception
    */
-  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg) throws InterruptedException {
+  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg) {
     return wait(waitForTrue, RETRY_TIME_FROM_CONFIG, TIMEOUT_FROM_CONFIG, false, arg);
   }
 
@@ -51,10 +52,9 @@ public final class GenericWait {
    *
    * @param waitForTrue the wait for true
    * @return the boolean
-   * @throws InterruptedException the interrupted exception
-   * @throws FunctionException    the function exception
+   * @throws FunctionException the function exception
    */
-  public static boolean waitUntil(BooleanSupplier waitForTrue) throws InterruptedException {
+  public static boolean waitUntil(BooleanSupplier waitForTrue) {
     return wait(waitForTrue, RETRY_TIME_FROM_CONFIG, TIMEOUT_FROM_CONFIG, false);
   }
 
@@ -62,11 +62,10 @@ public final class GenericWait {
    * Wait for true.
    *
    * @param waitForTrue the wait for true
-   * @throws InterruptedException the interrupted exception
-   * @throws FunctionException    the function exception
-   * @throws TimeoutException     the timeout exception
+   * @throws FunctionException the function exception
+   * @throws TimeoutException  the timeout exception
    */
-  public static void waitForTrue(BooleanSupplier waitForTrue) throws InterruptedException {
+  public static void waitForTrue(BooleanSupplier waitForTrue) {
     if (!wait(waitForTrue, RETRY_TIME_FROM_CONFIG, TIMEOUT_FROM_CONFIG, true)) {
       throw new TimeoutException("Timed out waiting for the function to return true");
     }
@@ -78,11 +77,11 @@ public final class GenericWait {
    * @param <T>         the type parameter
    * @param waitForTrue the wait for true
    * @param arg         the arg
-   * @throws InterruptedException the interrupted exception
-   * @throws FunctionException    the function exception
-   * @throws TimeoutException     the timeout exception
+   * @throws FunctionException the function exception
+   * @throws TimeoutException  the timeout exception
+   * @ the interrupted exception
    */
-  public static <T> void waitForTrue(Predicate<T> waitForTrue, T arg) throws InterruptedException {
+  public static <T> void waitForTrue(Predicate<T> waitForTrue, T arg) {
     if (!wait(waitForTrue, RETRY_TIME_FROM_CONFIG, TIMEOUT_FROM_CONFIG, true, arg)) {
       throw new TimeoutException("Timed out waiting for the function to return true");
     }
@@ -95,9 +94,9 @@ public final class GenericWait {
    * @param waitForTrue      the wait for true
    * @param comparativeValue the comparative value
    * @return the t
-   * @throws InterruptedException the interrupted exception
+   * @ the interrupted exception
    */
-  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, T comparativeValue) throws InterruptedException {
+  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, T comparativeValue) {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -133,28 +132,50 @@ public final class GenericWait {
    * @param timeout          the timeout
    * @param comparativeValue the comparative value
    * @return the t
-   * @throws InterruptedException the interrupted exception
+   * @ the interrupted exception
    */
-  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
-      throws InterruptedException {
+  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue) {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
-    T value = waitForTrue.get();
+    //T value = waitForTrue.get();
 
+    ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    Callable<T> callable = waitForTrue::get;
     // Checks if the two values are equal
-    boolean paramsAreEqual = paramsEqual(value, comparativeValue);
+
+    boolean paramsAreEqual = false;
+    try {
+      Future<T> execute = executorService.submit(callable);
+      T value = execute.get();
+      paramsAreEqual = paramsEqual(value, comparativeValue);
+    } catch (FunctionException | ExecutionException e) {
+      throw new FunctionException(e);
+    } catch (InterruptedException ex) {
+      Thread.currentThread().interrupt();
+    }
+    //boolean paramsAreEqual = paramsEqual(value, comparativeValue);
 
     // While the params are not equal & the timeout hasn't met, keep checking
     while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeout) {
       // If they aren't, wait
-      Thread.sleep(retryTime);
+      //Thread.sleep(retryTime);
 
-      value = waitForTrue.get();
+      //value = waitForTrue.get();
 
       // Check if they are equal
       // (running them through another function because we can't use an operator with T
-      paramsAreEqual = paramsEqual(value, comparativeValue);
+      //paramsAreEqual = paramsEqual(value, comparativeValue);
+
+      ScheduledFuture<T> schedule = executorService.schedule(callable, RETRY_TIME_FROM_CONFIG, TimeUnit.MILLISECONDS);
+      //paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
+      try {
+        paramsAreEqual = paramsEqual(schedule.get(), comparativeValue);
+      } catch (FunctionException | ExecutionException e) {
+        throw new FunctionException(e);
+      } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
+      }
     }
 
     // return the value regardless
@@ -167,28 +188,45 @@ public final class GenericWait {
    * @param <T>              the type parameter
    * @param waitForTrue      the wait for true
    * @param comparativeValue the comparative value
-   * @throws InterruptedException the interrupted exception
-   * @throws TimeoutException     the timeout exception
+   * @throws TimeoutException the timeout exception
+   * @ the interrupted exception
    */
-  public static <T> void waitForMatch(Supplier<T> waitForTrue, T comparativeValue) throws InterruptedException {
+  public static <T> void waitForMatch(Supplier<T> waitForTrue, T comparativeValue) {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
-
+    ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    Callable<T> callable = waitForTrue::get;
     // Checks if the two values are equal
-    boolean paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
-
+    //boolean paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
+    boolean paramsAreEqual = false;
+    try {
+      Future<T> execute = executorService.submit(callable);
+      paramsAreEqual = paramsEqual(execute.get(), comparativeValue);
+    } catch (FunctionException | ExecutionException e) {
+      throw new FunctionException(e);
+    } catch (InterruptedException ex) {
+      Thread.currentThread().interrupt();
+    }
     // While the params are not equal & the timeout hasn't met, keep checking
     while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < TIMEOUT_FROM_CONFIG) {
       // If they aren't, wait
-      Thread.sleep(RETRY_TIME_FROM_CONFIG);
+      //Thread.sleep(RETRY_TIME_FROM_CONFIG);
 
       // Check if they are equal
       // (running them through another function because we can't use an operator with T
-      paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
-    }
-
-    if (!paramsAreEqual) {
-      throw new TimeoutException("Timed out waiting for the supplier to return expected value of " + comparativeValue);
+      ScheduledFuture<T> schedule = executorService.schedule(callable, RETRY_TIME_FROM_CONFIG, TimeUnit.MILLISECONDS);
+      //paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
+      try {
+        paramsAreEqual = paramsEqual(schedule.get(), comparativeValue);
+      } catch (FunctionException | ExecutionException e) {
+        throw new FunctionException(e);
+      } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
+      }
+      if (!paramsAreEqual) {
+        throw new TimeoutException(
+            "Timed out waiting for the supplier to return expected value of " + comparativeValue);
+      }
     }
   }
 
@@ -200,11 +238,10 @@ public final class GenericWait {
    * @param retryTime        the retry time
    * @param timeout          the timeout
    * @param comparativeValue the comparative value
-   * @throws InterruptedException the interrupted exception
-   * @throws TimeoutException     the timeout exception
+   * @throws TimeoutException the timeout exception
+   * @ the interrupted exception
    */
-  public static <T> void waitForMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
-      throws InterruptedException {
+  public static <T> void waitForMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue) {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -232,10 +269,10 @@ public final class GenericWait {
    * @param <T>     the type parameter
    * @param waitFor the wait for
    * @return the t
-   * @throws InterruptedException the interrupted exception
-   * @throws TimeoutException     the timeout exception
+   * @throws TimeoutException the timeout exception
+   * @ the interrupted exception
    */
-  public static <T> T waitFor(Supplier<T> waitFor) throws InterruptedException {
+  public static <T> T waitFor(Supplier<T> waitFor) {
     return wait(waitFor, RETRY_TIME_FROM_CONFIG, TIMEOUT_FROM_CONFIG);
   }
 
@@ -247,10 +284,10 @@ public final class GenericWait {
    * @param waitFor the wait for
    * @param arg     the arg
    * @return the t
-   * @throws InterruptedException the interrupted exception
-   * @throws TimeoutException     the timeout exception
+   * @throws TimeoutException the timeout exception
+   * @ the interrupted exception
    */
-  public static <T, U> T waitFor(Function<U, T> waitFor, U arg) throws InterruptedException {
+  public static <T, U> T waitFor(Function<U, T> waitFor, U arg) {
     return wait(waitFor, RETRY_TIME_FROM_CONFIG, TIMEOUT_FROM_CONFIG, arg);
   }
 
@@ -264,17 +301,17 @@ public final class GenericWait {
    * @param throwException the throw exception
    * @param arg            the arg
    * @return the boolean
-   * @throws InterruptedException the interrupted exception
-   * @throws FunctionException    the function exception
+   * @throws FunctionException the function exception
+   * @ the interrupted exception
    */
-  public static <T> boolean wait(Predicate<T> waitForTrue, long retryTime, long timeout, boolean throwException, T arg)
-      throws InterruptedException {
+  public static <T> boolean wait(Predicate<T> waitForTrue, long retryTime, long timeout, boolean throwException,
+      T arg) {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     FunctionException exception = null;
 
     do {
-      try {
+      /*try {
         // Clear out old exception
         exception = null;
 
@@ -287,10 +324,22 @@ public final class GenericWait {
         if (throwException) {
           exception = new FunctionException("Predicate exception caught.", e);
         }
-      }
+      }*/
 
-      // Give the system a second before checking if the page is updating
-      Thread.sleep(retryTime);
+      Callable<Boolean> callable = () -> waitForTrue.test(arg);
+      ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+      ScheduledFuture<Boolean> schedule = executorService.schedule(callable, retryTime, TimeUnit.MILLISECONDS);
+      try {
+        if (schedule.get().booleanValue()) {
+          return true;
+        }
+      } catch (FunctionException | ExecutionException e) {
+        if (throwException) {
+          throw new FunctionException(e);
+        }
+      } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
+      }
     } while ((ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeout);
 
     // Check if we had an exceptions
@@ -310,51 +359,34 @@ public final class GenericWait {
    * @param timeout        the timeout
    * @param throwException the throw exception
    * @return the boolean
-   * @throws InterruptedException the interrupted exception
-   * @throws FunctionException    the function exception
+   * @throws FunctionException the function exception
    */
   public static boolean wait(BooleanSupplier waitForTrue, long retryTime, long timeout, boolean throwException) {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
-    RuntimeException exception = null;
 
     do {
-      /*try {
-        // Clear out old exception
-        exception = null;
 
-        // Check if the function returns true
-        if (waitForTrue.getAsBoolean()) {
-          return true;
-        }
-      } catch (Exception e) {
-        // Save of the exception if we want to throw exceptions
-        if (throwException) {
-          exception = new FunctionException("BooleanSupplier exception caught.", e);
-        }
-      }
-
-      // Give the system a second before checking if the page is updating
-      Thread.sleep(retryTime);*/
-
-      Callable callable = waitForTrue::getAsBoolean;
+      Callable<Boolean> callable = waitForTrue::getAsBoolean;
       ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
       ScheduledFuture<Boolean> schedule = executorService.schedule(callable, retryTime, TimeUnit.MILLISECONDS);
       try {
         if (schedule.get().booleanValue()) {
           return true;
         }
-      } catch (FunctionException | ExecutionException | InterruptedException e) {
+      } catch (FunctionException | ExecutionException e) {
         if (throwException) {
-          exception = new FunctionException("BooleanSupplier exception caught.", e.getCause());
+          throw new FunctionException(e);
         }
+      } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
       }
     } while (ChronoUnit.MILLIS.between(start, LocalDateTime.now()) < timeout);
 
-    // Check if we had an exceptions
-    if (throwException && exception != null) {
-      throw exception;
-    }
+    //    // Check if we had an exceptions
+    //    if (throwException && exception != null) {
+    //      throw exception;
+    //    }
 
     // We timed out waiting for the function to return true
     return false;
@@ -368,27 +400,13 @@ public final class GenericWait {
    * @param retryTime the retry time
    * @param timeout   the timeout
    * @return the t
-   * @throws InterruptedException the interrupted exception
    */
-  public static <T> T wait(Supplier<T> waitFor, long retryTime, long timeout) throws InterruptedException {
+  public static <T> T wait(Supplier<T> waitFor, long retryTime, long timeout) {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
-    Exception exception = new Exception();
+    Exception exception = null;
 
     do {
-      /*try {
-        T value = waitFor.get();
-
-        if (value != null) {
-          return value;
-        }
-
-      } catch (Exception e) {
-        exception = e;
-      }
-
-      // Give the system a second before checking if the page is updating
-      Thread.sleep(retryTime);*/
       Callable<T> callable = waitFor::get;
       ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
       ScheduledFuture<T> schedule = executorService.schedule(callable, retryTime, TimeUnit.MILLISECONDS);
@@ -396,6 +414,8 @@ public final class GenericWait {
         return schedule.get();
       } catch (ExecutionException e) {
         exception = e;
+      } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
       }
 
     } while ((ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeout);
@@ -413,33 +433,24 @@ public final class GenericWait {
    * @param timeout   the timeout
    * @param arg       the arg
    * @return the t
-   * @throws InterruptedException the interrupted exception
-   * @throws TimeoutException     the timeout exception
+   * @throws TimeoutException the timeout exception
    */
-  public static <T, U> T wait(Function<U, T> waitFor, long retryTime, long timeout, U arg) throws InterruptedException {
+  public static <T, U> T wait(Function<U, T> waitFor, long retryTime, long timeout, U arg) {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     Exception exception = new Exception();
 
     do {
-      //      try {
-      //        return waitFor.apply(arg);
-      //      } catch (Exception e) {
-      //        exception = e;
-      //      }
-
       Callable<T> callable = () -> waitFor.apply(arg);
-      //ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1);
       ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
       ScheduledFuture<T> schedule = executorService.schedule(callable, retryTime, TimeUnit.MILLISECONDS);
       try {
         return schedule.get();
       } catch (ExecutionException e) {
         exception = e;
+      } catch (InterruptedException ex) {
+        Thread.currentThread().interrupt();
       }
-
-      // Give the system a second before checking if the page is updating
-      //Thread.sleep(retryTime);
     } while ((ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeout);
 
     throw new TimeoutException("Timed out waiting for the function to return", exception);
