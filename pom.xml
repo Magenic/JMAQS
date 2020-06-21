@@ -104,6 +104,10 @@
             <properties>
                 <sonar.coverage.jacoco.xmlReportPaths>./target/site/jacoco-aggregate/jacoco.xml
                 </sonar.coverage.jacoco.xmlReportPaths>
+                <sonar.projectKey>com.magenic.jmaqs:jmaqs-framework</sonar.projectKey>
+                <sonar.organization>magenic</sonar.organization>
+                <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+                <sonar.login>PLACEHOLDER</sonar.login>
             </properties>
             <modules>
                 <module>jmaqs-jacoco-reporting</module>
@@ -319,6 +323,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.0.0-M1</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
