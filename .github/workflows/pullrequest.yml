@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  pull_request:
+  unit_tests:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,7 +14,7 @@ jobs:
         with:
           java-version: 11
       - name: Build with Maven
-        run: mvn -B -Pjacoco package sonar:sonar --file pom.xml -e -fae
+        run: mvn -B -Pjacoco package sonar:sonar --file pom.xml -e -fae -Dsonar.login=${{SONAR_LOGIN}}
   checkstyle:
     runs-on: ubuntu-latest
     steps:
@@ -35,5 +35,5 @@ jobs:
 
     #TODO:
     # - Add lockdown
-    # - SonarCloud properties
+    #X - SonarCloud properties
     # - caching
