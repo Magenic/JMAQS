@@ -14,7 +14,7 @@ jobs:
         with:
           java-version: 11
       - name: Build with Maven
-        run: mvn -B -Pjacoco package sonar:sonar --file pom.xml -e -fae -Dsonar.login=${{SONAR_LOGIN}}
+        run: mvn -B -Pjacoco package sonar:sonar --file pom.xml -e -fae -Dsonar.login=${{secrets.SONAR_LOGIN}}
   checkstyle:
     runs-on: ubuntu-latest
     steps:
