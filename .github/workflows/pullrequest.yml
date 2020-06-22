@@ -21,7 +21,7 @@ jobs:
       - name: Create settings file
         uses: s4u/maven-settings-action@v2.1.0
         with:
-          properties: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }]'
+          properties: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
       - name: Run Unit Tests
         run: mvn -B -X clean install --file pom.xml -e -fae
       - name: Run SonarCloud Analysis
