@@ -13,7 +13,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Build with Maven
+      - name: Restore Local Maven Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{runner.os}}-m2
+      - name: Run Unit Tests
         run: mvn -B -Pjacoco package sonar:sonar --file pom.xml -e -fae -Dsonar.login=${{secrets.SONAR_LOGIN}}
   checkstyle:
     runs-on: ubuntu-latest
@@ -23,6 +28,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Restore Local Maven Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{runner.os}}-m2
       - name: Run Checkstyle
         run: mvn -B validate --file pom.xml -e -fae
   labels:
@@ -36,4 +46,4 @@ jobs:
     #TODO:
     # - Add lockdown
     #X - SonarCloud properties
-    # - caching
+    #X - caching
