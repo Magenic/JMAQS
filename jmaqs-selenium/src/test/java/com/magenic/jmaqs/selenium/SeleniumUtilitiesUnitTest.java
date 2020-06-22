@@ -138,8 +138,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
                         Assert.assertEquals(filePath,
                                         Paths.get(StringProcessor.safeFormatter("%s%s - %s%s",
-                                                        fileLogger.getDirectory(), "\\TestCustomName", dateTime,
-                                                        ".png")).normalize().toString());
+                                            fileLogger.getDirectory(), File.separator + "TestCustomName", dateTime,
+                                            ".png")).normalize().toString());
                         Assert.assertTrue(new File(filePath).exists(),
                                         "Checking that screenshot file exists at expected path.");
                 } finally {
@@ -232,8 +232,8 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
                         // Assert File Path returned from Screenshot is the same as expected file path.
                         Assert.assertEquals(filePath,
                                         Paths.get(StringProcessor.safeFormatter("%s%s - %s%s",
-                                                        fileLogger.getDirectory(), "\\TestCustomName", dateTime,
-                                                        ".txt")).normalize().toString());
+                                            fileLogger.getDirectory(), File.separator + "TestCustomName", dateTime,
+                                            ".txt")).normalize().toString());
                         Assert.assertTrue(new File(filePath).exists(),
                                         "Checking that page source file exists at expected path.");
                         String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();

@@ -10,6 +10,7 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import io.appium.java_client.AppiumDriver;
+import java.io.File;
 import java.nio.file.Paths;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -99,8 +100,8 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
         StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
 
     // Assert File Path returned from Screenshot is the same as expected file path.
-    Assert.assertEquals(filePath, Paths.get(
-        StringProcessor.safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), "\\TestCustomName", dateTime, ".png"))
+    Assert.assertEquals(filePath, Paths.get(StringProcessor
+        .safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), File.separator + "TestCustomName", dateTime, ".png"))
         .normalize().toString());
   }
 
@@ -161,8 +162,8 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
         StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
 
     // Assert File Path returned from Screenshot is the same as expected file path.
-    Assert.assertEquals(filePath, Paths.get(
-        StringProcessor.safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), "\\TestCustomName", dateTime, ".txt"))
+    Assert.assertEquals(filePath, Paths.get(StringProcessor
+        .safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), File.separator + "TestCustomName", dateTime, ".txt"))
         .normalize().toString());
   }
 

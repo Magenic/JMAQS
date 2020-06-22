@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium.constants;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -64,10 +65,33 @@ public class OperatingSystemUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Test get operating system.
+   * Test get operating system - MacOS.
    */
-  @Test
-  public void testGetOperatingSystem() {
+  @Test(singleThreaded = true, dependsOnGroups = TestCategories.SELENIUM)
+  public void testGetOperatingSystemMacOS() {
+    System.setProperty("os.name", "macOS");
+    OperatingSystem operatingSystem = OperatingSystem.getOperatingSystem();
+    Assert.assertEquals(operatingSystem, OperatingSystem.MACOS);
+  }
+
+  /**
+   * Test get operating system - Linux.
+   */
+  @Test(singleThreaded = true,
+        dependsOnMethods = "com.magenic.jmaqs.selenium.constants.OperatingSystemUnitTest.testGetOperatingSystemMacOS")
+  public void testGetOperatingSystemLinux() {
+    System.setProperty("os.name", "Linux");
+    OperatingSystem operatingSystem = OperatingSystem.getOperatingSystem();
+    Assert.assertEquals(operatingSystem, OperatingSystem.LINUX);
+  }
+
+  /**
+   * Test get operating system - Windows.
+   */
+  @Test(singleThreaded = true,
+        dependsOnMethods = "com.magenic.jmaqs.selenium.constants.OperatingSystemUnitTest.testGetOperatingSystemLinux")
+  public void testGetOperatingSystemWindows() {
+    System.setProperty("os.name", "Windows");
     OperatingSystem operatingSystem = OperatingSystem.getOperatingSystem();
     Assert.assertEquals(operatingSystem, OperatingSystem.WINDOWS);
   }
