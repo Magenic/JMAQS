@@ -19,7 +19,9 @@ jobs:
           path: ~/.m2
           key: ${{runner.os}}-m2
       - name: Run Unit Tests
-        run: mvn -B -X -Pjacoco package sonar:sonar  --file pom.xml -e -fae -Dsonar.login=$SONAR_TOKEN
+        run: mvn -B -X clean install --file pom.xml -e -fae
+      - name: Run SonarCloud Analysis
+        run: mvn -B -X -Psonar sonar:sonar --file pom.xml -e -fae -Dsonar.login=$SONAR_TOKEN
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_LOGIN }}

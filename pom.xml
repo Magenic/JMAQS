@@ -30,8 +30,8 @@
         <url>https://github.com/Magenic/JMAQS/issues</url>
     </issueManagement>
     <ciManagement>
-        <system>Azure Pipelines</system>
-        <url>https://dev.azure.com/magenicOpen/JMAQS/_build</url>
+        <system>GitHub Actions</system>
+        <url>https://github.com/Magenic/JMAQS/actions</url>
     </ciManagement>
     <licenses>
         <license>
@@ -87,17 +87,17 @@
             <distributionManagement>
                 <repository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/InstaCode/JMAQS</url>
+                    <url>https://maven.pkg.github.com/Magenic/JMAQS</url>
                 </repository>
                 <snapshotRepository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/InstaCode/JMAQS</url>
+                    <url>https://maven.pkg.github.com/Magenic/JMAQS</url>
                     <uniqueVersion>true</uniqueVersion>
                 </snapshotRepository>
             </distributionManagement>
         </profile>
         <profile>
-            <id>jacoco</id>
+            <id>sonar</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -109,6 +109,12 @@
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
                 <sonar.login>PLACEHOLDER</sonar.login>
             </properties>
+        </profile>
+        <profile>
+            <id>jacoco</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <modules>
                 <module>jmaqs-jacoco-reporting</module>
             </modules>
