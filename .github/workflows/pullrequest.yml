@@ -18,12 +18,14 @@ jobs:
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
+      - name: Create settings file
+        uses: whelk-io/maven-settings-xml-action@v4
+        with:
+          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/Magenic/JMAQS"},{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}}" }]'
       - name: Run Unit Tests
         run: mvn -B -X clean install --file pom.xml -e -fae
       - name: Run SonarCloud Analysis
-        run: mvn -B -X -Psonar sonar:sonar --file pom.xml -e -fae -Dsonar.login=${{secrets.SONAR_LOGIN}}
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: mvn -B -X -Psonar sonar:sonar --file pom.xml -e -fae
   checkstyle:
     runs-on: ubuntu-latest
     steps:
