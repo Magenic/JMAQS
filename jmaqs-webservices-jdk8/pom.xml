@@ -15,7 +15,7 @@
         <jackson-databind.version>2.10.2</jackson-databind.version>
         <jackson-core.version>2.11.0</jackson-core.version>
         <jcommander.version>1.78</jcommander.version>
-        <jackson-dataformat-xml.version>2.10.2</jackson-dataformat-xml.version>
+        <jackson-dataformat-xml.version>2.11.0</jackson-dataformat-xml.version>
         <httpcore.version>4.4.13</httpcore.version>
         <jackson-annotations.version>2.11.0</jackson-annotations.version>
         <httpclient.version>4.5.12</httpclient.version>
