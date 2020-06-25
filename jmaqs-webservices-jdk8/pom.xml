@@ -12,7 +12,7 @@
     <artifactId>jmaqs-webservices-jdk8</artifactId>
     <name>JMAQS JDK8 WebServices Testing Module</name>
     <properties>
-        <jackson-databind.version>2.10.2</jackson-databind.version>
+        <jackson-databind.version>2.11.1</jackson-databind.version>
         <jackson-core.version>2.11.0</jackson-core.version>
         <jcommander.version>1.78</jcommander.version>
         <jackson-dataformat-xml.version>2.11.1</jackson-dataformat-xml.version>
