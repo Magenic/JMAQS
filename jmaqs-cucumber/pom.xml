@@ -29,7 +29,7 @@
             <scope>compile</scope>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>5.7.0</version>
+            <version>6.1.2</version>
         </dependency>
         <dependency>
             <scope>compile</scope>
