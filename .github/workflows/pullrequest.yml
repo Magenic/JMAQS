@@ -66,8 +66,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: jacoco-files
-          path: jacoco-files/
-      - run: ls jacaco-files
+          path: ./jacoco-files/
+      - run: ls
+      - run: ls ./jacaco-files
       #- run: ls -l jacaco-files >> files.txt
       #      - name: Create settings file
       #        uses: InstaCode/maven-settings-xml-action@v9
