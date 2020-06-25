@@ -67,7 +67,7 @@ jobs:
         with:
           name: jacoco-files
           path: ./
-      - run: ls -l >> files.txt
+      - run: ls -l /home/runner/work/JMAQS/JMAQS >> files.txt
       #      - name: Create settings file
       #        uses: InstaCode/maven-settings-xml-action@v9
       #        with:
