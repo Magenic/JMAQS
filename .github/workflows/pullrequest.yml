@@ -77,6 +77,6 @@ jobs:
           name: jacoco-files-sonar-stage
           path: ./**/jacoco.xml
       - name: Build Packages
-        run: mvn -B package --skipTests --file pom.xml -e -fae
+        run: mvn -B package -DskipTests=true --file pom.xml -e -fae
       - name: Run SonarCloud Analysis
         run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae
