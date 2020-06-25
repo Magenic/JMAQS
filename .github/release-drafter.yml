@@ -1,0 +1,15 @@
+tag-template: 'draft'
+change-template: "* $TITLE (#$NUMBER)"
+categories:
+  - title: 'Features and Enhancements'
+    label:
+      - 'feature'
+      - 'enhancement
+  - title: 'Bug Fixes'
+    label: 'bug'
+  - title: 'Maintenance'
+    label: 'dependencies'
+template: |
+  ## What’s Changed
+
+  $CHANGES
