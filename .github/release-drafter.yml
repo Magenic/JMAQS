@@ -1,10 +1,22 @@
 tag-template: 'draft'
 change-template: "* $TITLE (#$NUMBER)"
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'feature'
+  patch:
+    labels:
+      - 'bug'
+      - 'enhancement'
+  default: patch
 categories:
   - title: 'Features and Enhancements'
     label:
       - 'feature'
-      - 'enhancement
+      - 'enhancement'
   - title: 'Bug Fixes'
     label: 'bug'
   - title: 'Maintenance'
