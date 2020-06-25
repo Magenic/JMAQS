@@ -51,5 +51,3 @@ jobs:
 
     #TODO:
     # - Add lockdown
-    #X - SonarCloud properties
-    #X - caching
