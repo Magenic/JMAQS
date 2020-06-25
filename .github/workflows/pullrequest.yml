@@ -18,10 +18,6 @@ jobs:
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
-      - name: Create settings file
-        uses: InstaCode/maven-settings-xml-action@v9
-        with:
-          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
       - name: Run Unit Tests
         run: mvn -B -Pjacoco clean verify install --file pom.xml -e -fae -T 1C
       - name: upload files
@@ -75,5 +71,12 @@ jobs:
         uses: InstaCode/maven-settings-xml-action@v9
         with:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
+      - name: upload files
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco-files-sonar-stage
+          path: ./**/jacoco.xml
+      - name: Build Packages
+        run: mvn -B package -skipTests --file pom.xml -e -fae
       - name: Run SonarCloud Analysis
         run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae
