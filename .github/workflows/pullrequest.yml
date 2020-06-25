@@ -26,6 +26,11 @@ jobs:
         run: mvn -B -Pjacoco clean install --file pom.xml -e -fae
       - name: Run SonarCloud Analysis
         run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae
+      - name: upload files
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco-files
+          path: ./**/jacoco.xml
   checkstyle:
     runs-on: ubuntu-latest
     steps:
