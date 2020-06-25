@@ -23,9 +23,9 @@ jobs:
         with:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
       - name: Run Unit Tests
-        run: mvn -B -X -Pjacoco clean install --file pom.xml -e -fae
+        run: mvn -B -Pjacoco clean install --file pom.xml -e -fae
       - name: Run SonarCloud Analysis
-        run: mvn -B -X -Psonar sonar:sonar --file pom.xml -e -fae
+        run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae
   checkstyle:
     runs-on: ubuntu-latest
     steps:
