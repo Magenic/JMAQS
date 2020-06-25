@@ -102,7 +102,8 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco-aggregate/jacoco.xml
+                <sonar.coverage.jacoco.xmlReportPaths>
+                    jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml
                 </sonar.coverage.jacoco.xmlReportPaths>
             </properties>
             <build>
