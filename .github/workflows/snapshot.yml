@@ -52,7 +52,7 @@ jobs:
         uses: s4u/maven-settings-action@v2.1.0
         with:
           sonatypeSnapshots: true
-          servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES_PAT}}"}]'
+          servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
           override: true
           githubServer: false
       - name: Maven Cache
