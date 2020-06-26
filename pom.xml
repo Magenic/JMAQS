@@ -27,11 +27,11 @@
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/Magenic/JMAQS/issues</url>
+        <url>https://github.com/InstaCode/JMAQS/issues</url>
     </issueManagement>
     <ciManagement>
         <system>GitHub Actions</system>
-        <url>https://github.com/Magenic/JMAQS/actions</url>
+        <url>https://github.com/InstaCode/JMAQS/actions</url>
     </ciManagement>
     <licenses>
         <license>
@@ -87,11 +87,11 @@
             <distributionManagement>
                 <repository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/Magenic/JMAQS</url>
+                    <url>https://maven.pkg.github.com/InstaCode/JMAQS</url>
                 </repository>
                 <snapshotRepository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/Magenic/JMAQS</url>
+                    <url>https://maven.pkg.github.com/InstaCode/JMAQS</url>
                     <uniqueVersion>true</uniqueVersion>
                 </snapshotRepository>
             </distributionManagement>
