@@ -70,10 +70,7 @@ jobs:
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
-      - name: Set Snapshot Version to ${{env.VERSION}}
-        run: mvn versions:set -DnewVersion="${{env.VERSION}}-SNAPSHOT"
-      - name: Run Unit Tests
-        run: mvn -Pgithub install -B -e -f pom.xml -fae
-      - name: Deploy Packages to GitHub
-        run: mvn -Pgithub deploy -B -e -f pom.xml
+      - name: Set Version to ${{env.VERSION}}-SNAPSHOT and Deploy
+        run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Pgithub deploy -B -e -f pom.xml -fae
+
 
