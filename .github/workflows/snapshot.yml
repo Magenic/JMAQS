@@ -73,6 +73,6 @@ jobs:
         run: |
           mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Psonar sonar:sonar -B -e -f pom.xml -fae
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
