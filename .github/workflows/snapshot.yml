@@ -64,14 +64,15 @@ jobs:
       - name: Set Version to ${{env.VERSION}}-SNAPSHOT and Deploy
         run: |
           mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Pgithub -Pjacoco -T 1C deploy -B -e -f pom.xml -fae
-      - name: Run SonarCloud
-        run: |
-          mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Psonar sonar:sonar -B -e -f pom.xml -fae
-      - name: Upload Version Number
+      - name: Upload Workspace
         uses: actions/upload-artifact@v2
         with:
           name: framework-state
           path: ${{github.workspace}}/
-
+      - name: Run SonarCloud
+        run: |
+          mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Psonar sonar:sonar -B -e -f pom.xml -fae
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
