@@ -20,7 +20,9 @@ jobs:
         uses: release-drafter/release-drafter@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo "${${{steps.release-drafter.outputs.tag_name}}//v}" > version.txt
+      - run: |
+          version=${{steps.release-drafter.outputs.tag_name}}
+          echo "${version//v}" >> version.txt
       - name: Upload Version Number
         uses: actions/upload-artifact@v2
         with:
