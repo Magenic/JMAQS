@@ -11,7 +11,7 @@
         automation efforts
     </description>
     <packaging>pom</packaging>
-    <url>https://github.com/Magenic/JMAQS</url>
+    <url>https://github.com/InstaCode/JMAQS</url>
     <inceptionYear>2017</inceptionYear>
     <organization>
         <name>Magenic Technologies</name>
@@ -36,13 +36,13 @@
     <licenses>
         <license>
             <name>MIT</name>
-            <url>https://github.com/Magenic/JMAQS/blob/master/LICENSE</url>
+            <url>https://github.com/InstaCode/JMAQS/blob/master/LICENSE</url>
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:git://github.com/Magenic/JMAQS.git</connection>
-        <developerConnection>scm:git:git@github.com:Magenic/JMAQS.git</developerConnection>
-        <url>https://github.com/Magenic/JMAQS</url>
+        <connection>scm:git:git://github.com/InstaCode/JMAQS.git</connection>
+        <developerConnection>scm:git:git@github.com:InstaCode/JMAQS.git</developerConnection>
+        <url>https://github.com/InstaCode/JMAQS</url>
         <tag>HEAD</tag>
     </scm>
 
