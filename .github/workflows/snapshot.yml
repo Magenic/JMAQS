@@ -60,10 +60,10 @@ jobs:
         uses: InstaCode/maven-settings-xml-action@v9
         with:
           servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
-          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{secrets.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}", "sonar.projectKey":"InstaCode_JMAQS"}}]'
+          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{secrets.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}"}}]'
       - name: Set Version to ${{env.VERSION}}-SNAPSHOT and Deploy
         run: |
-          mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Pgithub -Pjacoco deploy -B -e -f pom.xml -fae
+          mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Pgithub -Pjacoco -T 1C deploy -B -e -f pom.xml -fae
           mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Psonar sonar:sonar -B -e -f pom.xml -fae
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
