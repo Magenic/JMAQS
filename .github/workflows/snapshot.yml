@@ -15,21 +15,12 @@ jobs:
   update_release_draft:
     runs-on: ubuntu-latest
     steps:
-      # Drafts your next Release notes as Pull Requests are merged into "master"
-      - name: Calculate New Version
-        id: version
-        uses: patrickjahns/version-drafter-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Draft Release notes
+        id: release-drafter
         uses: release-drafter/release-drafter@master
-        with:
-          version: ${{ format('v{0}', steps.version.outputs.next-version) }}
-          tag: ${{ format('v{0}', steps.version.outputs.next-version) }}
-          name: ${{ format('v{0}', steps.version.outputs.next-version) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo ${{steps.version.outputs.next-version}} > version.txt
+      - run: echo "${${{steps.release-drafter.outputs.tag_name}}//v}" > version.txt
       - name: Upload Version Number
         uses: actions/upload-artifact@v2
         with:
