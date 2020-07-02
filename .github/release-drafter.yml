@@ -1,4 +1,3 @@
-tag-template: 'draft'
 change-template: "* $TITLE (#$NUMBER)"
 version-resolver:
   major:
