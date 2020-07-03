@@ -69,11 +69,6 @@ jobs:
         with:
           name: framework
           path: ${{github.workspace}}/
-      - name: Run SonarCloud
-        run: |
-          mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Psonar sonar:sonar -B -e -f pom.xml -fae
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   sonarcloud:
     needs:
       - snapshot_build
@@ -94,6 +89,9 @@ jobs:
           name: framework-sonar
           path: ${{github.workspace}}/
       - name: Run SonarCloud Analysis
-        run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae
+        run: |
+          mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Psonar sonar:sonar -B -e -f pom.xml -fae
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
