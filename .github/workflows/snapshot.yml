@@ -76,12 +76,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   sonarcloud:
     needs:
-      - unit_tests
+      - snapshot_build
     runs-on: ubuntu-latest
     steps:
       - name: Download version artifact
-          uses: actions/download-artifact@v1
-          with:
+        uses: actions/download-artifact@v1
+        with:
             name: framework
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
