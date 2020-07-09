@@ -90,7 +90,7 @@ jobs:
           path: ${{github.workspace}}/
       - name: Run SonarCloud Analysis
         run: |
-          mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Psonar sonar:sonar -B -e -f pom.xml -fae
+          mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Psonar sonar:sonar -B -e -f framework/pom.xml -fae
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
