@@ -74,6 +74,10 @@ jobs:
       - snapshot_build
     runs-on: ubuntu-latest
     steps:
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
       - name: Download version artifact
         uses: actions/download-artifact@v1
         with:
@@ -82,7 +86,7 @@ jobs:
         run: |
           value=`cat version/version.txt`
           echo ::set-env name=VERSION::$value
-      - name: Download version artifact
+      - name: Download framework artifact
         uses: actions/download-artifact@v1
         with:
             name: framework
