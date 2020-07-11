@@ -77,6 +77,14 @@ jobs:
       - name: Download version artifact
         uses: actions/download-artifact@v1
         with:
+          name: version
+      - shell: bash
+        run: |
+          value=`cat version/version.txt`
+          echo ::set-env name=VERSION::$value
+      - name: Download version artifact
+        uses: actions/download-artifact@v1
+        with:
             name: framework
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
