@@ -82,18 +82,18 @@ jobs:
       - name: Download version artifact
         uses: actions/download-artifact@v1
         with:
-            name: framework
+          name: framework
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
         with:
           servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{secrets.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}"}}]'
-      - name: Upload Workspace
-        uses: actions/upload-artifact@v2
-        with:
-          name: framework-sonar
-          path: ${{github.workspace}}/
+#      - name: Upload Workspace
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: framework-sonar
+#          path: ${{github.workspace}}/
       - name: Run SonarCloud Analysis
-        run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae
+        run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths=${{github.workspace}}/framework/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml
 
 
