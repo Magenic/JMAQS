@@ -102,5 +102,6 @@ jobs:
 #          path: ${{github.workspace}}/
       - name: Run SonarCloud Analysis
         run: mvn -B -Psonar sonar:sonar --file framework/pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths=${{github.workspace}}/framework/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml
-
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
