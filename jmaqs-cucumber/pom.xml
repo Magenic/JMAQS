@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commonsio.version>2.6</commonsio.version>
         <selenium.version>3.141.59</selenium.version>
-		<cucumber.version>6.1.2</cucumber.version>
+		<cucumber.version>6.4.0</cucumber.version>
     </properties>
 
     <dependencies>
