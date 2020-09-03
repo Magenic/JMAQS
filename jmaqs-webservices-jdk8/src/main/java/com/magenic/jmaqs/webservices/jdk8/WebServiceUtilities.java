@@ -110,10 +110,10 @@ public final class WebServiceUtilities {
     } else if (contentType.toString().toUpperCase().contains("JSON")) {
       return new StringEntity(serializeJson(body), contentType);
     } else if (contentType.toString().toUpperCase().contains("TEXT")) {
-      return new StringEntity((String) body);
+      return new StringEntity(body.getClass().toString());
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter("Content not supported: " + contentType));
     }
   }
 

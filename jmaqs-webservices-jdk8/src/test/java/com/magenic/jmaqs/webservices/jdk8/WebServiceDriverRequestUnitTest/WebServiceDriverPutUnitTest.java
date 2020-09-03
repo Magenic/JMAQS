@@ -67,7 +67,7 @@ public class WebServiceDriverPutUnitTest extends BaseWebServiceTest {
     p.setName("ff");
     p.setPrice(BigDecimal.valueOf(3.25));
 
-    HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.APPLICATION_JSON);
+    HttpEntity content = WebServiceUtilities.createStringEntity(p, ContentType.TEXT_PLAIN);
     CloseableHttpResponse response = this.getWebServiceDriver()
         .putContent("/api/String/Put/1", content, ContentType.TEXT_PLAIN, false);
 

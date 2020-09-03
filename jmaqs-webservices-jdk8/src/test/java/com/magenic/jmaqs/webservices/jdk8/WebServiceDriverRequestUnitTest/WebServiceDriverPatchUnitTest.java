@@ -75,9 +75,9 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   public void webServicePatchError() throws Exception {
     HttpEntity content = WebServiceUtilities.createStringEntity("", ContentType.APPLICATION_XML);
     CloseableHttpResponse response = this.getWebServiceDriver()
-        .patchContent("/api/XML_JSON/Put/1", content, ContentType.APPLICATION_XML, false);
+        .patchContent("/api/XML_JSON/Patch/1", content, ContentType.APPLICATION_XML, false);
 
-    Assert.assertEquals(response.getStatusLine().getStatusCode(), 405);
-    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Method Not Allowed");
+    Assert.assertEquals(response.getStatusLine().getStatusCode(), 400);
+    Assert.assertEquals(response.getStatusLine().getReasonPhrase(), "Bad Request");
   }
 }
