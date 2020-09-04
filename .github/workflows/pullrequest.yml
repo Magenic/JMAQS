@@ -66,11 +66,16 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: jacoco-files
-          path: ./jacoco-files/
+          path: ./jacoco-files
       - name: Create settings file
         uses: InstaCode/maven-settings-xml-action@v9
         with:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{secrets.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
+      - name: upload files
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-folder-snapshot
+          path: ${{github.workspace}}
       - name: Build Packages
         run: mvn -B package -DskipTests=true --file pom.xml -e -fae
       - name: Run SonarCloud Analysis
