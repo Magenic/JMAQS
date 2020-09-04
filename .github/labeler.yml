@@ -28,7 +28,7 @@ database:
   - jmaqs-database/**/*
 
 devops:
-  - .dependabot/*
+
   - .github/*
   - .github/**/*
 
@@ -39,3 +39,7 @@ JDK11:
 JDK8:
   - jmaqs-webservices-jdk8/*
   - jmaqs-webservices-jdk8/**/*
+
+cucumber:
+  - jmaqs-cucumber/*
+  - jmaqs-cucumber/**/*
