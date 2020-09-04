@@ -4,18 +4,19 @@
 
 package com.magenic.jmaqs.selenium.unittestpagemodel;
 
+import com.magenic.jmaqs.selenium.BaseSeleniumPageModel;
+import com.magenic.jmaqs.selenium.LazyWebElement;
+import com.magenic.jmaqs.selenium.SeleniumConfig;
 import com.magenic.jmaqs.selenium.SeleniumTestObject;
+import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import org.openqa.selenium.By;
 
 /**
  * The type Page elements page model.
  */
-public class PageElementsPageModel {
+public class PageElementsPageModel extends BaseSeleniumPageModel {
 
-  /**
-   * The Test object.
-   */
-  private SeleniumTestObject testObject;
+  private final String pageAddress = SeleniumConfig.getWebSiteBase() + "/Automation";
 
   /**
    * The Show dialog 1 button locator.
@@ -34,13 +35,39 @@ public class PageElementsPageModel {
    */
   public By uploadImageButtonLocator = By.id("photo");
 
+  public By pageTitleLocator = By.cssSelector("body > div.container.body-content > h2");
+
+  public By bodyLocator = By.cssSelector("body");
+
+  public  LazyWebElement body = new LazyWebElement(getTestObject(), bodyLocator, "Body");
+
+  public  LazyWebElement pageTitle = new LazyWebElement(getTestObject(), pageTitleLocator , "Page Title");
+
   /**
    * Instantiates a new Page elements page model.
    *
    * @param testObject the test object
    */
   public PageElementsPageModel(SeleniumTestObject testObject) {
-    this.testObject = testObject;
+    super(testObject);
+  }
+
+  @Override
+  public boolean isPageLoaded() {
+    try {
+      return pageTitle.doesExist();
+    } catch (TimeoutException | InterruptedException e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+  /**
+   * Open.
+   *
+   */
+  public void open() {
+    open(pageAddress);
   }
 
   /**
@@ -49,16 +76,7 @@ public class PageElementsPageModel {
    * @param url the url
    */
   public void open(String url) {
-    this.testObject.getWebDriver().get(url);
-  }
-
-  /**
-   * Gets selenium test object.
-   *
-   * @return the selenium test object
-   */
-  public SeleniumTestObject getSeleniumTestObject() {
-    return this.testObject;
+    this.getWebDriver().get(url);
   }
 
 }

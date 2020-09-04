@@ -22,7 +22,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -30,247 +29,297 @@ import org.testng.annotations.Test;
  */
 public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
 
-  /**
-   * Test capture screenshot no append.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void testCaptureScreenshotNoAppend() throws Exception {
-    WebDriver webDriver = null;
-    webDriver = WebDriverFactory.getDefaultBrowser();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
-    SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-    this.setTestObject(testObject);
+        /**
+         * Test capture screenshot no append.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testCaptureScreenshotNoAppend() throws Exception {
 
-    // Open Google and take a screenshot
-    webDriver.navigate().to("http://www.google.com");
-    boolean isSuccess = SeleniumUtilities.captureScreenshot(webDriver, testObject);
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
-    // Assert screenshot was successful
-    Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
-    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
-    Assert
-        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
-            "Checking that expected file path exists");
-  }
+                try {
+                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
+                                        this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
 
-  /**
-   * Test capture screenshot append.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void testCaptureScreenshotAppend() throws Exception {
-    WebDriver webDriver = null;
-    webDriver = WebDriverFactory.getDefaultBrowser();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
-    SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-    this.setTestObject(testObject);
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        boolean isSuccess = SeleniumUtilities.captureScreenshot(webDriver, testObject);
 
-    // Open Google and take a screenshot
-    webDriver.navigate().to("http://www.google.com");
-    final String testAppend = "testAppend";
-    boolean isSuccess = SeleniumUtilities.captureScreenshot(webDriver, testObject, testAppend);
+                        // Assert screenshot was successful
+                        Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+                        String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+                        Assert.assertTrue(
+                                        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+                                        "Checking that expected file path exists");
+                } finally {
+                        webDriver.quit();
+                }
+        }
 
-    // Assert screenshot was successful
-    Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
-    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
-    Assert
-        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
-            "Checking that expected file path exists");
-    Assert.assertTrue(
-        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).getName()
-            .contains(testAppend), "Checking that appended value was added to file");
-  }
+        /**
+         * Test capture screenshot append.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testCaptureScreenshotAppend() throws Exception {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
-  /**
-   * Test capture screenshot console logger.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void testCaptureScreenshotConsoleLogger() throws Exception {
-    WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-    ConsoleLogger consoleLogger = new ConsoleLogger();
-    SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-    this.setTestObject(testObject);
+                try {
+                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
+                                        this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
 
-    // Open Google and take a screenshot
-    webDriver.navigate().to("http://www.google.com");
-    boolean isSuccess = SeleniumUtilities.captureScreenshot(webDriver, testObject, "testAppend");
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        final String testAppend = "testAppend";
+                        boolean isSuccess = SeleniumUtilities.captureScreenshot(webDriver, testObject, testAppend);
 
-    // Assert screenshot was NOT successful
-    Assert.assertFalse(isSuccess, "Expected Screenshot to NOT be successful.");
-  }
+                        // Assert screenshot was successful
+                        Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+                        String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+                        Assert.assertTrue(
+                                        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+                                        "Checking that expected file path exists");
+                        Assert.assertTrue(
+                                        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).getName()
+                                                        .contains(testAppend),
+                                        "Checking that appended value was added to file");
+                } finally {
+                        webDriver.quit();
+                }
+        }
 
-  /**
-   * Test capture screenshot custom directory file name.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void testCaptureScreenshotCustomDirectoryFileName() throws Exception {
-    WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
-    SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-    this.setTestObject(testObject);
+        /**
+         * Test capture screenshot console logger.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testCaptureScreenshotConsoleLogger() throws Exception {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
-    // Open Google and take a screenshot
-    webDriver.navigate().to("http://www.google.com");
-    String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
-        .format(LocalDateTime.now(Clock.systemUTC()));
-    String filePath = SeleniumUtilities
-        .captureScreenshot(webDriver, testObject, fileLogger.getDirectory(),
-            StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
+                try {
+                        ConsoleLogger consoleLogger = new ConsoleLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
+                                        this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
 
-    Assert.assertEquals(filePath, Paths.get(StringProcessor
-        .safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), "\\TestCustomName", dateTime,
-            ".png")).normalize().toString());
-    Assert.assertTrue(new File(filePath).exists(),
-        "Checking that screenshot file exists at expected path.");
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        boolean isSuccess = SeleniumUtilities.captureScreenshot(webDriver, testObject, "testAppend");
 
-  }
+                        // Assert screenshot was NOT successful
+                        Assert.assertFalse(isSuccess, "Expected Screenshot to NOT be successful.");
+                } finally {
+                        webDriver.quit();
+                }
+        }
 
-  /**
-   * Test save page source no append.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void testSavePageSourceNoAppend() throws Exception {
-    WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
-    SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-    this.setTestObject(testObject);
+        /**
+         * Test capture screenshot custom directory file name.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testCaptureScreenshotCustomDirectoryFileName() throws Exception {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
-    // Open Google and take a screenshot
-    webDriver.navigate().to("http://www.google.com");
-    boolean isSuccess = SeleniumUtilities.savePageSource(webDriver, testObject);
+                try {
+                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
+                                        this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
 
-    // Assert screenshot was successful
-    Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
-    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
-    Assert
-        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
-            "Checking that expected file path exists");
-  }
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+                                        .format(LocalDateTime.now(Clock.systemUTC()));
+                        String filePath = SeleniumUtilities.captureScreenshot(webDriver, testObject,
+                                        fileLogger.getDirectory(),
+                                        StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
 
-  /**
-   * Test save page source append.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void testSavePageSourceAppend() throws Exception {
-    WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
-    SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-    this.setTestObject(testObject);
+                        Assert.assertEquals(filePath,
+                                        Paths.get(StringProcessor.safeFormatter("%s%s - %s%s",
+                                            fileLogger.getDirectory(), File.separator + "TestCustomName", dateTime,
+                                            ".png")).normalize().toString());
+                        Assert.assertTrue(new File(filePath).exists(),
+                                        "Checking that screenshot file exists at expected path.");
+                } finally {
+                        webDriver.quit();
+                }
+        }
 
-    // Open Google and take a screenshot
-    webDriver.navigate().to("http://www.google.com");
-    final String testAppend = "testAppend";
-    boolean isSuccess = SeleniumUtilities.savePageSource(webDriver, testObject, testAppend);
+        /**
+         * Test save page source no append.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testSavePageSourceNoAppend() throws Exception {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
-    // Assert screenshot was successful
-    Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
-    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
-    Assert
-        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
-            "Checking that expected file path exists");
-    Assert.assertTrue(
-        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).getName()
-            .contains(testAppend), "Checking that appended value was added to file");
+                try {
+                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
+                                        this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
 
-  }
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        boolean isSuccess = SeleniumUtilities.savePageSource(webDriver, testObject);
 
-  /**
-   * Test save page source custom directory file name.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void testSavePageSourceCustomDirectoryFileName() throws Exception {
-    WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-    FileLogger fileLogger = (FileLogger) this.getTestObject().getLog();
-    SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-    this.setTestObject(testObject);
+                        // Assert screenshot was successful
+                        Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+                        String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+                        Assert.assertTrue(
+                                        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+                                        "Checking that expected file path exists");
+                } finally {
+                        webDriver.quit();
+                }
+        }
 
-    // Open Google and take a screenshot
-    webDriver.navigate().to("http://www.google.com");
-    String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
-        .format(LocalDateTime.now(Clock.systemUTC()));
-    String filePath = SeleniumUtilities
-        .savePageSource(webDriver, testObject, fileLogger.getDirectory(),
-            StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
+        /**
+         * Test save page source append.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testSavePageSourceAppend() throws Exception {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
-    // Assert File Path returned from Screenshot is the same as expected file path.
-    Assert.assertEquals(filePath, Paths.get(StringProcessor
-        .safeFormatter("%s%s - %s%s", fileLogger.getDirectory(), "\\TestCustomName", dateTime,
-            ".txt")).normalize().toString());
-    Assert.assertTrue(new File(filePath).exists(),
-        "Checking that page source file exists at expected path.");
-    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
-    Assert
-        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
-            "Checking that expected file path exists");
+                try {
+                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
+                                        this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
 
-  }
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        final String testAppend = "testAppend";
+                        boolean isSuccess = SeleniumUtilities.savePageSource(webDriver, testObject, testAppend);
 
-  /**
-   * Test save page source console logger.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void testSavePageSourceConsoleLogger() throws Exception {
-    WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-    ConsoleLogger consoleLogger = new ConsoleLogger();
-    SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-    this.setTestObject(testObject);
+                        // Assert screenshot was successful
+                        Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+                        String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+                        Assert.assertTrue(
+                                        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+                                        "Checking that expected file path exists");
+                        Assert.assertTrue(
+                                        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).getName()
+                                                        .contains(testAppend),
+                                        "Checking that appended value was added to file");
+                } finally {
+                        webDriver.quit();
+                }
+        }
 
-    // Open Google and take a screenshot
-    webDriver.navigate().to("http://www.google.com");
-    boolean isSuccess = SeleniumUtilities.savePageSource(webDriver, testObject);
+        /**
+         * Test save page source custom directory file name.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testSavePageSourceCustomDirectoryFileName() throws Exception {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
-    // Assert screenshot was successful
-    Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
-    String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
-    Assert
-        .assertTrue(new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
-            "Checking that expected file path exists");
-  }
+                try {
+                        FileLogger fileLogger = (FileLogger) this.getTestObject().getLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, fileLogger,
+                                        this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
 
-  /**
-   * Test web element to web driver.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void testWebElementToWebDriver() throws Exception {
-    WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-    EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(webDriver);
-    ConsoleLogger consoleLogger = new ConsoleLogger();
-    SeleniumTestObject testObject = new SeleniumTestObject(eventFiringWebDriver, consoleLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-    this.setTestObject(testObject);
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+                                        .format(LocalDateTime.now(Clock.systemUTC()));
+                        String filePath = SeleniumUtilities.savePageSource(webDriver, testObject,
+                                        fileLogger.getDirectory(),
+                                        StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
 
-    // Open Google and take a screenshot
-    eventFiringWebDriver.navigate().to("http://www.google.com");
-    WebElement input = UIWaitFactory.getWaitDriver(eventFiringWebDriver)
-        .waitForVisibleElement(By.tagName("div"));
-    WebDriver webElementToWebDriver = SeleniumUtilities.webElementToWebDriver(input);
-    Assert.assertNotNull(webElementToWebDriver, "Expected extracted webdriver to not be null");
-  }
+                        // Assert File Path returned from Screenshot is the same as expected file path.
+                        Assert.assertEquals(filePath,
+                                        Paths.get(StringProcessor.safeFormatter("%s%s - %s%s",
+                                            fileLogger.getDirectory(), File.separator + "TestCustomName", dateTime,
+                                            ".txt")).normalize().toString());
+                        Assert.assertTrue(new File(filePath).exists(),
+                                        "Checking that page source file exists at expected path.");
+                        String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+                        Assert.assertTrue(
+                                        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+                                        "Checking that expected file path exists");
+                } finally {
+                        webDriver.quit();
+                }
+        }
 
-  /**
-   * Test kill driver.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void testKillDriver() throws Exception {
-    WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
-    ConsoleLogger consoleLogger = new ConsoleLogger();
-    SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-    this.setTestObject(testObject);
+        /**
+         * Test save page source console logger.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testSavePageSourceConsoleLogger() throws Exception {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
-    // Open Google then Kill the Driver
-    webDriver.navigate().to("http://www.google.com");
-    SeleniumUtilities.killDriver(webDriver);
+                try {
+                        ConsoleLogger consoleLogger = new ConsoleLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
+                                        this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
 
-    // Assert that the Session ID is null in the Selenium Driver
-    Assert.assertNull(((RemoteWebDriver) webDriver).getSessionId(),
-        "Expected Selenium Driver Session ID to be null.");
-  }
+                        // Open Google and take a screenshot
+                        webDriver.navigate().to("http://www.google.com");
+                        boolean isSuccess = SeleniumUtilities.savePageSource(webDriver, testObject);
+
+                        // Assert screenshot was successful
+                        Assert.assertTrue(isSuccess, "Expected Screenshot to be successful.");
+                        String[] arrayOfAssociatedFiles = testObject.getArrayOfAssociatedFiles();
+                        Assert.assertTrue(
+                                        new File((arrayOfAssociatedFiles[arrayOfAssociatedFiles.length - 1])).exists(),
+                                        "Checking that expected file path exists");
+                } finally {
+                        webDriver.quit();
+                }
+        }
+
+        /**
+         * Test web element to web driver.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testWebElementToWebDriver() throws Exception {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
+
+                try {
+                        EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(webDriver);
+                        ConsoleLogger consoleLogger = new ConsoleLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(eventFiringWebDriver, consoleLogger,
+                                        this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
+
+                        // Open Google and take a screenshot
+                        eventFiringWebDriver.navigate().to("http://www.google.com");
+                        WebElement input = UIWaitFactory.getWaitDriver(eventFiringWebDriver)
+                                        .waitForVisibleElement(By.tagName("div"));
+                        WebDriver webElementToWebDriver = SeleniumUtilities.webElementToWebDriver(input);
+                        Assert.assertNotNull(webElementToWebDriver, "Expected extracted web driver to not be null");
+                } finally {
+                        webDriver.quit();
+                }
+        }
+
+        /**
+         * Test kill driver.
+         */
+        @Test(groups = TestCategories.SELENIUM)
+        public void testKillDriver() throws Exception {
+                WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
+
+                try {
+                        ConsoleLogger consoleLogger = new ConsoleLogger();
+                        SeleniumTestObject testObject = new SeleniumTestObject(webDriver, consoleLogger,
+                                        this.getTestObject().getFullyQualifiedTestName());
+                        this.setTestObject(testObject);
+
+                        // Open Google then Kill the Driver
+                        webDriver.navigate().to("http://www.google.com");
+                        SeleniumUtilities.killDriver(webDriver);
+
+                        // Assert that the Session ID is null in the Selenium Driver
+                        Assert.assertNull(((RemoteWebDriver) webDriver).getSessionId(),
+                                        "Expected Selenium Driver Session ID to be null.");
+                } finally {
+                        webDriver.quit();
+                }
+        }
 }

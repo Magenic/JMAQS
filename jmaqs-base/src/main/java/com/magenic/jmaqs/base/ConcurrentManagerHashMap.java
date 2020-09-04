@@ -66,7 +66,8 @@ public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTest
    *
    * @param key   key with which the specified value is associated
    * @param value value expected to be associated with the specified key
-   * @return the previous value associated with the specified key, or null if there was no mapping for the key
+   * @return the previous value associated with the specified key, or null if
+   *         there was no mapping for the key
    */
   @Override
   public BaseTestObject replace(String key, BaseTestObject value) {
@@ -80,7 +81,7 @@ public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTest
    * @param key Key of the item to close
    */
   private void closeForKey(Object key) {
-    if (super.contains(key)) {
+    if (super.containsKey(key)) {
       super.get(key).close();
     }
   }

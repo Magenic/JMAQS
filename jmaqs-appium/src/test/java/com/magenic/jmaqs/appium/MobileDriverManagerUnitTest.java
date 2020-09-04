@@ -5,12 +5,11 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.base.BaseGenericTest;
-import com.magenic.jmaqs.base.BaseTest;
+
 import io.appium.java_client.AppiumDriver;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
 
 /**
@@ -23,11 +22,12 @@ public class MobileDriverManagerUnitTest extends BaseGenericTest {
   @Test
   public void testGetMobileDriver() {
     Supplier<AppiumDriver<WebElement>> supplier = AppiumDriverFactory::getDefaultMobileDriver;
-    MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier,
-        this.getTestObject());
+    AppiumTestObject appiumTestObject = new AppiumTestObject(supplier, this.getLogger(),
+        this.getTestObject().getFullyQualifiedTestName());
 
-    Assert.assertNotNull(mobileDriverManager.getMobileDriver(),
-        "Expected Mobile Driver to not be null.");
+    try (MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier, appiumTestObject)) {
+      Assert.assertNotNull(mobileDriverManager.getMobileDriver(), "Expected Mobile Driver to not be null.");
+    }
   }
 
   /**
@@ -36,9 +36,18 @@ public class MobileDriverManagerUnitTest extends BaseGenericTest {
   @Test
   public void testClose() {
     Supplier<AppiumDriver<WebElement>> supplier = AppiumDriverFactory::getDefaultMobileDriver;
-    MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier,
-        this.getTestObject());
+    MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier, this.getTestObject());
 
+    mobileDriverManager.close();
+    Assert.assertNull(mobileDriverManager.getBaseDriver(), "Expected Mobile Driver to be null.");
+  }
+
+  /**
+   * Test close with instantiated driver.
+   */
+  @Test
+  public void testCloseWithInstantiatedDriver() {
+    MobileDriverManager mobileDriverManager = new MobileDriverManager(AppiumDriverFactory.getDefaultMobileDriver(), this.getTestObject());
     mobileDriverManager.close();
     Assert.assertNull(mobileDriverManager.getBaseDriver(), "Expected Mobile Driver to be null.");
   }
@@ -49,8 +58,7 @@ public class MobileDriverManagerUnitTest extends BaseGenericTest {
   @Test
   public void testCloseNullBaseDriver() {
     Supplier<AppiumDriver<WebElement>> supplier = AppiumDriverFactory::getDefaultMobileDriver;
-    MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier,
-        this.getTestObject());
+    MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier, this.getTestObject());
 
     // Close once to make Base Driver null
     mobileDriverManager.close();

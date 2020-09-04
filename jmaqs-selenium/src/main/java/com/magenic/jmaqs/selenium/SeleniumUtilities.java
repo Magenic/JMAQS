@@ -61,22 +61,22 @@ public class SeleniumUtilities {
       String appendName) {
     try {
       // Check if we are using a file logger. If not, return false.
-      if (!(testObject.getLog() instanceof FileLogger)) {
+      if (!(testObject.getLogger() instanceof FileLogger)) {
         return false;
       }
 
       // Calculate the file name with Date Time Stamp
-      String directory = ((FileLogger) testObject.getLog()).getDirectory();
+      String directory = ((FileLogger) testObject.getLogger()).getDirectory();
       String fileNameWithoutExtension = StringProcessor
           .safeFormatter(LOG_MESSAGE_PREFIX, testObject.getFullyQualifiedTestName(),
               DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT, Locale.getDefault())
                   .format(LocalDateTime.now(Clock.systemUTC())), appendName);
       captureScreenshot(webDriver, testObject, directory, fileNameWithoutExtension);
 
-      testObject.getLog().logMessage(MessageType.INFORMATION, "Screenshot saved.");
+      testObject.getLogger().logMessage(MessageType.INFORMATION, "Screenshot saved.");
       return true;
     } catch (Exception exception) {
-      testObject.getLog().logMessage(MessageType.ERROR,
+      testObject.getLogger().logMessage(MessageType.ERROR,
           String.format("Screenshot error: %s", exception.getMessage()));
       return false;
     }
@@ -103,7 +103,7 @@ public class SeleniumUtilities {
     try {
       copyFileToPath(tempFile, path);
     } catch (IOException exception) {
-      testObject.getLog().logMessage(MessageType.ERROR,
+      testObject.getLogger().logMessage(MessageType.ERROR,
           String.format("Screenshot error: %s", exception.getMessage()));
     }
 
@@ -140,7 +140,7 @@ public class SeleniumUtilities {
       String path = "";
 
       // Check if we are using a file logger.
-      if (!(testObject.getLog() instanceof FileLogger)) {
+      if (!(testObject.getLogger() instanceof FileLogger)) {
         // Since this is not a file logger we will need to use a generic file name
         path = savePageSource(webDriver, testObject, LoggingConfig.getLogDirectory(),
             StringProcessor.safeFormatter(LOG_MESSAGE_PREFIX, "PageSource",
@@ -148,7 +148,7 @@ public class SeleniumUtilities {
                     .format(LocalDateTime.now(Clock.systemUTC())), appendName));
       } else {
         // Calculate the file name
-        String directory = ((FileLogger) testObject.getLog()).getDirectory();
+        String directory = ((FileLogger) testObject.getLogger()).getDirectory();
         String fileNameWithoutExtension = StringProcessor
             .safeFormatter(LOG_MESSAGE_PREFIX, testObject.getFullyQualifiedTestName() + "_PS",
                 DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT, Locale.getDefault())
@@ -157,10 +157,10 @@ public class SeleniumUtilities {
         path = savePageSource(webDriver, testObject, directory, fileNameWithoutExtension);
       }
 
-      testObject.getLog().logMessage(MessageType.INFORMATION, "Page Source saved: " + path);
+      testObject.getLogger().logMessage(MessageType.INFORMATION, "Page Source saved: " + path);
       return true;
     } catch (Exception exception) {
-      testObject.getLog().logMessage(MessageType.ERROR,
+      testObject.getLogger().logMessage(MessageType.ERROR,
           String.format("Page Source error: %s", exception.getMessage()));
       return false;
     }
@@ -192,7 +192,7 @@ public class SeleniumUtilities {
       // Flush File Writer
       writer.flush();
     } catch (IOException exception) {
-      testObject.getLog().logMessage(MessageType.ERROR, "Failed to start File Writer.");
+      testObject.getLogger().logMessage(MessageType.ERROR, "Failed to start File Writer.");
     }
 
     testObject.addAssociatedFile(path);
@@ -211,7 +211,7 @@ public class SeleniumUtilities {
         Files.createDirectories(path);
       }
     } catch (IOException exception) {
-      testObject.getLog()
+      testObject.getLogger()
           .logMessage(MessageType.ERROR, "Failed to create directories: " + exception.getMessage());
     }
   }

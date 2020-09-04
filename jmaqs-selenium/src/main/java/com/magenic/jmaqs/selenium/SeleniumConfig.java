@@ -28,12 +28,12 @@ public final class SeleniumConfig {
   /**
    * The web service configuration section.
    */
-  public static final ConfigSection SELENIUM_SECTION = ConfigSection.SeleniumMaqs;
+  public static final ConfigSection SELENIUM_SECTION = ConfigSection.SELENIUM_MAQS;
 
   /**
    * The remote selenium configuration section.
    */
-  private static final ConfigSection SELENIUM_CAPS_SECTION = ConfigSection.RemoteSeleniumCapsMaqs;
+  private static final ConfigSection SELENIUM_CAPS_SECTION = ConfigSection.REMOTE_SELENIUM_CAPS_MAQS;
 
   /**
    * Get the browser type.

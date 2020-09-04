@@ -15,16 +15,26 @@ import org.openqa.selenium.WebElement;
 /**
  * Mobile Driver Manager Class.
  */
-public class MobileDriverManager extends DriverManager {
+public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>> {
   /**
    * Instantiates a new Mobile Driver Manager.
    *
    * @param getDriverFunction Function that specifies how to get the driver.
    * @param baseTestObject    The Base Test Object.
    */
-  public MobileDriverManager(Supplier<AppiumDriver<WebElement>> getDriverFunction,
-      BaseTestObject baseTestObject) {
+  public MobileDriverManager(Supplier<AppiumDriver<WebElement>> getDriverFunction, BaseTestObject baseTestObject) {
     super(getDriverFunction, baseTestObject);
+  }
+
+  /**
+   * Instantiates a new Appium Driver Manager.
+   *
+   * @param driver         Appium Driver
+   * @param baseTestObject The Base Test Object.
+   */
+  public MobileDriverManager(AppiumDriver<WebElement> driver, BaseTestObject baseTestObject) {
+    super(() -> driver, baseTestObject);
+    this.baseDriver = driver;
   }
 
   /**
@@ -33,14 +43,14 @@ public class MobileDriverManager extends DriverManager {
    * @return The Appium Driver
    */
   public AppiumDriver<WebElement> getMobileDriver() {
-    return (AppiumDriver<WebElement>) getBase();
+    return getBase();
   }
 
   /**
    * Cleanup the Appium Driver.
    */
   public void close() {
-    // If we never created the driver we don't have any cleanup to do  
+    // If we never created the driver we don't have any cleanup to do
     if (!this.isDriverInitialized()) {
       return;
     }
@@ -50,8 +60,8 @@ public class MobileDriverManager extends DriverManager {
       driver.close();
       driver.quit();
     } catch (Exception e) {
-      this.getLogger().logMessage(MessageType.ERROR, StringProcessor
-          .safeFormatter("Failed to close mobile driver because: %s", e.getMessage()));
+      this.getLogger().logMessage(MessageType.ERROR,
+          StringProcessor.safeFormatter("Failed to close mobile driver because: %s", e.getMessage()));
     }
 
     this.baseDriver = null;

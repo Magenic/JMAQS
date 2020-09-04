@@ -7,7 +7,9 @@ package com.magenic.jmaqs.utilities.helper.exceptions;
 /**
  * Custom FunctionException, as you can't throw a generic exception.
  */
-public class FunctionException extends Exception {
+public class FunctionException extends RuntimeException {
+  private static final long serialVersionUID = 1;
+
   /**
    * Initializes an instance of the FunctionException class.
    *

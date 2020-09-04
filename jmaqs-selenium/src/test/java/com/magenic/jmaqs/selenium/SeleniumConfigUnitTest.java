@@ -81,7 +81,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
 
     String path = SeleniumConfig.getDriverHintPath();
 
-    Assert.assertEquals(path, "./src/test/resources");
+    Assert.assertEquals(path, "./src/test/resources/drivers");
   }
 
   /**

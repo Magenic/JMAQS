@@ -4,15 +4,13 @@
     <parent>
         <groupId>com.magenic.jmaqs</groupId>
         <artifactId>jmaqs-framework</artifactId>
-        <version>2.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>${revision}</version>
     </parent>
 
     <groupId>com.magenic.jmaqs.selenium</groupId>
     <artifactId>jmaqs-selenium</artifactId>
     <name>JMAQS Selenium Testing Module</name>
     <packaging>jar</packaging>
-    <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -96,12 +94,12 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <installationDirectory>./src/test/resources</installationDirectory>
+                    <installationDirectory>./src/test/resources/drivers</installationDirectory>
                     <drivers>
                         <driver>
                             <name>chromedriver</name>
                             <customFileName>chromedriver</customFileName>
-                            <version>80.0.3987.16</version>
+                            <version>83.0.4103.39</version>
                         </driver>
                         <driver>
                             <name>internetexplorerdriver</name>

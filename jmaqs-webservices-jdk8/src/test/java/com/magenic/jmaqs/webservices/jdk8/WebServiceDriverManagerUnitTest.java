@@ -22,15 +22,12 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceDriverWithSupplierTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    webServiceDriver
-        .setHttpClient(webServiceDriver.getHttpClient(MediaType.APP_JSON.getMediaTypeString()));
+    webServiceDriver.setHttpClient(webServiceDriver.getHttpClient(MediaType.APP_JSON.getMediaTypeString()));
 
-    WebServiceDriverManager driverManager = new WebServiceDriverManager(
-        () -> webServiceDriver.getHttpClient(MediaType.APP_JSON.getMediaTypeString()),
-        this.getTestObject());
-
-    Assert.assertNotNull(driverManager.getWebServiceDriver(),
-        "Expected Web Service Driver to not be null");
+    try (WebServiceDriverManager driverManager = new WebServiceDriverManager(
+        () -> webServiceDriver.getHttpClient(MediaType.APP_JSON.getMediaTypeString()), this.getTestObject())) {
+      Assert.assertNotNull(driverManager.getWebServiceDriver(), "Expected Web Service Driver to not be null");
+    }
   }
 
   /**
@@ -41,28 +38,26 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceDriverTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver,
-        this.getTestObject());
-
-    Assert.assertNotNull(driverManager.getWebServiceDriver(),
-        "Expected Web Service Driver to not be null");
+    try (WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver, this.getTestObject())) {
+      Assert.assertNotNull(driverManager.getWebServiceDriver(), "Expected Web Service Driver to not be null");
+    }
   }
 
   /**
-   * Test for Getting Web Service Driver when Driver is null and instantiates default Driver.
+   * Test for Getting Web Service Driver when Driver is null and instantiates
+   * default Driver.
    *
    * @throws URISyntaxException URI Syntax Exception
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getWebServiceDriverNullDriver() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver,
-        this.getTestObject());
-
-    // Set the Driver to be null then check Get Web Service Driver creates default Driver.
-    driverManager.overrideDriver(null);
-    Assert.assertNotNull(driverManager.getWebServiceDriver(),
-        "Expected Default Web Service Driver to be created.");
+    try (WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver, this.getTestObject())) {
+      // Set the Driver to be null then check Get Web Service Driver creates default
+      // Driver.
+      driverManager.overrideDriver(null);
+      Assert.assertNotNull(driverManager.getWebServiceDriver(), "Expected Default Web Service Driver to be created.");
+    }
   }
 
   /**
@@ -75,12 +70,12 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
     WebServiceDriver webServiceDriver2 = new WebServiceDriver("http://www.google.com/");
 
-    WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver,
-        this.getTestObject());
-    driverManager.overrideDriver(webServiceDriver2);
+    try (WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver, this.getTestObject())) {
+      driverManager.overrideDriver(webServiceDriver2);
 
-    Assert.assertEquals(driverManager.getWebServiceDriver().getBaseWebServiceAddress().toString(),
-        "http://www.google.com/");
+      Assert.assertEquals(driverManager.getWebServiceDriver().getBaseWebServiceAddress().toString(),
+          "http://www.google.com/");
+    }
   }
 
   /**
@@ -91,8 +86,7 @@ public class WebServiceDriverManagerUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void closeWebServiceDriverTest() throws URISyntaxException {
     WebServiceDriver webServiceDriver = new WebServiceDriver(WebServiceConfig.getWebServiceUri());
-    WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver,
-        this.getTestObject());
+    WebServiceDriverManager driverManager = new WebServiceDriverManager(webServiceDriver, this.getTestObject());
 
     driverManager.close();
     Assert.assertNull(driverManager.getBaseDriver(), "Expected Base Driver to be null.");

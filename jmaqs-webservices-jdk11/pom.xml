@@ -5,7 +5,7 @@
     <parent>
         <artifactId>jmaqs-framework</artifactId>
         <groupId>com.magenic.jmaqs</groupId>
-        <version>2.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -54,7 +54,7 @@
                 <version>3.8.1</version>
                 <configuration>
                     <source>11</source>
-                         <target>11</target>
+                    <target>11</target>
                 </configuration>
             </plugin>
             <plugin>

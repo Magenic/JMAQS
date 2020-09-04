@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.utilities.helper;
 
+import com.magenic.jmaqs.utilities.helper.exceptions.FrameworkConfigurationException;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,7 +21,7 @@ import org.apache.commons.configuration2.sync.ReadWriteSynchronizer;
 public final class Config {
 
   private Config() {
-    //Private constructor
+    // Private constructor
   }
 
   /**
@@ -31,7 +32,7 @@ public final class Config {
   /**
    * The default section MagenicMaqs.
    */
-  public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MagenicMaqs;
+  public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MAGENIC_MAQS;
 
   /**
    * The default config.xml file name.
@@ -68,7 +69,7 @@ public final class Config {
       overrideConfig = new XMLConfiguration();
       overrideConfig.setSynchronizer(new ReadWriteSynchronizer());
     } catch (ConfigurationException exception) {
-      throw new RuntimeException(StringProcessor
+      throw new FrameworkConfigurationException(StringProcessor
           .safeFormatter("Exception creating the xml configuration object from the file : %s", exception));
     }
   }
@@ -90,7 +91,7 @@ public final class Config {
    * @return A HashMap of the values in the section
    */
   public static Map<String, String> getSection(String section) {
-    HashMap<String, String> sectionValues = new HashMap();
+    HashMap<String, String> sectionValues = new HashMap<>();
 
     // first parse the override config
     Iterator<String> overridePaths = overrideConfig.getKeys(section);
@@ -223,7 +224,8 @@ public final class Config {
    * Get the configuration value for a specific key. Does not assume a section.
    *
    * @param key The key
-   * @return The configuration value - Returns the empty string if the key is not found
+   * @return The configuration value - Returns the empty string if the key is not
+   *         found
    */
   public static String getValue(String key) {
     String retVal = overrideConfig.getString(key, "");
@@ -235,7 +237,8 @@ public final class Config {
    *
    * @param key          The key
    * @param defaultValue Value to return if the key does not exist
-   * @return The configuration value - Returns the default string if the key is not found
+   * @return The configuration value - Returns the default string if the key is
+   *         not found
    */
   public static String getValue(String key, String defaultValue) {
     String retVal = getValue(key);
@@ -249,7 +252,7 @@ public final class Config {
    * @return True if the key exists, false otherwise
    */
   public static boolean doesKeyExist(String key) {
-    return overrideConfig.containsKey(key) ? true : configValues.containsKey(key);
+    return overrideConfig.containsKey(key) || configValues.containsKey(key);
   }
 
   /**

@@ -5,9 +5,13 @@
 package com.magenic.jmaqs.utilities.helper.exceptions;
 
 /**
- * Custom TimeoutException, as the built in one does not allow for a passed in inner exception.
+ * Custom TimeoutException, as the built in one does not allow for a passed in
+ * inner exception.
  */
-public class TimeoutException extends Exception {
+public class TimeoutException extends RuntimeException {
+
+  private static final long serialVersionUID = 1;
+
   /**
    * Initializes an instance of the TimeoutException class.
    *

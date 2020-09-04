@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Database Providers
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Database Providers
 
 ## Overview
 We support several providers with Database testing, the providers support getting the data source and the Dialect.
