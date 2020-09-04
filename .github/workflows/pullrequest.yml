@@ -30,7 +30,7 @@ jobs:
       #          name: jacoco-files
       #          path: ./**/jacoco.xml
       - name: Run SonarCloud Analysis
-        run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths=${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml
+        run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
   checkstyle:
     runs-on: ubuntu-latest
     steps:
