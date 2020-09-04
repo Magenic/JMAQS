@@ -18,13 +18,19 @@ jobs:
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
+      - name: Create settings file
+        uses: InstaCode/maven-settings-xml-action@v9
+        with:
+          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{secrets.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
       - name: Run Unit Tests
         run: mvn -B -Pjacoco clean verify install --file pom.xml -e -fae -T 1C
-      - name: upload files
-        uses: actions/upload-artifact@v2
-        with:
-          name: jacoco-files
-          path: ./**/jacoco.xml
+      #      - name: upload files
+      #        uses: actions/upload-artifact@v2
+      #        with:
+      #          name: jacoco-files
+      #          path: ./**/jacoco.xml
+      - name: Run SonarCloud Analysis
+        run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths=${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml
   checkstyle:
     runs-on: ubuntu-latest
     steps:
@@ -47,31 +53,31 @@ jobs:
         uses: actions/labeler@v2
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-  sonarcloud:
-    needs:
-      - unit_tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Restore Local Maven Cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{runner.os}}-m2
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: jacoco-files
-          path: ./jacoco-files
-      - name: Create settings file
-        uses: InstaCode/maven-settings-xml-action@v9
-        with:
-          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{secrets.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
-      - name: Build Packages
-        run: mvn -B package -DskipTests=true --file pom.xml -e -fae
-      - name: Run SonarCloud Analysis
-        run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths=${{github.workspace}}/jacoco-files/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml
+#  sonarcloud:
+#    needs:
+#      - unit_tests
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Set up JDK 11
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 11
+#      - name: Restore Local Maven Cache
+#        uses: actions/cache@v2
+#        with:
+#          path: ~/.m2
+#          key: ${{runner.os}}-m2
+#      - name: Download Build Artifact
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: jacoco-files
+#          path: ./jacoco-files
+#      - name: Create settings file
+#        uses: InstaCode/maven-settings-xml-action@v9
+#        with:
+#          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{secrets.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
+#      - name: Build Packages
+#        run: mvn -B package -DskipTests=true --file pom.xml -e -fae
+#      - name: Run SonarCloud Analysis
+#        run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths=${{github.workspace}}/jacoco-files/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml
