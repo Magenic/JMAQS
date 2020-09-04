@@ -1,8 +1,0 @@
-{
-  "name": "internetexplorerdriver",
-  "platform": "windows",
-  "bit": "64",
-  "version": "2.39.0",
-  "url": "http://selenium-release.storage.googleapis.com/2.39/IEDriverServer_x64_2.39.0.zip",
-  "customFileName": "IEDriverServer"
-}

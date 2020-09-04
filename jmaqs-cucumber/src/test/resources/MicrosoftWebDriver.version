@@ -1,8 +1,0 @@
-{
-  "name": "edgedriver",
-  "platform": "windows",
-  "bit": "64",
-  "version": "5.16299",
-  "url": "https://download.microsoft.com/download/D/4/1/D417998A-58EE-4EFE-A7CC-39EF9E020768/MicrosoftWebDriver.exe",
-  "customFileName": "MicrosoftWebDriver"
-}
