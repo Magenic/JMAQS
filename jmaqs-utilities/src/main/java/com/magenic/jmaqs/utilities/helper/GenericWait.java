@@ -36,8 +36,7 @@ public final class GenericWait {
    * @throws InterruptedException the interrupted exception
    * @throws FunctionException    the function exception
    */
-  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg)
-      throws InterruptedException, FunctionException {
+  public static <T> boolean waitUntil(Predicate<T> waitForTrue, T arg) throws InterruptedException {
     return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false, arg);
   }
 
@@ -49,8 +48,7 @@ public final class GenericWait {
    * @throws InterruptedException the interrupted exception
    * @throws FunctionException    the function exception
    */
-  public static boolean waitUntil(BooleanSupplier waitForTrue)
-      throws InterruptedException, FunctionException {
+  public static boolean waitUntil(BooleanSupplier waitForTrue) throws InterruptedException {
     return wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, false);
   }
 
@@ -62,8 +60,7 @@ public final class GenericWait {
    * @throws FunctionException    the function exception
    * @throws TimeoutException     the timeout exception
    */
-  public static void waitForTrue(BooleanSupplier waitForTrue)
-      throws InterruptedException, FunctionException, TimeoutException {
+  public static void waitForTrue(BooleanSupplier waitForTrue) throws InterruptedException {
     if (!wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, true)) {
       throw new TimeoutException("Timed out waiting for the function to return true");
     }
@@ -79,8 +76,7 @@ public final class GenericWait {
    * @throws FunctionException    the function exception
    * @throws TimeoutException     the timeout exception
    */
-  public static <T> void waitForTrue(Predicate<T> waitForTrue, T arg)
-      throws InterruptedException, FunctionException, TimeoutException {
+  public static <T> void waitForTrue(Predicate<T> waitForTrue, T arg) throws InterruptedException {
     if (!wait(waitForTrue, retryTimeFromConfig, timeoutFromConfig, true, arg)) {
       throw new TimeoutException("Timed out waiting for the function to return true");
     }
@@ -95,8 +91,7 @@ public final class GenericWait {
    * @return the t
    * @throws InterruptedException the interrupted exception
    */
-  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, T comparativeValue)
-      throws InterruptedException {
+  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, T comparativeValue) throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -106,8 +101,7 @@ public final class GenericWait {
     boolean paramsAreEqual = paramsEqual(value, comparativeValue);
 
     // While the params are not equal & the timeout hasn't met, keep checking
-    while (!paramsAreEqual
-        && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
+    while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
       // If they aren't, wait
       Thread.sleep(retryTimeFromConfig);
 
@@ -135,8 +129,8 @@ public final class GenericWait {
    * @return the t
    * @throws InterruptedException the interrupted exception
    */
-  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, long retryTime, long timeout,
-      T comparativeValue) throws InterruptedException {
+  public static <T> T waitUntilMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
+      throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -170,8 +164,7 @@ public final class GenericWait {
    * @throws InterruptedException the interrupted exception
    * @throws TimeoutException     the timeout exception
    */
-  public static <T> void waitForMatch(Supplier<T> waitForTrue, T comparativeValue)
-      throws InterruptedException, TimeoutException {
+  public static <T> void waitForMatch(Supplier<T> waitForTrue, T comparativeValue) throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -179,8 +172,7 @@ public final class GenericWait {
     boolean paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
 
     // While the params are not equal & the timeout hasn't met, keep checking
-    while (!paramsAreEqual
-        && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
+    while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
       // If they aren't, wait
       Thread.sleep(retryTimeFromConfig);
 
@@ -190,8 +182,7 @@ public final class GenericWait {
     }
 
     if (!paramsAreEqual) {
-      throw new TimeoutException(
-          "Timed out waiting for the supplier to return expected value of " + comparativeValue);
+      throw new TimeoutException("Timed out waiting for the supplier to return expected value of " + comparativeValue);
     }
   }
 
@@ -206,8 +197,8 @@ public final class GenericWait {
    * @throws InterruptedException the interrupted exception
    * @throws TimeoutException     the timeout exception
    */
-  public static <T> void waitForMatch(Supplier<T> waitForTrue, long retryTime, long timeout,
-      T comparativeValue) throws InterruptedException, TimeoutException {
+  public static <T> void waitForMatch(Supplier<T> waitForTrue, long retryTime, long timeout, T comparativeValue)
+      throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
 
@@ -238,7 +229,7 @@ public final class GenericWait {
    * @throws InterruptedException the interrupted exception
    * @throws TimeoutException     the timeout exception
    */
-  public static <T> T waitFor(Supplier<T> waitFor) throws InterruptedException, TimeoutException {
+  public static <T> T waitFor(Supplier<T> waitFor) throws InterruptedException {
     return wait(waitFor, retryTimeFromConfig, timeoutFromConfig);
   }
 
@@ -253,8 +244,7 @@ public final class GenericWait {
    * @throws InterruptedException the interrupted exception
    * @throws TimeoutException     the timeout exception
    */
-  public static <T, U> T waitFor(Function<U, T> waitFor, U arg)
-      throws InterruptedException, TimeoutException {
+  public static <T, U> T waitFor(Function<U, T> waitFor, U arg) throws InterruptedException {
     return wait(waitFor, retryTimeFromConfig, timeoutFromConfig, arg);
   }
 
@@ -271,8 +261,8 @@ public final class GenericWait {
    * @throws InterruptedException the interrupted exception
    * @throws FunctionException    the function exception
    */
-  public static <T> boolean wait(Predicate<T> waitForTrue, long retryTime, long timeout,
-      boolean throwException, T arg) throws InterruptedException, FunctionException {
+  public static <T> boolean wait(Predicate<T> waitForTrue, long retryTime, long timeout, boolean throwException, T arg)
+      throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     FunctionException exception = null;
@@ -317,8 +307,8 @@ public final class GenericWait {
    * @throws InterruptedException the interrupted exception
    * @throws FunctionException    the function exception
    */
-  public static boolean wait(BooleanSupplier waitForTrue, long retryTime, long timeout,
-      boolean throwException) throws InterruptedException, FunctionException {
+  public static boolean wait(BooleanSupplier waitForTrue, long retryTime, long timeout, boolean throwException)
+      throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     FunctionException exception = null;
@@ -361,10 +351,8 @@ public final class GenericWait {
    * @param timeout   the timeout
    * @return the t
    * @throws InterruptedException the interrupted exception
-   * @throws TimeoutException     the timeout exception
    */
-  public static <T> T wait(Supplier<T> waitFor, long retryTime, long timeout)
-      throws InterruptedException, TimeoutException {
+  public static <T> T wait(Supplier<T> waitFor, long retryTime, long timeout) throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     Exception exception = new Exception();
@@ -401,8 +389,7 @@ public final class GenericWait {
    * @throws InterruptedException the interrupted exception
    * @throws TimeoutException     the timeout exception
    */
-  public static <T, U> T wait(Function<U, T> waitFor, long retryTime, long timeout, U arg)
-      throws InterruptedException, TimeoutException {
+  public static <T, U> T wait(Function<U, T> waitFor, long retryTime, long timeout, U arg) throws InterruptedException {
     // Set start time and exception holder
     LocalDateTime start = LocalDateTime.now();
     Exception exception;

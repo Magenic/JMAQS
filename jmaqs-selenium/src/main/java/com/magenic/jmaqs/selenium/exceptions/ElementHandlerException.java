@@ -11,6 +11,11 @@ public class ElementHandlerException extends RuntimeException {
 
   private static final long serialVersionUID = 1;
 
+  /**
+   * Instantiates a new Element handler exception.
+   *
+   * @param message the message
+   */
   public ElementHandlerException(String message) {
     super(message);
   }

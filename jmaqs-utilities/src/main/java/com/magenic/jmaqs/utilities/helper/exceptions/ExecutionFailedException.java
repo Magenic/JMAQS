@@ -4,7 +4,7 @@
 
 package com.magenic.jmaqs.utilities.helper.exceptions;
 
-public class ExecutionFailedException extends Exception {
+public class ExecutionFailedException extends RuntimeException {
 
   private static final long serialVersionUID = 1;
 

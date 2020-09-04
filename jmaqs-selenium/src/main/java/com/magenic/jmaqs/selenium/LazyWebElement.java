@@ -59,7 +59,7 @@ public class LazyWebElement extends AbstractLazyElement {
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
-  public LazyWebElement findElement(By locator) throws TimeoutException, InterruptedException {
+  public LazyWebElement findElement(By locator) throws InterruptedException {
     WebElement elementFound = this.findRawElement(locator);
     return new LazyWebElement(this, locator, this.userFriendlyName, null, elementFound);
   }
@@ -72,7 +72,7 @@ public class LazyWebElement extends AbstractLazyElement {
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
-  public List<LazyWebElement> findElements(By locator) throws TimeoutException, InterruptedException {
+  public List<LazyWebElement> findElements(By locator) throws InterruptedException {
     int index = 0;
     List<LazyWebElement> elements = new ArrayList<>();
 

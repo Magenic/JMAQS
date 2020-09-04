@@ -44,6 +44,11 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   private static By home = By.cssSelector("#homeButton > a");
 
   /**
+   * Alert button.
+   */
+  private static By alert = By.id("javascriptAlertButton");
+
+  /**
    * Alert button with confirm option.
    */
 
@@ -81,7 +86,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerClickElement() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to click an element, then get the log text
     webDriverWithHandler.findElement(EventHandlerUnitTest.checkbox).click();
@@ -104,7 +109,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerChangeValueOf() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to change the value of an element, then get
     // the log text
@@ -128,7 +133,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerFindBy() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to find an element, then get the log text
     webDriverWithHandler.findElement(EventHandlerUnitTest.computerPartsList);
@@ -152,7 +157,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerNavigateBack() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to navigate back to a page, then get the log
     // text
@@ -178,7 +183,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerNavigateForward() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to navigate forward to a page, then get the
     // log text
@@ -204,7 +209,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerRefresh() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to refresh the page, then get the log text
     webDriverWithHandler.navigate().refresh();
@@ -227,7 +232,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerNavigateTo() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to navigate to a page, then get the log text
     webDriverWithHandler.navigate().to(siteAutomationUrl);
@@ -250,7 +255,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerScript() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to execute a script, then get the log text
     JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriverWithHandler;
@@ -273,7 +278,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerSwitchWindow() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to open a new tab, then get the log text
     ((JavascriptExecutor) webDriverWithHandler).executeScript("window.open()");
@@ -298,11 +303,11 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerAcceptAlert() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to accept an alert, then get the log text
-    UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    waitDriver.waitForClickableElement(alertWithConfirm).click();
+    UIWait waitDriver = UIWaitFactory.getWaitDriver(((EventFiringWebDriver) this.getWebDriver()).getWrappedDriver());
+    waitDriver.waitForClickableElement(alert).click();
     Alert alert = webDriverWithHandler.switchTo().alert();
     alert.accept();
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
@@ -324,10 +329,10 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerAcceptDismiss() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to dismiss an alert, then get the log text
-    UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    UIWait waitDriver = UIWaitFactory.getWaitDriver(((EventFiringWebDriver) this.getWebDriver()).getWrappedDriver());
     waitDriver.waitForClickableElement(alertWithConfirm).click();
     Alert alert = webDriverWithHandler.switchTo().alert();
     alert.dismiss();
@@ -351,7 +356,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerGetText() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to get the text from an element, then get the
     // log text
@@ -375,7 +380,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   public void eventHandlerScreenshot() {
     // Navigate to the Automation site and setup the event handler
     this.navigateToAutomationSiteUrl();
-    WebDriver webDriverWithHandler = getWebDriverWithHandler();
+    WebDriver webDriverWithHandler = getWebDriver();
 
     // Use the Event Firing Web Driver to take a screenshot, then get the log text
     TakesScreenshot takeScreenshot = ((TakesScreenshot) webDriverWithHandler);
@@ -392,24 +397,11 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Setup the Event Handler and register the Event Firing Web Driver before each
-   * test.
-   */
-  private EventFiringWebDriver getEventWebDriver() {
-    return new EventFiringWebDriver(this.getWebDriver());
-  }
-
-  private EventFiringWebDriver getWebDriverWithHandler() {
-    final EventFiringWebDriver eventWebDriver = getEventWebDriver();
-    return eventWebDriver.register(new EventHandler(this.getLogger()));
-  }
-
-  /**
    * Navigate to test page url and wait for page to load.
    */
   private void navigateToAutomationSiteUrl() {
     getWebDriver().navigate().to(siteAutomationUrl);
-    // getSeleniumWait().waitForPageLoad();
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
   }
 
   /**

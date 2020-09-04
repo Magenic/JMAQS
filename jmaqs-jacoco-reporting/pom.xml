@@ -9,7 +9,7 @@
     <parent>
         <artifactId>jmaqs-framework</artifactId>
         <groupId>com.magenic.jmaqs</groupId>
-        <version>2.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -21,7 +21,7 @@
         <profile>
             <id>jacoco</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <build>
                 <plugins>
@@ -84,6 +84,11 @@
         <dependency>
             <groupId>com.magenic.jmaqs.selenium</groupId>
             <artifactId>jmaqs-selenium</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.cucumber</groupId>
+            <artifactId>jmaqs-cucumber</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -48,7 +48,7 @@ public class WebDriverFactory {
    * @return the default browser
    * @throws Exception the exception
    */
-  public static WebDriver getDefaultBrowser() throws WebDriverFactoryException {
+  public static WebDriver getDefaultBrowser() {
     return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
   }
 
@@ -59,7 +59,7 @@ public class WebDriverFactory {
    * @return the browser with default configuration
    * @throws WebDriverFactoryException the exception
    */
-  public static WebDriver getBrowserWithDefaultConfiguration(BrowserType browser) throws WebDriverFactoryException {
+  public static WebDriver getBrowserWithDefaultConfiguration(BrowserType browser) {
     String size = SeleniumConfig.getBrowserSize();
 
     try {
@@ -75,8 +75,7 @@ public class WebDriverFactory {
         case EDGE:
           return getEdgeDriver(getDefaultEdgeOptions(), size);
         case REMOTE:
-          return new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()),
-              getDefaultRemoteOptions());
+          return new RemoteWebDriver(new URL(SeleniumConfig.getHubUrl()), getDefaultRemoteOptions());
         default:
           throw new IllegalArgumentException(
               StringProcessor.safeFormatter("Browser type '%s' is not supported", browser));
@@ -84,8 +83,13 @@ public class WebDriverFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
+
       // Log that something went wrong
-      throw new WebDriverFactoryException("Your web driver may be out of date or unsupported.", e);
+      String message =  "Failed to initial web driver because: %s %s"
+          + "This likely means your web driver is missing, unsupported or out of date.";
+      message = StringProcessor.safeFormatter(message, e.getMessage() , System.lineSeparator());
+
+      throw new WebDriverFactoryException(message, e);
     }
   }
 
@@ -187,8 +191,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
     System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator
-            + WebDriverFile.CHROME.getFileName());
+        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
     WebDriver driver = new ChromeDriver(chromeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -202,8 +205,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
     System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator
-            + WebDriverFile.CHROME.getFileName());
+        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
     return new ChromeDriver(headlessChromeOptions);
   }
 
@@ -216,8 +218,7 @@ public class WebDriverFactory {
    */
   public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
     System.setProperty("webdriver.gecko.driver",
-        getDriverLocation(WebDriverFile.FIREFOX.getFileName()) + File.separator
-            + WebDriverFile.FIREFOX.getFileName());
+        getDriverLocation(WebDriverFile.FIREFOX.getFileName()) + File.separator + WebDriverFile.FIREFOX.getFileName());
 
     WebDriver driver = new FirefoxDriver(firefoxOptions);
     setBrowserSize(driver, size);
@@ -241,8 +242,7 @@ public class WebDriverFactory {
       driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName());
     }
 
-    System.setProperty("webdriver.edge.driver",
-        driverLocation + File.separator + WebDriverFile.EDGE.getFileName());
+    System.setProperty("webdriver.edge.driver", driverLocation + File.separator + WebDriverFile.EDGE.getFileName());
     EdgeDriver driver = new EdgeDriver(edgeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -255,11 +255,9 @@ public class WebDriverFactory {
    * @param size                    the size
    * @return the internet explorer driver
    */
-  public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions,
-      String size) {
+  public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
     System.setProperty("webdriver.ie.driver",
-        getDriverLocation(WebDriverFile.IE.getFileName()) + File.separator + WebDriverFile.IE
-            .getFileName());
+        getDriverLocation(WebDriverFile.IE.getFileName()) + File.separator + WebDriverFile.IE.getFileName());
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
 
@@ -275,8 +273,7 @@ public class WebDriverFactory {
     RemoteBrowserType remoteBrowser = SeleniumConfig.getRemoteBrowserType();
     String remotePlatform = SeleniumConfig.getRemotePlatform();
     String remoteBrowserVersion = SeleniumConfig.getRemoteBrowserVersion();
-    HashMap<String, Object> capabilities = (HashMap<String, Object>) SeleniumConfig
-        .getRemoteCapabilitiesAsObjects();
+    HashMap<String, Object> capabilities = (HashMap<String, Object>) SeleniumConfig.getRemoteCapabilitiesAsObjects();
 
     return getRemoteOptions(remoteBrowser, remotePlatform, remoteBrowserVersion, capabilities);
   }
@@ -312,8 +309,8 @@ public class WebDriverFactory {
    * @param remoteCapabilities   the remote capabilities
    * @return the remote options
    */
-  public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser,
-      String remotePlatform, String remoteBrowserVersion, Map<String, Object> remoteCapabilities) {
+  public static MutableCapabilities getRemoteOptions(RemoteBrowserType remoteBrowser, String remotePlatform,
+      String remoteBrowserVersion, Map<String, Object> remoteCapabilities) {
     MutableCapabilities options;
     switch (remoteBrowser) {
       case IE:
@@ -337,8 +334,8 @@ public class WebDriverFactory {
         break;
 
       default:
-        throw new IllegalArgumentException(StringProcessor
-            .safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
+        throw new IllegalArgumentException(
+            StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
     }
 
     // Make sure the remote capabilities dictionary exists
@@ -368,8 +365,7 @@ public class WebDriverFactory {
    * @param driverOptions          the driver options
    * @param additionalCapabilities the additional capabilities
    */
-  public static void setDriverOptions(MutableCapabilities driverOptions,
-      Map<String, Object> additionalCapabilities) {
+  public static void setDriverOptions(MutableCapabilities driverOptions, Map<String, Object> additionalCapabilities) {
     // If there are no additional capabilities just return
     if (additionalCapabilities == null) {
       return;
@@ -424,8 +420,7 @@ public class WebDriverFactory {
     String[] sizes = size.split("[xX]");
 
     if (!size.toUpperCase().contains("X") || sizes.length != 2) {
-      throw new IllegalArgumentException(
-          "Browser size is expected to be in an expected format: 1920x1080");
+      throw new IllegalArgumentException("Browser size is expected to be in an expected format: 1920x1080");
     }
 
     try {
@@ -433,8 +428,7 @@ public class WebDriverFactory {
       int height = Integer.parseInt(sizes[1]);
       return new Dimension(width, height);
     } catch (NumberFormatException e) {
-      throw new NumberFormatException(
-          "Length and Width must be a string that is an integer value: 400x400");
+      throw new NumberFormatException("Length and Width must be a string that is an integer value: 400x400");
     }
   }
 
@@ -467,8 +461,7 @@ public class WebDriverFactory {
    * @param mustExist       the must exist
    * @return the driver location
    */
-  public static String getDriverLocation(String driverFile, String defaultHintPath,
-      boolean mustExist) {
+  public static String getDriverLocation(String driverFile, String defaultHintPath, boolean mustExist) {
     // Get the hint path from the config
     String hintPath = SeleniumConfig.getDriverHintPath();
 
@@ -499,8 +492,7 @@ public class WebDriverFactory {
 
     // We didn't find the web driver so throw an error if we need to know where it is
     if (mustExist) {
-      throw new DriverNotFoundException(
-          StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
+      throw new DriverNotFoundException(StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
     }
 
     return "";

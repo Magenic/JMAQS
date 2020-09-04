@@ -70,7 +70,9 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
 
     if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
       WebDriver tempDriver = this.getBase();
-      tempDriver = new EventFiringWebDriver(tempDriver);
+      EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(tempDriver);
+      eventFiringWebDriver.register(new EventHandler(getTestObject().getLogger()));
+      tempDriver = eventFiringWebDriver;
       this.baseDriver = tempDriver;
 
       // Log the setup

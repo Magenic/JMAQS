@@ -1,27 +1,34 @@
 package com.magenic.jmaqs.selenium;
 
-import com.google.common.base.Predicate;
-import com.magenic.jmaqs.utilities.helper.exceptions.ExecutionFailedException;
-import org.openqa.selenium.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNotSame;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 
+import com.google.common.base.Predicate;
+import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
+import com.magenic.jmaqs.utilities.helper.TestCategories;
+import com.magenic.jmaqs.utilities.helper.exceptions.ExecutionFailedException;
+import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
+import com.magenic.jmaqs.utilities.logging.FileLogger;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import org.testng.asserts.SoftAssert;
-
-import static org.testng.Assert.*;
 
 /**
  * Unit test class for LazyElement
@@ -50,12 +57,21 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
-	 * Gets the input box
+	 * Gets the first name input box
 	 * 
 	 * @return The input box
 	 */
-	private LazyWebElement getInputBox() {
-		return new LazyWebElement(this.getTestObject(), By.cssSelector("#TextFields [name='firstname']"), "Input box");
+	private LazyWebElement getFirstNameInputBox() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#TextFields [name='firstname']"), "First Name Input box");
+	}
+
+	/**
+	 * Gets the last name input box
+	 *
+	 * @return The input box
+	 */
+	private LazyWebElement getLastNameInputBox() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("#TextFields [name='lastname']"), "Last Name Input box");
 	}
 
 	/**
@@ -333,12 +349,12 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementClear() throws TimeoutException, InterruptedException, ExecutionFailedException {
 		// Make sure we can set the value
-		this.getInputBox().sendKeys("test");
-		assertEquals("test", this.getInputBox().getAttribute("value"));
+		this.getFirstNameInputBox().sendKeys("test");
+		assertEquals("test", this.getFirstNameInputBox().getAttribute("value"));
 
 		// Make sure the value is cleared
-		this.getInputBox().clear();
-		assertEquals("", this.getInputBox().getAttribute("value"));
+		this.getFirstNameInputBox().clear();
+		assertEquals("", this.getFirstNameInputBox().getAttribute("value"));
 	}
 
 	/**
@@ -408,8 +424,8 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSendKeys() throws TimeoutException, InterruptedException, ExecutionFailedException {
-		this.getInputBox().sendKeys("test");
-		assertEquals(this.getInputBox().getValue(), "test");
+		this.getFirstNameInputBox().sendKeys("test");
+		assertEquals(this.getFirstNameInputBox().getValue(), "test");
 	}
 
 	/**
@@ -429,11 +445,11 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSendSecretKeys()
 			throws IOException, ExecutionFailedException, InterruptedException, TimeoutException {
-		this.getInputBox().sendKeys("beforeSuspendTest");
-		this.getInputBox().clear();
-		this.getInputBox().sendSecretKeys("secretKeys");
-		this.getInputBox().clear();
-		this.getInputBox().sendKeys("continueTest");
+		this.getFirstNameInputBox().sendKeys("beforeSuspendTest");
+		this.getFirstNameInputBox().clear();
+		this.getLastNameInputBox().sendSecretKeys("secretKeys");
+		this.getFirstNameInputBox().clear();
+		this.getFirstNameInputBox().sendKeys("continueTest");
 
 		FileLogger logger = (FileLogger) this.getTestObject().getLogger();
 		String filepath = logger.getFilePath();
@@ -494,7 +510,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementEnabled() throws TimeoutException, InterruptedException {
 		assertFalse(this.getDisabledItem().isEnabled());
-		assertTrue(this.getInputBox().isEnabled());
+		assertTrue(this.getFirstNameInputBox().isEnabled());
 	}
 
 	/**
@@ -541,7 +557,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementLocation() throws TimeoutException, InterruptedException {
-		Point point = this.getInputBox().getLocation();
+		Point point = this.getFirstNameInputBox().getLocation();
 		assertTrue(point.getX() > 0 && point.getY() > 0, "Unexpected point: " + point);
 	}
 
@@ -550,7 +566,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementLocationWithParent() throws TimeoutException, InterruptedException {
-		Point earlierPoint = this.getInputBox().getLocation();
+		Point earlierPoint = this.getFirstNameInputBox().getLocation();
 		Point laterPoint = this.getDisabledInput().getLocation();
 
 		assertTrue(laterPoint.getX() > 0, "Unexpected point: " + laterPoint);
@@ -562,7 +578,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementSize() throws TimeoutException, InterruptedException {
-		Dimension size = this.getInputBox().getSize();
+		Dimension size = this.getFirstNameInputBox().getSize();
 		assertTrue(size.getWidth() > 0 && size.getHeight() > 0, "Height and/or width are less than 1");
 	}
 
@@ -581,7 +597,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementTagName() throws TimeoutException, InterruptedException {
-		assertEquals("input", this.getInputBox().getTagName());
+		assertEquals("input", this.getFirstNameInputBox().getTagName());
 	}
 
 	/**
@@ -597,7 +613,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetVisibleElement() {
-		assertNotEquals(null, this.getInputBox().getRawVisibleElement());
+		assertNotEquals(null, this.getFirstNameInputBox().getRawVisibleElement());
 	}
 
 	/**
@@ -605,7 +621,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetClickableElement() {
-		assertNotNull(this.getInputBox().getRawClickableElement());
+		assertNotNull(this.getFirstNameInputBox().getRawClickableElement());
 	}
 
 	/**
@@ -613,7 +629,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetExistingElement() {
-		assertNotNull(this.getInputBox().getRawExistingElement());
+		assertNotNull(this.getFirstNameInputBox().getRawExistingElement());
 	}
 
 	/**
