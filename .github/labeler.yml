@@ -28,7 +28,6 @@ database:
   - jmaqs-database/**/*
 
 devops:
-
   - .github/*
   - .github/**/*
 
