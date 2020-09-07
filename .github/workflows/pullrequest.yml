@@ -23,7 +23,7 @@ jobs:
         with:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
       - name: Run Unit Tests and SonarCloud Analysis
-        run: mvn -B -Pjacoco -Psonar verify package sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
+        run: mvn -B -Pjacoco -Psonar verify package sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml" -T 1C
   checkstyle:
     runs-on: ubuntu-latest
     steps:
@@ -46,31 +46,3 @@ jobs:
         uses: actions/labeler@v2
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-#  sonarcloud:
-#    needs:
-#      - unit_tests
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: Set up JDK 11
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: 11
-#      - name: Restore Local Maven Cache
-#        uses: actions/cache@v2
-#        with:
-#          path: ~/.m2
-#          key: ${{runner.os}}-m2
-#      - name: Download Build Artifact
-#        uses: actions/download-artifact@v2
-#        with:
-#          name: jacoco-files
-#          path: ./jacoco-files
-#      - name: Create settings file
-#        uses: InstaCode/maven-settings-xml-action@v9
-#        with:
-#          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{secrets.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
-#      - name: Build Packages
-#        run: mvn -B package -DskipTests=true --file pom.xml -e -fae
-#      - name: Run SonarCloud Analysis
-#        run: mvn -B -Psonar sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths=${{github.workspace}}/jacoco-files/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml
