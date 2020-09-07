@@ -129,7 +129,8 @@ public class WebDriverFactory {
     headlessChromeOptions.addArguments("--disable-web-security");
     headlessChromeOptions.addArguments("--allow-running-insecure-content");
     headlessChromeOptions.addArguments("--disable-extensions");
-    //headlessChromeOptions.addArguments("--no-sandbox");
+    headlessChromeOptions.addArguments("--disable-dev-shm-usage");
+    headlessChromeOptions.addArguments("--no-sandbox");
     headlessChromeOptions.addArguments("--headless");
     headlessChromeOptions.addArguments(getHeadlessWindowSizeString(size));
 
