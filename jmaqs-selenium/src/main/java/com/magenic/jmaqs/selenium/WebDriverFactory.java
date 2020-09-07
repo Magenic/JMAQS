@@ -104,8 +104,8 @@ public class WebDriverFactory {
     chromeOptions.addArguments("--disable-web-security");
     chromeOptions.addArguments("--allow-running-insecure-content");
     chromeOptions.addArguments("--disable-extensions");
-    chromeOptions.addArguments("--no-sandbox");
-    chromeOptions.addArguments("--disable-dev-shm-usage");
+    //chromeOptions.addArguments("--no-sandbox");
+    //chromeOptions.addArguments("--disable-dev-shm-usage");
     return chromeOptions;
   }
 

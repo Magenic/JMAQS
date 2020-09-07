@@ -99,7 +99,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
     ChromeDriver driver = null;
 
     try {
-      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.CHROME);
+      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.HEADLESS_CHROME);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -441,7 +441,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.SELENIUM)
   public void testGetChromeDriver() {
-    final ChromeOptions defaultChromeOptions = WebDriverFactory.getDefaultChromeOptions();
+    final ChromeOptions defaultChromeOptions = WebDriverFactory.getDefaultHeadlessChromeOptions();
     final WebDriver chromeDriver = WebDriverFactory.getChromeDriver(defaultChromeOptions);
 
     try {
