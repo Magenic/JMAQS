@@ -104,8 +104,6 @@ public class WebDriverFactory {
     chromeOptions.addArguments("--disable-web-security");
     chromeOptions.addArguments("--allow-running-insecure-content");
     chromeOptions.addArguments("--disable-extensions");
-    //chromeOptions.addArguments("--no-sandbox");
-    //chromeOptions.addArguments("--disable-dev-shm-usage");
     return chromeOptions;
   }
 
@@ -130,7 +128,6 @@ public class WebDriverFactory {
     headlessChromeOptions.addArguments("--disable-web-security");
     headlessChromeOptions.addArguments("--allow-running-insecure-content");
     headlessChromeOptions.addArguments("--disable-extensions");
-    headlessChromeOptions.addArguments("--disable-dev-shm-usage");
     headlessChromeOptions.addArguments("--no-sandbox");
     headlessChromeOptions.addArguments("--headless");
     headlessChromeOptions.addArguments(getHeadlessWindowSizeString(size));

@@ -22,14 +22,7 @@ jobs:
         uses: InstaCode/maven-settings-xml-action@v9
         with:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
-      #      - name: Run Unit Tests
-      #        run: mvn -B -Pjacoco clean verify package --file pom.xml -e -fae
-      #      - name: upload files
-      #        uses: actions/upload-artifact@v2
-      #        with:
-      #          name: jacoco-files
-      #          path: ./**/jacoco.xml
-      - name: Run SonarCloud Analysis
+      - name: Run Unit Tests and SonarCloud Analysis
         run: mvn -B -Pjacoco -Psonar verify package sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
   checkstyle:
     runs-on: ubuntu-latest
