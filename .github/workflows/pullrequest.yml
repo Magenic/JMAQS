@@ -24,8 +24,6 @@ jobs:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
           servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
       - name: Run Unit Tests and SonarCloud Analysis
-        run: mvn we
-      - name: Run Unit Tests and SonarCloud Analysis
         run: mvn -B -Pjacoco -Psonar verify package sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml" -T 1C
       - name: Upload Test Result Logs
         if: ${{ always() }}
