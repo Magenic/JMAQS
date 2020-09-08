@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.constants.BrowserType;
+import com.magenic.jmaqs.selenium.constants.OperatingSystem;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.selenium.exceptions.DriverNotFoundException;
@@ -85,9 +86,9 @@ public class WebDriverFactory {
     } catch (Exception e) {
 
       // Log that something went wrong
-      String message =  "Failed to initial web driver because: %s %s"
+      String message = "Failed to initial web driver because: %s %s"
           + "This likely means your web driver is missing, unsupported or out of date.";
-      message = StringProcessor.safeFormatter(message, e.getMessage() , System.lineSeparator());
+      message = StringProcessor.safeFormatter(message, e.getMessage(), System.lineSeparator());
 
       throw new WebDriverFactoryException(message, e);
     }
@@ -100,10 +101,14 @@ public class WebDriverFactory {
    */
   public static ChromeOptions getDefaultChromeOptions() {
     ChromeOptions chromeOptions = new ChromeOptions();
-    chromeOptions.addArguments("test-type");
+    chromeOptions.addArguments("--test-type");
     chromeOptions.addArguments("--disable-web-security");
     chromeOptions.addArguments("--allow-running-insecure-content");
     chromeOptions.addArguments("--disable-extensions");
+
+    if (OperatingSystem.getOperatingSystem() == OperatingSystem.LINUX) {
+      chromeOptions.addArguments("--remote-debugging-port=9222");
+    }
 
     return chromeOptions;
   }
@@ -125,7 +130,7 @@ public class WebDriverFactory {
    */
   public static ChromeOptions getDefaultHeadlessChromeOptions(String size) {
     ChromeOptions headlessChromeOptions = new ChromeOptions();
-    headlessChromeOptions.addArguments("test-type");
+    headlessChromeOptions.addArguments("--test-type");
     headlessChromeOptions.addArguments("--disable-web-security");
     headlessChromeOptions.addArguments("--allow-running-insecure-content");
     headlessChromeOptions.addArguments("--disable-extensions");
