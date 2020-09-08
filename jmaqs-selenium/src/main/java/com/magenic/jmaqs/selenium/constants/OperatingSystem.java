@@ -20,7 +20,7 @@ public enum OperatingSystem {
   /**
    * Linux Operating System.
    */
-  LINUX("Linux", new ArrayList<>(Arrays.asList("nix", "nux", "aix", "ubuntu"))),
+  LINUX("Linux", new ArrayList<>(Arrays.asList("nix", "nux", "aix", "ubuntu", "Linux"))),
   /**
    * Mac Operating System.
    */
@@ -33,11 +33,11 @@ public enum OperatingSystem {
   /**
    * The Operating system name.
    */
-  private String operatingSystemName;
+  private final String operatingSystemName;
   /**
    * The Operating system abbreviations.
    */
-  private ArrayList<String> operatingSystemAbbreviations;
+  private final ArrayList<String> operatingSystemAbbreviations;
 
   /**
    * Instantiates a new Operating system.
