@@ -25,11 +25,12 @@ jobs:
           servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
       - name: Run Unit Tests and SonarCloud Analysis
         run: mvn -B -Pjacoco -Psonar verify package sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml" -T 1C
-  #      - name: Upload Test Result Logs
-  #        uses: actions/upload-artifact@v2
-  #        with:
-  #          name: Logs
-  #          path:
+      - name: Upload Test Result Logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: Logs
+          path: /**/logs
   checkstyle:
     runs-on: ubuntu-latest
     steps:
