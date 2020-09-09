@@ -442,7 +442,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.SELENIUM)
   public void testGetChromeDriver() {
     ChromeOptions defaultChromeOptions = WebDriverFactory.getDefaultChromeOptions();
-    defaultChromeOptions.addArguments("--user-data-dir=/home/runner/.config/google-chrome/Default");
+    //defaultChromeOptions.addArguments("--user-data-dir=/home/runner/.config/google-chrome/Default");
     final WebDriver chromeDriver = WebDriverFactory.getChromeDriver(defaultChromeOptions);
 
     try {
