@@ -61,15 +61,15 @@ jobs:
         uses: InstaCode/maven-settings-xml-action@v9
         with:
           servers: '[{"id": "ossrh", "username": "jason-edstrom", "password": "${{secrets.OSSRH_PACKAGES}}"}]'
-          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"${{secrets.SONAR_ORG}}", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}"}}]'
+          profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}"}}]'
       - name: Set Version to ${{env.VERSION}}-SNAPSHOT and Run Unit Tests
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Psonar -Pjacoco -T 1C verify install sonar:sonar -B -e -f pom.xml -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
+          run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Dtesting -T 1C verify install sonar:sonar -B -e -f pom.xml -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy SnapShot Packages to Sonatype - Open Source
-        run: mvn -Possrh deploy -DskipTests -B -e -f pom.xml
+        run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Possrh -Dsnapshot deploy -B -e -f pom.xml
       - name: Upload Test Result Logs
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
