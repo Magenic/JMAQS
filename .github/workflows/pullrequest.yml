@@ -1,4 +1,4 @@
-name: Pull Request Build
+name: Pull Request Pipeline
 
 on:
   pull_request:
@@ -8,10 +8,6 @@ jobs:
   unit_tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up XVFB for UI tests
-        run: |
-          sudo apt-get update
-          sudo apt-get install xvfb
       - uses: actions/checkout@v2
       - name: Set up JDK 11
         uses: actions/setup-java@v1
@@ -28,7 +24,11 @@ jobs:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}" }}]'
           servers: '[{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
       - name: Run Unit Tests and SonarCloud Analysis
-        run: xvfb-run mvn -B -Dtesting verify package sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml" -T 1C
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: mvn -B -Dtesting verify package sonar:sonar --file pom.xml -e -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml" -T 1C
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Test Result Logs
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
