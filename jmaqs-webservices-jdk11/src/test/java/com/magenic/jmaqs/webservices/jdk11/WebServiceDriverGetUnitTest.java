@@ -18,7 +18,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   /**
    * String to hold the URL.
    */
-  private static String url = WebServiceConfig.getWebServiceUri();
+  private static String baseUrl = WebServiceConfig.getWebServiceUri();
 
   /**
    * Test Json Get deserialize a single product.
@@ -28,9 +28,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductXmlDeserialize() throws IOException, InterruptedException, URISyntaxException {
-    WebServiceDriver client = new WebServiceDriver(url);
-    HttpResponse<String> result = client.get("/api/XML_JSON/GetProduct/2", MediaType.APP_XML, false);
-    Product products = WebServiceUtilities.getResponseBody(result, MediaType.APP_XML, Product.class);
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    Product products = client.get(baseUrl + "/api/XML_JSON/GetProduct/2", MediaType.APP_XML, false, Product.class);
     Assert.assertEquals(products.getName(), "Yo-yo", "Expected 3 products to be returned");
   }
 
@@ -42,9 +41,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductsXmlDeserialize() throws IOException, InterruptedException, URISyntaxException {
-    WebServiceDriver client = new WebServiceDriver(url);
-    HttpResponse<String> result = client.get("/api/XML_JSON/GetAllProducts", MediaType.APP_XML, false);
-    Product[] products = WebServiceUtilities.getResponseBody(result, MediaType.APP_XML, Product[].class);
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    Product[] products = client.getContent(baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_XML, false, Product[].class);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
   }
 
@@ -56,8 +54,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductJsonDeserialize() throws IOException, URISyntaxException, InterruptedException {
-    WebServiceDriver client = new WebServiceDriver(url);
-    HttpResponse<String> response = client.get("/api/XML_JSON/GetProduct/2", MediaType.APP_JSON, false);
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    HttpResponse<String> response = client.getContent(baseUrl + "/api/XML_JSON/GetProduct/2", MediaType.APP_JSON, false);
     Product products = WebServiceUtilities.getResponseBody(response, MediaType.APP_JSON, Product.class);
     Assert.assertEquals(products.getName(),"Yo-yo", "Expected 3 products to be returned");
   }
@@ -70,8 +68,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductsJsonDeserialize() throws IOException, URISyntaxException, InterruptedException {
-    WebServiceDriver client = new WebServiceDriver(url);
-    HttpResponse<String> response = client.get("/api/XML_JSON/GetAllProducts", MediaType.APP_JSON, false);
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    HttpResponse<String> response = client.get(baseUrl + "/api/XML_JSON/GetAllProducts", MediaType.APP_JSON, false);
     Product[] products = WebServiceUtilities.getResponseBody(response, MediaType.APP_JSON, Product[].class);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
   }
@@ -84,8 +82,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getProductsPlainText() throws IOException, URISyntaxException, InterruptedException {
-    WebServiceDriver client = new WebServiceDriver(url);
-    HttpResponse<String> result = client.get("/api/String/Get",  MediaType.PLAIN_TEXT, false);
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    HttpResponse<String> result = client.get(baseUrl + "/api/String/Get",  MediaType.PLAIN_TEXT, false);
     Assert.assertTrue(result.body().contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + result);
     Assert.assertTrue(result.body().contains("Yo-yo"),
@@ -102,8 +100,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getStringById() throws IOException, URISyntaxException, InterruptedException {
-    WebServiceDriver client = new WebServiceDriver(url);
-    HttpResponse<String> result = client.get("/api/String/1",  MediaType.PLAIN_TEXT, false);
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    HttpResponse<String> result = client.get(baseUrl + "/api/String/1",  MediaType.PLAIN_TEXT, false);
     Assert.assertTrue(result.body().contains("Tomato Soup"),
         "Was expecting a result with Tomato Soup but instead got - " + result);
   }
@@ -116,8 +114,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getStringByName() throws IOException, URISyntaxException, InterruptedException {
-    WebServiceDriver client = new WebServiceDriver(url);
-    HttpResponse<String> result = client.get("/api/String/Yo-yo",  MediaType.PLAIN_TEXT, false);
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    HttpResponse<String> result = client.get(baseUrl + "/api/String/Yo-yo",  MediaType.PLAIN_TEXT, false);
     Assert.assertTrue(result.body().contains("Yo-yo"),
         "Was expecting a result with Yo-yo but instead got - " + result);
   }
@@ -131,8 +129,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getResponseAndDeserializeJson()
       throws IOException, URISyntaxException, InterruptedException {
-    WebServiceDriver client = new WebServiceDriver(url);
-    HttpResponse<String> message = client.getWithResponse("/api/XML_JSON/GetAllProducts",
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    HttpResponse<String> message = client.get(baseUrl + "/api/XML_JSON/GetAllProducts",
        MediaType.APP_JSON, true  );
     Product[] products = WebServiceUtilities.deserializeJson(message, Product[].class);
     Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
@@ -147,8 +145,8 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void getResponseAndDeserializeXml()
       throws IOException, URISyntaxException, InterruptedException {
-    WebServiceDriver client = new WebServiceDriver(url);
-    HttpResponse<String> message = client.getWithResponse("/api/XML_JSON/GetAllProducts",
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    HttpResponse<String> message = client.get(baseUrl + "/api/XML_JSON/GetAllProducts",
         MediaType.APP_XML, true);
     Product[] products = WebServiceUtilities.deserializeXml(message, Product[].class);
     Assert.assertEquals(products.length,3,"Expected 3 products to be returned");

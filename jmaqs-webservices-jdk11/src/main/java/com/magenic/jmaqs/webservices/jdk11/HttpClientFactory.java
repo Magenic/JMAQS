@@ -44,7 +44,6 @@ public class HttpClientFactory {
     HttpClient.Builder builder = HttpClient.newBuilder()
         .version(HttpClient.Version.HTTP_2)
         .followRedirects(HttpClient.Redirect.NORMAL)
-        //.authenticator(Authenticator.getDefault())
         .connectTimeout(timeout);
 
     // sets up proxy settings
