@@ -109,7 +109,7 @@ public class WebServiceUtilities {
   }
 
   /**
-   * Deserialize json t.
+   * Deserialize json to a specified object.
    *
    * @param <T>     the type parameter
    * @param message the message
@@ -122,7 +122,7 @@ public class WebServiceUtilities {
   }
 
   /**
-   * Deserialize xml t.
+   * Deserialize xml to a specified object.
    *
    * @param <T>     the type parameter
    * @param message the message
