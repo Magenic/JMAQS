@@ -2,8 +2,8 @@ name: Release Pipeline
 
 on:
   push:
-  tags:
-    -v*
+    tags:
+        -v*
 
 
 jobs:
