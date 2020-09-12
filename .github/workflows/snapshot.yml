@@ -58,7 +58,7 @@ jobs:
       - name: Set Version to ${{env.VERSION}}-SNAPSHOT and Run Unit Tests
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Dtesting -T 1C verify install sonar:sonar -B -e -f pom.xml -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
+          run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Psonar -Dtesting -T 1C verify install sonar:sonar -B -e -f pom.xml -fae -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy SnapShot Packages to Sonatype - Open Source
