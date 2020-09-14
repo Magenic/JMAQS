@@ -354,7 +354,7 @@ public class WebServiceDriver {
     // Check if it was a success and if not create a user friendly error message
     if (response.statusCode() != HttpStatus.OK.value()) {
       throw new NotAcceptableStatusException(
-          String.format("Response did not indicate a success. %s Response code was: %s",
+          String.format("Response did not indicate a success. %s Response code was: %d",
               System.lineSeparator(), response.statusCode()));
     }
   }
@@ -374,7 +374,7 @@ public class WebServiceDriver {
     if (response.statusCode() != expectedStatus.hashCode()) {
       String body = response.body();
       throw new NotAcceptableStatusException(String.format("Response status did not match expected. %s "
-                  + "Response code was: %s %s Expected code was: %s %s"
+                  + "Response code was: %d %s Expected code was: %d %s"
                   + "Body: %s", System.lineSeparator(), response.statusCode(),
               System.lineSeparator(), expectedStatus.hashCode(), System.lineSeparator(), body));
     }
@@ -384,7 +384,7 @@ public class WebServiceDriver {
    * Check if the media type is supported.
    * @param mediaType Media type to add
    */
-  public void checkIfMediaTypeNotPresent(String mediaType) {
+  private void checkIfMediaTypeNotPresent(String mediaType) {
     // Make sure a media type was passed in
     if (mediaType.isEmpty()) {
       return;
