@@ -45,7 +45,7 @@ public final class WebServiceConfig {
    * @return True if we want to use the proxy
    */
   public static boolean getUseProxy() {
-    return Config.getValueForSection(ConfigSection.WebServiceMaqs, "UseProxy", "No").equals("Yes");
+    return Config.getValueForSection(WEBSERVICE_SECTION, "UseProxy", "No").equals("Yes");
   }
 
   /**
@@ -54,6 +54,16 @@ public final class WebServiceConfig {
    * @return The proxy address
    */
   public static String getProxyAddress() {
-    return Config.getValueForSection(ConfigSection.WebServiceMaqs, "ProxyAddress");
+    return Config.getValueForSection(WEBSERVICE_SECTION, "ProxyAddress");
+  }
+
+  /**
+   * Get the Proxy Port to use.
+   *
+   * @return The Proxy Port
+   */
+  public static int getProxyPort() {
+    return Integer
+        .parseInt(Config.getValueForSection(WEBSERVICE_SECTION, "WebServiceTimeout", "-1"));
   }
 }
