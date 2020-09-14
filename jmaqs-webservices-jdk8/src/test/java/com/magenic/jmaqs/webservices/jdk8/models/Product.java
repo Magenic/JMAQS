@@ -4,10 +4,12 @@
 
 package com.magenic.jmaqs.webservices.jdk8.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import java.math.BigDecimal;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Product {
     /**
      * the xmlns namespace.
