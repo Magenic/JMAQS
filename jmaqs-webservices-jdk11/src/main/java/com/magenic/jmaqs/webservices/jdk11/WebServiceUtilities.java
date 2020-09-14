@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -131,9 +135,6 @@ public class WebServiceUtilities {
    * @throws IOException the io exception
    */
   public static <T> T deserializeXml(HttpResponse<String> message, Type type) throws IOException {
-    // the body of the response is given back in JSON
-    // therefore deserialize it to JSON then convert into XML
-    String response = xmlMapper.writeValueAsString(deserializeJson(message, type));
-    return xmlMapper.readValue(response, xmlMapper.getTypeFactory().constructType(type));
+    return xmlMapper.readValue(getResponseBody(message), xmlMapper.getTypeFactory().constructType(type));
   }
 }
