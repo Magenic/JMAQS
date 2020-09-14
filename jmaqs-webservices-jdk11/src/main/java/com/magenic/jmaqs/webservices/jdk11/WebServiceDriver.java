@@ -271,7 +271,8 @@ public class WebServiceDriver {
    * @param content The Http Request Content
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType, MediaType mediaType, String content) {
+  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType,
+      MediaType mediaType, String content) {
     return buildHttpRequest(requestUri, requestType, mediaType, content, new HashMap<>());
   }
 
@@ -283,7 +284,8 @@ public class WebServiceDriver {
    * @param additionalHeaders The Additional Headers for the Http Request
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType, MediaType mediaType, Map<String, String> additionalHeaders) {
+  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType,
+      MediaType mediaType, Map<String, String> additionalHeaders) {
     return buildHttpRequest(requestUri, requestType, mediaType, null, additionalHeaders);
   }
 
@@ -296,16 +298,17 @@ public class WebServiceDriver {
    * @param additionalHeaders The Additional Headers for the Http Request
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType, MediaType mediaType, String content, Map<String, String> additionalHeaders) {
-     HttpRequest.Builder builder = this.baseHttpRequestBuilder.copy();
+  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType,
+      MediaType mediaType, String content, Map<String, String> additionalHeaders) {
+    HttpRequest.Builder builder = this.baseHttpRequestBuilder.copy();
 
-     builder
-        .header("Content-Type", mediaType.toString())
-        .uri(URI.create(requestUri));
+    builder
+      .header("Content-Type", mediaType.toString())
+      .uri(URI.create(requestUri));
 
-     for (Map.Entry<String, String> header : additionalHeaders.entrySet()) {
-       builder.header(header.getKey(), header.getValue());
-     }
+    for (Map.Entry<String, String> header : additionalHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
 
     if (requestType.equals(RequestType.POST)) {
       return builder.POST(HttpRequest.BodyPublishers.ofString(content)).build();
