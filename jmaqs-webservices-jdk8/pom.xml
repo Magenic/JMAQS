@@ -11,6 +11,7 @@
     <groupId>com.magenic.jmaqs.webservices</groupId>
     <artifactId>jmaqs-webservices-jdk8</artifactId>
     <name>JMAQS JDK8 WebServices Testing Module</name>
+    <version>${revision}</version>
     <properties>
         <jackson-databind.version>2.10.2</jackson-databind.version>
         <jackson-core.version>2.11.0</jackson-core.version>

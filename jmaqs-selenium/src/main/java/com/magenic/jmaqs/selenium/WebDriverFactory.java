@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.constants.BrowserType;
+import com.magenic.jmaqs.selenium.constants.OperatingSystem;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.selenium.exceptions.DriverNotFoundException;
@@ -100,11 +101,16 @@ public class WebDriverFactory {
    */
   public static ChromeOptions getDefaultChromeOptions() {
     ChromeOptions chromeOptions = new ChromeOptions();
-    chromeOptions.addArguments("test-type");
+    chromeOptions.addArguments("--test-type");
     chromeOptions.addArguments("--disable-web-security");
     chromeOptions.addArguments("--allow-running-insecure-content");
     chromeOptions.addArguments("--disable-extensions");
 
+    if (OperatingSystem.getOperatingSystem() == OperatingSystem.LINUX) {
+      chromeOptions.addArguments("--no-sandbox");
+      chromeOptions.addArguments("--disable-dev-shm-usage");
+    }
+    
     return chromeOptions;
   }
 
@@ -125,7 +131,7 @@ public class WebDriverFactory {
    */
   public static ChromeOptions getDefaultHeadlessChromeOptions(String size) {
     ChromeOptions headlessChromeOptions = new ChromeOptions();
-    headlessChromeOptions.addArguments("test-type");
+    headlessChromeOptions.addArguments("--test-type");
     headlessChromeOptions.addArguments("--disable-web-security");
     headlessChromeOptions.addArguments("--allow-running-insecure-content");
     headlessChromeOptions.addArguments("--disable-extensions");
