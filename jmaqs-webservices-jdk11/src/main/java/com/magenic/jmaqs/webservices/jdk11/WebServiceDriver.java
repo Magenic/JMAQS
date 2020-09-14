@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.NotAcceptableStatusException;
 
 /**
@@ -166,7 +165,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestType.GET, mediaType);
 
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
@@ -191,7 +190,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestType.GET, mediaType);
 
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
@@ -216,7 +215,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestType.GET, mediaType);
 
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
@@ -243,7 +242,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestType.GET, mediaType);
 
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
@@ -260,7 +259,7 @@ public class WebServiceDriver {
    * @param mediaType The Media Type
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestType, MediaType mediaType) {
+  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType, MediaType mediaType) {
     return buildHttpRequest(requestUri, requestType, mediaType, null, new HashMap<>());
   }
 
@@ -272,7 +271,7 @@ public class WebServiceDriver {
    * @param content The Http Request Content
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestType, MediaType mediaType, String content) {
+  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType, MediaType mediaType, String content) {
     return buildHttpRequest(requestUri, requestType, mediaType, content, new HashMap<>());
   }
 
@@ -284,7 +283,7 @@ public class WebServiceDriver {
    * @param additionalHeaders The Additional Headers for the Http Request
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestType, MediaType mediaType, Map<String, String> additionalHeaders) {
+  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType, MediaType mediaType, Map<String, String> additionalHeaders) {
     return buildHttpRequest(requestUri, requestType, mediaType, null, additionalHeaders);
   }
 
@@ -297,7 +296,7 @@ public class WebServiceDriver {
    * @param additionalHeaders The Additional Headers for the Http Request
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestType, MediaType mediaType, String content, Map<String, String> additionalHeaders) {
+  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType, MediaType mediaType, String content, Map<String, String> additionalHeaders) {
      HttpRequest.Builder builder = this.baseHttpRequestBuilder.copy();
 
      builder
@@ -308,13 +307,13 @@ public class WebServiceDriver {
        builder.header(header.getKey(), header.getValue());
      }
 
-    if (requestType.equals(RequestMethod.POST)) {
+    if (requestType.equals(RequestType.POST)) {
       return builder.POST(HttpRequest.BodyPublishers.ofString(content)).build();
-    } else if (requestType.equals(RequestMethod.PUT)) {
+    } else if (requestType.equals(RequestType.PUT)) {
       return builder.PUT(HttpRequest.BodyPublishers.ofString(content)).build();
-    } else if (requestType.equals(RequestMethod.DELETE)) {
+    } else if (requestType.equals(RequestType.DELETE)) {
       return builder.DELETE().build();
-    } else if (requestType.equals(RequestMethod.PATCH)) {
+    } else if (requestType.equals(RequestType.PATCH)) {
       return builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content)).build();
     }
     return builder.GET().build();
