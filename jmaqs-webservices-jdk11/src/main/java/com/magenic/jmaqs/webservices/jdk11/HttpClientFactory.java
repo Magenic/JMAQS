@@ -54,7 +54,7 @@ public class HttpClientFactory {
 
     // sets up proxy settings
     if (useProxy) {
-      builder.proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, 8080)));
+      builder.proxy(ProxySelector.of(new InetSocketAddress(proxyAddress, WebServiceConfig.getProxyPort())));
     }
     return builder.build();
   }
