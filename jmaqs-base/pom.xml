@@ -12,6 +12,7 @@
     <groupId>com.magenic.jmaqs.base</groupId>
     <artifactId>jmaqs-base</artifactId>
     <name>JMAQS Base Testing Module</name>
+    <version>${revision}</version>
     <packaging>jar</packaging>
     <url>http://maven.apache.org</url>
 

@@ -12,6 +12,7 @@
 
     <groupId>com.magenic.jmaqs.appium</groupId>
     <artifactId>jmaqs-appium</artifactId>
+    <version>${revision}</version>
     <name>JMAQS Appium Testing Module</name>
 
     <properties>

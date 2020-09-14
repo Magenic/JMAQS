@@ -11,8 +11,8 @@
 
     <groupId>com.magenic.jmaqs.webservices</groupId>
     <artifactId>jmaqs-webservices-jdk11</artifactId>
+    <version>${revision}</version>
     <name>JMAQS JDK11 WebServices Testing Module</name>
-    <version>2.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>

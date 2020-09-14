@@ -15,6 +15,7 @@
 
     <artifactId>jmaqs-jacoco-reporting</artifactId>
     <name>JMAQS Code Coverage Reporting Module</name>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <profiles>
