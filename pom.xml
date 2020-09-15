@@ -51,9 +51,11 @@
         <module>jmaqs-base</module>
         <module>jmaqs-selenium</module>
         <module>jmaqs-webservices-jdk8</module>
+        <module>jmaqs-webservices-jdk11</module>
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
         <module>jmaqs-cucumber</module>
+        <module>jmaqs-jacoco-reporting</module>
     </modules>
 
     <profiles>
@@ -78,15 +80,6 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
-        <profile>
-            <id>WIP</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <modules>
-                <module>jmaqs-webservices-jdk11</module>
-            </modules>
         </profile>
         <profile>
             <id>ossrh</id>
@@ -218,9 +211,6 @@
                     <name>testing</name>
                 </property>
             </activation>
-            <modules>
-                <module>jmaqs-jacoco-reporting</module>
-            </modules>
             <build>
                 <plugins>
                     <plugin>
@@ -263,6 +253,41 @@
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.appium</groupId>
+                <artifactId>jmaqs-appium</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.base</groupId>
+                <artifactId>jmaqs-base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.utilities</groupId>
+                <artifactId>jmaqs-utilities</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.webservices</groupId>
+                <artifactId>jmaqs-webservices-jdk8</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.database</groupId>
+                <artifactId>jmaqs-database</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.selenium</groupId>
+                <artifactId>jmaqs-selenium</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.cucumber</groupId>
+                <artifactId>jmaqs-cucumber</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -274,13 +299,19 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.8</version>
+                    <extensions>true</extensions>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.2.3</version>
+                <version>1.2.5</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
                     <flattenMode>resolveCiFriendliesOnly</flattenMode>
@@ -356,13 +387,6 @@
                     <parallel>methods</parallel>
                     <threadCount>6</threadCount>
                     <argLine>${argLine}</argLine>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>

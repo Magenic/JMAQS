@@ -22,7 +22,9 @@
         <profile>
             <id>jacoco</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>testing</name>
+                </property>
             </activation>
             <build>
                 <plugins>
@@ -52,6 +54,15 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -60,37 +71,30 @@
         <dependency>
             <groupId>com.magenic.jmaqs.appium</groupId>
             <artifactId>jmaqs-appium</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.base</groupId>
             <artifactId>jmaqs-base</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
             <artifactId>jmaqs-utilities</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.webservices</groupId>
             <artifactId>jmaqs-webservices-jdk8</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.database</groupId>
             <artifactId>jmaqs-database</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.selenium</groupId>
             <artifactId>jmaqs-selenium</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.cucumber</groupId>
             <artifactId>jmaqs-cucumber</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

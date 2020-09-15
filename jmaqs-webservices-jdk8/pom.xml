@@ -8,10 +8,12 @@
         <artifactId>jmaqs-framework</artifactId>
         <version>${revision}</version>
     </parent>
+
     <groupId>com.magenic.jmaqs.webservices</groupId>
     <artifactId>jmaqs-webservices-jdk8</artifactId>
     <name>JMAQS JDK8 WebServices Testing Module</name>
     <version>${revision}</version>
+
     <properties>
         <jackson-databind.version>2.10.2</jackson-databind.version>
         <jackson-core.version>2.11.0</jackson-core.version>
@@ -21,6 +23,7 @@
         <jackson-annotations.version>2.11.1</jackson-annotations.version>
         <httpclient.version>4.5.12</httpclient.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -39,12 +42,10 @@
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
             <artifactId>jmaqs-utilities</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.base</groupId>
             <artifactId>jmaqs-base</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.beust</groupId>
