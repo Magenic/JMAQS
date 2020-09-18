@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.NotAcceptableStatusException;
 
 /**
@@ -165,7 +166,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestType.GET, mediaType);
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
 
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
@@ -190,7 +191,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestType.GET, mediaType);
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
 
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
@@ -215,7 +216,7 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestType.GET, mediaType);
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
 
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
@@ -224,7 +225,7 @@ public class WebServiceDriver {
       ensureSuccessStatusCode(response);
     }
 
-    return deserializeResponse(response, mediaType, type);
+    return WebServiceUtilities.getResponseBody(response, mediaType, type);
   }
 
   /**
@@ -242,63 +243,63 @@ public class WebServiceDriver {
       throws IOException, InterruptedException {
     this.checkIfMediaTypeNotPresent(mediaType.toString());
 
-    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestType.GET, mediaType);
+    HttpRequest httpRequest = buildHttpRequest(requestUri, RequestMethod.GET, mediaType);
 
     HttpResponse<String> response = baseHttpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
     // We check for specific status
     ensureStatusCodesMatch(response, expectedStatus);
 
-    return deserializeResponse(response, mediaType, type);
+    return WebServiceUtilities.getResponseBody(response, mediaType, type);
   }
 
   /**
    * Build the Http Request
    * @param requestUri The Request URI
-   * @param requestType The Request Type
+   * @param requestMethod The Request Type
    * @param mediaType The Media Type
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType, MediaType mediaType) {
-    return buildHttpRequest(requestUri, requestType, mediaType, null, new HashMap<>());
+  protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestMethod, MediaType mediaType) {
+    return buildHttpRequest(requestUri, requestMethod, mediaType, null, new HashMap<>());
   }
 
   /**
    * Build the Http Request
    * @param requestUri The Request URI
-   * @param requestType The Request Type
+   * @param requestMethod The Request Type
    * @param mediaType The Media Type
    * @param content The Http Request Content
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType,
+  protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestMethod,
       MediaType mediaType, String content) {
-    return buildHttpRequest(requestUri, requestType, mediaType, content, new HashMap<>());
+    return buildHttpRequest(requestUri, requestMethod, mediaType, content, new HashMap<>());
   }
 
   /**
    * Build the Http Request
    * @param requestUri The Request URI
-   * @param requestType The Request Type
+   * @param requestMethod The Request Type
    * @param mediaType The Media Type
    * @param additionalHeaders The Additional Headers for the Http Request
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType,
+  protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestMethod,
       MediaType mediaType, Map<String, String> additionalHeaders) {
-    return buildHttpRequest(requestUri, requestType, mediaType, null, additionalHeaders);
+    return buildHttpRequest(requestUri, requestMethod, mediaType, null, additionalHeaders);
   }
 
   /**
    * Build the Http Request
    * @param requestUri The Request URI
-   * @param requestType The Request Type
+   * @param requestMethod The Request Type
    * @param mediaType The Media Type
    * @param content The Http Request Content
    * @param additionalHeaders The Additional Headers for the Http Request
    * @return The Http Request
    */
-  protected HttpRequest buildHttpRequest(String requestUri, RequestType requestType,
+  protected HttpRequest buildHttpRequest(String requestUri, RequestMethod requestMethod,
       MediaType mediaType, String content, Map<String, String> additionalHeaders) {
     HttpRequest.Builder builder = this.baseHttpRequestBuilder.copy();
 
@@ -310,35 +311,17 @@ public class WebServiceDriver {
       builder.header(header.getKey(), header.getValue());
     }
 
-    if (requestType.equals(RequestType.POST)) {
+    if (requestMethod.equals(RequestMethod.POST)) {
       return builder.POST(HttpRequest.BodyPublishers.ofString(content)).build();
-    } else if (requestType.equals(RequestType.PUT)) {
+    } else if (requestMethod.equals(RequestMethod.PUT)) {
       return builder.PUT(HttpRequest.BodyPublishers.ofString(content)).build();
-    } else if (requestType.equals(RequestType.DELETE)) {
+    } else if (requestMethod.equals(RequestMethod.DELETE)) {
       return builder.DELETE().build();
-    } else if (requestType.equals(RequestType.PATCH)) {
+    } else if (requestMethod.equals(RequestMethod.PATCH)) {
       return builder.method("PATCH", HttpRequest.BodyPublishers.ofString(content)).build();
     }
     return builder.GET().build();
 
-  }
-
-  /**
-   * Deserialize the Response.
-   * @param httpResponse Http Response to deserialize
-   * @param mediaType The Media Type
-   * @param type The Object Type
-   * @param <T> The Object Type
-   * @return The De-serialized Object
-   * @throws IOException if the exception is thrown
-   */
-  private <T> T deserializeResponse(HttpResponse<String> httpResponse, MediaType mediaType, Type type)
-      throws IOException {
-    if (mediaType.equals(MediaType.APP_XML)) {
-      return WebServiceUtilities.deserializeXml(httpResponse, type);
-    } else {
-      return WebServiceUtilities.deserializeJson(httpResponse, type);
-    }
   }
 
   /**
@@ -371,7 +354,7 @@ public class WebServiceDriver {
     }
 
     // Check if it was a success and if not create a user friendly error message
-    if (response.statusCode() != expectedStatus.hashCode()) {
+    if (response.statusCode() != expectedStatus.value()) {
       String body = response.body();
       throw new NotAcceptableStatusException(String.format("Response status did not match expected. %s "
                   + "Response code was: %d %s Expected code was: %d %s"
