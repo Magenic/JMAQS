@@ -8,6 +8,8 @@ import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
+
+import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -139,6 +141,36 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
     HttpResponse<String> message = client.get(baseUrl + "/api/XML_JSON/GetAllProducts",
         MediaType.APP_XML, true);
+    Product[] products = WebServiceUtilities.deserializeXml(message, Product[].class);
+    Assert.assertEquals(products.length,3,"Expected 3 products to be returned");
+  }
+
+  /**
+   * Test that we can use the web service utility to deserialize JSON and have an expected Status.
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getResponseAndDeserializeJsonExpectedStatus()
+      throws IOException, InterruptedException {
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    HttpResponse<String> message = client.get(baseUrl + "/api/XML_JSON/GetAllProducts",
+        MediaType.APP_JSON, HttpStatus.OK);
+    Product[] products = WebServiceUtilities.deserializeJson(message, Product[].class);
+    Assert.assertEquals(products.length, 3, "Expected 3 products to be returned");
+  }
+
+  /**
+   * Test that we can use the web service utility to deserialize XML and have an expected Status.
+   * @throws IOException if exception is thrown
+   * @throws InterruptedException if exception is thrown
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getResponseAndDeserializeXmlExpectedStatus()
+      throws IOException, InterruptedException {
+    WebServiceDriver client = new WebServiceDriver(HttpClientFactory.getDefaultClient());
+    HttpResponse<String> message = client.get(baseUrl + "/api/XML_JSON/GetAllProducts",
+        MediaType.APP_XML, HttpStatus.OK);
     Product[] products = WebServiceUtilities.deserializeXml(message, Product[].class);
     Assert.assertEquals(products.length,3,"Expected 3 products to be returned");
   }
