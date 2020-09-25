@@ -64,6 +64,6 @@ public final class WebServiceConfig {
    */
   public static int getProxyPort() {
     return Integer
-        .parseInt(Config.getValueForSection(WEBSERVICE_SECTION, "WebServiceTimeout", "-1"));
+        .parseInt(Config.getValueForSection(WEBSERVICE_SECTION, "ProxyPort", "-1"));
   }
 }
