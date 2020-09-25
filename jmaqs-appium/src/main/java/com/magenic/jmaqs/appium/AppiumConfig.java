@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.appium;
 
 import com.magenic.jmaqs.appium.constants.PlatformType;
+import com.magenic.jmaqs.appium.exceptions.AppiumConfigException;
 import com.magenic.jmaqs.utilities.helper.Config;
 import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
@@ -22,12 +23,12 @@ public class AppiumConfig {
   /**
    * The appium configuration section.
    */
-  private static final ConfigSection APPIUM_SECTION = ConfigSection.AppiumMaqs;
+  private static final ConfigSection APPIUM_SECTION = ConfigSection.APPIUM_MAQS;
 
   /**
    * The appium capabilities configuration section.
    */
-  private static final ConfigSection APPIUM_CAPS_SECTION = ConfigSection.AppiumCapsMaqs;
+  private static final ConfigSection APPIUM_CAPS_SECTION = ConfigSection.APPIUM_CAPS_MAQS;
 
   private AppiumConfig() {
 
@@ -66,8 +67,7 @@ public class AppiumConfig {
    * @return the save page source on fail
    */
   public static boolean getSavePageSourceOnFail() {
-    return Config.getValueForSection(APPIUM_SECTION, "SavePageSourceOnFail")
-        .equalsIgnoreCase("Yes");
+    return Config.getValueForSection(APPIUM_SECTION, "SavePageSourceOnFail").equalsIgnoreCase("Yes");
   }
 
   /**
@@ -76,8 +76,7 @@ public class AppiumConfig {
    * @return the soft assert screen shot
    */
   public static boolean getSoftAssertScreenShot() {
-    return Config.getValueForSection(APPIUM_SECTION, "SoftAssertScreenShot")
-        .equalsIgnoreCase("Yes");
+    return Config.getValueForSection(APPIUM_SECTION, "SoftAssertScreenShot").equalsIgnoreCase("Yes");
   }
 
   /**
@@ -99,7 +98,7 @@ public class AppiumConfig {
     try {
       url = new URL(getMobileHubUrlString());
     } catch (MalformedURLException e) {
-      e.printStackTrace();
+      throw new AppiumConfigException(e);
     }
     return url;
   }
@@ -115,8 +114,8 @@ public class AppiumConfig {
     try {
       timeoutValue = Integer.parseInt(value);
     } catch (NumberFormatException ex) {
-      throw new NumberFormatException("MobileCommandTimeout in " + APPIUM_SECTION
-          + " should be a number, but the current value is: " + value);
+      throw new NumberFormatException(
+          "MobileCommandTimeout in " + APPIUM_SECTION + " should be a number, but the current value is: " + value);
     }
 
     return Duration.ofMillis((long) timeoutValue);
@@ -128,10 +127,8 @@ public class AppiumConfig {
    * @return the mobile timeout
    */
   public static Duration getMobileTimeout() {
-    return Duration.ofMillis(
-        Integer.parseInt(Config.getValueForSection(APPIUM_SECTION, "MobileTimeout", "0")));
+    return Duration.ofMillis(Integer.parseInt(Config.getValueForSection(APPIUM_SECTION, "MobileTimeout", "0")));
   }
-
 
   /**
    * Gets capabilities as strings.

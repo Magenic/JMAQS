@@ -14,9 +14,16 @@ import java.io.PrintWriter;
 import java.nio.file.Paths;
 
 /**
- * Helper class for adding logs to a plain text file. Allows configurable file path.
+ * Helper class for adding logs to a plain text file. Allows configurable file
+ * path.
  */
 public class FileLogger extends Logger {
+
+  /**
+   * Default extension type.
+   */
+  private static final String TXT = ".txt";
+
   /**
    * The default log file save location.
    */
@@ -188,8 +195,9 @@ public class FileLogger extends Logger {
   /**
    * Initializes a new instance of the FileLogger class.
    *
-   * @param append       True to append to an existing log file or false to overwrite it.
-   *                     If the file does not exist this, flag will have no affect.
+   * @param append       True to append to an existing log file or false to
+   *                     overwrite it. If the file does not exist this, flag will
+   *                     have no affect.
    * @param logFolder    Where log files should be saved
    * @param name         File Name
    * @param messageLevel Messaging Level
@@ -226,8 +234,8 @@ public class FileLogger extends Logger {
       } catch (IOException e) {
         // Failed to write to the event log, write error to the console instead
         ConsoleLogger console = new ConsoleLogger();
-        console.logMessage(MessageType.ERROR, StringProcessor
-            .safeFormatter("Failed to write to event log because: %s", e.getMessage()));
+        console.logMessage(MessageType.ERROR,
+            StringProcessor.safeFormatter("Failed to write to event log because: %s", e.getMessage()));
       }
     }
   }
@@ -283,7 +291,7 @@ public class FileLogger extends Logger {
    * @return File Extension
    */
   protected String getExtension() {
-    return ".txt";
+    return TXT;
   }
 
   /*
@@ -300,18 +308,18 @@ public class FileLogger extends Logger {
   /*
    * (non-Javadoc)
    *
-   * @see com.magenic.jmaqs.utilities.Logging.Logger#logMessage(com.magenic.jmaqs.utilities.
-   * Logging.MessageType, java.lang.String, java.lang.Object[])
+   * @see com.magenic.jmaqs.utilities.Logging.Logger#logMessage(com.magenic.jmaqs.
+   * utilities. Logging.MessageType, java.lang.String, java.lang.Object[])
    */
   @Override
   public void logMessage(MessageType messageType, String message, Object... args) {
-    // If the message level is greater that the current log level then do not log it.
+    // If the message level is greater that the current log level then do not log
+    // it.
     if (this.shouldMessageBeLogged(messageType)) {
       try (FileWriter fw = new FileWriter(this.filePath, true);
           BufferedWriter bw = new BufferedWriter(fw);
           PrintWriter writer = new PrintWriter(bw)) {
-        writer.println(
-            StringProcessor.safeFormatter("%s%s", Config.NEW_LINE, System.currentTimeMillis()));
+        writer.println(StringProcessor.safeFormatter("%s%s", Config.NEW_LINE, System.currentTimeMillis()));
         writer.print(StringProcessor.safeFormatter("%s:\t", messageType.toString()));
 
         writer.println(StringProcessor.safeFormatter(message, args));
@@ -343,8 +351,8 @@ public class FileLogger extends Logger {
       replacedName = name.replaceAll("[^a-zA-Z0-9\\._\\- ]+", "~");
     } catch (NullPointerException e) {
       ConsoleLogger console = new ConsoleLogger();
-      console.logMessage(MessageType.ERROR, StringProcessor
-          .safeFormatter("Failed to Replace Invalid Characters because: %s", e.getMessage()));
+      console.logMessage(MessageType.ERROR,
+          StringProcessor.safeFormatter("Failed to Replace Invalid Characters because: %s", e.getMessage()));
     }
 
     return replacedName;
@@ -357,8 +365,7 @@ public class FileLogger extends Logger {
    * @return The Unknown Message Type Message.
    */
   protected String unknownMessageTypeMessage(MessageType type) {
-    return StringProcessor
-        .safeFormatter("Unknown MessageType: %s%s%s%s", type.name(), System.lineSeparator(),
-            "Message will be displayed with the MessageType of: ", MessageType.GENERIC.name());
+    return StringProcessor.safeFormatter("Unknown MessageType: %s%s%s%s", type.name(), System.lineSeparator(),
+        "Message will be displayed with the MessageType of: ", MessageType.GENERIC.name());
   }
 }

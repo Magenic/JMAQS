@@ -40,7 +40,7 @@ public class EventHandler implements WebDriverEventListener {
   public void beforeClickOn(WebElement element, WebDriver driver) {
     try {
       this.logger.logMessage(MessageType.INFORMATION,
-          "Before clicking element: {0} Text:{1} Location: X:{2} Y:{3}", element.toString(),
+          "Before clicking element: %s Text:%s Location: X:%d Y:%d", element.toString(),
           element.getText(), element.getLocation().x, element.getLocation().y);
     } catch (Exception exc) {
       this.logger.logMessage(MessageType.INFORMATION, "Before clicking element");
@@ -57,7 +57,7 @@ public class EventHandler implements WebDriverEventListener {
   public void afterClickOn(WebElement element, WebDriver driver) {
     try {
       this.logger.logMessage(MessageType.INFORMATION,
-          "Element clicked: {0} Text:{1} Location: X:{2} Y:{3}", element.toString(),
+          "Element clicked: %s Text:%s Location: X:%d Y:%d", element.toString(),
           element.getText(), element.getLocation().x, element.getLocation().y);
     } catch (Exception exc) {
       this.logger.logMessage(MessageType.INFORMATION, "Element clicked");
@@ -74,7 +74,7 @@ public class EventHandler implements WebDriverEventListener {
   @Override
   public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
     String value = element.getAttribute("value");
-    this.logger.logMessage(MessageType.INFORMATION, "Element value before change: {0}", value);
+    this.logger.logMessage(MessageType.INFORMATION, "Element value before change: %s", value);
   }
 
   /**
@@ -87,7 +87,7 @@ public class EventHandler implements WebDriverEventListener {
   @Override
   public void afterChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
     String value = element.getAttribute("value");
-    this.logger.logMessage(MessageType.INFORMATION, "Element value changed to: {0}", value);
+    this.logger.logMessage(MessageType.INFORMATION, "Element value changed to: %s", value);
   }
 
   /**
@@ -100,7 +100,7 @@ public class EventHandler implements WebDriverEventListener {
   @Override
   public void beforeFindBy(By by, WebElement element, WebDriver driver) {
     this.logger
-        .logMessage(MessageType.INFORMATION, "Before finding element By: {0}", by.toString());
+        .logMessage(MessageType.INFORMATION, "Before finding element By: %s", by.toString());
   }
 
   /**
@@ -132,7 +132,7 @@ public class EventHandler implements WebDriverEventListener {
    */
   @Override
   public void afterNavigateBack(WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Navigated back to previous page: {0}",
+    this.logger.logMessage(MessageType.INFORMATION, "Navigated back to previous page: %s",
         driver.getCurrentUrl());
   }
 
@@ -153,7 +153,7 @@ public class EventHandler implements WebDriverEventListener {
    */
   @Override
   public void afterNavigateForward(WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Navigated forward to next page: {0}",
+    this.logger.logMessage(MessageType.INFORMATION, "Navigated forward to next page: %s",
         driver.getCurrentUrl());
   }
 
@@ -185,7 +185,7 @@ public class EventHandler implements WebDriverEventListener {
    */
   @Override
   public void beforeNavigateTo(String url, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before navigating to page: {0}", url);
+    this.logger.logMessage(MessageType.INFORMATION, "Before navigating to page: %s", url);
   }
 
   /**
@@ -196,7 +196,7 @@ public class EventHandler implements WebDriverEventListener {
    */
   @Override
   public void afterNavigateTo(String url, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "After navigating to page: {0}", url);
+    this.logger.logMessage(MessageType.INFORMATION, "After navigating to page: %s", url);
   }
 
   /**
@@ -207,7 +207,7 @@ public class EventHandler implements WebDriverEventListener {
    */
   @Override
   public void beforeScript(String script, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before executing script: {0}", script);
+    this.logger.logMessage(MessageType.INFORMATION, "Before executing script: %s", script);
   }
 
   /**
@@ -218,7 +218,7 @@ public class EventHandler implements WebDriverEventListener {
    */
   @Override
   public void afterScript(String script, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Script executed: {0}", script);
+    this.logger.logMessage(MessageType.INFORMATION, "Script executed: %s", script);
   }
 
   /**
@@ -229,7 +229,7 @@ public class EventHandler implements WebDriverEventListener {
    */
   @Override
   public void beforeSwitchToWindow(String windowName, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Before switching to window: {0}", windowName);
+    this.logger.logMessage(MessageType.INFORMATION, "Before switching to window: %s", windowName);
   }
 
   /**
@@ -240,7 +240,7 @@ public class EventHandler implements WebDriverEventListener {
    */
   @Override
   public void afterSwitchToWindow(String windowName, WebDriver driver) {
-    this.logger.logMessage(MessageType.INFORMATION, "Switched to window: {0}", windowName);
+    this.logger.logMessage(MessageType.INFORMATION, "Switched to window: %s", windowName);
   }
 
   /**
@@ -292,7 +292,7 @@ public class EventHandler implements WebDriverEventListener {
   @Override
   public void onException(Throwable e, WebDriver driver) {
     // First chance handler catches these when it is a real error - These are typically retry loops
-    this.logger.logMessage(MessageType.VERBOSE, "Exception occurred at {0}", e.getMessage());
+    this.logger.logMessage(MessageType.VERBOSE, "Exception occurred at %s", e.getMessage());
   }
 
   /**
@@ -338,6 +338,6 @@ public class EventHandler implements WebDriverEventListener {
    */
   @Override
   public void afterGetText(WebElement element, WebDriver driver, String text) {
-    this.logger.logMessage(MessageType.INFORMATION, "Got element text: {0}", text);
+    this.logger.logMessage(MessageType.INFORMATION, "Got element text: %s", text);
   }
 }

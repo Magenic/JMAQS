@@ -1,0 +1,39 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+change-template: "* $TITLE (#$NUMBER)"
+categories:
+  - title: 'Feature'
+    label: 'feature'
+  - title: 'Enhancement'
+    label: 'enhancement'
+  - title: 'Bug Fixes'
+    label: 'bug'
+  - title: 'Documentation'
+    label: 'documentation'
+  - title: 'Maintenance'
+    label: 'maintenance'
+  - title: 'Dependencies'
+    labels:
+      - 'dependencies'
+      - 'dependabot'
+  - title: 'DevOps'
+    label: 'devops'
+version-resolver:
+  major:
+    labels:
+      - 'breaking change'
+  minor:
+    labels:
+      - 'feature'
+  patch:
+    labels:
+      - 'bug'
+      - 'enhancement'
+      - 'documentation'
+      - 'maintenance'
+      - 'dependencies'
+  default: patch
+template: |
+  ## What’s Changed
+  
+  $CHANGES

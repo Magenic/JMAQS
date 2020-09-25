@@ -18,7 +18,7 @@ public final class WebServiceConfig {
   /**
    * The web service configuration section.
    */
-  private static final ConfigSection WEBSERVICE_SECTION = ConfigSection.WebServiceMaqs;
+  private static final ConfigSection WEBSERVICE_SECTION = ConfigSection.WEB_SERVICE_MAQS;
 
   /**
    * Grabs the URI for the Web Service.

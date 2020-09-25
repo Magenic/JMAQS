@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Web Service Configuration
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Web Service Configuration
 
 ## Overview
 The WebServiceConfig class is used to get values from the WebServiceMaqs section of your test run properties.

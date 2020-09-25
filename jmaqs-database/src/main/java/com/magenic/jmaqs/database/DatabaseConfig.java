@@ -24,12 +24,12 @@ public class DatabaseConfig {
   /**
    * The Database section.
    */
-  private static final ConfigSection DATABASE_SECTION = ConfigSection.DatabaseMaqs;
+  private static final ConfigSection DATABASE_SECTION = ConfigSection.DATABASE_MAQS;
 
   /**
    * Field DATABASE_CAPS_SECTION.
    */
-  private static final ConfigSection DATABASE_CAPS_SECTION = ConfigSection.DatabaseCapsMaqs;
+  private static final ConfigSection DATABASE_CAPS_SECTION = ConfigSection.DATABASE_CAPS_MAQS;
 
   /**
    * Gets connection string.

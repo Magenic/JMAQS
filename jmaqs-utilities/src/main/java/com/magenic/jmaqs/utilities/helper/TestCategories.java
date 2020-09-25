@@ -47,4 +47,9 @@ public class TestCategories {
    * String for Appium unit test category.
    */
   public static final String APPIUM = "Appium Unit Tests";
+
+  /**
+   * String for Cucumber unit test category.
+   */
+  public static final String CUCUMBER = "Cucumber Unit Tests";
 }

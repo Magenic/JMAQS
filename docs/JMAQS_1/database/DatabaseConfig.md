@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Database Config
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Database Config
 
 ## Overview
 Manages the connections to access the databases.

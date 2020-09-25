@@ -44,8 +44,7 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
   public void testSetEntityManager() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
     final int hashCode = openConnection.getEntityManager().hashCode();
-    openConnection
-        .setEntityManager(ConnectionFactory.getEntityManagerFactory().createEntityManager());
+    openConnection.setEntityManager(ConnectionFactory.getEntityManagerFactory().createEntityManager());
     final int hashCode1 = openConnection.getEntityManager().hashCode();
     Assert.assertNotEquals(hashCode, hashCode1);
   }
@@ -62,7 +61,7 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.DATABASE)
   public void testQuery() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
-    List results = openConnection.query(INFORMATION_SCHEMAS_QUERY);
+    List<?> results = openConnection.query(INFORMATION_SCHEMAS_QUERY);
     Assert.assertTrue(results.stream().anyMatch(n -> ((Object[]) n)[2].equals("States")));
   }
 
@@ -83,8 +82,7 @@ public class DatabaseDriverUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.DATABASE)
   public void testTypedQuery() {
     DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
-    final List<StatesEntity> queryResults = openConnection
-        .query(STATES_SELECT_QUERY, StatesEntity.class);
+    final List<StatesEntity> queryResults = openConnection.query(STATES_SELECT_QUERY, StatesEntity.class);
     Assert.assertNotNull(queryResults);
     Assert.assertEquals(queryResults.size(), 49);
   }

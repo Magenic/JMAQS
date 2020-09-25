@@ -16,8 +16,6 @@ import javax.persistence.spi.PersistenceUnitTransactionType;
 import javax.sql.DataSource;
 
 public class DatabasePersistenceUnitInfo implements PersistenceUnitInfo {
-
-  private static final String JPA_VERSION = "2.1";
   private String persistenceUnitName;
   private PersistenceUnitTransactionType transactionType = PersistenceUnitTransactionType.RESOURCE_LOCAL;
   private String persistenceProviderClassName = "org.hibernate.jpa.HibernatePersistenceProvider";

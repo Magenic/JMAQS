@@ -1,70 +1,34 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> SeleniumTestObject
-Manages the interactions of the web driver and web manager.
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Selenium Test Object
 
-## Inheritance Hierarchy
+## Overview
+Selenium test context data
+
+## GetWebDriver
+Gets the Selenium web driver
 ```java
-AutoCloseable
-    BaseTestObject
-        com.magenic.jmaqs.appium.SeleniumTestObject
-```
-Package: com.magenic.jmaqs.appium;
-<br> Assembly: import com.magenic.jmaqs.appium.SeleniumTestObject;
-
-## Syntax
-Java
-
-```java
-public class SeleniumTestObject extends BaseTestObject
+  public WebDriver getWebDriver() {
+    return this.getWebManager().getWebDriver();
+  }
 ```
 
-The SeleniumTestObject type exposes the following members.
-
-## Constructors
-Instantiates a new Selenium test object.
-#### Written as
+## SetWebDriver
+Sets the selenium webDriver
 ```java
-public SeleniumTestObject(Supplier<WebDriver> getDriverSupplier,
-Logger logger, String fullyQualifiedTestName)
+public void setWebDriver(WebDriver driver) {
+    this.getManagerStore().put(SeleniumDriverManager.class.getCanonicalName(),
+        new SeleniumDriverManager((() -> driver), this));
+  }
 ```
-#### Example
+The override
 ```java
-SeleniumTestObject testObject = new SeleniumTestObject((() 
--> finalDefaultBrowser), this.getLogger(),
-this.getFullyQualifiedTestClassName());
-```
-
-## Methods
-
-### GetWebDriver
-Get the WebDriver Object.
-#### Written as
-```java
-WebDriver getWebDriver()
-```
-#### Example
-```java
-WebElement elementDriver = UIWaitFactory.getWaitDriver(
-    pageModel.getSeleniumTestObject().getWebDriver())
+public void setWebDriver(Supplier<WebDriver> webDriverSupplier) {
+    this.getManagerStore().put(SeleniumDriverManager.class.getCanonicalName(),
+        new SeleniumDriverManager(webDriverSupplier, this));
+  }
 ```
 
-### GetWebManager
-Gets the Selenium driver manager.
-#### Written as
+## GetWebManager
+Gets the Selenium driver manager
 ```java
-SeleniumDriverManager getWebManager()
-```
-#### Example
-```java
-return this.getWebManager().getWebDriver();
-```
-
-### SetWebDriver
-Sets the web driver.
-#### Written as
-```java
-void setWebDriver(WebDriver driver)
-```
-#### Example
-```java
-this.getTestObject().setWebDriver(webDriver);
+SeleniumDriverManager manager = this.getWebManager.getWebDriver();
 ```

@@ -6,8 +6,8 @@ package com.magenic.jmaqs.utilities;
 
 import com.magenic.jmaqs.utilities.helper.GenericWait;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.utilities.helper.TimeoutException;
 
+import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -56,7 +56,8 @@ public class GenericWaitUnitTest {
   }
 
   /**
-   * Test wait until with an array of parameters works when the wait function returns true.
+   * Test wait until with an array of parameters works when the wait function
+   * returns true.
    */
   @Test(groups = TestCategories.UTILITIES)
   public void passObjectArrayUntilTest() {
@@ -65,15 +66,15 @@ public class GenericWaitUnitTest {
     objects.add(new HashMap<Integer, UUID>());
 
     try {
-      Assert.assertTrue(GenericWait.waitUntil(this::isTwoParameters, objects.toArray()),
-          "Failed parameter array test");
+      Assert.assertTrue(GenericWait.waitUntil(this::isTwoParameters, objects.toArray()), "Failed parameter array test");
     } catch (Exception e) {
       Assert.fail("waitUntil generic object test failed with exception", e);
     }
   }
 
   /**
-   * Test wait for with an array of parameters works when the wait function returns true.
+   * Test wait for with an array of parameters works when the wait function
+   * returns true.
    */
   @Test(groups = TestCategories.UTILITIES)
   public void passObjectArrayForTest() {
@@ -89,20 +90,21 @@ public class GenericWaitUnitTest {
   }
 
   /**
-   * Test wait until with a single parameter works when the wait function returns false.
+   * Test wait until with a single parameter works when the wait function returns
+   * false.
    */
   @Test(groups = TestCategories.UTILITIES)
   public void failStringUntilTest() {
     try {
-      Assert.assertFalse(GenericWait.waitUntil(this::isParamTestString, "Bad"),
-          "Failed single parameter test");
+      Assert.assertFalse(GenericWait.waitUntil(this::isParamTestString, "Bad"), "Failed single parameter test");
     } catch (Exception e) {
       Assert.fail("waitUntil failed with exception", e);
     }
   }
 
   /**
-   * Test wait until with a parameter array works when the wait function returns false.
+   * Test wait until with a parameter array works when the wait function returns
+   * false.
    */
   @Test(groups = TestCategories.UTILITIES)
   public void failObjectArrayUntilTest() {
@@ -116,7 +118,8 @@ public class GenericWaitUnitTest {
   }
 
   /**
-   * Test wait until with a parameter array works when the wait function returns false.
+   * Test wait until with a parameter array works when the wait function returns
+   * false.
    */
   @Test(expectedExceptions = UnsupportedOperationException.class, groups = TestCategories.UTILITIES)
   public void throwExceptionWithoutParamTest() throws Throwable {
@@ -133,7 +136,8 @@ public class GenericWaitUnitTest {
   @Test(groups = TestCategories.UTILITIES)
   public void waitForTruePasses() {
     try {
-      GenericWait.waitForTrue(() -> 2 == 2);
+      int one = 1;
+      GenericWait.waitForTrue(() -> one == 1);
     } catch (Exception e) {
       Assert.fail("waitForTrue threw unexpected exception", e);
     }
@@ -160,7 +164,8 @@ public class GenericWaitUnitTest {
   }
 
   /**
-   * Test wait for with a parameter returns the function exception when the check times out.
+   * Test wait for with a parameter returns the function exception when the check
+   * times out.
    */
   @Test(expectedExceptions = RuntimeException.class, groups = TestCategories.UTILITIES)
   public void throwExceptionWithParamTest() throws Throwable {
@@ -213,8 +218,7 @@ public class GenericWaitUnitTest {
       LocalDateTime start = LocalDateTime.now();
       GenericWait.wait(this::isParamTest, testretry, testtimeout, false);
       long duration = ChronoUnit.MILLIS.between(start, LocalDateTime.now());
-      Assert.assertTrue(duration < max,
-          "The max wait time should be no more than " + max + " but was " + duration);
+      Assert.assertTrue(duration < max, "The max wait time should be no more than " + max + " but was " + duration);
     } catch (Exception e) {
       Assert.fail("wait threw unexpected exception", e);
     }
@@ -230,8 +234,7 @@ public class GenericWaitUnitTest {
       LocalDateTime start = LocalDateTime.now();
       GenericWait.wait(this::isParamTestString, testretry, testtimeout, false, "bad");
       long duration = ChronoUnit.MILLIS.between(start, LocalDateTime.now());
-      Assert.assertTrue(duration < max,
-          "The max wait time should be no more than " + max + " but was " + duration);
+      Assert.assertTrue(duration < max, "The max wait time should be no more than " + max + " but was " + duration);
     } catch (Exception e) {
       Assert.fail("wait threw unexpected exception", e);
     }
@@ -241,8 +244,7 @@ public class GenericWaitUnitTest {
    * Verify that Wait with input parameter throws expected exception.
    */
   @Test(expectedExceptions = TimeoutException.class, groups = TestCategories.UTILITIES)
-  public void waitForFunctionWithInputExceptionThrown()
-      throws InterruptedException, TimeoutException {
+  public void waitForFunctionWithInputExceptionThrown() throws InterruptedException, TimeoutException {
     GenericWait.wait(this::throwError, testretry, testtimeout, "input");
   }
 
@@ -262,8 +264,7 @@ public class GenericWaitUnitTest {
    * Verify that Wait without input parameter throws expected exception.
    */
   @Test(expectedExceptions = TimeoutException.class, groups = TestCategories.UTILITIES)
-  public void waitForFunctionWithoutInputExceptionThrown()
-      throws InterruptedException, TimeoutException {
+  public void waitForFunctionWithoutInputExceptionThrown() throws InterruptedException, TimeoutException {
     GenericWait.wait(this::throwError, testretry, testtimeout);
   }
 
@@ -300,8 +301,7 @@ public class GenericWaitUnitTest {
   public void waitUntilMatchTimeout() {
     try {
       String[] loop = { "aa" };
-      Assert.assertEquals(
-          GenericWait.waitUntilMatch(() -> loop[0] += "", testretry, testtimeout, "bb"), "aa");
+      Assert.assertEquals(GenericWait.waitUntilMatch(() -> loop[0] += "", testretry, testtimeout, "bb"), "aa");
     } catch (InterruptedException e) {
       Assert.fail("waitUntil threw unexpected exception", e);
     }
@@ -343,7 +343,8 @@ public class GenericWaitUnitTest {
   }
 
   /**
-   * Verify waitForMatch with time retry and time overridden throws timeout exception.
+   * Verify waitForMatch with time retry and time overridden throws timeout
+   * exception.
    */
   @Test(expectedExceptions = TimeoutException.class, groups = TestCategories.UTILITIES)
   public void waitForMatchDefinedRetryTimeout() throws InterruptedException, TimeoutException {
@@ -361,7 +362,8 @@ public class GenericWaitUnitTest {
   }
 
   /**
-   * Test function that checks if the test string passed in is the same as the constant test string.
+   * Test function that checks if the test string passed in is the same as the
+   * constant test string.
    *
    * @param testString The test string
    * @return True if the constant and passed in test strings match
@@ -371,14 +373,14 @@ public class GenericWaitUnitTest {
   }
 
   /**
-   * Test function that checks if the object array passed in is in the form expected.
+   * Test function that checks if the object array passed in is in the form
+   * expected.
    *
    * @param parameters Object array
    * @return True if the array is in the form expected
    */
   private boolean isTwoParameters(Object[] parameters) {
-    return (parameters.length == 2 && (parameters[0] instanceof String)
-        && (parameters[1] instanceof HashMap));
+    return (parameters.length == 2 && (parameters[0] instanceof String) && (parameters[1] instanceof HashMap));
   }
 
   /**
