@@ -5,6 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.base.BaseExtendableTest;
+import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
@@ -14,12 +15,13 @@ import org.testng.ITestResult;
 /**
  * Base Selenium Test class.
  */
-public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
+public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
 
   /**
    * Initialize a new instance of the BaseSeleniumTest class.
    */
   public BaseSeleniumTest() {
+    // This initializer is intentionally left blank
   }
 
   /**
@@ -35,8 +37,9 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
    * Sets web driver.
    *
    * @param webDriver the web driver
+   * @throws Exception exception
    */
-  public void setWebDriver(WebDriver webDriver) {
+  public void setWebDriver(WebDriver webDriver) throws Exception {
     this.getTestObject().setWebDriver(webDriver);
   }
 
@@ -62,21 +65,27 @@ public abstract class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestOb
    * Get the current browser.
    *
    * @return Current browser Web Driver
-   * @throws Exception Throws exception
+   * @throws WebDriverFactoryException Throws exception
    */
-  protected WebDriver getBrowser() throws Exception {
+  protected WebDriver getBrowser() {
     // Returns the web driver
     return WebDriverFactory.getDefaultBrowser();
   }
 
   @Override
-  protected void createNewTestObject() {
+  protected void createNewTestObject()  {
     try {
-      this.setTestObject(new SeleniumTestObject(this.getBrowser(), this.createLogger(),
-          this.getFullyQualifiedTestClassName()));
+      this.setTestObject(
+          new SeleniumTestObject(() -> {
+            try {
+              return getBrowser();
+            } catch (WebDriverFactoryException e) {
+              getLogger().logMessage(StringProcessor.safeFormatter("Failed setup driver: %s", e.toString()));
+            }
+            return null;
+          }, this.createLogger(), this.getFullyQualifiedTestClassName()));
     } catch (Exception e) {
-      getLogger().logMessage(
-          StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
+      getLogger().logMessage(StringProcessor.safeFormatter("Test Object could not be created: %s", e.getMessage()));
     }
   }
 }

@@ -43,11 +43,6 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   private By homeButtonCssSelector = By.cssSelector("#homeButton > a");
 
   /**
-   * Home button css selector.
-   */
-  private By dropdownToggleClassSelector = By.className("dropdown-toggle");
-
-  /**
    * Dropdown selector.
    */
   private By asyncDropdownCssSelector = By.cssSelector("#Selector");
@@ -139,8 +134,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "style", "display: none;"));
-    Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "style",
-        "display: none;", 10000, 2000));
+    Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "style", "display: none;", 10000, 2000));
   }
 
   /**
@@ -163,13 +157,12 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAsyncUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "id", ""));
-    Assert.assertTrue(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "id",
-        "", 10000, 1000));
+    Assert.assertTrue(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "id", "", 10000, 1000));
   }
 
   /**
-   * Verify that the WaitUntilAttributeTextContains method returns false
-   * for objects that don't have this text inside attribute value within timeout.
+   * Verify that the WaitUntilAttributeTextContains method returns false for
+   * objects that don't have this text inside attribute value within timeout.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void waitUntilAttributeTextContainsFalse() {
@@ -178,13 +171,13 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertFalse(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "nottherightid", "id"));
-    Assert.assertFalse(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector,
-        "nottherightid", "id", 10000, 1000));
+    Assert
+        .assertFalse(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "nottherightid", "id", 10000, 1000));
   }
 
   /**
-   * Verify that the WaitUntilAttributeTextContains method returns false
-   * for objects that don't have this attribute value within timeout.
+   * Verify that the WaitUntilAttributeTextContains method returns false for
+   * objects that don't have this attribute value within timeout.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void waitUntilAttributeTextEqualsFalse() {
@@ -193,8 +186,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertFalse(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "display:", "style"));
-    Assert.assertFalse(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "display:",
-        "style", 10000, 1000));
+    Assert.assertFalse(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "display:", "style", 10000, 1000));
   }
 
   /**
@@ -205,20 +197,19 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertNotNull(wait.waitForClickableElementAndScrollIntoView(automationShowDialog1));
-    Assert.assertNotNull(wait.waitForClickableElementAndScrollIntoView(automationShowDialog1,
-        10000, 1000));
+    Assert.assertNotNull(wait.waitForClickableElementAndScrollIntoView(automationShowDialog1, 10000, 1000));
   }
 
   /**
-   * Tests the functionality that waits until a clickable element scrolls into view.
+   * Tests the functionality that waits until a clickable element scrolls into
+   * view.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void waitUntilClickableElementAndScrollIntoView() {
     this.getWebDriver().navigate().to(testSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilClickableElementAndScrollIntoView(automationShowDialog1));
-    Assert.assertTrue(wait.waitUntilClickableElementAndScrollIntoView(automationShowDialog1,
-        10000, 1000));
+    Assert.assertTrue(wait.waitUntilClickableElementAndScrollIntoView(automationShowDialog1, 10000, 1000));
   }
 
   /**
@@ -366,7 +357,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   *  Verify WaitForAbsentElement wait fails.
+   * Verify WaitForAbsentElement wait fails.
    */
   @Test(groups = TestCategories.SELENIUM, expectedExceptions = TimeoutException.class)
   public void waitForAbsentElementFail() {
@@ -412,8 +403,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilClickableElement(automationShowDialog1), "Failed to find element");
-    Assert.assertTrue(wait.waitUntilClickableElement(automationShowDialog1,
-        10000, 1000), "Failed to find element");
+    Assert.assertTrue(wait.waitUntilClickableElement(automationShowDialog1, 10000, 1000), "Failed to find element");
   }
 
   /**
@@ -426,8 +416,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilVisibleElement(automationShowDialog1), "Failed to find element");
-    Assert.assertTrue(wait.waitUntilVisibleElement(automationShowDialog1,
-        10000, 1000), "Failed to find element");
+    Assert.assertTrue(wait.waitUntilVisibleElement(automationShowDialog1, 10000, 1000), "Failed to find element");
   }
 
   /**
@@ -440,8 +429,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertTrue(wait.waitUntilExactText(automationShowDialog1, "Show dialog"), "Failed to find element");
-    Assert.assertTrue(wait.waitUntilExactText(automationShowDialog1, "Show dialog",
-        10000, 1000), "Failed to find element");
+    Assert.assertTrue(wait.waitUntilExactText(automationShowDialog1, "Show dialog", 10000, 1000),
+        "Failed to find element");
   }
 
   /**
@@ -453,10 +442,9 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    Assert.assertTrue(wait.waitUntilContainsText(automationShowDialog1, "dialog"),
+    Assert.assertTrue(wait.waitUntilContainsText(automationShowDialog1, "dialog"), "Failed to find element");
+    Assert.assertTrue(wait.waitUntilContainsText(automationShowDialog1, "dialog", 10000, 1000),
         "Failed to find element");
-    Assert.assertTrue(wait.waitUntilContainsText(automationShowDialog1, "dialog",
-        10000, 1000), "Failed to find element");
   }
 
   /**
@@ -473,10 +461,9 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Verify that WaitForAttributeTextEquals throws an exception
-   * for instances where the attribute is not found.
-   * An attribute check that should have failed to
-   * find the given string equal to an elements attribute passed
+   * Verify that WaitForAttributeTextEquals throws an exception for instances
+   * where the attribute is not found. An attribute check that should have failed
+   * to find the given string equal to an elements attribute passed
    */
   @Test(groups = TestCategories.SELENIUM, expectedExceptions = NotFoundException.class)
   public void waitForAttributeEqualsDoesNotFind() {
@@ -489,7 +476,8 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Verify that WaitForAttributeTextEquals can find an attribute value after waiting.
+   * Verify that WaitForAttributeTextEquals can find an attribute value after
+   * waiting.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void waitForAttributeEqualsFound() {
@@ -498,8 +486,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
     Assert.assertNotNull(wait.waitForAttributeTextEquals(asyncLoadingTextDiv, "style", "display: block;"));
-    Assert.assertNotNull(wait.waitForAttributeTextEquals(asyncLoadingTextDiv, "style",
-        "display: block;", 10000, 1000));
+    Assert.assertNotNull(wait.waitForAttributeTextEquals(asyncLoadingTextDiv, "style", "display: block;", 10000, 1000));
   }
 
   /**
@@ -511,7 +498,7 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "style","display: none;"));
+    Assert.assertTrue(wait.waitUntilAttributeTextEquals(asyncLoadingLabel, "style", "display: none;"));
   }
 
   /**

@@ -1,46 +1,16 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> SeleniumUtilities
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Selenium Utilities
+
+## Overview
 The SeleniumUtilities class is a utility class for working with Selenium
 
-## Inheritance Hierarchy
-```java
-com.magenic.jmaqs.selenium.SeleniumUtilities
-```
-Package: com.magenic.jmaqs.selenium;
-<br> Assembly: import com.magenic.jmaqs.selenium.SeleniumUtilities;
-
-## Syntax
-Java
-
-```java
-public class SeleniumUtilities
-```
-
-The SeleniumUtilities type exposes the following members.
-
-## Constructors
-Creates an instance of the Selenium Utilities class.
-#### Written as
-```java
-private SeleniumUtilities()
-```
-
-## MobileDriverManager
-Initializes a new instance of the MobileDriverManager class  
-
-#### Written as
-```java
-MobileDriverManager(Supplier<AppiumDriver<WebElement>> getDriverFunction, BaseTestObject baseTestObject)
-```
-#### Example
-```java
-MobileDriverManager mobileDriverManager = new MobileDriverManager(supplier, this.getTestObject());
-```
-
-# Methods
-[CaptureScreenshot](#CaptureScreenshot) - Capture a screenshot.  
-[SavePageSource](#SavePageSource) - Capture the page DOM.  
-[WebElementToWebDriver](#WebElementToWebDriver) - Get the web driver from a web element  
-[KillDriver](#KillDriver) - Make sure a web driver gets closed  
+# Available methods
+[CaptureScreenshot](#CaptureScreenshot)  
+[CopyFileToPath](#CopyFileToPath)  
+[SavePageSource](#SavePageSource)  
+[CalculateFileName](#CalculateFileName)  
+[ValidateDirectoryStructure](#ValidateDirectoryStructure)  
+[WebElementToWebDriver](#WebElementToWebDriver)  
+[KillDriver](#KillDriver)  
 
 ## CaptureScreenshot
 Capture a screenshot.  
@@ -48,42 +18,66 @@ Capture a screenshot.
 ```java
 String username = "NOT";
 String password = "Valid";
-LoginPageModel page = new LoginPageModel(this.TestObject);
-page.OpenLoginPage();
+LoginPageModel page = new LoginPageModel(this.getTestObject());
+page.openLoginPage();
 
-SeleniumUtilities.CaptureScreenshot(this.WebDriver, this.TestObject, "LoginPage");
+SeleniumUtilities.captureScreenshot(webDriver, testObject, directory, fileNameWithoutExtension);
 ```
-## SavePageSource
+
+## CopyFileToPath
+Copies the file to a path
+```java
+private static void copyFileToPath(File tempFile, String path) throws IOException {
+    Files.copy(tempFile.toPath(), new File(path).toPath(), StandardCopyOption.COPY_ATTRIBUTES);
+  }
+```
+
+##  SavePageSource
 Capture the page DOM.  
 *By default page source ends up in the log folder, but one of the 'SavePageSource' functions allows you to choose a different directory.*
 ```java
 String username = "NOT";
 String password = "Valid";
-LoginPageModel page = new LoginPageModel(this.TestObject);
-page.OpenLoginPage();
+LoginPageModel page = new LoginPageModel(this.getTestObject());
+page.openLoginPage();
 
-SeleniumUtilities.SavePageSource(this.WebDriver, this.TestObject);
+String path = SeleniumUtilities.savePageSource(webDriver, testObject, LoggingConfig.getLogDirectory(),
 ```
-## WebElementToWebDriver
+
+## CalculateFileName
+Gets the file name
+```java
+String path = calculateFileName(directory, fileNameWithoutExtension, ".png");
+```
+
+## ValidateDirectoryStructure
+Checks if the directory structure is valid
+```java
+validateDirectoryStructure(testObject, directory);
+```
+
+
+##  WebElementToWebDriver
 Get the web driver from a web element
 ```java
-EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(webDriver);
-LoginPageModel page = new LoginPageModel(this.TestObject);
-page.OpenLoginPage();
+LoginPageModel page = new LoginPageModel(this.getTestObject);
+page.openLoginPage();
 
-WebElement input = UIWaitFactory.getWaitDriver(eventFiringWebDriver)
-        .waitForVisibleElement(By.tagName("div"));
+WebElement element = this.WebDriver.findElement(By.CssSelector("#SELECTOR"));
 
-WebDriver webElementToWebDriver = SeleniumUtilities.webElementToWebDriver(input);
+WebDriver driver = SeleniumUtilities.webElementToWebDriver(element);
+
 ```
-## KillDriver
+
+##  KillDriver
 Make sure a web driver gets closed
 ```java
-WebDriver webDriver = WebDriverFactory.GetBrowserWithDefaultConfiguration(BrowserType.HeadlessChrome);
+WebDriver tempDriver = WebDriverFactory.getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
 
 try {
       webDriver.close();
     } finally {
       webDriver.quit();
     }
+  }
 ```

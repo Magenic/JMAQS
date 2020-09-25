@@ -4,11 +4,19 @@
 
 package com.magenic.jmaqs.webservices.jdk8.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import java.math.BigDecimal;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Product {
+    /**
+     * the xmlns namespace.
+     */
+    @JacksonXmlProperty(isAttribute = true)
+    private final String xmlns = "http://schemas.datacontract.org/2004/07/AutomationTestSite.Models";
+
     @JsonProperty("Id")
     private int id;
 
@@ -63,12 +71,9 @@ public class Product {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder(20);
-        sb.append(String.format("%s:%d\n", "Id", this.getId()));
-        sb.append(String.format("%s:%s\n", "Name", this.getName()));
-        sb.append(String.format("%s:%s\n", "Category", this.getCategory()));
-        sb.append(String.format("%s:%d\n", "Price", this.getPrice()));
-
-        return sb.toString();
+        return String.format("%s:%d\n", "Id", this.getId()) + String
+            .format("%s:%s\n", "Name", this.getName()) + String
+            .format("%s:%s\n", "Category", this.getCategory()) + String
+            .format("%s:%s\n", "Price", this.getPrice());
     }
 }

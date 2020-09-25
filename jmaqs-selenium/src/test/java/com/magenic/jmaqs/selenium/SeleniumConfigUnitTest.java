@@ -81,7 +81,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
 
     String path = SeleniumConfig.getDriverHintPath();
 
-    Assert.assertEquals(path, "./src/test/resources");
+    Assert.assertEquals(path, "./src/test/resources/drivers");
   }
 
   /**
@@ -186,7 +186,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   public void getWaitTime() {
     Duration value = SeleniumConfig.getWaitTime();
 
-    Assert.assertNotNull(value);
+    Assert.assertEquals(value.toMillis(), 1000);
   }
 
   /**
@@ -196,7 +196,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   public void getTimeoutTime() {
     Duration value = SeleniumConfig.getTimeoutTime();
 
-    Assert.assertNotNull(value);
+    Assert.assertEquals(value.toMillis(), 20000);
   }
 
   /**

@@ -7,8 +7,10 @@ package com.magenic.jmaqs.webservices.jdk8;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import org.apache.http.HttpEntity;
@@ -21,11 +23,19 @@ import org.apache.http.util.EntityUtils;
  * The type Web service utilities.
  */
 public final class WebServiceUtilities {
+  /**
+   * The Object mapper to serialize/deserialize JSON.
+   */
   private static final ObjectMapper objectMapper = new ObjectMapper();
 
-  private static final ObjectMapper xmlMapper = new XmlMapper();
+  /**
+   * The Object mapper to serialize/deserialize XML.
+   */
+  private static final XmlMapper xmlMapper = new XmlMapper();
 
-  // private constructor
+  /**
+   * private class constructor.
+   */
   private WebServiceUtilities() {
   }
 
@@ -78,7 +88,7 @@ public final class WebServiceUtilities {
    * @throws JsonProcessingException the json processing exception
    */
   public static <T> StringEntity createStringEntity(T body, Charset encoding, String mediaType)
-      throws JsonProcessingException {
+      throws JsonProcessingException, UnsupportedEncodingException {
     ContentType contentType = ContentType.create(mediaType, encoding);
     return createStringEntity(body, contentType);
   }
@@ -92,14 +102,17 @@ public final class WebServiceUtilities {
    * @return the string entity
    * @throws JsonProcessingException the json processing exception
    */
-  public static <T> StringEntity createStringEntity(T body, ContentType contentType) throws JsonProcessingException {
+  public static <T> StringEntity createStringEntity(T body, ContentType contentType)
+      throws JsonProcessingException, UnsupportedEncodingException {
     if (contentType.toString().toUpperCase().contains("XML")) {
       return new StringEntity(serializeXml(body), contentType);
     } else if (contentType.toString().toUpperCase().contains("JSON")) {
       return new StringEntity(serializeJson(body), contentType);
+    } else if (contentType.toString().toUpperCase().contains("TEXT")) {
+      return new StringEntity(body.getClass().toString());
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter("Content not supported: " + contentType));
     }
   }
 
@@ -124,6 +137,7 @@ public final class WebServiceUtilities {
    * @throws JsonProcessingException the json processing exception
    */
   public static <T> String serializeXml(T body) throws JsonProcessingException {
+    xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
     return xmlMapper.writeValueAsString(body);
   }
 

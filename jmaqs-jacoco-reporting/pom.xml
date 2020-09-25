@@ -9,19 +9,22 @@
     <parent>
         <artifactId>jmaqs-framework</artifactId>
         <groupId>com.magenic.jmaqs</groupId>
-        <version>2.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jmaqs-jacoco-reporting</artifactId>
     <name>JMAQS Code Coverage Reporting Module</name>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <profiles>
         <profile>
             <id>jacoco</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>testing</name>
+                </property>
             </activation>
             <build>
                 <plugins>
@@ -59,32 +62,30 @@
         <dependency>
             <groupId>com.magenic.jmaqs.appium</groupId>
             <artifactId>jmaqs-appium</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.base</groupId>
             <artifactId>jmaqs-base</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
             <artifactId>jmaqs-utilities</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.webservices</groupId>
             <artifactId>jmaqs-webservices-jdk8</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.database</groupId>
             <artifactId>jmaqs-database</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.selenium</groupId>
             <artifactId>jmaqs-selenium</artifactId>
-            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.cucumber</groupId>
+            <artifactId>jmaqs-cucumber</artifactId>
         </dependency>
     </dependencies>
 </project>

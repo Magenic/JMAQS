@@ -99,8 +99,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
     ChromeDriver driver = null;
 
     try {
-      driver = (ChromeDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.CHROME);
+      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.CHROME);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -116,8 +115,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getHeadlessChromeDriverTest() throws Exception {
     ChromeDriver driver = null;
     try {
-      driver = (ChromeDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.HEADLESS_CHROME);
+      driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.HEADLESS_CHROME);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -129,12 +127,12 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Fire Fox driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getFirefoxDriverTest() throws Exception {
     FirefoxDriver driver = null;
     try {
-      driver = (FirefoxDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.FIREFOX);
+      driver = (FirefoxDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.FIREFOX);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -164,12 +162,12 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the IE driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getInternetExplorerDriverTest() throws Exception {
     InternetExplorerDriver driver = null;
     try {
-      driver = (InternetExplorerDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.IE);
+      driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.IE);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -187,8 +185,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getRemoteDriverTest() throws Exception {
     RemoteWebDriver driver = null;
     try {
-      driver = (RemoteWebDriver) WebDriverFactory
-          .getBrowserWithDefaultConfiguration(BrowserType.REMOTE);
+      driver = (RemoteWebDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.REMOTE);
       Assert.assertNotNull(driver);
     } finally {
       if (driver != null) {
@@ -211,8 +208,8 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteOptionsChromeTest() {
-    MutableCapabilities options = WebDriverFactory
-        .getRemoteOptions(RemoteBrowserType.CHROME, "testPlatform", "testVersion", null);
+    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.CHROME, "testPlatform",
+        "testVersion", null);
     Assert.assertNotNull(options);
 
     options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.CHROME, null);
@@ -382,8 +379,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getDriverLocationDefaultHintPathTest() {
-    String driverLocation = WebDriverFactory
-        .getDriverLocation(WebDriverFile.CHROME.getFileName(), "");
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName(), "");
     Assert.assertFalse(driverLocation.isEmpty());
     Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
         "Checking that driver location and default hint path are the same.");
@@ -447,7 +443,11 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void testGetChromeDriver() {
     final ChromeOptions defaultChromeOptions = WebDriverFactory.getDefaultChromeOptions();
     final WebDriver chromeDriver = WebDriverFactory.getChromeDriver(defaultChromeOptions);
-    Assert.assertNotNull(chromeDriver);
 
+    try {
+      Assert.assertNotNull(chromeDriver);
+    } finally {
+      chromeDriver.quit();
+    }
   }
 }

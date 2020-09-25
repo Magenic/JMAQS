@@ -57,7 +57,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
     UIWait firstWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
     UIWait secondWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
-    Assert.assertEquals(firstWaitDriver, secondWaitDriver,
+    Assert.assertEquals(firstWaitDriver.getWaitDriver(), secondWaitDriver.getWaitDriver(),
         String.format(assertEqualErrorTemplate, "firstWaitDriver", "secondWaitDriver"));
   }
 
@@ -67,11 +67,11 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void setWaitDriverWhenDriverKeyDoesNotExist() {
     UIWait waitDriver = new UIWait(this.getWebDriver());
-    UIWaitFactory.setWaitDriver(this.getWebDriver(), waitDriver);
+    UIWaitFactory.setWaitDriver(this.getWebDriver(), waitDriver.getWaitDriver());
 
     UIWait existingDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
-    Assert.assertEquals(waitDriver, existingDriver,
+    Assert.assertEquals(waitDriver.getWaitDriver(), existingDriver.getWaitDriver(),
         String.format(assertEqualErrorTemplate, "waitDriver", "existingDriver"));
   }
 
@@ -83,12 +83,12 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
     UIWait oldWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
     UIWait newWaitDriver = new UIWait(this.getWebDriver());
 
-    UIWaitFactory.setWaitDriver(this.getWebDriver(), newWaitDriver);
+    UIWaitFactory.setWaitDriver(this.getWebDriver(), newWaitDriver.getWaitDriver());
     UIWait overridenWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
-    Assert.assertEquals(newWaitDriver, overridenWaitDriver,
+    Assert.assertEquals(newWaitDriver.getWaitDriver(), overridenWaitDriver.getWaitDriver(),
         String.format(assertEqualErrorTemplate, "newWaitDriver", "overridenWaitDriver"));
-    Assert.assertNotEquals(oldWaitDriver, overridenWaitDriver,
+    Assert.assertNotEquals(oldWaitDriver.getWaitDriver(), overridenWaitDriver.getWaitDriver(),
         String.format(assertNotEqualErrorTemplate, "oldWaitDriver", "overridentWaitDriver"));
   }
 
@@ -100,7 +100,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
     PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
     pageModel.open(siteAutomationUrl);
     WebElement elementDriver = UIWaitFactory
-        .getWaitDriver(pageModel.getSeleniumTestObject().getWebDriver())
+        .getWaitDriver(pageModel.getWebDriver())
         .waitForClickableElement(pageModel.showDialog1ButtonLocator);
 
     UIWait waitDriver = UIWaitFactory.getWaitDriver(elementDriver);

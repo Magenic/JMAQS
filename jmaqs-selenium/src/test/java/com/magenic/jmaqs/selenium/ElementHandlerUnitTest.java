@@ -10,6 +10,7 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -47,8 +48,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * First name textbox.
    */
-  private static By firstNameTextBox = By
-      .cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
+  private static By firstNameTextBox = By.cssSelector("#TextFields > p:nth-child(1) > input[type=\"text\"]");
 
   /**
    * Female radio button.
@@ -87,8 +87,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void createSortedCommaDelimitedStringFromWebElementsTest() {
     String expectedText = "Hard Drive, Keyboard, Monitor, Motherboard, Mouse, Power Supply";
     navigateToUrl();
-    Assert.assertEquals(
-        ElementHandler.createCommaDelimitedString(getWebDriver(), computerPartsListOptions, true),
+    Assert.assertEquals(ElementHandler.createCommaDelimitedString(getWebDriver(), computerPartsListOptions, true),
         expectedText, "Expected String does not match actual");
   }
 
@@ -99,8 +98,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void createCommaDelimitedStringFromWebElementsTest() {
     String expectedText = "Motherboard, Power Supply, Hard Drive, Monitor, Mouse, Keyboard";
     navigateToUrl();
-    Assert.assertEquals(
-        ElementHandler.createCommaDelimitedString(getWebDriver(), computerPartsListOptions),
+    Assert.assertEquals(ElementHandler.createCommaDelimitedString(getWebDriver(), computerPartsListOptions),
         expectedText, "Expected String does not match actual");
   }
 
@@ -124,8 +122,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     navigateToUrl();
     ElementHandler.clickButton(getWebDriver(), femaleRadioButton, false);
     Assert.assertTrue(
-        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(femaleRadioButton)
-            .isSelected(), "Radio button was not selected");
+        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(femaleRadioButton).isSelected(),
+        "Radio button was not selected");
   }
 
   /**
@@ -135,8 +133,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   public void checkCheckBoxTest() {
     navigateToUrl();
     ElementHandler.checkCheckBox(getWebDriver(), checkbox, true);
-    Assert.assertTrue(
-        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(checkbox).isSelected(),
+    Assert.assertTrue(UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(checkbox).isSelected(),
         "Checkbox was not enabled");
   }
 
@@ -152,36 +149,34 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit Test for selecting an item from a dropdown and getting the selected item from a dropdown
-   * (By actual value).
+   * Unit Test for selecting an item from a dropdown and getting the selected item
+   * from a dropdown (By actual value).
    */
   @Test(groups = TestCategories.SELENIUM)
   public void selectItemFromDropDownTest() {
     String expectedSelection = "Emily";
     navigateToUrl();
     ElementHandler.selectDropDownOption(getWebDriver(), nameDropdown, expectedSelection);
-    String actualSelection = ElementHandler
-        .getSelectedOptionFromDropdown(getWebDriver(), nameDropdown);
+    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(), nameDropdown);
     verifyText(actualSelection, expectedSelection);
   }
 
   /**
-   * Unit Test for selecting an item from a dropdown and getting the selected item from a dropdown
-   * (By list value).
+   * Unit Test for selecting an item from a dropdown and getting the selected item
+   * from a dropdown (By list value).
    */
   @Test(groups = TestCategories.SELENIUM)
   public void selectItemFromDropDownByValueTest() {
     String expectedSelection = "Jack";
     navigateToUrl();
     ElementHandler.selectDropDownOptionByValue(getWebDriver(), nameDropdown, "two");
-    String actualSelection = ElementHandler
-        .getSelectedOptionFromDropdown(getWebDriver(), nameDropdown);
+    String actualSelection = ElementHandler.getSelectedOptionFromDropdown(getWebDriver(), nameDropdown);
     verifyText(actualSelection, expectedSelection);
   }
 
   /**
-   * Unit Test for selecting multiple items from a list box and getting all selected items in a list
-   * box(By actual value).
+   * Unit Test for selecting multiple items from a list box and getting all
+   * selected items in a list box(By actual value).
    */
   @Test(groups = TestCategories.SELENIUM)
   public void selectMultipleItemsFromListBoxTest() {
@@ -191,10 +186,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     itemsToSelect.add("Hard Drive");
     itemsToSelect.add("Keyboard");
     navigateToUrl();
-    ElementHandler
-        .selectMultipleElementsFromListBox(getWebDriver(), computerPartsList, itemsToSelect);
-    ArrayList<String> selectedItems = (ArrayList) ElementHandler
-        .getSelectedOptionsFromDropdown(getWebDriver(), computerPartsList);
+    ElementHandler.selectMultipleElementsFromListBox(getWebDriver(), computerPartsList, itemsToSelect);
+    ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(getWebDriver(),
+        computerPartsList);
     ListProcessor.listOfStringsComparer(itemsToSelect, selectedItems, results, false);
     if (results.length() > 0) {
       Assert.fail(results.toString());
@@ -202,8 +196,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit Test for selecting multiple items from a list box and getting all selected items in a list
-   * box(By list value).
+   * Unit Test for selecting multiple items from a list box and getting all
+   * selected items in a list box(By list value).
    */
   @Test(groups = TestCategories.SELENIUM)
   public void selectMultipleItemsFromListBoxTestByValue() {
@@ -212,10 +206,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     itemsToSelect.add("four");
     itemsToSelect.add("five");
     navigateToUrl();
-    ElementHandler
-        .selectMultipleElementsFromListBoxByValue(getWebDriver(), computerPartsList, itemsToSelect);
-    ArrayList<String> selectedItems = (ArrayList) ElementHandler
-        .getSelectedOptionsFromDropdown(getWebDriver(), computerPartsList);
+    ElementHandler.selectMultipleElementsFromListBoxByValue(getWebDriver(), computerPartsList, itemsToSelect);
+    ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(getWebDriver(),
+        computerPartsList);
 
     if (selectedItems.size() != 3) {
       Assert.fail("Does not contain 3 elements: " + selectedItems.toString());
@@ -223,7 +216,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Unit test for ClickElementByJavaScript using a hover dropdown, where dropdown is not visible.
+   * Unit test for ClickElementByJavaScript using a hover dropdown, where dropdown
+   * is not visible.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void clickElementByJavascriptFromHoverDropdown() {
@@ -262,7 +256,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Test to verify scrolling into view when passing a parent WebElement with coordinates.
+   * Test to verify scrolling into view when passing a parent WebElement with
+   * coordinates.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void scrollIntoViewElementWithCoords() {
@@ -297,8 +292,8 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     navigateToUrl();
     ElementHandler.slowType(getWebDriver(), firstNameTextBox, "Test input slowtype");
     Assert.assertEquals(
-        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(firstNameTextBox)
-            .getAttribute("value"), "Test input slowtype");
+        UIWaitFactory.getWaitDriver(getWebDriver()).waitForClickableElement(firstNameTextBox).getAttribute("value"),
+        "Test input slowtype");
   }
 
   /**
@@ -312,12 +307,12 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     this.getWebDriver().findElement(firstNameTextBox).clear();
     ElementHandler.sendSecretKeys(getWebDriver(), firstNameTextBox, "secretKeys", this.getLogger());
 
-    FileLogger logger = (FileLogger) this.getTestObject().getLog();
+    FileLogger logger = (FileLogger) this.getTestObject().getLogger();
     File file = new File(logger.getFilePath());
 
-    Assert.assertTrue(FileUtils.readFileToString(file).contains("somethingTest"),
+    Assert.assertTrue(FileUtils.readFileToString(file, StandardCharsets.UTF_8).contains("somethingTest"),
         "Failed to assert the logger logged normal keys.");
-    Assert.assertFalse(FileUtils.readFileToString(file).contains("secretKeys"),
+    Assert.assertFalse(FileUtils.readFileToString(file, StandardCharsets.UTF_8).contains("secretKeys"),
         "Failed to assert the logger did not log secret keys.");
   }
 
@@ -332,12 +327,12 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     this.getWebDriver().findElement(firstNameTextBox).clear();
     this.getWebDriver().findElement(firstNameTextBox).sendKeys("somethingTest");
 
-    FileLogger logger = (FileLogger) this.getTestObject().getLog();
+    FileLogger logger = (FileLogger) this.getTestObject().getLogger();
     File file = new File(logger.getFilePath());
 
-    Assert.assertFalse(FileUtils.readFileToString(file).contains("secretKeys"),
+    Assert.assertFalse(FileUtils.readFileToString(file, StandardCharsets.UTF_8).contains("secretKeys"),
         "Failed to assert the logger did not log the secret keys.");
-    Assert.assertTrue(FileUtils.readFileToString(file).contains("somethingTest"),
+    Assert.assertTrue(FileUtils.readFileToString(file, StandardCharsets.UTF_8).contains("somethingTest"),
         "Failed to assert the logger did continued logging normally after secret keys.");
   }
 

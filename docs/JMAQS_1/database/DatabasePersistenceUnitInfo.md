@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Database Persistence Unit Info
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Database Persistence Unit Info
 
 ## Overview
 Manages the database persistence unit info

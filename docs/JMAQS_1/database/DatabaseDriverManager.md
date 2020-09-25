@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Database Driver Manager
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Database Driver Manager
 
 ## Overview
 Gets and closes the Database driver.

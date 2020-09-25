@@ -1,4 +1,4 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> Web Service Utilities
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Web Service Utilities
 
 ## Overview
 The WebServiceUtils class is a utility class for working with HTTP content and serialization 

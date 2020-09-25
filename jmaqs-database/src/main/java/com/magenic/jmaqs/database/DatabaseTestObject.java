@@ -30,34 +30,37 @@ public class DatabaseTestObject extends BaseTestObject {
    * @param logger                 of type Logger
    * @param fullyQualifiedTestName of type String
    */
-  public DatabaseTestObject(Supplier getDriverSupplier, Logger logger,
-      String fullyQualifiedTestName) {
+  public DatabaseTestObject(Supplier<DatabaseDriver> getDriverSupplier, Logger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
     this.getManagerStore().put((DatabaseDriverManager.class).getCanonicalName(),
         new DatabaseDriverManager(getDriverSupplier, this));
   }
 
   /**
-   * Method getDatabaseDriver returns the databaseDriver of this DatabaseTestObject object.
+   * Method getDatabaseDriver returns the databaseDriver of this
+   * DatabaseTestObject object.
    *
-   * @return the databaseDriver (type DatabaseDriver) of this DatabaseTestObject object.
+   * @return the databaseDriver (type DatabaseDriver) of this DatabaseTestObject
+   *         object.
    */
   public DatabaseDriver getDatabaseDriver() {
     return this.getDatabaseManager().getDatabaseDriver();
   }
 
   /**
-   * Method getDatabaseManager returns the databaseManager of this DatabaseTestObject object.
+   * Method getDatabaseManager returns the databaseManager of this
+   * DatabaseTestObject object.
    *
-   * @return the databaseManager (type DatabaseDriverManager) of this DatabaseTestObject object.
+   * @return the databaseManager (type DatabaseDriverManager) of this
+   *         DatabaseTestObject object.
    */
   public DatabaseDriverManager getDatabaseManager() {
-    return (DatabaseDriverManager) this.getManagerStore()
-        .get(DatabaseDriverManager.class.getCanonicalName());
+    return (DatabaseDriverManager) this.getManagerStore().get(DatabaseDriverManager.class.getCanonicalName());
   }
 
   /**
-   * Method setDatabaseDriver sets the databaseDriver of this DatabaseTestObject object.
+   * Method setDatabaseDriver sets the databaseDriver of this DatabaseTestObject
+   * object.
    *
    * @param driver the databaseDriver of this DatabaseTestObject object.
    */
@@ -67,7 +70,8 @@ public class DatabaseTestObject extends BaseTestObject {
   }
 
   /**
-   * Method setDatabaseManager sets the databaseManager of this DatabaseTestObject object.
+   * Method setDatabaseManager sets the databaseManager of this DatabaseTestObject
+   * object.
    *
    * @param manager the databaseManager of this DatabaseTestObject object.
    */

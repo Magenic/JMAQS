@@ -1,64 +1,38 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> AppiumUtilities
-Class for the appium utilities
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Utilities
 
-## Inheritance Hierarchy
+## Overview
+The Appium Utilities class is a utility class for working with Appium
 
+# Available methods
+[CaptureScreenshot](#CaptureScreenshot)  
+[SavePageSource](#SavePageSource)  
+
+##  CaptureScreenshot
+Capture a screenshot.  
+*By default screenshots ends up in the log folder, but one of the 'CaptureScreenshot' functions allows you to choose a different directory.*
 ```java
-com.magenic.jmaqs.appium.AppiumUtilities
+String username = "NOT";
+String password = "Valid";
+LoginPageModel page = new LoginPageModel(this.getTestObject());
+page.openLoginPage();
+
+boolean captured = AppiumUtilities.captureScreenshot(this.getWebDriver(), this.getTestObject(), "LoginPage");
 ```
-Package: com.magenic.jmaqs.appium;
-Assembly: import com.magenic.jmaqs.appium.AppiumUtilities
-
-## Syntax
-Java
+##  SavePageSource
+Capture the page DOM.  
+*By default page source ends up in the log folder, but one of the 'SavePageSource' functions allows you to choose a different directory.*
 ```java
-public class AppiumUtilities
-```
+String username = "NOT";
+String password = "Valid";
+LoginPageModel page = new LoginPageModel(this.getTestObject());
+page.OpenLoginPage();
 
-## Methods
-[CaptureScreenshot](#CaptureScreenshot)  -  To capture a screenshot during execution  
-[SavePageSource](#SavePageSource)        -  To capture a page source during execution  
-[KillDriver](#KillDriver)                -  Kills the appium driver.  
+boolean savedSource = AppiumUtilities.savePageSource(this.getWebDriver(), this.getTestObject());
 
-## CaptureScreenshot
-To capture a screenshot during execution.
-
-#### Written as
-```java
-boolean captureScreenshot(AppiumDriver<WebElement> appiumDriver, AppiumTestObject testObject)
-```
-#### Example
-```java
-AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger,
-        this.getTestObject().getFullyQualifiedTestName());
-boolean isSuccess = AppiumUtilities.captureScreenshot(appiumDriver, testObject);
+String pageSourcePath = AppiumUtilities.savePageSource(this.getAppiumDriver(), this.getTestObject(), "TempTestDirectory", "TestObjAssoc");
 ```
 
-## SavePageSource
-To capture Page Source during execution.
-
-#### Written as
+##  KillDriver
+Make sure an appium driver gets closed
 ```java
-boolean savePageSource(AppiumDriver<WebElement> appiumDriver,AppiumTestObject testObject)
-```
-#### Example
-```java
-AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-AppiumTestObject testObject = new AppiumTestObject(appiumDriver, fileLogger, 
-            this.getTestObject().getFullyQualifiedTestName());
-boolean isSuccess = AppiumUtilities.savePageSource(appiumDriver, testObject);
-```
-
-## KillDriver
-Makes sure the driver is shut down.
-
-#### Written as
-```java
-void killDriver(AppiumDriver<WebElement> appiumDriver)
-```
-#### Example:
-```java
-AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.getDefaultMobileDriver();
-AppiumUtilities.killDriver(appiumDriver);
-```
+AppiumUtilties.killdriver(appiumDriver);

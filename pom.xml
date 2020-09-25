@@ -1,11 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.magenic.jmaqs</groupId>
     <artifactId>jmaqs-framework</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>JMAQS Framework</name>
-    <description>A collection of testing libraries and conveince classes to accelerate startup automation efforts</description>
+    <description>A collection of testing libraries and convenience classes to accelerate startup
+        automation efforts
+    </description>
     <packaging>pom</packaging>
     <url>https://github.com/Magenic/JMAQS</url>
     <inceptionYear>2017</inceptionYear>
@@ -26,8 +30,8 @@
         <url>https://github.com/Magenic/JMAQS/issues</url>
     </issueManagement>
     <ciManagement>
-        <system>Azure Pipelines</system>
-        <url>https://dev.azure.com/magenicOpen/JMAQS/_build</url>
+        <system>GitHub Actions</system>
+        <url>https://github.com/Magenic/JMAQS/actions</url>
     </ciManagement>
     <licenses>
         <license>
@@ -42,38 +46,165 @@
         <tag>HEAD</tag>
     </scm>
 
-
     <modules>
         <module>jmaqs-utilities</module>
         <module>jmaqs-base</module>
         <module>jmaqs-selenium</module>
         <module>jmaqs-webservices-jdk8</module>
         <module>jmaqs-appium</module>
-      <module>jmaqs-database</module>
-        <module>jmaqs-webservices-jdk11</module>
+        <module>jmaqs-database</module>
+        <module>jmaqs-cucumber</module>
     </modules>
-
-    <distributionManagement>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <profiles>
         <profile>
-            <id>jacoco</id>
+            <id>WIP</id>
+            <modules>
+                <module>jmaqs-webservices-jdk11</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>deploy</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>deploy</name>
+                </property>
             </activation>
             <properties>
-                <sonar.coverage.jacoco.xmlReportPaths>./target/site/jacoco-aggregate/jacoco.xml
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>3.0.0-M1</version>
+                        <configuration>
+                            <deployAtEnd>true</deployAtEnd>
+                            <uniqueVersion>true</uniqueVersion>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>github</id>
+            <activation>
+                <property>
+                    <name>deploy</name>
+                    <value>github</value>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/Magenic/JMAQS</url>
+                </repository>
+                <snapshotRepository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/Magenic/JMAQS</url>
+                    <uniqueVersion>true</uniqueVersion>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>ossrh</id>
+            <activation>
+                <property>
+                    <name>deploy</name>
+                    <value>ossrh</value>
+                </property>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <uniqueVersion>true</uniqueVersion>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>release-github</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                    <value>github</value>
+                </property>
+            </activation>
+        </profile>
+        <profile>
+            <id>release-ossrh</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                    <value>ossrh</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>sonar</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+                <sonar.coverage.jacoco.xmlReportPaths>
+                    ./target/site/jacoco-aggregate/jacoco.xml
                 </sonar.coverage.jacoco.xmlReportPaths>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>3.7.0.1746</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jacoco</id>
+            <activation>
+                <property>
+                    <name>testing</name>
+                </property>
+            </activation>
             <modules>
                 <module>jmaqs-jacoco-reporting</module>
             </modules>
@@ -95,28 +226,23 @@
             </build>
         </profile>
         <profile>
-            <id>release-sign-artifacts</id>
+            <id>testing</id>
             <activation>
                 <property>
-                    <name>performRelease</name>
-                    <value>true</value>
+                    <name>testing</name>
                 </property>
             </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${surefire.plugin.version}</version>
+                        <configuration>
+                            <parallel>methods</parallel>
+                            <threadCount>6</threadCount>
+                            <argLine>${argLine}</argLine>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -124,15 +250,16 @@
     </profiles>
 
     <properties>
+        <revision>2.1.1-SNAPSHOT</revision>
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
-        <javadoc.plugin.version>3.1.1</javadoc.plugin.version>
+        <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
-        <surefire.plugin.version>3.0.0-M4</surefire.plugin.version>
-        <mvncheckstyle.plugin.version>3.1.0</mvncheckstyle.plugin.version>
+        <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
+        <mvncheckstyle.plugin.version>3.1.1</mvncheckstyle.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <puppycheckstyle.plugin.version>8.29</puppycheckstyle.plugin.version>
-        <jacoco.version>0.8.5</jacoco.version>
-        <testng.version>7.1.0</testng.version>
+        <jacoco.version>0.8.6</jacoco.version>
+        <testng.version>7.3.0</testng.version>
         <selenium.version>3.141.59</selenium.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
@@ -145,55 +272,80 @@
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.appium</groupId>
+                <artifactId>jmaqs-appium</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.base</groupId>
+                <artifactId>jmaqs-base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.utilities</groupId>
+                <artifactId>jmaqs-utilities</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.webservices</groupId>
+                <artifactId>jmaqs-webservices-jdk8</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.database</groupId>
+                <artifactId>jmaqs-database</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.selenium</groupId>
+                <artifactId>jmaqs-selenium</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.cucumber</groupId>
+                <artifactId>jmaqs-cucumber</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
+                <!--<plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin.version}</version>
-                </plugin>
+                </plugin>-->
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
-                <extensions>true</extensions>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.2.5</version>
                 <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <localCheckout>true</localCheckout>
-                    <pushChanges>false</pushChanges>
-                    <mavenExecutorId>forked-path</mavenExecutorId>
-                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-provider-gitexe</artifactId>
-                        <version>1.11.2</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-api</artifactId>
-                        <version>1.11.2</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-           
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -219,6 +371,7 @@
                         </goals>
                         <configuration>
                             <source>8</source>
+                            <doclint>none</doclint>
                             <additionalparam>-Xdoclint:none</additionalparam>
                             <workingDirectory>target/</workingDirectory>
                         </configuration>
@@ -236,9 +389,6 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                        <configuration>
-
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -254,18 +404,13 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven-deploy-plugin.version}</version>
-            </plugin>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${mvncheckstyle.plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>8.29</version>
+                        <version>${puppycheckstyle.plugin.version}</version>
                     </dependency>
                 </dependencies>
                 <executions>
@@ -277,7 +422,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <failOnWarnings>false</failOnWarnings>
-                    <failOnError>true</failOnError>
+                            <failOnError>true</failOnError>
                             <configLocation>maqs_checks.xml</configLocation>
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <consoleOutput>true</consoleOutput>
@@ -286,7 +431,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 </project>

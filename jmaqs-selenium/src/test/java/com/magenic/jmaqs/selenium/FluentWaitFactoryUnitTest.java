@@ -43,7 +43,7 @@ public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
 
     PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
     pageModel.open(siteAutomationUrl);
-    WebElement elementDriver = UIWaitFactory.getWaitDriver(pageModel.getSeleniumTestObject().getWebDriver())
+    WebElement elementDriver = UIWaitFactory.getWaitDriver(pageModel.getWebDriver())
         .waitForClickableElement(pageModel.showDialog1ButtonLocator);
 
     FluentWait<WebElement> fluentWait = FluentWaitFactory

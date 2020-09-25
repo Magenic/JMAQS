@@ -1,114 +1,57 @@
-# <img src="resources/maqslogo.ico" height="32" width="32"> AppiumDriverFactory
-The Appium Driver Factory class is a utility class for working with Selenium.
+# <img src="resources/jmaqslogo.jpg" height="32" width="32"> Appium Driver Factory
 
-## Inheritance Hierarchy
-```java
-com.magenic.jmaqs.appium.AppiumDriverFactory
-```
-Package: com.magenic.jmaqs.appium;
-Assembly: import com.magenic.jmaqs.appium.AppiumDriverFactory
+## Overview
+Takes care of the Appium driver set up, teardown and optimization.
 
-## Syntax
-Java
-```java
-public class AppiumDriverFactory
-```
+[GetDefaultMobileDriver](#GetDefaultMobileDriver)  
+[GetDefaultMobileOptions](#GetDefaultMobileOptions)  
+[GetAndroidDriver](#GetAndriodDriver)   
+[GetIOSDriver](#GetIOSDriver)   
+[GetWindowsDriver](#GetWindowsDriver)   
+[MergeCapabilities](#MergeCapabilities)  
+[CreateDriver](#CreateDriver)
 
-The AppiumDriverFactory type exposes the following members.
-
-## Constructors
-### MobileDriverManager
-Initializes a new instance of the MobileDriverManager class
-#### Written as
-```java
-private AppiumDriverFactory()
-```
-
-## Methods
-[GetDefaultMobileDriver](#GetDefaultMobileDriver) - Gets the default mobile driver  
-[GetDefaultMobileOptions](#GetDefaultMobileOptions) - Gets the default mobile Options  
-[GetAndroidDriver](#GetAndroidDriver) - Get the android driver  
-[GetIosDriver](#GetIosDriver) - get the IOS driver  
-[GetWindowsDriver](#GetWindowsDriver) - Get the windows driver  
-[MergeCapabilities](#MergeCapabilities) - Merge the capabilities    
-[CreateDriver](#CreateDriver) - creates a new driver
-
-##  GetDefaultMobileDriver
-Gets the default mobile driver.
-#### Written as
-```java
-AppiumDriver<WebElement> getDefaultMobileDriver()
-```
-#### Example
+## GetDefaultMobileDriver
+Gets default mobile driver
 ```java
 AppiumDriver<WebElement> defaultMobileDriver = AppiumDriverFactory.getDefaultMobileDriver();
 ```
 
-##  GetDefaultMobileOptions
-Gets default mobile driver.
-#### Written as
+## GetDefaultMobileOptions
+Gets default mobile options
 ```java
-AppiumDriver<WebElement> getDefaultMobileDriver(PlatformType deviceType)
-```
-##### Example
-```java
-final DesiredCapabilities defaultMobileOptions = AppiumDriverFactory.getDefaultMobileOptions();
+DesiredCapabilities capabilities = getDefaultMobileOptions();
+
+DesiredCapabilities capabilities = AppiumDriverFactory.getDefaultMobileOptions(capabilitiesAsObjects);
 ```
 
-## GetAndroidDriver
-Gets the android driver.
-#### Written as
+## GetAndriodDriver
+Gets the android driver
 ```java
-AppiumDriver<WebElement> getAndroidDriver(URL mobileHub, DesiredCapabilities options, Duration timeout)
-```
-#### Example:
-```java
-AppiumDriver<WebElement> androidDriver = AppiumDriverFactory.getAndroidDriver(
-AppiumConfig.getMobileHubUrl(), capabilities, AppiumConfig.getMobileTimeout());
+AppiumDriver<WebElement> appiumDriver = getAndroidDriver(mobileHubUrl, capabilities, duration);
 ```
 
-## GetIosDriver
-Gets the ios driver.
-#### Written as
+## GetIOSDriver
+Gets the IOS driver
 ```java
-AppiumDriver<WebElement> getIosDriver(URL mobileHub, DesiredCapabilities options, Duration timeout)
-```
-#### Example
-```java
-AppiumDriver<WebElement> iosDriver = AppiumDriverFactory.getIosDriver(
-AppiumConfig.getMobileHubUrl(), capabilities,AppiumConfig.getMobileTimeout());
+AppiumDriver<WebElement> appiumDriver = getIosDriver(mobileHubUrl, capabilities, duration);
 ```
 
 ## GetWindowsDriver
-Gets the windows driver.
-#### Written as
+Gets the windows driver
 ```java
-AppiumDriver<WebElement> getWindowsDriver(URL mobileHub, DesiredCapabilities options, Duration timeout)
-```
-#### Written as
-```java
-AppiumDriver<WebElement> windowsDriver = AppiumDriverFactory.getWindowsDriver(
-new URL("http://127.0.0.1:4723"), appCapabilities,AppiumConfig.getMobileTimeout());
+Gets windows driver
+AppiumDriver<WebElement> appiumDriver = getWindowsDriver(mobileHubUrl, capabilities, duration);
 ```
 
-##  MergeCapabilities
-Merge the desired capabilities into one object.
-#### Written as
-```java
-DesiredCapabilities mergeCapabilities(DesiredCapabilities capabilities, Map<String, Object> capabilitiesAsObjects)
-```
-#### Example
+## MergeCapabilities
+Merge capabilities desired capabilities
 ```java
 DesiredCapabilities capabilities = AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
 ```
 
-##  CreateDriver
-Create an appium driver.
-#### Written as
+## CreateDriver
+Create an appium driver
 ```java
-AppiumDriver<WebElement> createDriver(Supplier<AppiumDriver<WebElement>> createFunction)
-```
-#### Example
-```java
-AppiumDriver<WebElement> appiumDriver = AppiumDriverFactory.createDriver(appiumDriverSupplier);
+AppiumDriver<WebElement> = AppiumDriverFactory.createDriver(appiumDriverSupplier);
 ```

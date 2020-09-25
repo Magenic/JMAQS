@@ -143,7 +143,7 @@ public class AppiumConfigUnitTest extends BaseGenericTest {
   public void testGetCommandTimeoutError() {
     HashMap<String, String> configValues = new HashMap<>();
     configValues.put("MobileCommandTimeout", "sixty thousand");
-    Config.addTestSettingValues(configValues, ConfigSection.AppiumMaqs, true);
+    Config.addTestSettingValues(configValues, ConfigSection.APPIUM_MAQS, true);
     AppiumConfig.getCommandTimeout();
   }
 

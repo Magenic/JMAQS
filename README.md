@@ -3,9 +3,9 @@
 | Check | Status |
 |-------|--------|
 |**Latest Release**|[![Maven Central](https://img.shields.io/maven-central/v/com.magenic.jmaqs/jmaqs-framework.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.magenic.jmaqs%22%20AND%20a:%22jmaqs-framework%22)|
-|**SnapShot Build**|[![Build status](https://dev.azure.com/MagenicOpen/JMAQS/_apis/build/status/JMAQS-SnapShot-CI)](https://dev.azure.com/MagenicOpen/JMAQS/_build/latest?definitionId=13)|
+|**Release**|![Release Pipeline](https://github.com/Magenic/JMAQS/workflows/Release%20Pipeline/badge.svg)|
+|**SnapShot**|![SnapShot Pipeline](https://github.com/Magenic/JMAQS/workflows/SnapShot%20Pipeline/badge.svg)|
 |**Code Quality**|[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.magenic.jmaqs%3Ajmaqs-framework&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.magenic.jmaqs%3Ajmaqs-framework)|
-|**Dependencies**|[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=Magenic/JMAQS)](https://dependabot.com)|
 |**License**|[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://raw.githubusercontent.com/Magenic/JMAQS/master/LICENSE)| 
 
 ## Introduction 

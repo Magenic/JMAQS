@@ -21,11 +21,10 @@ public class SeleniumTestObject extends BaseTestObject {
    * @param logger                 the logger
    * @param fullyQualifiedTestName the fully qualified test name
    */
-  public SeleniumTestObject(Supplier<WebDriver> getDriverSupplier, Logger logger,
-      String fullyQualifiedTestName) {
+  public SeleniumTestObject(Supplier<WebDriver> getDriverSupplier, Logger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
-    this.getManagerStore().put((SeleniumDriverManager.class).getCanonicalName(),
-        new SeleniumDriverManager(getDriverSupplier, this));
+    this.getManagerStore()
+        .put((SeleniumDriverManager.class).getCanonicalName(), new SeleniumDriverManager(getDriverSupplier, this));
   }
 
   /**
@@ -37,8 +36,8 @@ public class SeleniumTestObject extends BaseTestObject {
    */
   public SeleniumTestObject(WebDriver webDriver, Logger logger, String fullyQualifiedTestName) {
     super(logger, fullyQualifiedTestName);
-    this.getManagerStore().put((SeleniumDriverManager.class).getCanonicalName(),
-        new SeleniumDriverManager((() -> webDriver), this));
+    this.getManagerStore()
+        .put((SeleniumDriverManager.class).getCanonicalName(), new SeleniumDriverManager((() -> webDriver), this));
   }
 
   /**
@@ -56,18 +55,24 @@ public class SeleniumTestObject extends BaseTestObject {
    * @return the web manager
    */
   public SeleniumDriverManager getWebManager() {
-    return (SeleniumDriverManager) this.getManagerStore()
-        .get(SeleniumDriverManager.class.getCanonicalName());
+    return (SeleniumDriverManager) this.getManagerStore().get(SeleniumDriverManager.class.getCanonicalName());
   }
 
   /**
    * Sets web driver.
    *
    * @param driver the driver
+   * @throws Exception exception
    */
-  public void setWebDriver(WebDriver driver) {
-    this.getManagerStore().put(SeleniumDriverManager.class.getCanonicalName(),
-        new SeleniumDriverManager((() -> driver), this));
+  public void setWebDriver(WebDriver driver) throws Exception {
+
+    String name = SeleniumDriverManager.class.getCanonicalName();
+    if (this.getManagerStore().containsKey(name)) {
+      this.getManagerStore().get(name).close();
+      this.getManagerStore().remove(name);
+    }
+
+    this.getManagerStore().put(name, new SeleniumDriverManager((() -> driver), this));
   }
 
   /**
@@ -76,8 +81,8 @@ public class SeleniumTestObject extends BaseTestObject {
    * @param webDriverSupplier the web driver supplier
    */
   public void setWebDriver(Supplier<WebDriver> webDriverSupplier) {
-    this.getManagerStore().put(SeleniumDriverManager.class.getCanonicalName(),
-        new SeleniumDriverManager(webDriverSupplier, this));
+    this.getManagerStore()
+        .put(SeleniumDriverManager.class.getCanonicalName(), new SeleniumDriverManager(webDriverSupplier, this));
   }
 
 }
