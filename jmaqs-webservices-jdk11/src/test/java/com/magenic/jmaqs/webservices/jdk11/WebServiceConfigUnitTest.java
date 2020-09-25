@@ -5,7 +5,7 @@ import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class WebServiceUtilitiesUnitTest {
+public class WebServiceConfigUnitTest {
 
   /**
    * Verifies that getting the Use Proxy works properly
