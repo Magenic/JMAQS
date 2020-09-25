@@ -13,6 +13,25 @@
     <artifactId>jmaqs-webservices-jdk11</artifactId>
 
     <version>${revision}</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.magenic.jmaqs.utilities</groupId>
+            <artifactId>jmaqs-utilities</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.webservices</groupId>
+            <artifactId>jmaqs-webservices-jdk8</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.2.5.RELEASE</version>
+        </dependency>
+    </dependencies>
 
     <name>JMAQS JDK11 WebServices Testing Module</name>
 

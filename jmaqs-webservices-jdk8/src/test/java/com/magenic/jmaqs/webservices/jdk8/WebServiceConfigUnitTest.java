@@ -48,4 +48,13 @@ public class WebServiceConfigUnitTest extends BaseGenericTest {
     Assert.assertEquals(WebServiceConfig.getProxyAddress(), "127.0.0.1:8001",
         "Proxy address is not the same");
   }
+
+  /**
+   * gets the proxy port.
+   */
+  @Test(groups = TestCategories.WEB_SERVICE)
+  public void getProxyPort() {
+    Assert.assertEquals(WebServiceConfig.getProxyPort(), 8080,
+        "Proxy Port is not the same");
+  }
 }
