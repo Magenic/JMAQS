@@ -15,7 +15,7 @@
     <version>${revision}</version>
 
     <properties>
-        <jackson-databind.version>2.10.2</jackson-databind.version>
+        <jackson-databind.version>2.11.3</jackson-databind.version>
         <jackson-core.version>2.11.0</jackson-core.version>
         <jcommander.version>1.78</jcommander.version>
         <jackson-dataformat-xml.version>2.11.1</jackson-dataformat-xml.version>
