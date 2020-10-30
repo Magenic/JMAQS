@@ -263,6 +263,7 @@
         <selenium.version>3.141.59</selenium.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
+        <failOnCheckStyleError>true</failOnCheckStyleError>
     </properties>
 
     <dependencyManagement>
@@ -396,42 +397,37 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.plugin.version}</version>
-                <configuration>
-                    <parallel>methods</parallel>
-                    <threadCount>6</threadCount>
-                    <argLine>${argLine}</argLine>
-                </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${mvncheckstyle.plugin.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.puppycrawl.tools</groupId>
-                        <artifactId>checkstyle</artifactId>
-                        <version>${puppycheckstyle.plugin.version}</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <id>checkstyle</id>
-                        <phase>validate</phase>
-                        <configuration>
-                            <failOnWarnings>false</failOnWarnings>
-                            <failOnError>true</failOnError>
-                            <configLocation>maqs_checks.xml</configLocation>
-                            <encoding>${project.build.sourceEncoding}</encoding>
-                            <consoleOutput>true</consoleOutput>
-                            <linkXRef>false</linkXRef>
-                            <violationSeverity>warning</violationSeverity>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>${mvncheckstyle.plugin.version}</version>
+            <dependencies>
+                <dependency>
+                    <groupId>com.puppycrawl.tools</groupId>
+                    <artifactId>checkstyle</artifactId>
+                    <version>${puppycheckstyle.plugin.version}</version>
+                </dependency>
+            </dependencies>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>check</goal>
+                    </goals>
+                    <id>checkstyle</id>
+                    <phase>validate</phase>
+                    <configuration>
+                        <failOnWarnings>false</failOnWarnings>
+                        <failOnError>${failOnCheckStyleError}</failOnError>
+                        <configLocation>maqs_checks.xml</configLocation>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <consoleOutput>true</consoleOutput>
+                        <linkXRef>false</linkXRef>
+                        <violationSeverity>warning</violationSeverity>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
 </project>

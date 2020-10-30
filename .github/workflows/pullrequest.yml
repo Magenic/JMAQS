@@ -26,7 +26,7 @@ jobs:
       - name: Run Unit Tests
         uses: GabrielBB/xvfb-action@v1
         with:
-          run: mvn -B -Dtesting verify package --file pom.xml -e -fae -T 1C
+          run: mvn -B -Dtesting -DfailOnCheckStyleError=false verify package --file pom.xml -e -fae -T 1C
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run SonarCloud Analysis

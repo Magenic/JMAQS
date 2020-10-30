@@ -68,5 +68,11 @@
         <UseProxy>No</UseProxy>
         <ProxyAddress>127.0.0.1:8001</ProxyAddress>
     </WebServiceMaqs>
+    <SoapMaqs>
+        <SoapPrefix>soapenv</SoapPrefix>
+    </SoapMaqs>
+    <SoapMaqsNameSpaces>
+        <gs>http://spring.io/guides/gs-producing-web-service</gs>
+    </SoapMaqsNameSpaces>
 
 </configuration>
