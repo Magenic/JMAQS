@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.selenium;
 
 import com.deque.html.axecore.results.AxeRuntimeException;
