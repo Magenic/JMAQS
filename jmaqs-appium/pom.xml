@@ -12,6 +12,7 @@
 
     <groupId>com.magenic.jmaqs.appium</groupId>
     <artifactId>jmaqs-appium</artifactId>
+    <version>${revision}</version>
     <name>JMAQS Appium Testing Module</name>
 
     <properties>
@@ -42,12 +43,10 @@
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
             <artifactId>jmaqs-utilities</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.base</groupId>
             <artifactId>jmaqs-base</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -10,6 +10,7 @@
     <groupId>com.magenic.jmaqs.selenium</groupId>
     <artifactId>jmaqs-selenium</artifactId>
     <name>JMAQS Selenium Testing Module</name>
+    <version>${revision}</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -52,17 +53,14 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
             <artifactId>jmaqs-utilities</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.magenic.jmaqs.base</groupId>
             <artifactId>jmaqs-base</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -104,7 +102,7 @@
                         <driver>
                             <name>chromedriver</name>
                             <customFileName>chromedriver</customFileName>
-                            <version>83.0.4103.39</version>
+                            <version>85.0.4183.83</version>
                         </driver>
                         <driver>
                             <name>internetexplorerdriver</name>

@@ -10,6 +10,7 @@
     </parent>
     <groupId>com.magenic.jmaqs.database</groupId>
     <artifactId>jmaqs-database</artifactId>
+    <version>${revision}</version>
     <name>JMAQS Database Testing Module</name>
     <properties>
         <hibernate-core.version>5.4.15.Final</hibernate-core.version>
@@ -33,8 +34,6 @@
         <dependency>
             <groupId>com.magenic.jmaqs.utilities</groupId>
             <artifactId>jmaqs-utilities</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>

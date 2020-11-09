@@ -37,7 +37,7 @@ public final class Config {
   /**
    * The default config.xml file name.
    */
-  public static final String CONFIG_FILE = "config.xml";
+  public static final String CONFIG_FILE = PropertyManager.get("jmaqs.config.location", "config.xml");
 
   /**
    * The configuration containing values loaded in from the config.xml file.

@@ -284,13 +284,13 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
                         EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(webDriver);
                         ConsoleLogger consoleLogger = new ConsoleLogger();
                         SeleniumTestObject testObject = new SeleniumTestObject(eventFiringWebDriver, consoleLogger,
-                                        this.getTestObject().getFullyQualifiedTestName());
+                            this.getTestObject().getFullyQualifiedTestName());
                         this.setTestObject(testObject);
 
                         // Open Google and take a screenshot
                         eventFiringWebDriver.navigate().to("http://www.google.com");
-                        WebElement input = UIWaitFactory.getWaitDriver(eventFiringWebDriver)
-                                        .waitForVisibleElement(By.tagName("div"));
+                        UIWaitFactory.getWaitDriver(eventFiringWebDriver).waitForPageLoad();
+                        WebElement input = eventFiringWebDriver.findElement(By.tagName("div"));
                         WebDriver webElementToWebDriver = SeleniumUtilities.webElementToWebDriver(input);
                         Assert.assertNotNull(webElementToWebDriver, "Expected extracted web driver to not be null");
                 } finally {

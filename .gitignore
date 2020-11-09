@@ -156,7 +156,8 @@ target/
 Logs
 
 #Git Time Tracking
-*/.gtm/
-/jmaqs-selenium/src/test/resources
+**/.gtm/
+**/src/test/resources/drivers
+**/.flattened-pom.xml
 .gtm
 .vscode
