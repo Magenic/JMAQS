@@ -78,7 +78,7 @@ jobs:
           path: ~/.m2
           key: ${{runner.os}}-m2
       - name: Run OWASP scan
-        run: mvn -B complile verify -Dmaven.test.skip=true --file pom.xml -e -fae
+        run: mvn -B compile verify -Dmaven.test.skip=true --file pom.xml -e -fae
   labels:
     name: Pull Request Labels
     runs-on: ubuntu-latest
