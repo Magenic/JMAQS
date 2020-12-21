@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commonsio.version>2.6</commonsio.version>
         <selenium.version>3.141.59</selenium.version>
-		<cucumber.version>6.7.0</cucumber.version>
+		<cucumber.version>6.9.1</cucumber.version>
     </properties>
 
     <dependencies>
@@ -116,7 +116,7 @@
                         <driver>
                             <name>chromedriver</name>
                             <customFileName>chromedriver</customFileName>
-                            <version>85.0.4183.83</version>
+                            <version>87.0.4280.20</version>
                         </driver>
                         <driver>
                             <name>internetexplorerdriver</name>
@@ -126,7 +126,7 @@
                         <driver>
                             <name>geckodriver</name>
                             <customFileName>geckodriver</customFileName>
-                            <version>0.26.0</version>
+                            <version>0.28.0</version>
                         </driver>
                         <driver>
                             <name>edgedriver</name>
