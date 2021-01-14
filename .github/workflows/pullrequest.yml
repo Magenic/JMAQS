@@ -79,11 +79,12 @@ jobs:
           key: ${{runner.os}}-m2
       - name: Run OWASP scan
         run: mvn -B compile verify -Dmaven.test.skip=true --file pom.xml -e -fae
-      - name: Publish Test Report
+      - name: Publish OWASP Report
         uses: mikepenz/action-junit-report@v1
         if: ${{ always() }}
         with:
-            report_paths: '**/owasp/dependency-check-junit.xml'
+            check_name: OWASP Dependency Report
+            report_paths: '~/**/target/owasp/dependency-check-junit.xml'
             github_token: ${{ secrets.GITHUB_TOKEN }}
   labels:
     name: Pull Request Labels

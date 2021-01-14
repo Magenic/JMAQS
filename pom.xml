@@ -423,16 +423,38 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>analyze</id>
+                        <goals>
+                            <goal>analyze-only</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>6.0.3</version>
                 <executions>
                     <execution>
+                        <id>vulnerability-check</id>
                         <phase>verify</phase>
                         <goals>
-                            <goal>check</goal>
+                            <goal>aggregate</goal>
                         </goals>
+                        <configuration>
+                            <prettyPrint>true</prettyPrint>
+                            <formats>
+                                <format>ALL</format>
+                            </formats>
+                            <showSummary>true</showSummary>
+                            <outputDirectory>./target/owasp</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
