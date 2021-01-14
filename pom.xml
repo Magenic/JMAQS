@@ -251,7 +251,7 @@
     </profiles>
 
     <properties>
-        <revision>2.1.1-SNAPSHOT</revision>
+        <revision>2.2.1</revision>
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
@@ -270,9 +270,24 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.apache.ant</groupId>
+                <artifactId>ant</artifactId>
+                <version>1.10.9</version>
+            </dependency>
+            <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.magenic.jmaqs.appium</groupId>
@@ -408,7 +423,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>checkstyle-aggregate</goal>
+                            <goal>checkstyle</goal>
                         </goals>
                         <id>checkstyle</id>
                         <phase>validate</phase>
