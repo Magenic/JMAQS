@@ -408,7 +408,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>check</goal>
+                            <goal>checkstyle-aggregate</goal>
                         </goals>
                         <id>checkstyle</id>
                         <phase>validate</phase>

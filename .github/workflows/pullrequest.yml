@@ -34,7 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run SonarCloud Analysis
-        run: mvn -Psonar -B sonar:sonar -e -f pom.xml -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
+        run: mvn -Psonar -B sonar:sonar -e -f pom.xml -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml" -Dsonar.java.checkstyle.reportPaths="${{github.workspace}}/target/checkstyle-result.xml"
       - name: Publish Unit Test Results Report
         uses: scacap/action-surefire-report@v1
         if: ${{ always() }}
