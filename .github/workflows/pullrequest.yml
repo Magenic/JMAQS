@@ -79,6 +79,13 @@ jobs:
           key: ${{runner.os}}-m2
       - name: Run OWASP scan
         run: mvn -B compile verify -Dmaven.test.skip=true --file pom.xml -e -fae
+      - name: Publish OWASP Scan Results
+        uses: ashley-taylor/junit-report-annotations-action@1.3
+          if: ${{ always() }}
+          with:
+            name: OWASP Dependency Results
+            path: ./**/owasp/dependency-check-junit.xml
+            access-token: ${{ secrets.GITHUB_TOKEN }}
   labels:
     name: Pull Request Labels
     runs-on: ubuntu-latest
