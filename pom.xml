@@ -187,6 +187,9 @@
                 <sonar.coverage.jacoco.xmlReportPaths>
                     ./target/site/jacoco-aggregate/jacoco.xml
                 </sonar.coverage.jacoco.xmlReportPaths>
+                <sonar.dependencyCheck.xmlReportPath>./target/owasp/dependency-check-report.xml</sonar.dependencyCheck.xmlReportPath>
+                <sonar.dependencyCheck.jsonReportPath>./target/owasp/dependency-check-report.json</sonar.dependencyCheck.jsonReportPath>
+                <sonar.dependencyCheck.htmlReportPath>./target/owasp/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
             </properties>
             <build>
                 <plugins>
