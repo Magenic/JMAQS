@@ -80,9 +80,9 @@ jobs:
       - name: Run OWASP scan
         run: mvn -B compile verify -Dmaven.test.skip=true --file pom.xml -e -fae
       - name: Publish Test Report
-          uses: mikepenz/action-junit-report@v1
-          if: ${{ always() }}
-          with:
+        uses: mikepenz/action-junit-report@v1
+        if: ${{ always() }}
+        with:
             report_paths: '**/owasp/dependency-check-junit.xml'
             github_token: ${{ secrets.GITHUB_TOKEN }}
   labels:
