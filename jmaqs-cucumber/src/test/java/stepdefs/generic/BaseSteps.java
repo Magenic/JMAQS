@@ -1,3 +1,7 @@
+/*
+ * Copyright 2021 (C) Magenic, All rights Reserved
+ */
+
 package stepdefs.generic;
 
 import com.magenic.jmaqs.cucumber.steps.BaseGenericStep;

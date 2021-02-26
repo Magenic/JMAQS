@@ -1,3 +1,7 @@
+/*
+ * Copyright 2021 (C) Magenic, All rights Reserved
+ */
+
 import com.magenic.jmaqs.cucumber.BaseSeleniumCucumber;
 
 import io.cucumber.testng.CucumberOptions;

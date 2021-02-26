@@ -1,3 +1,7 @@
+/*
+ * Copyright 2021 (C) Magenic, All rights Reserved
+ */
+
 package com.magenic.jmaqs.cucumber.steps;
 
 import com.magenic.jmaqs.cucumber.ScenarioContext;
