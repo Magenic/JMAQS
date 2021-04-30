@@ -4,9 +4,7 @@
 
 package com.magenic.jmaqs.accessibility;
 
-import com.deque.html.axecore.results.Node;
-import com.deque.html.axecore.results.Results;
-import com.deque.html.axecore.results.Rule;
+import com.deque.html.axecore.results.*;
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
 import java.io.File;
@@ -161,19 +159,19 @@ public class HtmlReporter {
     }
 
     if (violationCount > 0 && requestedResults.contains(ResultType.Violations)) {
-      getReadableAxeResults(results.getViolations(), ResultType.Violations.name(), resultsFlex);
+      getReadableAxeResults(results.getViolations(), ResultType.Violations, resultsFlex);
     }
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
-      getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name(), resultsFlex);
+      getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete, resultsFlex);
     }
 
     if (passCount > 0 && requestedResults.contains(ResultType.Passes)) {
-      getReadableAxeResults(results.getPasses(), ResultType.Passes.name(), resultsFlex);
+      getReadableAxeResults(results.getPasses(), ResultType.Passes, resultsFlex);
     }
 
     if (inapplicableCount > 0 && requestedResults.contains(ResultType.Inapplicable)) {
-      getReadableAxeResults(results.getInapplicable(), ResultType.Inapplicable.name(), resultsFlex);
+      getReadableAxeResults(results.getInapplicable(), ResultType.Inapplicable, resultsFlex);
     }
 
     Element modal = new Element("div");
@@ -195,7 +193,7 @@ public class HtmlReporter {
     FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
 
-  private static void getReadableAxeResults(List<Rule> results, String type, Element body) {
+  private static void getReadableAxeResults(List<Rule> results, ResultType type, Element body) {
     Element resultWrapper = new Element("div");
     resultWrapper.attributes().put(classString, "resultWrapper");
     body.appendChild(resultWrapper);
@@ -208,7 +206,7 @@ public class HtmlReporter {
 
     Element sectionButtonHeader = new Element("h2");
     sectionButtonHeader.attributes().put(classString, "buttonInfoText");
-    sectionButtonHeader.text(type + ": " + getCount(results, selectors));
+    sectionButtonHeader.text(type.name() + ": " + getCount(results, selectors));
     sectionButton.appendChild(sectionButtonHeader);
 
     Element sectionButtonExpando = new Element("h2");
@@ -218,7 +216,7 @@ public class HtmlReporter {
 
     Element section = new Element("div");
     section.attributes().put(classString, "majorSection");
-    section.attributes().put("id", type + "Section");
+    section.attributes().put("id", type.name() + "Section");
     resultWrapper.appendChild(section);
 
     int loops = 1;
@@ -286,6 +284,70 @@ public class HtmlReporter {
           htmlAndSelector.text(targetString);
           htmlAndSelector.html(targetString);
         }
+        htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+
+        addFixes(element.getNodes(), type, htmlAndSelectorWrapper);
+      }
+    }
+  }
+
+  private static void addFixes(CheckedNode resultsNode, ResultType type, Element htmlAndSelectorWrapper) {
+    Element htmlAndSelector;
+
+    List<Check> anyCheckResults = resultsNode.getAny();
+    List<Check> allCheckResults = resultsNode.getAll();
+    List<Check> noneCheckResults = resultsNode.getNone();
+
+    int checkResultsCount = anyCheckResults.size() + allCheckResults.size() + noneCheckResults.size();
+
+    // Add fixes if this is for violations
+    if (ResultType.Violations.equals(type) && checkResultsCount > 0) {
+      htmlAndSelector.CreateTextNode("To solve:");
+      htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+
+      StringBuilder content;
+      htmlAndSelector = new Element("p");
+      htmlAndSelector.attr("class", "wrapTwo");
+      htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+
+      if (allCheckResults.isEmpty() || noneCheckResults.isEmpty()) {
+        htmlAndSelector = new Element("p");
+        htmlAndSelector.attr("class", "wrapOne");
+        content = new StringBuilder();
+
+        content.append("Fix all of the following issues:");
+        content.append("<ul>");
+
+        for (Check checkResult : allCheckResults) {
+          content.append("<li>").append(checkResult.getImpact().toUpperCase())
+              .append(": ").append(checkResult.getMessage()).append("</li>");
+        }
+
+        for(Check checkResult : noneCheckResults) {
+          content.append("<li>").append(checkResult.getImpact().toUpperCase())
+              .append(": ").append(checkResult.getMessage()).append("</li>");
+        }
+
+        content.append("</ul>");
+        htmlAndSelector.text(content.toString());
+        htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+      }
+
+      if (anyCheckResults.isEmpty()) {
+        content = new StringBuilder();
+
+        htmlAndSelector = new Element("p");
+        htmlAndSelector.attr("class", "wrapOne");
+        content.append("Fix at least one of the following issues:");
+        content.append("<ul>");
+
+        for (Check checkResult : anyCheckResults) {
+          content.append("<li>").append(checkResult.getImpact().toUpperCase())
+              .append(": ").append(checkResult.getMessage()).append("</li>");
+        }
+
+        content.append("</ul>");
+        htmlAndSelector.text(content.toString());
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
       }
     }
