@@ -258,7 +258,7 @@ public class HtmlReporter {
       childEl2.attributes().put(classString, "emTwo");
       childEl.appendChild(content);
 
-      for (Node item : element.getNodes()) {
+      for (CheckedNode item : element.getNodes()) {
         Element elementNodes = new Element("div");
         elementNodes.attr(classString, "htmlTable");
         childEl.appendChild(elementNodes);
@@ -284,15 +284,15 @@ public class HtmlReporter {
           htmlAndSelector.text(targetString);
           htmlAndSelector.html(targetString);
         }
-        htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
-        addFixes(element.getNodes(), type, htmlAndSelectorWrapper);
+        htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+        addFixes(item, type, htmlAndSelectorWrapper);
       }
     }
   }
 
   private static void addFixes(CheckedNode resultsNode, ResultType type, Element htmlAndSelectorWrapper) {
-    Element htmlAndSelector;
+    Element htmlAndSelector = new Element("div");
 
     List<Check> anyCheckResults = resultsNode.getAny();
     List<Check> allCheckResults = resultsNode.getAll();
@@ -302,7 +302,7 @@ public class HtmlReporter {
 
     // Add fixes if this is for violations
     if (ResultType.Violations.equals(type) && checkResultsCount > 0) {
-      htmlAndSelector.CreateTextNode("To solve:");
+      htmlAndSelector.text("To solve:");
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       StringBuilder content;
@@ -335,7 +335,6 @@ public class HtmlReporter {
 
       if (anyCheckResults.isEmpty()) {
         content = new StringBuilder();
-
         htmlAndSelector = new Element("p");
         htmlAndSelector.attr("class", "wrapOne");
         content.append("Fix at least one of the following issues:");
