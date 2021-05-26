@@ -31,7 +31,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
 public class HtmlReporter {
-  
   private static final String classString = "class";
 
   private HtmlReporter() {
@@ -305,48 +304,47 @@ public class HtmlReporter {
       htmlAndSelector.text("To solve:");
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
-      StringBuilder content;
       htmlAndSelector = new Element("p");
       htmlAndSelector.attr("class", "wrapTwo");
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
-      if (allCheckResults.isEmpty() || noneCheckResults.isEmpty()) {
+      if (!allCheckResults.isEmpty() || !noneCheckResults.isEmpty()) {
         htmlAndSelector = new Element("p");
         htmlAndSelector.attr("class", "wrapOne");
-        content = new StringBuilder();
+        htmlAndSelector.text("Fix all of the following issues:");
 
-        content.append("Fix all of the following issues:");
-        content.append("<ul>");
+        Element htmlSet = new Element("ul");
 
         for (Check checkResult : allCheckResults) {
-          content.append("<li>").append(checkResult.getImpact().toUpperCase())
-              .append(": ").append(checkResult.getMessage()).append("</li>");
+          Element bulletPoints = new Element("li");
+          bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
+          htmlSet.appendChild(bulletPoints);
         }
 
-        for(Check checkResult : noneCheckResults) {
-          content.append("<li>").append(checkResult.getImpact().toUpperCase())
-              .append(": ").append(checkResult.getMessage()).append("</li>");
+        for (Check checkResult : noneCheckResults) {
+          Element bulletPoints = new Element("li");
+          bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
+          htmlSet.appendChild(bulletPoints);
         }
 
-        content.append("</ul>");
-        htmlAndSelector.text(content.toString());
+        htmlAndSelector.appendChild(htmlSet);
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
       }
 
-      if (anyCheckResults.isEmpty()) {
-        content = new StringBuilder();
+      if (!anyCheckResults.isEmpty()) {
         htmlAndSelector = new Element("p");
         htmlAndSelector.attr("class", "wrapOne");
-        content.append("Fix at least one of the following issues:");
-        content.append("<ul>");
+        htmlAndSelector.text("Fix at least one of the following issues:");
+
+        Element htmlSet = new Element("ul");
 
         for (Check checkResult : anyCheckResults) {
-          content.append("<li>").append(checkResult.getImpact().toUpperCase())
-              .append(": ").append(checkResult.getMessage()).append("</li>");
+          Element bulletPoints = new Element("li");
+          bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
+          htmlSet.appendChild(bulletPoints);
         }
 
-        content.append("</ul>");
-        htmlAndSelector.text(content.toString());
+        htmlAndSelector.appendChild(htmlSet);
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
       }
     }
