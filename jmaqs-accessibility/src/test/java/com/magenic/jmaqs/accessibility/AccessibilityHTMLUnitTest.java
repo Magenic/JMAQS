@@ -70,7 +70,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * @throws IOException if an exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
-  public void AccessibilityMultipleHtmlReports() throws IOException, ParseException {
+  public void accessibilityMultipleHtmlReports() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -91,7 +91,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * Verify we throw an exception if the scan has an error.
    */
   @Ignore @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
-  public void AccessibilityHtmlReportWithError() throws IOException, ParseException {
+  public void accessibilityHtmlReportWithError() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -109,7 +109,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * Verify we throw an exception if the scan has an error and are using lazy elements.
    */
   @Ignore @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
-  public void AccessibilityHtmlReportWithErrorFromLazyElement() throws IOException, ParseException {
+  public void accessibilityHtmlReportWithErrorFromLazyElement() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -129,7 +129,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * @throws IOException if an exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
-  public void AccessibilityHtmlReportWithViolation() throws IOException, ParseException {
+  public void accessibilityHtmlReportWithViolation() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -141,7 +141,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * @throws IOException if exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
-  public void AccessibilityHtmlReportWithLazyElement() throws IOException, ParseException {
+  public void accessibilityHtmlReportWithLazyElement() throws IOException, ParseException {
     getWebDriver().get(TestSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -163,7 +163,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * @throws IOException if exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
-  public void AccessibilityHtmlReportWithElement() throws IOException, ParseException {
+  public void accessibilityHtmlReportWithElement() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -185,7 +185,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * @throws IOException if an exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
-  public void AccessibilityHtmlLogSuppression() throws IOException, ParseException {
+  public void accessibilityHtmlLogSuppression() throws IOException, ParseException {
     // Make sure we are not using verbose logging
     this.getLogger().setLoggingLevel(MessageType.INFORMATION);
 
@@ -209,7 +209,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * @throws ParseException if a parsing exception occurs
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
-  public void AccessibilityHtmlReportViolationsOnly() throws IOException, ParseException {
+  public void accessibilityHtmlReportViolationsOnly() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();
@@ -234,7 +234,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    * @throws IOException if exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
-  public void AccessibilityHtmlViolationsReportWithElement() throws IOException, ParseException {
+  public void accessibilityHtmlViolationsReportWithElement() throws IOException, ParseException {
     getWebDriver().navigate().to(TestSiteAutomationUrl);
     UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
     wait.waitForPageLoad();

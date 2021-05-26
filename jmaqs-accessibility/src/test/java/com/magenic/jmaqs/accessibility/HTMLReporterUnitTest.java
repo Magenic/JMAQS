@@ -29,11 +29,11 @@ import org.testng.annotations.Test;
 import org.testng.Assert;
 
 public class HTMLReporterUnitTest extends BaseSeleniumTest {
-  private final static File integrationTestTargetFile = new File("src/test/resources/testFiles/integration-test-target.html");
-  private final static String integrationTestTargetUrl = integrationTestTargetFile.getAbsolutePath();
+  private static final File integrationTestTargetFile = new File("src/test/resources/testFiles/integration-test-target.html");
+  private static final String integrationTestTargetUrl = integrationTestTargetFile.getAbsolutePath();
 
-  private final static File integrationTestJsonResultFile = new File("src/test/resources/testFiles/sampleResults.json");
-  private final static String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
+  private static final File integrationTestJsonResultFile = new File("src/test/resources/testFiles/sampleResults.json");
+  private static final String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
 
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void htmlReportFullPage() throws IOException, ParseException {
@@ -148,7 +148,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   }
 
   private String createReportPath() {
-    return FileSystems.getDefault().getPath("target/logs").toString() + UUID.randomUUID().toString() + ".html";
+    return FileSystems.getDefault().getPath("target/logs") + UUID.randomUUID().toString() + ".html";
   }
 
   private void validateReport(String path, int violationCount, int passCount, int incompleteCount, int inapplicableCount)
