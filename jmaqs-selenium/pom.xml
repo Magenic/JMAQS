@@ -15,7 +15,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <commonsio.version>2.8.0</commonsio.version>
+        <commonsio.version>2.9.0</commonsio.version>
         <selenium.version>3.141.59</selenium.version>
     </properties>
 
