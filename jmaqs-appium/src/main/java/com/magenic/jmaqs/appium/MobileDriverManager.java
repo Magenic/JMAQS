@@ -57,7 +57,7 @@ public class MobileDriverManager extends DriverManager<AppiumDriver<WebElement>>
 
     try {
       AppiumDriver<WebElement> driver = this.getMobileDriver();
-      driver.close();
+      //driver.close();
       driver.quit();
     } catch (Exception e) {
       this.getLogger().logMessage(MessageType.ERROR,

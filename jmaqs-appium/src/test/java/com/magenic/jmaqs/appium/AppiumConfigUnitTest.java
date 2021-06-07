@@ -46,7 +46,7 @@ public class AppiumConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.APPIUM)
   public void testGetOSVersion() throws Exception {
     String osVersion = AppiumConfig.getPlatformVersion();
-    Assert.assertTrue(osVersion.equalsIgnoreCase("6.0"));
+    Assert.assertTrue(osVersion.equalsIgnoreCase("11.0"));
   }
 
   /**

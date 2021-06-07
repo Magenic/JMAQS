@@ -45,8 +45,7 @@ public class MobileDriverManagerUnitTest extends BaseGenericTest {
   /**
    * Test close with instantiated driver.
    */
-  //TODO Troubleshoot socket timeout
-  //@Test
+  @Test
   public void testCloseWithInstantiatedDriver() {
     MobileDriverManager mobileDriverManager = new MobileDriverManager(AppiumDriverFactory.getDefaultMobileDriver(), this.getTestObject());
     mobileDriverManager.close();
