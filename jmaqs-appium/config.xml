@@ -34,7 +34,7 @@
     <AppiumMaqs>
         <!-- Device settings -->
         <PlatformName>Android</PlatformName>
-        <PlatformVersion>6.0</PlatformVersion>
+        <PlatformVersion>11.0</PlatformVersion>
         <DeviceName>Android GoogleAPI Emulator</DeviceName>
 
         <!-- Appium or grid connection -->
