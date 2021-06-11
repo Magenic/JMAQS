@@ -31,7 +31,7 @@ import org.openqa.selenium.WebElement;
  */
 public class AccessibilityUtilities {
   /**
-   * private constructor.
+   * private class constructor.
    */
   private AccessibilityUtilities() {
   }
@@ -89,7 +89,7 @@ public class AccessibilityUtilities {
     logger.logMessage(MessageType.INFORMATION, "Running accessibility check");
 
     if (AxeReporter.getReadableAxeResults(checkType, webDriver, getResults.get()) && throwOnResults) {
-      throw new AxeRuntimeException(System.lineSeparator() + AxeReporter.getAxeResultString());
+      throw new AxeRuntimeException(new Exception(System.lineSeparator() + AxeReporter.getAxeResultString()));
     } else {
       logger.logMessage(loggingLevel, AxeReporter.getAxeResultString());
     }
@@ -244,14 +244,14 @@ public class AccessibilityUtilities {
 
     // Throw exception if we found violations and we want that to cause an error
     if (throwOnViolation && !getResults.get().getViolations().isEmpty()) {
-      throw new AxeRuntimeException(System.lineSeparator()
-          + "Accessibility violations, see: " + report + " for more details.");
+      throw new AxeRuntimeException(new Exception(System.lineSeparator()
+          + "Accessibility violations, see: " + report + " for more details."));
     }
 
     // Throw exception if the accessibility check had any errors
     if (results.isErrored()) {
-      throw new AxeRuntimeException(System.lineSeparator()
-          + "Accessibility check failure, see: " + report + " for more details.");
+      throw new AxeRuntimeException(new Exception(System.lineSeparator()
+          + "Accessibility check failure, see: " + report + " for more details."));
     }
   }
 

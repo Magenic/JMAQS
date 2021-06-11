@@ -9,7 +9,6 @@ import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.AxeReporter;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
 import com.magenic.jmaqs.selenium.SeleniumConfig;
-import com.magenic.jmaqs.selenium.UIWait;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
@@ -21,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class AccessibilityUnitTest extends BaseSeleniumTest {
@@ -29,22 +29,24 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   private static final String TestSiteUrl = SeleniumConfig.getWebSiteBase();
 
+  @BeforeMethod
+  public void setup() {
+    this.getWebDriver().navigate().to(TestSiteUrl);
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+  }
+
   /**
    * Verify we get verbose message back.
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityCheckVerbose() throws IOException {
-    this.getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String filePath = ((FileLogger)getLogger()).getFilePath();
     AccessibilityUtilities.checkAccessibility(getTestObject(), false);
     String logContent = Files.lines(Paths.get(filePath),
         StandardCharsets.UTF_8).collect(Collectors.joining(System.lineSeparator()));
 
-    Assert.assertTrue(logContent.contains("Found 19 items"), "Expected to find 19 pass matches.");
-    Assert.assertTrue(logContent.contains("Found 51 items"), "Expected to find 51 inapplicable matches.");
+    Assert.assertTrue(logContent.contains("Found 20 items"), "Expected to find 20 pass matches.");
+    Assert.assertTrue(logContent.contains("Found 62 items"), "Expected to find 62 inapplicable matches.");
     Assert.assertTrue(logContent.contains("Found 6 items"), "Expected to find 6 violations matches.");
     Assert.assertTrue(logContent.contains("INCOMPLETE check for"), "Expected to find any incomplete matches.");
 
@@ -57,10 +59,6 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityCheckRespectsMessageLevel() {
-    this.getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, "LevTest.txt", MessageType.WARNING);
 
@@ -92,10 +90,6 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityInapplicableCheckRespectsMessageLevel() {
-    this.getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
 
@@ -122,10 +116,6 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityIncompleteCheckRespectsMessageLevel() {
-    this.getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
 
@@ -152,10 +142,6 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityPassesCheckRespectsMessageLevel() {
-    this.getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
 
@@ -182,10 +168,6 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityViolationsCheckRespectsMessageLevel() {
-    this.getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
 
@@ -210,11 +192,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
   /**
    * Verify accessibility exception will be thrown.
    */
-    @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
+    @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = RuntimeException.class)
   public void testAccessibilityCheckThrows() {
-      this.getWebDriver().navigate().to(TestSiteUrl);
-      UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-      wait.waitForPageLoad();
       AccessibilityUtilities.checkAccessibility(getTestObject(), true);
   }
 
@@ -223,10 +202,6 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityCheckNoThrowOnNoResults() {
-    this.getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     // There should be 0 incomplete items found
     AccessibilityUtilities.checkAccessibilityIncomplete(getTestObject().getWebDriver(),
         getTestObject().getLogger(), MessageType.WARNING, true);
@@ -237,10 +212,6 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityReadableResults() {
-    this.getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     AxeReporter.getReadableAxeResults("TEST", getWebDriver(), new AxeBuilder().analyze(getWebDriver()).getViolations());
     String messages = AxeReporter.getAxeResultString();
 

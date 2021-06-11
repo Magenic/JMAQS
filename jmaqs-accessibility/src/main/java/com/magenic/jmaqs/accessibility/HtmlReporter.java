@@ -33,7 +33,7 @@ import org.openqa.selenium.WrapsElement;
 public class HtmlReporter {
   private static final String classString = "class";
 
-  private HtmlReporter() {
+  protected HtmlReporter() {
   }
 
   public static void createAxeHtmlReport(WebDriver webDriver, String destination)

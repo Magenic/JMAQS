@@ -6,6 +6,7 @@ package com.magenic.jmaqs.accessibility;
 
 import com.deque.html.axecore.results.AxeRuntimeException;
 import com.deque.html.axecore.results.Results;
+import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
@@ -22,12 +23,13 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
@@ -47,22 +49,33 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   private static final String TestSiteAutomationUrl = TestSiteUrl + "Automation/";
 
+  private UIWait wait;
+
+  @BeforeMethod
+  public void setup() {
+    this.getWebDriver().navigate().to(TestSiteUrl);
+    wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
+  }
+
+  @AfterMethod
+  public void cleanUp() {
+    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
+  }
+
+
   /**
    * Verify we can create and associate an accessibility HTML report.
    * @throws IOException if an exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityHtmlReport() throws IOException, ParseException {
-    getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
-    AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), false);
+    AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
+        new AxeBuilder().analyze(this.getWebDriver()), false);
 
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertTrue(filePath.length() > 0, "Accessibility report is empty");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -71,10 +84,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void accessibilityMultipleHtmlReports() throws IOException, ParseException {
-    getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     // Create 3 reports
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), false);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), false);
@@ -84,7 +93,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
         .filter(x -> x.contains(".html")).count();
     Assert.assertEquals(count, 3,
         "Expected 3 accessibility reports but see " + count + " instead");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -92,17 +100,12 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Ignore @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
   public void accessibilityHtmlReportWithError() throws IOException, ParseException {
-    getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     Results results = new ObjectMapper().readValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), results, false);
 
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertTrue(filePath.length() > 0, "Accessibility report is empty");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -110,8 +113,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Ignore @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
   public void accessibilityHtmlReportWithErrorFromLazyElement() throws IOException, ParseException {
-    getWebDriver().navigate().to(TestSiteAutomationUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    this.getWebDriver().navigate().to(TestSiteAutomationUrl);
     wait.waitForPageLoad();
 
     Results error = new ObjectMapper().convertValue(axeResultWithError, Results.class);
@@ -121,18 +123,14 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
 
     Assert.assertTrue(filePath.length() > 0, "Accessibility report is empty");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
    * Verify we throw an exception if there are violations and we choose the throw exception option.
    * @throws IOException if an exception is thrown
    */
-  @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
+  @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = RuntimeException.class)
   public void accessibilityHtmlReportWithViolation() throws IOException, ParseException {
-    getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), true);
   }
 
@@ -142,8 +140,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void accessibilityHtmlReportWithLazyElement() throws IOException, ParseException {
-    getWebDriver().get(TestSiteAutomationUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    this.getWebDriver().get(TestSiteAutomationUrl);
     wait.waitForPageLoad();
 
     LazyWebElement foodTable = new LazyWebElement(this.getTestObject(),
@@ -155,7 +152,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertFalse(filePath.isEmpty(), "Accessibility report is empty");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -164,8 +160,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void accessibilityHtmlReportWithElement() throws IOException, ParseException {
-    getWebDriver().navigate().to(TestSiteAutomationUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    this.getWebDriver().navigate().to(TestSiteAutomationUrl);
     wait.waitForPageLoad();
 
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
@@ -189,8 +184,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     // Make sure we are not using verbose logging
     this.getLogger().setLoggingLevel(MessageType.INFORMATION);
 
-    getWebDriver().navigate().to(TestSiteAutomationUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    this.getWebDriver().navigate().to(TestSiteAutomationUrl);
     wait.waitForPageLoad();
 
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), false);
@@ -200,7 +194,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     String file = IOUtils.toString(fis, StandardCharsets.UTF_8);
 
     Assert.assertFalse(file.contains("Script executed"), "Logging was not suppressed as expected.");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -210,10 +203,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void accessibilityHtmlReportViolationsOnly() throws IOException, ParseException {
-    getWebDriver().navigate().to(TestSiteUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
-    wait.waitForPageLoad();
-
     // Make sure we are not using verbose logging
     this.getLogger().setLoggingLevel(MessageType.INFORMATION);
 
@@ -226,7 +215,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     Assert.assertFalse(fileString.contains("Passes "), "Passes were still in the report");
     Assert.assertFalse(fileString.contains("Inapplicable "), "Inapplicable were still in the report");
     Assert.assertFalse(fileString.contains("Incomplete  "), "Incomplete were still in the report");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**
@@ -235,8 +223,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void accessibilityHtmlViolationsReportWithElement() throws IOException, ParseException {
-    getWebDriver().navigate().to(TestSiteAutomationUrl);
-    UIWait wait = UIWaitFactory.getWaitDriver(getWebDriver());
+    this.getWebDriver().navigate().to(TestSiteAutomationUrl);
     wait.waitForPageLoad();
 
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(),
@@ -246,16 +233,14 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())
         .filter(x -> x.contains(".html")).findFirst().map(Object::toString).orElse("");
     Assert.assertFalse(filePath.isEmpty(), "Accessibility report is empty");
-    deleteFiles(Collections.singletonList(filePath));
   }
 
   private void deleteFiles(List<String> files) {
     for (String file : files) {
-      File filePath = new File(file);
-      Assert.assertTrue(filePath.exists(),
-          System.lineSeparator() + "File does not exist: " + file + System.lineSeparator());
-      Assert.assertTrue(filePath.delete(),
-          System.lineSeparator() +"File was not deleted: " + file + System.lineSeparator());
+      File filePath = new File(file).getAbsoluteFile();
+      if (filePath.exists()) {
+        filePath.delete();
+      }
     }
   }
 }

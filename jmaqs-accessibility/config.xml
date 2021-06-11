@@ -31,7 +31,6 @@
         <!-- Log file path - Defaults to build location if no value is defined -->
         <FileLoggerPath>./target/logs</FileLoggerPath>
     </MagenicMaqs>
-
     <SeleniumMaqs>
         <!--Local browser settings
         <Browser>Chrome</Browser>

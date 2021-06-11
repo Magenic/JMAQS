@@ -8,8 +8,6 @@ package com.magenic.jmaqs.utilities.helper;
  * Test category type.
  */
 public class TestCategories {
-
-
   private TestCategories() {
   }
 
@@ -17,6 +15,16 @@ public class TestCategories {
    * String for Accessibility unit test category.
    */
   public static final String ACCESSIBILITY = "Accessibility Unit Tests";
+
+  /**
+   * String for Appium unit test category.
+   */
+  public static final String APPIUM = "Appium Unit Tests";
+
+  /**
+   * String for Cucumber unit test category.
+   */
+  public static final String CUCUMBER = "Cucumber Unit Tests";
 
   /**
    * String for database unit test category.
@@ -27,6 +35,11 @@ public class TestCategories {
    * String for email unit test category.
    */
   public static final String EMAIL = "Email Unit Tests";
+
+  /**
+   * String for base framework unit test category.
+   */
+  public static final String FRAMEWORK = "Base Framework Unit Tests";
 
   /**
    * String for Selenium unit test category.
@@ -42,19 +55,4 @@ public class TestCategories {
    * String for web service unit test category.
    */
   public static final String WEB_SERVICE = "Web Service Unit Tests";
-
-  /**
-   * String for base framework unit test category.
-   */
-  public static final String FRAMEWORK = "Base Framework Unit Tests";
-
-  /**
-   * String for Appium unit test category.
-   */
-  public static final String APPIUM = "Appium Unit Tests";
-
-  /**
-   * String for Cucumber unit test category.
-   */
-  public static final String CUCUMBER = "Cucumber Unit Tests";
 }
