@@ -18,7 +18,7 @@
         <mssql-jdbc.version>8.2.2.jre8</mssql-jdbc.version>
         <javax.persistence.version>2.2.1</javax.persistence.version>
         <sqlite-dialect.version>0.1.1</sqlite-dialect.version>
-        <commons-io.version>2.8.0</commons-io.version>
+        <commons-io.version>2.10.0</commons-io.version>
     </properties>
     <dependencies>
         <dependency>
