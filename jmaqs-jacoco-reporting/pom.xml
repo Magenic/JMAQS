@@ -64,6 +64,10 @@
             <artifactId>jmaqs-appium</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.magenic.jmaqs.accessibility</groupId>
+            <artifactId>jmaqs-accessibility</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.magenic.jmaqs.base</groupId>
             <artifactId>jmaqs-base</artifactId>
         </dependency>

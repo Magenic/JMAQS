@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.magenic.jmaqs</groupId>
+        <artifactId>jmaqs-framework</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <groupId>com.magenic.jmaqs.accessibility</groupId>
+    <artifactId>jmaqs-accessibility</artifactId>
+    <version>${revision}</version>
+    <name>JMAQS Accessibility Testing Module</name>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.deque.html.axe-core</groupId>
+            <artifactId>selenium</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.selenium</groupId>
+            <artifactId>jmaqs-selenium</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.magenic.jmaqs.utilities</groupId>
+            <artifactId>jmaqs-utilities</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.webdriverextensions</groupId>
+                <artifactId>webdriverextensions-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-drivers</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <installationDirectory>./src/test/resources/drivers</installationDirectory>
+                    <drivers>
+                        <driver>
+                            <name>chromedriver</name>
+                            <customFileName>chromedriver</customFileName>
+                            <version>90.0.4430.24</version>
+                        </driver>
+                    </drivers>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -41,6 +41,14 @@ public abstract class Logger {
   }
 
   /**
+   * Gets the logging level.
+   * @return the Message Type
+   */
+  public MessageType getLoggingLevel() {
+    return this.logLevel;
+  }
+
+  /**
    * Set the logging level.
    *
    * @param level

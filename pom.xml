@@ -54,6 +54,7 @@
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
         <module>jmaqs-cucumber</module>
+        <module>jmaqs-accessibility</module>
     </modules>
 
     <profiles>
@@ -272,6 +273,11 @@
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.accessibility</groupId>
+                <artifactId>jmaqs-accessibility</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.magenic.jmaqs.appium</groupId>
