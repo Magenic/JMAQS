@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: 15
       - name: Restore Local Maven Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
@@ -57,7 +57,7 @@ jobs:
         with:
           java-version: 11
       - name: Restore Local Maven Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
