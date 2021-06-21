@@ -187,6 +187,7 @@
                 <sonar.coverage.jacoco.xmlReportPaths>
                     ./target/site/jacoco-aggregate/jacoco.xml
                 </sonar.coverage.jacoco.xmlReportPaths>
+                <sonar.java.checkstyle.reportPaths>./target/checkstyle-result.xml</sonar.java.checkstyle.reportPaths>
             </properties>
             <build>
                 <plugins>
@@ -250,7 +251,7 @@
     </profiles>
 
     <properties>
-        <revision>2.1.1-SNAPSHOT</revision>
+        <revision>2.2.1</revision>
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
         <javadoc.plugin.version>3.2.0</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
@@ -269,9 +270,19 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.apache.ant</groupId>
+                <artifactId>ant</artifactId>
+                <version>1.10.9</version>
+            </dependency>
+            <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13.1</version>
             </dependency>
             <dependency>
                 <groupId>com.magenic.jmaqs.appium</groupId>
@@ -312,15 +323,6 @@
     </dependencyManagement>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <!--<plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>${maven-deploy-plugin.version}</version>
-                </plugin>-->
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -354,7 +356,6 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <showDeprecation>false</showDeprecation>
-                    <!--<multiReleaseOutput>true</multiReleaseOutput>-->
                     <release>${jdk.version}</release>
                     <workingDirectory>target/</workingDirectory>
                 </configuration>
@@ -417,7 +418,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>check</goal>
+                            <goal>checkstyle</goal>
                         </goals>
                         <id>checkstyle</id>
                         <phase>validate</phase>
@@ -429,6 +430,41 @@
                             <consoleOutput>true</consoleOutput>
                             <linkXRef>false</linkXRef>
                             <violationSeverity>warning</violationSeverity>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>analyze</id>
+                        <goals>
+                            <goal>analyze-only</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>6.0.3</version>
+                <executions>
+                    <execution>
+                        <id>vulnerability-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                        <configuration>
+                            <prettyPrint>true</prettyPrint>
+                            <formats>
+                                <format>ALL</format>
+                            </formats>
+                            <showSummary>true</showSummary>
+                            <outputDirectory>./target/owasp</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

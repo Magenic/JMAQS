@@ -34,7 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run SonarCloud Analysis
-        run: mvn -Psonar -B sonar:sonar -e -f pom.xml -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml"
+        run: mvn -Psonar -B sonar:sonar -e -f pom.xml -Dsonar.coverage.jacoco.xmlReportPaths="${{github.workspace}}/jmaqs-jacoco-reporting/target/site/jacoco-aggregate/jacoco.xml" -Dsonar.java.checkstyle.reportPaths="${{github.workspace}}/target/checkstyle-result.xml"
       - name: Publish Unit Test Results Report
         uses: scacap/action-surefire-report@v1
         if: ${{ always() }}
@@ -63,6 +63,29 @@ jobs:
           key: ${{runner.os}}-m2
       - name: Run Checkstyle
         run: mvn -B validate --file pom.xml -e -fae
+  owasp:
+    name: OWASP Dependency Check Run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Restore Local Maven Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{runner.os}}-m2
+      - name: Run OWASP scan
+        run: mvn -B compile verify -Dmaven.test.skip=true --file pom.xml -e -fae
+      - name: Publish OWASP Report
+        uses: mikepenz/action-junit-report@v1
+        if: ${{ always() }}
+        with:
+            check_name: OWASP Dependency Report
+            report_paths: '~/**/target/owasp/dependency-check-junit.xml'
+            github_token: ${{ secrets.GITHUB_TOKEN }}
   labels:
     name: Pull Request Labels
     runs-on: ubuntu-latest
