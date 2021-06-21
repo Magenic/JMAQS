@@ -52,7 +52,7 @@ jobs:
       - name: Print out version number from needs
         run: echo "${{env.VERSION}}"
       - name: Set Version to ${{env.VERSION}} and Run Unit Tests
-        uses: GabrielBB/xvfb-action@v1.4
+        uses: GabrielBB/xvfb-action@v1.5
         with:
           run: mvn -Drevision="${{env.VERSION}}" -Dtesting -T 1C verify install -B -e -f pom.xml -fae -Djdk.version=${{env.JDK}}
         env:

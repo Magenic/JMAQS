@@ -45,7 +45,7 @@ jobs:
         with:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}"}}]'
       - name: Set Version to ${{env.VERSION}}-SNAPSHOT and Run Unit Tests
-        uses: GabrielBB/xvfb-action@v1.4
+        uses: GabrielBB/xvfb-action@v1.5
         with:
           run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -B -Dtesting verify install --file pom.xml -e -fae -T 1C -Djdk.version=${{env.JDK}}
         env:
