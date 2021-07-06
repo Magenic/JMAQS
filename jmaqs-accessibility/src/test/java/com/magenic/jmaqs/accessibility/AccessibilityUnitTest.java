@@ -4,7 +4,6 @@
 
 package com.magenic.jmaqs.accessibility;
 
-import com.deque.html.axecore.results.AxeRuntimeException;
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.AxeReporter;
 import com.magenic.jmaqs.selenium.BaseSeleniumTest;
