@@ -309,45 +309,53 @@ public class HtmlReporter {
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       if (!allCheckResults.isEmpty() || !noneCheckResults.isEmpty()) {
-        htmlAndSelector = new Element("p");
-        htmlAndSelector.attr("class", "wrapOne");
-        htmlAndSelector.text("Fix all of the following issues:");
-
-        Element htmlSet = new Element("ul");
-
-        for (Check checkResult : allCheckResults) {
-          Element bulletPoints = new Element("li");
-          bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
-          htmlSet.appendChild(bulletPoints);
-        }
-
-        for (Check checkResult : noneCheckResults) {
-          Element bulletPoints = new Element("li");
-          bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
-          htmlSet.appendChild(bulletPoints);
-        }
-
-        htmlAndSelector.appendChild(htmlSet);
-        htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+        fixAllIssues(htmlAndSelectorWrapper, allCheckResults, noneCheckResults);
       }
 
       if (!anyCheckResults.isEmpty()) {
-        htmlAndSelector = new Element("p");
-        htmlAndSelector.attr("class", "wrapOne");
-        htmlAndSelector.text("Fix at least one of the following issues:");
-
-        Element htmlSet = new Element("ul");
-
-        for (Check checkResult : anyCheckResults) {
-          Element bulletPoints = new Element("li");
-          bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
-          htmlSet.appendChild(bulletPoints);
-        }
-
-        htmlAndSelector.appendChild(htmlSet);
-        htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+        fixAnyIssues(htmlAndSelectorWrapper, anyCheckResults);
       }
     }
+  }
+
+  private static void fixAllIssues(Element htmlAndSelectorWrapper, List<Check> allCheckResults, List<Check> noneCheckResults) {
+    Element htmlAndSelector = new Element("p");
+    htmlAndSelector.attr("class", "wrapOne");
+    htmlAndSelector.text("Fix at least one of the following issues:");
+
+    Element htmlSet = new Element("ul");
+
+    for (var checkResult : allCheckResults) {
+      Element bulletPoints = new Element("li");
+      bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
+      htmlSet.appendChild(bulletPoints);
+    }
+
+    for (var checkResult : noneCheckResults) {
+      Element bulletPoints = new Element("li");
+      bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
+      htmlSet.appendChild(bulletPoints);
+    }
+
+    htmlAndSelector.appendChild(htmlSet);
+    htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+  }
+
+  private static void fixAnyIssues(Element htmlAndSelectorWrapper, List<Check> anyCheckResults) {
+    Element htmlAndSelector = new Element("p");
+    htmlAndSelector.attr("class", "wrapOne");
+    htmlAndSelector.text("Fix at least one of the following issues:");
+
+    Element htmlSet = new Element("ul");
+
+    for (var checkResult : anyCheckResults) {
+      Element bulletPoints = new Element("li");
+      bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
+      htmlSet.appendChild(bulletPoints);
+    }
+
+    htmlAndSelector.appendChild(htmlSet);
+    htmlAndSelectorWrapper.appendChild(htmlAndSelector);
   }
 
   private static String getCss(SearchContext context) {
