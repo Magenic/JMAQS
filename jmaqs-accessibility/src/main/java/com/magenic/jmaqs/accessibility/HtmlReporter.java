@@ -4,7 +4,11 @@
 
 package com.magenic.jmaqs.accessibility;
 
-import com.deque.html.axecore.results.*;
+import com.deque.html.axecore.results.Check;
+import com.deque.html.axecore.results.CheckedNode;
+import com.deque.html.axecore.results.Node;
+import com.deque.html.axecore.results.Results;
+import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
 import java.io.File;
@@ -144,7 +148,6 @@ public class HtmlReporter {
     Element resultsFlex = new Element("div");
     resultsFlex.attributes().put("id", "results");
     contentArea.appendChild(resultsFlex);
-
 
     if (results.isErrored()) {
       Element errorHeader = new Element("h2");
@@ -318,7 +321,8 @@ public class HtmlReporter {
     }
   }
 
-  private static void fixAllIssues(Element htmlAndSelectorWrapper, List<Check> allCheckResults, List<Check> noneCheckResults) {
+  private static void fixAllIssues(Element htmlAndSelectorWrapper,
+      List<Check> allCheckResults, List<Check> noneCheckResults) {
     Element htmlAndSelector = new Element("p");
     htmlAndSelector.attr("class", "wrapOne");
     htmlAndSelector.text("Fix at least one of the following issues:");
