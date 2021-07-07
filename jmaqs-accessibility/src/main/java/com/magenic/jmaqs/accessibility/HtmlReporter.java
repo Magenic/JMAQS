@@ -34,42 +34,109 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
+/**
+ * Html Reporter class for Accessibility Functionality.
+ */
 public class HtmlReporter {
+  /**
+   * Place holder for class tag string type.
+   */
   private static final String classString = "class";
 
+  /**
+   * Class constructor.
+   */
   protected HtmlReporter() {
   }
 
+  /**
+   * Creates an Html report with All result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param destination The file path where the html report will be stored
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, String destination)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, destination, EnumSet.allOf(ResultType.class));
   }
 
+  /**
+   * Creates an Html report with a list of specified result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param destination The file path where the html report will be stored
+   * @param requestedResults The result types that will be included on the html report
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, String destination, Set<ResultType> requestedResults)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver), destination, requestedResults);
   }
 
+  /**
+   * Creates an Html report with All result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param element The element that will be reported on
+   * @param destination The file path where the html report will be stored
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, element, destination, EnumSet.allOf(ResultType.class));
   }
 
+  /**
+   * Creates an Html report with a list of specified result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param element The element that will be reported on
+   * @param destination The file path where the html report will be stored
+   * @param requestedResults The result types that will be included on the html report
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver, element), destination, requestedResults);
   }
 
+  /**
+   * Creates an Html report with All result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param results The results that will be used for the html report
+   * @param destination The file path where the html report will be stored
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, results, destination, EnumSet.allOf(ResultType.class));
   }
 
+  /**
+   * Creates an Html report with a list of specified result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param results The results that will be used for the html report
+   * @param destination The file path where the html report will be stored
+   * @param requestedResults The result types that will be included on the html report
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     createAxeHtmlReportFile(webDriver, results, destination, requestedResults);
   }
 
+  /**
+   * Creates an Html report.
+   * @param context the web driver or web element to be used for the scan
+   * @param results The results that will be used for the html report
+   * @param destination The file path where the html report will be stored
+   * @param requestedResults The result types that will be included on the html report
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   private static void createAxeHtmlReportFile(SearchContext context, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     // Get the unwrapped element if we are using a wrapped element
@@ -195,6 +262,12 @@ public class HtmlReporter {
     FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
 
+  /**
+   * Sets up the results into html elements for the report.
+   * @param results A list of the Rule results found
+   * @param type The result type that is being created
+   * @param body The main html page element body
+   */
   private static void getReadableAxeResults(List<Rule> results, ResultType type, Element body) {
     Element resultWrapper = new Element("div");
     resultWrapper.attributes().put(classString, "resultWrapper");
@@ -293,6 +366,12 @@ public class HtmlReporter {
     }
   }
 
+  /**
+   * Add the fixes for the specified result type.
+   * @param resultsNode The fixes from the results in this specific result type
+   * @param type The result type fixes
+   * @param htmlAndSelectorWrapper The element that the fixes will be appended to
+   */
   private static void addFixes(CheckedNode resultsNode, ResultType type, Element htmlAndSelectorWrapper) {
     Element htmlAndSelector = new Element("div");
 
@@ -321,6 +400,12 @@ public class HtmlReporter {
     }
   }
 
+  /**
+   * Adds the issues in the All category in the list of Checks.
+   * @param htmlAndSelectorWrapper The element that all the content will be appended to
+   * @param allCheckResults A list of the all check results
+   * @param noneCheckResults A list of the none check results
+   */
   private static void fixAllIssues(Element htmlAndSelectorWrapper,
       List<Check> allCheckResults, List<Check> noneCheckResults) {
     Element htmlAndSelector = new Element("p");
@@ -345,6 +430,11 @@ public class HtmlReporter {
     htmlAndSelectorWrapper.appendChild(htmlAndSelector);
   }
 
+  /**
+   * Adds the issues in the Any category in the list of Checks.
+   * @param htmlAndSelectorWrapper The element that all the content will be appended to
+   * @param anyCheckResults A list of the any check results
+   */
   private static void fixAnyIssues(Element htmlAndSelectorWrapper, List<Check> anyCheckResults) {
     Element htmlAndSelector = new Element("p");
     htmlAndSelector.attr("class", "wrapOne");
@@ -362,6 +452,11 @@ public class HtmlReporter {
     htmlAndSelectorWrapper.appendChild(htmlAndSelector);
   }
 
+  /**
+   * Creates and gets the css for the html page.
+   * @param context The web driver or element to be scanned for the screen shot
+   * @return the css in string format
+   */
   private static String getCss(SearchContext context) {
     return ".thumbnail{" + "content: url('" + getDataImageString(context)
         + "; border: 1px solid black;margin-left:1em;margin-right:1em;width:auto;max-height:150px;"
@@ -413,6 +508,12 @@ public class HtmlReporter {
         + results.getTestEngine().getVersion() + ")");
   }
 
+  /**
+   * Gets the count of the number of rules that came up in the scan.
+   * @param results The list of rules to be looped through
+   * @param uniqueList An empty list to add unique content to
+   * @return The count of all the the rules
+   */
   private static int getCount(List<Rule> results, HashSet<String> uniqueList) {
     int count = 0;
     for (Rule item : results) {
@@ -431,6 +532,15 @@ public class HtmlReporter {
     return count;
   }
 
+  /**
+   * Sets up the count content for the html report.
+   * @param violationCount The count for the violations in the scan
+   * @param incompleteCount The count for incomplete in the scan
+   * @param passCount The count for passes in the scan
+   * @param inapplicableCount The count for inapplicable in the scan
+   * @param requestedResults The result types that will be included on the html report
+   * @param element The element that all the content will be appended to
+   */
   private static void getCountContent(int violationCount, int incompleteCount, int passCount,
       int inapplicableCount, Set<ResultType> requestedResults, Element element) {
     if (requestedResults.contains(ResultType.Violations)) {
@@ -453,16 +563,31 @@ public class HtmlReporter {
     }
   }
 
+  /**
+   * Gets the data image as a base 64 string.
+   * @param context The web driver or element to take a screen shot of
+   * @return the base 64 data image as a string
+   */
   private static String getDataImageString(SearchContext context) {
     TakesScreenshot newScreen = (TakesScreenshot) context;
     return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64) + "');";
   }
 
+  /**
+   * Gets the date format into a string.
+   * @param timestamp The time to be made into a date format
+   * @return The timestamp as a specified date formatted string
+   * @throws ParseException If parse exception occurs
+   */
   private static String getDateFormat(String timestamp) throws ParseException {
     Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(timestamp);
     return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);
   }
 
+  /**
+   * Sets up the javascript to utilize button functionality.
+   * @return the javascript as a string
+   */
   private static String getJavascriptToString() {
     return StringEscapeUtils.escapeEcmaScript(
         "var buttons = document.getElementsByClassName(\"sectionbutton\");\n"

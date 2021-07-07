@@ -153,6 +153,8 @@ public class AccessibilityUtilities {
    * Create a HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       boolean throwOnViolation) throws IOException, ParseException {
@@ -164,6 +166,8 @@ public class AccessibilityUtilities {
    * Create a HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       boolean throwOnViolation, Set<ResultType> requestedResult) throws IOException, ParseException {
@@ -175,6 +179,8 @@ public class AccessibilityUtilities {
    * Create a HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       WebElement element, boolean throwOnViolation) throws IOException, ParseException {
@@ -187,6 +193,8 @@ public class AccessibilityUtilities {
    * Create a HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       WebElement element, boolean throwOnViolation, Set<ResultType> resultRequested)
@@ -195,11 +203,28 @@ public class AccessibilityUtilities {
         () -> new AxeBuilder().analyze(testObject.getWebDriver(), element), throwOnViolation, resultRequested);
   }
 
+  /**
+   * Create a HTML accessibility report for an entire web page.
+   * @param testObject The TestObject to associate the report with
+   * @param result The result object
+   * @param throwOnViolation Should violations cause an exception to be thrown
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject, Results result,
       boolean throwOnViolation) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject, result, throwOnViolation, EnumSet.allOf(ResultType.class));
   }
 
+  /**
+   * Create a HTML accessibility report for an entire web page.
+   * @param testObject The TestObject to associate the report with
+   * @param result The result object
+   * @param throwOnViolation Should violations cause an exception to be thrown
+   * @param resultRequested A set list of enum types from the Result Type enum class
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject, Results result,
       boolean throwOnViolation, Set<ResultType> resultRequested) throws IOException, ParseException {
     createAccessibilityHtmlReport(testObject, () -> result, throwOnViolation, resultRequested);
@@ -210,6 +235,8 @@ public class AccessibilityUtilities {
    * @param testObject The TestObject to associate the report with
    * @param getResults Function for getting the accessibility scan results
    * @param throwOnViolation Should violations cause an exception to be thrown
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
    */
   public static void createAccessibilityHtmlReport(SeleniumTestObject testObject,
       Supplier<Results> getResults, boolean throwOnViolation,
