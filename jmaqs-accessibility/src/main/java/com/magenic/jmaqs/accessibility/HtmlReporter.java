@@ -6,7 +6,6 @@ package com.magenic.jmaqs.accessibility;
 
 import com.deque.html.axecore.results.Check;
 import com.deque.html.axecore.results.CheckedNode;
-import com.deque.html.axecore.results.Node;
 import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.AxeBuilder;
@@ -19,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
@@ -143,11 +141,10 @@ public class HtmlReporter {
     context = (context instanceof WrapsElement)
         ? ((WrapsElement) context).getWrappedElement() : context;
 
-    HashSet<String> selectors = new HashSet<>();
-    final int violationCount = getCount(results.getViolations(), selectors);
-    final int incompleteCount = getCount(results.getIncomplete(), selectors);
-    final int passCount = getCount(results.getPasses(), selectors);
-    final int inapplicableCount = getCount(results.getInapplicable(), selectors);
+    final int violationCount = getCount(results.getViolations());
+    final int incompleteCount = getCount(results.getIncomplete());
+    final int passCount = getCount(results.getPasses());
+    final int inapplicableCount = getCount(results.getInapplicable());
 
     String stringBuilder = "<!DOCTYPE html>\r\n" + "<html lang=\"en\">" + "<head>"
         + "<meta charset=\"utf-8\">"
@@ -277,11 +274,9 @@ public class HtmlReporter {
     sectionButton.attributes().put(classString, "sectionbutton active");
     resultWrapper.appendChild(sectionButton);
 
-    HashSet<String> selectors = new HashSet<>();
-
     Element sectionButtonHeader = new Element("h2");
     sectionButtonHeader.attributes().put(classString, "buttonInfoText");
-    sectionButtonHeader.text(type.name() + ": " + getCount(results, selectors));
+    sectionButtonHeader.text(type.name() + ": " + getCount(results));
     sectionButton.appendChild(sectionButtonHeader);
 
     Element sectionButtonExpando = new Element("h2");
@@ -349,7 +344,7 @@ public class HtmlReporter {
         htmlAndSelector.html(item.getHtml());
         htmlAndSelector.text(item.getHtml());
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
-        htmlAndSelectorWrapper.appendText("Selector(s):");
+        htmlAndSelectorWrapper.appendText("Selector:");
 
         htmlAndSelector = new Element("p");
         htmlAndSelector.attributes().put(classString, "wrapTwo");
@@ -511,18 +506,12 @@ public class HtmlReporter {
   /**
    * Gets the count of the number of rules that came up in the scan.
    * @param results The list of rules to be looped through
-   * @param uniqueList An empty list to add unique content to
    * @return The count of all the the rules
    */
-  private static int getCount(List<Rule> results, HashSet<String> uniqueList) {
+  private static int getCount(List<Rule> results) {
     int count = 0;
     for (Rule item : results) {
-      for (Node node : item.getNodes()) {
-        for (Object target : Collections.singletonList(node.getTarget())) {
-          count++;
-          uniqueList.add(target.toString());
-        }
-      }
+      count += item.getNodes().size();
 
       // Still add one if no targets are included
       if (item.getNodes().isEmpty()) {
