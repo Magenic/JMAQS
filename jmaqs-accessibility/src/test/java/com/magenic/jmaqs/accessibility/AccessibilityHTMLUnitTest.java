@@ -25,19 +25,19 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   /**
-   * Axe JSON with an error.
+   * The file that has a sample result with an error.
    */
-  private static final String axeResultWithError = "{\"errorMessage\": \"AutomationError\",\"results\":{ \"toolOptions\":{\"reporter\":\"v1\" }, \"testEngine\": {\"name\":\"axe-core\",\"version\":\"3.4.1\" }, \"testEnvironment\": {\"userAgent\":\"AutoAgent\",\"windowWidth\": 1200,\"windowHeight\": 646,\"orientationAngle\": 0,\"orientationType\":\"landscape-primary\" }, \"testRunner\": {\"name\":\"axe\" }, \"url\":\"url\", \"timestamp\":\"2020-04-14T01:33:59.139Z\", \"passes\":[], \"violations\":[], \"incomplete\":[], \"inapplicable\": []}}";
+  private static final File axeResultWithErrorFile = new File("src/test/resources/testFiles/sampleResults.json");
 
   /**
    * Unit testing site URL - Login page.
@@ -98,8 +98,9 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   /**
    * Verify we throw an exception if the scan has an error.
    */
-  @Ignore @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
+  @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
   public void accessibilityHtmlReportWithError() throws IOException, ParseException {
+    String axeResultWithError = FileUtils.readFileToString(axeResultWithErrorFile, StandardCharsets.UTF_8);
     Results results = new ObjectMapper().readValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), results, false);
 
@@ -111,12 +112,13 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   /**
    * Verify we throw an exception if the scan has an error and are using lazy elements.
    */
-  @Ignore @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
+  @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
   public void accessibilityHtmlReportWithErrorFromLazyElement() throws IOException, ParseException {
     this.getWebDriver().navigate().to(TestSiteAutomationUrl);
     wait.waitForPageLoad();
 
-    Results error = new ObjectMapper().convertValue(axeResultWithError, Results.class);
+    String axeResultWithError = FileUtils.readFileToString(axeResultWithErrorFile, StandardCharsets.UTF_8);
+    Results error = new ObjectMapper().readValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), error,false);
 
     String filePath = Arrays.stream(this.getTestObject().getArrayOfAssociatedFiles())

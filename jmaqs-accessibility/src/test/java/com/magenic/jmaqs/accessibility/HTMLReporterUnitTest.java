@@ -29,10 +29,24 @@ import org.testng.annotations.Test;
 import org.testng.Assert;
 
 public class HTMLReporterUnitTest extends BaseSeleniumTest {
+  /**
+   * The file to be opened in the browser.
+   */
   private static final File integrationTestTargetFile = new File("src/test/resources/testFiles/integration-test-target.html");
+
+  /**
+   * The file to be opened in the browser.
+   */
   private static final String integrationTestTargetUrl = integrationTestTargetFile.getAbsolutePath();
 
+  /**
+   * The file to be converted into a result type.
+   */
   private static final File integrationTestJsonResultFile = new File("src/test/resources/testFiles/sampleResults.json");
+
+  /**
+   * The path to the file converted into a result type.
+   */
   private static final String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
 
   @BeforeMethod
@@ -129,7 +143,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     File file = new File(path);
 
     if (file.exists()) {
-      Assert.assertTrue( file.delete(), "File was not deleted");
+      Assert.assertTrue(file.delete(), "File was not deleted");
     }
   }
 
