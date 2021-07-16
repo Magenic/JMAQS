@@ -4,7 +4,11 @@
 
 package com.magenic.jmaqs.accessibility;
 
-import com.deque.html.axecore.results.*;
+import com.deque.html.axecore.results.Check;
+import com.deque.html.axecore.results.CheckedNode;
+import com.deque.html.axecore.results.Node;
+import com.deque.html.axecore.results.Results;
+import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.AxeBuilder;
 import com.deque.html.axecore.selenium.ResultType;
 import java.io.File;
