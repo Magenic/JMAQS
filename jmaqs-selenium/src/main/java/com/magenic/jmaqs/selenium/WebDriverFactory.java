@@ -47,7 +47,6 @@ public class WebDriverFactory {
    * Gets default browser.
    *
    * @return the default browser
-   * @throws Exception the exception
    */
   public static WebDriver getDefaultBrowser() {
     return getBrowserWithDefaultConfiguration(SeleniumConfig.getBrowserType());
@@ -344,7 +343,7 @@ public class WebDriverFactory {
             StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
     }
 
-    // Make sure the remote capabilities dictionary exists
+    // Make sure the remote capabilities' dictionary exists
     if (remoteCapabilities == null) {
       remoteCapabilities = new HashMap<>();
     }
