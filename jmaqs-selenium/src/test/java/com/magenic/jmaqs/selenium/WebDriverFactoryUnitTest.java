@@ -102,13 +102,12 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
       try {
         driver = WebDriverFactory.getBrowserWithDefaultConfiguration(browserType);
       } catch (WebDriverFactoryException e) {
-        System.out.print(browserType + " Threw an exception");
-        System.out.print(System.lineSeparator());
+        softAssert.fail(browserType + " " + e.getMessage());
       } finally {
         if (driver != null) {
+          softAssert.assertNotNull(driver, browserType.name());
           driver.quit();
         }
-        softAssert.assertNotNull(driver, browserType.name());
       }
     }
     softAssert.assertAll();
@@ -167,7 +166,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Edge driver.
    */
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   // TODO: File path to the WebDriver.exe might be an issue here.
   public void getEdgeDriverTest() {
@@ -185,7 +183,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the IE driver.
    */
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getInternetExplorerDriverTest() {
     InternetExplorerDriver driver = null;

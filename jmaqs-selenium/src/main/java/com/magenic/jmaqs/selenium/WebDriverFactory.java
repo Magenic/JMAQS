@@ -83,9 +83,8 @@ public class WebDriverFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
-
       // Log that something went wrong
-      String message =  "Failed to initial web driver because: %s %s"
+      String message =  "Failed to initialize web driver because: %s %s"
           + "This likely means your web driver is missing, unsupported or out of date.";
       message = StringProcessor.safeFormatter(message, e.getMessage() , System.lineSeparator());
 
@@ -142,9 +141,9 @@ public class WebDriverFactory {
   }
 
   /**
-   * Gets default internet explorer options.
+   * Gets default Internet Explorer options.
    *
-   * @return the default internet explorer options
+   * @return the default Internet Explorer options
    */
   public static InternetExplorerOptions getDefaultInternetExplorerOptions() {
     InternetExplorerOptions options = new InternetExplorerOptions();
@@ -247,18 +246,19 @@ public class WebDriverFactory {
       driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName());
     }
 
-    System.setProperty("webdriver.edge.driver", driverLocation + File.separator + WebDriverFile.EDGE.getFileName());
+    String str = driverLocation + File.separator + WebDriverFile.EDGE.getFileName();
+    System.setProperty("webdriver.edge.driver", driverLocation + File.separator + "msedge.exe");
     EdgeDriver driver = new EdgeDriver(edgeOptions);
     setBrowserSize(driver, size);
     return driver;
   }
 
   /**
-   * Gets internet explorer driver.
+   * Gets Internet Explorer driver.
    *
-   * @param internetExplorerOptions the internet explorer options
+   * @param internetExplorerOptions the Internet Explorer options
    * @param size                    the size
-   * @return the internet explorer driver
+   * @return the Internet Explorer driver
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
     System.setProperty("webdriver.ie.driver",
@@ -463,7 +463,7 @@ public class WebDriverFactory {
    *
    * @param driverFile      the driver file
    * @param defaultHintPath the default hint path
-   * @param mustExist       the must exist
+   * @param mustExist       if it must exist
    * @return the driver location
    */
   public static String getDriverLocation(String driverFile, String defaultHintPath, boolean mustExist) {
