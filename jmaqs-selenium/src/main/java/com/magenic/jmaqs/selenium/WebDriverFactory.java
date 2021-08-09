@@ -238,6 +238,10 @@ public class WebDriverFactory {
    * @return the edge driver
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
+
+    String location1 = getDriverLocation(WebDriverFile.EDGE.getFileName());
+    String location2 = getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFileName());
+
     String driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName(),
         getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFileName()));
 
@@ -246,8 +250,8 @@ public class WebDriverFactory {
       driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName());
     }
 
-    String str = driverLocation + File.separator + WebDriverFile.EDGE.getFileName();
-    System.setProperty("webdriver.edge.driver", driverLocation + File.separator + "msedge.exe");
+    System.setProperty("webdriver.edge.driver", driverLocation + File.separator + WebDriverFile.EDGE.getFileName());
+
     EdgeDriver driver = new EdgeDriver(edgeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -510,7 +514,7 @@ public class WebDriverFactory {
    * @return the windows edge driver location
    */
   static String getWindowsEdgeDriverLocation(String file) {
-    String edgeDriverFolder = "Microsoft Web Driver";
+    String edgeDriverFolder = "Microsoft\\Edge\\Application";
 
     Path path = Paths.get(System.getenv("ProgramW6432"), edgeDriverFolder, file);
     if (path.toFile().isFile()) {

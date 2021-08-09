@@ -306,7 +306,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Tests getting headless Chrome window to maximum size string.
+   * Tests getting the headless Chrome window to maximum size string.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getHeadlessWindowSizeStringMaximizeTest() {

@@ -24,7 +24,7 @@ public enum WebDriverFile {
   /**
    * The Edge driver file.
    */
-  EDGE("MicrosoftWebDriver");
+  EDGE("msedge");
 
   /**
    * This driver file.
