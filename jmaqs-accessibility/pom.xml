@@ -35,30 +35,4 @@
             <artifactId>jmaqs-utilities</artifactId>
         </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.github.webdriverextensions</groupId>
-                <artifactId>webdriverextensions-maven-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>install-drivers</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <installationDirectory>./src/test/resources/drivers</installationDirectory>
-                    <drivers>
-                        <driver>
-                            <name>chromedriver</name>
-                            <customFileName>chromedriver</customFileName>
-                            <version>90.0.4430.24</version>
-                        </driver>
-                    </drivers>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
