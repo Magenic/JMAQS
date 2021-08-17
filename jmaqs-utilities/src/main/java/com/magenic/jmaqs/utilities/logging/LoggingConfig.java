@@ -17,7 +17,7 @@ public class LoggingConfig {
   public static final String TXT = "TXT";
 
   private LoggingConfig() {
-    //Hiding implicit contructor
+    // Hiding implicit constructor
   }
 
   /**
@@ -73,9 +73,7 @@ public class LoggingConfig {
    * @return The logger
    */
   public static Logger getLogger(String fileName) {
-    /**
-     * Disable logging means we just send any logged messages to the console
-     */
+    // Disable logging means we just send any logged messages to the console
     if (getLoggingEnabledSetting() == LoggingEnabled.NO) {
       return new ConsoleLogger();
     }

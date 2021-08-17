@@ -22,9 +22,9 @@ public final class GenericWait {
     throw new IllegalStateException("Utility class");
   }
 
-  private static long retryTimeFromConfig = Long.parseLong(Config.getGeneralValue("WaitTime", "0"));
+  private static final long retryTimeFromConfig = Long.parseLong(Config.getGeneralValue("WaitTime", "0"));
 
-  private static long timeoutFromConfig = Long.parseLong(Config.getGeneralValue("Timeout", "0"));
+  private static final long timeoutFromConfig = Long.parseLong(Config.getGeneralValue("Timeout", "0"));
 
   /**
    * Wait until boolean.
@@ -292,7 +292,7 @@ public final class GenericWait {
       throw exception;
     }
 
-    // We timed out waiting for the function to return true
+    // We timed-out waiting for the function to return true
     return false;
   }
 
@@ -338,7 +338,7 @@ public final class GenericWait {
       throw exception;
     }
 
-    // We timed out waiting for the function to return true
+    // We timed-out waiting for the function to return true
     return false;
   }
 

@@ -4,7 +4,6 @@
 
 package com.magenic.jmaqs.utilities;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
@@ -25,7 +24,7 @@ public class ConsoleCopy implements AutoCloseable {
   /**
    * Stores the original Console output.
    */
-  private PrintStream oldOut;
+  private final PrintStream oldOut;
 
   /**
    * Initializes a new instance of the ConsoleCopy class.
@@ -37,7 +36,7 @@ public class ConsoleCopy implements AutoCloseable {
     this.oldOut = System.out;
 
     try {
-      this.fileWriter = new PrintStream(new FileOutputStream(new File(path), true));
+      this.fileWriter = new PrintStream(new FileOutputStream(path, true));
       this.doubleWriter = new DoubleWriter(this.fileWriter, this.oldOut);
     } catch (Exception e) {
       System.out.println("Cannot open file for writing");
@@ -67,16 +66,16 @@ public class ConsoleCopy implements AutoCloseable {
   /**
    * Custom PrintStream that writes to both a log file and the console.
    */
-  private class DoubleWriter extends PrintStream {
+  private static class DoubleWriter extends PrintStream {
     /**
      * Used to write to the Log File.
      */
-    private PrintStream fileOutput;
+    private final PrintStream fileOutput;
 
     /**
      * Used to write to the Console.
      */
-    private PrintStream consoleOutput;
+    private final PrintStream consoleOutput;
 
     /**
      * Initializes a new instance of the DoubleWriter class.

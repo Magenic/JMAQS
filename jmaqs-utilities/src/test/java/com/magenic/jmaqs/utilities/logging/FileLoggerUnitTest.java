@@ -2,20 +2,13 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities;
+package com.magenic.jmaqs.utilities.logging;
 
+import com.magenic.jmaqs.utilities.ConsoleCopy;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-
-import com.magenic.jmaqs.utilities.logging.ConsoleLogger;
-import com.magenic.jmaqs.utilities.logging.FileLogger;
-import com.magenic.jmaqs.utilities.logging.HtmlFileLogger;
-import com.magenic.jmaqs.utilities.logging.Logger;
-import com.magenic.jmaqs.utilities.logging.LoggingConfig;
-import com.magenic.jmaqs.utilities.logging.MessageType;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import java.util.HashMap;
 import java.util.UUID;
 import org.testng.Assert;
@@ -28,12 +21,9 @@ import org.testng.asserts.SoftAssert;
  */
 @Test(singleThreaded = true)
 
-/**
- * Don't check for serial version unique IDs as we will never serialize the test
- * data
- */
-@SuppressWarnings("serial")
 
+// Don't check for serial version unique IDs as we will never serialize the test data
+@SuppressWarnings("serial")
 public class FileLoggerUnitTest {
 
   public static final String LOG_FOLDER_MESSAGING_LEVEL_DIRECTORY = LoggingConfig.getLogDirectory() + "/"

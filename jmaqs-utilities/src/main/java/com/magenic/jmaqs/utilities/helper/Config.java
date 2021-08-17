@@ -47,16 +47,14 @@ public final class Config {
   /**
    * The configuration containing values that were added to the configuration.
    */
-  private static XMLConfiguration overrideConfig;
+  private static final XMLConfiguration overrideConfig;
 
   /**
    * The base configs object.
    */
-  private static Configurations configs = new Configurations();
+  private static final Configurations configs = new Configurations();
 
-  /**
-   * initialize config object.
-   */
+  // initialize config object.
   static {
     try {
       if ((new File(CONFIG_FILE).exists())) {

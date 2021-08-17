@@ -18,17 +18,17 @@ public class GenericWaitNotParallelUnitTest {
   /**
    * Constant test string.
    */
-  private String teststring = "Test String";
+  private final String testString = "Test String";
 
   /**
    * Test override retry time.
    */
-  private static long testretry = 100;
+  private static final long testRetry = 100;
 
   /**
    * Test override time out time.
    */
-  private static long testtimeout = 500;
+  private static final long testTimeout = 500;
 
   /**
    * Bool for unit tests.
@@ -60,7 +60,7 @@ public class GenericWaitNotParallelUnitTest {
   public void passStringUntilTest() {
     number = 0;
     try {
-      Assert.assertTrue(GenericWait.waitUntil(this::isParamTestString, teststring + "3"),
+      Assert.assertTrue(GenericWait.waitUntil(this::isParamTestString, testString + "3"),
           "Failed single parameter test");
     } catch (Exception e) {
       Assert.fail("waitUntil with parameter failed with exception", e);
@@ -80,7 +80,7 @@ public class GenericWaitNotParallelUnitTest {
       Assert.fail("waitUnitMatch parameter test failed with exception", e);
     }
 
-    Assert.assertTrue(matchedVal.equals("Test String3"), "Failed expected parameter test.");
+    Assert.assertEquals(matchedVal, "Test String3", "Failed expected parameter test.");
   }
 
   /**
@@ -93,12 +93,12 @@ public class GenericWaitNotParallelUnitTest {
 
     try {
       matchedVal = GenericWait
-          .waitUntilMatch(this::functionTestString, testretry, testtimeout, "Test String3");
+          .waitUntilMatch(this::functionTestString, testRetry, testTimeout, "Test String3");
     } catch (Exception e) {
       Assert.fail("waitUnitMatch with parameter and retry/timeouts failed with exception", e);
     }
 
-    Assert.assertTrue(matchedVal.equals("Test String3"), "Failed expected parameter test.");
+    Assert.assertEquals(matchedVal, "Test String3", "Failed expected parameter test.");
   }
 
   /**
@@ -108,7 +108,7 @@ public class GenericWaitNotParallelUnitTest {
   public void passStringWaitFor() {
     int[] number = { 0 };
     try {
-      GenericWait.waitForMatch(() -> teststring + ++number[0], teststring + "3");
+      GenericWait.waitForMatch(() -> testString + ++number[0], testString + "3");
     } catch (Exception e) {
       Assert.fail("waitForMatch parameter test failed with exception", e);
     }
@@ -122,7 +122,7 @@ public class GenericWaitNotParallelUnitTest {
   public void passStringWaitForOverride() {
     number = 0;
     try {
-      GenericWait.waitForMatch(this::functionTestString, testretry, testtimeout, teststring + "3");
+      GenericWait.waitForMatch(this::functionTestString, testRetry, testTimeout, testString + "3");
     } catch (Exception e) {
       Assert.fail("waitForMatch parameter test and retry/timeouts failed with exception", e);
     }
@@ -135,7 +135,7 @@ public class GenericWaitNotParallelUnitTest {
   public void passStringForTest() {
     int[] number = { 0 };
     try {
-      GenericWait.waitFor((p) -> p.equals(teststring + number[0]++), teststring + "3");
+      GenericWait.waitFor((p) -> p.equals(testString + number[0]++), testString + "3");
     } catch (Exception e) {
       Assert.fail("waitFor parameter test failed with exception", e);
     }
@@ -148,7 +148,7 @@ public class GenericWaitNotParallelUnitTest {
    * @return True if the constant and passed in test strings match
    */
   private boolean isParamTestString(String testString) {
-    return testString.equals(this.teststring + number++);
+    return testString.equals(this.testString + number++);
   }
 
   /**
@@ -157,7 +157,7 @@ public class GenericWaitNotParallelUnitTest {
    * @return Always returns a specific string
    */
   private String functionTestString() {
-    return teststring + number++;
+    return testString + number++;
   }
 
   /**

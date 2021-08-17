@@ -46,7 +46,7 @@ public enum MessageType {
   /**
    * The value of current Message Type.
    */
-  private int value;
+  private final int value;
 
   /**
    * Initializes a new instance of Message Type.

@@ -28,10 +28,10 @@ public final class StringProcessor {
       return String.format(message, args);
     } catch (Exception e) {
       StringBuilder builder = new StringBuilder();
-      builder.append("Message: " + message);
+      builder.append("Message: ").append(message);
       builder.append(" Arguments: ");
       for (Object arg : args) {
-        builder.append(arg.toString() + " ");
+        builder.append(arg.toString()).append(" ");
       }
 
       return builder.toString();

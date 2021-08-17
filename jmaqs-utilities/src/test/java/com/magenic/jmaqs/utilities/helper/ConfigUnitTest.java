@@ -2,11 +2,8 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities;
+package com.magenic.jmaqs.utilities.helper;
 
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
-import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import java.util.Map;
 import org.testng.Assert;
@@ -31,13 +28,13 @@ public class ConfigUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void addTestSettingValuesNewSectionTest() {
-    HashMap<String, String> newValueMap = new HashMap<String, String>();
+    HashMap<String, String> newValueMap = new HashMap<>();
     newValueMap.put("BROWSER1", "CHROME1");
-    newValueMap.put("DBString2", "Dbstring2222");
+    newValueMap.put("DBString2", "DBString2222");
 
     Config.addTestSettingValues(newValueMap, "NewSection", false);
     Assert.assertEquals(Config.getSection("NewSection").get("BROWSER1"), "CHROME1");
-    Assert.assertEquals(Config.getSection("NewSection").get("DBString2"), "Dbstring2222");
+    Assert.assertEquals(Config.getSection("NewSection").get("DBString2"), "DBString2222");
   }
 
   /**
@@ -45,7 +42,7 @@ public class ConfigUnitTest {
    */
   @Test(groups = TestCategories.UTILITIES)
   public void addGeneralTestSettingValuesOverrideValuesTest() {
-    HashMap<String, String> newValueMap = new HashMap<String, String>();
+    HashMap<String, String> newValueMap = new HashMap<>();
     newValueMap.put("BrowserOverride", "CHROME");
     newValueMap.put("TimeoutOverride", "13333333");
 
@@ -58,31 +55,31 @@ public class ConfigUnitTest {
    * Test not overriding existing values in the config.
    */
   @Test(groups = TestCategories.UTILITIES)
-  public void addGeneralTestSettingValuesDontOverrideValuesTest() {
-    HashMap<String, String> newValueMap = new HashMap<String, String>();
-    newValueMap.put("DontBrowserOverride", "CHROME");
-    newValueMap.put("DontTimeoutOverride", "13333333");
+  public void addGeneralTestSettingValuesDoNotOverrideValuesTest() {
+    HashMap<String, String> newValueMap = new HashMap<>();
+    newValueMap.put("DoNotBrowserOverride", "CHROME");
+    newValueMap.put("DoNotTimeoutOverride", "13333333");
 
-    HashMap<String, String> newValueMapTwo = new HashMap<String, String>();
-    newValueMapTwo.put("DontBrowserOverride", "IE");
-    newValueMapTwo.put("DontTimeoutOverride", "5555");
+    HashMap<String, String> newValueMapTwo = new HashMap<>();
+    newValueMapTwo.put("DoNotBrowserOverride", "IE");
+    newValueMapTwo.put("DoNotTimeoutOverride", "5555");
 
     // add values to the override config since the values don't exist in the
     // override config
     Config.addGeneralTestSettingValues(newValueMap, false);
-    Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "CHROME");
-    Assert.assertEquals(Config.getGeneralValue("DontTimeoutOverride"), "13333333");
+    Assert.assertEquals(Config.getGeneralValue("DoNotBrowserOverride"), "CHROME");
+    Assert.assertEquals(Config.getGeneralValue("DoNotTimeoutOverride"), "13333333");
 
     // don't add the values to the override config since the values do exist in the
     // override config
     Config.addGeneralTestSettingValues(newValueMapTwo, false);
-    Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "CHROME");
-    Assert.assertEquals(Config.getGeneralValue("DontTimeoutOverride"), "13333333");
+    Assert.assertEquals(Config.getGeneralValue("DoNotBrowserOverride"), "CHROME");
+    Assert.assertEquals(Config.getGeneralValue("DoNotTimeoutOverride"), "13333333");
 
     // do add the values because of the override flag
     Config.addGeneralTestSettingValues(newValueMapTwo, true);
-    Assert.assertEquals(Config.getGeneralValue("DontBrowserOverride"), "IE");
-    Assert.assertEquals(Config.getGeneralValue("DontTimeoutOverride"), "5555");
+    Assert.assertEquals(Config.getGeneralValue("DoNotBrowserOverride"), "IE");
+    Assert.assertEquals(Config.getGeneralValue("DoNotTimeoutOverride"), "5555");
   }
 
   /**

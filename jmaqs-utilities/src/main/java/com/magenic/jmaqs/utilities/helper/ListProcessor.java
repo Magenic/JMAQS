@@ -58,7 +58,7 @@ public class ListProcessor {
    *                     same elements are in both lists
    * @return True if the lists are the same
    */
-  public static boolean listOfStringsComparer(List<String> expectedList, List<String> actualList,
+  public static boolean listOfStringsCompared(List<String> expectedList, List<String> actualList,
       StringBuilder results, boolean verifyOrder) {
     if (expectedList.size() != actualList.size()) {
       results.append(StringProcessor

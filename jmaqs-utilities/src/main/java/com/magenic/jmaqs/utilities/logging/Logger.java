@@ -16,7 +16,7 @@ public abstract class Logger {
   /**
    * Log Level value area.
    */
-  private MessageType logLevel = MessageType.INFORMATION;
+  private MessageType logLevel;
 
   /**
    *  Log Level value save area.

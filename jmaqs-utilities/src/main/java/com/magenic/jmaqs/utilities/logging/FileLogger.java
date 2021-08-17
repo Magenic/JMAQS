@@ -37,7 +37,7 @@ public class FileLogger extends Logger {
   /**
    * Creates a private string for the name of the file.
    */
-  private String fileName;
+  private final String fileName;
 
   /**
    * Create a private string for the path of the file.
@@ -47,12 +47,12 @@ public class FileLogger extends Logger {
   /**
    * Creates a private Message Type.
    */
-  private MessageType messageType;
+  private final MessageType messageType;
 
   /**
    * Creates a private string for the directory of the folder.
    */
-  private String directory;
+  private final String directory;
 
   /**
    * Initializes a new instance of the FileLogger class.
@@ -337,7 +337,7 @@ public class FileLogger extends Logger {
   /**
    * Take a name sting and make it a valid file name.
    *
-   * @param name The string to cleanup
+   * @param name The string to clean up
    * @return returns the string of a valid filename
    */
   private static String makeValidFileName(String name) {
