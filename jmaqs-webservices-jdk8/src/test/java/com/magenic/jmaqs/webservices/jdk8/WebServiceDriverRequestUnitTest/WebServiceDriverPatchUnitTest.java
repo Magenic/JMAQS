@@ -36,7 +36,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Test patching with an Xml object.
+   * Test patching with an XML object.
    * @throws Exception if an error occurs
    */
   @Test(groups = TestCategories.WEB_SERVICE)

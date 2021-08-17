@@ -67,8 +67,8 @@ public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Try to get a response body as an object from
-   * neither Xml or Jason, this should throw an error which is caught.
+   * Try to get a response body as an object from neither XML nor JSON,
+   * this should throw an error which is caught.
    * @throws Exception because the object is not supported
    */
   @Test(expectedExceptions = IllegalArgumentException.class, groups = TestCategories.WEB_SERVICE)

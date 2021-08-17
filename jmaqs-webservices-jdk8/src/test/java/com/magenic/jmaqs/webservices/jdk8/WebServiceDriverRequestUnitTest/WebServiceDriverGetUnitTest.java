@@ -32,7 +32,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertTrue(responseString.contains("Tomato Soup"),
-        "Was expecting a result with Tomato Soup but instead got - " + response.toString());
+        "Was expecting a result with Tomato Soup but instead got - " + response);
   }
 
   /**
@@ -48,7 +48,7 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertTrue(responseString.contains("Hammer"),
-        "Was expecting a result with Hammer but instead got - " + response.toString());
+        "Was expecting a result with Hammer but instead got - " + response);
   }
 
   /**
@@ -64,11 +64,11 @@ public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
     String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertTrue(responseString.contains("Tomato Soup"),
-        "Was expecting a result with Tomato Soup but instead got - " + response.toString());
+        "Was expecting a result with Tomato Soup but instead got - " + response);
     Assert.assertTrue(responseString.contains("Yo-yo"),
-        "Was expecting a result with Yo-yo but instead got - " + response.toString());
+        "Was expecting a result with Yo-yo but instead got - " + response);
     Assert.assertTrue(responseString.contains("Hammer"),
-        "Was expecting a result with Hammer but instead got - " + response.toString());
+        "Was expecting a result with Hammer but instead got - " + response);
   }
 
   /**

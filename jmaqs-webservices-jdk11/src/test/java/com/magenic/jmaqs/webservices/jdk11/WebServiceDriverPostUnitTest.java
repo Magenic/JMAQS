@@ -114,7 +114,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Post string without utility.
+   * Post a string without utility.
    * @throws IOException if the exception is thrown
    * @throws InterruptedException if the exception is thrown
    */
@@ -126,7 +126,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Post stream without utility.
+   * Post a stream without utility.
    * @throws IOException if the exception is thrown
    * @throws InterruptedException if the exception is thrown
    */
@@ -142,7 +142,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Post string with utility.
+   * Post a string with utility.
    * @throws IOException if the exception is thrown
    * @throws InterruptedException if the exception is thrown
    */
@@ -155,7 +155,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Post string without utility to verify status code.
+   * Post a string without utility to verify status code.
    * @throws IOException if the exception is thrown
    * @throws InterruptedException if the exception is thrown
    */
@@ -203,7 +203,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Test type parameterized Post request with expected status.
+   * Test type parameterized Post a request with expected status.
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */
@@ -228,7 +228,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Test more parameters Post request with expected status
+   * Test more parameters Post a request with expected status
    * @throws IOException if an exception is thrown
    * @throws InterruptedException if an exception is thrown
    */

@@ -5,7 +5,6 @@
 package com.magenic.jmaqs.webservices.jdk11;
 
 import com.magenic.jmaqs.utilities.helper.TestCategories;
-import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import java.net.http.HttpRequest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -19,10 +18,10 @@ public class WebServiceDriverUnitTest {
   public void setHttpClient() {
     WebServiceDriver webServiceDriver1 = new WebServiceDriver(
         HttpClientFactory.getDefaultClient());
-    webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient(MediaType.APP_JSON.toString()));
+    webServiceDriver1.setHttpClient(webServiceDriver1.getHttpClient());
     WebServiceDriver webServiceDriver2 = new WebServiceDriver(
-        webServiceDriver1.getHttpClient(MediaType.APP_XML.toString()));
-    Assert.assertNotNull(webServiceDriver1.getHttpClient(MediaType.APP_JSON.toString()),
+        webServiceDriver1.getHttpClient());
+    Assert.assertNotNull(webServiceDriver1.getHttpClient(),
         "Driver 1 is null");
     Assert.assertNotNull(webServiceDriver2, "Driver 2 is null");
   }

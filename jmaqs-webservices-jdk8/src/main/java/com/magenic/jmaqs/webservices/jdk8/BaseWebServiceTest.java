@@ -41,7 +41,7 @@ public class BaseWebServiceTest extends BaseExtendableTest<WebServiceTestObject>
    */
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
-    // There is no before logging tear-down required
+    // There is a no before logging tear-down required
   }
 
   /**

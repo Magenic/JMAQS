@@ -22,7 +22,7 @@ public class HttpClientFactory {
   }
 
   /**
-   * Gets a HTTP client based on configuration values.
+   * Gets an HTTP client based on configuration values.
    * @return A HTTP client
    */
   public static HttpClient getDefaultClient() {
@@ -30,7 +30,7 @@ public class HttpClientFactory {
   }
 
   /**
-   * Gets a HTTP client based on configuration values.
+   * Gets an HTTP client based on configuration values.
    * @param timeout Web service timeout
    * @return A HTTP client
    */

@@ -68,7 +68,7 @@ public class WebServiceUtilities {
   }
 
   /**
-   * Create string entity string entity.
+   * Create a string entity.
    *
    * @param <T>         the type parameter
    * @param body        the body

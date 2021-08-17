@@ -29,7 +29,7 @@ public class WebServiceDriverUnitTest extends BaseGenericTest {
     String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertTrue(responseString.contains("Tomato Soup"),
-        "Was expecting a result with Tomato Soup but instead got - " + response.toString());
+        "Was expecting a result with Tomato Soup but instead got - " + response);
   }
 
   /**
