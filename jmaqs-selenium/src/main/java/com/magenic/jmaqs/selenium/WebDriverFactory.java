@@ -7,14 +7,10 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.OperatingSystem;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
-import com.magenic.jmaqs.selenium.constants.WebDriverFile;
-import com.magenic.jmaqs.selenium.exceptions.DriverNotFoundException;
 import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import java.io.File;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import org.openqa.selenium.Dimension;
@@ -136,7 +132,6 @@ public class WebDriverFactory {
     headlessChromeOptions.addArguments("--no-sandbox");
     headlessChromeOptions.addArguments("--headless");
     headlessChromeOptions.addArguments(getHeadlessWindowSizeString(size));
-
     return headlessChromeOptions;
   }
 
@@ -148,7 +143,6 @@ public class WebDriverFactory {
   public static InternetExplorerOptions getDefaultInternetExplorerOptions() {
     InternetExplorerOptions options = new InternetExplorerOptions();
     options.ignoreZoomSettings();
-
     return options;
   }
 
@@ -160,7 +154,6 @@ public class WebDriverFactory {
   public static FirefoxOptions getDefaultFirefoxOptions() {
     FirefoxOptions firefoxOptions = new FirefoxOptions();
     firefoxOptions.setProfile(new FirefoxProfile());
-
     return firefoxOptions;
   }
 
@@ -172,7 +165,6 @@ public class WebDriverFactory {
   public static EdgeOptions getDefaultEdgeOptions() {
     EdgeOptions edgeOptions = new EdgeOptions();
     edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL.toString());
-
     return edgeOptions;
   }
 
@@ -194,8 +186,7 @@ public class WebDriverFactory {
    * @return the chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
-    System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
+    WebDriverManager.chromedriver().setup();
     WebDriver driver = new ChromeDriver(chromeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -208,8 +199,7 @@ public class WebDriverFactory {
    * @return the headless chrome driver
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
-    System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
+    WebDriverManager.chromedriver().setup();
     return new ChromeDriver(headlessChromeOptions);
   }
 
@@ -221,12 +211,9 @@ public class WebDriverFactory {
    * @return the firefox driver
    */
   public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
-    System.setProperty("webdriver.gecko.driver",
-        getDriverLocation(WebDriverFile.FIREFOX.getFileName()) + File.separator + WebDriverFile.FIREFOX.getFileName());
-
+    WebDriverManager.firefoxdriver().setup();
     WebDriver driver = new FirefoxDriver(firefoxOptions);
     setBrowserSize(driver, size);
-
     return driver;
   }
 
@@ -238,21 +225,8 @@ public class WebDriverFactory {
    * @return the edge driver
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
-
-    String location1 = getDriverLocation(WebDriverFile.EDGE.getFileName());
-    String location2 = getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFileName());
-
-    String driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName(),
-        getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFileName()));
-
-    // If we can't find an installed edge driver, look in the normal places
-    if (driverLocation.isEmpty()) {
-      driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName());
-    }
-
-    System.setProperty("webdriver.edge.driver", driverLocation + File.separator + WebDriverFile.EDGE.getFileName());
-
-    EdgeDriver driver = new EdgeDriver(edgeOptions);
+    WebDriverManager.edgedriver().setup();
+    WebDriver driver = new EdgeDriver(edgeOptions);
     setBrowserSize(driver, size);
     return driver;
   }
@@ -265,11 +239,9 @@ public class WebDriverFactory {
    * @return the Internet Explorer driver
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
-    System.setProperty("webdriver.ie.driver",
-        getDriverLocation(WebDriverFile.IE.getFileName()) + File.separator + WebDriverFile.IE.getFileName());
+    WebDriverManager.iedriver().setup();
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
-
     return driver;
   }
 
@@ -325,23 +297,18 @@ public class WebDriverFactory {
       case IE:
         options = new InternetExplorerOptions();
         break;
-
       case FIREFOX:
         options = new FirefoxOptions();
         break;
-
       case CHROME:
         options = new ChromeOptions();
         break;
-
       case EDGE:
         options = new EdgeOptions();
         break;
-
       case SAFARI:
         options = new SafariOptions();
         break;
-
       default:
         throw new IllegalArgumentException(
             StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
@@ -439,98 +406,5 @@ public class WebDriverFactory {
     } catch (NumberFormatException e) {
       throw new NumberFormatException("Length and Width must be a string that is an integer value: 400x400");
     }
-  }
-
-  /**
-   * Gets driver location.
-   *
-   * @param driverFile the driver file
-   * @return the driver location
-   */
-  public static String getDriverLocation(String driverFile) {
-    return getDriverLocation(driverFile, "", true);
-  }
-
-  /**
-   * Gets driver location.
-   *
-   * @param driverFile      the driver file
-   * @param defaultHintPath the default hint path
-   * @return the driver location
-   */
-  public static String getDriverLocation(String driverFile, String defaultHintPath) {
-    return getDriverLocation(driverFile, defaultHintPath, true);
-  }
-
-  /**
-   * Gets driver location.
-   *
-   * @param driverFile      the driver file
-   * @param defaultHintPath the default hint path
-   * @param mustExist       if it must exist
-   * @return the driver location
-   */
-  public static String getDriverLocation(String driverFile, String defaultHintPath, boolean mustExist) {
-    // Get the hint path from the config
-    String hintPath = SeleniumConfig.getDriverHintPath();
-
-    // Try the hint path first
-    if (!hintPath.isEmpty() && Paths.get(hintPath, driverFile).toFile().exists()) {
-      return hintPath;
-    }
-
-    // Try the default hint path next
-    if (!defaultHintPath.isEmpty() && Paths.get(defaultHintPath, driverFile).toFile().exists()) {
-      return Paths.get(defaultHintPath).toString();
-    }
-
-    // Try the test location
-    Path path = Paths.get(new File("").getAbsolutePath());
-    String testLocation = path.getParent().toString();
-    if (Paths.get(testLocation, driverFile).toFile().exists()) {
-      return testLocation;
-    }
-
-    // Try resources
-    ClassLoader classLoader = WebDriverFactory.class.getClassLoader();
-    URL url = classLoader.getResource(driverFile);
-    if (url != null) {
-      File file = new File(url.getPath());
-      return file.getParent();
-    }
-
-    // We didn't find the web driver so throw an error if we need to know where it is
-    if (mustExist) {
-      throw new DriverNotFoundException(StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
-    }
-
-    return "";
-  }
-
-  /**
-   * Gets windows edge driver location.
-   *
-   * @param file the file
-   * @return the windows edge driver location
-   */
-  static String getWindowsEdgeDriverLocation(String file) {
-    String edgeDriverFolder = "Microsoft\\Edge\\Application";
-
-    Path path = Paths.get(System.getenv("ProgramW6432"), edgeDriverFolder, file);
-    if (path.toFile().isFile()) {
-      return path.getParent().toString();
-    }
-
-    path = Paths.get(System.getenv("ProgramFiles(x86)"), edgeDriverFolder, file);
-    if (path.toFile().isFile()) {
-      return path.getParent().toString();
-    }
-
-    path = Paths.get(System.getenv("ProgramFiles"), edgeDriverFolder, file);
-    if (path.toFile().isFile()) {
-      return path.getParent().toString();
-    }
-
-    return "";
   }
 }
