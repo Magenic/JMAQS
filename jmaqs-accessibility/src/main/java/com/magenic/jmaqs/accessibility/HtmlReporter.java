@@ -37,9 +37,14 @@ import org.openqa.selenium.WrapsElement;
  */
 public class HtmlReporter {
   /**
-   * Place holder for class tag string type.
+   * Placeholder for class tag string type.
    */
   private static final String classString = "class";
+
+  /**
+   * Placeholder for wrap one tag string type.
+   */
+  private static final String wrapOne = "wrapOne";
 
   /**
    * Class constructor.
@@ -48,7 +53,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates an Html report with All result types.
+   * Creates a Html report with All result types.
    * @param webDriver The web driver to be used for the scan
    * @param destination The file path where the html report will be stored
    * @throws IOException If an IO exception is thrown
@@ -60,7 +65,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates an Html report with a list of specified result types.
+   * Creates a Html report with a list of specified result types.
    * @param webDriver The web driver to be used for the scan
    * @param destination The file path where the html report will be stored
    * @param requestedResults The result types that will be included on the html report
@@ -73,7 +78,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates an Html report with All result types.
+   * Creates a Html report with All result types.
    * @param webDriver The web driver to be used for the scan
    * @param element The element that will be reported on
    * @param destination The file path where the html report will be stored
@@ -86,7 +91,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates an Html report with a list of specified result types.
+   * Creates a Html report with a list of specified result types.
    * @param webDriver The web driver to be used for the scan
    * @param element The element that will be reported on
    * @param destination The file path where the html report will be stored
@@ -100,7 +105,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates an Html report with All result types.
+   * Creates a Html report with All result types.
    * @param webDriver The web driver to be used for the scan
    * @param results The results that will be used for the html report
    * @param destination The file path where the html report will be stored
@@ -113,7 +118,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates an Html report with a list of specified result types.
+   * Creates a Html report with a list of specified result types.
    * @param webDriver The web driver to be used for the scan
    * @param results The results that will be used for the html report
    * @param destination The file path where the html report will be stored
@@ -127,7 +132,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates an Html report.
+   * Creates a Html report.
    * @param context the web driver or web element to be used for the scan
    * @param results The results that will be used for the html report
    * @param destination The file path where the html report will be stored
@@ -340,7 +345,7 @@ public class HtmlReporter {
         elementNodes.appendChild(htmlAndSelectorWrapper);
 
         Element htmlAndSelector = new Element("p");
-        htmlAndSelector.attr(classString, "wrapOne");
+        htmlAndSelector.attr(classString, wrapOne);
         htmlAndSelector.html(item.getHtml());
         htmlAndSelector.text(item.getHtml());
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
@@ -382,7 +387,7 @@ public class HtmlReporter {
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       htmlAndSelector = new Element("p");
-      htmlAndSelector.attr("class", "wrapTwo");
+      htmlAndSelector.attr(classString, "wrapTwo");
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       if (!allCheckResults.isEmpty() || !noneCheckResults.isEmpty()) {
@@ -396,7 +401,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Adds the issues in the All category in the list of Checks.
+   * Adds the issues in the all category in the list of Checks.
    * @param htmlAndSelectorWrapper The element that all the content will be appended to
    * @param allCheckResults A list of the all check results
    * @param noneCheckResults A list of the none check results
@@ -404,7 +409,7 @@ public class HtmlReporter {
   private static void fixAllIssues(Element htmlAndSelectorWrapper,
       List<Check> allCheckResults, List<Check> noneCheckResults) {
     Element htmlAndSelector = new Element("p");
-    htmlAndSelector.attr("class", "wrapOne");
+    htmlAndSelector.attr("class", wrapOne);
     htmlAndSelector.text("Fix at least one of the following issues:");
 
     Element htmlSet = new Element("ul");
@@ -432,7 +437,7 @@ public class HtmlReporter {
    */
   private static void fixAnyIssues(Element htmlAndSelectorWrapper, List<Check> anyCheckResults) {
     Element htmlAndSelector = new Element("p");
-    htmlAndSelector.attr("class", "wrapOne");
+    htmlAndSelector.attr("class", wrapOne);
     htmlAndSelector.text("Fix at least one of the following issues:");
 
     Element htmlSet = new Element("ul");
@@ -449,7 +454,7 @@ public class HtmlReporter {
 
   /**
    * Creates and gets the css for the html page.
-   * @param context The web driver or element to be scanned for the screen shot
+   * @param context The web driver or element to be scanned for the screenshot
    * @return the css in string format
    */
   private static String getCss(SearchContext context) {
@@ -506,7 +511,7 @@ public class HtmlReporter {
   /**
    * Gets the count of the number of rules that came up in the scan.
    * @param results The list of rules to be looped through
-   * @return The count of all the the rules
+   * @return The count of all the rules
    */
   private static int getCount(List<Rule> results) {
     int count = 0;
@@ -554,7 +559,7 @@ public class HtmlReporter {
 
   /**
    * Gets the data image as a base 64 string.
-   * @param context The web driver or element to take a screen shot of
+   * @param context The web driver or element to take a screenshot of
    * @return the base 64 data image as a string
    */
   private static String getDataImageString(SearchContext context) {
