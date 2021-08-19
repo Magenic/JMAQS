@@ -241,7 +241,7 @@
                         <version>${surefire.plugin.version}</version>
                         <configuration>
                             <parallel>methods</parallel>
-                            <threadCount>6</threadCount>
+                            <threadCount>5</threadCount>
                             <argLine>${argLine}</argLine>
                         </configuration>
                     </plugin>
