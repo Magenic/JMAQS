@@ -44,7 +44,7 @@ public class HtmlReporter {
   /**
    * Placeholder for wrap one tag string type.
    */
-  private static final String wrapOne = "wrapOne";
+  private static final String wrapOneElement = "wrapOne";
 
   /**
    * Class constructor.
@@ -345,7 +345,7 @@ public class HtmlReporter {
         elementNodes.appendChild(htmlAndSelectorWrapper);
 
         Element htmlAndSelector = new Element("p");
-        htmlAndSelector.attr(classString, wrapOne);
+        htmlAndSelector.attr(classString, wrapOneElement);
         htmlAndSelector.html(item.getHtml());
         htmlAndSelector.text(item.getHtml());
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
@@ -409,7 +409,7 @@ public class HtmlReporter {
   private static void fixAllIssues(Element htmlAndSelectorWrapper,
       List<Check> allCheckResults, List<Check> noneCheckResults) {
     Element htmlAndSelector = new Element("p");
-    htmlAndSelector.attr("class", wrapOne);
+    htmlAndSelector.attr(classString, wrapOneElement);
     htmlAndSelector.text("Fix at least one of the following issues:");
 
     Element htmlSet = new Element("ul");
@@ -437,7 +437,7 @@ public class HtmlReporter {
    */
   private static void fixAnyIssues(Element htmlAndSelectorWrapper, List<Check> anyCheckResults) {
     Element htmlAndSelector = new Element("p");
-    htmlAndSelector.attr("class", wrapOne);
+    htmlAndSelector.attr(classString, wrapOneElement);
     htmlAndSelector.text("Fix at least one of the following issues:");
 
     Element htmlSet = new Element("ul");
