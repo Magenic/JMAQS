@@ -39,12 +39,12 @@ public class HtmlReporter {
   /**
    * Placeholder for class tag string type.
    */
-  private static final String classString = "class";
+  private static final String CLASS = "class";
 
   /**
    * Placeholder for wrap one tag string type.
    */
-  private static final String wrapOneElement = "wrapOne";
+  private static final String WRAP_ONE = "wrapOne";
 
   /**
    * Class constructor.
@@ -180,7 +180,7 @@ public class HtmlReporter {
     contextGroup.appendChild(contextHeader);
 
     Element contextContent = new Element("div");
-    contextContent.attributes().put(classString, "emOne");
+    contextContent.attributes().put(CLASS, "emOne");
     contextContent.attributes().put("id", "reportContext");
     getContextContent(results, contextContent);
     contextGroup.appendChild(contextContent);
@@ -194,7 +194,7 @@ public class HtmlReporter {
     imgGroup.appendChild(imageHeader);
 
     Element imageContent = new Element("img");
-    imageContent.attributes().put(classString, "thumbnail");
+    imageContent.attributes().put(CLASS, "thumbnail");
     imageContent.attributes().put("id", "screenshotThumbnail");
     imageContent.attributes().put("alt", "A Screenshot of the page");
     imageContent.attributes().put("width", "33%");
@@ -210,7 +210,7 @@ public class HtmlReporter {
     countsGroup.appendChild(countsHeader);
 
     Element countsContent = new Element("div");
-    countsContent.attributes().put(classString, "emOne");
+    countsContent.attributes().put(CLASS, "emOne");
     getCountContent(violationCount, incompleteCount, passCount, inapplicableCount, requestedResults, countsContent);
     countsGroup.appendChild(countsContent);
 
@@ -272,25 +272,25 @@ public class HtmlReporter {
    */
   private static void getReadableAxeResults(List<Rule> results, ResultType type, Element body) {
     Element resultWrapper = new Element("div");
-    resultWrapper.attributes().put(classString, "resultWrapper");
+    resultWrapper.attributes().put(CLASS, "resultWrapper");
     body.appendChild(resultWrapper);
 
     Element sectionButton = new Element("button");
-    sectionButton.attributes().put(classString, "sectionbutton active");
+    sectionButton.attributes().put(CLASS, "sectionbutton active");
     resultWrapper.appendChild(sectionButton);
 
     Element sectionButtonHeader = new Element("h2");
-    sectionButtonHeader.attributes().put(classString, "buttonInfoText");
+    sectionButtonHeader.attributes().put(CLASS, "buttonInfoText");
     sectionButtonHeader.text(type.name() + ": " + getCount(results));
     sectionButton.appendChild(sectionButtonHeader);
 
     Element sectionButtonExpando = new Element("h2");
-    sectionButtonExpando.attributes().put(classString, "buttonExpandoText");
+    sectionButtonExpando.attributes().put(CLASS, "buttonExpandoText");
     sectionButtonExpando.text("-");
     sectionButton.appendChild(sectionButtonExpando);
 
     Element section = new Element("div");
-    section.attributes().put(classString, "majorSection");
+    section.attributes().put(CLASS, "majorSection");
     section.attributes().put("id", type.name() + "Section");
     resultWrapper.appendChild(section);
 
@@ -298,12 +298,12 @@ public class HtmlReporter {
 
     for (Rule element : results) {
       Element childEl = new Element("div");
-      childEl.attributes().put(classString, "findings");
+      childEl.attributes().put(CLASS, "findings");
       childEl.appendText(loops++ + ": " + element.getHelp());
       section.appendChild(childEl);
 
       Element content = new Element("div");
-      content.attributes().put(classString, "emTwo");
+      content.attributes().put(CLASS, "emTwo");
       content.text("Description: " + element.getDescription());
       content.appendChild(new Element("br"));
       content.appendText("Help: " + element.getHelp());
@@ -330,29 +330,29 @@ public class HtmlReporter {
       }
 
       Element childEl2 = new Element("div");
-      childEl2.attributes().put(classString, "emTwo");
+      childEl2.attributes().put(CLASS, "emTwo");
       childEl.appendChild(content);
 
       for (CheckedNode item : element.getNodes()) {
         Element elementNodes = new Element("div");
-        elementNodes.attr(classString, "htmlTable");
+        elementNodes.attr(CLASS, "htmlTable");
         childEl.appendChild(elementNodes);
 
         Element htmlAndSelectorWrapper = new Element("div");
-        htmlAndSelectorWrapper.attr(classString, "emThree");
+        htmlAndSelectorWrapper.attr(CLASS, "emThree");
         htmlAndSelectorWrapper.text("Html:");
         htmlAndSelectorWrapper.appendChild(new Element("br"));
         elementNodes.appendChild(htmlAndSelectorWrapper);
 
         Element htmlAndSelector = new Element("p");
-        htmlAndSelector.attr(classString, wrapOneElement);
+        htmlAndSelector.attr(CLASS, WRAP_ONE);
         htmlAndSelector.html(item.getHtml());
         htmlAndSelector.text(item.getHtml());
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
         htmlAndSelectorWrapper.appendText("Selector:");
 
         htmlAndSelector = new Element("p");
-        htmlAndSelector.attributes().put(classString, "wrapTwo");
+        htmlAndSelector.attributes().put(CLASS, "wrapTwo");
 
         for (Object target : Collections.singletonList(item.getTarget())) {
           String targetString = target.toString().replace("[", "").replace("]", "");
@@ -387,7 +387,7 @@ public class HtmlReporter {
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       htmlAndSelector = new Element("p");
-      htmlAndSelector.attr(classString, "wrapTwo");
+      htmlAndSelector.attr(CLASS, "wrapTwo");
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       if (!allCheckResults.isEmpty() || !noneCheckResults.isEmpty()) {
@@ -409,7 +409,7 @@ public class HtmlReporter {
   private static void fixAllIssues(Element htmlAndSelectorWrapper,
       List<Check> allCheckResults, List<Check> noneCheckResults) {
     Element htmlAndSelector = new Element("p");
-    htmlAndSelector.attr(classString, wrapOneElement);
+    htmlAndSelector.attr(CLASS, WRAP_ONE);
     htmlAndSelector.text("Fix at least one of the following issues:");
 
     Element htmlSet = new Element("ul");
@@ -437,7 +437,7 @@ public class HtmlReporter {
    */
   private static void fixAnyIssues(Element htmlAndSelectorWrapper, List<Check> anyCheckResults) {
     Element htmlAndSelector = new Element("p");
-    htmlAndSelector.attr(classString, wrapOneElement);
+    htmlAndSelector.attr(CLASS, WRAP_ONE);
     htmlAndSelector.text("Fix at least one of the following issues:");
 
     Element htmlSet = new Element("ul");
