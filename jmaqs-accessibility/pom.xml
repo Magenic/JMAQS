@@ -54,7 +54,7 @@
                         <driver>
                             <name>chromedriver</name>
                             <customFileName>chromedriver</customFileName>
-                            <version>90.0.4430.24</version>
+                            <version>92.0.4515.107</version>
                         </driver>
                     </drivers>
                 </configuration>
