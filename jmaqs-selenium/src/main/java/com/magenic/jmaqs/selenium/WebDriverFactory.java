@@ -7,10 +7,15 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.OperatingSystem;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
+import com.magenic.jmaqs.selenium.constants.WebDriverFile;
+import com.magenic.jmaqs.selenium.exceptions.DriverNotFoundException;
 import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import io.github.bonigarcia.wdm.WebDriverManager;
+
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import org.openqa.selenium.Dimension;
@@ -186,8 +191,9 @@ public class WebDriverFactory {
    * @return the chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
-    WebDriverManager.chromedriver().setup();
     WebDriver driver = new ChromeDriver(chromeOptions);
+    checkDriverProperty("webdriver.chrome.driver",
+        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
     setBrowserSize(driver, size);
     return driver;
   }
@@ -199,7 +205,8 @@ public class WebDriverFactory {
    * @return the headless chrome driver
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
-    WebDriverManager.chromedriver().setup();
+    checkDriverProperty("webdriver.chrome.driver",
+        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
     return new ChromeDriver(headlessChromeOptions);
   }
 
@@ -211,8 +218,9 @@ public class WebDriverFactory {
    * @return the firefox driver
    */
   public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
-    WebDriverManager.firefoxdriver().setup();
     WebDriver driver = new FirefoxDriver(firefoxOptions);
+    checkDriverProperty("webdriver.gecko.driver",
+        getDriverLocation(WebDriverFile.FIREFOX.getFileName()) + File.separator + WebDriverFile.FIREFOX.getFileName());
     setBrowserSize(driver, size);
     return driver;
   }
@@ -225,8 +233,17 @@ public class WebDriverFactory {
    * @return the edge driver
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
-    WebDriverManager.edgedriver().setup();
     WebDriver driver = new EdgeDriver(edgeOptions);
+
+    String driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName(),
+        getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFileName()));
+
+    // If we can't find an installed edge driver, look in the normal places
+    if (driverLocation.isEmpty()) {
+      driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName());
+    }
+
+    checkDriverProperty("webdriver.edge.driver", driverLocation + File.separator + WebDriverFile.EDGE.getFileName());
     setBrowserSize(driver, size);
     return driver;
   }
@@ -239,10 +256,23 @@ public class WebDriverFactory {
    * @return the Internet Explorer driver
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
-    WebDriverManager.iedriver().setup();
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
+    checkDriverProperty("webdriver.ie.driver",
+        getDriverLocation(WebDriverFile.IE.getFileName()) + File.separator + WebDriverFile.IE.getFileName());
     setBrowserSize(driver, size);
     return driver;
+  }
+
+  /**
+   * Check if the driver property is null.
+   * if so, set the driver with the backup
+   * @param driverProperty The driver system property value
+   * @param fileLocation the file location of the driver
+   */
+  private static void checkDriverProperty(String driverProperty, String fileLocation) {
+    if (System.getProperty(driverProperty) == null) {
+      System.setProperty(driverProperty, fileLocation);
+    }
   }
 
   /**
@@ -406,5 +436,97 @@ public class WebDriverFactory {
     } catch (NumberFormatException e) {
       throw new NumberFormatException("Length and Width must be a string that is an integer value: 400x400");
     }
+  }
+
+  /**
+   * Gets driver location.
+   *
+   * @param driverFile the driver file
+   * @return the driver location
+   */
+  public static String getDriverLocation(String driverFile) {
+    return getDriverLocation(driverFile, "", true);
+  }
+
+  /**
+   * Gets driver location.
+   *
+   * @param driverFile      the driver file
+   * @param defaultHintPath the default hint path
+   * @return the driver location
+   */
+  public static String getDriverLocation(String driverFile, String defaultHintPath) {
+    return getDriverLocation(driverFile, defaultHintPath, true);
+  }
+
+  /**
+   * Gets driver location.
+   *
+   * @param driverFile      the driver file
+   * @param defaultHintPath the default hint path
+   * @param mustExist       the must exist
+   * @return the driver location
+   */
+  public static String getDriverLocation(String driverFile, String defaultHintPath, boolean mustExist) {
+    // Get the hint path from the config
+    String hintPath = SeleniumConfig.getDriverHintPath();
+
+    // Try the hint path first
+    if (!hintPath.isEmpty() && Paths.get(hintPath, driverFile).toFile().exists()) {
+      return hintPath;
+    }
+
+    // Try the default hint path next
+    if (!defaultHintPath.isEmpty() && Paths.get(defaultHintPath, driverFile).toFile().exists()) {
+      return Paths.get(defaultHintPath).toString();
+    }
+
+    // Try the test location
+    Path path = Paths.get(new File("").getAbsolutePath());
+    String testLocation = path.getParent().toString();
+    if (Paths.get(testLocation, driverFile).toFile().exists()) {
+      return testLocation;
+    }
+
+    // Try resources
+    ClassLoader classLoader = WebDriverFactory.class.getClassLoader();
+    URL url = classLoader.getResource(driverFile);
+    if (url != null) {
+      File file = new File(url.getPath());
+      return file.getParent();
+    }
+
+    // We didn't find the web driver so throw an error if we need to know where it is
+    if (mustExist) {
+      throw new DriverNotFoundException(StringProcessor.safeFormatter("Unable to find driver for '%s'", driverFile));
+    }
+
+    return "";
+  }
+
+  /**
+   * Gets windows edge driver location.
+   *
+   * @param file the file
+   * @return the windows edge driver location
+   */
+  static String getWindowsEdgeDriverLocation(String file) {
+    String edgeDriverFolder = "Microsoft Web Driver";
+
+    Path path = Paths.get(System.getenv("ProgramW6432"), edgeDriverFolder, file);
+    if (path.toFile().isFile()) {
+      return path.getParent().toString();
+    }
+
+    path = Paths.get(System.getenv("ProgramFiles(x86)"), edgeDriverFolder, file);
+    if (path.toFile().isFile()) {
+      return path.getParent().toString();
+    }
+
+    path = Paths.get(System.getenv("ProgramFiles"), edgeDriverFolder, file);
+    if (path.toFile().isFile()) {
+      return path.getParent().toString();
+    }
+    return "";
   }
 }
