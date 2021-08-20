@@ -265,7 +265,7 @@
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
         <jdk.version>11</jdk.version>
-        <webdrivermanager.version>4.2.2</webdrivermanager.version>
+        <webdrivermanager.version>4.4.3</webdrivermanager.version>
     </properties>
 
     <dependencyManagement>
