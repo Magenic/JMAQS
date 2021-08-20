@@ -128,7 +128,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Verify we throw an exception if there are violations and we choose the throw exception option.
+   * Verify we throw an exception if there are violations, and we choose the throw exception option.
    * @throws IOException if an exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = RuntimeException.class)
@@ -137,7 +137,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Verify we can create an accessibility HTML report off a lazy element.
+   * Verify we can create accessibility HTML reports off a lazy element.
    * @throws IOException if exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
@@ -157,7 +157,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   *  Verify we can create an accessibility HTML report off a normal web element.
+   *  Verify we can create accessibility HTML reports off a normal web element.
    * @throws IOException if exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
@@ -220,7 +220,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   *  Verify we can create an accessibility HTML report off a normal web element.
+   *  Verify we can create accessibility HTML reports off a normal web element.
    * @throws IOException if exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
