@@ -67,8 +67,8 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getDefaultInternetExplorerOptionsTest() {
-    InternetExplorerOptions options = WebDriverFactory.getDefaultInternetExplorerOptions();
-    Assert.assertNotNull(options);
+      InternetExplorerOptions options = WebDriverFactory.getDefaultInternetExplorerOptions();
+      Assert.assertNotNull(options);
   }
 
   /**
@@ -175,12 +175,16 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getInternetExplorerDriverTest() {
     InternetExplorerDriver driver = null;
-    try {
-      driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.IE);
-      Assert.assertNotNull(driver);
-    } finally {
-      if (driver != null) {
-        driver.quit();
+
+    if (System.getProperty("os.name").contains("Win")) {
+      try {
+        driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(
+            BrowserType.IE);
+        Assert.assertNotNull(driver);
+      } finally {
+        if (driver != null) {
+          driver.quit();
+        }
       }
     }
   }
