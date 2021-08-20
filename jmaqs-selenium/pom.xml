@@ -83,4 +83,46 @@
             <version>${webdrivermanager.version}</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.webdriverextensions</groupId>
+                <artifactId>webdriverextensions-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-drivers</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <installationDirectory>./src/test/resources/drivers</installationDirectory>
+                    <drivers>
+                        <driver>
+                            <name>chromedriver</name>
+                            <customFileName>chromedriver</customFileName>
+                            <version>92.0.4515.107</version>
+                        </driver>
+                        <driver>
+                            <name>internetexplorerdriver</name>
+                            <platform>windows</platform>
+                            <customFileName>IEDriverServer</customFileName>
+                        </driver>
+                        <driver>
+                            <name>geckodriver</name>
+                            <customFileName>geckodriver</customFileName>
+                            <version>0.28.0</version>
+                        </driver>
+                        <driver>
+                            <name>edgedriver</name>
+                            <platform>windows</platform>
+                            <customFileName>MicrosoftWebDriver</customFileName>
+                            <version>5.16299</version>
+                        </driver>
+                    </drivers>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
