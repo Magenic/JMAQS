@@ -105,7 +105,7 @@ jobs:
           key: ${{runner.os}}-m2
       - name: Import GPG key
         id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v3.0.2
+        uses: crazy-max/ghaction-import-gpg@v3.2.0
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
