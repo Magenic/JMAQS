@@ -13,7 +13,7 @@
     <version>${revision}</version>
     <name>JMAQS Database Testing Module</name>
     <properties>
-        <hibernate-core.version>5.4.27.Final</hibernate-core.version>
+        <hibernate-core.version>5.5.7.Final</hibernate-core.version>
         <sqlite-jdbc.version>3.34.0</sqlite-jdbc.version>
         <mssql-jdbc.version>8.2.2.jre8</mssql-jdbc.version>
         <javax.persistence.version>2.2.1</javax.persistence.version>
