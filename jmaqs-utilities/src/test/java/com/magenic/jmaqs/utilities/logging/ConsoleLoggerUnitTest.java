@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 /**
  * Unit test class for ConsoleLogger.java
  */
-@Test
 public class ConsoleLoggerUnitTest {
+
   /**
    * Log message to a new console logger
    */
@@ -47,21 +47,21 @@ public class ConsoleLoggerUnitTest {
     console.write(MessageType.GENERIC, "TestString %s", "args1");
   }
 
-    /**
-     * Write message with new line to new console logger
-     */
-    @Test
-    public void consoleLoggerWriteLineMessage() {
-        ConsoleLogger console = new ConsoleLogger();
-        console.write("Test String %s %s", "args1", "args2");
-    }
+  /**
+   * Write message with new line to new console logger
+   */
+  @Test
+  public void consoleLoggerWriteLineMessage() {
+      ConsoleLogger console = new ConsoleLogger();
+      console.write("Test String %s %s", "args1", "args2");
+  }
 
-    /**
-     * Write message with new line to new console logger using defined message type
-     */
-    @Test
-    public void consoleLoggerWriteMessageLineSelectType() {
-        ConsoleLogger console = new ConsoleLogger();
-        console.write(MessageType.GENERIC, "TestString %s", "args1");
-    }
+  /**
+   * Write message with new line to new console logger using defined message type
+   */
+  @Test
+  public void consoleLoggerWriteMessageLineSelectType() {
+      ConsoleLogger console = new ConsoleLogger();
+      console.write(MessageType.GENERIC, "TestString %s", "args1");
+  }
 }

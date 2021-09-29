@@ -103,11 +103,10 @@ public final class Config {
     while (configValuePaths.hasNext()) {
       String key = configValuePaths.next();
       String editedKey = key.replaceFirst(section + "\\.", "");
-      if (!sectionValues.containsKey(editedKey)) {
-        sectionValues.put(editedKey, configValues.getString(key));
-      }
-    }
 
+      // this works like put.(editedKey, configValues.getString(key)) if editedKey is absent
+      sectionValues.computeIfAbsent(editedKey, k -> configValues.getString(key));
+    }
     return sectionValues;
   }
 

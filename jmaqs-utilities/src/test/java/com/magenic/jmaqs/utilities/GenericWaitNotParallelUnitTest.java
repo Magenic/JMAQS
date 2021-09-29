@@ -134,11 +134,13 @@ public class GenericWaitNotParallelUnitTest {
   @Test(groups = TestCategories.UTILITIES)
   public void passStringForTest() {
     int[] number = { 0 };
+    Object obj = null;
     try {
-      GenericWait.waitFor((p) -> p.equals(testString + number[0]++), testString + "3");
+      obj = GenericWait.waitFor((p) -> p.equals(testString + number[0]++), testString + "3");
     } catch (Exception e) {
       Assert.fail("waitFor parameter test failed with exception", e);
     }
+    Assert.assertNotNull(obj);
   }
 
   /**

@@ -8,6 +8,7 @@ import com.magenic.jmaqs.utilities.helper.exceptions.FunctionException;
 import com.magenic.jmaqs.utilities.helper.exceptions.TimeoutException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.concurrent.TimeUnit;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -102,8 +103,8 @@ public final class GenericWait {
 
     // While the params are not equal & the timeout hasn't met, keep checking
     while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
-      // If they aren't, wait
-      Thread.sleep(retryTimeFromConfig);
+      // If they aren't: wait
+      TimeUnit.MILLISECONDS.sleep(retryTimeFromConfig);
 
       value = waitForTrue.get();
 
@@ -142,7 +143,7 @@ public final class GenericWait {
     // While the params are not equal & the timeout hasn't met, keep checking
     while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeout) {
       // If they aren't, wait
-      Thread.sleep(retryTime);
+      TimeUnit.MILLISECONDS.sleep(retryTime);
 
       value = waitForTrue.get();
 
@@ -174,7 +175,7 @@ public final class GenericWait {
     // While the params are not equal & the timeout hasn't met, keep checking
     while (!paramsAreEqual && (ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeoutFromConfig) {
       // If they aren't, wait
-      Thread.sleep(retryTimeFromConfig);
+      TimeUnit.MILLISECONDS.sleep(retryTimeFromConfig);
 
       // Check if they are equal
       // (running them through another function because we can't use an operator with T
@@ -211,7 +212,7 @@ public final class GenericWait {
       paramsAreEqual = paramsEqual(waitForTrue.get(), comparativeValue);
 
       // If they aren't, wait
-      Thread.sleep(retryTime);
+      TimeUnit.MILLISECONDS.sleep(retryTime);
     }
 
     if (!paramsAreEqual) {
@@ -284,7 +285,7 @@ public final class GenericWait {
       }
 
       // Give the system a second before checking if the page is updating
-      Thread.sleep(retryTime);
+      TimeUnit.MILLISECONDS.sleep(retryTime);
     } while ((ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeout);
 
     // Check if we had an exceptions
@@ -330,7 +331,7 @@ public final class GenericWait {
       }
 
       // Give the system a second before checking if the page is updating
-      Thread.sleep(retryTime);
+      TimeUnit.MILLISECONDS.sleep(retryTime);
     } while (ChronoUnit.MILLIS.between(start, LocalDateTime.now()) < timeout);
 
     // Check if we had an exceptions
@@ -370,7 +371,7 @@ public final class GenericWait {
       }
 
       // Give the system a second before checking if the page is updating
-      Thread.sleep(retryTime);
+      TimeUnit.MILLISECONDS.sleep(retryTime);
     } while ((ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeout);
 
     throw new TimeoutException("Timed out waiting for the supplier to return", exception);
@@ -402,7 +403,7 @@ public final class GenericWait {
       }
 
       // Give the system a second before checking if the page is updating
-      Thread.sleep(retryTime);
+      TimeUnit.MILLISECONDS.sleep(retryTime);
     } while ((ChronoUnit.MILLIS.between(start, LocalDateTime.now())) < timeout);
 
     throw new TimeoutException("Timed out waiting for the function to return", exception);

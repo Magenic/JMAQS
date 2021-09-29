@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -651,9 +652,9 @@ public class FileLoggerUnitTest {
     logger.logMessage(MessageType.WARNING, logLine, MessageType.WARNING);
     logger.logMessage(MessageType.ERROR, logLine, MessageType.ERROR);
 
-    // Give the write time
+    // Give time for the writing to happen.
     try {
-      Thread.sleep(250);
+      TimeUnit.MILLISECONDS.sleep(250);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }

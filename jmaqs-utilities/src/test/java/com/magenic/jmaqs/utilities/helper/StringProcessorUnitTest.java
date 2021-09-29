@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
  * Unit tests for the StringProcessor class.
  */
 public class StringProcessorUnitTest {
+
   @Test(groups = TestCategories.UTILITIES)
   public void testSafeFormatter() {
     final String successful = StringProcessor.safeFormatter("This is a %s message.", "successful");

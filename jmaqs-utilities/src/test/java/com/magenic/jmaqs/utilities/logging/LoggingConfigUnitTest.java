@@ -5,8 +5,12 @@
 package com.magenic.jmaqs.utilities.logging;
 
 import com.magenic.jmaqs.utilities.helper.Config;
+import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+
+import java.io.File;
 import java.util.HashMap;
 
 /**
@@ -14,6 +18,7 @@ import java.util.HashMap;
  */
 @Test(singleThreaded = true)
 public class LoggingConfigUnitTest {
+
     /**
      * Test getting Logging Enabled Setting. Override Config to 'YES'
      */
@@ -205,13 +210,11 @@ public class LoggingConfigUnitTest {
     }
 
     // Test getting Log Directory. Config value not defined - Compare to Default Path.
-    // FIXME: Commenting out test until repaired. Expected result does not make
-    // sense.
-    /*
-     * @Test public void getLogDirectoryTest() { String defaultPath = new
-     * File("").getAbsolutePath().concat("\\Logs");
-     * Assert.assertEquals(LoggingConfig.getLogDirectory(), defaultPath,
-     * StringProcessor.safeFormatter( "Expected Default Path '{0)'.", defaultPath));
-     * }
-     */
+    // FIXME: Commenting out test until repaired. Expected result does not make sense.
+    @Ignore
+    @Test public void getLogDirectoryTest() {
+        String defaultPath = new File("").getAbsolutePath().concat("\\Logs");
+        Assert.assertEquals(LoggingConfig.getLogDirectory(), defaultPath,
+        StringProcessor.safeFormatter( "Expected Default Path '{0)'.", defaultPath));
+    }
 }
