@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
  * Unit tests for the ListProcessor class.
  */
 public class ListProcessorUnitTest {
+
   /**
    * Unit Test for creating a comma delimited string.
    */
@@ -61,7 +62,6 @@ public class ListProcessorUnitTest {
   /**
    * Unit Test for comparing two lists of strings.
    */
-
   @Test(groups = TestCategories.UTILITIES)
   public void listOfStringsComparedTest() {
     final StringBuilder results = new StringBuilder();

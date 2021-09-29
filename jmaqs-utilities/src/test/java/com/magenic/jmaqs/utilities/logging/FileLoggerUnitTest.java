@@ -22,7 +22,6 @@ import org.testng.asserts.SoftAssert;
  */
 @Test(singleThreaded = true)
 
-
 // Don't check for serial version unique IDs as we will never serialize the test data
 @SuppressWarnings("serial")
 public class FileLoggerUnitTest {

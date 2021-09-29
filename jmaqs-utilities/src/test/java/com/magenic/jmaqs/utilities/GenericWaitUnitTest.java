@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
  * Unit test for the GenericWait class.
  */
 public class GenericWaitUnitTest {
+
   /**
    * Constant test string.
    */

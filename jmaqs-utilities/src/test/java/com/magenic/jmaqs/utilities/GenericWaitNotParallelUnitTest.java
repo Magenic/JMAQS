@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
  */
 @Test(singleThreaded = true)
 public class GenericWaitNotParallelUnitTest {
+
   /**
    * Constant test string.
    */

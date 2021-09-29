@@ -12,18 +12,27 @@ import org.testng.annotations.Test;
  */
 public class StringProcessorUnitTest {
 
+  /**
+   * Test the safe formatter.
+   */
   @Test(groups = TestCategories.UTILITIES)
   public void testSafeFormatter() {
     final String successful = StringProcessor.safeFormatter("This is a %s message.", "successful");
     Assert.assertEquals(successful, "This is a successful message.");
   }
 
+  /**
+   * Test the safe formatter message.
+   */
   @Test(groups = TestCategories.UTILITIES)
   public void testSafeFormatterMessage() {
     final String successful = StringProcessor.safeFormatter("This is a message.");
     Assert.assertEquals(successful, "This is a message.");
   }
 
+  /**
+   * Test when the safe formatter message is null.
+   */
   @Test(groups = TestCategories.UTILITIES)
   public void testSafeFormatterMessageNull() {
     final String s = StringProcessor.safeFormatter(null, "Message", "String", "Null");

@@ -11,6 +11,7 @@ import java.io.PrintStream;
  * Class to copy console output to a file.
  */
 public class ConsoleCopy implements AutoCloseable {
+
   /**
    * Used to Write to the log file.
    */
