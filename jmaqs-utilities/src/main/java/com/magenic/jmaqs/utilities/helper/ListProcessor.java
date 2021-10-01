@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * Contains methods for processing lists.
  */
-
 public class ListProcessor {
 
   private ListProcessor() {

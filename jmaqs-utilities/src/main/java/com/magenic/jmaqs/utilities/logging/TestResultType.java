@@ -8,6 +8,7 @@ package com.magenic.jmaqs.utilities.logging;
  * The type of result.
  */
 public enum TestResultType {
+
   /**
    * The test passed.
    */

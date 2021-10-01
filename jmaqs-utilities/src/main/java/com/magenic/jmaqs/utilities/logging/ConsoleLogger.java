@@ -10,6 +10,7 @@ import com.magenic.jmaqs.utilities.helper.StringProcessor;
  * Helper class for logging to the console.
  */
 public class ConsoleLogger extends Logger {
+
   /**
    * Initializes a new instance of the ConsoleLogger class.
    */

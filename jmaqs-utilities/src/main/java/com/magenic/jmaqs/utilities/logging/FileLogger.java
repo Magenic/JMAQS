@@ -14,8 +14,7 @@ import java.io.PrintWriter;
 import java.nio.file.Paths;
 
 /**
- * Helper class for adding logs to a plain text file. Allows configurable file
- * path.
+ * Helper class for adding logs to a plain text file. Allows configurable file path.
  */
 public class FileLogger extends Logger {
 

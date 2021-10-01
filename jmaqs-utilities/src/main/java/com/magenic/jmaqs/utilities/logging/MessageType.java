@@ -8,6 +8,7 @@ package com.magenic.jmaqs.utilities.logging;
  * The type of message.
  */
 public enum MessageType {
+
   /**
    * Suspended message.
    */

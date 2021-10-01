@@ -5,12 +5,10 @@
 package com.magenic.jmaqs.utilities.logging;
 
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
-import org.apache.tools.ant.util.FileUtils;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -29,7 +27,7 @@ public class HtmlFileLoggerUnitTest {
     logger.logMessage(MessageType.WARNING, "Hello, this is a test.");
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -43,7 +41,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -56,7 +54,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -70,7 +68,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -88,11 +86,11 @@ public class HtmlFileLoggerUnitTest {
     File file = new File(logger.getFilePath());
     Assert.assertTrue(this.readTextFile(logger.getFilePath())
         .contains("Test to ensure that the file in the created directory can be written to."));
-    file.delete();
+    Assert.assertTrue(file.delete());
 
     file = new File(logger.getDirectory());
     try {
-      file.delete();
+      Assert.assertTrue(file.delete());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -109,7 +107,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
 
     Assert.assertTrue(htmlText.contains("Test to ensure LogMessage works as expected."),
         "Expected Log Message to be contained in log.");
@@ -126,7 +124,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
 
     Assert.assertTrue(htmlText.contains("Test to ensure LogMessage works as expected."),
         "Expected Log Message to be contained in log.");
@@ -143,8 +141,8 @@ public class HtmlFileLoggerUnitTest {
     String filePath = logger.getFilePath();
 
     File file = new File(logger.getFilePath());
+    Assert.assertNotNull(file);
     logger.close();
-    file.delete();
     Assert.assertEquals(filePath, "test file path", "Expected 'test file path' as file path");
   }
 
@@ -160,8 +158,8 @@ public class HtmlFileLoggerUnitTest {
 
     logger.logMessage(MessageType.GENERIC, "Test throws error as expected.");
     File file = new File(logger.getFilePath());
+    Assert.assertNotNull(file);
     logger.close();
-    file.delete();
   }
 
   /**
@@ -193,7 +191,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -216,7 +214,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -239,7 +237,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -261,7 +259,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -284,7 +282,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -376,7 +374,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -400,7 +398,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -449,7 +447,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -473,7 +471,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
@@ -499,7 +497,7 @@ public class HtmlFileLoggerUnitTest {
 
     File file = new File(logger.getFilePath());
     logger.close();
-    file.delete();
+    Assert.assertTrue(file.delete());
   }
 
   /**
