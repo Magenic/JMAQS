@@ -34,7 +34,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
+/**
+ * The HTML reporter class.
+ */
 public class HtmlReporter {
+
   private static final String classString = "class";
 
   protected HtmlReporter() {
