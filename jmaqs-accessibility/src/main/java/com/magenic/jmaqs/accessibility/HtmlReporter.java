@@ -33,9 +33,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
 /**
- * Html Reporter class for Accessibility Functionality.
+ * The HTML reporter class.
  */
 public class HtmlReporter {
+
   /**
    * Placeholder for class tag string type.
    */
@@ -230,19 +231,19 @@ public class HtmlReporter {
     }
 
     if (violationCount > 0 && requestedResults.contains(ResultType.Violations)) {
-      getReadableAxeResults(results.getViolations(), ResultType.Violations, resultsFlex);
+      getReadableAxeResults(results.getViolations(), ResultType.Violations.name(), resultsFlex);
     }
 
     if (incompleteCount > 0 && requestedResults.contains(ResultType.Incomplete)) {
-      getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete, resultsFlex);
+      getReadableAxeResults(results.getIncomplete(), ResultType.Incomplete.name(), resultsFlex);
     }
 
     if (passCount > 0 && requestedResults.contains(ResultType.Passes)) {
-      getReadableAxeResults(results.getPasses(), ResultType.Passes, resultsFlex);
+      getReadableAxeResults(results.getPasses(), ResultType.Passes.name(), resultsFlex);
     }
 
     if (inapplicableCount > 0 && requestedResults.contains(ResultType.Inapplicable)) {
-      getReadableAxeResults(results.getInapplicable(), ResultType.Inapplicable, resultsFlex);
+      getReadableAxeResults(results.getInapplicable(), ResultType.Inapplicable.name(), resultsFlex);
     }
 
     Element modal = new Element("div");

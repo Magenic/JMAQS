@@ -30,6 +30,7 @@ import org.openqa.selenium.WebElement;
  * Utilities class for Accessibility Functionality.
  */
 public class AccessibilityUtilities {
+
   /**
    * private class constructor.
    */
@@ -150,7 +151,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Create HTML accessibility report for an entire web page.
+   * Create an HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
    * @throws IOException If an IO exception is thrown
@@ -163,7 +164,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Create HTML accessibility report for an entire web page.
+   * Create an HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
    * @throws IOException If an IO exception is thrown
@@ -176,7 +177,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Create HTML accessibility report for an entire web page.
+   * Create an HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
    * @throws IOException If an IO exception is thrown
@@ -190,7 +191,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Create HTML accessibility report for an entire web page.
+   * Create an HTML accessibility report for an entire web page.
    * @param testObject The TestObject to associate the report with
    * @param throwOnViolation Should violations cause an exception to be thrown
    * @throws IOException If an IO exception is thrown
@@ -231,7 +232,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Create HTML accessibility report.
+   * Create an HTML accessibility report.
    * @param testObject The TestObject to associate the report with
    * @param getResults Function for getting the accessibility scan results
    * @param throwOnViolation Should violations cause an exception to be thrown
