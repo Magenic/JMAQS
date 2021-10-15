@@ -50,6 +50,11 @@ public class HtmlReporter {
   private static final String WRAP_ONE = "wrapOne";
 
   /**
+   * File path to resources java resources folder.
+   */
+  private static final String resourcesFile = "../jmaqs-accessibility/src/main/resources/";
+
+  /**
    * Class constructor.
    */
   protected HtmlReporter() {
@@ -453,46 +458,6 @@ public class HtmlReporter {
 
     htmlAndSelector.appendChild(htmlSet);
     htmlAndSelectorWrapper.appendChild(htmlAndSelector);
-  }
-
-  /**
-   * Creates and gets the css for the html page.
-   * @param context The web driver or element to be scanned for the screenshot
-   * @return the css in string format
-   */
-  private static String getCss(SearchContext context) {
-    return ".thumbnail{" + "content: url('" + getDataImageString(context)
-        + "; border: 1px solid black;margin-left:1em;margin-right:1em;width:auto;max-height:150px;"
-        + "} .thumbnail:hover{border:2px solid black;}"
-        + ".wrap .wrapTwo .wrapThree{margin:2px;max-width:70vw;}"
-        + ".wrapOne {margin-left:1em;overflow-wrap:anywhere;}"
-        + ".wrapTwo {margin-left:2em;overflow-wrap:anywhere;}"
-        + ".wrapThree {margin-left:3em;overflow-wrap:anywhere;}"
-        + ".emOne {margin-left:1em;margin-right:1em;overflow-wrap:anywhere;}"
-        + ".emTwo {margin-left:2em;overflow-wrap:anywhere;}"
-        + ".emThree {margin-left:3em;overflow-wrap:anywhere;}"
-        + "#modal {display: none;position: fixed;z-index: 1;left: 0;top: 0;width: 100%;"
-        + "height: 100%;overflow: auto;background-color: rgba(0, 0, 0, 0.9);  flex-direction: column;}"
-        + "#modalclose{font-family: Lucida Console; font-size: 35px; width: auto; "
-        + "color: white; text-align: right; padding: 20px;"
-        + "cursor: pointer; max-height: 10%}"
-        + "#modalimage {margin: auto;display: block;max-width: 95%; padding: 10px; max-height: 90%}"
-        + ".htmlTable{border-top:double lightgray;width:100%;display:table;}"
-        + ".sectionbutton{background-color: #000000; color: #FFFFFF; cursor: pointer; padding: 18px; width: 100%;"
-        + "text-align: left; outline: none; transition: 0.4s; border: 1px solid black;}"
-        + ".sectionbutton:hover {background-color: #828282;}"
-        + ".buttonInfoText {width: 50%; float: left;}"
-        + ".buttonExpandoText {text-align: right; width: 50%; float: right;}"
-        + ".majorSection{padding: 0 18px;background-color:white; overflow:hidden;"
-        + "transition: max-height 0.2s ease-out;}"
-        + ".findings{margin-top: 5px; border-top:1px solid black;}"
-        + ".active {background-color: #474747; margin-bottom: 0px;}"
-        + ".resultWrapper {margin: 5px}" + "#context {width: 50%;}"
-        + "#image {width: 50%; height: 220px;}" + "#counts {width: 100%;}"
-        + "#metadata {display: flex; flex-wrap: wrap;}"
-        + "#results {display: flex; flex-direction: column;}"
-        + "@media only screen and (max-width: 800px) {#metadata {flex-direction: column;}"
-        + "#context {width: 100%;}" + "#image {width: 100%;}";
   }
 
   private static void getContextContent(Results results, Element element) throws ParseException {
