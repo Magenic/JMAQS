@@ -13,6 +13,8 @@ import com.deque.html.axecore.selenium.ResultType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -21,8 +23,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.DataNode;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.openqa.selenium.OutputType;
@@ -260,7 +262,7 @@ public class HtmlReporter {
     modal.appendChild(modalImage);
 
     Element script = doc.select("script").first();
-    script.text(getJavascriptToString());
+    script.appendChild(new DataNode(getJavascriptFileToString()));
 
     FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
@@ -563,9 +565,15 @@ public class HtmlReporter {
    * @param context The web driver or element to take a screenshot of
    * @return the base 64 data image as a string
    */
+  private static String getCss(SearchContext context) throws IOException {
+    String css = new String(Files.readAllBytes(
+        Paths.get(resourcesFile + "htmlReporter.css")));
+    return  css.replace("url('", "url('" + getDataImageString(context));
+  }
+
   private static String getDataImageString(SearchContext context) {
     TakesScreenshot newScreen = (TakesScreenshot) context;
-    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64) + "');";
+    return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
   }
 
   /**
@@ -579,52 +587,7 @@ public class HtmlReporter {
     return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);
   }
 
-  /**
-   * Sets up the javascript to utilize button functionality.
-   * @return the javascript as a string
-   */
-  private static String getJavascriptToString() {
-    return StringEscapeUtils.escapeEcmaScript(
-        "var buttons = document.getElementsByClassName(\"sectionbutton\");\n"
-            + "                              var i;\n"
-            + "\n"
-            + "                              for (i = 0; i < buttons.length; i++) \n"
-            + "                              {\n"
-            + "                                  buttons[i].addEventListener(\"click\", function() \n"
-            + "                                  {\n"
-            + "                              var expandoText = this.getElementsByClassName(\"buttonExpandoText\")[0];\n"
-            + "                                      \n"
-            + "                                      this.classList.toggle(\"active\");\n"
-            + "\n"
-            + "                                      var content = this.nextElementSibling;\n"
-            + "                                      if (expandoText.innerHTML == \"-\") \n"
-            + "                                      {\n"
-            + "                                          content.style.maxHeight = 0;\n"
-            + "                                          expandoText.innerHTML = \"+\";\n"
-            + "                                      } \n"
-            + "                                      else \n"
-            + "                                      {\n"
-            + "                                          content.style.maxHeight = content.scrollHeight + \"px\";\n"
-            + "                                          expandoText.innerHTML = \"-\";\n"
-            + "                                      }\n"
-            + "                                  })\n"
-            + "                              }\n"
-            + "\n"
-            + "                              var thumbnail = document.getElementById(\"screenshotThumbnail\");\n"
-            + "                              var thumbnailStyle = getComputedStyle(thumbnail);      \n"
-            + "                              var modal = document.getElementById(\"modal\");\n"
-            + "                              var modalimg = modal.getElementsByTagName(\"img\")[0]\n"
-            + "\n"
-            + "                              modal.addEventListener('click',function(){\n"
-            + "                                 modal.style.display = \"none\";\n"
-            + "                                 modalimg.style.content = \"\";\n"
-            + "                                 modalimg.alt = \"\";\n"
-            + "                               })\n"
-            + "\n"
-            + "                              thumbnail.addEventListener('click',function(){\n"
-            + "                                 modal.style.display = \"flex\";\n"
-            + "                                 modalimg.style.content = thumbnailStyle.content;\n"
-            + "                                 modalimg.alt = thumbnail.alt;\n"
-            + "                               })");
+  private static String getJavascriptFileToString() throws IOException {
+    return new String(Files.readAllBytes(Paths.get(resourcesFile + "htmlReporterElements.js")));
   }
 }
