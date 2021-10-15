@@ -6,7 +6,6 @@ package com.magenic.jmaqs.accessibility;
 
 import com.deque.html.axecore.results.Check;
 import com.deque.html.axecore.results.CheckedNode;
-import com.deque.html.axecore.results.Node;
 import com.deque.html.axecore.results.Results;
 import com.deque.html.axecore.results.Rule;
 import com.deque.html.axecore.selenium.AxeBuilder;
@@ -461,6 +460,12 @@ public class HtmlReporter {
     htmlAndSelectorWrapper.appendChild(htmlAndSelector);
   }
 
+  /**
+   * Sets up the Context content and adds it to the element.
+   * @param results the results to be used for the report
+   * @param element the element that the content will be added to
+   * @throws ParseException if an exception is thrown
+   */
   private static void getContextContent(Results results, Element element) throws ParseException {
     element.text("Url: " + results.getUrl());
     element.appendChild(new Element("br"));
@@ -527,9 +532,9 @@ public class HtmlReporter {
   }
 
   /**
-   * Gets the data image as a base 64 string.
-   * @param context The web driver or element to take a screenshot of
-   * @return the base 64 data image as a string
+   * Gets the CSS file into a string format.
+   * @return the CSS file script as a string
+   * @throws IOException if an exception is thrown
    */
   private static String getCss(SearchContext context) throws IOException {
     String css = new String(Files.readAllBytes(
@@ -537,6 +542,11 @@ public class HtmlReporter {
     return  css.replace("url('", "url('" + getDataImageString(context));
   }
 
+  /**
+   * Gets the data image as a base 64 string.
+   * @param context The web driver or element to take a screenshot of
+   * @return the base 64 data image as a string
+   */
   private static String getDataImageString(SearchContext context) {
     TakesScreenshot newScreen = (TakesScreenshot) context;
     return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
@@ -553,6 +563,11 @@ public class HtmlReporter {
     return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);
   }
 
+  /**
+   * Gets the javascript file into a string format.
+   * @return the javascript file script as a string
+   * @throws IOException if an exception is thrown
+   */
   private static String getJavascriptFileToString() throws IOException {
     return new String(Files.readAllBytes(Paths.get(resourcesFile + "htmlReporterElements.js")));
   }
