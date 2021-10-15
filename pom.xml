@@ -51,6 +51,7 @@
         <module>jmaqs-base</module>
         <module>jmaqs-selenium</module>
         <module>jmaqs-webservices-jdk8</module>
+        <module>jmaqs-webservices-jdk11</module>
         <module>jmaqs-appium</module>
         <module>jmaqs-database</module>
         <module>jmaqs-cucumber</module>
@@ -315,6 +316,11 @@
             <dependency>
                 <groupId>com.magenic.jmaqs.webservices</groupId>
                 <artifactId>jmaqs-webservices-jdk8</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.magenic.jmaqs.webservices</groupId>
+                <artifactId>jmaqs-webservices-jdk11</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
