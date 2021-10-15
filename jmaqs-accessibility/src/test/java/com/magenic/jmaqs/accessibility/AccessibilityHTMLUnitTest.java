@@ -131,7 +131,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   * Verify we can create an accessibility HTML report file with a lazy element.
+   * Verify we can create accessibility HTML reports off a lazy element.
    * @throws IOException if exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
@@ -150,7 +150,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   *  Verify we can create an accessibility HTML report file off a normal web element.
+   *  Verify we can create accessibility HTML reports off a normal web element.
    * @throws IOException if exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
@@ -212,7 +212,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
   }
 
   /**
-   *  Verify we can create an accessibility HTML report file off a normal web element.
+   *  Verify we can create accessibility HTML reports off a normal web element.
    * @throws IOException if exception is thrown
    */
   @Test(groups = TestCategories.ACCESSIBILITY)

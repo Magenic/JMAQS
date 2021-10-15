@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
@@ -41,54 +40,125 @@ import org.openqa.selenium.WrapsElement;
  */
 public class HtmlReporter {
 
-  private static final String classString = "class";
+  /**
+   * Placeholder for class tag string type.
+   */
+  private static final String CLASS = "class";
 
+  /**
+   * Placeholder for wrap one tag string type.
+   */
+  private static final String WRAP_ONE = "wrapOne";
+
+  /**
+   * File path to resources java resources folder.
+   */
   private static final String resourcesFile = "../jmaqs-accessibility/src/main/resources/";
 
+  /**
+   * Class constructor.
+   */
   protected HtmlReporter() {
   }
 
+  /**
+   * Creates a Html report with All result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param destination The file path where the html report will be stored
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, String destination)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, destination, EnumSet.allOf(ResultType.class));
   }
 
+  /**
+   * Creates a Html report with a list of specified result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param destination The file path where the html report will be stored
+   * @param requestedResults The result types that will be included on the html report
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, String destination, Set<ResultType> requestedResults)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver), destination, requestedResults);
   }
 
+  /**
+   * Creates a Html report with All result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param element The element that will be reported on
+   * @param destination The file path where the html report will be stored
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, element, destination, EnumSet.allOf(ResultType.class));
   }
 
+  /**
+   * Creates a Html report with a list of specified result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param element The element that will be reported on
+   * @param destination The file path where the html report will be stored
+   * @param requestedResults The result types that will be included on the html report
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     createAxeHtmlReport(webDriver, new AxeBuilder().analyze(webDriver, element), destination, requestedResults);
   }
 
+  /**
+   * Creates a Html report with All result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param results The results that will be used for the html report
+   * @param destination The file path where the html report will be stored
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination)
       throws IOException, ParseException {
     createAxeHtmlReport(webDriver, results, destination, EnumSet.allOf(ResultType.class));
   }
 
+  /**
+   * Creates a Html report with a list of specified result types.
+   * @param webDriver The web driver to be used for the scan
+   * @param results The results that will be used for the html report
+   * @param destination The file path where the html report will be stored
+   * @param requestedResults The result types that will be included on the html report
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     createAxeHtmlReportFile(webDriver, results, destination, requestedResults);
   }
 
+  /**
+   * Creates a Html report.
+   * @param context the web driver or web element to be used for the scan
+   * @param results The results that will be used for the html report
+   * @param destination The file path where the html report will be stored
+   * @param requestedResults The result types that will be included on the html report
+   * @throws IOException If an IO exception is thrown
+   * @throws ParseException If a parse exception is thrown
+   */
   private static void createAxeHtmlReportFile(SearchContext context, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
     // Get the unwrapped element if we are using a wrapped element
     context = (context instanceof WrapsElement)
         ? ((WrapsElement) context).getWrappedElement() : context;
 
-    HashSet<String> selectors = new HashSet<>();
-    final int violationCount = getCount(results.getViolations(), selectors);
-    final int incompleteCount = getCount(results.getIncomplete(), selectors);
-    final int passCount = getCount(results.getPasses(), selectors);
-    final int inapplicableCount = getCount(results.getInapplicable(), selectors);
+    final int violationCount = getCount(results.getViolations());
+    final int incompleteCount = getCount(results.getIncomplete());
+    final int passCount = getCount(results.getPasses());
+    final int inapplicableCount = getCount(results.getInapplicable());
 
     String stringBuilder = "<!DOCTYPE html>\r\n" + "<html lang=\"en\">" + "<head>"
         + "<meta charset=\"utf-8\">"
@@ -119,7 +189,7 @@ public class HtmlReporter {
     contextGroup.appendChild(contextHeader);
 
     Element contextContent = new Element("div");
-    contextContent.attributes().put(classString, "emOne");
+    contextContent.attributes().put(CLASS, "emOne");
     contextContent.attributes().put("id", "reportContext");
     getContextContent(results, contextContent);
     contextGroup.appendChild(contextContent);
@@ -133,7 +203,7 @@ public class HtmlReporter {
     imgGroup.appendChild(imageHeader);
 
     Element imageContent = new Element("img");
-    imageContent.attributes().put(classString, "thumbnail");
+    imageContent.attributes().put(CLASS, "thumbnail");
     imageContent.attributes().put("id", "screenshotThumbnail");
     imageContent.attributes().put("alt", "A Screenshot of the page");
     imageContent.attributes().put("width", "33%");
@@ -149,14 +219,13 @@ public class HtmlReporter {
     countsGroup.appendChild(countsHeader);
 
     Element countsContent = new Element("div");
-    countsContent.attributes().put(classString, "emOne");
+    countsContent.attributes().put(CLASS, "emOne");
     getCountContent(violationCount, incompleteCount, passCount, inapplicableCount, requestedResults, countsContent);
     countsGroup.appendChild(countsContent);
 
     Element resultsFlex = new Element("div");
     resultsFlex.attributes().put("id", "results");
     contentArea.appendChild(resultsFlex);
-
 
     if (results.isErrored()) {
       Element errorHeader = new Element("h2");
@@ -204,29 +273,33 @@ public class HtmlReporter {
     FileUtils.writeStringToFile(new File(destination), doc.outerHtml(), StandardCharsets.UTF_8);
   }
 
+  /**
+   * Sets up the results into html elements for the report.
+   * @param results A list of the Rule results found
+   * @param type The result type that is being created
+   * @param body The main html page element body
+   */
   private static void getReadableAxeResults(List<Rule> results, ResultType type, Element body) {
     Element resultWrapper = new Element("div");
-    resultWrapper.attributes().put(classString, "resultWrapper");
+    resultWrapper.attributes().put(CLASS, "resultWrapper");
     body.appendChild(resultWrapper);
 
     Element sectionButton = new Element("button");
-    sectionButton.attributes().put(classString, "sectionbutton active");
+    sectionButton.attributes().put(CLASS, "sectionbutton active");
     resultWrapper.appendChild(sectionButton);
 
-    HashSet<String> selectors = new HashSet<>();
-
     Element sectionButtonHeader = new Element("h2");
-    sectionButtonHeader.attributes().put(classString, "buttonInfoText");
-    sectionButtonHeader.text(type.name() + ": " + getCount(results, selectors));
+    sectionButtonHeader.attributes().put(CLASS, "buttonInfoText");
+    sectionButtonHeader.text(type.name() + ": " + getCount(results));
     sectionButton.appendChild(sectionButtonHeader);
 
     Element sectionButtonExpando = new Element("h2");
-    sectionButtonExpando.attributes().put(classString, "buttonExpandoText");
+    sectionButtonExpando.attributes().put(CLASS, "buttonExpandoText");
     sectionButtonExpando.text("-");
     sectionButton.appendChild(sectionButtonExpando);
 
     Element section = new Element("div");
-    section.attributes().put(classString, "majorSection");
+    section.attributes().put(CLASS, "majorSection");
     section.attributes().put("id", type.name() + "Section");
     resultWrapper.appendChild(section);
 
@@ -234,12 +307,12 @@ public class HtmlReporter {
 
     for (Rule element : results) {
       Element childEl = new Element("div");
-      childEl.attributes().put(classString, "findings");
+      childEl.attributes().put(CLASS, "findings");
       childEl.appendText(loops++ + ": " + element.getHelp());
       section.appendChild(childEl);
 
       Element content = new Element("div");
-      content.attributes().put(classString, "emTwo");
+      content.attributes().put(CLASS, "emTwo");
       content.text("Description: " + element.getDescription());
       content.appendChild(new Element("br"));
       content.appendText("Help: " + element.getHelp());
@@ -266,29 +339,29 @@ public class HtmlReporter {
       }
 
       Element childEl2 = new Element("div");
-      childEl2.attributes().put(classString, "emTwo");
+      childEl2.attributes().put(CLASS, "emTwo");
       childEl.appendChild(content);
 
       for (CheckedNode item : element.getNodes()) {
         Element elementNodes = new Element("div");
-        elementNodes.attr(classString, "htmlTable");
+        elementNodes.attr(CLASS, "htmlTable");
         childEl.appendChild(elementNodes);
 
         Element htmlAndSelectorWrapper = new Element("div");
-        htmlAndSelectorWrapper.attr(classString, "emThree");
+        htmlAndSelectorWrapper.attr(CLASS, "emThree");
         htmlAndSelectorWrapper.text("Html:");
         htmlAndSelectorWrapper.appendChild(new Element("br"));
         elementNodes.appendChild(htmlAndSelectorWrapper);
 
         Element htmlAndSelector = new Element("p");
-        htmlAndSelector.attr(classString, "wrapOne");
+        htmlAndSelector.attr(CLASS, WRAP_ONE);
         htmlAndSelector.html(item.getHtml());
         htmlAndSelector.text(item.getHtml());
         htmlAndSelectorWrapper.appendChild(htmlAndSelector);
-        htmlAndSelectorWrapper.appendText("Selector(s):");
+        htmlAndSelectorWrapper.appendText("Selector:");
 
         htmlAndSelector = new Element("p");
-        htmlAndSelector.attributes().put(classString, "wrapTwo");
+        htmlAndSelector.attributes().put(CLASS, "wrapTwo");
 
         for (Object target : Collections.singletonList(item.getTarget())) {
           String targetString = target.toString().replace("[", "").replace("]", "");
@@ -302,6 +375,12 @@ public class HtmlReporter {
     }
   }
 
+  /**
+   * Add the fixes for the specified result type.
+   * @param resultsNode The fixes from the results in this specific result type
+   * @param type The result type fixes
+   * @param htmlAndSelectorWrapper The element that the fixes will be appended to
+   */
   private static void addFixes(CheckedNode resultsNode, ResultType type, Element htmlAndSelectorWrapper) {
     Element htmlAndSelector = new Element("div");
 
@@ -317,49 +396,69 @@ public class HtmlReporter {
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       htmlAndSelector = new Element("p");
-      htmlAndSelector.attr("class", "wrapTwo");
+      htmlAndSelector.attr(CLASS, "wrapTwo");
       htmlAndSelectorWrapper.appendChild(htmlAndSelector);
 
       if (!allCheckResults.isEmpty() || !noneCheckResults.isEmpty()) {
-        htmlAndSelector = new Element("p");
-        htmlAndSelector.attr("class", "wrapOne");
-        htmlAndSelector.text("Fix all of the following issues:");
-
-        Element htmlSet = new Element("ul");
-
-        for (Check checkResult : allCheckResults) {
-          Element bulletPoints = new Element("li");
-          bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
-          htmlSet.appendChild(bulletPoints);
-        }
-
-        for (Check checkResult : noneCheckResults) {
-          Element bulletPoints = new Element("li");
-          bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
-          htmlSet.appendChild(bulletPoints);
-        }
-
-        htmlAndSelector.appendChild(htmlSet);
-        htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+        fixAllIssues(htmlAndSelectorWrapper, allCheckResults, noneCheckResults);
       }
 
       if (!anyCheckResults.isEmpty()) {
-        htmlAndSelector = new Element("p");
-        htmlAndSelector.attr("class", "wrapOne");
-        htmlAndSelector.text("Fix at least one of the following issues:");
-
-        Element htmlSet = new Element("ul");
-
-        for (Check checkResult : anyCheckResults) {
-          Element bulletPoints = new Element("li");
-          bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
-          htmlSet.appendChild(bulletPoints);
-        }
-
-        htmlAndSelector.appendChild(htmlSet);
-        htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+        fixAnyIssues(htmlAndSelectorWrapper, anyCheckResults);
       }
     }
+  }
+
+  /**
+   * Adds the issues in the all category in the list of Checks.
+   * @param htmlAndSelectorWrapper The element that all the content will be appended to
+   * @param allCheckResults A list of the all check results
+   * @param noneCheckResults A list of the none check results
+   */
+  private static void fixAllIssues(Element htmlAndSelectorWrapper,
+      List<Check> allCheckResults, List<Check> noneCheckResults) {
+    Element htmlAndSelector = new Element("p");
+    htmlAndSelector.attr(CLASS, WRAP_ONE);
+    htmlAndSelector.text("Fix at least one of the following issues:");
+
+    Element htmlSet = new Element("ul");
+
+    for (var checkResult : allCheckResults) {
+      Element bulletPoints = new Element("li");
+      bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
+      htmlSet.appendChild(bulletPoints);
+    }
+
+    for (var checkResult : noneCheckResults) {
+      Element bulletPoints = new Element("li");
+      bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
+      htmlSet.appendChild(bulletPoints);
+    }
+
+    htmlAndSelector.appendChild(htmlSet);
+    htmlAndSelectorWrapper.appendChild(htmlAndSelector);
+  }
+
+  /**
+   * Adds the issues in the Any category in the list of Checks.
+   * @param htmlAndSelectorWrapper The element that all the content will be appended to
+   * @param anyCheckResults A list of the any check results
+   */
+  private static void fixAnyIssues(Element htmlAndSelectorWrapper, List<Check> anyCheckResults) {
+    Element htmlAndSelector = new Element("p");
+    htmlAndSelector.attr(CLASS, WRAP_ONE);
+    htmlAndSelector.text("Fix at least one of the following issues:");
+
+    Element htmlSet = new Element("ul");
+
+    for (var checkResult : anyCheckResults) {
+      Element bulletPoints = new Element("li");
+      bulletPoints.text(checkResult.getImpact().toUpperCase() + ": " + checkResult.getMessage());
+      htmlSet.appendChild(bulletPoints);
+    }
+
+    htmlAndSelector.appendChild(htmlSet);
+    htmlAndSelectorWrapper.appendChild(htmlAndSelector);
   }
 
   private static void getContextContent(Results results, Element element) throws ParseException {
@@ -378,15 +477,15 @@ public class HtmlReporter {
         + results.getTestEngine().getVersion() + ")");
   }
 
-  private static int getCount(List<Rule> results, HashSet<String> uniqueList) {
+  /**
+   * Gets the count of the number of rules that came up in the scan.
+   * @param results The list of rules to be looped through
+   * @return The count of all the rules
+   */
+  private static int getCount(List<Rule> results) {
     int count = 0;
     for (Rule item : results) {
-      for (Node node : item.getNodes()) {
-        for (Object target : Collections.singletonList(node.getTarget())) {
-          count++;
-          uniqueList.add(target.toString());
-        }
-      }
+      count += item.getNodes().size();
 
       // Still add one if no targets are included
       if (item.getNodes().isEmpty()) {
@@ -396,6 +495,15 @@ public class HtmlReporter {
     return count;
   }
 
+  /**
+   * Sets up the count content for the html report.
+   * @param violationCount The count for the violations in the scan
+   * @param incompleteCount The count for incomplete in the scan
+   * @param passCount The count for passes in the scan
+   * @param inapplicableCount The count for inapplicable in the scan
+   * @param requestedResults The result types that will be included on the html report
+   * @param element The element that all the content will be appended to
+   */
   private static void getCountContent(int violationCount, int incompleteCount, int passCount,
       int inapplicableCount, Set<ResultType> requestedResults, Element element) {
     if (requestedResults.contains(ResultType.Violations)) {
@@ -418,6 +526,11 @@ public class HtmlReporter {
     }
   }
 
+  /**
+   * Gets the data image as a base 64 string.
+   * @param context The web driver or element to take a screenshot of
+   * @return the base 64 data image as a string
+   */
   private static String getCss(SearchContext context) throws IOException {
     String css = new String(Files.readAllBytes(
         Paths.get(resourcesFile + "htmlReporter.css")));
@@ -429,13 +542,18 @@ public class HtmlReporter {
     return "data:image/png;base64," + newScreen.getScreenshotAs(OutputType.BASE64);
   }
 
+  /**
+   * Gets the date format into a string.
+   * @param timestamp The time to be made into a date format
+   * @return The timestamp as a specified date formatted string
+   * @throws ParseException If parse exception occurs
+   */
   private static String getDateFormat(String timestamp) throws ParseException {
     Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(timestamp);
     return new SimpleDateFormat("dd-MMM-yy HH:mm:ss Z").format(date);
   }
 
   private static String getJavascriptFileToString() throws IOException {
-    return new String(Files.readAllBytes(
-        Paths.get(resourcesFile + "htmlReporterElements.js")));
+    return new String(Files.readAllBytes(Paths.get(resourcesFile + "htmlReporterElements.js")));
   }
 }
