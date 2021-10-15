@@ -265,6 +265,9 @@
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
         <jdk.version>11</jdk.version>
+        <chromedriver.version>94.0.4606.41</chromedriver.version>
+        <geckodriver.version>0.28.0</geckodriver.version>
+        <edgedriver.version>5.16299</edgedriver.version>
     </properties>
 
     <dependencyManagement>
