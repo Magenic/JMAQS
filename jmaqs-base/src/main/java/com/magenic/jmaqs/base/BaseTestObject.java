@@ -98,6 +98,7 @@ public class BaseTestObject implements AutoCloseable {
     this.managerStore = baseTestObject.getManagerStore();
     this.associatedFiles = new ArrayList<>();
     this.fullyQualifiedTestName = baseTestObject.getFullyQualifiedTestName();
+    this.isClosed = baseTestObject.getClosed();
 
     baseTestObject.getLogger().logMessage(MessageType.INFORMATION, "Setup test object");
   }

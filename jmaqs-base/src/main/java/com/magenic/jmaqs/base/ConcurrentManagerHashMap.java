@@ -37,7 +37,7 @@ public class ConcurrentManagerHashMap extends ConcurrentHashMap<String, BaseTest
   }
 
   /**
-   * Removes all of the mappings from this map.
+   * Removes all the mappings from this map.
    */
   @Override
   public void clear() {

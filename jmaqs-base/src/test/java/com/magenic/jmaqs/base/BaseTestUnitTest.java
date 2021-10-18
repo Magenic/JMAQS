@@ -22,6 +22,7 @@ import org.testng.annotations.Test;
  */
 @Test(groups = TestCategories.FRAMEWORK)
 public class BaseTestUnitTest extends BaseTest {
+
   /**
    * Verify fully qualified test name.
    */
@@ -66,13 +67,13 @@ public class BaseTestUnitTest extends BaseTest {
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void addLoggedExceptionsTest() {
-    ArrayList<String> exceptions = new ArrayList<String>();
+    ArrayList<String> exceptions = new ArrayList<>();
     exceptions.add("First Exception.");
     exceptions.add("Second Exception.");
     exceptions.add("Third Exception.");
     this.setLoggedExceptions(exceptions);
 
-    Assert.assertTrue(this.getLoggedExceptions().size() == 3,
+    Assert.assertEquals(this.getLoggedExceptions().size(), 3,
         "Expect that 3 Logged exceptions are in this exception list.");
   }
 
@@ -142,5 +143,4 @@ public class BaseTestUnitTest extends BaseTest {
   protected void beforeLoggingTeardown(ITestResult resultType) {
 
   }
-
 }

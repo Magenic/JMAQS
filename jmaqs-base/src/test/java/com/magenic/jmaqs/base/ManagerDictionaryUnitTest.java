@@ -18,7 +18,6 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testClose() {
-
     ManagerDictionary managerDictionary = new ManagerDictionary();
     final String dm1 = "DM1";
     managerDictionary.put(dm1, getTestDriverManager());
@@ -102,7 +101,7 @@ public class ManagerDictionaryUnitTest extends BaseGenericTest {
   /**
    * Test Driver Manager for Unit Tests.
    */
-  private class TestDriverManager extends DriverManager<Object> {
+  private static class TestDriverManager extends DriverManager<Object> {
     TestDriverManager(Supplier<Object> getDriverFunction, BaseTestObject baseTestObject) {
       super(getDriverFunction, baseTestObject);
     }

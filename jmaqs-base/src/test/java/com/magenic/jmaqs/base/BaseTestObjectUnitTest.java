@@ -9,6 +9,7 @@ import com.magenic.jmaqs.utilities.logging.Logger;
 import com.magenic.jmaqs.utilities.performance.PerfTimerCollection;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -55,17 +56,54 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   }
 
   /**
+   * Test set value.
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testSetValues() {
+    BaseTestObject testObject = this.getTestObject();
+    final String key = "SetKey";
+    final String value = "SetKey Value";
+    final ConcurrentHashMap<String, String> values = new ConcurrentHashMap<>();
+    values.put(key + "1", value);
+    values.put(key + "2", value);
+
+    testObject.setValues(values);
+    Assert.assertTrue(testObject.getValues().containsKey(key + "1"), "Checking that key exists in test object dictionary");
+    Assert.assertTrue(testObject.getValues().containsKey(key + "2"), "Checking that key exists in test object dictionary");
+    Assert.assertEquals(testObject.getValues().get(key + "1"), value, "Checking that value set correctly");
+    Assert.assertEquals(testObject.getValues().get(key + "2"), value, "Checking that value set correctly");
+  }
+
+  /**
    * Test set object.
    */
   @Test(groups = TestCategories.FRAMEWORK)
   public void testSetObject() {
-
     BaseTestObject testObject = this.getTestObject();
     final String key = "SetObject";
     final Object object = new Object();
     testObject.setObject(key, object);
     Assert.assertTrue(testObject.getObjects().containsKey(key), "Checking that key exists in test object dictionary");
     Assert.assertEquals(testObject.getObjects().get(key), object, "Checking that value set correctly");
+  }
+
+  /**
+   * Test set objects.
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testSetObjects() {
+    BaseTestObject testObject = this.getTestObject();
+    final String key = "SetObjectKey";
+    final Object object = new Object();
+    final ConcurrentHashMap<String, Object> values = new ConcurrentHashMap<>();
+    values.put(key + "1", object);
+    values.put(key + "2", object);
+
+    testObject.setObjects(values);
+    Assert.assertTrue(testObject.getObjects().containsKey(key + "1"), "Checking that key exists in test object dictionary");
+    Assert.assertTrue(testObject.getObjects().containsKey(key + "2"), "Checking that key exists in test object dictionary");
+    Assert.assertEquals(testObject.getObjects().get(key + "1"), object, "Checking that value set correctly");
+    Assert.assertEquals(testObject.getObjects().get(key + "2"), object, "Checking that value set correctly");
   }
 
   /**
@@ -137,6 +175,17 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
   }
 
   /**
+   * Test Set Manager Store - Not Null.
+   */
+  @Test(groups = TestCategories.FRAMEWORK)
+  public void testSetManagerStoreNotNull() {
+    BaseTestObject testObject = this.getTestObject();
+    ManagerDictionary managerDictionary = new ManagerDictionary();
+    testObject.setManagerStore(managerDictionary);
+    Assert.assertNotNull(testObject.getManagerStore(), "Checking that objects is not null.");
+  }
+
+  /**
    * Test add driver manager.
    */
   @Test(groups = TestCategories.FRAMEWORK)
@@ -189,6 +238,7 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     final Supplier<String> supplier = () -> null;
     final DriverManager<String> driverManager = getDriverManager(testObject, supplier);
     final String key = "DriverManager1";
+
     Assert.assertEquals(testObject.getManagerStore().size(), 0, "Checking that manager store is empty");
     testObject.addDriverManager(key, driverManager);
     Assert.assertEquals(testObject.getManagerStore().size(), 1, "Checking that manager store has 1 object added");
@@ -219,12 +269,13 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     BaseTestObject testObject = this.getTestObject();
     File temp = null;
     try {
-      temp = File.createTempFile("tempfile", ".tmp");
+      temp = File.createTempFile("tempFile", ".tmp");
     } catch (IOException e) {
       e.printStackTrace();
     }
-    assert temp.exists();
 
+    Assert.assertNotNull(temp);
+    Assert.assertTrue(temp.exists());
     Assert.assertTrue(testObject.addAssociatedFile(temp.getAbsolutePath()), "Checking that associated file was added");
     Assert.assertEquals((testObject.getArrayOfAssociatedFiles()).length, 1,
         "Checking that one file was added to array.");
@@ -238,15 +289,17 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     BaseTestObject testObject = this.getTestObject();
     File temp = null;
     try {
-      temp = File.createTempFile("tempfile", ".tmp");
+      temp = File.createTempFile("tempFile", ".tmp");
     } catch (IOException e) {
       e.printStackTrace();
     }
-    assert temp.exists();
-    final String path = temp.getAbsolutePath();
 
+    Assert.assertNotNull(temp);
+    Assert.assertTrue(temp.exists());
+
+    final String path = temp.getAbsolutePath();
     Assert.assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
-    Assert.assertTrue(testObject.removeAssociatedFile(path), "Checking that assocai");
+    Assert.assertTrue(testObject.removeAssociatedFile(path), "Checking that associated file was removed");
   }
 
   /**
@@ -257,11 +310,14 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     BaseTestObject testObject = this.getTestObject();
     File temp = null;
     try {
-      temp = File.createTempFile("tempfile", ".tmp");
+      temp = File.createTempFile("tempFile", ".tmp");
     } catch (IOException e) {
       e.printStackTrace();
     }
-    assert temp.exists();
+
+    Assert.assertNotNull(temp);
+    Assert.assertTrue(temp.exists());
+
     final String path = temp.getAbsolutePath();
     Assert.assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
     Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(), "Checking that array is instantiated");
@@ -276,11 +332,14 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
     BaseTestObject testObject = this.getTestObject();
     File temp = null;
     try {
-      temp = File.createTempFile("tempfile", ".tmp");
+      temp = File.createTempFile("tempFile", ".tmp");
     } catch (IOException e) {
       e.printStackTrace();
     }
-    assert temp.exists();
+
+    Assert.assertNotNull(temp);
+    Assert.assertTrue(temp.exists());
+
     final String path = temp.getAbsolutePath();
     Assert.assertTrue(testObject.addAssociatedFile(path), "Checking that associated file was added");
     Assert.assertNotNull(testObject.getArrayOfAssociatedFiles(), "Checking that array is instantiated");
@@ -302,9 +361,9 @@ public class BaseTestObjectUnitTest extends BaseGenericTest {
    */
 
   private DriverManager<String> getDriverManager(BaseTestObject testObject, Supplier<String> supplier) {
-    return new DriverManager<String>(supplier, testObject) {
+    return new DriverManager<>(supplier, testObject) {
       @Override
-      public void close() throws Exception {
+      public void close() {
       }
     };
   }

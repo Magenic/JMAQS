@@ -38,7 +38,7 @@ public class ManagerDictionary extends HashMap<String, DriverManager<?>> impleme
    * @return the driver
    */
   @SuppressWarnings("unchecked")
-  public <T extends Object> T getDriver(String key) {
+  public <T> T getDriver(String key) {
     return (T) this.get(key);
   }
 
