@@ -25,7 +25,8 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
   /**
    * Default header for the HTML file, this gives us our colored text.
    */
-  private static final String DEFAULT_HTML_HEADER = "<!DOCTYPE html><html><header><title>Test Log</title></header><body>";
+  private static final String DEFAULT_HTML_HEADER =
+      "<!DOCTYPE html><html><header><title>Test Log</title></header><body>";
   private static final String LOG_ERROR_MESSAGE = "Failed to write to event log because: %s";
 
   /**
