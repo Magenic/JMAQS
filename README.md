@@ -8,6 +8,8 @@
 |**Code Quality**|[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.magenic.jmaqs%3Ajmaqs-framework&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.magenic.jmaqs%3Ajmaqs-framework)|
 |**License**|[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://raw.githubusercontent.com/Magenic/JMAQS/master/LICENSE)| 
 
+[![Testing Powered By Sauce Labs](https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-white.png?sanitize=true "Testing Powered By Sauce Labs")](https://saucelabs.com)
+
 ## Introduction 
 JMAQS stands for Magenic's Automation Quick Start - Java Edtion.
 

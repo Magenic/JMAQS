@@ -28,6 +28,11 @@ public class WebServiceUtilities {
   private static final ObjectMapper xmlMapper = new XmlMapper();
 
   /**
+   * Error exception message.
+   */
+  private static final String EXCEPTION_MESSAGE = "Only xml and json conversions are currently supported";
+
+  /**
    * private class constructor.
    */
   private WebServiceUtilities() {
@@ -61,7 +66,7 @@ public class WebServiceUtilities {
       responseBody = deserializeXml(response, type);
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
 
     return responseBody;
@@ -85,7 +90,7 @@ public class WebServiceUtilities {
       return body.toString();
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
   }
 
@@ -116,21 +121,21 @@ public class WebServiceUtilities {
   /**
    * Deserialize the response based on the media type.
    * @param <T>         the type parameter
-   * @param message the String Http Response message
+   * @param response the String Http Response message
    * @param mediaType the type the message is going to be turned into
    * @param type the class or java object to be transferred into
    * @return the response type
    * @throws IOException the io exception
    */
-  public static <T> T deserializeResponse(HttpResponse<String> message, MediaType mediaType, Type type)
+  public static <T> T deserializeResponse(HttpResponse<String> response, MediaType mediaType, Type type)
       throws IOException {
     if (mediaType.equals(MediaType.APP_XML)) {
-      return deserializeXml(message, type);
+      return deserializeXml(response, type);
     } else if (mediaType.equals(MediaType.APP_JSON)) {
-      return deserializeJson(message, type);
+      return deserializeJson(response, type);
     } else {
       throw new IllegalArgumentException(
-          StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
+          StringProcessor.safeFormatter(EXCEPTION_MESSAGE));
     }
   }
 

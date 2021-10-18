@@ -80,10 +80,10 @@ public class AppiumConfigUnitTest extends BaseGenericTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(username));
-    softAssert.assertEquals(capabilitiesAsStrings.get(username), "Partner_Magenic");
+    softAssert.assertEquals(capabilitiesAsStrings.get(username), "JMAQS");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(accessKey));
     softAssert
-        .assertEquals(capabilitiesAsStrings.get(accessKey), "0a4d7d84-f93b-43e6-9af1-1c89ac143355");
+        .assertEquals(capabilitiesAsStrings.get(accessKey), "80592d42-18a3-4303-9b65-b8f8181d0e67");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(browserName));
     softAssert.assertEquals(capabilitiesAsStrings.get(browserName), "Chrome");
     softAssert.assertTrue(capabilitiesAsStrings.containsKey(deviceOrientation));
@@ -100,10 +100,10 @@ public class AppiumConfigUnitTest extends BaseGenericTest {
 
     SoftAssert softAssert = new SoftAssert();
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(username));
-    softAssert.assertEquals(capabilitiesAsObjects.get(username), "Partner_Magenic");
+    softAssert.assertEquals(capabilitiesAsObjects.get(username), "JMAQS");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(accessKey));
     softAssert
-        .assertEquals(capabilitiesAsObjects.get(accessKey), "0a4d7d84-f93b-43e6-9af1-1c89ac143355");
+        .assertEquals(capabilitiesAsObjects.get(accessKey), "80592d42-18a3-4303-9b65-b8f8181d0e67");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(browserName));
     softAssert.assertEquals(capabilitiesAsObjects.get(browserName), "Chrome");
     softAssert.assertTrue(capabilitiesAsObjects.containsKey(deviceOrientation));
