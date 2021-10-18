@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
  * Test with the web service driver directly.
  */
 public class WebServiceDriverUnitTest extends BaseGenericTest {
+
   /**
    * Verifies that basic GET features work with the WebServiceDriver.
    *

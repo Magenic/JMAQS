@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
  * Tests the Base Web Service Test functionality.
  */
 public class BaseWebServiceTestUnitTest extends BaseWebServiceTest {
+
   /**
    * Test getting the web service driver.
    */

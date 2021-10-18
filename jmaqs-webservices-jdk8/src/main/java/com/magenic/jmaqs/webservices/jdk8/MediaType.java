@@ -8,6 +8,7 @@ package com.magenic.jmaqs.webservices.jdk8;
  * The enum Media type.
  */
 public enum MediaType {
+
   /**
    * App json media type.
    */

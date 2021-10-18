@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
  * Unit tests for the Web Service Utilities functionality.
  */
 public class WebServiceUtilitiesUnitTest extends BaseWebServiceTest {
+
   /**
   The web service object used for the test.
    */

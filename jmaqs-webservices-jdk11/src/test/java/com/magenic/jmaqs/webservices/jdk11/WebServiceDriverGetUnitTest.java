@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
  * Test web service gets.
  */
 public class WebServiceDriverGetUnitTest extends BaseWebServiceTest {
+
   /**
    * String to hold the URL.
    */

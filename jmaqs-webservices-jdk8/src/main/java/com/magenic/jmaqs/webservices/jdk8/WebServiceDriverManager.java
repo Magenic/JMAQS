@@ -13,6 +13,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
  * Web Service Driver Manager Class.
  */
 public class WebServiceDriverManager extends DriverManager<CloseableHttpClient> {
+
   /**
    * Web Service Driver variable.
    */
