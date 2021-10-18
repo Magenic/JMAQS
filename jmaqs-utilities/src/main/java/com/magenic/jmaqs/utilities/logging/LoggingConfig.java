@@ -13,7 +13,14 @@ import java.io.File;
  */
 public class LoggingConfig {
 
+  /**
+   * Value of console in uppercase.
+   */
   public static final String CONSOLE = "CONSOLE";
+
+  /**
+   * Value of txt in uppercase.
+   */
   public static final String TXT = "TXT";
 
   private LoggingConfig() {

@@ -25,7 +25,6 @@ public class ListProcessor {
    *                   delimited string in the order of elements in the arraylist
    * @return a comma delimited string
    */
-
   public static String createCommaDelimitedString(List<String> stringList, boolean sort) {
     boolean firstElement = true;
     StringBuilder commaDelimitedString = new StringBuilder();

@@ -136,8 +136,7 @@ public class GenericWaitUnitTest {
   @Test(groups = TestCategories.UTILITIES)
   public void waitForTruePasses() {
     try {
-      int one = 1;
-      GenericWait.waitForTrue(() -> one == 1);
+      GenericWait.waitForTrue(() -> true);
     } catch (Exception e) {
       Assert.fail("waitForTrue threw unexpected exception", e);
     }

@@ -19,12 +19,21 @@ import java.util.function.Supplier;
  */
 public final class GenericWait {
 
+  /**
+   * Generic wait class instantiation.
+   */
   private GenericWait() {
     throw new IllegalStateException("Utility class");
   }
 
+  /**
+   * Config retry time.
+   */
   private static final long retryTimeFromConfig = Long.parseLong(Config.getGeneralValue("WaitTime", "0"));
 
+  /**
+   * Config timeout time.
+   */
   private static final long timeoutFromConfig = Long.parseLong(Config.getGeneralValue("Timeout", "0"));
 
   /**

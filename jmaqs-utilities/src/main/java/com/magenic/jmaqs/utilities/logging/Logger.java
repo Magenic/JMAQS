@@ -8,6 +8,7 @@ package com.magenic.jmaqs.utilities.logging;
  * Abstract logging interface base class.
  */
 public abstract class Logger {
+
   /**
    * Default date format.
    */

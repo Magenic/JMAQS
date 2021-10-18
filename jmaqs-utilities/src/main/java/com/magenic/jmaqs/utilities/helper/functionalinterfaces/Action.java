@@ -10,7 +10,6 @@ package com.magenic.jmaqs.utilities.helper.functionalinterfaces;
 @FunctionalInterface
 public interface Action {
 
-
   /**
    * invokes the functional interface when called.
    */

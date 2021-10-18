@@ -30,7 +30,7 @@ public final class Config {
   public static final String NEW_LINE = System.getProperty("line.separator");
 
   /**
-   * The default section MagenicMaqs.
+   * The default section of MagenicMAQS.
    */
   public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MAGENIC_MAQS;
 
@@ -111,7 +111,7 @@ public final class Config {
   }
 
   /**
-   * Add dictionary of values to maqs section.
+   * Add dictionary of values to MagenicMAQS section.
    *
    * @param configurations   Dictionary of configuration values
    * @param overrideExisting True to override existing values, False otherwise

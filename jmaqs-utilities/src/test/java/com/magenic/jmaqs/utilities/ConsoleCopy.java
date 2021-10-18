@@ -18,11 +18,6 @@ public class ConsoleCopy implements AutoCloseable {
   private PrintStream fileWriter;
 
   /**
-   * Used to Write to both the console and the log.
-   */
-  private PrintStream doubleWriter;
-
-  /**
    * Stores the original Console output.
    */
   private final PrintStream oldOut;
@@ -36,16 +31,19 @@ public class ConsoleCopy implements AutoCloseable {
   public ConsoleCopy(String path) {
     this.oldOut = System.out;
 
+    // Used to Write to both the console and the log.
+    PrintStream doubleWriter;
+
     try {
       this.fileWriter = new PrintStream(new FileOutputStream(path, true));
-      this.doubleWriter = new DoubleWriter(this.fileWriter, this.oldOut);
+      doubleWriter = new DoubleWriter(this.fileWriter, this.oldOut);
     } catch (Exception e) {
       System.out.println("Cannot open file for writing");
       System.out.println(e.getMessage());
       return;
     }
 
-    System.setOut(this.doubleWriter);
+    System.setOut(doubleWriter);
   }
 
   /**
