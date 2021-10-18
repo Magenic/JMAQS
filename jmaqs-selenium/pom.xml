@@ -28,12 +28,12 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-remote-driver</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -97,7 +97,7 @@
                         <driver>
                             <name>chromedriver</name>
                             <customFileName>chromedriver</customFileName>
-                            <version>90.0.4430.24</version>
+                            <version>${chromedriver.version}</version>
                         </driver>
                         <driver>
                             <name>internetexplorerdriver</name>
@@ -107,13 +107,13 @@
                         <driver>
                             <name>geckodriver</name>
                             <customFileName>geckodriver</customFileName>
-                            <version>0.28.0</version>
+                            <version>${geckodriver.version}</version>
                         </driver>
                         <driver>
                             <name>edgedriver</name>
                             <platform>windows</platform>
                             <customFileName>MicrosoftWebDriver</customFileName>
-                            <version>5.16299</version>
+                            <version>${edgedriver.version}</version>
                         </driver>
                     </drivers>
                 </configuration>

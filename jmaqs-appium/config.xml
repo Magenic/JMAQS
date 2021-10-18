@@ -68,8 +68,8 @@
         <SavePageSourceOnFail>NO</SavePageSourceOnFail>
     </AppiumMaqs>
     <AppiumCapsMaqs>
-        <username>Partner_Magenic</username>
-        <accessKey>0a4d7d84-f93b-43e6-9af1-1c89ac143355</accessKey>
+        <username>JMAQS</username>
+        <accessKey>80592d42-18a3-4303-9b65-b8f8181d0e67</accessKey>
         <deviceOrientation>portrait</deviceOrientation>
         <browserName>Chrome</browserName>
     </AppiumCapsMaqs>

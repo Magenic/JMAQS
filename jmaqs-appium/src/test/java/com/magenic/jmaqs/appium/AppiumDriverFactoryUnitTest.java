@@ -38,8 +38,8 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
   @BeforeClass
   public void setUp() {
     sauceLabsConfig = new DesiredCapabilities();
-    sauceLabsConfig.setCapability("username", "Partner_Magenic");
-    sauceLabsConfig.setCapability("accessKey", "0a4d7d84-f93b-43e6-9af1-1c89ac143355");
+    sauceLabsConfig.setCapability("username", "JMAQS");
+    sauceLabsConfig.setCapability("accessKey", "80592d42-18a3-4303-9b65-b8f8181d0e67");
     sauceLabsConfig.setCapability("deviceOrientation", "portrait");
   }
 
