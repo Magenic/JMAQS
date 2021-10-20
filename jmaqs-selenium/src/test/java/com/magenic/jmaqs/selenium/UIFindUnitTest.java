@@ -64,7 +64,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
     WebElement element = find.findElement(automationNamesLabel);
-    Assert.assertEquals("Names", element.getText());
+    Assert.assertEquals(element.getText(), "Names");
   }
 
   /**
@@ -86,7 +86,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
     List<WebElement> list = find.findElements(dropdownToggleClassSelector);
-    Assert.assertEquals(3, list.size(), "There are 3 elements with dropdown classes");
+    Assert.assertEquals(list.size(), 3, "There are 3 elements with dropdown classes");
 
     Assert.assertEquals(list.get(0).getText(), "Manage");
     Assert.assertTrue(list.get(0).isDisplayed());
@@ -165,7 +165,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   public void findIndexOfElementWithText() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
-    Assert.assertEquals(3, find.findIndexOfElementWithText(flowerTable, "Red"));
+    Assert.assertEquals(find.findIndexOfElementWithText(flowerTable, "Red"), 3);
   }
 
   /**
@@ -200,8 +200,8 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   public void findIndexOfElementInCollection() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
-    Assert.assertEquals(0, find.findIndexOfElementWithText(
-        find.findElements(flowerTable), "10 in"));
+    Assert.assertEquals(find.findIndexOfElementWithText(
+        find.findElements(flowerTable), "10 in"), 0);
   }
 
   /**
@@ -224,8 +224,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   public void findIndexOfElementInCollectionEmptyInputList() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
-    List<WebElement> list = null;
-    int index = find.findIndexOfElementWithText(list, "#notfound", false);
+    int index = find.findIndexOfElementWithText((List<WebElement>) null, "#notfound", false);
     Assert.assertEquals(index, -1);
   }
 

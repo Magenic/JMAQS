@@ -33,7 +33,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test capture screenshot no append.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testCaptureScreenshotNoAppend() throws Exception {
+        public void testCaptureScreenshotNoAppend() {
 
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
@@ -62,7 +62,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test capture screenshot append.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testCaptureScreenshotAppend() throws Exception {
+        public void testCaptureScreenshotAppend() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
@@ -95,7 +95,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test capture screenshot console logger.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testCaptureScreenshotConsoleLogger() throws Exception {
+        public void testCaptureScreenshotConsoleLogger() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
@@ -119,7 +119,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test capture screenshot custom directory file name.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testCaptureScreenshotCustomDirectoryFileName() throws Exception {
+        public void testCaptureScreenshotCustomDirectoryFileName() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
@@ -151,7 +151,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test save page source no append.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testSavePageSourceNoAppend() throws Exception {
+        public void testSavePageSourceNoAppend() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
@@ -179,7 +179,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test save page source append.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testSavePageSourceAppend() throws Exception {
+        public void testSavePageSourceAppend() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
@@ -212,7 +212,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test save page source custom directory file name.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testSavePageSourceCustomDirectoryFileName() throws Exception {
+        public void testSavePageSourceCustomDirectoryFileName() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
@@ -249,7 +249,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test save page source console logger.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testSavePageSourceConsoleLogger() throws Exception {
+        public void testSavePageSourceConsoleLogger() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
@@ -277,7 +277,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test web element to web driver.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testWebElementToWebDriver() throws Exception {
+        public void testWebElementToWebDriver() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {
@@ -302,7 +302,7 @@ public class SeleniumUtilitiesUnitTest extends BaseGenericTest {
          * Test kill driver.
          */
         @Test(groups = TestCategories.SELENIUM)
-        public void testKillDriver() throws Exception {
+        public void testKillDriver() {
                 WebDriver webDriver = WebDriverFactory.getDefaultBrowser();
 
                 try {

@@ -55,9 +55,7 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void testGetUIFindWithDriver() {
     UIFind findWithWebDriver = UIFindFactory.getFind(this.getWebDriver());
-
     Assert.assertNotNull(findWithWebDriver,
         String.format(assertNotNullErrorTemplate, "findWithWebDriver"));
   }
-
 }

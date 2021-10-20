@@ -181,7 +181,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void selectMultipleItemsFromListBoxTest() {
     final StringBuilder results = new StringBuilder();
-    ArrayList<String> itemsToSelect = new ArrayList<String>();
+    ArrayList<String> itemsToSelect = new ArrayList<>();
     itemsToSelect.add("Monitor");
     itemsToSelect.add("Hard Drive");
     itemsToSelect.add("Keyboard");
@@ -201,7 +201,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void selectMultipleItemsFromListBoxTestByValue() {
-    ArrayList<String> itemsToSelect = new ArrayList<String>();
+    ArrayList<String> itemsToSelect = new ArrayList<>();
     itemsToSelect.add("one");
     itemsToSelect.add("four");
     itemsToSelect.add("five");
@@ -211,7 +211,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
         computerPartsList);
 
     if (selectedItems.size() != 3) {
-      Assert.fail("Does not contain 3 elements: " + selectedItems.toString());
+      Assert.fail("Does not contain 3 elements: " + selectedItems);
     }
   }
 

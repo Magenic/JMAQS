@@ -6,17 +6,11 @@ package com.magenic.jmaqs.selenium.constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * The enum Operating system.
  */
 public enum OperatingSystem {
-
-  /**
-   * None.  Can be used as a default state
-   */
-  NONE("None", new ArrayList<>(Collections.singletonList("None"))),
   /**
    * Linux Operating System.
    */

@@ -562,14 +562,11 @@ public abstract class AbstractLazyElement {
           .logMessage(MessageType.VERBOSE, "Performing lazy driver find on: " + this.getBy());
       this.setCachedElement(getElement);
       return this.getCachedElement();
-    } catch (NoSuchElementException nsee) {
-      StringBuilder messageBuilder = new StringBuilder();
-
-      messageBuilder.append("Failed to find: " + this.userFriendlyName + System.lineSeparator());
-      messageBuilder.append("Locator: " + this.getBy() + System.lineSeparator());
-      messageBuilder.append("Because: " + nsee.getMessage() + System.lineSeparator());
-
-      throw new NoSuchElementException(messageBuilder.toString(), nsee);
+    } catch (NoSuchElementException noSuchElementException) {
+      String messageBuilder =
+          "Failed to find: " + this.userFriendlyName + System.lineSeparator() + "Locator: " + this.getBy()
+              + System.lineSeparator() + "Because: " + noSuchElementException.getMessage() + System.lineSeparator();
+      throw new NoSuchElementException(messageBuilder, noSuchElementException);
     }
   }
 
@@ -585,13 +582,11 @@ public abstract class AbstractLazyElement {
       this.getTestObject().getLogger().logMessage(MessageType.VERBOSE, "Performing lazy driver action: " + caller);
       elementAction.invoke();
     } catch (Exception e) {
-      StringBuilder messageBuilder = new StringBuilder();
-
-      messageBuilder.append("Failed to " + caller + ": " + this.userFriendlyName + System.lineSeparator());
-      messageBuilder.append("Locator: " + this.getBy() + System.lineSeparator());
-      messageBuilder.append("Because: " + e.getMessage() + System.lineSeparator());
-
-      throw new ExecutionFailedException(messageBuilder.toString(), e);
+      String messageBuilder =
+          "Failed to " + caller + ": " + this.userFriendlyName + System.lineSeparator()
+              + "Locator: " + this.getBy() + System.lineSeparator() + "Because: " + e.getMessage()
+              + System.lineSeparator();
+      throw new ExecutionFailedException(messageBuilder, e);
     }
   }
 
@@ -603,7 +598,6 @@ public abstract class AbstractLazyElement {
    * @param expectedState The expected state to be logged if the matchesState function returns false
    * @return The WebElement at the indexed value
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
-   * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   private WebElement getRawIndexed(Predicate<WebElement> matchesState, String expectedState) {
     List<WebElement> elements = (this.parent == null)

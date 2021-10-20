@@ -13,14 +13,17 @@ public enum WebDriverFile {
    * The Chrome driver file.
    */
   CHROME("chromedriver"),
+
   /**
    * The Firefox driver file.
    */
   FIREFOX("geckodriver"),
+
   /**
    * The Internet Explorer driver file.
    */
   IE("IEDriverServer"),
+
   /**
    * The Edge driver file.
    */
@@ -47,6 +50,5 @@ public enum WebDriverFile {
     } else {
       return fileName;
     }
-
   }
 }

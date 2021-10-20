@@ -98,7 +98,7 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
     for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
       String trim = stackTraceElement.toString().trim();
       if (!trim.startsWith(fullTestName)) {
-        messages.append(stackTraceElement.toString());
+        messages.append(stackTraceElement);
       }
     }
     getLogger().logMessage(MessageType.VERBOSE, messages.toString());

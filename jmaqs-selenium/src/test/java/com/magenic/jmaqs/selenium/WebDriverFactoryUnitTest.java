@@ -34,7 +34,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the default browser.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void getDefaultBrowserTest() throws Exception {
+  public void getDefaultBrowserTest() {
     WebDriver driver = null;
     try {
       driver = WebDriverFactory.getDefaultBrowser();
@@ -95,7 +95,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the Chrome driver.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void getChromeDriverTest() throws Exception {
+  public void getChromeDriverTest() {
     ChromeDriver driver = null;
 
     try {
@@ -112,7 +112,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the headless Chrome driver.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void getHeadlessChromeDriverTest() throws Exception {
+  public void getHeadlessChromeDriverTest() {
     ChromeDriver driver = null;
     try {
       driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.HEADLESS_CHROME);
@@ -129,7 +129,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Ignore
   @Test(groups = TestCategories.SELENIUM)
-  public void getFirefoxDriverTest() throws Exception {
+  public void getFirefoxDriverTest() {
     FirefoxDriver driver = null;
     try {
       driver = (FirefoxDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.FIREFOX);
@@ -147,7 +147,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   @Ignore
   @Test(groups = TestCategories.SELENIUM)
   // TODO: File path to the WebDriver.exe might be an issue here.
-  public void getEdgeDriverTest() throws Exception {
+  public void getEdgeDriverTest() {
     EdgeDriver driver = null;
     try {
       driver = (EdgeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.EDGE);
@@ -164,7 +164,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Ignore
   @Test(groups = TestCategories.SELENIUM)
-  public void getInternetExplorerDriverTest() throws Exception {
+  public void getInternetExplorerDriverTest() {
     InternetExplorerDriver driver = null;
     try {
       driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.IE);
@@ -181,8 +181,8 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   @Ignore
-  // TODO: Remote driver not being instatiated.
-  public void getRemoteDriverTest() throws Exception {
+  // TODO: Remote driver not being instantiated.
+  public void getRemoteDriverTest() {
     RemoteWebDriver driver = null;
     try {
       driver = (RemoteWebDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.REMOTE);
@@ -280,7 +280,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests setting the browser size.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void setBrowserSizeTest() throws Exception {
+  public void setBrowserSizeTest() {
     WebDriver driver = null;
     try {
       driver = WebDriverFactory.getDefaultBrowser();
@@ -298,7 +298,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests setting the browser to Maximize window size.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void setBrowserSizeMaximizeTest() throws Exception {
+  public void setBrowserSizeMaximizeTest() {
     WebDriver driver = null;
     try {
       driver = WebDriverFactory.getDefaultBrowser();
@@ -361,17 +361,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getDriverLocationTest() {
     String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
     Assert.assertFalse(driverLocation.isEmpty());
-  }
-
-  /**
-   * Tests getting the driver location configuration hint path.
-   */
-  @Test(groups = TestCategories.SELENIUM)
-  public void getDriverLocationConfigHintPathTest() {
-    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
-    Assert.assertFalse(driverLocation.isEmpty());
-    Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
-        "Checking that driver location and config hint path are the same.");
   }
 
   /**

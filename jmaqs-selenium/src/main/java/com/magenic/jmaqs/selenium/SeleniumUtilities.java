@@ -54,7 +54,7 @@ public class SeleniumUtilities {
    *
    * @param webDriver  the web driver
    * @param testObject the test object
-   * @param appendName the append name
+   * @param appendName the appended name
    * @return the boolean
    */
   public static boolean captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject,
@@ -131,13 +131,13 @@ public class SeleniumUtilities {
    *
    * @param webDriver  the web driver
    * @param testObject the test object
-   * @param appendName the append name
+   * @param appendName the appended name
    * @return the boolean
    */
   public static boolean savePageSource(WebDriver webDriver, SeleniumTestObject testObject,
       String appendName) {
     try {
-      String path = "";
+      String path;
 
       // Check if we are using a file logger.
       if (!(testObject.getLogger() instanceof FileLogger)) {

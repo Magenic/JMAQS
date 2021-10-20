@@ -282,7 +282,7 @@ public class EventHandlerUnitTest extends BaseSeleniumTest {
 
     // Use the Event Firing Web Driver to open a new tab, then get the log text
     ((JavascriptExecutor) webDriverWithHandler).executeScript("window.open()");
-    ArrayList<String> tabs = new ArrayList<String>(webDriverWithHandler.getWindowHandles());
+    ArrayList<String> tabs = new ArrayList<>(webDriverWithHandler.getWindowHandles());
     webDriverWithHandler.switchTo().window(tabs.get(1));
     String logText = this.readTextFile(((FileLogger) this.getLogger()).getFilePath());
 

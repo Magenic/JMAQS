@@ -38,7 +38,7 @@ public class BaseSeleniumPageModelUnitTest extends BaseSeleniumTest {
   }
 
   @Test
-  public void testSetWebDriver() throws Exception {
+  public void testSetWebDriver() {
     PageElementsPageModel pageElementsPageModel = new PageElementsPageModel(getTestObject());
     int hashCode = pageElementsPageModel.getWebDriver().hashCode();
     WebDriver drive = this.getBrowser();

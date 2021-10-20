@@ -167,9 +167,9 @@ public final class SeleniumConfig {
   }
 
   /**
-   * Get the web site base url.
+   * Get the website base url.
    *
-   * @return The web site base url
+   * @return The website base url
    */
   public static String getWebSiteBase() {
     return Config.getValueForSection(SELENIUM_SECTION, "WebSiteBase");
