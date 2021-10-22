@@ -12,7 +12,6 @@ import static org.testng.Assert.assertNotSame;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
-import com.google.common.base.Predicate;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import com.magenic.jmaqs.utilities.helper.exceptions.ExecutionFailedException;
@@ -23,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.function.Predicate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
@@ -46,6 +46,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	private static final String FLOWER_TABLE_CAPTION = "Flower table caption";
 	private static final String FOOTER_PARAGRAPH_BY = "FOOTER P";
 	private static final String FOOTER = "Footer";
+	private static final String THREAD = "THEAD TH";
 
 	private LazyWebElement getDivRoot() {
 		return new LazyWebElement(this.getTestObject(), By.cssSelector("#ItemsToAutomate"), "Div Root");
@@ -664,7 +665,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElement() throws TimeoutException, InterruptedException {
-		WebElement firstElement = this.getFlowerTableLazyElement().findRawElement(By.cssSelector("THEAD TH"));
+		WebElement firstElement = this.getFlowerTableLazyElement().findRawElement(By.cssSelector(THREAD));
 		assertEquals(firstElement.getText(), "Flowers");
 	}
 
@@ -673,7 +674,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElements() throws TimeoutException, InterruptedException {
-		List<WebElement> elements = this.getFlowerTableLazyElement().findRawElements(By.cssSelector("THEAD TH"));
+		List<WebElement> elements = this.getFlowerTableLazyElement().findRawElements(By.cssSelector(THREAD));
 		assertEquals(elements.get(4).getText(), "Color");
 	}
 
@@ -684,7 +685,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementFindElementsStackedWithStale() throws TimeoutException, InterruptedException {
 		LazyWebElement lazyRoot = this.getDivRoot();
 		LazyWebElement secondTable = lazyRoot.findElements(By.cssSelector("TABLE")).get(1);
-		LazyWebElement lastTableHeader = secondTable.findElements(By.cssSelector("THEAD TH")).get(4);
+		LazyWebElement lastTableHeader = secondTable.findElements(By.cssSelector(THREAD)).get(4);
 
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase());
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
@@ -698,9 +699,9 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementFindElementsAreLazy() throws TimeoutException, InterruptedException {
 		SoftAssert softAssertion = new SoftAssert();
-		for (LazyWebElement element : this.getFlowerTableLazyElement().findElements(By.cssSelector("THEAD TH"))) {
+		for (LazyWebElement element : this.getFlowerTableLazyElement().findElements(By.cssSelector(THREAD))) {
 			Predicate<LazyWebElement> predicate = e -> {
-				assertTrue(e instanceof LazyWebElement);
+				assertNotNull(e);
 				return true;
 			};
 

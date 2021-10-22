@@ -22,7 +22,7 @@ public class UIWaitFactory {
   /**
    * the collection of wait objects.
    */
-  private static ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection = new ConcurrentHashMap<>();
+  private static final ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection = new ConcurrentHashMap<>();
 
   /**
    * private constructor so class can't be instantiated.

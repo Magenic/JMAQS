@@ -20,7 +20,7 @@ public class UIFind {
   /**
    * The search context item.
    */
-  private SearchContext searchItem;
+  private final SearchContext searchItem;
 
   /**
    * Initializes a new instance of the {@link UIFind}.

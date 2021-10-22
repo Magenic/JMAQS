@@ -45,17 +45,17 @@ public class UIWait {
   /**
    * The Web driver that the test is currently running on.
    */
-  private WebDriver driver;
+  private final WebDriver driver;
 
   /**
    * The retry time.
    */
-  private int fluentRetryTime;
+  private final int fluentRetryTime;
 
   /**
    * The timeout time.
    */
-  private int timeout;
+  private final int timeout;
 
   /**
    * The web driver wait that the test is currently running on.

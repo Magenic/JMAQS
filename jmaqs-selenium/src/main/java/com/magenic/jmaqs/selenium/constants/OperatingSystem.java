@@ -27,11 +27,11 @@ public enum OperatingSystem {
   /**
    * The Operating system name.
    */
-  private String operatingSystemName;
+  private final String operatingSystemName;
   /**
    * The Operating system abbreviations.
    */
-  private ArrayList<String> operatingSystemAbbreviations;
+  private final ArrayList<String> operatingSystemAbbreviations;
 
   /**
    * Instantiates a new Operating system.

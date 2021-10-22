@@ -17,90 +17,91 @@ import org.testng.annotations.Test;
  * The UI wait class functionality unit test.
  */
 public class UIWaitUnitTest extends BaseSeleniumTest {
+
   /**
    * Unit testing site URL - Login page.
    */
-  private String testSiteUrl = SeleniumConfig.getWebSiteBase();
+  private final String testSiteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Unit testing site URL - IFrame page.
    */
-  private String testSiteIFrameUrl = testSiteUrl + "Automation/iFramePage";
+  private final String testSiteIFrameUrl = testSiteUrl + "Automation/iFramePage";
 
   /**
    * Unit testing site URL - Async page.
    */
-  private String testSiteAsyncUrl = testSiteUrl + "Automation/AsyncPage";
+  private final String testSiteAsyncUrl = testSiteUrl + "Automation/AsyncPage";
 
   /**
    * Unit testing site URL - Automation page.
    */
-  private String testSiteAutomationUrl = testSiteUrl + "Automation/";
+  private final String testSiteAutomationUrl = testSiteUrl + "Automation/";
 
   /**
    * Home button css selector.
    */
-  private By homeButtonCssSelector = By.cssSelector("#homeButton > a");
+  private final By homeButtonCssSelector = By.cssSelector("#homeButton > a");
 
   /**
    * Dropdown selector.
    */
-  private By asyncDropdownCssSelector = By.cssSelector("#Selector");
+  private final By asyncDropdownCssSelector = By.cssSelector("#Selector");
 
   /**
    * Dropdown label.
    */
-  private By asyncOptionsLabel = By.cssSelector("#Label");
+  private final By asyncOptionsLabel = By.cssSelector("#Label");
 
   /**
    * Dropdown label - hidden once dropdown loads.
    */
-  private By asyncLoadingLabel = By.cssSelector("#LoadingLabel");
+  private final By asyncLoadingLabel = By.cssSelector("#LoadingLabel");
 
   /**
    * Asynchronous div that loads after a delay on Async Testing Page.
    */
-  private By asyncLoadingTextDiv = By.cssSelector("#loading-div-text");
+  private final By asyncLoadingTextDiv = By.cssSelector("#loading-div-text");
 
   /**
    * Names label.
    */
-  private By automationNamesLabel = By.cssSelector("#Dropdown > p > strong > label");
+  private final By automationNamesLabel = By.cssSelector("#Dropdown > p > strong > label");
 
   /**
    * Selector that is not in page.
    */
-  private By notInPage = By.cssSelector("NOTINPAGE");
+  private final By notInPage = By.cssSelector("NOTINPAGE");
 
   /**
    * First dialog button.
    */
-  private By automationShowDialog1 = By.cssSelector("#showDialog1");
+  private final By automationShowDialog1 = By.cssSelector("#showDialog1");
 
   /**
    * Flower table title.
    */
-  private By flowerTableTitle = By.cssSelector("#FlowerTable > caption > strong");
+  private final By flowerTableTitle = By.cssSelector("#FlowerTable > caption > strong");
 
   /**
    * Flower table.
    */
-  private By flowerTable = By.cssSelector("#FlowerTable TD");
+  private final By flowerTable = By.cssSelector("#FlowerTable TD");
 
   /**
    * Food table.
    */
-  private By foodTable = By.cssSelector("#FoodTable");
+  private final By foodTable = By.cssSelector("#FoodTable");
 
   /**
    * Gets the disabled item.
    */
-  private By disabledField = By.cssSelector("#disabledField > INPUT");
+  private final By disabledField = By.cssSelector("#disabledField > INPUT");
 
   /**
    * the IFrame element with the source.
    */
-  private By magenicIFrameLocator = By.cssSelector("#mageniciFrame");
+  private final By magenicIFrameLocator = By.cssSelector("#mageniciFrame");
 
   /**
    * Tests the functionality that waits until the IFrame to load.
@@ -170,9 +171,9 @@ public class UIWaitUnitTest extends BaseSeleniumTest {
     UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
 
     UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
-    Assert.assertFalse(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "nottherightid", "id"));
+    Assert.assertFalse(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "notTheRightId", "id"));
     Assert
-        .assertFalse(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "nottherightid", "id", 10000, 1000));
+        .assertFalse(wait.waitUntilAttributeTextContains(asyncDropdownCssSelector, "notTheRightId", "id", 10000, 1000));
   }
 
   /**

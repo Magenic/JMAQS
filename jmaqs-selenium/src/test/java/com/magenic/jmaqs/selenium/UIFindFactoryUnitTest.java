@@ -20,17 +20,17 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Url for the site.
    */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
+  private static final String siteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Automation site url.
    */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
+  private static final String siteAutomationUrl = siteUrl + "Automation/";
 
   /**
    * Error string templates for assertion failures.
    */
-  private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
+  private static final String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
 
   /**
    * Test get ui find with element.

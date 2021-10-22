@@ -36,7 +36,7 @@ public abstract class AbstractLazyElement {
   private final Integer elementIndex;
 
   /**
-   * A user friendly name, for logging purposes.
+   * A user-friendly name, for logging purposes.
    */
   protected final String userFriendlyName;
 
@@ -65,7 +65,7 @@ public abstract class AbstractLazyElement {
    *
    * @param testObject       The selenium test object
    * @param locator          The by locator to search on
-   * @param userFriendlyName The user friendly name of the lazy element
+   * @param userFriendlyName The user-friendly name of the lazy element
    */
   protected AbstractLazyElement(SeleniumTestObject testObject, By locator, String userFriendlyName) {
     this.testObject = testObject;
@@ -79,7 +79,7 @@ public abstract class AbstractLazyElement {
    *
    * @param parent           The parent lazy element
    * @param locator          The by locator to search on
-   * @param userFriendlyName The user friendly name of the lazy element
+   * @param userFriendlyName The user-friendly name of the lazy element
    */
   protected AbstractLazyElement(LazyWebElement parent, By locator, String userFriendlyName) {
     this.testObject = parent.getTestObject();
@@ -94,7 +94,7 @@ public abstract class AbstractLazyElement {
    *
    * @param parent           The parent lazy element
    * @param locator          THe by locator to search on
-   * @param userFriendlyName The user friendly name of the lazy element
+   * @param userFriendlyName The user-friendly name of the lazy element
    * @param elementIndex     The index of the cached element
    * @param cachedElement    The cached element
    */
@@ -137,7 +137,7 @@ public abstract class AbstractLazyElement {
   }
 
   /**
-   * Gets the user friendly name.
+   * Gets the user-friendly name.
    *
    * @return the userFriendlyName
    */
@@ -553,7 +553,7 @@ public abstract class AbstractLazyElement {
         return this.getCachedElement();
       } catch (Exception e) {
         this.getTestObject().getLogger()
-            .logMessage(MessageType.VERBOSE, "Refinding element because: " + e.getMessage());
+            .logMessage(MessageType.VERBOSE, "Finding element again because: " + e.getMessage());
       }
     }
 

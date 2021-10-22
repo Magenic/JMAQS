@@ -22,37 +22,35 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   /**
    * Remote capabilities username identifier.
    */
-  private String username = "username";
+  private final String username = "username";
   /**
    * Remote browser access key identifier.
    */
-  private String accessKey = "accessKey";
+  private final String accessKey = "accessKey";
   /**
    * Remote browser name identifier.
    */
-  private String browserName = "browserName";
+  private final String browserName = "browserName";
   /**
    * Remote version platform identifier.
    */
-  private String platform = "platform";
+  private final String platform = "platform";
   /**
    * Remote browser version identifier.
    */
-  private String version = "version";
+  private final String version = "version";
 
   /**
    * Browser name.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getBrowserName() {
-
     String driverName = SeleniumConfig.getBrowserName();
-
     Assert.assertTrue(driverName.equalsIgnoreCase("HEADLESSCHROME"));
   }
 
   /**
-   * Web site base.
+   * Website base.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getWebsiteBase() {
@@ -160,12 +158,11 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Verify SavePagesourceOnFail is enabled.
+   * Verify SavePageSourceOnFail is enabled.
    */
   @Test(groups = TestCategories.SELENIUM)
-  public void getSavePagesourceOnFail() {
-    boolean value = SeleniumConfig.getSavePagesourceOnFail();
-
+  public void getSavePageSourceOnFail() {
+    boolean value = SeleniumConfig.getSavePageSourceOnFail();
     Assert.assertTrue(value);
   }
 
@@ -175,7 +172,6 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getSoftAssertScreenshot() {
     boolean value = SeleniumConfig.getSoftAssertScreenshot();
-
     Assert.assertTrue(value);
   }
 

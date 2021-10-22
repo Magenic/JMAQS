@@ -21,17 +21,12 @@ public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Url for the site.
    */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
+  private static final String siteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Automation site url.
    */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
-
-  /**
-   * Error string templates for assertion failures.
-   */
-  private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
+  private static final String siteAutomationUrl = siteUrl + "Automation/";
 
   /**
    * Test get fluent wait object.
@@ -49,7 +44,7 @@ public class FluentWaitFactoryUnitTest extends BaseSeleniumTest {
     FluentWait<WebElement> fluentWait = FluentWaitFactory
         .getNewElementFluentWait(elementDriver, timeout, polling);
 
+    String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
     Assert.assertNotNull(fluentWait, String.format(assertNotNullErrorTemplate, "fluentWait"));
   }
-
 }

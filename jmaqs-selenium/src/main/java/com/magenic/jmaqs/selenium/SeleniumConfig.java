@@ -180,7 +180,7 @@ public final class SeleniumConfig {
    *
    * @return True if the flag is set to "Yes"
    */
-  public static boolean getSavePagesourceOnFail() {
+  public static boolean getSavePageSourceOnFail() {
     return Config.getValueForSection(SELENIUM_SECTION, "SavePagesourceOnFail")
         .equalsIgnoreCase("Yes");
   }

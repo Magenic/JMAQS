@@ -16,45 +16,46 @@ import org.testng.annotations.Test;
  * The UI Find functionality unit test.
  */
 public class UIFindUnitTest extends BaseSeleniumTest {
+
   /**
    * Url for the site.
    */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
+  private static final String siteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Automation site url.
    */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
+  private static final String siteAutomationUrl = siteUrl + "Automation/";
 
   /**
    * Flower table.
    */
-  private static By flowerTable = By.cssSelector("#FlowerTable TD");
+  private static final By flowerTable = By.cssSelector("#FlowerTable TD");
 
   /**
    * Home button css selector.
    */
-  private By homeButton = By.cssSelector("#homeButton > a");
+  private final By homeButton = By.cssSelector("#homeButton > a");
 
   /**
    * Selector that is not in page.
    */
-  private By notInPage = By.cssSelector("NOTINPAGE");
+  private final By notInPage = By.cssSelector("NOTINPAGE");
 
   /**
    * Names label.
    */
-  private By automationNamesLabel = By.cssSelector("#Dropdown > p > strong > label");
+  private final By automationNamesLabel = By.cssSelector("#Dropdown > p > strong > label");
 
   /**
    * Home button css selector.
    */
-  private By dropdownToggleClassSelector = By.className("dropdown-toggle");
+  private final By dropdownToggleClassSelector = By.className("dropdown-toggle");
 
   /**
    * First dialog button.
    */
-  private By automationShowDialog1 = By.cssSelector("#showDialog1");
+  private final By automationShowDialog1 = By.cssSelector("#showDialog1");
 
   /**
    * Verify findElement works, validating a specific selector is found.

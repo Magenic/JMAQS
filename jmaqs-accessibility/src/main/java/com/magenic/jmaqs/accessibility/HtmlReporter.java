@@ -52,7 +52,7 @@ public class HtmlReporter {
   /**
    * File path to resources java resources folder.
    */
-  private static final String resourcesFile = "../jmaqs-accessibility/src/main/resources/";
+  private static final String RESOURCES_FILE = "../jmaqs-accessibility/src/main/resources/";
 
   /**
    * Class constructor.
@@ -538,7 +538,7 @@ public class HtmlReporter {
    */
   private static String getCss(SearchContext context) throws IOException {
     String css = new String(Files.readAllBytes(
-        Paths.get(resourcesFile + "htmlReporter.css")));
+        Paths.get(RESOURCES_FILE + "htmlReporter.css")));
     return  css.replace("url('", "url('" + getDataImageString(context));
   }
 
@@ -569,6 +569,6 @@ public class HtmlReporter {
    * @throws IOException if an exception is thrown
    */
   private static String getJavascriptFileToString() throws IOException {
-    return new String(Files.readAllBytes(Paths.get(resourcesFile + "htmlReporterElements.js")));
+    return new String(Files.readAllBytes(Paths.get(RESOURCES_FILE + "htmlReporterElements.js")));
   }
 }

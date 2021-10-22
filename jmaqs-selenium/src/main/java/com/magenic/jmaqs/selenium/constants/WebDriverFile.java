@@ -32,7 +32,7 @@ public enum WebDriverFile {
   /**
    * This driver file.
    */
-  private String fileName;
+  private final String fileName;
 
   WebDriverFile(String file) {
     this.fileName = file;

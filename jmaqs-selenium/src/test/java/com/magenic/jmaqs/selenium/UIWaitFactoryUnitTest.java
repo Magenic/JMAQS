@@ -19,25 +19,21 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   /**
    * Url for the site.
    */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
+  private static final String siteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Automation site url.
    */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
+  private static final String siteAutomationUrl = siteUrl + "Automation/";
 
-  /**
-   * Error string templates for assertion failures.
-   */
-  private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
   /**
    * The constant assertEqualErrorTemplate.
    */
-  private static String assertEqualErrorTemplate = "%s was not equal to %s when they were expected to be.";
+  private static final String assertEqualErrorTemplate = "%s was not equal to %s when they were expected to be.";
   /**
    * The constant assertNotEqualErrorTemplate.
    */
-  private static String assertNotEqualErrorTemplate = "%s was equal to %s when they were expected not to be.";
+  private static final String assertNotEqualErrorTemplate = "%s was equal to %s when they were expected not to be.";
 
   /**
    * Gets wait driver test.
@@ -46,6 +42,7 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   public void getWaitDriverTest() {
     UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
+    String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
     Assert.assertNotNull(waitDriver, String.format(assertNotNullErrorTemplate, "waitDriver"));
   }
 
