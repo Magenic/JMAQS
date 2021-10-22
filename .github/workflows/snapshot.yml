@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Draft Release Notes
         id: release-drafter
-        uses: release-drafter/release-drafter@v5.14.0
+        uses: release-drafter/release-drafter@v5.15.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - id: bash_v
@@ -36,7 +36,7 @@ jobs:
         with:
           java-version: ${{env.JDK}}
       - name: Maven Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
@@ -45,7 +45,7 @@ jobs:
         with:
           profiles: '[{ "id": "sonar", "properties": { "sonar.organization":"magenic", "sonar.host.url":"https://sonarcloud.io", "sonar.login": "${{secrets.SONAR_LOGIN}}"}}]'
       - name: Set Version to ${{env.VERSION}}-SNAPSHOT and Run Unit Tests
-        uses: GabrielBB/xvfb-action@v1.4
+        uses: GabrielBB/xvfb-action@v1.5
         with:
           run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -B -Dtesting verify install --file pom.xml -e -fae -T 1C -Djdk.version=${{env.JDK}}
         env:
@@ -73,61 +73,61 @@ jobs:
             name: Artifacts
             path: ./**/*.jar
 
-  deploy_snapshot:
-    name: Deploy SnapShot Packages
-    needs: [snapshot_build, update_release_draft]
-    runs-on: ubuntu-latest
-    env:
-      JDK: 11
-      VERSION: ${{needs.update_release_draft.outputs.version}}
-    strategy:
-      matrix:
-        #repo: [github, ossrh]
-        repo: [ ossrh ]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK ${{env.JDK}}
-        uses: actions/setup-java@v1
-        with:
-            java-version: ${{env.JDK}}
-      - name: Maven Cache
-        uses: actions/cache@v2.1.4
-        with:
-          path: ~/.m2
-          key: ${{runner.os}}-m2
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v3.0.2
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Create settings file
-        uses: InstaCode/maven-settings-xml-action@v9
-        with:
-          servers: '[{"id": "ossrh", "username": "jason-edstrom", "password": "${{secrets.OSSRH_PACKAGES}}"},{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
-      - uses: altinukshini/deployment-action@releases/v1
-        name: Create GitHub deployment
-        id: deployment
-        with:
-          token: "${{ github.token }}"
-          target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
-          environment: SnapShot - ${{matrix.repo}}
-      - name: Deploy SnapShot Packages to '${{matrix.repo}}' Repository
-        run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Ddeploy=${{matrix.repo}} deploy -B -e -f pom.xml -Djdk.version=${{env.JDK}}
-      - name: Update deployment status (success)
-        if: success()
-        uses: altinukshini/deployment-status@releases/v1
-        with:
-          token: "${{ github.token }}"
-          target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
-          state: "success"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-      - name: Update deployment status (failure)
-        if: failure()
-        uses: altinukshini/deployment-status@releases/v1
-        with:
-          token: "${{ github.token }}"
-          target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
-          state: "failure"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}  
+#   deploy_snapshot:
+#     name: Deploy SnapShot Packages
+#     needs: [snapshot_build, update_release_draft]
+#     runs-on: ubuntu-latest
+#     env:
+#       JDK: 11
+#       VERSION: ${{needs.update_release_draft.outputs.version}}
+#     strategy:
+#       matrix:
+#         #repo: [github, ossrh]
+#         repo: [ ossrh ]
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Set up JDK ${{env.JDK}}
+#         uses: actions/setup-java@v1
+#         with:
+#             java-version: ${{env.JDK}}
+#       - name: Maven Cache
+#         uses: actions/cache@v2.1.6
+#         with:
+#           path: ~/.m2
+#           key: ${{runner.os}}-m2
+#       - name: Import GPG key
+#         id: import_gpg
+#         uses: crazy-max/ghaction-import-gpg@v3.0.2
+#         env:
+#           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+#           PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+#       - name: Create settings file
+#         uses: InstaCode/maven-settings-xml-action@v9
+#         with:
+#           servers: '[{"id": "ossrh", "username": "jason-edstrom", "password": "${{secrets.OSSRH_PACKAGES}}"},{"id": "github", "username": "jason-edstrom", "password": "${{secrets.PACKAGES}}"}]'
+#       - uses: altinukshini/deployment-action@releases/v1
+#         name: Create GitHub deployment
+#         id: deployment
+#         with:
+#           token: "${{ github.token }}"
+#           target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
+#           environment: SnapShot - ${{matrix.repo}}
+#       - name: Deploy SnapShot Packages to '${{matrix.repo}}' Repository
+#         run: mvn -Drevision="${{env.VERSION}}-SNAPSHOT" -Ddeploy=${{matrix.repo}} deploy -B -e -f pom.xml -Djdk.version=${{env.JDK}}
+#       - name: Update deployment status (success)
+#         if: success()
+#         uses: altinukshini/deployment-status@releases/v1
+#         with:
+#           token: "${{ github.token }}"
+#           target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
+#           state: "success"
+#           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+#       - name: Update deployment status (failure)
+#         if: failure()
+#         uses: altinukshini/deployment-status@releases/v1
+#         with:
+#           token: "${{ github.token }}"
+#           target_url: https://oss.sonatype.org/#nexus-search;quick~JMAQS
+#           state: "failure"
+#           deployment_id: ${{ steps.deployment.outputs.deployment_id }}  
 

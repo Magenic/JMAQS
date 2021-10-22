@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Get release
         id: get_release
-        uses: bruceadams/get-release@v1.2.2
+        uses: bruceadams/get-release@v1.2.3
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Formatting Version Tag
@@ -41,7 +41,7 @@ jobs:
         with:
           java-version: 15
       - name: Maven Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
@@ -52,7 +52,7 @@ jobs:
       - name: Print out version number from needs
         run: echo "${{env.VERSION}}"
       - name: Set Version to ${{env.VERSION}} and Run Unit Tests
-        uses: GabrielBB/xvfb-action@v1.4
+        uses: GabrielBB/xvfb-action@v1.5
         with:
           run: mvn -Drevision="${{env.VERSION}}" -Dtesting -T 1C verify install -B -e -f pom.xml -fae -Djdk.version=${{env.JDK}}
         env:
@@ -99,7 +99,7 @@ jobs:
         with:
             java-version: 15
       - name: Maven Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
