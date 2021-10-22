@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: 15
       - name: Restore Local Maven Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
@@ -57,7 +57,7 @@ jobs:
         with:
           java-version: 11
       - name: Restore Local Maven Cache
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v2.1.6
         with:
           path: ~/.m2
           key: ${{runner.os}}-m2
@@ -65,6 +65,7 @@ jobs:
         run: mvn -B validate --file pom.xml -e -fae
   labels:
     name: Pull Request Labels
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Label Pull Request
