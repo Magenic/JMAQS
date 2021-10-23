@@ -210,8 +210,8 @@ public abstract class AbstractLazyElement {
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public Dimension getSize() throws InterruptedException {
-    this.getTestObject().getLogger().logMessage(MessageType.INFORMATION,
-        String.format("Getting the size of lazy element '%s'", this.userFriendlyName));
+    this.getTestObject().getLogger().logMessage(
+        MessageType.INFORMATION, String.format("Getting the size of lazy element '%s'", this.userFriendlyName));
     return GenericWait.waitFor(this.getElement(this::getRawExistingElement)::getSize);
   }
 
@@ -223,8 +223,8 @@ public abstract class AbstractLazyElement {
    * @throws ExecutionFailedException If error occurs while sending keys
    */
   public void click() throws InterruptedException {
-    this.getTestObject().getLogger()
-        .logMessage(MessageType.INFORMATION, String.format("Click '%s'", this.userFriendlyName));
+    this.getTestObject().getLogger().logMessage(
+        MessageType.INFORMATION, String.format("Click '%s'", this.userFriendlyName));
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawClickableElement));
     this.executeEvent(element::click, "Click");
   }
@@ -238,8 +238,8 @@ public abstract class AbstractLazyElement {
    * @throws InterruptedException     If the thread is interrupted while waiting for the element to be found
    */
   public void sendSecretKeys(String keys) throws InterruptedException {
-    this.getTestObject().getLogger()
-        .logMessage(MessageType.VERBOSE, "Send secret keys to '%s'", this.getUserFriendlyName());
+    this.getTestObject().getLogger().logMessage(
+        MessageType.VERBOSE, "Send secret keys to '%s'", this.getUserFriendlyName());
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawVisibleElement));
 
     try {
@@ -248,8 +248,8 @@ public abstract class AbstractLazyElement {
       this.getTestObject().getLogger().continueLogging();
     } catch (ExecutionFailedException e) {
       this.getTestObject().getLogger().continueLogging();
-      this.getTestObject().getLogger()
-          .logMessage(MessageType.ERROR, "Exception during sending secret keys: " + e + System.lineSeparator());
+      this.getTestObject().getLogger().logMessage(
+          MessageType.ERROR, "Exception during sending secret keys: " + e + System.lineSeparator());
 
       throw e;
     }
@@ -261,8 +261,8 @@ public abstract class AbstractLazyElement {
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public void clear() throws InterruptedException {
-    this.getTestObject().getLogger()
-        .logMessage(MessageType.INFORMATION, String.format("Clear '%s'", this.userFriendlyName));
+    this.getTestObject().getLogger().logMessage(
+        MessageType.INFORMATION, String.format("Clear '%s'", this.userFriendlyName));
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawVisibleElement));
     this.executeEvent(element::clear, "Clear");
   }
@@ -273,8 +273,8 @@ public abstract class AbstractLazyElement {
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
    */
   public void submit() throws InterruptedException {
-    this.getTestObject().getLogger()
-        .logMessage(MessageType.INFORMATION, String.format("Submit '%s'", this.userFriendlyName));
+    this.getTestObject().getLogger().logMessage(
+        MessageType.INFORMATION, String.format("Submit '%s'", this.userFriendlyName));
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawExistingElement));
     this.executeEvent(element::submit, "Submit");
   }
@@ -357,7 +357,6 @@ public abstract class AbstractLazyElement {
    * @return The click-able web element
    */
   public WebElement getRawClickableElement() {
-
     Supplier<WebElement> elementSupplier;
     if (this.elementIndex == null) {
       if (this.parent == null) {
@@ -386,7 +385,6 @@ public abstract class AbstractLazyElement {
    * @return The existing web element
    */
   public WebElement getRawExistingElement() {
-
     Supplier<WebElement> elementSupplier;
 
     if (this.elementIndex == null) {
@@ -451,8 +449,8 @@ public abstract class AbstractLazyElement {
       keyBuilder.append(cs);
     }
 
-    this.getTestObject().getLogger()
-        .logMessage(MessageType.VERBOSE, "Send keys '%s' to '%s'", keyBuilder.toString(), this.getUserFriendlyName());
+    this.getTestObject().getLogger().logMessage(
+        MessageType.VERBOSE, "Send keys '%s' to '%s'", keyBuilder.toString(), this.getUserFriendlyName());
 
     WebElement element = GenericWait.waitFor(() -> this.getElement(this::getRawVisibleElement));
     this.executeEvent(() -> element.sendKeys(keysToSend), "SendKeys");
@@ -564,8 +562,9 @@ public abstract class AbstractLazyElement {
       return this.getCachedElement();
     } catch (NoSuchElementException noSuchElementException) {
       String messageBuilder =
-          "Failed to find: " + this.userFriendlyName + System.lineSeparator() + "Locator: " + this.getBy()
-              + System.lineSeparator() + "Because: " + noSuchElementException.getMessage() + System.lineSeparator();
+          "Failed to find: " + this.userFriendlyName + System.lineSeparator()
+              + "Locator: " + this.getBy() + System.lineSeparator()
+              + "Because: " + noSuchElementException.getMessage() + System.lineSeparator();
       throw new NoSuchElementException(messageBuilder, noSuchElementException);
     }
   }
@@ -584,8 +583,8 @@ public abstract class AbstractLazyElement {
     } catch (Exception e) {
       String messageBuilder =
           "Failed to " + caller + ": " + this.userFriendlyName + System.lineSeparator()
-              + "Locator: " + this.getBy() + System.lineSeparator() + "Because: " + e.getMessage()
-              + System.lineSeparator();
+              + "Locator: " + this.getBy() + System.lineSeparator()
+              + "Because: " + e.getMessage() + System.lineSeparator();
       throw new ExecutionFailedException(messageBuilder, e);
     }
   }
