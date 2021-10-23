@@ -40,7 +40,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   /**
    * Selector that is not in page.
    */
-  private final By notInPage = By.cssSelector("NOTINPAGE");
+  private final By notInPage = By.cssSelector("NotInPage");
 
   /**
    * Names label.
@@ -237,8 +237,8 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   public void findIndexOfElementInCollectionTextNotFoundAssertIsTrue() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
-    int index = find.findIndexOfElementWithText(find.findElements(flowerTable),
-        "#notfound", false);
+    int index = find.findIndexOfElementWithText(
+        find.findElements(flowerTable), "#notfound", false);
     Assert.assertEquals(index, -1);
   }
 }
