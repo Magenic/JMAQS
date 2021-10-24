@@ -47,6 +47,17 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   }
 
   /**
+   * Gets wait driver test.
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void getWaitDriverWithTimeoutTest() {
+    UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver(), 5000, 1000);
+
+    String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
+    Assert.assertNotNull(waitDriver, String.format(assertNotNullErrorTemplate, "waitDriver"));
+  }
+
+  /**
    * Gets wait driver when one exists.
    */
   @Test(groups = TestCategories.SELENIUM)

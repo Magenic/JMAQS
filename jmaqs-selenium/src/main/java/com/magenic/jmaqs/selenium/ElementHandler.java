@@ -243,7 +243,6 @@ public class ElementHandler {
    * @param textToEnter Text to enter into the text box
    */
   public static void setTextBox(WebDriver webDriver, By by, String textToEnter) {
-
     setTextBox(webDriver, by, textToEnter, true);
   }
 

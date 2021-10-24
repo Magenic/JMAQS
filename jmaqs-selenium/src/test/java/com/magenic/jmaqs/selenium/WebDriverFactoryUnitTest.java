@@ -8,6 +8,7 @@ import com.magenic.jmaqs.base.BaseGenericTest;
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
+import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.HashMap;
 import org.openqa.selenium.Dimension;
@@ -127,7 +128,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Fire Fox driver.
    */
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getFirefoxDriverTest() {
     FirefoxDriver driver = null;
@@ -223,6 +223,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getRemoteOptionsIeTest() {
     MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.IE);
     Assert.assertNotNull(options);
+    Assert.assertEquals(options.getBrowserName(), "internet explorer");
   }
 
   /**
@@ -232,6 +233,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getRemoteOptionsFirefoxTest() {
     MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.FIREFOX);
     Assert.assertNotNull(options);
+    Assert.assertEquals(options.getBrowserName(), "firefox");
   }
 
   /**
@@ -241,6 +243,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getRemoteOptionsEdgeTest() {
     MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.EDGE);
     Assert.assertNotNull(options);
+    Assert.assertEquals(options.getBrowserName(), "MicrosoftEdge");
   }
 
   /**
@@ -250,6 +253,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getRemoteOptionsSafariTest() {
     MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.SAFARI);
     Assert.assertNotNull(options);
+    Assert.assertEquals(options.getBrowserName(), "safari");
   }
 
   /**
@@ -438,5 +442,13 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
     } finally {
       chromeDriver.quit();
     }
+  }
+
+  /**
+   * Tests getting the Chrome driver.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = WebDriverFactoryException.class)
+  public void getNullDriverTest() {
+    WebDriverFactory.getBrowserWithDefaultConfiguration(null);
   }
 }

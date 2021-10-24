@@ -8,6 +8,7 @@ import com.magenic.jmaqs.selenium.factories.UIFindFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -240,5 +241,29 @@ public class UIFindUnitTest extends BaseSeleniumTest {
     int index = find.findIndexOfElementWithText(
         find.findElements(flowerTable), "#notfound", false);
     Assert.assertEquals(index, -1);
+  }
+
+  /**
+   * Verify FindIndexOfElementWithText works,
+   * NotFoundException is thrown when the element is not found and assert == true.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = NotFoundException.class)
+  public void findIndexOfElementWithTextThrowTheException() {
+    this.getWebDriver().navigate().to(siteAutomationUrl);
+    UIFind find = UIFindFactory.getFind(this.getWebDriver());
+    find.findIndexOfElementWithText(
+        find.findElements(notInPage), "#notfound", true);
+  }
+
+  /**
+   * Verify FindIndexOfElementWithText works,
+   * NotFoundException is thrown when the element is not found and assert == true.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = NotFoundException.class)
+  public void findIndexOfElementWithTextInvalidElementText() {
+    this.getWebDriver().navigate().to(siteAutomationUrl);
+    UIFind find = UIFindFactory.getFind(this.getWebDriver());
+    find.findIndexOfElementWithText(
+        find.findElements(flowerTable), "#notfound", true);
   }
 }

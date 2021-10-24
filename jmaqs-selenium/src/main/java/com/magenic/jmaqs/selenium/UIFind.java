@@ -194,7 +194,6 @@ public class UIFind {
    */
   public int findIndexOfElementWithText(List<WebElement> list, String text) {
     return findIndexOfElementWithText(list, text, true);
-
   }
 
   /**

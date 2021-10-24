@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.exceptions.ElementHandlerException;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.ListProcessor;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
@@ -108,6 +109,18 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void setTextBoxAndVerifyValueTest() {
     String expectedValue = "Tester";
+    navigateToUrl();
+    ElementHandler.setTextBox(getWebDriver(), firstNameTextBox, expectedValue);
+    String actualValue = ElementHandler.getElementAttribute(getWebDriver(), firstNameTextBox);
+    verifyText(actualValue, expectedValue);
+  }
+
+  /**
+   * Unit test for entering text into a text box and getting text from a text box.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = ElementHandlerException.class)
+  public void setTextBoxAndVerifyEmptyValueTest() {
+    String expectedValue = "";
     navigateToUrl();
     ElementHandler.setTextBox(getWebDriver(), firstNameTextBox, expectedValue);
     String actualValue = ElementHandler.getElementAttribute(getWebDriver(), firstNameTextBox);
@@ -299,9 +312,9 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
   /**
    * Verify Send Secret Keys suspends logging.
    */
-  @Ignore("This can be uncommented when the logger functions as expected.")
+  //@Ignore("This can be uncommented when the logger functions as expected.")
   @Test(groups = TestCategories.SELENIUM)
-  public void sendSecretTextSuspendLoggingTest() throws IOException {
+  public void sendSecretKeysSuspendLoggingTest() throws IOException {
     this.navigateToUrl();
     this.getWebDriver().findElement(firstNameTextBox).sendKeys("somethingTest");
     this.getWebDriver().findElement(firstNameTextBox).clear();
@@ -336,6 +349,14 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
         "Failed to assert the logger did continued logging normally after secret keys.");
   }
 
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = Exception.class)
+  public void sendSecretKeysInvalidElement() {
+    this.navigateToUrl();
+    this.getWebDriver().findElement(firstNameTextBox).sendKeys("somethingTest");
+    this.getWebDriver().findElement(firstNameTextBox).clear();
+    ElementHandler.sendSecretKeys(getWebDriver(), By.cssSelector("notAnElement"), "secretKeys", this.getLogger());
+  }
+
   /**
    * Verify two Strings are equal. If not fail test.
    *
@@ -353,5 +374,4 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     getWebDriver().navigate().to(siteAutomationUrl);
     UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
   }
-
 }

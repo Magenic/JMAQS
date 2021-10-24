@@ -83,7 +83,6 @@ public class WebDriverFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
-
       // Log that something went wrong
       String message =  "Failed to initial web driver because: %s %s"
           + "This likely means your web driver is missing, unsupported or out of date.";
