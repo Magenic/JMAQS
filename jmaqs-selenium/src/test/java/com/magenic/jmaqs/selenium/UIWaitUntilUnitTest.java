@@ -240,6 +240,18 @@ public class UIWaitUntilUnitTest extends BaseSeleniumTest {
   }
 
   /**
+   * Verify WaitUntilVisibleElement wait works.
+   */
+  @Test(groups = TestCategories.SELENIUM)
+  public void waitUntilVisibleInvalidElement() {
+    this.getWebDriver().navigate().to(testSiteAutomationUrl);
+    UIWaitFactory.getWaitDriver(this.getWebDriver()).waitForPageLoad();
+
+    UIWait wait = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    Assert.assertFalse(wait.waitUntilVisibleElement(notInPage), "Element was found");
+  }
+
+  /**
    * Verify WaitUntilExactText wait works.
    */
   @Test(groups = TestCategories.SELENIUM)

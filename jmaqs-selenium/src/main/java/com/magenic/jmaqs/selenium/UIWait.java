@@ -281,7 +281,6 @@ public class UIWait {
    * @return boolean true if element is found, else false
    */
   public boolean waitUntilEnabledElement(final By by, final int timeOutInMillis, final int sleepInMillis) {
-
     WebElement element = this.waitForVisibleElement(by);
     FluentWait<WebElement> fluentWait = FluentWaitFactory
         .getNewElementFluentWait(element, timeOutInMillis, sleepInMillis);
@@ -374,7 +373,6 @@ public class UIWait {
    * @return boolean - true if not displayed
    */
   public boolean waitUntilAbsentElement(By by, final int timeOutInMillis, final int sleepInMillis) {
-
     try {
       WebElement element = this.driver.findElement(by);
       FluentWait<WebElement> fluentWait = FluentWaitFactory
@@ -876,7 +874,6 @@ public class UIWait {
    * @param by The frame locator
    */
   public boolean waitUntilIframeToLoad(By by, WebDriverWait wait) {
-
     try {
       waitForIframeToLoad(by, wait);
       return true;

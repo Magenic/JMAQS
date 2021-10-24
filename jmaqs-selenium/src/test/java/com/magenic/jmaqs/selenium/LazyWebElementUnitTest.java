@@ -23,11 +23,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
@@ -170,6 +167,16 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	private LazyWebElement getDisabledInput() {
 		return new LazyWebElement(this.getDisabledDiv(), By.cssSelector("input"), FLOWER_TABLE_CAPTION);
 	}
+
+	/**
+	 * Gets the disabled input
+	 *
+	 * @return The disabled input
+	 */
+	private LazyWebElement getNotInPage() {
+		return new LazyWebElement(this.getTestObject(), By.cssSelector("notInPage"), "Not In Page");
+	}
+
 
 	/**
 	 * Setup before a test
@@ -470,6 +477,20 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	}
 
 	/**
+	 * Verify Lazy Element SendKeys test.
+	 * @throws ExecutionFailedException if an exception is thrown
+	 * @throws InterruptedException if an exception is thrown
+	 * @throws TimeoutException if an exception is thrown
+	 */
+	@Test(groups = TestCategories.SELENIUM, expectedExceptions = ExecutionFailedException.class)
+	public void lazyElementSendSecretKeysInvalidElement()
+			throws ExecutionFailedException, InterruptedException, TimeoutException {
+		this.getFirstNameInputBox().sendKeys("beforeSuspendTest");
+		this.getFirstNameInputBox().clear();
+		this.getDisabledDiv().sendSecretKeys("secretKeys");
+	}
+
+	/**
 	 * Verify Lazy Element Submit test
 	 */
 	@Test(groups = TestCategories.SELENIUM)
@@ -760,5 +781,34 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 	public void lazyElementDoesExist() throws TimeoutException, InterruptedException {
 		LazyWebElement element = this.getFlowerTableLazyElement();
 		assertTrue(element.doesExist(), "element didn't exist when it was expected to");
+	}
+
+	/**
+	 * Verify the element does exist function behaves correctly
+	 */
+	@Test(groups = TestCategories.SELENIUM, expectedExceptions = TimeoutException.class)
+	public void lazyElementDoesNotExist() throws TimeoutException, InterruptedException {
+		LazyWebElement element = this.getNotInPage();
+		assertTrue(element.doesExist(), "element didn't exist when it was expected to");
+	}
+
+	/**
+	 * Get the lazy element Rectangle.
+	 * TODO: Delete unit test when method is deleted
+	 */
+	@Test(groups = TestCategories.SELENIUM)
+	public void lazyElementGetRect() throws TimeoutException, InterruptedException {
+		LazyWebElement element = this.getDialogOne();
+		assertNotNull(element.getRect(), "element rectangle exists");
+	}
+
+	/**
+	 * Get the lazy element Rectangle.
+	 * TODO: Delete unit test when method is deleted
+	 */
+	@Test(groups = TestCategories.SELENIUM)
+	public void lazyElementGetScreenshotAs() throws TimeoutException, InterruptedException {
+		LazyWebElement element = this.getFlowerTableLazyElement();
+		assertNotNull(element.getScreenshotAs(OutputType.FILE), "screenshot was created");
 	}
 }

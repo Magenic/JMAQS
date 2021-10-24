@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.selenium.exceptions.ElementHandlerException;
 import com.magenic.jmaqs.selenium.factories.FluentWaitFactory;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
 import com.magenic.jmaqs.utilities.helper.GenericWait;
@@ -560,12 +561,12 @@ public abstract class AbstractLazyElement {
           .logMessage(MessageType.VERBOSE, "Performing lazy driver find on: " + this.getBy());
       this.setCachedElement(getElement);
       return this.getCachedElement();
-    } catch (NoSuchElementException noSuchElementException) {
+    } catch (TimeoutException | NoSuchElementException noSuchElementException) {
       String messageBuilder =
           "Failed to find: " + this.userFriendlyName + System.lineSeparator()
               + "Locator: " + this.getBy() + System.lineSeparator()
               + "Because: " + noSuchElementException.getMessage() + System.lineSeparator();
-      throw new NoSuchElementException(messageBuilder, noSuchElementException);
+      throw new ElementHandlerException(messageBuilder, noSuchElementException);
     }
   }
 
