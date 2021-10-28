@@ -794,17 +794,6 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 
 	/**
 	 * Get the lazy element Rectangle.
-	 * TODO: Delete unit test when method is deleted
-	 */
-	@Test(groups = TestCategories.SELENIUM)
-	public void lazyElementGetRect() throws TimeoutException, InterruptedException {
-		LazyWebElement element = this.getDialogOne();
-		assertNotNull(element.getRect(), "element rectangle exists");
-	}
-
-	/**
-	 * Get the lazy element Rectangle.
-	 * TODO: Delete unit test when method is deleted
 	 */
 	@Test(groups = TestCategories.SELENIUM)
 	public void lazyElementGetScreenshotAs() throws TimeoutException, InterruptedException {

@@ -502,7 +502,9 @@ public abstract class AbstractLazyElement {
    * @return The location and size of the element
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found
    * @throws InterruptedException If the thread is interrupted while waiting for the element to be found
+   * @deprecated this method can be used within the selenium web driver
    */
+  @Deprecated(forRemoval = true)
   public Rectangle getRect() throws InterruptedException {
     return new Rectangle(this.getLocation(), this.getSize());
   }

@@ -12,8 +12,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
 /**
- * UIFind class This is the tool-class used for finding elements with
- * the provided search item.
+ * UIFind is the tool-class used for finding elements with the provided search item.
  */
 public class UIFind {
 
