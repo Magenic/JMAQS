@@ -260,7 +260,6 @@ public class HtmlFileLogger extends FileLogger implements AutoCloseable {
         console.logMessage(MessageType.ERROR, StringProcessor.safeFormatter(LOG_ERROR_MESSAGE, e.getMessage()));
       }
     }
-
   }
 
   /**
