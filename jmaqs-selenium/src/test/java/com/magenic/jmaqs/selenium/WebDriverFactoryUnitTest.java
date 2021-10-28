@@ -24,7 +24,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
@@ -144,9 +143,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Edge driver.
    */
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
-  // TODO: File path to the WebDriver.exe might be an issue here.
   public void getEdgeDriverTest() {
     EdgeDriver driver = null;
     try {
@@ -162,7 +159,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the IE driver.
    */
-  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getInternetExplorerDriverTest() {
     InternetExplorerDriver driver = null;
@@ -180,8 +176,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    * Tests getting the Headless driver.
    */
   @Test(groups = TestCategories.SELENIUM)
-  @Ignore
-  // TODO: Remote driver not being instantiated.
   public void getRemoteDriverTest() {
     RemoteWebDriver driver = null;
     try {
