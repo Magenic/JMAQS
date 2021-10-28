@@ -10,6 +10,8 @@ import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
 import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.selenium.exceptions.DriverNotFoundException;
 import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
+import com.magenic.jmaqs.utilities.helper.Config;
+import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.File;
 import java.net.URL;
@@ -84,9 +86,9 @@ public class WebDriverFactory {
       throw e;
     } catch (Exception e) {
       // Log that something went wrong
-      String message =  "Failed to initial web driver because: %s %s"
+      String message = "Failed to initial web driver because: %s %s"
           + "This likely means your web driver is missing, unsupported or out of date.";
-      message = StringProcessor.safeFormatter(message, e.getMessage() , System.lineSeparator());
+      message = StringProcessor.safeFormatter(message, e.getMessage(), System.lineSeparator());
 
       throw new WebDriverFactoryException(message, e);
     }
@@ -108,7 +110,7 @@ public class WebDriverFactory {
       chromeOptions.addArguments("--no-sandbox");
       chromeOptions.addArguments("--disable-dev-shm-usage");
     }
-    
+
     return chromeOptions;
   }
 
@@ -194,8 +196,6 @@ public class WebDriverFactory {
    * @return the chrome driver
    */
   public static WebDriver getChromeDriver(ChromeOptions chromeOptions, String size) {
-    System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
     WebDriver driver = new ChromeDriver(chromeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -208,8 +208,6 @@ public class WebDriverFactory {
    * @return the headless chrome driver
    */
   public static WebDriver getHeadlessChromeDriver(ChromeOptions headlessChromeOptions) {
-    System.setProperty("webdriver.chrome.driver",
-        getDriverLocation(WebDriverFile.CHROME.getFileName()) + File.separator + WebDriverFile.CHROME.getFileName());
     return new ChromeDriver(headlessChromeOptions);
   }
 
@@ -221,9 +219,6 @@ public class WebDriverFactory {
    * @return the firefox driver
    */
   public static WebDriver getFirefoxDriver(FirefoxOptions firefoxOptions, String size) {
-    System.setProperty("webdriver.gecko.driver",
-        getDriverLocation(WebDriverFile.FIREFOX.getFileName()) + File.separator + WebDriverFile.FIREFOX.getFileName());
-
     WebDriver driver = new FirefoxDriver(firefoxOptions);
     setBrowserSize(driver, size);
 
@@ -238,15 +233,6 @@ public class WebDriverFactory {
    * @return the edge driver
    */
   public static WebDriver getEdgeDriver(EdgeOptions edgeOptions, String size) {
-    String driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName(),
-        getWindowsEdgeDriverLocation(WebDriverFile.EDGE.getFileName()));
-
-    // If we can't find an installed edge driver, look in the normal places
-    if (driverLocation.isEmpty()) {
-      driverLocation = getDriverLocation(WebDriverFile.EDGE.getFileName());
-    }
-
-    System.setProperty("webdriver.edge.driver", driverLocation + File.separator + WebDriverFile.EDGE.getFileName());
     EdgeDriver driver = new EdgeDriver(edgeOptions);
     setBrowserSize(driver, size);
     return driver;
@@ -260,8 +246,6 @@ public class WebDriverFactory {
    * @return the internet explorer driver
    */
   public static WebDriver getInternetExplorerDriver(InternetExplorerOptions internetExplorerOptions, String size) {
-    System.setProperty("webdriver.ie.driver",
-        getDriverLocation(WebDriverFile.IE.getFileName()) + File.separator + WebDriverFile.IE.getFileName());
     InternetExplorerDriver driver = new InternetExplorerDriver(internetExplorerOptions);
     setBrowserSize(driver, size);
 
@@ -441,7 +425,9 @@ public class WebDriverFactory {
    *
    * @param driverFile the driver file
    * @return the driver location
+   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
    */
+  @Deprecated(forRemoval = true)
   public static String getDriverLocation(String driverFile) {
     return getDriverLocation(driverFile, "", true);
   }
@@ -452,7 +438,9 @@ public class WebDriverFactory {
    * @param driverFile      the driver file
    * @param defaultHintPath the default hint path
    * @return the driver location
+   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
    */
+  @Deprecated(forRemoval = true)
   public static String getDriverLocation(String driverFile, String defaultHintPath) {
     return getDriverLocation(driverFile, defaultHintPath, true);
   }
@@ -464,7 +452,9 @@ public class WebDriverFactory {
    * @param defaultHintPath the default hint path
    * @param mustExist       if it must exist
    * @return the driver location
+   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
    */
+  @Deprecated(forRemoval = true)
   public static String getDriverLocation(String driverFile, String defaultHintPath, boolean mustExist) {
     // Get the hint path from the config
     String hintPath = SeleniumConfig.getDriverHintPath();
@@ -507,7 +497,9 @@ public class WebDriverFactory {
    *
    * @param file the file
    * @return the windows edge driver location
+   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
    */
+  @Deprecated(forRemoval = true)
   static String getWindowsEdgeDriverLocation(String file) {
     String edgeDriverFolder = "Microsoft Web Driver";
 

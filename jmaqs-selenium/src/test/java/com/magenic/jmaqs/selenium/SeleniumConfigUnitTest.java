@@ -74,7 +74,7 @@ public class SeleniumConfigUnitTest extends BaseGenericTest {
   /**
    * Driver hint path.
    */
-  @Test(groups = TestCategories.SELENIUM)
+  @Test(groups = TestCategories.SELENIUM, enabled = false)
   public void getDriverHintPath() {
 
     String path = SeleniumConfig.getDriverHintPath();

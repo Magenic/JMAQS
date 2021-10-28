@@ -361,16 +361,27 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the driver location.
    */
-  @Test(groups = TestCategories.SELENIUM)
+  @Test(groups = TestCategories.SELENIUM, enabled = false)
   public void getDriverLocationTest() {
     String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
     Assert.assertFalse(driverLocation.isEmpty());
   }
 
   /**
+   * Tests getting the driver location configuration hint path.
+   */
+  @Test(groups = TestCategories.SELENIUM, enabled = false)
+  public void getDriverLocationConfigHintPathTest() {
+    String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
+    Assert.assertFalse(driverLocation.isEmpty());
+    Assert.assertEquals(driverLocation, SeleniumConfig.getDriverHintPath(),
+        "Checking that driver location and config hint path are the same.");
+  }
+
+  /**
    * Tests getting the driver location default hint path.
    */
-  @Test(groups = TestCategories.SELENIUM)
+  @Test(groups = TestCategories.SELENIUM, enabled = false)
   public void getDriverLocationDefaultHintPathTest() {
     String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName(), "");
     Assert.assertFalse(driverLocation.isEmpty());
@@ -386,7 +397,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the driver location test location.
    */
-  @Test(groups = TestCategories.SELENIUM)
+  @Test(groups = TestCategories.SELENIUM, enabled = false)
   public void getDriverLocationTestLocationTest() {
     String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
     Assert.assertFalse(driverLocation.isEmpty());
@@ -397,7 +408,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the driver location and its resource test.
    */
-  @Test(groups = TestCategories.SELENIUM)
+  @Test(groups = TestCategories.SELENIUM, enabled = false)
   public void getDriverLocationTestResourcesLocationTest() {
     String driverLocation = WebDriverFactory.getDriverLocation(WebDriverFile.CHROME.getFileName());
     Assert.assertFalse(driverLocation.isEmpty());
@@ -408,7 +419,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the driver location when it does not exist.
    */
-  @Test(groups = TestCategories.SELENIUM)
+  @Test(groups = TestCategories.SELENIUM, enabled = false)
   public void getDriverLocationDoesNotExistTest() {
     String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", false);
     Assert.assertEquals(driverLocation, "");
@@ -417,7 +428,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the driver location when it must exist.
    */
-  @Test(expectedExceptions = RuntimeException.class, groups = TestCategories.SELENIUM)
+  @Test(expectedExceptions = RuntimeException.class, groups = TestCategories.SELENIUM, enabled = false)
   public void getDriverLocationMustExistTest() {
     String driverLocation = WebDriverFactory.getDriverLocation("doesNotExist.exe", "", true);
     Assert.assertEquals(driverLocation, "");
@@ -426,7 +437,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the edge driver location.
    */
-  @Test(groups = TestCategories.SELENIUM)
+  @Test(groups = TestCategories.SELENIUM, enabled = false)
   public void getWindowsEdgeDriverLocationTest() {
     String driverLocation = WebDriverFactory.getWindowsEdgeDriverLocation("testFile");
     Assert.assertEquals(driverLocation, "");

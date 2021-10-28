@@ -124,7 +124,9 @@ public final class SeleniumConfig {
    * Get the hint path for the web driver.
    *
    * @return The hint path for the web driver
+   * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
    */
+  @Deprecated(forRemoval = true)
   public static String getDriverHintPath() {
     String defaultPath = new java.io.File("Resources").getAbsolutePath();
     return Config.getValueForSection(SELENIUM_SECTION, "WebDriverHintPath", defaultPath);
