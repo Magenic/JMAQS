@@ -31,6 +31,7 @@ import org.testng.annotations.Test;
  * The WebDriverFactory test class.
  */
 public class WebDriverFactoryUnitTest extends BaseGenericTest {
+
   /**
    * Tests getting the default browser.
    */
@@ -98,7 +99,6 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getChromeDriverTest() {
     ChromeDriver driver = null;
-
     try {
       driver = (ChromeDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(BrowserType.CHROME);
       Assert.assertNotNull(driver);
@@ -164,13 +164,15 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getInternetExplorerDriverTest() {
     InternetExplorerDriver driver = null;
 
-    try {
-      driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(
-          BrowserType.IE);
-      Assert.assertNotNull(driver);
-    } finally {
-      if (driver != null) {
-        driver.quit();
+    if (System.getProperty("os.name").equalsIgnoreCase("windows")) {
+      try {
+        driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(
+            BrowserType.IE);
+        Assert.assertNotNull(driver);
+      } finally {
+        if (driver != null) {
+          driver.quit();
+        }
       }
     }
   }
@@ -206,8 +208,8 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getRemoteOptionsChromeTest() {
-    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.CHROME, "testPlatform",
-        "testVersion", null);
+    MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.CHROME,
+        "testPlatform", "testVersion", null);
     Assert.assertNotNull(options);
 
     options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.CHROME, null);
