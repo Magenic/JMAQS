@@ -164,15 +164,13 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   public void getInternetExplorerDriverTest() {
     InternetExplorerDriver driver = null;
 
-    if (System.getProperty("os.name").equalsIgnoreCase("windows")) {
-      try {
-        driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(
-            BrowserType.IE);
-        Assert.assertNotNull(driver);
-      } finally {
-        if (driver != null) {
-          driver.quit();
-        }
+    try {
+      driver = (InternetExplorerDriver) WebDriverFactory.getBrowserWithDefaultConfiguration(
+          BrowserType.IE);
+      Assert.assertNotNull(driver);
+    } finally {
+      if (driver != null) {
+        driver.quit();
       }
     }
   }
