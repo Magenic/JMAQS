@@ -144,6 +144,7 @@ public class WebDriverFactoryUnitTest extends BaseGenericTest {
   /**
    * Tests getting the Edge driver.
    */
+  @Ignore
   @Test(groups = TestCategories.SELENIUM)
   public void getEdgeDriverTest() {
     EdgeDriver driver = null;
