@@ -19,26 +19,24 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * Accessibility Unit Tests.
+ */
 public class AccessibilityUnitTest extends BaseSeleniumTest {
+
   /**
    * Unit testing site URL - Login page.
    */
   private static final String TestSiteUrl = SeleniumConfig.getWebSiteBase();
-
-  @BeforeMethod
-  public void setup() {
-    this.getWebDriver().navigate().to(TestSiteUrl);
-    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
-  }
 
   /**
    * Verify we get verbose message back.
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityCheckVerbose() throws IOException {
+    setup();
     String filePath = ((FileLogger)getLogger()).getFilePath();
     AccessibilityUtilities.checkAccessibility(getTestObject(), false);
     String logContent = Files.lines(Paths.get(filePath),
@@ -49,8 +47,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     Assert.assertTrue(logContent.contains("Found 6 items"), "Expected to find 6 violations matches.");
     Assert.assertTrue(logContent.contains("INCOMPLETE check for"), "Expected to find any incomplete matches.");
 
-    File file = new File(filePath);
-    Assert.assertTrue(file.delete());
+    deleteFile(filePath);
   }
 
   /**
@@ -58,6 +55,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityCheckRespectsMessageLevel() {
+    setup();
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, "LevTest.txt", MessageType.WARNING);
 
@@ -78,9 +76,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      File file = new File(filePath);
-      Assert.assertTrue(file.delete(), "File was not deleted");
-      Assert.assertFalse(file.exists(), "File Still exists");
+      deleteFile(filePath);
     }
   }
 
@@ -89,6 +85,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityInapplicableCheckRespectsMessageLevel() {
+    setup();
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
 
@@ -105,8 +102,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      File file = new File(filePath);
-      Assert.assertTrue(file.delete());
+      deleteFile(filePath);
     }
   }
 
@@ -115,6 +111,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityIncompleteCheckRespectsMessageLevel() {
+    setup();
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
 
@@ -131,8 +128,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      File file = new File(filePath);
-      Assert.assertTrue(file.delete());
+      deleteFile(filePath);
     }
   }
 
@@ -141,6 +137,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityPassesCheckRespectsMessageLevel() {
+    setup();
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
 
@@ -157,8 +154,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      File file = new File(filePath);
-      Assert.assertTrue(file.delete());
+      deleteFile(filePath);
     }
   }
 
@@ -167,6 +163,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityViolationsCheckRespectsMessageLevel() {
+    setup();
     String filePath = ((FileLogger)getLogger()).getFilePath();
     FileLogger fileLogger = new FileLogger(filePath, getTestContext().getName() + ".txt", MessageType.INFORMATION);
 
@@ -183,8 +180,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
-      File file = new File(filePath);
-      Assert.assertTrue(file.delete());
+      deleteFile(filePath);
     }
   }
 
@@ -193,6 +189,7 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
     @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = RuntimeException.class)
   public void testAccessibilityCheckThrows() {
+      setup();
       AccessibilityUtilities.checkAccessibility(getTestObject(), true);
   }
 
@@ -201,6 +198,8 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityCheckNoThrowOnNoResults() {
+    setup();
+
     // There should be 0 incomplete items found
     AccessibilityUtilities.checkAccessibilityIncomplete(getTestObject().getWebDriver(),
         getTestObject().getLogger(), MessageType.WARNING, true);
@@ -211,10 +210,23 @@ public class AccessibilityUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void testAccessibilityReadableResults() {
-    AxeReporter.getReadableAxeResults("TEST", getWebDriver(), new AxeBuilder().analyze(getWebDriver()).getViolations());
+    setup();
+    AxeReporter.getReadableAxeResults("TEST", getWebDriver(),
+        new AxeBuilder().analyze(getWebDriver()).getViolations());
     String messages = AxeReporter.getAxeResultString();
 
     Assert.assertTrue(messages.contains("TEST check for"), "Expected header.");
     Assert.assertTrue(messages.contains("Found 6 items"), "Expected to find 6 violations matches.");
+  }
+
+  public void setup() {
+    this.getWebDriver().navigate().to(TestSiteUrl);
+    UIWaitFactory.getWaitDriver(getWebDriver()).waitForPageLoad();
+  }
+
+  private void deleteFile(String filePath) {
+    File file = new File(filePath);
+    Assert.assertTrue(file.delete());
+    Assert.assertFalse(file.exists(), "File Still exists");
   }
 }
