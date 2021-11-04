@@ -239,7 +239,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${surefire.plugin.version}</version>
+                        <version>${maven.surefire.plugin.version}</version>
                         <configuration>
                             <parallel>methods</parallel>
                             <threadCount>5</threadCount>
@@ -254,19 +254,27 @@
 
     <properties>
         <revision>2.1.1-SNAPSHOT</revision>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>11</jdk.version>
+        <testng.version>7.3.0</testng.version>
+
         <checkstyle.plugin.version>2.17</checkstyle.plugin.version>
         <javadoc.plugin.version>3.3.1</javadoc.plugin.version>
         <compiler.plugin.version>3.8.1</compiler.plugin.version>
-        <surefire.plugin.version>3.0.0-M5</surefire.plugin.version>
-        <mvncheckstyle.plugin.version>3.1.2</mvncheckstyle.plugin.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <puppycheckstyle.plugin.version>8.38</puppycheckstyle.plugin.version>
+        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
+        <maven.checkstyle.plugin.version>3.1.2</maven.checkstyle.plugin.version>
+        <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
+        <flatten.maven.plugin.version>1.2.7</flatten.maven.plugin.version>
+        <puppy.checkstyle.plugin.version>8.38</puppy.checkstyle.plugin.version>
+
         <jacoco.version>0.8.7</jacoco.version>
-        <testng.version>7.3.0</testng.version>
-        <selenium.version>3.141.59</selenium.version>
-        <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <checkstyle.version>8.29</checkstyle.version>
-        <jdk.version>11</jdk.version>
+
+        <commons.io.version>2.11.0</commons.io.version>
+        <apache.commons.version>1.9</apache.commons.version>
+
+        <selenium.version>3.141.59</selenium.version>
+        <webdriver.extensions>3.2.0</webdriver.extensions>
         <chromedriver.version>94.0.4606.41</chromedriver.version>
         <geckodriver.version>0.28.0</geckodriver.version>
         <edgedriver.version>5.16299</edgedriver.version>
@@ -353,7 +361,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.2.7</version>
+                <version>${flatten.maven.plugin.version}</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
                     <flattenMode>resolveCiFriendliesOnly</flattenMode>
@@ -410,7 +418,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>${maven.source.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -424,7 +432,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${maven.checkstyle.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -436,7 +444,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <parallel>methods</parallel>
                     <threadCount>5</threadCount>
@@ -446,19 +454,19 @@
                     <dependency>
                         <groupId>org.apache.maven.surefire</groupId>
                         <artifactId>surefire-testng</artifactId>
-                        <version>3.0.0-M5</version>
+                        <version>${maven.surefire.plugin.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${mvncheckstyle.plugin.version}</version>
+                <version>${maven.checkstyle.plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
                         <artifactId>checkstyle</artifactId>
-                        <version>${puppycheckstyle.plugin.version}</version>
+                        <version>${puppy.checkstyle.plugin.version}</version>
                     </dependency>
                 </dependencies>
                 <executions>

@@ -1,5 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.magenic.jmaqs</groupId>
         <artifactId>jmaqs-framework</artifactId>
@@ -14,9 +17,6 @@
     <packaging>jar</packaging>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <commonsio.version>2.6</commonsio.version>
-        <selenium.version>3.141.59</selenium.version>
 		<cucumber.version>6.9.1</cucumber.version>
     </properties>
 
@@ -96,5 +96,4 @@
             <version>${selenium.version}</version>
         </dependency>
     </dependencies>
-
 </project>

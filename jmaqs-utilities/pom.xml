@@ -3,28 +3,28 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.magenic.jmaqs</groupId>
         <artifactId>jmaqs-framework</artifactId>
         <version>${revision}</version>
     </parent>
 
-
     <groupId>com.magenic.jmaqs.utilities</groupId>
     <artifactId>jmaqs-utilities</artifactId>
     <name>JMAQS Testing Utilities Module</name>
     <version>${revision}</version>
 
-
     <properties>
-        <commonsconfiguration2.version>2.7</commonsconfiguration2.version>
-        <commonsbeanutils.version>1.9.4</commonsbeanutils.version>
+        <commons.configuration2.version>2.7</commons.configuration2.version>
+        <commons.bean.utils.version>1.9.4</commons.bean.utils.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-configuration2</artifactId>
-            <version>${commonsconfiguration2.version}</version>
+            <version>${commons.configuration2.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
@@ -33,12 +33,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.9</version>
+            <version>${apache.commons.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>${commonsbeanutils.version}</version>
+            <version>${commons.bean.utils.version}</version>
         </dependency>
     </dependencies>
 </project>

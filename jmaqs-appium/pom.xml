@@ -16,15 +16,14 @@
     <name>JMAQS Appium Testing Module</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <appiumjavaclient.version>7.6.0</appiumjavaclient.version>
+        <appium.java.client.version>7.6.0</appium.java.client.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>${appiumjavaclient.version}</version>
+            <version>${appium.java.client.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>

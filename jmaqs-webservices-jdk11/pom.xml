@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>jmaqs-framework</artifactId>
         <groupId>com.magenic.jmaqs</groupId>
@@ -13,6 +14,10 @@
     <artifactId>jmaqs-webservices-jdk11</artifactId>
     <name>JMAQS JDK11 WebServices Testing Module</name>
     <version>${revision}</version>
+
+    <properties>
+        <spring.web.version>5.3.11</spring.web.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -30,7 +35,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>5.3.12</version>
+            <version>${spring.web.version}</version>
         </dependency>
     </dependencies>
 
@@ -39,10 +44,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${compiler.plugin.version}</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -50,7 +55,6 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
-
                 </configuration>
             </plugin>
             <plugin>
@@ -65,7 +69,7 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <source>11</source>
+                            <source>${jdk.version}</source>
                             <additionalparam>-Xdoclint:none</additionalparam>
                             <workingDirectory>target/</workingDirectory>
                         </configuration>
