@@ -4,6 +4,7 @@
 
 package com.magenic.jmaqs.selenium;
 
+import com.magenic.jmaqs.base.exceptions.JMAQSRuntimeException;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import com.magenic.jmaqs.utilities.logging.FileLogger;
 import com.magenic.jmaqs.utilities.logging.LoggingConfig;
@@ -24,7 +25,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 /**
  * The type Selenium utilities.
@@ -54,7 +54,7 @@ public class SeleniumUtilities {
    *
    * @param webDriver  the web driver
    * @param testObject the test object
-   * @param appendName the append name
+   * @param appendName the appended name
    * @return the boolean
    */
   public static boolean captureScreenshot(WebDriver webDriver, SeleniumTestObject testObject,
@@ -65,6 +65,8 @@ public class SeleniumUtilities {
         return false;
       }
 
+      testObject.getLogger().logMessage(MessageType.VERBOSE, "Before screenshot capture");
+
       // Calculate the file name with Date Time Stamp
       String directory = ((FileLogger) testObject.getLogger()).getDirectory();
       String fileNameWithoutExtension = StringProcessor
@@ -74,6 +76,7 @@ public class SeleniumUtilities {
       captureScreenshot(webDriver, testObject, directory, fileNameWithoutExtension);
 
       testObject.getLogger().logMessage(MessageType.INFORMATION, "Screenshot saved.");
+      testObject.getLogger().logMessage(MessageType.VERBOSE, "After screenshot capture");
       return true;
     } catch (Exception exception) {
       testObject.getLogger().logMessage(MessageType.ERROR,
@@ -131,13 +134,13 @@ public class SeleniumUtilities {
    *
    * @param webDriver  the web driver
    * @param testObject the test object
-   * @param appendName the append name
+   * @param appendName the appended name
    * @return the boolean
    */
   public static boolean savePageSource(WebDriver webDriver, SeleniumTestObject testObject,
       String appendName) {
     try {
-      String path = "";
+      String path;
 
       // Check if we are using a file logger.
       if (!(testObject.getLogger() instanceof FileLogger)) {
@@ -227,8 +230,8 @@ public class SeleniumUtilities {
     driver = ((WrapsDriver) webElement).getWrappedDriver();
 
     // If this an even firing wrapper get the base wrapper
-    if (driver instanceof EventFiringWebDriver) {
-      return ((EventFiringWebDriver) driver).getWrappedDriver();
+    if (driver instanceof WrapsDriver) {
+      return ((WrapsDriver) driver).getWrappedDriver();
     }
 
     return driver;
@@ -244,6 +247,22 @@ public class SeleniumUtilities {
       webDriver.close();
     } finally {
       webDriver.quit();
+    }
+  }
+
+  /**
+   * Switches to a different window.
+   * @param testObject the test object to be used
+   * @param windowName the name of the window being switched to
+   */
+  public static void switchToWindow(SeleniumTestObject testObject, String windowName) {
+    testObject.getLogger().logMessage(MessageType.VERBOSE, "Before switching to window: %s", windowName);
+
+    try {
+      testObject.getWebDriver().switchTo().window(windowName);
+      testObject.getLogger().logMessage(MessageType.VERBOSE, "After switching to window: %s", windowName);
+    } catch (Exception e) {
+      throw new JMAQSRuntimeException(e.getMessage(), e);
     }
   }
 }

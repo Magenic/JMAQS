@@ -12,8 +12,10 @@ import com.magenic.jmaqs.utilities.logging.LoggingEnabled;
 import com.magenic.jmaqs.utilities.logging.MessageType;
 import java.util.function.Supplier;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 
 /**
  * The type Selenium driver manager.
@@ -67,16 +69,12 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    * @return the web driver
    */
   public WebDriver getWebDriver() {
-
     if (!this.isDriverInitialized() && LoggingConfig.getLoggingEnabledSetting() != LoggingEnabled.NO) {
-      WebDriver tempDriver = this.getBase();
-      EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(tempDriver);
-      eventFiringWebDriver.register(new EventHandler(getTestObject().getLogger()));
-      tempDriver = eventFiringWebDriver;
-      this.baseDriver = tempDriver;
+      WebDriverListener listener = new EventHandler(this.getLogger());
+      this.baseDriver = new EventFiringDecorator(listener).decorate(this.getBase());
 
       // Log the setup
-      this.loggingStartup(tempDriver);
+      this.loggingStartup(this.baseDriver);
     }
 
     return getBase();
@@ -89,7 +87,6 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
    * @param args    the args
    */
   protected void logVerbose(String message, Object... args) {
-
     StringBuilder messages = new StringBuilder();
     messages.append(StringProcessor.safeFormatter(message, args));
     String fullTestName = getTestObject().getFullyQualifiedTestName();
@@ -98,7 +95,7 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
     for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
       String trim = stackTraceElement.toString().trim();
       if (!trim.startsWith(fullTestName)) {
-        messages.append(stackTraceElement.toString());
+        messages.append(stackTraceElement);
       }
     }
     getLogger().logMessage(MessageType.VERBOSE, messages.toString());
@@ -106,7 +103,7 @@ public class SeleniumDriverManager extends DriverManager<WebDriver> {
 
   private void loggingStartup(WebDriver webDriver) {
     try {
-      WebDriver driver = ((EventFiringWebDriver) webDriver).getWrappedDriver();
+      WebDriver driver = ((WrapsDriver) webDriver).getWrappedDriver();
 
       String browserType = ((RemoteWebDriver) driver).getCapabilities().toString();
 

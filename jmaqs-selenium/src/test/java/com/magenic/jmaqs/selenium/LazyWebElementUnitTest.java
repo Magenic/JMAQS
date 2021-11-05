@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -721,7 +722,7 @@ public class LazyWebElementUnitTest extends BaseSeleniumTest {
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase());
 		this.getWebDriver().navigate().to(SeleniumConfig.getWebSiteBase() + "Automation");
 
-		UIWaitFactory.setWaitDriver(this.getWebDriver(), new WebDriverWait(this.getWebDriver(), 1));
+		UIWaitFactory.setWaitDriver(this.getWebDriver(), new WebDriverWait(this.getWebDriver(), Duration.ofSeconds(1)));
 		firstElement.click();
 	}
 
