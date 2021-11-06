@@ -60,12 +60,6 @@
 
     <profiles>
         <profile>
-            <id>WIP</id>
-            <modules>
-                <module>jmaqs-webservices-jdk11</module>
-            </modules>
-        </profile>
-        <profile>
             <id>deploy</id>
             <activation>
                 <property>
