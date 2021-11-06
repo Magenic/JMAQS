@@ -13,7 +13,7 @@ public class BaseGenericTest extends BaseExtendableTest<BaseTestObject> {
 
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
-    //No before logging steps needed in this scenario
+    // No logging steps needed before in this scenario
   }
 
   @Override

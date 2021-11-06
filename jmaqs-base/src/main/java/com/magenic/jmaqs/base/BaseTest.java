@@ -409,12 +409,12 @@ public abstract class BaseTest {
    */
   protected void logVerbose(String message, Object... args) {
     StringBuilder messages = new StringBuilder();
-    messages.append(StringProcessor.safeFormatter(message, args) + System.lineSeparator());
+    messages.append(StringProcessor.safeFormatter(message, args)).append(System.lineSeparator());
 
     for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
       // If the stack trace element is from the com.magenic package (excluding this method) append the stack trace line 
       if (element.toString().startsWith("com.magenic") && !element.toString().contains("BaseTest.logVerbose")) {
-        messages.append(element.toString() + System.lineSeparator());
+        messages.append(element).append(System.lineSeparator());
       }
     }
 

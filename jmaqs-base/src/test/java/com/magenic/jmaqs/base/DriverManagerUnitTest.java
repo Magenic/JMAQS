@@ -8,10 +8,13 @@ import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Driver manager Unit tests.
+ */
 public class DriverManagerUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
-  public void testGetBaseDriver() throws Exception {
+  public void testGetBaseDriver() {
     DriverManager<String> driverManager = getDriverManager();
     driverManager.setBaseDriver("Fake String");
     Assert.assertNotNull(driverManager.getBaseDriver());
@@ -51,10 +54,9 @@ public class DriverManagerUnitTest extends BaseGenericTest {
   }
 
   private DriverManager<String> getDriverManager() {
-    return new DriverManager<String>(() -> "Fake String here", getTestObject()) {
+    return new DriverManager<>(() -> "Fake String here", getTestObject()) {
       @Override
-      public void close() throws Exception {
-        this.close();
+      public void close() {
       }
     };
   }

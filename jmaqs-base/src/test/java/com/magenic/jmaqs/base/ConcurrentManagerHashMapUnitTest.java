@@ -16,11 +16,9 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testClear() {
-
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     newHash.put("2", new BaseTestObject(this.getTestObject()));
-
     newHash.clear();
 
     Assert.assertEquals(newHash.mappingCount(), 0);
@@ -28,7 +26,6 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testRemoveWithKey() {
-
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
@@ -42,7 +39,6 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testRemoveWithKeyAndValue() {
-
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
@@ -56,7 +52,6 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testReplace() {
-
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
@@ -74,7 +69,6 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
 
   @Test(groups = TestCategories.FRAMEWORK)
   public void testReplaceWithNewAndOld() {
-
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
     newHash.put("1", new BaseTestObject(this.getTestObject()));
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
@@ -92,10 +86,15 @@ public class ConcurrentManagerHashMapUnitTest extends BaseTest {
   @Test
   public void testReplaceWithNew() {
     ConcurrentManagerHashMap newHash = new ConcurrentManagerHashMap();
-    newHash.put("1", new BaseTestObject(this.getTestObject()));
+    BaseTestObject baseTestObject = new BaseTestObject(this.getTestObject());
+    newHash.put("1", baseTestObject);
     BaseTestObject temp = new BaseTestObject(this.getTestObject());
-    BaseTestObject temp2 = new BaseTestObject(this.getTestObject());
     newHash.put("2", temp);
+
+    Assert.assertTrue(newHash.containsKey("1"));
+    Assert.assertTrue(newHash.containsValue(baseTestObject));
+    Assert.assertTrue(newHash.containsKey("2"));
+    Assert.assertTrue(newHash.containsValue(temp));
   }
 
   /*
