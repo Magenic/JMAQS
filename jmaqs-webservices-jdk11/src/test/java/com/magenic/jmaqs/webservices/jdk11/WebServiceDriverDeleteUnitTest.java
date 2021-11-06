@@ -13,13 +13,13 @@ import java.io.IOException;
 import java.net.http.HttpResponse;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 /**
  * Test web service Deletes.
  */
 public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
+
   /**
    * String to hold the URL.
    */
@@ -50,27 +50,6 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON, false);
     Assert.assertEquals(result.statusCode(), HttpStatus.CONFLICT.value());
-  }
-
-  /**
-   * Delete Json request to assert status code.
-   * @throws IOException if the exception is thrown
-   * @throws InterruptedException if the exception is thrown
-   */
-  @Ignore
-  @Test(groups = TestCategories.WEB_SERVICE)
-  public void deleteJSONSerializedVerifyStatusCodeWithHeaderOverride()
-      throws IOException, InterruptedException {
-    /*
-    HttpResponse<String> result = webServiceDriver.delete(
-        baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON,
-        Collections.singletonMap("pass", "word"), true);
-    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
-    result = webServiceDriver.delete(
-        baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON,
-        Collections.singletonMap("pass", "word"), HttpStatus.OK);
-    Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
-     */
   }
 
   /**

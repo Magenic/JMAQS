@@ -69,10 +69,9 @@ public class WebServiceDriver {
 
   /**
    * Gets http client.
-   * @param mediaType the media type
    * @return the http client
    */
-  public HttpClient getHttpClient(String mediaType) {
+  public HttpClient getHttpClient() {
     return this.baseHttpClient;
   }
 
@@ -595,7 +594,7 @@ public class WebServiceDriver {
    * Execute a web service delete.
    * @param requestUri The request uri
    * @param expectedMediaType The type of media being requested
-   * @param type the request type type being done
+   * @param type the request type being done
    * @param expectSuccess Assert a success code was returned
    * @param <T> The expected response type
    * @return The response by deserialize as the T
@@ -613,7 +612,7 @@ public class WebServiceDriver {
    * @param requestUri The request uri
    * @param expectedMediaType The type of media being requested
    * @param expectedStatus Assert a specific status code was returned
-   * @param type the request type type being done
+   * @param type the request type being done
    * @param <T> The expected response type
    * @return The response by deserialize as the T
    * @throws IOException if an exception is thrown
@@ -776,7 +775,7 @@ public class WebServiceDriver {
   }
 
   /**
-   * Ensure the HTTP response was successful, if not throw a user friendly error message.
+   * Ensure the HTTP response was successful, if not throw a user-friendly error message.
    * @param response The HTTP response
    */
   private static void ensureSuccessStatusCode(HttpResponse<String> response) {
@@ -785,7 +784,7 @@ public class WebServiceDriver {
       throw new NullPointerException(HttpStatus.NO_CONTENT + " Response was null");
     }
 
-    // Check if it was a success and if not create a user friendly error message
+    // Check if it was a success and if not create a user-friendly error message
     if (response.statusCode() != HttpStatus.OK.value()) {
       throw new NotAcceptableStatusException(
           String.format("Response did not indicate a success. %s Response code was: %d",
@@ -794,7 +793,7 @@ public class WebServiceDriver {
   }
 
   /**
-   * Ensure the HTTP response has specified status, if not throw a user friendly error message.
+   * Ensure the HTTP response has specified status, if not throw a user-friendly error message.
    * @param response The HTTP response
    * @param expectedStatus Assert a specific status code was returned
    */
@@ -804,7 +803,7 @@ public class WebServiceDriver {
       throw new NullPointerException(HttpStatus.NO_CONTENT + " Response was null");
     }
 
-    // Check if it was a success and if not create a user friendly error message
+    // Check if it was a success and if not create a user-friendly error message
     if (response.statusCode() != expectedStatus.value()) {
       String body = response.body();
       throw new NotAcceptableStatusException(String.format("Response status did not match expected. %s "

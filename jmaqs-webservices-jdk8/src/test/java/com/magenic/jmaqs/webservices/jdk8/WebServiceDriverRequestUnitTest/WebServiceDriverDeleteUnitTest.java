@@ -15,11 +15,11 @@ import org.testng.annotations.Test;
  * Tests the web service driver Delete functionality.
  */
 public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
+
   /**
    * Verify delete works.
    *
-   * @throws Exception
-   *           There was a problem with the test
+   * @throws Exception There was a problem with the test
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceDelete() throws Exception {
@@ -31,8 +31,7 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
   /**
    * Verify delete works.
    *
-   * @throws Exception
-   *           There was a problem with the test
+   * @throws Exception There was a problem with the test
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceStringDelete() throws Exception {
@@ -44,8 +43,7 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
   /**
    * Verify delete throws an error.
    *
-   * @throws Exception
-   *           There was a problem with the test
+   * @throws Exception There was a problem with the test
    */
   @Test(groups = TestCategories.WEB_SERVICE)
   public void webServiceStringDeleteError() throws Exception {

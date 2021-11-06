@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
  * Unit tests for Media Type functionality.
  */
 public class MediaTypeUnitTest extends BaseGenericTest {
+
   /**
    * Tests the string value of App_Json
    */

@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
  * Test with the web service driver directly.
  */
 public class WebServiceDriverUnitTest extends BaseGenericTest {
+
   /**
    * Verifies that basic GET features work with the WebServiceDriver.
    *
@@ -29,7 +30,7 @@ public class WebServiceDriverUnitTest extends BaseGenericTest {
     String responseString = WebServiceUtilities.getResponseBody(response);
 
     Assert.assertTrue(responseString.contains("Tomato Soup"),
-        "Was expecting a result with Tomato Soup but instead got - " + response.toString());
+        "Was expecting a result with Tomato Soup but instead got - " + response);
   }
 
   /**

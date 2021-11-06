@@ -13,6 +13,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
  * Web service test object class.
  */
 public class WebServiceTestObject extends BaseTestObject {
+
   /**
    * Instantiates a new Web Service Test Object with a supplier.
    * @param getDriverSupplier the get driver supplier.

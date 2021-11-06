@@ -32,8 +32,15 @@ import org.apache.http.message.BasicHeader;
  * The type Web service driver.
  */
 public class WebServiceDriver {
+
+  /**
+   * The base http client.
+   */
   private CloseableHttpClient baseHttpClient;
 
+  /**
+   * The base address uri.
+   */
   private URI baseAddress;
 
   /**
@@ -122,7 +129,7 @@ public class WebServiceDriver {
    *
    * @param requestUri      the request uri
    * @param returnMediaType the return media type
-   * @param expectSuccess   the expect success
+   * @param expectSuccess   the expected success
    * @return the content
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
@@ -137,7 +144,7 @@ public class WebServiceDriver {
    *
    * @param requestUri      the request uri
    * @param returnMediaType the return media type
-   * @param expectSuccess   the expect success
+   * @param expectSuccess   the expected success
    * @return the content
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
@@ -155,7 +162,7 @@ public class WebServiceDriver {
    * @param requestUri      the request uri
    * @param content         the content
    * @param returnMediaType the return media type
-   * @param expectSuccess   the expect success
+   * @param expectSuccess   the expected success
    * @return the closeable http response
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
@@ -171,7 +178,7 @@ public class WebServiceDriver {
    * @param requestUri      the request uri
    * @param content         the content
    * @param returnMediaType the return media type
-   * @param expectSuccess   the expect success
+   * @param expectSuccess   the expected success
    * @return the closeable http response
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
@@ -189,7 +196,7 @@ public class WebServiceDriver {
    * @param requestUri      the request uri
    * @param content         the content
    * @param returnMediaType the return media type
-   * @param expectSuccess   the expect success
+   * @param expectSuccess   the expected success
    * @return the closeable http response
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
@@ -205,7 +212,7 @@ public class WebServiceDriver {
    * @param requestUri      the request uri
    * @param content         the content
    * @param returnMediaType the return media type
-   * @param expectSuccess   the expect success
+   * @param expectSuccess   the expected success
    * @return the closeable http response
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
@@ -223,7 +230,7 @@ public class WebServiceDriver {
    * @param requestUri      the request uri
    * @param content         the content
    * @param returnMediaType the return media type
-   * @param expectSuccess   the expect success
+   * @param expectSuccess   the expected success
    * @return the closeable http response
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
@@ -239,7 +246,7 @@ public class WebServiceDriver {
    * @param requestUri      the request uri
    * @param content         the content
    * @param returnMediaType the return media type
-   * @param expectSuccess   the expect success
+   * @param expectSuccess   the expected success
    * @return the closeable http response
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
@@ -257,7 +264,7 @@ public class WebServiceDriver {
    *
    * @param requestUri      the request uri
    * @param returnMediaType the return media type
-   * @param expectSuccess   the expect success
+   * @param expectSuccess   the expected success
    * @return the closeable http response
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
@@ -272,7 +279,7 @@ public class WebServiceDriver {
    *
    * @param requestUri      the request uri
    * @param returnMediaType the return media type
-   * @param expectSuccess   the expect success
+   * @param expectSuccess   the expected success
    * @return the closeable http response
    * @throws IOException        the io exception
    * @throws URISyntaxException the uri syntax exception
@@ -303,8 +310,7 @@ public class WebServiceDriver {
       throw new NullPointerException("Response was null");
     }
 
-    // Check if it was a success and if not create a user friendly error
-    // message
+    // Check if it was a success and if not create a user-friendly error message
     if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
       String body = response.getStatusLine().toString();
 
@@ -315,9 +321,8 @@ public class WebServiceDriver {
   }
 
   private RequestConfig getRequestTimeouts() {
-
     return RequestConfig.copy(RequestConfig.DEFAULT)
-        .setConnectionRequestTimeout(WebServiceConfig.getWebServiceTimeOut() * 1000)
-        .setConnectTimeout(WebServiceConfig.getWebServiceTimeOut() * 1000).build();
+        .setConnectionRequestTimeout(WebServiceConfig.getWebServiceTimeout() * 1000)
+        .setConnectTimeout(WebServiceConfig.getWebServiceTimeout() * 1000).build();
   }
 }

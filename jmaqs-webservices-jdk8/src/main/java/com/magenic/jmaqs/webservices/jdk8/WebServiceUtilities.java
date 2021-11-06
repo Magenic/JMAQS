@@ -23,6 +23,7 @@ import org.apache.http.util.EntityUtils;
  * The type Web service utilities.
  */
 public final class WebServiceUtilities {
+
   /**
    * The Object mapper to serialize/deserialize JSON.
    */
@@ -78,7 +79,7 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Create string entity string entity.
+   * Creates a string entity.
    *
    * @param <T>       the type parameter
    * @param body      the body
@@ -94,7 +95,7 @@ public final class WebServiceUtilities {
   }
 
   /**
-   * Create string entity string entity.
+   * Creates a string entity.
    *
    * @param <T>         the type parameter
    * @param body        the body

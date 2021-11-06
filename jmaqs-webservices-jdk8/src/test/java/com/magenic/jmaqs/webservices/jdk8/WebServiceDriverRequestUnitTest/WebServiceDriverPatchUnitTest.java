@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
  * Tests the web service driver Patch functionality.
  */
 public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
+
   /**
    * Test patching with a String object.
    * @throws Exception if an error occurs
@@ -36,7 +37,7 @@ public class WebServiceDriverPatchUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Test patching with an Xml object.
+   * Test patching with an XML object.
    * @throws Exception if an error occurs
    */
   @Test(groups = TestCategories.WEB_SERVICE)

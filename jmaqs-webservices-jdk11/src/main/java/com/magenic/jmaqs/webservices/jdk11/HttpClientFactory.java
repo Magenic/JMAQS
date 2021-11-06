@@ -22,15 +22,15 @@ public class HttpClientFactory {
   }
 
   /**
-   * Gets a HTTP client based on configuration values.
+   * Gets an HTTP client based on configuration values.
    * @return A HTTP client
    */
   public static HttpClient getDefaultClient() {
-    return getClient(WebServiceConfig.getWebServiceTimeOut());
+    return getClient(WebServiceConfig.getWebServiceTimeout());
   }
 
   /**
-   * Gets a HTTP client based on configuration values.
+   * Gets an HTTP client based on configuration values.
    * @param timeout Web service timeout
    * @return A HTTP client
    */
@@ -40,7 +40,7 @@ public class HttpClientFactory {
   }
 
   /**
-   * Gets a HTTP client based on configuration values.
+   * Gets an HTTP client based on configuration values.
    * @param timeout Web service timeout
    * @param useProxy Use a proxy
    * @param proxyAddress The proxy address to use

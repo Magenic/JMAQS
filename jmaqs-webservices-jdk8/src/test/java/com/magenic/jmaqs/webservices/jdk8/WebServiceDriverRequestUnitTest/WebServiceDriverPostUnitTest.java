@@ -20,8 +20,9 @@ import java.math.BigDecimal;
  * Tests the web service driver Post functionality.
  */
 public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
+
   /**
-   * Test posting with an Xml object.
+   * Test posting with an XML object.
    * @throws Exception if an error occurs
    */
   @Test(groups = TestCategories.WEB_SERVICE)
@@ -42,7 +43,7 @@ public class WebServiceDriverPostUnitTest extends BaseWebServiceTest {
   }
 
   /**
-   * Test posting with an Json object.
+   * Test posting with a JSON object.
    * @throws Exception if an error occurs
    */
   @Test(groups = TestCategories.WEB_SERVICE)
