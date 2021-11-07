@@ -90,7 +90,7 @@ public abstract class BaseSeleniumPageModel {
   /**
    * Gets the per timer collection.
    *
-   * @return The perf timer colection
+   * @return The perf timer collection
    */
   public PerfTimerCollection getPerfTimerCollection() {
     return this.testObject.getPerfTimerCollection();
@@ -126,7 +126,7 @@ public abstract class BaseSeleniumPageModel {
    *
    * @param parent           the parent
    * @param by               the by
-   * @param userFriendlyName the user friendly name
+   * @param userFriendlyName the user-friendly name
    * @return the lazy element
    */
   protected LazyWebElement getLazyElement(LazyWebElement parent, By by, String userFriendlyName) {
@@ -149,7 +149,7 @@ public abstract class BaseSeleniumPageModel {
    * Gets lazy element.
    *
    * @param by               the by
-   * @param userFriendlyName the user friendly name
+   * @param userFriendlyName the user-friendly name
    * @return the lazy element
    */
   protected LazyWebElement getLazyElement(By by, String userFriendlyName) {

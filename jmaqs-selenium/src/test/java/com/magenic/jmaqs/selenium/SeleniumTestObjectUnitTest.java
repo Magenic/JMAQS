@@ -16,20 +16,18 @@ import org.testng.annotations.Test;
 public class SeleniumTestObjectUnitTest extends BaseGenericTest {
 
   /**
+   * The default browser that is set in the test.
+   */
+  private WebDriver defaultBrowser = null;
+
+  /**
    * Test appium test object creation with driver.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testSeleniumTestObjectCreationWithDriver() {
-
-    WebDriver defaultBrowser = null;
-    try {
-      defaultBrowser = WebDriverFactory.getDefaultBrowser();
-    } catch (Exception e) {
-      e.printStackTrace();
-      Assert.fail("Driver creation failed. ");
-    }
-    SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, this.getLogger(),
-        this.getFullyQualifiedTestClassName());
+    defaultBrowser = setDefaultBrowser();
+    SeleniumTestObject testObject = new SeleniumTestObject(
+        defaultBrowser, this.getLogger(), this.getFullyQualifiedTestClassName());
 
     defaultBrowser.quit();
     Assert.assertNotNull(testObject, "Checking that selenium test object via driver is not null");
@@ -40,7 +38,6 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testSeleniumTestObjectCreationWithSupplier() {
-
     try (SeleniumTestObject testObject = new SeleniumTestObject(() -> {
       try {
         return WebDriverFactory.getDefaultBrowser();
@@ -53,54 +50,51 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
     }
   }
 
+  /**
+   * Test getting the web driver.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
-    WebDriver defaultBrowser = null;
-    try {
-      defaultBrowser = WebDriverFactory.getDefaultBrowser();
-    } catch (Exception e) {
-      e.printStackTrace();
-      Assert.fail("Driver creation failed. ");
-    }
+    defaultBrowser = setDefaultBrowser();
 
-    try (SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, this.getLogger(),
-        this.getFullyQualifiedTestClassName())) {
+    try (SeleniumTestObject testObject = new SeleniumTestObject(
+        defaultBrowser, this.getLogger(), this.getFullyQualifiedTestClassName())) {
       WebDriver webDriver = testObject.getWebDriver();
       Assert.assertNotNull(webDriver, "Checking that selenium driver can be retrieved from test object");
     } finally {
-      defaultBrowser.quit();
+      if (defaultBrowser != null) {
+        defaultBrowser.quit();
+      }
     }
   }
 
+  /**
+   * Test getting the web manager.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetWebManager() {
-    WebDriver defaultBrowser = null;
-    try {
-      defaultBrowser = WebDriverFactory.getDefaultBrowser();
-    } catch (Exception e) {
-      e.printStackTrace();
-      Assert.fail("Driver creation failed. ");
-    }
-    try (SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, this.getLogger(),
-        this.getFullyQualifiedTestClassName())) {
+    defaultBrowser = setDefaultBrowser();
+
+    try (SeleniumTestObject testObject = new SeleniumTestObject(
+        defaultBrowser, this.getLogger(), this.getFullyQualifiedTestClassName())) {
       SeleniumDriverManager webManager = testObject.getWebManager();
       Assert.assertNotNull(webManager, "Checking that selenium driver manager can be retrieved from test object");
     } finally {
-      defaultBrowser.quit();
+      if (defaultBrowser != null) {
+        defaultBrowser.quit();
+      }
     }
   }
 
+  /**
+   * Tests setting the web driver.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriver() {
-    WebDriver defaultBrowser = null;
-    try {
-      defaultBrowser = WebDriverFactory.getDefaultBrowser();
-    } catch (Exception e) {
-      e.printStackTrace();
-      Assert.fail("Driver creation failed. ");
-    }
-    try (SeleniumTestObject testObject = new SeleniumTestObject(defaultBrowser, this.getLogger(),
-        this.getFullyQualifiedTestClassName())) {
+    defaultBrowser = setDefaultBrowser();
+
+    try (SeleniumTestObject testObject = new SeleniumTestObject(
+        defaultBrowser, this.getLogger(), this.getFullyQualifiedTestClassName())) {
       int hashCode = testObject.getWebDriver().hashCode();
 
       try {
@@ -116,21 +110,20 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
           String.format("Checking that the selenium driver is not the same as previous version.  First: %d, Second: %d",
               hashCode, hashCode1));
     } finally {
-      defaultBrowser.quit();
+      if (defaultBrowser != null) {
+        defaultBrowser.quit();
+      }
     }
   }
 
+  /**
+   * Test setting the web driver supplier.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriverSupplier() {
-    WebDriver defaultBrowser = null;
-    try {
-      defaultBrowser = WebDriverFactory.getDefaultBrowser();
-    } catch (Exception e) {
-      e.printStackTrace();
-      Assert.fail("Driver creation failed. ");
-    }
-    WebDriver finalDefaultBrowser = defaultBrowser;
-    try (SeleniumTestObject testObject = new SeleniumTestObject((() -> finalDefaultBrowser), this.getLogger(),
+    defaultBrowser = setDefaultBrowser();
+
+    try (SeleniumTestObject testObject = new SeleniumTestObject((() -> defaultBrowser), this.getLogger(),
         this.getFullyQualifiedTestClassName())) {
       int hashCode = testObject.getWebDriver().hashCode();
       try {
@@ -154,7 +147,22 @@ public class SeleniumTestObjectUnitTest extends BaseGenericTest {
           String.format("Checking that the selenium driver is not the same as previous version.  First: %d, Second: %d",
               hashCode, hashCode1));
     } finally {
-      defaultBrowser.quit();
+      if (defaultBrowser != null) {
+        defaultBrowser.quit();
+      }
     }
+  }
+
+  /**
+   * Sets the default browser from the web driver factory.
+   * @return the default web driver
+   */
+  private WebDriver setDefaultBrowser() {
+    try {
+      return WebDriverFactory.getDefaultBrowser();
+    } catch (Exception e) {
+      Assert.fail("Driver creation failed.");
+    }
+    return null;
   }
 }

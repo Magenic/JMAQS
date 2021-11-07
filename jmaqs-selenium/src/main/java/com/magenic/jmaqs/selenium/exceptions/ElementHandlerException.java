@@ -31,7 +31,4 @@ public class ElementHandlerException extends JMAQSRuntimeException {
   public ElementHandlerException(String message, Exception exception) {
     super(message, exception);
   }
-
-
-
 }

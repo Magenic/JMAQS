@@ -58,13 +58,13 @@
         <BrowserSize>1024x768</BrowserSize>
 
         <SoftAssertScreenshot>Yes</SoftAssertScreenshot>
-        <SavePagesourceOnFail>Yes</SavePagesourceOnFail>
+        <SavePageSourceOnFail>Yes</SavePageSourceOnFail>
         <ImageFormat>jpeg</ImageFormat>
     </SeleniumMaqs>
 
     <RemoteSeleniumCapsMaqs>
         <username>Sauce_Labs_Username</username>
-        <accessKey>Sauce_Labs_Accesskey</accessKey>
+        <accessKey>Sauce_Labs_AccessKey</accessKey>
         <browserName>Chrome</browserName>
         <platform>OS X 10.11</platform>
         <version>54.0</version>

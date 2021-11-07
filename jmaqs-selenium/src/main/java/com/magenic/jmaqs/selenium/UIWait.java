@@ -27,8 +27,9 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Selenium waiter This is the tool-class used for waiting. It can be used to wait for many
- * circumstances (element exist, not exist, be visible, to equal a desired value, etc..
+ * Selenium waiter This is the tool-class used for waiting.
+ * It can be used to wait for many circumstances:
+ * element exist, not exist, be visible, to equal a desired value, etc...
  */
 public class UIWait {
 
@@ -43,19 +44,19 @@ public class UIWait {
   private static final By BODY_BY = By.cssSelector("BODY");
 
   /**
-   * The Webdriver that the test is currently running on.
+   * The web driver that the test is currently running on.
    */
-  private WebDriver driver;
+  private final WebDriver driver;
 
   /**
    * The retry time.
    */
-  private int fluentRetryTime;
+  private final int fluentRetryTime;
 
   /**
    * The timeout time.
    */
-  private int timeout;
+  private final int timeout;
 
   /**
    * The web driver wait that the test is currently running on.
@@ -93,7 +94,7 @@ public class UIWait {
   }
 
   /**
-   * Get the WebDriverWait for use outside of this instance class.
+   * Get the WebDriverWait for use outside this instance class.
    *
    * @return The WebDriverWait
    */
@@ -291,7 +292,7 @@ public class UIWait {
         return obj.isEnabled();
       } catch (NoSuchElementException | StaleElementReferenceException e) {
         // Do not throw these exceptions here.
-        // Instead return false and let the fluentwait try again.
+        // Instead, return false and let the fluent wait try again.
         return false;
       }
     };
@@ -383,7 +384,7 @@ public class UIWait {
         try {
           return !obj.isDisplayed();
         } catch (NoSuchElementException | StaleElementReferenceException e) {
-          // Do not throw these exceptions here. Instead return true as the element has disappeared.
+          // Do not throw these exceptions here. Instead, return true as the element has disappeared.
           return true;
         }
       };
@@ -414,7 +415,6 @@ public class UIWait {
    * @param timeOutInMillis the number of milliseconds to wait before failing
    * @param sleepInMillis   the number of milliseconds to wait before a recheck
    * @return List of WebElements - all web elements found by the specified selector
-   * @throws Exception if encountered
    */
   public List<WebElement> waitForElements(final By by, final int timeOutInMillis, final int sleepInMillis) {
     WebDriverWait wait = this.getNewWaitDriver(timeOutInMillis, sleepInMillis);
@@ -428,7 +428,6 @@ public class UIWait {
    * @param by   Selector value to wait for
    * @param wait The wait driver
    * @return List of WebElements - all web elements found by the specified selector
-   * @throws Exception if encountered
    */
   public List<WebElement> waitForElements(final By by, WebDriverWait wait) {
     return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
@@ -579,7 +578,7 @@ public class UIWait {
    * @param by        Selector to look for
    * @param attribute String value of the attribute to look at on the specified selector
    * @param text      String value of the text to look for in the attribute
-   * @return Webelement of the selector that is found
+   * @return Web element of the selector that is found
    */
   public WebElement waitForAttributeTextEquals(final By by, final String attribute, final String text) {
     return this.waitForAttributeTextEquals(by, attribute, text, getWaitDriver());
@@ -655,7 +654,7 @@ public class UIWait {
    * @param attribute String value of the attribute to look at on the specified selector
    * @param text      String value of the text to look for in the attribute
    * @param wait      The wait driver
-   * @param contains  boolean true if checking if contains, false if exact match
+   * @param contains  boolean true if checking contains, false if exact match
    * @return true if the attribute with the specified text value is found, else false
    */
   public boolean waitUntilAttribute(final By by, final String attribute, final String text, WebDriverWait wait,
@@ -878,7 +877,6 @@ public class UIWait {
    * @param by The frame locator
    */
   public boolean waitUntilIframeToLoad(By by, WebDriverWait wait) {
-
     try {
       waitForIframeToLoad(by, wait);
       return true;
@@ -996,8 +994,8 @@ public class UIWait {
       System.err.print(error);
     }
 
-    Coordinates coord = ((Locatable) element).getCoordinates();
-    while (coord.inViewPort().getY() < HEADER_SIZE && counter < max) {
+    Coordinates coordinates = ((Locatable) element).getCoordinates();
+    while (coordinates.inViewPort().getY() < HEADER_SIZE && counter < max) {
       waitForVisibleElement(BODY_BY).sendKeys(Keys.ARROW_UP);
       counter++;
     }

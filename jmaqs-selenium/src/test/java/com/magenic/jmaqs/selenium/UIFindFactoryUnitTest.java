@@ -6,7 +6,7 @@ package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.factories.UIFindFactory;
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
+import com.magenic.jmaqs.selenium.pageModels.AutomationPageModel;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -18,30 +18,20 @@ import org.testng.annotations.Test;
 public class UIFindFactoryUnitTest extends BaseSeleniumTest {
 
   /**
-   * Url for the site.
-   */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
-
-  /**
-   * Automation site url.
-   */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
-
-  /**
    * Error string templates for assertion failures.
    */
-  private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
+  private static final String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
 
   /**
    * Test get ui find with element.
    */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetUIFindWithElement() {
-    PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
-    pageModel.open(siteAutomationUrl);
+    AutomationPageModel automationUrl = new AutomationPageModel(this.getTestObject());
+    automationUrl.open(automationUrl.testSiteAutomationUrl);
     WebElement elementDriver = UIWaitFactory
-        .getWaitDriver(pageModel.getWebDriver())
-        .waitForClickableElement(pageModel.showDialog1ButtonLocator);
+        .getWaitDriver(automationUrl.getWebDriver())
+        .waitForClickableElement(automationUrl.automationShowDialog1);
 
     UIFind findWithElement = UIFindFactory.getFind(elementDriver);
 
@@ -59,5 +49,4 @@ public class UIFindFactoryUnitTest extends BaseSeleniumTest {
     Assert.assertNotNull(findWithWebDriver,
         String.format(assertNotNullErrorTemplate, "findWithWebDriver"));
   }
-
 }

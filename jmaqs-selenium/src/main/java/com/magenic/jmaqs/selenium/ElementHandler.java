@@ -32,27 +32,25 @@ public class ElementHandler {
   }
 
   /**
-   * Get selected option from drop down.
+   * Get selected option from dropdown.
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
    * @return Text of the selected option in drop down
    */
   public static String getSelectedOptionFromDropdown(WebDriver webDriver, By by) {
-
     Select select = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
     return select.getFirstSelectedOption().getText();
   }
 
   /**
-   * Get a ArrayList of the items selected in a drop down.
+   * Get a ArrayList of the items selected in a dropdown.
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
    * @return String array list of selected items in drop down
    */
   public static List<String> getSelectedOptionsFromDropdown(WebDriver webDriver, By by) {
-
     ArrayList<WebElement> elements;
     ArrayList<String> selectedItems = new ArrayList<>();
     Select select = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
@@ -68,7 +66,6 @@ public class ElementHandler {
         selectedItems.add(element.getText());
       }
     }
-
     return selectedItems;
   }
 
@@ -77,7 +74,7 @@ public class ElementHandler {
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
-   * @return The text in the textbox
+   * @return The text in the text box
    */
   public static String getElementAttribute(WebDriver webDriver, By by) {
     return getElementAttribute(webDriver, by, "value");
@@ -89,10 +86,9 @@ public class ElementHandler {
    * @param webDriver The web driver
    * @param by        By selector for the element
    * @param attribute The attribute to get the value for
-   * @return The text in the textbox
+   * @return The text in the text box
    */
   public static String getElementAttribute(WebDriver webDriver, By by, String attribute) {
-
     return UIWaitFactory.getWaitDriver(webDriver).waitForVisibleElement(by).getAttribute(attribute);
   }
 
@@ -138,7 +134,6 @@ public class ElementHandler {
    * @return Returns a comma delimited String
    */
   public static String createCommaDelimitedString(WebDriver webDriver, By by) {
-
     return createCommaDelimitedString(webDriver, by, false);
   }
 
@@ -167,7 +162,7 @@ public class ElementHandler {
   public static void selectMultipleElementsFromListBox(WebDriver webDriver, By by, List<String> elementsTextToSelect) {
     Select selectItem = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
 
-    // Select all desired items in the Listbox
+    // Select all desired items in the list box
     for (String text : elementsTextToSelect) {
       selectItem.selectByVisibleText(text);
     }
@@ -183,14 +178,14 @@ public class ElementHandler {
   public static void selectMultipleElementsFromListBoxByValue(WebDriver webDriver, By by, List<String> values) {
     Select selectItem = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
 
-    // Select all desired items in the Listbox
+    // Select all desired items in the list box
     for (String value : values) {
       selectItem.selectByValue(value);
     }
   }
 
   /**
-   * Select an option from a drop down using displayed text.
+   * Select an option from a dropdown using displayed text.
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
@@ -202,7 +197,7 @@ public class ElementHandler {
   }
 
   /**
-   * Select an option from a drop down using the value attribute.
+   * Select an option from a dropdown using the value attribute.
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
@@ -214,11 +209,11 @@ public class ElementHandler {
   }
 
   /**
-   * Enter text into a textbox. NOTE: This function clears the textbox before entering text.
+   * Enter text into a text box. NOTE: This function clears the text box before entering text.
    *
    * @param webDriver   The web driver
    * @param by          By selector for the element
-   * @param textToEnter Text to enter into the textbox
+   * @param textToEnter Text to enter into the text box
    * @param tabOff      true to press the Tab key after entering text
    */
   public static void setTextBox(WebDriver webDriver, By by, String textToEnter, boolean tabOff) {
@@ -236,14 +231,13 @@ public class ElementHandler {
   }
 
   /**
-   * Enter text into a textbox. NOTE: This function clears the textbox before entering text.
+   * Enter text into a text box. NOTE: This function clears the text box before entering text.
    *
    * @param webDriver   The web driver
    * @param by          By selector for the element
-   * @param textToEnter Text to enter into the textbox
+   * @param textToEnter Text to enter into the text box
    */
   public static void setTextBox(WebDriver webDriver, By by, String textToEnter) {
-
     setTextBox(webDriver, by, textToEnter, true);
   }
 
@@ -261,7 +255,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * The JavaScript method to scroll an element into the view.
    *
    * @param webDriver The WebDriver
    * @param by        By selector for the element
@@ -272,7 +266,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * The JavaScript method to scroll an element into the view.
    *
    * @param webElement The parent web element
    * @param by         By element
@@ -285,7 +279,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * The JavaScript method to scroll an element into the view.
    *
    * @param webDriver The web driver
    * @param by        By element
@@ -298,7 +292,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * The JavaScript method to scroll an element into the view.
    *
    * @param webElement The parent web element
    * @param by         By element
@@ -311,7 +305,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * The JavaScript method to scroll an element into the view.
    *
    * @param webDriver The web driver
    * @param x         Horizontal direction
@@ -323,7 +317,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * The JavaScript method to scroll an element into the view.
    *
    * @param webElement The web element
    * @param x          Horizontal direction
@@ -376,9 +370,9 @@ public class ElementHandler {
       e.printStackTrace(new PrintWriter(sw));
       String stackTrace = sw.toString();
 
-      logger.logMessage(MessageType.ERROR,
-          "Exception during sending secret keys: " + e.getMessage() + System.lineSeparator() + stackTrace);
-      throw e;
+      String message = "Exception during sending secret keys: " + e.getMessage() + System.lineSeparator() + stackTrace;
+      logger.logMessage(MessageType.ERROR, message);
+      throw new ElementHandlerException(message);
     }
   }
 }

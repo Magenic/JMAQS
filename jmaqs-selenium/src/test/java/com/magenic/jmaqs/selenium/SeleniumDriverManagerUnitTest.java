@@ -72,7 +72,6 @@ public class SeleniumDriverManagerUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.SELENIUM)
   public void testLogVerbose() {
     try (SeleniumDriverManager seleniumDriverManager = new SeleniumDriverManager(getDriver, this.getTestObject())) {
-      // List list;
       seleniumDriverManager.logVerbose("Logging verbose messaging");
     }
   }

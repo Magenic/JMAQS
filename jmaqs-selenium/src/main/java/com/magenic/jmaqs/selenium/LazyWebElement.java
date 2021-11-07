@@ -20,7 +20,7 @@ public class LazyWebElement extends AbstractLazyElement {
    *
    * @param testObject       The selenium test object
    * @param locator          The by locator to search on
-   * @param userFriendlyName The user friendly name of the lazy element
+   * @param userFriendlyName The User Friendly name of the lazy element
    */
   public LazyWebElement(SeleniumTestObject testObject, By locator, String userFriendlyName) {
     super(testObject, locator, userFriendlyName);
@@ -31,7 +31,7 @@ public class LazyWebElement extends AbstractLazyElement {
    *
    * @param parent           The parent lazy element
    * @param locator          The by locator to search on
-   * @param userFriendlyName The user friendly name of the lazy element
+   * @param userFriendlyName The User Friendly name of the lazy element
    */
   public LazyWebElement(LazyWebElement parent, By locator, String userFriendlyName) {
     super(parent, locator, userFriendlyName);
@@ -42,7 +42,7 @@ public class LazyWebElement extends AbstractLazyElement {
    *
    * @param parent           The parent lazy element
    * @param locator          THe by locator to search on
-   * @param userFriendlyName The user friendly name of the lazy element
+   * @param userFriendlyName The User Friendly name of the lazy element
    * @param index            The index of the cached element if cached using the {@link #findElements(By)} method
    * @param cachedElement    The cached element
    */
@@ -81,7 +81,6 @@ public class LazyWebElement extends AbstractLazyElement {
           new LazyWebElement(this, locator, String.format("%s - %d", this.userFriendlyName, index), index, element));
       index++;
     }
-
     return elements;
   }
 }

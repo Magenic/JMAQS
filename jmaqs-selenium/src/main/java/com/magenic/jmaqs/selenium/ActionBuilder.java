@@ -28,20 +28,18 @@ public class ActionBuilder {
    * @param by        By selector for the element
    */
   public static void hoverOver(WebDriver webDriver, By by) {
-    Actions builder = new Actions(webDriver);
     WebElement element = UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by);
-    builder.moveToElement(element).build().perform();
+    new Actions(webDriver).moveToElement(element).build().perform();
   }
 
   /**
-   * Press non alphanumeric key. Ex. Control, Home, etc.
+   * Press non-alphanumeric key. Ex. Control, Home, etc.
    *
    * @param webDriver The web driver
    * @param key       The key to press. NOTE: Use the Keys class
    */
   public static void pressModifierKey(WebDriver webDriver, CharSequence... key) {
-    Actions builder = new Actions(webDriver);
-    builder.sendKeys(key).build().perform();
+    new Actions(webDriver).sendKeys(key).build().perform();
   }
 
   /**
@@ -52,8 +50,7 @@ public class ActionBuilder {
    * @param pixelsOffset Integer of pixels to be moved (Positive or negative)
    */
   public static void slideElement(WebDriver webDriver, By by, int pixelsOffset) {
-    Actions builder = new Actions(webDriver);
-    builder.dragAndDropBy(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by),
+    new Actions(webDriver).dragAndDropBy(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by),
         pixelsOffset, 0).build().perform();
   }
 
@@ -64,8 +61,7 @@ public class ActionBuilder {
    * @param by        By selector for the element
    */
   public static void rightClick(WebDriver webDriver, By by) {
-    Actions builder = new Actions(webDriver);
     WebElement element = UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by);
-    builder.contextClick(element).build().perform();
+    new Actions(webDriver).contextClick(element).build().perform();
   }
 }

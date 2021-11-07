@@ -15,11 +15,18 @@ import org.testng.annotations.Test;
  */
 public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
 
+  /**
+   * Tests getting the web driver.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetWebDriver() {
-    Assert.assertNotNull(this.getWebDriver(), "Checking that Selenium Driver is not null through BaseSeleniumTest");
+    Assert.assertNotNull(this.getWebDriver(),
+        "Checking that Selenium Driver is not null through BaseSeleniumTest");
   }
 
+  /**
+   * Tests setting the web driver.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testSetWebDriver() {
     int hashCode = this.getWebDriver().hashCode();
@@ -32,15 +39,20 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
     Assert.assertNotEquals(hashCode, hashCode1);
   }
 
+  /**
+   * Tests getting the selenium test object.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetSeleniumTestObject() {
-    Assert
-        .assertNotNull(this.getTestObject(), "Checking that Selenium Test Object is not null through BaseSeleniumTest");
+    Assert.assertNotNull(
+        this.getTestObject(), "Checking that Selenium Test Object is not null through BaseSeleniumTest");
   }
 
+  /**
+   * Tests getting the browser.
+   */
   @Test(groups = TestCategories.SELENIUM)
   public void testGetBrowser() {
-
     WebDriver driver = null;
 
     try {
@@ -49,7 +61,9 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
-      driver.quit();
+      if (driver != null) {
+        driver.quit();
+      }
     }
   }
 
@@ -60,7 +74,7 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
 
   /**
    * Verify issue is resolved with upcasting the BaseTestObject to one of
-   * it's concrete implementation when using TestNG Dataproviders.
+   * it's concrete implementation when using TestNG Data providers.
    *
    * @param data The data being provided for each test
    * @see <a href=https://github.com/Magenic/JMAQS/issues/314>JMAQS github issue 314</a>
@@ -68,6 +82,6 @@ public class BaseSeleniumTestUnitTest extends BaseSeleniumTest {
   @Test(dataProvider = "data", groups = TestCategories.SELENIUM)
   public void testUpcastingToSeleniumTestObjectAfterDataProviderIteration(String data) {
     Assert.assertNotNull(data);
-    Assert.assertTrue(this.getTestObject() instanceof SeleniumTestObject);
+    Assert.assertNotNull(this.getTestObject());
   }
 }

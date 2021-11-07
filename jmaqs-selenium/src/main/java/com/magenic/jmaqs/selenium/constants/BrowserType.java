@@ -8,6 +8,7 @@ package com.magenic.jmaqs.selenium.constants;
  * Known browser types.
  */
 public enum BrowserType {
+
   /**
    * Chrome web browser.
    */

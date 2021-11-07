@@ -19,7 +19,7 @@ public class EventHandler implements WebDriverEventListener {
   /**
    * The Event Handler Logger.
    */
-  private Logger logger;
+  private final Logger logger;
 
   /**
    * Initializes a new instance of the EventHandler class.

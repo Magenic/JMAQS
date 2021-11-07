@@ -5,7 +5,7 @@
 package com.magenic.jmaqs.selenium;
 
 import com.magenic.jmaqs.selenium.factories.UIWaitFactory;
-import com.magenic.jmaqs.selenium.unittestpagemodel.PageElementsPageModel;
+import com.magenic.jmaqs.selenium.pageModels.AutomationPageModel;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -17,27 +17,13 @@ import org.testng.annotations.Test;
 public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
 
   /**
-   * Url for the site.
-   */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
-
-  /**
-   * Automation site url.
-   */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
-
-  /**
-   * Error string templates for assertion failures.
-   */
-  private static String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
-  /**
    * The constant assertEqualErrorTemplate.
    */
-  private static String assertEqualErrorTemplate = "%s was not equal to %s when they were expected to be.";
+  private static final String assertEqualErrorTemplate = "%s was not equal to %s when they were expected to be.";
   /**
    * The constant assertNotEqualErrorTemplate.
    */
-  private static String assertNotEqualErrorTemplate = "%s was equal to %s when they were expected not to be.";
+  private static final String assertNotEqualErrorTemplate = "%s was equal to %s when they were expected not to be.";
 
   /**
    * Gets wait driver test.
@@ -45,7 +31,11 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.SELENIUM)
   public void getWaitDriverTest() {
     UIWait waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    String assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
+    Assert.assertNotNull(waitDriver, String.format(assertNotNullErrorTemplate, "waitDriver"));
 
+    waitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver(), 5000, 500);
+    assertNotNullErrorTemplate = "The %s was null when it was expected to not be.";
     Assert.assertNotNull(waitDriver, String.format(assertNotNullErrorTemplate, "waitDriver"));
   }
 
@@ -84,12 +74,12 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
     UIWait newWaitDriver = new UIWait(this.getWebDriver());
 
     UIWaitFactory.setWaitDriver(this.getWebDriver(), newWaitDriver.getWaitDriver());
-    UIWait overridenWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
+    UIWait overriddenWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
-    Assert.assertEquals(newWaitDriver.getWaitDriver(), overridenWaitDriver.getWaitDriver(),
-        String.format(assertEqualErrorTemplate, "newWaitDriver", "overridenWaitDriver"));
-    Assert.assertNotEquals(oldWaitDriver.getWaitDriver(), overridenWaitDriver.getWaitDriver(),
-        String.format(assertNotEqualErrorTemplate, "oldWaitDriver", "overridentWaitDriver"));
+    Assert.assertEquals(newWaitDriver.getWaitDriver(), overriddenWaitDriver.getWaitDriver(),
+        String.format(assertEqualErrorTemplate, "newWaitDriver", "overriddenWaitDriver"));
+    Assert.assertNotEquals(oldWaitDriver.getWaitDriver(), overriddenWaitDriver.getWaitDriver(),
+        String.format(assertNotEqualErrorTemplate, "oldWaitDriver", "overrideWaitDriver"));
   }
 
   /**
@@ -97,11 +87,11 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.SELENIUM)
   public void getWaitDriverWithWebElement() {
-    PageElementsPageModel pageModel = new PageElementsPageModel(this.getTestObject());
-    pageModel.open(siteAutomationUrl);
+    AutomationPageModel automationPageModel = new AutomationPageModel(this.getTestObject());
+    automationPageModel.open(automationPageModel.testSiteAutomationUrl);
     WebElement elementDriver = UIWaitFactory
-        .getWaitDriver(pageModel.getWebDriver())
-        .waitForClickableElement(pageModel.showDialog1ButtonLocator);
+        .getWaitDriver(automationPageModel.getWebDriver())
+        .waitForClickableElement(automationPageModel.automationShowDialog1);
 
     UIWait waitDriver = UIWaitFactory.getWaitDriver(elementDriver);
 
@@ -115,11 +105,9 @@ public class UIWaitFactoryUnitTest extends BaseSeleniumTest {
   public void removeWaitDriver() {
     UIWait waitDriverToBeRemoved = UIWaitFactory.getWaitDriver(this.getWebDriver());
     UIWaitFactory.removeWaitDriver(this.getWebDriver());
-
     UIWait newWaitDriver = UIWaitFactory.getWaitDriver(this.getWebDriver());
 
     Assert.assertNotEquals(waitDriverToBeRemoved, newWaitDriver,
         String.format(assertNotEqualErrorTemplate, "waitDriverToBeRemoved", "newWaitDriver"));
   }
-
 }

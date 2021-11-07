@@ -6,7 +6,6 @@ package com.magenic.jmaqs.selenium.constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * The enum Operating system.
@@ -14,17 +13,15 @@ import java.util.Collections;
 public enum OperatingSystem {
 
   /**
-   * None.  Can be used as a default state
-   */
-  NONE("None", new ArrayList<>(Collections.singletonList("None"))),
-  /**
    * Linux Operating System.
    */
   LINUX("Linux", new ArrayList<>(Arrays.asList("nix", "nux", "aix", "ubuntu"))),
+
   /**
    * Mac Operating System.
    */
   MACOS("Mac OS", new ArrayList<>(Arrays.asList("mac os x", "mac"))),
+
   /**
    * Windows Operating System.
    */
@@ -33,11 +30,12 @@ public enum OperatingSystem {
   /**
    * The Operating system name.
    */
-  private String operatingSystemName;
+  private final String operatingSystemName;
+
   /**
    * The Operating system abbreviations.
    */
-  private ArrayList<String> operatingSystemAbbreviations;
+  private final ArrayList<String> operatingSystemAbbreviations;
 
   /**
    * Instantiates a new Operating system.

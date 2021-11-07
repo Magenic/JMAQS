@@ -64,10 +64,8 @@ public class SeleniumTestObject extends BaseTestObject {
    * Sets web driver.
    *
    * @param driver the driver
-   * @throws Exception exception
    */
   public void setWebDriver(WebDriver driver) {
-
     String name = SeleniumDriverManager.class.getCanonicalName();
     if (this.getManagerStore().containsKey(name)) {
       try {
@@ -79,7 +77,6 @@ public class SeleniumTestObject extends BaseTestObject {
       }
 
     }
-
     this.getManagerStore().put(name, new SeleniumDriverManager((() -> driver), this));
   }
 
@@ -92,5 +89,4 @@ public class SeleniumTestObject extends BaseTestObject {
     this.getManagerStore()
         .put(SeleniumDriverManager.class.getCanonicalName(), new SeleniumDriverManager(webDriverSupplier, this));
   }
-
 }

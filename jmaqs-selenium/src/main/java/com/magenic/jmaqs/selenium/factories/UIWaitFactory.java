@@ -22,7 +22,7 @@ public class UIWaitFactory {
   /**
    * the collection of wait objects.
    */
-  private static ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection = new ConcurrentHashMap<>();
+  private static final ConcurrentHashMap<WebDriver, WebDriverWait> waitCollection = new ConcurrentHashMap<>();
 
   /**
    * private constructor so class can't be instantiated.
@@ -70,7 +70,8 @@ public class UIWaitFactory {
     if (waitCollection.containsKey(unwrappedDriver)) {
       return waitCollection.get(unwrappedDriver);
     } else {
-      WebDriverWait waitDriver = new WebDriverWait(unwrappedDriver, SeleniumConfig.getTimeoutTime().getSeconds());
+      WebDriverWait waitDriver = new WebDriverWait(
+          unwrappedDriver, SeleniumConfig.getTimeoutTime().getSeconds());
       setWaitDriver(unwrappedDriver, waitDriver);
       return waitDriver;
     }
@@ -84,7 +85,6 @@ public class UIWaitFactory {
    */
   public static void setWaitDriver(SearchContext driver, WebDriverWait waitDriver) {
     WebDriver baseDriver = getLowLevelDriver(driver);
-
     waitCollection.put(baseDriver, waitDriver);
   }
 
@@ -95,7 +95,6 @@ public class UIWaitFactory {
    */
   public static void removeWaitDriver(SearchContext driver) {
     WebDriver baseDriver = getLowLevelDriver(driver);
-
     waitCollection.remove(baseDriver);
   }
 
