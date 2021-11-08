@@ -52,7 +52,7 @@ public class BaseAppiumTest extends BaseExtendableTest<AppiumTestObject> {
   }
 
   /**
-   * Steps to do before logging teardown results.
+   * Steps to take before logging teardown results.
    *
    * @param resultType The test result
    */

@@ -24,6 +24,12 @@ import org.testng.annotations.Test;
  * Appium Utilities Unit Test class.
  */
 public class AppiumUtilitiesUnitTest extends BaseGenericTest {
+
+  /**
+   * Placeholder for the timestamp as a string value.
+   */
+  private final String TIMESTAMP = "uuuu-MM-dd-HH-mm-ss-SSSS";
+
   /**
    * Test capture screenshot no append.
    */
@@ -94,7 +100,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
 
     // Open Google and take a screenshot with a custom name and date/time appended
     appiumDriver.navigate().to("http://www.google.com");
-    String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+    String dateTime = DateTimeFormatter.ofPattern(TIMESTAMP, Locale.getDefault())
         .format(LocalDateTime.now(Clock.systemUTC()));
     String filePath = AppiumUtilities.captureScreenshot(appiumDriver, testObject, fileLogger.getDirectory(),
         StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));
@@ -156,7 +162,7 @@ public class AppiumUtilitiesUnitTest extends BaseGenericTest {
 
     // Open Google and take a screenshot with a custom name and date/time appended
     appiumDriver.navigate().to("http://www.google.com");
-    String dateTime = DateTimeFormatter.ofPattern("uuuu-MM-dd-HH-mm-ss-SSSS", Locale.getDefault())
+    String dateTime = DateTimeFormatter.ofPattern(TIMESTAMP, Locale.getDefault())
         .format(LocalDateTime.now(Clock.systemUTC()));
     String filePath = AppiumUtilities.savePageSource(appiumDriver, testObject, fileLogger.getDirectory(),
         StringProcessor.safeFormatter("%s - %s", "TestCustomName", dateTime));

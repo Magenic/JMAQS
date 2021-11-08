@@ -136,12 +136,12 @@ public class AppiumDriverFactory {
   }
 
   /**
-   * Gets windows driver.
+   * Gets Windows driver.
    *
    * @param mobileHub the mobile hub
    * @param options   the options
    * @param timeout   the timeout
-   * @return the windows driver
+   * @return the Windows driver
    */
   public static AppiumDriver<WebElement> getWindowsDriver(URL mobileHub, DesiredCapabilities options,
       Duration timeout) {
@@ -187,10 +187,8 @@ public class AppiumDriverFactory {
         throw e;
       } else {
         try {
-
           Optional<AppiumDriver<WebElement>> driverOptional = Optional.ofNullable(appiumDriver);
           driverOptional.ifPresent(AppiumDriver::quit);
-
         } catch (Exception quitException) {
           throw new WebDriverException(
               "Appium driver setup and teardown failed. Your driver may be out of date",

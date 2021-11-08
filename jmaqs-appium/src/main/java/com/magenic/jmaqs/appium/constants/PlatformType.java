@@ -8,6 +8,7 @@ package com.magenic.jmaqs.appium.constants;
  * The enum Platform type.
  */
 public enum PlatformType {
+
   /**
    * Android application.
    */
@@ -22,5 +23,4 @@ public enum PlatformType {
    * Windows application.
    */
   WINDOWS
-
 }

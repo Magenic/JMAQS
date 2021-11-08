@@ -70,9 +70,7 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
     // Consumer is used by the iterator for bulk processing and verification of the
     // keys in the Map.
     // More elegant solution oppose to a for each.
-    Consumer<String> assertionConsumer = (String s) -> {
-      Assert.assertNotNull(defaultMobileOptions.is(s), String.format("Checking if capability key %s is not null", s));
-    };
+    Consumer<String> assertionConsumer = (String s) -> Assert.assertNotNull(defaultMobileOptions.is(s), String.format("Checking if capability key %s is not null", s));
     defaultMobileOptions.getCapabilityNames().forEach(assertionConsumer);
   }
 
@@ -104,7 +102,7 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
     capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "6.0");
     capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android GoogleAPI Emulator");
-    capabilities = AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
+    AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
     AppiumDriver<WebElement> androidDriver = AppiumDriverFactory.getAndroidDriver(AppiumConfig.getMobileHubUrl(),
         capabilities, AppiumConfig.getMobileTimeout());
     Assert.assertNotNull(androidDriver, "Checking if android driver is null");
@@ -120,14 +118,14 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
     capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Safari");
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "12.2");
     capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone X Simulator");
-    capabilities = AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap());
-    AppiumDriver<WebElement> iosDriver = AppiumDriverFactory.getIosDriver(AppiumConfig.getMobileHubUrl(), capabilities,
-        AppiumConfig.getMobileTimeout());
+
+    AppiumDriver<WebElement> iosDriver = AppiumDriverFactory.getIosDriver(AppiumConfig.getMobileHubUrl(),
+        AppiumDriverFactory.mergeCapabilities(capabilities, sauceLabsConfig.asMap()), AppiumConfig.getMobileTimeout());
     Assert.assertNotNull(iosDriver, "Checking if ios driver is null");
   }
 
   /**
-   * Test get windows driver.
+   * Test get Windows driver.
    */
   @Test(groups = TestCategories.APPIUM)
   @Ignore("Work on Windows implementation")
@@ -152,9 +150,8 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
   public void testCreateDriverException() {
     Supplier<AppiumDriver<WebElement>> appiumDriverSupplier = () -> {
       try {
-        AppiumDriver<WebElement> driver = new AppiumDriver<WebElement>(new URL("http://127.0.0.1:4723"),
+        return new AppiumDriver<>(new URL("http://127.0.0.1:4723"),
             new DesiredCapabilities());
-        return driver;
       } catch (MalformedURLException e) {
         e.printStackTrace();
       }
@@ -163,5 +160,4 @@ public class AppiumDriverFactoryUnitTest extends BaseGenericTest {
 
     AppiumDriverFactory.createDriver(appiumDriverSupplier);
   }
-
 }

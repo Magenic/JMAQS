@@ -83,7 +83,7 @@ public class AppiumTestObjectUnitTest extends BaseGenericTest {
     }
 
     /**
-     * Test test set appium driver.
+     * Test setting the appium driver.
      */
     @Test(groups = TestCategories.APPIUM)
     public void testSetAppiumDriverWithSupplier() {

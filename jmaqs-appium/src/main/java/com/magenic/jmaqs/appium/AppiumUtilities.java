@@ -29,7 +29,7 @@ import org.openqa.selenium.WebElement;
 public class AppiumUtilities {
 
   /**
-   * Default Date Time Format for appending to files.
+   * Default Date Time Format for appending to the files.
    */
   private static final String DEFAULT_DATE_TIME_FORMAT = "uuuu-MM-dd-HH-mm-ss-SSSS";
 
@@ -149,7 +149,7 @@ public class AppiumUtilities {
   public static boolean savePageSource(AppiumDriver<WebElement> appiumDriver,
       AppiumTestObject testObject, String appendName) {
     try {
-      String path = "";
+      String path;
 
       // Check if we are using a file logger.
       if (!(testObject.getLogger() instanceof FileLogger)) {
