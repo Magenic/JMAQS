@@ -91,7 +91,6 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
    */
   @Test(groups = TestCategories.ACCESSIBILITY, expectedExceptions = AxeRuntimeException.class)
   public void accessibilityHtmlReportWithError() throws IOException, ParseException {
-    setup(TestSiteUrl);
     String axeResultWithError = FileUtils.readFileToString(axeResultWithErrorFile, StandardCharsets.UTF_8);
     Results results = new ObjectMapper().readValue(axeResultWithError, Results.class);
     AccessibilityUtilities.createAccessibilityHtmlReport(this.getTestObject(), results, false);
@@ -208,7 +207,7 @@ public class AccessibilityHTMLUnitTest extends BaseSeleniumTest {
     Assert.assertFalse(fileString.contains("Passes "), "Passes were still in the report");
     Assert.assertFalse(fileString.contains("Inapplicable "), "Inapplicable were still in the report");
     Assert.assertFalse(fileString.contains("Incomplete  "), "Incomplete were still in the report");
-    deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
+    // deleteFiles(Arrays.asList(this.getTestObject().getArrayOfAssociatedFiles()));
   }
 
   /**

@@ -258,6 +258,8 @@ public class AccessibilityUtilities {
 
       results = getResults.get();
       HtmlReporter.createAxeHtmlReport(testObject.getWebDriver(), results, report, requestedResults);
+    } catch (Exception e) {
+      throw new RuntimeException(e.getLocalizedMessage());
     } finally {
       // Restore logging if we suspended it
       if (restoreLogging) {

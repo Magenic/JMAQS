@@ -22,10 +22,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -64,13 +61,13 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   /**
    * The file to be converted into a result type.
    */
-  private static final File integrationTestJsonResultFile = new File(
+  private static final File integrationTestSampleResultFile = new File(
       "src/test/resources/testFiles/sampleResults.json");
 
   /**
    * The path to the file converted into a result type.
    */
-  private static final String integrationTestJsonResultUrl = integrationTestJsonResultFile.getAbsolutePath();
+  private static final String integrationTestSampleResultUrl = integrationTestSampleResultFile.getAbsolutePath();
 
   /**
    * String value of main element selector.
@@ -188,7 +185,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   @Test(groups = TestCategories.ACCESSIBILITY)
   public void reportSampleResults() throws IOException, ParseException {
     String path = createReportPath();
-    Results results = new ObjectMapper().readValue(new File(integrationTestJsonResultUrl), Results.class);
+    Results results = new ObjectMapper().readValue(new File(integrationTestSampleResultUrl), Results.class);
 
     HtmlReporter.createAxeHtmlReport(this.getWebDriver(), results, path);
     validateReport(path, 3, 5, 2, 4);
@@ -196,10 +193,11 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
     String text = new String(Files.readAllBytes(Paths.get(path)));
     Document doc = Jsoup.parse(text);
 
-    String errorMessage = doc.selectFirst("#ErrorMessage").text();
+    String errorMessage = Objects.requireNonNull(doc.selectFirst("#ErrorMessage")).text();
+    //String errorMessage = doc.selectFirst("#ErrorMessage").text();
     Assert.assertEquals(errorMessage, "java.lang.Exception: AutomationError");
 
-    String reportContext = doc.selectFirst("#reportContext").text();
+    String reportContext = Objects.requireNonNull(doc.selectFirst("#reportContext")).text();
     Assert.assertTrue(reportContext.contains("Url: https://www.google.com/"), "URL is not in the document");
     Assert.assertTrue(reportContext.contains("Orientation: landscape-primary"), "Orientation is not in the document");
     Assert.assertTrue(reportContext.contains("Size: 1200 x 646"), "Size is not in the document");
@@ -311,7 +309,7 @@ public class HTMLReporterUnitTest extends BaseSeleniumTest {
   private void validateElementCount(Document doc, int count, ResultType resultType) {
     String ending = resultType.equals(ResultType.Inapplicable) ? "div.findings" : "div > div.htmlTable";
     String xpath = "#" + resultType + "Section > " + ending;
-    Elements liNodes = doc.select(xpath) != null ? doc.select(xpath) : new Elements();
+    Elements liNodes = !doc.select(xpath).isEmpty() ? doc.select(xpath) : new Elements();
     Assert.assertEquals(liNodes.size(), count, "Expected " + count + " " + resultType);
   }
 
