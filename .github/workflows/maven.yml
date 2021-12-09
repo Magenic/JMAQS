@@ -1,0 +1,174 @@
+name: Build
+on:
+  schedule:
+    - cron: "13 23 * * *"
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      override:
+        description: 'Version Number'
+        required: true
+        default: '0.0.0'
+
+jobs:
+
+  waitOld:
+    name: Wait For Older Runs To Complete
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait
+        id: wait
+        shell: pwsh
+        run: |
+          $runID = ${{ github.run_id }}
+          $endPoint = "https://api.github.com/repos/${{github.repository}}/actions/runs"
+
+          $timeout = New-TimeSpan -Minutes 60
+          $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+
+          do {
+              $result = Invoke-RestMethod -Uri $endPoint
+              $builds = $result.workflow_runs | Where-Object {$_.name -eq  "Build" -and ($_.status -eq "in_progress" -or $_.status -eq "queued") -and $_.id -lt  $runID}
+
+              # Check if there were any older build runs still going, if not we waited long enough
+              if (!$builds)
+              {
+                Write-Host "Are now top of the run queue"
+                return
+              }
+
+              Start-Sleep -s 60
+              Write-Host "Waited so far $($stopwatch.elapsed)"
+
+          } while ($stopwatch.elapsed -lt $timeout)
+
+           Write-Host "Waited more than an hour for earlier runs to complete, continuing action pipeline"
+
+  draftRelease:
+    name: Draft release
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  getVersion:
+    name: Get package version
+    runs-on: ubuntu-latest
+    needs: draftRelease
+    if: ${{ always() }}
+    outputs:
+      buildNumber: ${{ steps.ver.outputs.BUILD_NUMBER }}
+    steps:
+      - name: GetVersion
+        id: ver
+        shell: pwsh
+        run: |
+          if ("${{github.event.inputs.override}}")
+          {
+            Write-Host "Using manually entered override version"
+            $version = "${{ github.event.inputs.override}}"
+          }
+          else
+          {
+            $header = @{Authorization = 'Bearer ${{ secrets.GITHUB_TOKEN }}' }
+            $endPoint = "https://api.github.com/repos/${{github.repository}}/releases"
+            $info = Invoke-RestMethod -Uri $endPoint -Headers $header
+            $version = $info.name[0].Trim("v")
+          }
+
+          Write-Host "::set-output name=BUILD_NUMBER::$($version)"
+
+  install-modules:
+    name: Pre-compile packages
+    runs-on: ubuntu-latest
+    #needs: getVersion
+    outputs:
+      buildNumber: ${{ steps.ver.outputs.BUILD_NUMBER }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: builder
+        uses: ./.github/workflows/preinstall-action
+        with:
+          bt-param: '-fae -B -e -T 1C -Psonar'
+          version: ${{ github.sha }} #${{ needs.getVersion.outputs.buildNumber }}
+
+
+  test-modules:
+    name: Test Modules
+    needs: [ waitOld, install-modules ]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        module-name: [ jmaqs-utilities, jmaqs-base, jmaqs-appium, jmaqs-selenium, jmaqs-webservices-jdk8, jmaqs-webservices-jdk11, jmaqs-cucumber, jmaqs-accessibility ]
+    env:
+      BUILD_NUMBER: ${{ needs.getVersion.outputs.buildNumber }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: builder
+        uses: ./.github/workflows/buildtest-action
+        with:
+          module-name: ${{matrix.module-name}}
+          bt-param: '-fae -B -e -Dtesting=solo -T 1C'
+          version: ${{ github.sha }} #${{ needs.getVersion.outputs.buildNumber }}
+      - uses: actions/upload-artifact@v2
+        if: always()
+        name: "Upload test artifact"
+        with:
+          name: ${{matrix.module-name}}-results
+          path: |
+            ${{matrix.module-name}}/target/**/*.xml
+            ${{matrix.module-name}}/target/logs
+            ${{matrix.module-name}}/target/**/*.exec
+            ${{matrix.module-name}}/target/**/*.jar
+
+  sonarcloud:
+    name: SonarCloud Analysis
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    needs: [test-modules, getVersion]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          path: ${{github.workspace}}/artifacts/
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: ${{github.workspace}}/artifacts/
+      - name: Set up JDK
+        uses: actions/setup-java@v2.3.1
+        with:
+          distribution: zulu
+          java-version: 11
+      - name: Restore Local Maven Cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{inputs.version}}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - run: cd ../../ && mvn -Dtesting=multiple jacoco:merge
+#      - uses: cprudhom/jacoco-merge@v1
+#        with:
+#          exec-file: >
+#            ./artifacts/jmaqs-utilities-results/jacoco.exec
+#            ./artifacts/jmaqs-base-results/jacoco.exec
+#            ./artifacts/jmaqs-appium-results/jacoco.exec
+#            ./artifacts/jmaqs-selenium-results/jacoco.exec
+#            ./artifacts/jmaqs-webservices-jdk8-results/jacoco.exec
+#            ./artifacts/jmaqs-webservices-jdk11-results/jacoco.exec
+#            ./artifacts/jmaqs-cucumber-results/jacoco.exec
+#            ./artifacts/jmaqs-accessibility-results/jacoco.exec
+#          dest-file:
+#            target/jacoco.exec
+
+
+
+

@@ -1,0 +1,42 @@
+---
+version: '3.8'
+services:
+  framework:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - chrome
+      - mssql
+  chrome:
+    image: selenium/standalone-chrome:3.141.59-20210929
+    environment:
+      - SELENIUM_HOST=hub.docker.com
+      - SELENIUM_PORT=4444
+      - SELENIUM_BROWSER=chrome
+    volumes:
+      - ./selenium-chrome-data:/tmp/data
+      - /dev/shm:/dev/shm
+    ports:
+      - "4444:4444"
+    expose:
+      - 4444
+  mssql:
+    image: mcr.microsoft.com/mssql/server:latest
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=magenicMAQS2
+      - MSSQL_PID=Developer
+    expose:
+      - 1433
+    volumes:
+      # Mount the current directory onto /mnt/host on the image.
+      - ./:/mnt/host/
+    # Run a custom bash script that bootstraps the database after it is started.
+    command: [ '/bin/bash', '/mnt/host/initialize_and_start_sqlserver.sh' ]
+
+
+
+

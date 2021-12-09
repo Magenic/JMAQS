@@ -1,0 +1,86 @@
+name: Build
+on:
+  schedule:
+    - cron: "13 23 * * *"
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      override:
+        description: 'Version Number'
+        required: true
+        default: '0.0.0'
+
+jobs:
+
+  waitOld:
+    name: Wait For Older Runs To Complete
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait
+        id: wait
+        shell: pwsh
+        run: |
+          $runID = ${{ github.run_id }}
+          $endPoint = "https://api.github.com/repos/${{github.repository}}/actions/runs"
+
+          $timeout = New-TimeSpan -Minutes 60
+          $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+
+          do {
+              $result = Invoke-RestMethod -Uri $endPoint
+              $builds = $result.workflow_runs | Where-Object {$_.name -eq  "Build" -and ($_.status -eq "in_progress" -or $_.status -eq "queued") -and $_.id -lt  $runID}
+
+              # Check if there were any older build runs still going, if not we waited long enough
+              if (!$builds)
+              {
+                Write-Host "Are now top of the run queue"
+                return
+              }
+
+              Start-Sleep -s 60
+              Write-Host "Waited so far $($stopwatch.elapsed)"
+
+          } while ($stopwatch.elapsed -lt $timeout)
+
+           Write-Host "Waited more than an hour for earlier runs to complete, continuing action pipeline"
+
+  draftRelease:
+    name: Draft release
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  getVersion:
+    name: Get package version
+    runs-on: ubuntu-latest
+    needs: draftRelease
+    if: ${{ always() }}
+    outputs:
+      buildNumber: ${{ steps.ver.outputs.BUILD_NUMBER }}
+    steps:
+      - name: GetVersion
+        id: ver
+        shell: pwsh
+        run: |
+          if ("${{github.event.inputs.override}}")
+          {
+            Write-Host "Using manually entered override version"
+            $version = "${{ github.event.inputs.override}}"
+          }
+          else
+          {
+            $header = @{Authorization = 'Bearer ${{ secrets.GITHUB_TOKEN }}' }
+            $endPoint = "https://api.github.com/repos/${{github.repository}}/releases"
+            $info = Invoke-RestMethod -Uri $endPoint -Headers $header
+            $version = $info.name[0].Trim("v")
+          }
+
+          Write-Host "::set-output name=BUILD_NUMBER::$($version)"

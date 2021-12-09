@@ -1,0 +1,41 @@
+name: 'Build and test action'
+description: 'Build and test something'
+inputs:
+  pom-file:
+    description: 'pom file path'
+    default: 'pom.xml'
+    required: false
+  bt-param: # id of input
+    description: 'Build and test params'
+    required: true
+  artifact-name: # id of input
+    description: 'Artifact name'
+    required: true
+  module-name: # id of module
+      description: 'module namespace'
+      required: true
+  version:
+    description: 'version number'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v2.3.1
+      with:
+        distribution: zulu
+        java-version: 11
+    - name: Restore Local Maven Cache
+      uses: actions/cache@v2.1.6
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{inputs.version}}
+        restore-keys: |
+            ${{ runner.os }}-maven-
+    - name: Run Unit Tests
+      uses: GabrielBB/xvfb-action@v1.5
+      with:
+        run: mvn test -Drevision=${{inputs.version}} -f ./${{inputs.module-name}}/${{inputs.pom-file}} ${{ inputs.bt-param }}
+    - id: random-number-generator
+      run: echo "::set-output name=random-id::123"
+      shell: bash

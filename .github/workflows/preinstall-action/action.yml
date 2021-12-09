@@ -1,0 +1,36 @@
+name: 'Pre Install Packages action'
+description: 'install packages'
+inputs:
+  pom-file:
+    description: 'pom file path'
+    default: 'pom.xml'
+    required: false
+  bt-param: # id of input
+    description: 'Build and test params'
+    required: true
+  artifact-name: # id of input
+    description: 'Artifact name'
+    required: true
+  version:
+    description: 'version number'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v2.3.1
+      with:
+        distribution: zulu
+        java-version: 11
+    - name: Restore Local Maven Cache
+      uses: actions/cache@v2.1.6
+      with:
+        path: ~/.m2
+        key:  ${{ runner.os }}-maven-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+    - run: mvn -Drevision=${{inputs.version}} compile install ${{inputs.bt-param}} -Dtesting=multiple -Dmaven.test.skip=true
+      shell: bash
+    - id: random-number-generator
+      run: echo "::set-output name=random-id::123"
+      shell: bash
