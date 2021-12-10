@@ -53,9 +53,9 @@
         <!--<DatabaseProviderType>SQL</DatabaseProviderType>
         <DatabaseProviderType>MYSQL</DatabaseProviderType>-->
         <DatabaseProviderType>SQL</DatabaseProviderType>
-        <DatabaseUser>MagenicQA</DatabaseUser>
-        <DatabasePassword>1magenicMARQ</DatabasePassword>
-        <DatabaseConnectionString>jdbc:sqlserver://qasqlserver.database.windows.net</DatabaseConnectionString>
+        <DatabaseUser>sa</DatabaseUser>
+        <DatabasePassword>magenicMAQS2</DatabasePassword>
+        <DatabaseConnectionString>jdbc:sqlserver://mssql</DatabaseConnectionString>
         <EntityDirectory>./src/test/java/com/magenic/jmaqs/database/entities/</EntityDirectory>
         <EntityPackage>com.magenic.jmaqs.database.entities</EntityPackage>
     </DatabaseMaqs>

@@ -23,7 +23,7 @@ public class DatabaseConfigUnitTest extends BaseGenericTest {
   @Test(groups = TestCategories.DATABASE)
   public void testGetConnectionString() {
     Assert.assertEquals(DatabaseConfig.getConnectionString(),
-        "jdbc:sqlserver://qasqlserver.database.windows.net");
+        "jdbc:sqlserver://mssql");
   }
 
   /**
@@ -68,11 +68,11 @@ public class DatabaseConfigUnitTest extends BaseGenericTest {
 
   @Test(groups = TestCategories.DATABASE)
   public void testGetDatabaseUser() {
-    Assert.assertEquals(DatabaseConfig.getDatabaseUser(), "MagenicQA");
+    Assert.assertEquals(DatabaseConfig.getDatabaseUser(), "sa");
   }
 
   @Test(groups = TestCategories.DATABASE)
   public void testGetDatabasePassword() {
-    Assert.assertEquals(DatabaseConfig.getDatabasePassword(), "1magenicMARQ");
+    Assert.assertEquals(DatabaseConfig.getDatabasePassword(), "magenicMAQS2");
   }
 }

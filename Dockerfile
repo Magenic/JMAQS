@@ -1,27 +1,10 @@
-FROM openjdk:11-jdk-slim
-# ----
-# Install Maven
-RUN apt-get update && apt-get install maven -y
-ARG MAVEN_VERSION=3.8.4
-ARG USER_HOME_DIR="/root"
-#RUN mkdir -p /usr/share/maven && \
-#curl -fsSL http://apache.osuosl.org/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar -xzC /usr/share/maven --strip-components=1 && \
-#ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
-ENV MAVEN_HOME /usr/share/maven
-ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
-# speed up Maven JVM a bit
+FROM maven:3.8.4-openjdk-11-slim
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
-ENTRYPOINT ["/usr/bin/mvn"]
-# ----
-# Install project dependencies and keep sources
-# make source folder
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /root/framework
+WORKDIR /root/framework
 COPY . .
-# install maven dependency packages (keep in image)
-#COPY pom.xml /usr/src/app
-#COPY  ./jmaqs-*/ /usr/src/app/
-RUN mvn -B -e -T 1C install -Dmaven.test.skip=true
+RUN mvn -B -e -T 1C -Dtesting install -Dmaven.test.skip=true
 RUN mvn clean -B -e -T 1C
-# copy other source files (keep in image)
-#COPY  ./jmaqs-*/ /usr/src/app/
+RUN wget -O - $(wget -O - https://api.github.com/repos/powerman/dockerize/releases/latest | grep -i /dockerize-$(uname -s)-$(uname -m)\" | cut -d\" -f4) | install /dev/stdin /usr/local/bin/dockerize
+#CMD dockerize -wait tcp://mssql:1433 -wait http://chrome:4444 -timeout 360s -- echo 'Services running'
+#ENTRYPOINT dockerize -wait tcp://mssql:1433 -wait http://chrome:4444 -timeout 360s -- echo 'Services running' && mvn verify package --file pom.xml -e -fae -T 1C -B -Dtesting  -Djdk.version=11

@@ -1,26 +1,20 @@
 ---
 version: '3.8'
 services:
-  framework:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    depends_on:
-      - chrome
-      - mssql
-  chrome:
-    image: selenium/standalone-chrome:3.141.59-20210929
-    environment:
-      - SELENIUM_HOST=hub.docker.com
-      - SELENIUM_PORT=4444
-      - SELENIUM_BROWSER=chrome
-    volumes:
-      - ./selenium-chrome-data:/tmp/data
-      - /dev/shm:/dev/shm
-    ports:
-      - "4444:4444"
-    expose:
-      - 4444
+#  chrome:
+#    image: selenium/standalone-chrome:4.1.0-20211209
+#    environment:
+#      - SELENIUM_HOST=chrome.jmaqs.io
+#      - SELENIUM_PORT=4444
+#      - SELENIUM_BROWSER=chrome
+#    volumes:
+#      - ./docker/selenium-chrome-data:/tmp/data
+#      - /dev/shm:/dev/shm
+#    ports:
+#      - "4444:4444"
+#    expose:
+#      - 4444
+
   mssql:
     image: mcr.microsoft.com/mssql/server:latest
     ports:
@@ -33,9 +27,59 @@ services:
       - 1433
     volumes:
       # Mount the current directory onto /mnt/host on the image.
-      - ./:/mnt/host/
+      - ./docker/MAQSSQLServer/:/mnt/host/
     # Run a custom bash script that bootstraps the database after it is started.
     command: [ '/bin/bash', '/mnt/host/initialize_and_start_sqlserver.sh' ]
+  framework:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - selenium-hub
+      - chrome
+#      - firefox
+      - mssql
+    command: sh -c "dockerize -wait tcp://mssql:1433 -wait http://hub:4444/grid/console -timeout 360s -- echo 'Services running' | mvn verify package --file pom.xml -e -fae -T 1C -B -Dtesting  -Djdk.version=11"
+  chrome:
+    image: selenium/node-chrome:4.1.0-20211209
+    shm_size: 2gb
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    deploy:
+      replicas: 3
+    entrypoint: bash -c 'SE_OPTS="--host $$HOSTNAME" /opt/bin/entry_point.sh'
+
+#  edge:
+#    image: selenium/node-edge:4.1.0-20211209
+#    shm_size: 2gb
+#    environment:
+#      - SE_EVENT_BUS_HOST=selenium-hub
+#      - SE_EVENT_BUS_PUBLISH_PORT=4442
+#      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+#    deploy:
+#      replicas: 1
+#    entrypoint: bash -c 'SE_OPTS="--host $$HOSTNAME" /opt/bin/entry_point.sh'
+
+#  firefox:
+#    image: selenium/node-firefox:4.1.0-20211209
+#    shm_size: 2gb
+#    environment:
+#      - SE_EVENT_BUS_HOST=selenium-hub
+#      - SE_EVENT_BUS_PUBLISH_PORT=4442
+#      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+#    deploy:
+#      replicas: 1
+#    entrypoint: bash -c 'SE_OPTS="--host $$HOSTNAME" /opt/bin/entry_point.sh'
+
+  selenium-hub:
+    image: selenium/hub:4.1.0-20211209
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+
 
 
 

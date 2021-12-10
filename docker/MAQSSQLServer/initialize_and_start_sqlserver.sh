@@ -1,5 +1,5 @@
 #!/bin/bash
-{ 
+{
     # Wait for SQL Server to start up
     # Check if the server is ready
     not_ready=1

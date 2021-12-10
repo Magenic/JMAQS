@@ -39,18 +39,19 @@
         <Browser>Firefox</Browser>
         <Browser>Edge</Browser>
         <Browser>HEADLESSCHROME</Browser>-->
-        <Browser>HEADLESSCHROME</Browser>
+<!--        <Browser>HEADLESSCHROME</Browser>-->
 
         <!--Remote browser settings-->
         <!--<Browser>REMOTE</Browser>-->
+        <Browser>REMOTE</Browser>
         <RemoteBrowser>Chrome</RemoteBrowser>
-        <HubUrl>http://ondemand.saucelabs.com:80/wd/hub</HubUrl>
+        <HubUrl>http://selenium-hub:4444/wd/hub</HubUrl>
         <WebSiteBase>http://magenicautomation.azurewebsites.net/</WebSiteBase>
         <BrowserWaitTime>1000</BrowserWaitTime>
         <BrowserTimeout>20000</BrowserTimeout>
-        <RemoteBrowserName>Chrome</RemoteBrowserName>
+<!--        <RemoteBrowserName>Chrome</RemoteBrowserName>
         <RemotePlatform>OS X 10.11</RemotePlatform>
-        <RemoteVersion>54.0</RemoteVersion>
+        <RemoteVersion>54.0</RemoteVersion>-->
 
         <!--Browser Resize settings
         <BrowserSize>MAXIMIZE</BrowserSize>
@@ -63,11 +64,11 @@
     </SeleniumMaqs>
 
     <RemoteSeleniumCapsMaqs>
-        <username>Sauce_Labs_Username</username>
-        <accessKey>Sauce_Labs_Accesskey</accessKey>
-        <browserName>Chrome</browserName>
-        <platform>OS X 10.11</platform>
-        <version>54.0</version>
+<!--        <username>Sauce_Labs_Username</username>-->
+<!--        <accessKey>Sauce_Labs_Accesskey</accessKey>-->
+        <browserName>chrome</browserName>
+        <platform>LINUX</platform>
+<!--        <version>54.0</version>-->
     </RemoteSeleniumCapsMaqs>
 
 </configuration>
