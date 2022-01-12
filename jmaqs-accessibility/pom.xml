@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.deque.html.axe-core</groupId>
             <artifactId>selenium</artifactId>
-            <version>4.2.2</version>
+            <version>4.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -34,31 +34,11 @@
             <groupId>com.magenic.jmaqs.utilities</groupId>
             <artifactId>jmaqs-utilities</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.14.3</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.github.webdriverextensions</groupId>
-                <artifactId>webdriverextensions-maven-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>install-drivers</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <installationDirectory>./src/test/resources/drivers</installationDirectory>
-                    <drivers>
-                        <driver>
-                            <name>chromedriver</name>
-                            <customFileName>chromedriver</customFileName>
-                            <version>${chromedriver.version}</version>
-                        </driver>
-                    </drivers>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
