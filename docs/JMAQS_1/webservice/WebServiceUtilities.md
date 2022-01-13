@@ -13,7 +13,7 @@ The WebServiceUtils class is a utility class for working with HTTP content and s
 [DeserializeJson](#DeserializeJson)  
 
 ## CreateEntity
-Creates a HTTP entity with a content message string and a content type.
+Creates an HTTP entity with a content message string and a content type.
 ```java
 HttpEntity newEntity = new StringEntity(contentMessage, contentType);
 return newEntity;
@@ -29,11 +29,9 @@ Gets the body from a HTTP response with a closeable response, a content type, an
 ```java
  if (contentType.toString().toUpperCase().contains("JSON")) {
       responseBody = deserializeJson(response, type);
-    }
-    else if (contentType.toString().toUpperCase().contains("XML")) {
+    } else if (contentType.toString().toUpperCase().contains("XML")) {
       responseBody = deserializeXml(response, type);
-    }
-    else {
+    } else {
       throw new IllegalArgumentException(
               StringProcessor.safeFormatter("Only xml and json conversions are currently supported"));
     }

@@ -3,12 +3,11 @@
 ## Overview
 The Manager Dictionary contains methods to interact with the Driver manager.
 
-[GetDriver](#GetDriver)
+[GetDriver](#GetDriver)  
 [Put](#Put)  
-[AddOrOverride](#AddOrOverride)
-[Remove](#Remove)
+[AddOrOverride](#AddOrOverride)  
+[Remove](#Remove)  
 [Clear](#Clear)
-[Dispose](#Dispose)
 
 ## GetDriver
 Get the driver for the associated driver manager

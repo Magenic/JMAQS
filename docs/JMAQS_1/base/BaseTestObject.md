@@ -3,24 +3,19 @@
 ## Overview
 Takes care of the base test context data.
 
-[GetClosed](#GetClosed)
-[GetLog](#GetLog)
-[SetLog](#SetLog)
-[GetPerftimerCollection](#GetPerftimerCollection)  
-[SetPerftimerCollection](#SetPerftimerCollection)  
-[GetValues](#GetValues)  
-[SetValues](#SetValues)  
-[GetObjects](#GetObjects)
-[SetObjects](#SetObjects)
-[GetManagerStore](#GetManagerStore)  
+[GetClosed](#GetClosed)  
+[Log](#Log)  
+[PerfTimerCollection](#PerfTimerCollection)  
+[Values](#Values)   
+[Objects](#GetObjects)  
 [SetManagerStore](#SetManagerStore)  
-[AddAssociatedFile](#AddAssociatedFile)
+[AddAssociatedFile](#AddAssociatedFile)  
 [SetValue](#SetValue)  
 [SetObject](#SetObject) 
-[AddDriverManager](#AddDriverManager)
-[RemoveAssociatedFile](#RemoveAssociatedFile)
+[AddDriverManager](#AddDriverManager)  
+[RemoveAssociatedFile](#RemoveAssociatedFile)  
 [GetArrayOfAssociatedFiles](#GetArrayOfAssociatedFiles)  
-[ContainsAssociatedFile](#ContainsAssociatedFile)
+[ContainsAssociatedFile](#ContainsAssociatedFile)  
 [OverrideDriverManager](#OverrideDriverManager)  
 [Close](#Close)
 
@@ -30,26 +25,28 @@ Checks if the object has been closed
 boolean isClosed = this.getClosed();
 ```
 
-## GetLog
+## Log
+### GetLog
 Gets the logger
 ```java
 Logger log = this.getLog();
 ```
 
-## SetLog
+### SetLog
 Sets the logger
 ```java
 this.getTestObject.setLog(logger);
 this.log = logger;
 ```
 
-## GetPerftimerCollection
+## PerfTimerCollection
+### GetPerfTimerCollection
 Gets the performance timer collection
 ```java
 PerfTimerCollection collection = testObject.getPerfTimerCollection();
 ```
 
-## SetPerftimerCollection
+### SetPerfTimerCollection
 Sets the performance timer collection
 ```java
 BaseTestObject testObject = this.getBaseTestObject();
@@ -62,14 +59,15 @@ Gets the test name
 testObject.getFullyQualifiedTestName();
 ```
 
-## GetValues
+## Values
+### GetValues
 Gets the Concurrent Hash Map of string key value pairs
 ```java
 BaseTestObject testObject = this.getTestObject();
 ConcurrentMap<String, String> values = testObject.getValues();
 ```
 
-## SetValues
+### SetValues
 Sets the Concurrent Hash Map of string key and object value pairs
 ```java
 BaseTestObject testObject = this.getTestObject();
@@ -77,14 +75,15 @@ testObject.SetValues(hash map)
 this.values = values;
 ```
 
-## GetObjects
+## Objects
+### GetObjects
 Gets the Concurrent Hash Map of string key and object value pairs
 ```java
 BaseTestObject testObject = this.getTestObject();
 ConcurrentMap<String, String> values = testObject.getObjects();
 ```
 
-## SetObjects
+### SetObjects
 Sets the Concurrent Hash Map of string key and object value pairs
 ```java
 BaseTestObject testObject = this.getTestObject();
@@ -92,7 +91,8 @@ testObject.SetValues(hash map)
 this.values = values;
 ```
 
-## GetManagerStore
+## Manager
+### GetManagerStore
 Gets the Concurrent Hash Map of string key and driver value pairs
 ```java
 public ManagerDictionary getManagerStore() {
@@ -100,7 +100,7 @@ public ManagerDictionary getManagerStore() {
   }
 ```
 
-## SetManagerStore
+### SetManagerStore
 Sets the Concurrent Hash Map of string key and driver value pairs
 ```java
  protected void setManagerStore(ManagerDictionary managerStore) {
@@ -167,7 +167,8 @@ this.overrideDriverManager(driverManager.getClass().getTypeName(), driverManager
   }
 ```
 
-## AddAssociatedFile
+## AssociatedFile
+### AddAssociatedFile
 Checks if the file exists and if so attempts to add it to the associated files set
 ```java
 testObject.addAssociatedFile(path);
@@ -181,7 +182,7 @@ public boolean addAssociatedFile(String path) {
   }
 ```
 
-## RemoveAssociatedFile
+### RemoveAssociatedFile
 Removes the file path from the associated file set
 ```java
 boolean removed = testObject.removeAssociatedFile(logPath);

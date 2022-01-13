@@ -10,7 +10,7 @@ Each web driver call has a similar format
 * Expected response type
   * This tells the service what format the response body should take.
 * Content
-  * This is optional and only needs to be used when sending content to the web service.  Typically this would not be used with **GET** calls, but would be used with **PUT** calls.
+  * This is optional and only needs to be used when sending content to the web service.  Typically, this would not be used with **GET** calls, but would be used with **PUT** calls.
 
 # Available calls
 [Get](#Get)  

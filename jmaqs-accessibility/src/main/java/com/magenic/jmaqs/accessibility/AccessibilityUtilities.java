@@ -284,7 +284,7 @@ public class AccessibilityUtilities {
   }
 
   /**
-   * Get a unique file name that we can user for the accessibility HTML report.
+   * Get a unique file name that we can use for the accessibility HTML report.
    * @param testObject The TestObject to associate the report with
    * @return A unique HTML file name, includes full path
    */

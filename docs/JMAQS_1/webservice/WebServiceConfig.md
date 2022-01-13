@@ -7,7 +7,7 @@ The WebServiceConfig class is used to get values from the WebServiceMaqs section
 ## WebServiceMaqs
 The WebServiceMaqs configuration section contains the following Keys:
 * ***WebServiceUri*** : The base webservice uri
-* ***WebServiceTimeout*** : How long to wait for something before timing out - Used heavily with the MAQS waits
+* ***WebServiceTimeout*** : How long to wait for something before timing out - Used heavily with the JMAQS waits
 
 ## Available methods
 Get the base web service URL:

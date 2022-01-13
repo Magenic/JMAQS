@@ -1,7 +1,7 @@
 # <img src="resources/jmaqslogo.jpg" height="32" width="32">Database Info Constants
 
 ## Overview
-Place holder for the Data provider types and interactions.
+The placeholder for the Data provider types and interactions.
 
 ## Find
 Finds the provider data type via a string.

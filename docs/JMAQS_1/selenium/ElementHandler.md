@@ -68,13 +68,14 @@ UIWaitFactory.getWaitDriver(this.getWebDriver()).waitUntilClickableElement(check
 // If the checkbox is unchecked, then the driver will check the checkbox
 ElementHandler.checkCheckBox(this.getWebDriver(), checkbox, true);
 
-// If the checkbox is checked, then the driver will uncheckcheck the checkbox
+// If the checkbox is checked, then the driver will uncheck the checkbox
 ElementHandler.checkCheckBox(this.getWebDriver(), checkbox, false);
 ```
 In applications a checkbox will either be checked or unchecked.  Stating "click this checkbox" does not take into consideration the state of that checkbox.  
 
 ## CreateCommaDelimitedString
-Creates a collection of elements based on a selector, loops through the collection, gathering text, adding it to a list, removes any white space, sorts the list alphabetically, and then returns that list as a string with the values separated by commas.  By default it will retrieve the value from the value attribute.
+Creates a collection of elements based on a selector, loops through the collection, gathering text, adding it to a list, removes any white space, sorts the list alphabetically, and then returns that list as a string with the values separated by commas.  
+By default, it will retrieve the value from the value attribute.
 ```java
 // A by selector for a list of computer parts.
 private static By computerParts = By.cssSelector("ul>#options");
@@ -203,7 +204,7 @@ ElementHandler.slowType(this.getWebDriver(), textField, "hello, world");
 ```
 
 ## SendSecretKeys
-Sends keys to an element without logging. Useful to prevent secret fields (passwords) from being logged.
+Sends the keys to an element without logging. Useful to prevent secret fields (passwords) from being logged.
 ```java
  private static By passwordField = By.id("passwordField");
 

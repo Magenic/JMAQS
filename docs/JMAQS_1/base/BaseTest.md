@@ -5,94 +5,91 @@ The BaseTest class provides access to the TestObject and DriverManager.
 The Base for tests without a defined system under test
 
 # Available calls
-[GetPerfTimerCollection](#GetPerfTimerCollection)  
-[SetPerfTimerCollection](#SetPerfTimerCollection)  
-[GetLogger](#GetLogger)  
-[setLogger](#setLogger)  
-[GetLoggingEnabledSetting](#GetLoggingEnabledSetting)  
-[SetLoggingEnabledSetting](#SetLoggingEnabledSetting)  
-[GetLoggedExceptions](#GetLoggedExceptions)  
-[SetLoggedExceptions](#SetLoggedExceptions)  
-[GetManagerStore](#GetManagerStore) 
-[GetTestContext](#GetTestContext)  
-[SetTestContext](#SetTestContext)  
-[GetTestObject](#GetTestObject)  
-[SetTestObject](#SetTestObject)  
-[Setup](#Setup) 
-[Teardown](#Teardown) 
-[SetTestResult](#SetTestResult)
+[PerfTimerCollection](#PerfTimerCollection)  
+[Logger](#Logger)   
+[LoggingEnabledSetting](#LoggingEnabledSetting)   
+[LoggedExceptions](#LoggedExceptions)  
+[ManagerStore](#ManagerStore)  
+[TestContext](#TestContext)  
+[TestObject](#TestObject)  
+[Setup](#Setup)  
+[Teardown](#Teardown)   
+[SetTestResult](#SetTestResult)  
 [BeforeLoggingTeardown](#BeforeLoggingTeardown)  
-[CreateLogger](#CreateLogger) 
+[CreateLogger](#CreateLogger)  
 [GetResultType](#GetResultType)  
-[GetResultText](#GetResultText) 
-[GetFullyQualifiedTestClassName](#GetFullyQualifiedTestClassName)
+[GetResultText](#GetResultText)  
+[GetFullyQualifiedTestClassName](#GetFullyQualifiedTestClassName)  
 [TryToLog](#TryToLog)  
-[LogVerbose](#LogVerbose)
+[LogVerbose](#LogVerbose)  
 [CreateNewTestObject](#CreateNewTestObject)  
 
-
-## GetPerfTimerCollection
+## PerfTimerCollection
+### GetPerfTimerCollection
 Gets the performance timer collection for a test
 ```java
  PerfTimerCollection p = this.perfTimerCollection;
 ```
 
-## SetPerfTimerCollection
+### SetPerfTimerCollection
 Sets the performance timer collection for a test
 ```java
  PerfTimerCollection p = this.perfTimerCollection;
 ```
 
-## GetLogger
+## Logger
+### GetLogger
 Gets the testing object logger.
 ```java
-Logger log = this.getTestObject().getLog();
+Logger log = this.getTestObject().getLogger();
 ```
 
-## SetLogger
+### SetLogger
 Sets the testing object logger.
 ```java
-this.getTestObject().setLog(log);
+this.getTestObject().setLogger(log);
 ```
 
-## GetLoggingEnabledSetting
+## LoggingEnabledSetting
+### GetLoggingEnabledSetting
 Gets the logging enable flag
 ```java
 LoggingEnabled logEnabled = LoggingConfig.getLoggingEnabledSetting();
 ```
 
-## SetLoggingEnabledSetting
+### SetLoggingEnabledSetting
 Sets the logging enable flag
 ```java
 setLoggingEnabled(setting);
 ```
-
-## GetLoggedExceptions
+## LoggedExceptions
+### GetLoggedExceptions
 Gets the logged exceptions.
 ```java
 List<String> exceptions = this.getLoggedExceptions();
 ```
 
-## SetLoggedExceptions
+### SetLoggedExceptions
 Sets the logged exceptions.
 ```java
 setLoggedExceptions(loggedExceptionList);
 ```
-
-## GetManagerStore
+## ManagerStore
+### GetManagerStore
 Gets the driver store of the Manager Dictionary.
 ```java
 this.getManagerStore();
 ```
 
-## GetTestContext
+### GetTestContext
 Gets the TestNG Test Context
 ```java
 BaseTest tester = this.getBaseTest();
 tester.setTestContext(this.getTestContext());
 ```
 
-## SetTestContext
+## TestContext
+### SetTestContext
 Sets the TestNG Test Context
 ```java
 final ITestContext testContext = this.getTestContext();
@@ -100,13 +97,14 @@ testContext.setAttribute("testName", "SetTestContext");
 this.setTestContext(testContext);
 ```
 
-## GetTestObject
+## TestObject
+### GetTestObject
 Gets the test object
 ```java
 Assert.IsNotNull(this.getTestObject());
 ```
 
-## SetTestObject
+###  SetTestObject
 Sets the test object
 ```java
 this.setTestObject(testObject);
@@ -145,7 +143,7 @@ Set the test result after each test execution
 ```
 
 ## BeforeLoggingTeardown
-Steps to do before logging teardown results - If not override nothing is done before logging the results
+The steps taken before logging teardown results - If not overriding, nothing is done before logging the results
 ```java
 this.beforeLoggingTeardown(resultType);
 ```

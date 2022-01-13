@@ -19,7 +19,7 @@ public class ListProcessor {
   }
 
   /**
-   * Create a comma delimited string from a ArrayList of strings.
+   * Create a comma delimited string from an ArrayList of strings.
    *
    * @param stringList ArrayList of strings
    * @param sort       True to create an alphabetically sorted comma delimited string False to create comma

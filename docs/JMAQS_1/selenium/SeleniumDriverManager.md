@@ -29,7 +29,7 @@ Log a verbose message and include the automation specific call stack data.
 seleniumDriverManager.logVerbose("Logging verbose messaging");
 ```
 
-## LoggingStartup
+## LoggingStartUp
 Logging startup.
 ```java
 this.loggingStartup(tempDriver);

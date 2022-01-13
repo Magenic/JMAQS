@@ -32,10 +32,10 @@ protected WebDriver getBrowser() throws Exception {
 ```
 
 ## BeforeLoggingTeardown
-Take a screen shot if needed and tear down the web driver.
+Take a screenshot if needed and tear down the web driver.
 ```java
 protected void beforeLoggingTeardown(ITestResult resultType) {
-    // Try to take a screen shot
+    // Try to take a screenshot
     try {
       if (this.getWebDriver() != null && resultType.getStatus() != ITestResult.SUCCESS
           && this.getLoggingEnabledSetting() != LoggingEnabled.NO) {

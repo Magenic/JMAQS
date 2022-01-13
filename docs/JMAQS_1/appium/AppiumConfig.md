@@ -5,17 +5,17 @@ The AppiumConfig class is used to get values from the AppiumMaqs section of your
 <br>These values come from your config.xml and/or test run parameters.
 
 ## AppiumMaqs
-The AppiumMaqs configuation section contains the following Keys:
-* ***PlatformName***: The moblie device's platform name />
+The AppiumMaqs configuration section contains the following Keys:
+* ***PlatformName***: The mobile device's platform name />
 * ***PlatformVersion***: The platform version/>
 * ***DeviceName***: The mobile device's name />
 * ***MobileHubUrl***: the mobile hub URL />
 * ***MobileCommandTimeout***: How long to wait before the mobile command should time out />
 * ***MobileWaitTime***: The wait time for the mobile device />
-* ***MobileTimeout***: The timout for the mobile device />
+* ***MobileTimeout***: The timeout for the mobile device />
 
 ## AppiumCapsMaqs
-The AppiumCapsMaqs configuation section contains the following Keys:
+The AppiumCapsMaqs configuration section contains the following Keys:
 * ***Username*** : The username />
 * ***AccessKey***: The access key />
 * ***DeviceName***: The mobile device name />
@@ -23,7 +23,7 @@ The AppiumCapsMaqs configuation section contains the following Keys:
 * ***BrowserName***: The browser name being used />
 
 ## Available methods
-Get the initialize Appium timeout:
+Get the initialized Appium timeout:
 ```java
 TimeSpan timeout = AppiumConfig.getCommandTimeout();
 ```
@@ -58,7 +58,7 @@ Get the wait default wait driver:
 boolean pageSourceOnFail = AppiumConfig.getWaitDriver();
 ```
 
-Get the mobile device If no browser is provide in the project configuration file. We default to Android:
+Get the mobile device If no browser is provided in the project configuration file. We default to Android:
 ```java
 AppiumDriver driver = AppiumConfig.getWaitDriver();
 ```

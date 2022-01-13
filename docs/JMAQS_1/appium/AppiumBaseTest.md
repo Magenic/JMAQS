@@ -1,7 +1,7 @@
 # <img src="resources/jmaqslogo.jpg" height="32" width="32"> Base Appium Test
 
 ## Overview
-The BaseAppiumTest has methods that sets up the webdriver, gets the mobile driver, tears down the appium driver, and creates a new test object. 
+The BaseAppiumTest has methods that sets up the web driver, gets the mobile driver, tears down the appium driver, and creates a new test object. 
 
 # Available calls
 [GetAppiumDriver](#GetAppiumDriver)  
@@ -17,7 +17,7 @@ public AppiumDriver<WebElement> getAppiumDriver() {
 ```
 
 ## BeforeLoggingTeardown
-Takes a screen shot if needed and tear down the appium driver. It is called during teardown.
+Takes a screenshot if needed and tear down the appium driver. It is called during teardown.
 ```java
 this.beforeLoggingTeardown(resultType);
 ```

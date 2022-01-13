@@ -4,8 +4,8 @@
 JMAQS provides support for testing database applications.  	
 
 ## BaseTest
-BaseDatabaseTest is an abstract test class you can extend.  
-Extending the class allows you to automatically use JMAQS's database testing capabilities.
+BaseDatabaseTest is an abstract test class you can extend.
+Extending the class allows you to automatically use the JMAQS database testing capabilities.
 ```java
 public class MyDatabaseTests extends BaseDatabaseTest
 ```
@@ -20,7 +20,7 @@ The driver is also thread safe, which means you can run multiple database tests 
 Driver that manages the driver manager.
 
 ## Log
-There is also logger (also thread safe) the can be used to add log message to your log.
+There is also logger (also thread safe) that can be used to add log message to your log.
 ```java
 this.getLog().logMessage("I am testing with JMAQS");
 ```
@@ -34,7 +34,7 @@ This includes the database driver, logger, soft asserts, performance timers, plu
 * *You seldom use the test object directly. It is usually only used when you want to share your test JMAQS context with another piece of code*
 
 ## Utilities
-Stores functions for Capturing screenshots, saving page sources, waiting with the database driver, and killing the driver.
+Stores the functions for Capturing screenshots, saving page sources, waiting with the database driver, and killing the driver.
 
 ## Config
 Stores methods for interacting with the App.config
@@ -58,12 +58,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class DatabaseDriverUnitTest extends BaseGenericTest {
-{
-    @Test(groups = TestCategories.DATABASE)
-      public void testQuery() {
-        DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
-        List results = openConnection.query("SELECT * FROM information_schema.tables");
-        Assert.assertTrue(results.stream().anyMatch(n -> ((Object[]) n)[2].equals("States")));
-      }
+  {
+    @Test(groups = TestCategories.DATABASE) public void testQuery () {
+    DatabaseDriver openConnection = ConnectionFactory.getOpenConnection();
+    List results = openConnection.query("SELECT * FROM information_schema.tables");
+    Assert.assertTrue(results.stream().anyMatch(n -> ((Object[]) n)[2].equals("States")));
+    }
+  }
 }
 ```

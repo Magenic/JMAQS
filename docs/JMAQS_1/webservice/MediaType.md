@@ -4,9 +4,9 @@
 This class is the placeholder for the MediaType 
 
 ## These are the media types that are supported:
--JSON: APP_JSON("application/json"),
--XML: APP_XML("application/xml"),
--Plain Text: PLAIN_TEXT("text/plain"),
+-JSON: APP_JSON("application/json");  
+-XML: APP_XML("application/xml");  
+-Plain Text: PLAIN_TEXT("text/plain");  
 -Images in PNG format: IMAGE_PNG("image/png");
 
 You can reference them like this:

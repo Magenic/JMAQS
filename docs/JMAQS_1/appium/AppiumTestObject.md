@@ -11,7 +11,7 @@ Assembly: import com.magenic.jmaqs.appium.AppiumTestObject
 ## Syntax
 java
 ```java
-public class AppiumTestObject
+public class AppiumTestObject {}
 ```
 
 ## Overview

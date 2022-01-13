@@ -191,6 +191,7 @@ public abstract class AbstractLazyElement {
 
   /**
    * Gets the lazy element's location.
+   * 
    *
    * @return the location as a Point
    * @throws TimeoutException     If a timeout occurred while waiting for the element to be found

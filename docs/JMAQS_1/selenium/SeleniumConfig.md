@@ -39,11 +39,7 @@ String driverName = SeleniumConfig.getBrowserName();
 ```
 Get a web driver based on your configuration:
 ```java
-WebDriver driver = SeleniumConfig.GetBrowserType();
-```
-Get a web driver for the specified browser:
-```java
-WebDriver driver = SeleniumConfig.Browser("Chrome");
+WebDriver driver = SeleniumConfig.getBrowserType();
 ```
 Get a web driver type based on your configuration:
 ```java
@@ -81,7 +77,7 @@ Get the remote browser platform:
 ```java
 String platform = SeleniumConfig.getRemotePlatform();
 ```
-Get the base web site url:
+Get the base website url:
 ```java
 String siteUrl = SeleniumConfig.getWebSiteBase();
 ```

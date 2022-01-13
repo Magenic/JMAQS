@@ -3,6 +3,12 @@
 ## Overview
 JMAQS provides support for testing, base is the foundation for this support.  
 
+## Base Test
+Base for tests without a defined system under test
+```java
+MaqsBase basetest = new MaqsBase();
+```
+
 ## ExtendableTest
 Base code that extends the base test objects for Selenium, Appium, WebServices, and Database drivers or connections.
 

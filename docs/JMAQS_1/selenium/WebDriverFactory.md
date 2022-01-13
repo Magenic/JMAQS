@@ -55,7 +55,7 @@ Get the default IE options.
 InternetExplorerOptions getDefaultInternetExplorerOptions()
 ```
 
-## GetDefaultFirefoxOptions
+## GetDefaultFireFoxOptions
 Get the default Firefox options.
 ```java
 webDriver = getFirefoxDriver(getDefaultFirefoxOptions(), size);
@@ -79,7 +79,7 @@ Initialize a new headless Chrome driver.
 webDriver = getHeadlessChromeDriver(getDefaultHeadlessChromeOptions(size));
 ```
 
-## GetFirefoxDriver
+## GetFireFoxDriver
 Initialize a new Firefox driver.
 ```java
 webDriver = getFirefoxDriver(getDefaultFirefoxOptions(), size);
@@ -110,7 +110,7 @@ Get the remote driver options.
 MutableCapabilities options = WebDriverFactory.getRemoteOptions(RemoteBrowserType.IE);
 ```
 
-## setDriverOptions
+## SetDriverOptions
 Add additional capabilities to the driver options.
 ```java
 HashMap additionalCapabilities = new HashMap<>();
@@ -119,7 +119,7 @@ WebDriverFactory.setDriverOptions(options, additionalCapabilities);
 ```
 
 ## SetBrowserSize
-Sets the browser size based on the provide string value. 
+Sets the browser size based on the provided string value. 
 <br>Browser size is expected to be: MAXIMIZE, DEFAULT, or #x# (such as 1920x1080).
 <br>MAXIMIZE just maximizes the browser.
 <br>DEFAULT does not change the current size.

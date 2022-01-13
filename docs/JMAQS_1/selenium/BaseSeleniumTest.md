@@ -1,7 +1,8 @@
 # <img src="resources/jmaqslogo.jpg" height="32" width="32"> Action Builder
 
 ## Overview
-The action builder class contains many advanced methods using interactions with Selenium Actions class.  This includes actions that need to be performed synchronously.
+The action builder class contains many advanced methods using interactions with Selenium Actions class.  
+This includes actions that need to be performed synchronously.
 
 ## GetWebDriver
 Get the Web driver through BaseSeleniumTest

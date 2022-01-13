@@ -42,7 +42,7 @@ UI Wait has functions to wait for an element to exist, to not exist,
 [DoesContainsText](#DoesContainsText)  
 
 ## GetWaitDriver
-Get the WebDriverWait for use outside of this instance class.
+Get the WebDriverWait to use outside this instance class.
 ```java
 return this.waitForPresentElement(by, this.getWaitDriver());
 ```

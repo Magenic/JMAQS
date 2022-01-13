@@ -5,8 +5,8 @@ The Base Web Service Test class provides access to the WebService TestObject and
 
 # Available calls
 [GetWebServiceDriver](#GetWebServiceDriver)  
-[SetWebServiceDriver](#SetWebServiceDriver) 
-[GetWebServiceClient](#GetWebServiceClient)
+[SetWebServiceDriver](#SetWebServiceDriver)  
+[GetWebServiceClient](#GetWebServiceClient)  
 [CreateNewTestObject](#CreateNewTestObject)  
 
 ## GetWebServiceDriver

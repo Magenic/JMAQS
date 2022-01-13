@@ -47,7 +47,7 @@ String path = SeleniumUtilities.savePageSource(webDriver, testObject, LoggingCon
 ## CalculateFileName
 Gets the file name
 ```java
-String path = calculateFileName(directory, fileNameWithoutExtension, ".png");
+String path = SeleniumUtilities.calculateFileName(directory, fileNameWithoutExtension, ".png");
 ```
 
 ## ValidateDirectoryStructure
@@ -63,7 +63,7 @@ Get the web driver from a web element
 LoginPageModel page = new LoginPageModel(this.getTestObject);
 page.openLoginPage();
 
-WebElement element = this.WebDriver.findElement(By.CssSelector("#SELECTOR"));
+WebElement element = this.getWebDriver().findElement(By.CssSelector("#SELECTOR"));
 
 WebDriver driver = SeleniumUtilities.webElementToWebDriver(element);
 

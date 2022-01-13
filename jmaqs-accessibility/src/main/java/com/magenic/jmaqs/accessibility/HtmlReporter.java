@@ -61,11 +61,11 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with All result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param destination The file path where the html report will be stored
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for an entire web page.
+   * @param webDriver the web driver used in the scan
+   * @param destination the destination file the html report will go to
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, String destination)
       throws IOException, ParseException {
@@ -73,12 +73,12 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with a list of specified result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param destination The file path where the html report will be stored
-   * @param requestedResults The result types that will be included on the html report
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for an entire web page with specific Result types.
+   * @param webDriver the web driver used in the scan
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, String destination, Set<ResultType> requestedResults)
       throws IOException, ParseException {
@@ -86,12 +86,12 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with All result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param element The element that will be reported on
-   * @param destination The file path where the html report will be stored
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for a specific element.
+   * @param webDriver the web driver used in the scan
+   * @param element the element to be scanned
+   * @param destination the destination file the html report will go to
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination)
       throws IOException, ParseException {
@@ -99,13 +99,13 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with a list of specified result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param element The element that will be reported on
-   * @param destination The file path where the html report will be stored
-   * @param requestedResults The result types that will be included on the html report
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for a specific element and specified result types.
+   * @param webDriver the web driver used in the scan
+   * @param element the element to be scanned
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, WebElement element, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
@@ -113,12 +113,12 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with All result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param results The results that will be used for the html report
-   * @param destination The file path where the html report will be stored
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for an entire web page with already scanned results.
+   * @param webDriver the web driver used in the scan
+   * @param results the results type variable used after scanning the web page
+   * @param destination the destination file the html report will go to
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination)
       throws IOException, ParseException {
@@ -126,13 +126,14 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report with a list of specified result types.
-   * @param webDriver The web driver to be used for the scan
-   * @param results The results that will be used for the html report
-   * @param destination The file path where the html report will be stored
-   * @param requestedResults The result types that will be included on the html report
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Create an HTML accessibility report for an entire web page with specified Result types
+   * and inputted already scanned results.
+   * @param webDriver the web driver used in the scan
+   * @param results the results object created after scanning the web page
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   public static void createAxeHtmlReport(WebDriver webDriver, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
@@ -140,13 +141,13 @@ public class HtmlReporter {
   }
 
   /**
-   * Creates a Html report.
-   * @param context the web driver or web element to be used for the scan
-   * @param results The results that will be used for the html report
-   * @param destination The file path where the html report will be stored
-   * @param requestedResults The result types that will be included on the html report
-   * @throws IOException If an IO exception is thrown
-   * @throws ParseException If a parse exception is thrown
+   * Creates an HTML accessibility report.
+   * @param context the Search Context to be used in the scan
+   * @param results the results object created after scanning the web page
+   * @param destination the destination file the html report will go to
+   * @param requestedResults the specified result types to include in the report
+   * @throws IOException if an IO exception is thrown
+   * @throws ParseException if a parse exception is thrown
    */
   private static void createAxeHtmlReportFile(SearchContext context, Results results, String destination,
       Set<ResultType> requestedResults) throws IOException, ParseException {
@@ -553,7 +554,7 @@ public class HtmlReporter {
   }
 
   /**
-   * Gets the date format into a string.
+   * Gets the timestamp into a specified date format..
    * @param timestamp The time to be made into a date format
    * @return The timestamp as a specified date formatted string
    * @throws ParseException If parse exception occurs
