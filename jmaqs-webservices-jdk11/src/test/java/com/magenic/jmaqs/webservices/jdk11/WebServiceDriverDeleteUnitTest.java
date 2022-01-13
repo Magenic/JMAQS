@@ -10,7 +10,9 @@ import com.magenic.jmaqs.webservices.jdk8.BaseWebServiceTest;
 import com.magenic.jmaqs.webservices.jdk8.MediaType;
 import com.magenic.jmaqs.webservices.jdk8.WebServiceConfig;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.http.HttpResponse;
+import java.util.Collections;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
@@ -61,16 +63,15 @@ public class WebServiceDriverDeleteUnitTest extends BaseWebServiceTest {
   @Test(groups = TestCategories.WEB_SERVICE)
   public void deleteJSONSerializedVerifyStatusCodeWithHeaderOverride()
       throws IOException, InterruptedException {
-    /*
+        // TODO: review unit test, it might be irrelevant
     HttpResponse<String> result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON,
-        Collections.singletonMap("pass", "word"), true);
+            (Type) Collections.singletonMap("pass", "word"), true);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
     result = webServiceDriver.delete(
         baseUrl + "/api/XML_JSON/Delete/2", MediaType.APP_JSON,
-        Collections.singletonMap("pass", "word"), HttpStatus.OK);
+        (Type) Collections.singletonMap("pass", "word"), HttpStatus.OK);
     Assert.assertEquals(result.statusCode(), HttpStatus.OK.value());
-     */
   }
 
   /**
