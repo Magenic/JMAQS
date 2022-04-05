@@ -261,7 +261,7 @@
         <mvncheckstyle.plugin.version>3.1.2</mvncheckstyle.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <puppycheckstyle.plugin.version>8.38</puppycheckstyle.plugin.version>
-        <jacoco.version>0.8.7</jacoco.version>
+        <jacoco.version>0.8.8</jacoco.version>
         <testng.version>7.3.0</testng.version>
         <selenium.version>3.141.59</selenium.version>
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
