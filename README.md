@@ -1,11 +1,29 @@
+We have moved
+=======
+MAQS has moved to https://github.com/CognizantOpenSource/maqs-java
+
+Archived
+-----------
+
+
+
+
+
+
+
+
+
+
 ![JMAQS Logo](https://repository-images.githubusercontent.com/203866145/054b2500-5a6c-11ea-9980-20c7f30a12f8)
 
 | Check | Status |
 |-------|--------|
 |**Latest Release**|[![Maven Central](https://img.shields.io/maven-central/v/com.magenic.jmaqs/jmaqs-framework.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.magenic.jmaqs%22%20AND%20a:%22jmaqs-framework%22)|
-|**Release**|![Release Pipeline](https://github.com/Magenic/JMAQS/workflows/Release%20Pipeline/badge.svg)|
-|**SnapShot**|![SnapShot Pipeline](https://github.com/Magenic/JMAQS/workflows/SnapShot%20Pipeline/badge.svg)|
-|**Code Quality**|[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.magenic.jmaqs%3Ajmaqs-framework&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.magenic.jmaqs%3Ajmaqs-framework)|
+|Build Status|**NA**|  
+|Quality Gate Status|**NA**|   
+|Coverage|**NA**|
+|Bugs|**NA**|  
+|Vulnerabilities|**NA**|  
 |**License**|[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://raw.githubusercontent.com/Magenic/JMAQS/master/LICENSE)| 
 
 [![Testing Powered By Sauce Labs](https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-white.png?sanitize=true "Testing Powered By Sauce Labs")](https://saucelabs.com)
