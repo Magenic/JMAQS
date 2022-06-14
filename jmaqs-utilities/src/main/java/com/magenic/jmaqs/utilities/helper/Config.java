@@ -30,7 +30,7 @@ public final class Config {
   public static final String NEW_LINE = System.getProperty("line.separator");
 
   /**
-   * The default section MagenicMaqs.
+   * The default section of MagenicMAQS.
    */
   public static final ConfigSection DEFAULT_MAQS_SECTION = ConfigSection.MAGENIC_MAQS;
 
@@ -47,16 +47,14 @@ public final class Config {
   /**
    * The configuration containing values that were added to the configuration.
    */
-  private static XMLConfiguration overrideConfig;
+  private static final XMLConfiguration overrideConfig;
 
   /**
    * The base configs object.
    */
-  private static Configurations configs = new Configurations();
+  private static final Configurations configs = new Configurations();
 
-  /**
-   * initialize config object.
-   */
+  // initialize config object.
   static {
     try {
       if ((new File(CONFIG_FILE).exists())) {
@@ -105,16 +103,15 @@ public final class Config {
     while (configValuePaths.hasNext()) {
       String key = configValuePaths.next();
       String editedKey = key.replaceFirst(section + "\\.", "");
-      if (!sectionValues.containsKey(editedKey)) {
-        sectionValues.put(editedKey, configValues.getString(key));
-      }
-    }
 
+      // this works like put.(editedKey, configValues.getString(key)) if editedKey is absent
+      sectionValues.computeIfAbsent(editedKey, k -> configValues.getString(key));
+    }
     return sectionValues;
   }
 
   /**
-   * Add dictionary of values to maqs section.
+   * Add dictionary of values to MagenicMAQS section.
    *
    * @param configurations   Dictionary of configuration values
    * @param overrideExisting True to override existing values, False otherwise

@@ -8,6 +8,7 @@ package com.magenic.jmaqs.utilities.helper;
  * Test category type.
  */
 public class TestCategories {
+
   private TestCategories() {
   }
 

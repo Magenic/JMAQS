@@ -2,13 +2,15 @@
  * Copyright 2021 (C) Magenic, All rights Reserved
  */
 
-package com.magenic.jmaqs.utilities;
+package com.magenic.jmaqs.utilities.logging;
 
 import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.logging.*;
+import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.HashMap;
 
 /**
@@ -16,12 +18,13 @@ import java.util.HashMap;
  */
 @Test(singleThreaded = true)
 public class LoggingConfigUnitTest {
+
     /**
      * Test getting Logging Enabled Setting. Override Config to 'YES'
      */
     @Test
     public void getLoggingEnabledSettingTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "YES");
         Config.addGeneralTestSettingValues(newValueMap, true);
         Assert.assertEquals(LoggingConfig.getLoggingEnabledSetting(), LoggingEnabled.YES,
@@ -33,7 +36,7 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getLoggingEnabledOnFailSettingTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "ONFAIL");
         Config.addGeneralTestSettingValues(newValueMap, true);
         Assert.assertEquals(LoggingConfig.getLoggingEnabledSetting(), LoggingEnabled.ONFAIL,
@@ -45,7 +48,7 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getLoggingDisabledSettingTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "NO");
         Config.addGeneralTestSettingValues(newValueMap, true);
         Assert.assertEquals(LoggingConfig.getLoggingEnabledSetting(), LoggingEnabled.NO,
@@ -58,7 +61,7 @@ public class LoggingConfigUnitTest {
      */
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void getLoggingSettingIllegalArgumentTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "INVALIDVALUE");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
@@ -70,10 +73,10 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getLoggingLevelVerboseSettingTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "VERBOSE");
         Config.addGeneralTestSettingValues(newValueMap, true);
-        Assert.assertEquals(MessageType.VERBOSE, LoggingConfig.getLoggingLevelSetting(),
+        Assert.assertEquals(LoggingConfig.getLoggingLevelSetting(), MessageType.VERBOSE,
                 "Expected Logging Level Setting VERBOSE.");
     }
 
@@ -82,10 +85,10 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getLoggingLevelInformationSettingTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "INFORMATION");
         Config.addGeneralTestSettingValues(newValueMap, true);
-        Assert.assertEquals(MessageType.INFORMATION, LoggingConfig.getLoggingLevelSetting(),
+        Assert.assertEquals(LoggingConfig.getLoggingLevelSetting(), MessageType.INFORMATION,
                 "Expected Logging Level Setting INFORMATION.");
     }
 
@@ -94,11 +97,11 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getLoggingLevelGenericSettingTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "GENERIC");
         Config.addGeneralTestSettingValues(newValueMap, true);
-        Assert.assertEquals(MessageType.GENERIC, LoggingConfig.getLoggingLevelSetting(),
-                "Expected Logging Level Setting GENERIC.");
+        Assert.assertEquals(LoggingConfig.getLoggingLevelSetting(), MessageType.GENERIC,
+            "Expected Logging Level Setting GENERIC.");
     }
 
     /**
@@ -106,11 +109,11 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getLoggingLevelSuccessSettingTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "SUCCESS");
         Config.addGeneralTestSettingValues(newValueMap, true);
-        Assert.assertEquals(MessageType.SUCCESS, LoggingConfig.getLoggingLevelSetting(),
-                "Expected Logging Level Setting SUCCESS.");
+        Assert.assertEquals(LoggingConfig.getLoggingLevelSetting(), MessageType.SUCCESS,
+            "Expected Logging Level Setting SUCCESS.");
     }
 
     /**
@@ -118,11 +121,11 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getLoggingLevelWarningSettingTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "WARNING");
         Config.addGeneralTestSettingValues(newValueMap, true);
-        Assert.assertEquals(MessageType.WARNING, LoggingConfig.getLoggingLevelSetting(),
-                "Expected Logging Level Setting WARNING.");
+        Assert.assertEquals(LoggingConfig.getLoggingLevelSetting(), MessageType.WARNING,
+            "Expected Logging Level Setting WARNING.");
     }
 
     /**
@@ -130,11 +133,11 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getLoggingLevelErrorSettingTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "ERROR");
         Config.addGeneralTestSettingValues(newValueMap, true);
-        Assert.assertEquals(MessageType.ERROR, LoggingConfig.getLoggingLevelSetting(),
-                "Expected Logging Level Setting ERROR.");
+        Assert.assertEquals(LoggingConfig.getLoggingLevelSetting(), MessageType.ERROR,
+            "Expected Logging Level Setting ERROR.");
     }
 
     /**
@@ -142,11 +145,11 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getLoggingLevelSuspendedSettingTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "SUSPENDED");
         Config.addGeneralTestSettingValues(newValueMap, true);
-        Assert.assertEquals(MessageType.SUSPENDED, LoggingConfig.getLoggingLevelSetting(),
-                "Expected Logging Level Setting SUSPENDED.");
+        Assert.assertEquals(LoggingConfig.getLoggingLevelSetting(), MessageType.SUSPENDED,
+            "Expected Logging Level Setting SUSPENDED.");
     }
 
     /**
@@ -155,7 +158,7 @@ public class LoggingConfigUnitTest {
      */
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void getLoggingLevelIllegalArgumentTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogLevel", "INVALIDVALUE");
         Config.addGeneralTestSettingValues(newValueMap, true);
 
@@ -168,7 +171,7 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getFileLoggerTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogType", "TXT");
         newValueMap.put("Log", "YES");
         Config.addGeneralTestSettingValues(newValueMap, true);
@@ -183,7 +186,7 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getConsoleLoggerTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("LogType", "CONSOLE");
         newValueMap.put("Log", "YES");
         Config.addGeneralTestSettingValues(newValueMap, true);
@@ -198,7 +201,7 @@ public class LoggingConfigUnitTest {
      */
     @Test
     public void getConsoleLoggerLoggingDisabledTest() {
-        HashMap<String, String> newValueMap = new HashMap<String, String>();
+        HashMap<String, String> newValueMap = new HashMap<>();
         newValueMap.put("Log", "NO");
         Config.addGeneralTestSettingValues(newValueMap, true);
         String fileName = "TestLog.txt";
@@ -206,17 +209,12 @@ public class LoggingConfigUnitTest {
         Assert.assertTrue(logger instanceof ConsoleLogger, "Expected Logger to be of Type ConsoleLogger.");
     }
 
-    /**
-     * Test getting Log Directory. Config value not defined - Compare to Default
-     * Path.
-     */
-    // FIXME: Commenting out test until repaired. Expected result does not make
-    // sense.
-    /*
-     * @Test public void getLogDirectoryTest() { String defaultPath = new
-     * File("").getAbsolutePath().concat("\\Logs");
-     * Assert.assertEquals(LoggingConfig.getLogDirectory(), defaultPath,
-     * StringProcessor.safeFormatter( "Expected Default Path '{0)'.", defaultPath));
-     * }
-     */
+    // Test getting Log Directory. Config value not defined - Compare to Default Path.
+    // FIXME: Commenting out test until repaired. Expected result does not make sense.
+    @Ignore
+    @Test public void getLogDirectoryTest() {
+        String defaultPath = new File("").getAbsolutePath().concat("\\Logs");
+        Assert.assertEquals(LoggingConfig.getLogDirectory(), defaultPath,
+        StringProcessor.safeFormatter( "Expected Default Path '{0)'.", defaultPath));
+    }
 }

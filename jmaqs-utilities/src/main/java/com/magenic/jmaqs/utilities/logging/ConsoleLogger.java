@@ -10,6 +10,7 @@ import com.magenic.jmaqs.utilities.helper.StringProcessor;
  * Helper class for logging to the console.
  */
 public class ConsoleLogger extends Logger {
+
   /**
    * Initializes a new instance of the ConsoleLogger class.
    */
@@ -110,12 +111,11 @@ public class ConsoleLogger extends Logger {
 
   /**
    * write the message to the console.
-   * 
-   * 
+   *
    * @param type
    *          The type of message
    * @param line
-   *          Is this a write-line command, else it is just a write
+   *          Is this a write-line command, else it is just a write-line command
    * @param message
    *          The log message
    * @param args
@@ -129,7 +129,7 @@ public class ConsoleLogger extends Logger {
 
     String result = StringProcessor.safeFormatter(message, args);
     try {
-      // If this a write-line command
+      // If this is a write-line command
       if (line) {
         System.out.println(result);
       } else {

@@ -189,7 +189,7 @@ public class ElementHandlerUnitTest extends BaseSeleniumTest {
     ElementHandler.selectMultipleElementsFromListBox(getWebDriver(), computerPartsList, itemsToSelect);
     ArrayList<String> selectedItems = (ArrayList<String>) ElementHandler.getSelectedOptionsFromDropdown(getWebDriver(),
         computerPartsList);
-    ListProcessor.listOfStringsComparer(itemsToSelect, selectedItems, results, false);
+    ListProcessor.listOfStringsCompared(itemsToSelect, selectedItems, results, false);
     if (results.length() > 0) {
       Assert.fail(results.toString());
     }

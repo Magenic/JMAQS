@@ -8,6 +8,7 @@ package com.magenic.jmaqs.utilities.logging;
  * The type of message.
  */
 public enum MessageType {
+
   /**
    * Suspended message.
    */
@@ -46,7 +47,7 @@ public enum MessageType {
   /**
    * The value of current Message Type.
    */
-  private int value;
+  private final int value;
 
   /**
    * Initializes a new instance of Message Type.

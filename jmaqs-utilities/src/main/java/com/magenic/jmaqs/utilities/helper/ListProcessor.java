@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * Contains methods for processing lists.
  */
-
 public class ListProcessor {
 
   private ListProcessor() {
@@ -26,7 +25,6 @@ public class ListProcessor {
    *                   delimited string in the order of elements in the arraylist
    * @return a comma delimited string
    */
-
   public static String createCommaDelimitedString(List<String> stringList, boolean sort) {
     boolean firstElement = true;
     StringBuilder commaDelimitedString = new StringBuilder();
@@ -58,7 +56,7 @@ public class ListProcessor {
    *                     same elements are in both lists
    * @return True if the lists are the same
    */
-  public static boolean listOfStringsComparer(List<String> expectedList, List<String> actualList,
+  public static boolean listOfStringsCompared(List<String> expectedList, List<String> actualList,
       StringBuilder results, boolean verifyOrder) {
     if (expectedList.size() != actualList.size()) {
       results.append(StringProcessor

@@ -11,6 +11,7 @@ import com.magenic.jmaqs.utilities.logging.Logger;
  * Object to be owned by Test Class (Object), and passed to page Constructors to insert Performance Timers.
  */
 public class PerfTimerCollection {
+
   /**
    * The logger.
    */

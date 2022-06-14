@@ -10,7 +10,11 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 
+/**
+ * Unit tests for the Property Manager class.
+ */
 public class PropertyManagerUnitTest {
+
     /**
      * An invalid key for the property manager to invoke failure
      */
@@ -31,16 +35,25 @@ public class PropertyManagerUnitTest {
      */
     private static final String VALID_VALUE = "TestLocation";
 
+    /**
+     * Sets up the valid system properties.
+     */
     @BeforeTest
     public void setValidSystemProperty() {
         System.setProperty(VALID_KEY, VALID_VALUE);
     }
 
+    /**
+     * Tests the property set is maintained.
+     */
     @Test
     public void testPropertySetIsMaintained() {
         assertEquals(PropertyManager.get(VALID_KEY), VALID_VALUE);
     }
 
+    /**
+     * Tests when the property not set returns null.
+     */
     @Test
     public void testPropertyNotSetReturnsNull() {
         assertNull(
@@ -48,6 +61,9 @@ public class PropertyManagerUnitTest {
                 String.format("key %s was found when it wasn't suppose to be.", INVALID_KEY));
     }
 
+    /**
+     * Tests when the property not set returns default.
+     */
     @Test
     public void testPropertyNotSetReturnsDefault() {
         assertEquals(PropertyManager.get(INVALID_KEY, DEFAULT_VALUE), DEFAULT_VALUE);
