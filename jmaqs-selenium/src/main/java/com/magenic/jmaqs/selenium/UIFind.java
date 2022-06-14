@@ -12,15 +12,14 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 
 /**
- * UIFind class This is the tool-class used for finding elements with
- * the provided search item.
+ * UIFind is the tool-class used for finding elements with the provided search item.
  */
 public class UIFind {
 
   /**
    * The search context item.
    */
-  private SearchContext searchItem;
+  private final SearchContext searchItem;
 
   /**
    * Initializes a new instance of the {@link UIFind}.
@@ -35,7 +34,7 @@ public class UIFind {
    * General Find Element.
    *
    * @param by             Css Selector
-   * @param throwException optional assert parameter - throws an assert exception if no element is found
+   * @param throwException optional assert parameter - throws an assertion exception if no element is found
    * @return The Web Element
    */
   public WebElement findElement(By by, boolean throwException) {
@@ -73,7 +72,7 @@ public class UIFind {
    * Finds all elements using the by provided.
    *
    * @param by             Css Selector
-   * @param throwException optional assert parameter - throws an assert exception if no element is found
+   * @param throwException optional assert parameter - throws an assertion exception if no element is found
    * @return The Web Element
    */
   public List<WebElement> findElements(By by, boolean throwException) {
@@ -124,7 +123,7 @@ public class UIFind {
    * @return The index of a Web Element
    */
   public int findIndexOfElementWithText(By by, String text, boolean throwException) {
-    // return -1 if index not found.. assert a fail if true
+    // return -1 if index not found... assert a fail if true
     List<WebElement> elementList = getElementList(by, throwException);
     int index = -1;
 
@@ -190,11 +189,10 @@ public class UIFind {
    *
    * @param list ICollection of Web Elements
    * @param text Text to search the Web Element Collection
-   * @return The index of the Web Element in the inputed WebElement Collection
+   * @return The index of the Web Element in the inputted WebElement Collection
    */
   public int findIndexOfElementWithText(List<WebElement> list, String text) {
     return findIndexOfElementWithText(list, text, true);
-
   }
 
   /**

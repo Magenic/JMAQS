@@ -32,7 +32,7 @@ public class ElementHandler {
   }
 
   /**
-   * Get selected option from drop down.
+   * Get selected option from the dropdown.
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
@@ -45,7 +45,7 @@ public class ElementHandler {
   }
 
   /**
-   * Get a ArrayList of the items selected in a drop down.
+   * Get a ArrayList of the items selected in a dropdown.
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
@@ -77,7 +77,7 @@ public class ElementHandler {
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
-   * @return The text in the textbox
+   * @return The text in the text box
    */
   public static String getElementAttribute(WebDriver webDriver, By by) {
     return getElementAttribute(webDriver, by, "value");
@@ -89,7 +89,7 @@ public class ElementHandler {
    * @param webDriver The web driver
    * @param by        By selector for the element
    * @param attribute The attribute to get the value for
-   * @return The text in the textbox
+   * @return The text in the text box
    */
   public static String getElementAttribute(WebDriver webDriver, By by, String attribute) {
 
@@ -167,7 +167,7 @@ public class ElementHandler {
   public static void selectMultipleElementsFromListBox(WebDriver webDriver, By by, List<String> elementsTextToSelect) {
     Select selectItem = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
 
-    // Select all desired items in the Listbox
+    // Select all desired items in the List box
     for (String text : elementsTextToSelect) {
       selectItem.selectByVisibleText(text);
     }
@@ -183,14 +183,14 @@ public class ElementHandler {
   public static void selectMultipleElementsFromListBoxByValue(WebDriver webDriver, By by, List<String> values) {
     Select selectItem = new Select(UIWaitFactory.getWaitDriver(webDriver).waitForClickableElement(by));
 
-    // Select all desired items in the Listbox
+    // Select all desired items in the List box
     for (String value : values) {
       selectItem.selectByValue(value);
     }
   }
 
   /**
-   * Select an option from a drop down using displayed text.
+   * Select an option from a dropdown using displayed text.
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
@@ -202,7 +202,7 @@ public class ElementHandler {
   }
 
   /**
-   * Select an option from a drop down using the value attribute.
+   * Select an option from a dropdown using the value attribute.
    *
    * @param webDriver The web driver
    * @param by        By selector for the element
@@ -214,11 +214,11 @@ public class ElementHandler {
   }
 
   /**
-   * Enter text into a textbox. NOTE: This function clears the textbox before entering text.
+   * Enter text into a text box. NOTE: This function clears the text box before entering text.
    *
    * @param webDriver   The web driver
    * @param by          By selector for the element
-   * @param textToEnter Text to enter into the textbox
+   * @param textToEnter Text to enter into the text box
    * @param tabOff      true to press the Tab key after entering text
    */
   public static void setTextBox(WebDriver webDriver, By by, String textToEnter, boolean tabOff) {
@@ -236,14 +236,13 @@ public class ElementHandler {
   }
 
   /**
-   * Enter text into a textbox. NOTE: This function clears the textbox before entering text.
+   * Enter text into a text box. NOTE: This function clears the text box before entering text.
    *
    * @param webDriver   The web driver
    * @param by          By selector for the element
-   * @param textToEnter Text to enter into the textbox
+   * @param textToEnter Text to enter into the text box
    */
   public static void setTextBox(WebDriver webDriver, By by, String textToEnter) {
-
     setTextBox(webDriver, by, textToEnter, true);
   }
 
@@ -261,7 +260,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webDriver The WebDriver
    * @param by        By selector for the element
@@ -272,7 +271,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webElement The parent web element
    * @param by         By element
@@ -285,7 +284,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webDriver The web driver
    * @param by        By element
@@ -298,7 +297,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webElement The parent web element
    * @param by         By element
@@ -311,7 +310,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webDriver The web driver
    * @param x         Horizontal direction
@@ -323,7 +322,7 @@ public class ElementHandler {
   }
 
   /**
-   * JavaScript method to scroll an element into the view.
+   * A JavaScript method to scroll an element into the view.
    *
    * @param webElement The web element
    * @param x          Horizontal direction

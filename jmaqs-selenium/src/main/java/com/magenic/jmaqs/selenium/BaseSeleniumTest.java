@@ -43,13 +43,13 @@ public class BaseSeleniumTest extends BaseExtendableTest<SeleniumTestObject> {
   }
 
   /**
-   * Take a screen shot if needed and tear down the web driver.
+   * Take a screenshot if needed and tear down the web driver.
    *
    * @param resultType The test result type
    */
   @Override
   protected void beforeLoggingTeardown(ITestResult resultType) {
-    // Try to take a screen shot
+    // Try to take a screenshot
     try {
       if (this.getWebDriver() != null && resultType.getStatus() != ITestResult.SUCCESS
           && this.getLoggingEnabledSetting() != LoggingEnabled.NO) {

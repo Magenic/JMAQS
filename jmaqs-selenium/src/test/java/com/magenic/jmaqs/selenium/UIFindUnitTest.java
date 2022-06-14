@@ -8,6 +8,7 @@ import com.magenic.jmaqs.selenium.factories.UIFindFactory;
 import com.magenic.jmaqs.utilities.helper.TestCategories;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -16,45 +17,46 @@ import org.testng.annotations.Test;
  * The UI Find functionality unit test.
  */
 public class UIFindUnitTest extends BaseSeleniumTest {
+
   /**
    * Url for the site.
    */
-  private static String siteUrl = SeleniumConfig.getWebSiteBase();
+  private static final String siteUrl = SeleniumConfig.getWebSiteBase();
 
   /**
    * Automation site url.
    */
-  private static String siteAutomationUrl = siteUrl + "Automation/";
+  private static final String siteAutomationUrl = siteUrl + "Automation/";
 
   /**
    * Flower table.
    */
-  private static By flowerTable = By.cssSelector("#FlowerTable TD");
+  private static final By flowerTable = By.cssSelector("#FlowerTable TD");
 
   /**
    * Home button css selector.
    */
-  private By homeButton = By.cssSelector("#homeButton > a");
+  private final By homeButton = By.cssSelector("#homeButton > a");
 
   /**
    * Selector that is not in page.
    */
-  private By notInPage = By.cssSelector("NOTINPAGE");
+  private final By notInPage = By.cssSelector("NotInPage");
 
   /**
    * Names label.
    */
-  private By automationNamesLabel = By.cssSelector("#Dropdown > p > strong > label");
+  private final By automationNamesLabel = By.cssSelector("#Dropdown > p > strong > label");
 
   /**
    * Home button css selector.
    */
-  private By dropdownToggleClassSelector = By.className("dropdown-toggle");
+  private final By dropdownToggleClassSelector = By.className("dropdown-toggle");
 
   /**
    * First dialog button.
    */
-  private By automationShowDialog1 = By.cssSelector("#showDialog1");
+  private final By automationShowDialog1 = By.cssSelector("#showDialog1");
 
   /**
    * Verify findElement works, validating a specific selector is found.
@@ -64,7 +66,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
     WebElement element = find.findElement(automationNamesLabel);
-    Assert.assertEquals("Names", element.getText());
+    Assert.assertEquals(element.getText(), "Names");
   }
 
   /**
@@ -86,7 +88,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
     List<WebElement> list = find.findElements(dropdownToggleClassSelector);
-    Assert.assertEquals(3, list.size(), "There are 3 elements with dropdown classes");
+    Assert.assertEquals(list.size(), 3, "There are 3 elements with dropdown classes");
 
     Assert.assertEquals(list.get(0).getText(), "Manage");
     Assert.assertTrue(list.get(0).isDisplayed());
@@ -165,7 +167,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   public void findIndexOfElementWithText() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
-    Assert.assertEquals(3, find.findIndexOfElementWithText(flowerTable, "Red"));
+    Assert.assertEquals(find.findIndexOfElementWithText(flowerTable, "Red"), 3);
   }
 
   /**
@@ -200,8 +202,8 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   public void findIndexOfElementInCollection() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
-    Assert.assertEquals(0, find.findIndexOfElementWithText(
-        find.findElements(flowerTable), "10 in"));
+    Assert.assertEquals(find.findIndexOfElementWithText(
+        find.findElements(flowerTable), "10 in"), 0);
   }
 
   /**
@@ -224,8 +226,7 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   public void findIndexOfElementInCollectionEmptyInputList() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
-    List<WebElement> list = null;
-    int index = find.findIndexOfElementWithText(list, "#notfound", false);
+    int index = find.findIndexOfElementWithText((List<WebElement>) null, "#notfound", false);
     Assert.assertEquals(index, -1);
   }
 
@@ -237,8 +238,32 @@ public class UIFindUnitTest extends BaseSeleniumTest {
   public void findIndexOfElementInCollectionTextNotFoundAssertIsTrue() {
     this.getWebDriver().navigate().to(siteAutomationUrl);
     UIFind find = UIFindFactory.getFind(this.getWebDriver());
-    int index = find.findIndexOfElementWithText(find.findElements(flowerTable),
-        "#notfound", false);
+    int index = find.findIndexOfElementWithText(
+        find.findElements(flowerTable), "#notfound", false);
     Assert.assertEquals(index, -1);
+  }
+
+  /**
+   * Verify FindIndexOfElementWithText works,
+   * NotFoundException is thrown when the element is not found and assert == true.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = NotFoundException.class)
+  public void findIndexOfElementWithTextThrowTheException() {
+    this.getWebDriver().navigate().to(siteAutomationUrl);
+    UIFind find = UIFindFactory.getFind(this.getWebDriver());
+    find.findIndexOfElementWithText(
+        find.findElements(notInPage), "#notfound", true);
+  }
+
+  /**
+   * Verify FindIndexOfElementWithText works,
+   * NotFoundException is thrown when the element is not found and assert == true.
+   */
+  @Test(groups = TestCategories.SELENIUM, expectedExceptions = NotFoundException.class)
+  public void findIndexOfElementWithTextInvalidElementText() {
+    this.getWebDriver().navigate().to(siteAutomationUrl);
+    UIFind find = UIFindFactory.getFind(this.getWebDriver());
+    find.findIndexOfElementWithText(
+        find.findElements(flowerTable), "#notfound", true);
   }
 }

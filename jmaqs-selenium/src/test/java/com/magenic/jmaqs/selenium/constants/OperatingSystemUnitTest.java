@@ -65,7 +65,7 @@ public class OperatingSystemUnitTest extends BaseGenericTest {
   }
 
   /**
-   * Test get operating system - MacOS.
+   * Test get operating system - Mac OS.
    */
   @Test(singleThreaded = true, dependsOnGroups = TestCategories.SELENIUM)
   public void testGetOperatingSystemMacOS() {

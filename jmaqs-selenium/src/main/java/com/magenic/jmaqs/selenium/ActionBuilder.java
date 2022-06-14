@@ -34,7 +34,7 @@ public class ActionBuilder {
   }
 
   /**
-   * Press non alphanumeric key. Ex. Control, Home, etc.
+   * Press non-alphanumeric key. Ex. Control, Home, etc.
    *
    * @param webDriver The web driver
    * @param key       The key to press. NOTE: Use the Keys class

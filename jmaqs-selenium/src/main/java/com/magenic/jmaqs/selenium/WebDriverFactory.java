@@ -7,11 +7,8 @@ package com.magenic.jmaqs.selenium;
 import com.magenic.jmaqs.selenium.constants.BrowserType;
 import com.magenic.jmaqs.selenium.constants.OperatingSystem;
 import com.magenic.jmaqs.selenium.constants.RemoteBrowserType;
-import com.magenic.jmaqs.selenium.constants.WebDriverFile;
 import com.magenic.jmaqs.selenium.exceptions.DriverNotFoundException;
 import com.magenic.jmaqs.selenium.exceptions.WebDriverFactoryException;
-import com.magenic.jmaqs.utilities.helper.Config;
-import com.magenic.jmaqs.utilities.helper.ConfigSection;
 import com.magenic.jmaqs.utilities.helper.StringProcessor;
 import java.io.File;
 import java.net.URL;
@@ -85,7 +82,6 @@ public class WebDriverFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
-
       // Log that something went wrong
       String message = "Failed to initial web driver because: %s %s"
           + "This likely means your web driver is missing, unsupported or out of date.";
@@ -242,7 +238,7 @@ public class WebDriverFactory {
   /**
    * Gets internet explorer driver.
    *
-   * @param internetExplorerOptions the internet explorer options
+   * @param internetExplorerOptions the Internet Explorer options
    * @param size                    the size
    * @return the internet explorer driver
    */
@@ -327,7 +323,7 @@ public class WebDriverFactory {
             StringProcessor.safeFormatter("Remote browser type '%s' is not supported", remoteBrowser));
     }
 
-    // Make sure the remote capabilities dictionary exists
+    // Make sure the remote capabilities' dictionary exists
     if (remoteCapabilities == null) {
       remoteCapabilities = new HashMap<>();
     }
@@ -451,7 +447,7 @@ public class WebDriverFactory {
    *
    * @param driverFile      the driver file
    * @param defaultHintPath the default hint path
-   * @param mustExist       the must exist
+   * @param mustExist       if it must exist
    * @return the driver location
    * @deprecated Removing the find driver logic in favor of using the WebDriverManager to manage binaries
    */

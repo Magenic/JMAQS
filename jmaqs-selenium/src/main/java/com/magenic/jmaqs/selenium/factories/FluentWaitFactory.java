@@ -15,8 +15,7 @@ import org.openqa.selenium.support.ui.FluentWait;
  */
 public class FluentWaitFactory {
 
-  // private constructor so class can't
-  // be instantiated
+  // private constructor so class can't be instantiated
   private FluentWaitFactory() {
   }
 
