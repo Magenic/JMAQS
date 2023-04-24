@@ -230,6 +230,7 @@
         <profile>
             <id>testing</id>
             <activation>
+                <activeByDefault>true</activeByDefault>
                 <property>
                     <name>testing</name>
                 </property>
@@ -238,14 +239,32 @@
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.1.2</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>properties</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${surefire.plugin.version}</version>
+                        <version>3.0.0-M5</version>
                         <configuration>
                             <parallel>methods</parallel>
                             <threadCount>5</threadCount>
-                            <!--                            <argLine>${argLine}</argLine>-->
-                            <!--                            <argLine>-javaagent @{maven.dependency.io.github.bonigarcia:webdrivermanager:jar:path}</argLine>-->
+                            <argLine>${argLine} -javaagent:@{io.github.bonigarcia:webdrivermanager:jar}</argLine>
                         </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.maven.surefire</groupId>
+                                <artifactId>surefire-testng</artifactId>
+                                <version>3.0.0-M5</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -420,35 +439,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>properties</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <parallel>methods</parallel>
-                    <threadCount>5</threadCount>
-                    <argLine>-javaagent:@{io.github.bonigarcia:webdrivermanager:jar}</argLine>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-testng</artifactId>
-                        <version>3.0.0-M5</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

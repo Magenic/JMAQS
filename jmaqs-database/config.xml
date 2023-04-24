@@ -52,10 +52,11 @@
         <DatabaseName>MagenicAutomation</DatabaseName>
         <!--<DatabaseProviderType>SQL</DatabaseProviderType>
         <DatabaseProviderType>MYSQL</DatabaseProviderType>-->
+<!--        Data Source=localhost;Initial Catalog=MagenicAutomation;Persist Security Info=True;User ID=sa;Password=magenicMAQS2;Connection Timeout=30-->
         <DatabaseProviderType>SQL</DatabaseProviderType>
-        <DatabaseUser>MagenicQA</DatabaseUser>
-        <DatabasePassword>1magenicMARQ</DatabasePassword>
-        <DatabaseConnectionString>jdbc:sqlserver://qasqlserver.database.windows.net</DatabaseConnectionString>
+        <DatabaseUser>sa</DatabaseUser>
+        <DatabasePassword>magenicMAQS2</DatabasePassword>
+        <DatabaseConnectionString>jdbc:sqlserver://localhost</DatabaseConnectionString>
         <EntityDirectory>./src/test/java/com/magenic/jmaqs/database/entities/</EntityDirectory>
         <EntityPackage>com.magenic.jmaqs.database.entities</EntityPackage>
     </DatabaseMaqs>
